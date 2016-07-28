@@ -1,0 +1,881 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1946
+y 367
+w 1270
+h 457
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+endScreenProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 411
+w 205
+h 21
+controlPv "CMOC:LI_MAGIC"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_MAGIC"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 385
+w 205
+h 21
+controlPv "CMOC:LI_DSP_FLAVOR"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_DSP_FLAVOR"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 359
+w 205
+h 21
+controlPv "CMOC:LI_BUILD_YEAR"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_BUILD_YEAR"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 333
+w 205
+h 21
+controlPv "CMOC:LI_BUILD_MONTH"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_BUILD_MONTH"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 307
+w 205
+h 21
+controlPv "CMOC:LI_BUILD_DAY"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_BUILD_DAY"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 281
+w 205
+h 21
+controlPv "CMOC:LI_BUILD_HOUR"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_BUILD_HOUR"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 255
+w 205
+h 21
+controlPv "CMOC:LI_BUILD_MINUTE"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_BUILD_MINUTE"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 229
+w 205
+h 21
+controlPv "CMOC:LI_CODE_IS_CLEAN"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_CODE_IS_CLEAN"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 203
+w 205
+h 21
+controlPv "CMOC:LI_TOOL_REV"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_TOOL_REV"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 177
+w 205
+h 21
+controlPv "CMOC:LI_USER"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_USER"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 151
+w 205
+h 21
+controlPv "CMOC:LI_BOARD_TYPE"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_BOARD_TYPE"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 125
+w 205
+h 21
+controlPv "CMOC:LI_VERSION"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_VERSION"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 99
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1A"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1A"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 73
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1B"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1B"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 47
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1C"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1C"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 411
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1D"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1D"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 385
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1E"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1E"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 359
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1F"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1F"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 333
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1G"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1G"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 307
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1H"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1H"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 281
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1I"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1I"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 255
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1J"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1J"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 229
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1K"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1k"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 203
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1L"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1L"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 177
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1M"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1M"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 151
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1N"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1N"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 125
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1O"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1O"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 99
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1P"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1P"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 73
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1Q"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1Q"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 47
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1R"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1R"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 17
+y 21
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1S"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1S"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 253
+y 21
+w 205
+h 21
+controlPv "CMOC:LI_GIT_SHA_1T"
+format "hex"
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+id "CMOC:LI_GIT_SHA_1T"
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 501
+y 15
+w 746
+h 427
+# Appearance
+border
+graphTitle "All Waveforms"
+xLabel "Point"
+yLabel "Count"
+fgColor index 14
+bgColor index 0
+gridColor index 14
+font "helvetica-medium-r-18.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+showY2Axis
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 8
+yPv {
+  0 "CMOC:WF_0"
+  1 "CMOC:WF_1"
+  2 "CMOC:WF_2"
+  3 "CMOC:WF_3"
+  4 "CMOC:WF_4"
+  5 "CMOC:WF_5"
+  6 "CMOC:WF_6"
+  7 "CMOC:WF_7"
+}
+plotColor {
+  0 index 21
+  1 index 26
+  2 index 31
+  3 index 36
+  4 index 41
+  5 index 45
+  6 index 58
+  7 index 63
+}
+endObjectProperties
+

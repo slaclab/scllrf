@@ -1,0 +1,6 @@
+
+record( longin, "$(P):LI_$(REG)"){
+  field( DTYP, "asynInt32")
+  field( INP,  "@asyn($(PORT),0,1)$(REG)")
+  field( SCAN, "I/O Intr")
+}

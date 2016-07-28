@@ -1,0 +1,12 @@
+file wave.template
+{
+pattern { N,     EGU   }
+        { 0,    Counts }
+        { 1,    Counts }
+        { 2,    Counts }
+        { 3,    Counts }
+        { 4,    Counts }
+        { 5,    Counts }
+        { 6,    Counts }
+        { 7,    Counts }
+}

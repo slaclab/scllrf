@@ -1,0 +1,36 @@
+file li.template
+{
+pattern { REG }
+        { "MAGIC" }
+        { "DSP_FLAVOR" }
+        { "BUILD_YEAR" }
+        { "BUILD_MONTH" }
+        { "BUILD_DAY" }
+        { "BUILD_HOUR" }
+        { "BUILD_MINUTE" }
+        { "CODE_IS_CLEAN" }
+        { "TOOL_REV" }
+        { "USER" }
+        { "BOARD_TYPE" }
+        { "VERSION" }
+        { "GIT_SHA_1A" }
+        { "GIT_SHA_1B" }
+        { "GIT_SHA_1C" }
+        { "GIT_SHA_1D" }
+        { "GIT_SHA_1E" }
+        { "GIT_SHA_1F" }
+        { "GIT_SHA_1G" }
+        { "GIT_SHA_1H" }
+        { "GIT_SHA_1I" }
+        { "GIT_SHA_1J" }
+        { "GIT_SHA_1K" }
+        { "GIT_SHA_1L" }
+        { "GIT_SHA_1M" }
+        { "GIT_SHA_1N" }
+        { "GIT_SHA_1O" }
+        { "GIT_SHA_1P" }
+        { "GIT_SHA_1Q" }
+        { "GIT_SHA_1R" }
+        { "GIT_SHA_1S" }
+        { "GIT_SHA_1T" }
+}
