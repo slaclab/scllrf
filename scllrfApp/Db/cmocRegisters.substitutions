@@ -34,3 +34,8 @@ pattern { REG }
         { "GIT_SHA_1S" }
         { "GIT_SHA_1T" }
 }
+
+file IOCregmap_llrf_shell.template
+{
+	{DEVICE = '$(P)'}
+}

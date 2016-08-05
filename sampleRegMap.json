@@ -5,7 +5,7 @@
 	"month":
 	{	"address"     : 0x000003,
 		"access"      : "r",
-		"size"        : 1,
+		"bit_width"   : 8,
 		"lsBit"       : 0,
 		"nelms"       : 1,
 		"egu"         : "m",

@@ -33,43 +33,73 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
 		0), /* Default stack size*/
-		isShuttingDown_(0), netSendCount_(0), netWaitingRequests_(0), newWaveAvailable_(0), newWaveRead_ (0)
+		isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
+		newWaveAvailable_(0), newWaveRead_ (0), p_RunStop (stop)
 {
 	asynStatus status = asynSuccess;
 
-	createParam(P_MagicString, asynParamInt32, &P_Magic);
-	createParam(P_DspFlavorString, asynParamInt32, &P_DspFlavor);
-	createParam(P_BuildYearString, asynParamInt32, &P_BuildYear);
-	createParam(P_BuildMonthString, asynParamInt32, &P_BuildMonth);
-	createParam(P_BuildDayString, asynParamInt32, &P_BuildDay);
-	createParam(P_BuildHourString, asynParamInt32, &P_BuildHour);
-	createParam(P_BuildMinuteString, asynParamInt32, &P_BuildMinute);
-	createParam(P_CodeIsCleanString, asynParamInt32, &P_CodeIsClean);
-	createParam(P_ToolRevString, asynParamInt32, &P_ToolRev);
-	createParam(P_UserString, asynParamInt32, &P_User);
-	createParam(P_BoardTypeString, asynParamInt32, &P_BoardType);
-	createParam(P_VersionString, asynParamInt32, &P_Version);
-	createParam(P_GitSHA1aString, asynParamInt32, &P_GitSHA1a);
-	createParam(P_GitSHA1bString, asynParamInt32, &P_GitSHA1b);
-	createParam(P_GitSHA1cString, asynParamInt32, &P_GitSHA1c);
-	createParam(P_GitSHA1dString, asynParamInt32, &P_GitSHA1d);
-	createParam(P_GitSHA1eString, asynParamInt32, &P_GitSHA1e);
-	createParam(P_GitSHA1fString, asynParamInt32, &P_GitSHA1f);
-	createParam(P_GitSHA1gString, asynParamInt32, &P_GitSHA1g);
-	createParam(P_GitSHA1hString, asynParamInt32, &P_GitSHA1h);
-	createParam(P_GitSHA1iString, asynParamInt32, &P_GitSHA1i);
-	createParam(P_GitSHA1jString, asynParamInt32, &P_GitSHA1j);
-	createParam(P_GitSHA1kString, asynParamInt32, &P_GitSHA1k);
-	createParam(P_GitSHA1lString, asynParamInt32, &P_GitSHA1l);
-	createParam(P_GitSHA1mString, asynParamInt32, &P_GitSHA1m);
-	createParam(P_GitSHA1nString, asynParamInt32, &P_GitSHA1n);
-	createParam(P_GitSHA1oString, asynParamInt32, &P_GitSHA1o);
-	createParam(P_GitSHA1pString, asynParamInt32, &P_GitSHA1p);
-	createParam(P_GitSHA1qString, asynParamInt32, &P_GitSHA1q);
-	createParam(P_GitSHA1rString, asynParamInt32, &P_GitSHA1r);
-	createParam(P_GitSHA1sString, asynParamInt32, &P_GitSHA1s);
-	createParam(P_GitSHA1tString, asynParamInt32, &P_GitSHA1t);
-    createParam(P_Waveform1String,asynParamInt32Array, &P_Waveform);
+    epicsThreadSleep(defaultPollPeriod);
+
+    printf("%s creating %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
+
+    createParam(RunStopString, asynParamInt32, (int *) &p_RunStop);
+    createParam(MaxParallelRequestsString, asynParamInt32, &p_MaxParallelRequests);
+    createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
+	createParam(MagicString, asynParamInt32, &p_Magic);
+	createParam(DspFlavorString, asynParamInt32, &p_DspFlavor);
+	createParam(BuildYearString, asynParamInt32, &p_BuildYear);
+	createParam(BuildMonthString, asynParamInt32, &p_BuildMonth);
+	createParam(BuildDayString, asynParamInt32, &p_BuildDay);
+	createParam(BuildHourString, asynParamInt32, &p_BuildHour);
+	createParam(BuildMinuteString, asynParamInt32, &p_BuildMinute);
+	createParam(CodeIsCleanString, asynParamInt32, &p_CodeIsClean);
+	createParam(ToolRevString, asynParamInt32, &p_ToolRev);
+	createParam(UserString, asynParamInt32, &p_User);
+	createParam(BoardTypeString, asynParamInt32, &p_BoardType);
+	createParam(VersionString, asynParamInt32, &p_Version);
+	createParam(GitSHA1aString, asynParamInt32, &p_GitSHA1a);
+	createParam(GitSHA1bString, asynParamInt32, &p_GitSHA1b);
+	createParam(GitSHA1cString, asynParamInt32, &p_GitSHA1c);
+	createParam(GitSHA1dString, asynParamInt32, &p_GitSHA1d);
+	createParam(GitSHA1eString, asynParamInt32, &p_GitSHA1e);
+	createParam(GitSHA1fString, asynParamInt32, &p_GitSHA1f);
+	createParam(GitSHA1gString, asynParamInt32, &p_GitSHA1g);
+	createParam(GitSHA1hString, asynParamInt32, &p_GitSHA1h);
+	createParam(GitSHA1iString, asynParamInt32, &p_GitSHA1i);
+	createParam(GitSHA1jString, asynParamInt32, &p_GitSHA1j);
+	createParam(GitSHA1kString, asynParamInt32, &p_GitSHA1k);
+	createParam(GitSHA1lString, asynParamInt32, &p_GitSHA1l);
+	createParam(GitSHA1mString, asynParamInt32, &p_GitSHA1m);
+	createParam(GitSHA1nString, asynParamInt32, &p_GitSHA1n);
+	createParam(GitSHA1oString, asynParamInt32, &p_GitSHA1o);
+	createParam(GitSHA1pString, asynParamInt32, &p_GitSHA1p);
+	createParam(GitSHA1qString, asynParamInt32, &p_GitSHA1q);
+	createParam(GitSHA1rString, asynParamInt32, &p_GitSHA1r);
+	createParam(GitSHA1sString, asynParamInt32, &p_GitSHA1s);
+	createParam(GitSHA1tString, asynParamInt32, &p_GitSHA1t);
+    createParam(DspFdbkCoreMpProcCoeffString, asynParamInt32Array, &p_DspFdbkCoreMpProcCoeff);
+    createParam(DspFdbkCoreMpProcLimString, asynParamInt32Array, &p_DspFdbkCoreMpProcLim);
+    createParam(DspFdbkCoreMpProcSetmpString, asynParamInt32Array, &p_DspFdbkCoreMpProcSetmp);
+    createParam(DspLpNotchLp1AKxString, asynParamInt32Array, &p_DspLpNotchLp1AKx);
+    createParam(DspLpNotchLp1AKyString, asynParamInt32Array, &p_DspLpNotchLp1AKy);
+    createParam(DspLpNotchLp1BKxString, asynParamInt32Array, &p_DspLpNotchLp1BKx);
+    createParam(DspLpNotchLp1BKyString, asynParamInt32Array, &p_DspLpNotchLp1BKy);
+    createParam(DspChanKeepString, asynParamInt32, &p_DspChanKeep);
+    createParam(DspFdbkCoreCoarseScaleString, asynParamInt32, &p_DspFdbkCoreCoarseScale);
+    createParam(DspFdbkCoreMpProcPhOffsetString, asynParamInt32, &p_DspFdbkCoreMpProcPhOffset);
+    createParam(DspFdbkCoreMpProcSelEnString, asynParamInt32, &p_DspFdbkCoreMpProcSelEn);
+    createParam(DspFdbkCoreMpProcSelThreshString, asynParamInt32, &p_DspFdbkCoreMpProcSelThresh);
+    createParam(DspModuloString, asynParamInt32, &p_DspModulo);
+    createParam(DspPhaseStepString, asynParamInt32, &p_DspPhaseStep);
+    createParam(DspPiezoPiezoDcString, asynParamInt32, &p_DspPiezoPiezoDc);
+    createParam(DspTagString, asynParamInt32, &p_DspTag);
+    createParam(DspWaveSampPerString, asynParamInt32, &p_DspWaveSampPer);
+    createParam(DspWaveShiftString, asynParamInt32, &p_DspWaveShift);
+    createParam(Waveform1String,asynParamInt32Array, &p_Waveform);
+
+    epicsThreadSleep(defaultPollPeriod);
+
+    printf("%s done creating %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
 
 	status=pasynCommonSyncIO->connect(netPortName, 0, &pCommonAsynUser_, 0);
 	if(status!=asynSuccess)
@@ -83,14 +113,27 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 				__PRETTY_FUNCTION__,netPortName, status);
 	else  printf( "%s: connect: connected to port %s\n",__PRETTY_FUNCTION__,netPortName);
 
+    setIntegerParam(p_RunStop, stop);
+    setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
+    setDoubleParam(p_PollPeriod, defaultPollPeriod);
+
+    // The createParam calls are queued up rather than executed right away, so
+    // give them a chance to be created before we start writing to them.
+    // TODO: Is there a way to check that the params were finished being created?
+    epicsThreadSleep(defaultPollPeriod);
+
 	readEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startResponseHandler();
 
-	pollEventId_ = epicsEventMustCreate(epicsEventEmpty);
-	startPoller(defaultPollPeriod);
-
 	reqWaveEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startWaveformRequester();
+
+    epicsThreadSleep(defaultPollPeriod);
+
+    printf("%s starting polling thread.\n",__PRETTY_FUNCTION__);
+
+	pollEventId_ = epicsEventMustCreate(epicsEventEmpty);
+	startPoller(defaultPollPeriod);
 
 }
 
@@ -108,26 +151,182 @@ scllrfAsynPortDriver::~scllrfAsynPortDriver()
 }
 
 
+/** Called when you have the asyn parameter name and want the corresponding
+ * register address.
+  * \param[in] function From pAsynUser->reason, corresponding to a registered parameter.
+  * \param[in] pToFpga Pointer to the {Address, Data} structure where the register address will be written
+  * \param[in] nElements Number of elements to read. */
+asynStatus scllrfAsynPortDriver::functionToRegister(const int function, FpgaReg *pToFpga)
+{
+	unsigned int i;
+	asynStatus status = asynSuccess;
+
+    // Assume this is for a write function, doesn't have to include read only registers (so far)
+    if( function ==  p_DspFdbkCoreMpProcCoeff)
+    for(i=0; i<4; i++){
+		pToFpga[i].addr = DspFdbkCoreMpProcCoeffAdr+i;
+    }
+    else if( function == p_DspFdbkCoreMpProcLim )
+    for(i=0; i<4; i++){
+		pToFpga[i].addr = DspFdbkCoreMpProcLimAdr+i;
+    }
+    else if( function == p_DspFdbkCoreMpProcSetmp )
+    for(i=0; i<4; i++){
+		pToFpga[i].addr = DspFdbkCoreMpProcSetmpAdr+i;
+    }
+    else if( function == p_DspLpNotchLp1AKx )
+    for(i=0; i<2; i++){
+		pToFpga[i].addr = DspLpNotchLp1AKxAdr+i;
+    }
+    else if( function == p_DspLpNotchLp1AKy )
+    for(i=0; i<2; i++){
+		pToFpga[i].addr = DspLpNotchLp1AKyAdr+i;
+    }
+    else if( function == p_DspLpNotchLp1BKx )
+    for(i=0; i<2; i++){
+		pToFpga[i].addr = DspLpNotchLp1BKxAdr+i;
+    }
+    else if( function == p_DspLpNotchLp1BKy )
+    for(i=0; i<2; i++){
+		pToFpga[i].addr = DspLpNotchLp1BKyAdr+i;
+    }
+    else if( function == p_DspChanKeep )
+    {
+		pToFpga->addr = DspChanKeepAdr;
+    }
+    else if( function == p_DspFdbkCoreCoarseScale )
+    {
+		pToFpga->addr = DspFdbkCoreCoarseScaleAdr;
+    }
+    else if( function == p_DspFdbkCoreMpProcPhOffset )
+    {
+		pToFpga->addr = DspFdbkCoreMpProcPhOffsetAdr;
+    }
+    else if( function == p_DspFdbkCoreMpProcSelEn )
+    {
+		pToFpga->addr = DspFdbkCoreMpProcSelEnAdr;
+    }
+    else if( function == p_DspFdbkCoreMpProcSelThresh )
+    {
+		pToFpga->addr = DspFdbkCoreMpProcSelThreshAdr;
+    }
+    else if( function == p_DspModulo )
+    {
+		pToFpga->addr = DspModuloAdr;
+    }
+    else if( function == p_DspPhaseStep )
+    {
+		pToFpga->addr = DspPhaseStepAdr;
+    }
+    else if( function == p_DspPiezoPiezoDc )
+    {
+		pToFpga->addr = DspPiezoPiezoDcAdr;
+    }
+    else if( function == p_DspTag )
+    {
+		pToFpga->addr = DspTagAdr;
+    }
+    else if( function == p_DspWaveSampPer )
+    {
+		pToFpga->addr = DspWaveSampPerAdr;
+    }
+    else if( function == p_DspWaveShift )
+    {
+		pToFpga->addr = DspWaveShiftAdr;
+    }
+    else
+    	status = asynError;
+
+    return status;
+}
+
 /** Called when asyn clients call pasynInt32->read().
  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
  * \param[in] value Pointer to the value to read. */
-asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *value)
+asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
-	//    int function = pasynUser->reason;
-	//    int addr = 0;
+	int function = pasynUser->reason;
+//	int addr = 0;
 	asynStatus status = asynSuccess;
+    const char *paramName;
+    FpgaReg regSendBuf[2];
+
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
-	//    const char *functionName = "readInt32";
-	//    const char *paramName;
 
+    /* Set the parameter in the parameter library. */
+    status = (asynStatus) setIntegerParam(function, value);
 
+    /* Fetch the parameter string name for possible use in debugging */
+    getParamName(function, &paramName);
 
-
+    if (function == p_RunStop) {
+        if (value == run)
+        	epicsEventSignal(pollEventId_);
+    }
+    else {
+    	// Convert function to address & FpgaReg.
+    	status = functionToRegister(function, &regSendBuf[1]);
+    	if (status != asynSuccess)
+    		return status;
+    	regSendBuf[1].data = (uint32_t) value;
+    	htonFpgaRegArray(regSendBuf, 2);
+    	sendRegRequest(regSendBuf, 2);
+    }
 
 	/* Do callbacks so higher layers see any changes */
 	status = (asynStatus) callParamCallbacks();
 
-	return status;
+    if (status)
+        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+                  "%s: status=%d, function=%d, name=%s, value=%d",
+				  __PRETTY_FUNCTION__, status, function, paramName, value);
+    else
+        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+              "%s: function=%d, name=%s, value=%d\n",
+			  __PRETTY_FUNCTION__, function, paramName, value);
+    return status;
+}
+
+/** Called when asyn clients call pasynInt32Array->write().
+  * The base class implementation simply prints an error message.
+  * Derived classes may reimplement this function if required.
+  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
+  * \param[in] value Pointer to the array to write.
+  * \param[in] nElements Number of elements to write. */
+asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
+                                size_t nElements)
+{
+	int function = pasynUser->reason;
+	asynStatus status = asynSuccess;
+//	int nCopy;
+	FpgaReg regSendBuf[maxMsgSize/sizeof(FpgaReg)];
+	unsigned int i;
+
+	//getIntegerParam(P_ArrayLength, &nCopy);
+	//if ((int) nElements < nCopy)
+	//	nCopy = (int) nElements;
+
+	status = functionToRegister(function, &regSendBuf[1]);
+	if (status != asynSuccess)
+		return status;
+
+	for(i=0; i<nElements; i++)
+	{
+		regSendBuf[i+1].data = (uint32_t) value[i];
+		//*nIn = nCopy;
+	}
+	htonFpgaRegArray(regSendBuf, nElements);
+	sendRegRequest(regSendBuf, nElements);
+
+	if (status)
+		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+				"%s: status=%d, function=%d", __PRETTY_FUNCTION__,
+				status, function);
+	else
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d\n",
+				__PRETTY_FUNCTION__, function);
+
+	return status; //(writeArray < epicsInt32 > (pasynUser, value, nElements));
 }
 
 static void regPollerC(void *drvPvt)
@@ -155,12 +354,13 @@ asynStatus scllrfAsynPortDriver::startPoller(double pollPeriod)
 void scllrfAsynPortDriver::regPoller()
 {
 	epicsEventWaitStatus status;
+    int runStop;
 
 	// A canned request to read all registers
 	static FpgaReg cmocReadAllRegMsg[regCount + 1] =
 	{
 			{ 0, 0 },
-			{ flagReadMask | 0x00, blankData | (int32_t) wavesReadyMask },
+			{ flagReadMask | 0x00, blankData },
 			{ flagReadMask | 0x01, blankData },
 			{ flagReadMask | 0x02, blankData },
 			{ flagReadMask | 0x03, blankData },
@@ -194,10 +394,11 @@ void scllrfAsynPortDriver::regPoller()
 			{ flagReadMask | 0x1f, blankData } };
 	htonFpgaRegArray(cmocReadAllRegMsg, regCount + 1);
 
-	wakeupPoller();  /* Force on poll at startup */
-
+	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
-		if (pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
+		getDoubleParam(p_PollPeriod, &pollPeriod_);
+        getIntegerParam(p_RunStop, &runStop);
+		if (runStop == run && pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
 		else               status = epicsEventWait(pollEventId_);
 		if (status == epicsEventWaitOK) {
 			/* We got an event, rather than a timeout.  This is because other software
@@ -221,23 +422,30 @@ asynStatus scllrfAsynPortDriver::wakeupPoller()
 	return asynSuccess;
 }
 
-/** Polls the device.
- ** Note that the first "register" regBuffer[0] is really the nonce, not data.
- ** This function will set the nonce before sending.
- ** regBuffCount is the number of FpgaReg type elements, including the nonce
+/** Polls the device
+  * \param[in] regBuffer array of FpgaReg messages in network byte order.
+  * Note that the first "register" regBuffer[0] is really the nonce, not data.
+  * This function will set the nonce before sending.
+  * Other than the nonce, data in the array is not changed. This reduces the
+  * processing required, since most messages are canned and repeated at regular intervals.
+  * \param[in] regBuffCount is the number of FpgaReg type elements, including the nonce
  **  */
 asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount)
 {
+	assert(regBuffer != NULL);
+	assert(regBuffCount >= 2);
 	size_t writtenCount;
 	asynStatus status = asynSuccess;
 	char * pWriteBuffer;
 	pWriteBuffer = reinterpret_cast<char*>(regBuffer);
+	int maxParallelRequests;
+	getIntegerParam(p_MaxParallelRequests, &maxParallelRequests);
 
 	// Throttle so that we don't overflow buffers if response handling falls behind
-	if( netWaitingRequests_ > throttlePoint )
+	if( netWaitingRequests_ > (unsigned) maxParallelRequests )
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: too many requests waiting for responses, throttling requests.\n",__PRETTY_FUNCTION__);
-	while( netWaitingRequests_ > throttlePoint )
+	while( netWaitingRequests_ > (unsigned) maxParallelRequests )
 		epicsThreadSleep(throttleLoopDelay);
 
 	lock(); // protect netSendCount and netWaitingRequests
@@ -259,6 +467,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 		//		netWaitingRequests);
 	}
 	unlock();
+	epicsThreadSleep(0);
 	wakeupReader();
 
 	return asynSuccess;
@@ -391,11 +600,9 @@ void scllrfAsynPortDriver::responseHandler()
 {
 	asynStatus status;
 	epicsEventWaitStatus waitStatus;
-	//	unsigned i;
-	const size_t readBufferSize = waveSegmentCount * waveSegmentSize * sizeof(FpgaReg);
-	static char pReadBuffer[readBufferSize];
+	static char pReadBuffer[maxMsgSize];
 	FpgaReg *pRegReadback;
-	size_t readCount = 0;
+	size_t readCount = 0; // Number of bytes to process from the network read
 	int eomReason;
 
 	while (1)
@@ -418,7 +625,7 @@ void scllrfAsynPortDriver::responseHandler()
 
 				lock(); // protect netWaitingRequests from being modified by the write thread
 				status = pasynOctetSyncIO->read(pOctetAsynUser_, pReadBuffer,
-						readBufferSize, 0.001, &readCount, &eomReason);
+						maxMsgSize, 0.001, &readCount, &eomReason);
 				//				printf("%s: status=0x%x, readCount=%zd, eomReason=0x%x\n", __PRETTY_FUNCTION__, status, readCount, eomReason);
 
 				//				if (status == asynSuccess || readCount >0)
@@ -435,48 +642,10 @@ void scllrfAsynPortDriver::responseHandler()
 
 				ntohFpgaRegArray(pRegReadback, readCount/sizeof(FpgaReg));
 
-				// We put the message size in the data of the first buffer element for error checking
-				// and to handle multiple messages received
-				while(readCount > 0)
-				{
-					// We can read partial messages, so watch array bounds
-					if (readCount < (size_t) pRegReadback[0].data)
-					{
-						pRegReadback[0].data = readCount;
-						//pasynOctetSyncIO->flush(pOctetAsynUser); // Should we clear out waiting partial messages?
-					}
-					if (pRegReadback[0].addr > lastResponseCount_ + 1)
-						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-								"%s: Missing response message, response from request #%u, expected is request #%u\n",
-								__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-								lastResponseCount_ + 1);
-					if (pRegReadback[0].addr < lastResponseCount_ + 1)
-						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-								"%s: Out-of-order response message, response from request #%u, expected is request #%u\n",
-								__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-								lastResponseCount_ + 1);
-					lastResponseCount_ = pRegReadback[0].addr;
+				processReadbackBuffer(pRegReadback, readCount);
+				/* Do callbacks so higher layers see any changes */
+				status = (asynStatus) callParamCallbacks();
 
-					processReadbackBuffer(pRegReadback);
-
-					// check if this was a response to the most recent request
-					if (pRegReadback[0].addr < netSendCount_)
-					{
-						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-								"%s: processed response from request #%u, most recent is request #%u\n",
-								__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-								netSendCount_);
-						netWaitingRequests_--;
-					}
-					else
-						netWaitingRequests_ = 0; // We have the most recent, no outstanding requests
-
-					//printf("%s, buffer processing loop: readCount=%zd, pRegReadback[0].data=%d\n",__PRETTY_FUNCTION__, readCount, pRegReadback[0].data);
-					readCount -= (size_t) pRegReadback[0].data;
-					// The nonce in pRegReadback[0] contains the message size. Move pointer to the next message.
-					pRegReadback = & pRegReadback[pRegReadback[0].data/sizeof(FpgaReg)];
-					//printf("%s, buffer processing next loop: readCount=%zd, pRegReadback[0].data=%d\n",__PRETTY_FUNCTION__, readCount, pRegReadback[0].data);
-				}
 				epicsThreadSleep(0.002); // sleep to be nice to other threads
 			} // while (netWaitingRequests>0)
 		} // if (status == epicsEventWaitOK)
@@ -490,29 +659,79 @@ void scllrfAsynPortDriver::responseHandler()
 // Iterate over each register in the buffer returned from the FPGA
 // Array passed to this function contains the nonce, with the buffer
 // size at pRegReadback[0].data
-asynStatus scllrfAsynPortDriver::processReadbackBuffer(const FpgaReg *pRegReadback)
+asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, unsigned int readCount)
 {
 	unsigned i;
 	bool waveIsReady = false; // Made this local rather than member because of concurrency concerns
-	asynStatus status;
-	for (i = 1; i < pRegReadback[0].data / sizeof(FpgaReg); i++)
+	asynStatus status = asynSuccess;
+
+	// We put the message size in the data of the first buffer element for error checking
+	// and to handle multiple messages received
+	while(readCount > 0)
 	{
-		status = processRegReadback(&pRegReadback[i], waveIsReady);
-		if (status)
-			epicsSnprintf(pOctetAsynUser_->errorMessage,
-					pOctetAsynUser_->errorMessageSize,
-					"%s: status=%d, address=0x%x, value=%u",
-					__PRETTY_FUNCTION__, status,
-					(unsigned) pRegReadback[i].addr,
-					(unsigned) pRegReadback[i].data);
-//		else
-//			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-//					"%s: address=0x%x, value=%u\n", __PRETTY_FUNCTION__,
-//					(unsigned ) pRegReadback[i].addr,
-//					(unsigned ) pRegReadback[i].data);
-	}
-	/* Do callbacks so higher layers see any changes */
-	status = (asynStatus) callParamCallbacks();
+		// We can read partial messages, so watch array bounds
+		if (readCount < (size_t) pRegReadback[0].data)
+		{
+			pRegReadback[0].data = readCount;
+			//pasynOctetSyncIO->flush(pOctetAsynUser); // Should we clear out waiting partial messages?
+		}
+
+		if (pRegReadback[0].addr > lastResponseCount_ + 1)
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: Missing response message, response from request #%u, expected is request #%u\n",
+					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					lastResponseCount_ + 1);
+		if (pRegReadback[0].addr < lastResponseCount_ + 1)
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: Out-of-order response message, response from request #%u, expected is request #%u\n",
+					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					lastResponseCount_ + 1);
+		lastResponseCount_ = pRegReadback[0].addr;
+
+		for (i = 1; i < pRegReadback[0].data / sizeof(FpgaReg); i++)
+		{
+			if(pRegReadback[i].addr & flagReadMask)
+			{
+			status = processRegReadback(&pRegReadback[i], waveIsReady);
+			}
+			else
+			{
+				processRegWriteResponse(&pRegReadback[i]);
+			}
+			if (status)
+				epicsSnprintf(pOctetAsynUser_->errorMessage,
+						pOctetAsynUser_->errorMessageSize,
+						"%s: status=%d, address=0x%x, value=%u",
+						__PRETTY_FUNCTION__, status,
+						(unsigned) pRegReadback[i].addr,
+						(unsigned) pRegReadback[i].data);
+			//		else
+			//			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			//					"%s: address=0x%x, value=%u\n", __PRETTY_FUNCTION__,
+			//					(unsigned ) pRegReadback[i].addr,
+			//					(unsigned ) pRegReadback[i].data);
+		}
+
+		// check if this was a response to the most recent request
+		if (pRegReadback[0].addr < netSendCount_)
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: processed response from request #%u, most recent is request #%u\n",
+					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					netSendCount_);
+			netWaitingRequests_--;
+		}
+		else
+			netWaitingRequests_ = 0; // We have the most recent, no outstanding requests
+
+		//printf("%s, buffer processing loop: readCount=%zd, pRegReadback[0].data=%d\n",__PRETTY_FUNCTION__, readCount, pRegReadback[0].data);
+		// decrement number of bytes left to process by the numbr of bytes we just processed
+		readCount -= (size_t) pRegReadback[0].data;
+
+		// The nonce in pRegReadback[0] contains the message size. Move pointer to the next message.
+		pRegReadback = & pRegReadback[pRegReadback[0].data/sizeof(FpgaReg)];
+		//printf("%s, buffer processing next loop: readCount=%zd, pRegReadback[0].data=%d\n",__PRETTY_FUNCTION__, readCount, pRegReadback[0].data);
+	} // while(readCount > 0)
 
 	// If the waveIsReady flag is set,
 	if (waveIsReady &&
@@ -545,315 +764,319 @@ asynStatus scllrfAsynPortDriver::processWaveReadback(const FpgaReg *pFromFpga)
 	return asynSuccess;
 }
 
-// Extract register address and data from the received message and set the appropriate
-// asyn parameter.
-// Some registers have a "new waveform data ready" flag. If they have this and it is set,
-// set weveIsReady to true.
-// Note: This function should not set waveIsReady to false. That is done by a loop in the
-// calling function.
+/**  Extract register address and data from the received message and set the appropriate
+ * asyn parameter.
+ * Some registers have a "new waveform data ready" flag. If they have this and it is set,
+ * set weveIsReady to true.
+ * Note: This function should not set waveIsReady to false. That is done by a loop in the
+ * calling function.
+* \param[in] pFromFpga Data returned from the FPGA for a single register
+* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
+*/
 asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
 	unsigned int i;
 	asynStatus status = asynSuccess;
+	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 
 	/* Map address to parameter, set the parameter in the parameter library. */
-	switch (pFromFpga->addr & addrMask)
+	switch (pFromFpga->addr)
 	{
-	case MagicAdr:
-		status = (asynStatus) setIntegerParam(P_Magic,
+	case MagicAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_Magic,
 				pFromFpga->data & MagicMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_MagicString, (unsigned ) pFromFpga->data & MagicMask);
+				MagicString, (unsigned ) pFromFpga->data & MagicMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case DspFlavorAdr:
-		status = (asynStatus) setIntegerParam(P_DspFlavor,
+	case DspFlavorAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_DspFlavor,
 				pFromFpga->data & DspFlavorMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_DspFlavorString, (unsigned ) pFromFpga->data & DspFlavorMask);
+				DspFlavorString, (unsigned ) pFromFpga->data & DspFlavorMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case BuildYearAdr:
-		status = (asynStatus) setIntegerParam(P_BuildYear,
+	case BuildYearAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_BuildYear,
 				pFromFpga->data & BuildYearMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_BuildYearString, (unsigned ) pFromFpga->data & BuildYearMask);
+				BuildYearString, (unsigned ) pFromFpga->data & BuildYearMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case BuildMonthAdr:
-		status = (asynStatus) setIntegerParam(P_BuildMonth,
+	case BuildMonthAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_BuildMonth,
 				pFromFpga->data & BuildMonthMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_BuildMonthString, (unsigned ) pFromFpga->data & BuildMonthMask);
+				BuildMonthString, (unsigned ) pFromFpga->data & BuildMonthMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case BuildDayAdr:
-		status = (asynStatus) setIntegerParam(P_BuildDay,
+	case BuildDayAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_BuildDay,
 				pFromFpga->data & BuildDayMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_BuildDayString, (unsigned ) pFromFpga->data & BuildDayMask);
+				BuildDayString, (unsigned ) pFromFpga->data & BuildDayMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case BuildHourAdr:
-		status = (asynStatus) setIntegerParam(P_BuildHour,
+	case BuildHourAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_BuildHour,
 				pFromFpga->data & BuildHourMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_BuildHourString, (unsigned ) pFromFpga->data & BuildHourMask);
+				BuildHourString, (unsigned ) pFromFpga->data & BuildHourMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case BuildMinuteAdr:
-		status = (asynStatus) setIntegerParam(P_BuildMinute,
+	case BuildMinuteAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_BuildMinute,
 				pFromFpga->data & BuildMinuteMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_BuildMinuteString, (unsigned ) pFromFpga->data & BuildMinuteMask);
+				BuildMinuteString, (unsigned ) pFromFpga->data & BuildMinuteMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case CodeIsCleanAdr:
-		status = (asynStatus) setIntegerParam(P_CodeIsClean,
+	case CodeIsCleanAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_CodeIsClean,
 				pFromFpga->data & CodeIsCleanMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_CodeIsCleanString, (unsigned ) pFromFpga->data & CodeIsCleanMask);
+				CodeIsCleanString, (unsigned ) pFromFpga->data & CodeIsCleanMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case ToolRevAdr:
-		status = (asynStatus) setIntegerParam(P_ToolRev,
+	case ToolRevAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_ToolRev,
 				pFromFpga->data & ToolRevMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_ToolRevString, (unsigned ) pFromFpga->data & ToolRevMask);
+				ToolRevString, (unsigned ) pFromFpga->data & ToolRevMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case UserAdr:
-		status = (asynStatus) setIntegerParam(P_User,
+	case UserAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_User,
 				pFromFpga->data & UserMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_UserString, (unsigned ) pFromFpga->data & UserMask);
+				UserString, (unsigned ) pFromFpga->data & UserMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case BoardTypeAdr:
-		status = (asynStatus) setIntegerParam(P_BoardType,
+	case BoardTypeAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_BoardType,
 				pFromFpga->data & BoardTypeMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_BoardTypeString, (unsigned ) pFromFpga->data & BoardTypeMask);
+				BoardTypeString, (unsigned ) pFromFpga->data & BoardTypeMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case VersionAdr:
-		status = (asynStatus) setIntegerParam(P_Version,
+	case VersionAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_Version,
 				pFromFpga->data & VersionMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_VersionString, (unsigned ) pFromFpga->data & VersionMask);
+				VersionString, (unsigned ) pFromFpga->data & VersionMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1aAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1a,
+	case GitSHA1aAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1a,
 				pFromFpga->data & GitSHA1aMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1aString, (unsigned ) pFromFpga->data & GitSHA1aMask);
+				GitSHA1aString, (unsigned ) pFromFpga->data & GitSHA1aMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1bAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1b,
+	case GitSHA1bAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1b,
 				pFromFpga->data & GitSHA1bMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1bString, (unsigned ) pFromFpga->data & GitSHA1bMask);
+				GitSHA1bString, (unsigned ) pFromFpga->data & GitSHA1bMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1cAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1c,
+	case GitSHA1cAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1c,
 				pFromFpga->data & GitSHA1cMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1cString, (unsigned ) pFromFpga->data & GitSHA1cMask);
+				GitSHA1cString, (unsigned ) pFromFpga->data & GitSHA1cMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1dAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1d,
+	case GitSHA1dAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1d,
 				pFromFpga->data & GitSHA1dMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1dString, (unsigned ) pFromFpga->data & GitSHA1dMask);
+				GitSHA1dString, (unsigned ) pFromFpga->data & GitSHA1dMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1eAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1e,
+	case GitSHA1eAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1e,
 				pFromFpga->data & GitSHA1eMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1eString, (unsigned ) pFromFpga->data & GitSHA1eMask);
+				GitSHA1eString, (unsigned ) pFromFpga->data & GitSHA1eMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1fAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1f,
+	case GitSHA1fAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1f,
 				pFromFpga->data & GitSHA1fMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1fString, (unsigned ) pFromFpga->data & GitSHA1fMask);
+				GitSHA1fString, (unsigned ) pFromFpga->data & GitSHA1fMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1gAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1g,
+	case GitSHA1gAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1g,
 				pFromFpga->data & GitSHA1gMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1gString, (unsigned ) pFromFpga->data & GitSHA1gMask);
+				GitSHA1gString, (unsigned ) pFromFpga->data & GitSHA1gMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1hAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1h,
+	case GitSHA1hAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1h,
 				pFromFpga->data & GitSHA1hMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1hString, (unsigned ) pFromFpga->data & GitSHA1hMask);
+				GitSHA1hString, (unsigned ) pFromFpga->data & GitSHA1hMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1iAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1i,
+	case GitSHA1iAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1i,
 				pFromFpga->data & GitSHA1iMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1iString, (unsigned ) pFromFpga->data & GitSHA1iMask);
+				GitSHA1iString, (unsigned ) pFromFpga->data & GitSHA1iMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1jAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1j,
+	case GitSHA1jAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1j,
 				pFromFpga->data & GitSHA1jMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1jString, (unsigned ) pFromFpga->data & GitSHA1jMask);
+				GitSHA1jString, (unsigned ) pFromFpga->data & GitSHA1jMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1kAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1k,
+	case GitSHA1kAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1k,
 				pFromFpga->data & GitSHA1kMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1kString, (unsigned ) pFromFpga->data & GitSHA1kMask);
+				GitSHA1kString, (unsigned ) pFromFpga->data & GitSHA1kMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1lAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1l,
+	case GitSHA1lAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1l,
 				pFromFpga->data & GitSHA1lMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1lString, (unsigned ) pFromFpga->data & GitSHA1lMask);
+				GitSHA1lString, (unsigned ) pFromFpga->data & GitSHA1lMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1mAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1m,
+	case GitSHA1mAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1m,
 				pFromFpga->data & GitSHA1mMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1mString, (unsigned ) pFromFpga->data & GitSHA1mMask);
+				GitSHA1mString, (unsigned ) pFromFpga->data & GitSHA1mMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1nAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1n,
+	case GitSHA1nAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1n,
 				pFromFpga->data & GitSHA1nMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1nString, (unsigned ) pFromFpga->data & GitSHA1nMask);
+				GitSHA1nString, (unsigned ) pFromFpga->data & GitSHA1nMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1oAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1o,
+	case GitSHA1oAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1o,
 				pFromFpga->data & GitSHA1oMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1oString, (unsigned ) pFromFpga->data & GitSHA1oMask);
+				GitSHA1oString, (unsigned ) pFromFpga->data & GitSHA1oMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1pAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1p,
+	case GitSHA1pAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1p,
 				pFromFpga->data & GitSHA1pMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1pString, (unsigned ) pFromFpga->data & GitSHA1pMask);
+				GitSHA1pString, (unsigned ) pFromFpga->data & GitSHA1pMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1qAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1q,
+	case GitSHA1qAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1q,
 				pFromFpga->data & GitSHA1qMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1qString, (unsigned ) pFromFpga->data & GitSHA1qMask);
+				GitSHA1qString, (unsigned ) pFromFpga->data & GitSHA1qMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1rAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1r,
+	case GitSHA1rAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1r,
 				pFromFpga->data & GitSHA1rMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1rString, (unsigned ) pFromFpga->data & GitSHA1rMask);
+				GitSHA1rString, (unsigned ) pFromFpga->data & GitSHA1rMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1sAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1s,
+	case GitSHA1sAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1s,
 				pFromFpga->data & GitSHA1sMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1sString, (unsigned ) pFromFpga->data & GitSHA1sMask);
+				GitSHA1sString, (unsigned ) pFromFpga->data & GitSHA1sMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case GitSHA1tAdr:
-		status = (asynStatus) setIntegerParam(P_GitSHA1t,
+	case GitSHA1tAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_GitSHA1t,
 				pFromFpga->data & GitSHA1tMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				P_GitSHA1tString, (unsigned ) pFromFpga->data & GitSHA1tMask);
+				GitSHA1tString, (unsigned ) pFromFpga->data & GitSHA1tMask);
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case wavesEnd:
+	case wavesEnd|flagReadMask:
 		processWaveReadback(pFromFpga);
 		// Do we need to verify that all points of all waveforms have been received, not missing
 		// packets or some such?
 		// Basic approach: when we read in the last point of the last waveform, publish them all
 		for (i=0; i<wavesCount; i++)
-			status = doCallbacksInt32Array(pWaveform_[i], waveBufferRegCount/wavesCount, P_Waveform, i);
+			status = doCallbacksInt32Array(pWaveform_[i], waveBufferRegCount/wavesCount, p_Waveform, i);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
 		break;
@@ -866,6 +1089,168 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 	}
 
 	return status;
+}
+
+/**  Extract register address and data from the received message and set the appropriate
+ * asyn parameter.
+ * Some registers have a "new waveform data ready" flag. If they have this and it is set,
+ * set weveIsReady to true.
+ * Note: This function should not set waveIsReady to false. That is done by a loop in the
+ * calling function.
+* \param[in] pFromFpga Data returned from the FPGA for a single register
+* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
+*/
+asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
+{
+	asynStatus status = asynSuccess;
+	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+//  variables that may be useful for checking array data
+//	asynUser *pAsynArrayUser;
+//	unsigned int i;
+
+	/* Map address to parameter, set the parameter in the parameter library. */
+	switch (pFromFpga->addr)
+    {
+    case DspChanKeepAdr:
+		status = (asynStatus) getIntegerParam(p_DspChanKeep, valueSet);
+		if( (valueSet[0] & DspChanKeepMask) == (pFromFpga->data & DspChanKeepMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspChanKeepString, (unsigned ) pFromFpga->data & DspChanKeepMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspChanKeepString, valueSet[0] & DspChanKeepMask, (unsigned ) pFromFpga->data & DspChanKeepMask);
+
+		break;
+    case DspFdbkCoreCoarseScaleAdr:
+		status = (asynStatus) getIntegerParam(p_DspFdbkCoreCoarseScale, valueSet);
+		if( (valueSet[0] & DspFdbkCoreCoarseScaleMask) == (pFromFpga->data & DspFdbkCoreCoarseScaleMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreCoarseScaleString, (unsigned ) pFromFpga->data & DspFdbkCoreCoarseScaleMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreCoarseScaleString, valueSet[0] & DspFdbkCoreCoarseScaleMask, (unsigned ) pFromFpga->data & DspFdbkCoreCoarseScaleMask);
+
+		break;
+    case DspFdbkCoreMpProcPhOffsetAdr:
+		status = (asynStatus) getIntegerParam(p_DspFdbkCoreMpProcPhOffset, valueSet);
+		if( (valueSet[0] & DspFdbkCoreMpProcPhOffsetMask) == (pFromFpga->data & DspFdbkCoreMpProcPhOffsetMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreMpProcPhOffsetString, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcPhOffsetMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreMpProcPhOffsetString, valueSet[0] & DspFdbkCoreMpProcPhOffsetMask, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcPhOffsetMask);
+
+		break;
+    case DspFdbkCoreMpProcSelEnAdr:
+		status = (asynStatus) getIntegerParam(p_DspFdbkCoreMpProcSelEn, valueSet);
+		if( (valueSet[0] & DspFdbkCoreMpProcSelEnMask) == (pFromFpga->data & DspFdbkCoreMpProcSelEnMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreMpProcSelEnString, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelEnMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreMpProcSelEnString, valueSet[0] & DspFdbkCoreMpProcSelEnMask, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelEnMask);
+
+		break;
+    case DspFdbkCoreMpProcSelThreshAdr:
+		status = (asynStatus) getIntegerParam(p_DspFdbkCoreMpProcSelThresh, valueSet);
+		if( (valueSet[0] & DspFdbkCoreMpProcSelThreshMask) == (pFromFpga->data & DspFdbkCoreMpProcSelThreshMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreMpProcSelThreshString, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelThreshMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFdbkCoreMpProcSelThreshString, valueSet[0] & DspFdbkCoreMpProcSelThreshMask, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelThreshMask);
+
+		break;
+    case DspModuloAdr:
+		status = (asynStatus) getIntegerParam(p_DspModulo, valueSet);
+		if( (valueSet[0] & DspModuloMask) == (pFromFpga->data & DspModuloMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspModuloString, (unsigned ) pFromFpga->data & DspModuloMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspModuloString, valueSet[0] & DspModuloMask, (unsigned ) pFromFpga->data & DspModuloMask);
+
+		break;
+    case DspPhaseStepAdr:
+		status = (asynStatus) getIntegerParam(p_DspPhaseStep, valueSet);
+		if( (valueSet[0] & DspPhaseStepMask) == (pFromFpga->data & DspPhaseStepMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspPhaseStepString, (unsigned ) pFromFpga->data & DspPhaseStepMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspPhaseStepString, valueSet[0] & DspPhaseStepMask, (unsigned ) pFromFpga->data & DspPhaseStepMask);
+
+		break;
+    case DspPiezoPiezoDcAdr:
+		status = (asynStatus) getIntegerParam(p_DspPiezoPiezoDc, valueSet);
+		if( (valueSet[0] & DspPiezoPiezoDcMask) == (pFromFpga->data & DspPiezoPiezoDcMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspPiezoPiezoDcString, (unsigned ) pFromFpga->data & DspPiezoPiezoDcMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspPiezoPiezoDcString, valueSet[0] & DspPiezoPiezoDcMask, (unsigned ) pFromFpga->data & DspPiezoPiezoDcMask);
+
+		break;
+    case DspTagAdr:
+		status = (asynStatus) getIntegerParam(p_DspTag, valueSet);
+		if( (valueSet[0] & DspTagMask) == (pFromFpga->data & DspTagMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspTagString, (unsigned ) pFromFpga->data & DspTagMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspTagString, valueSet[0] & DspTagMask, (unsigned ) pFromFpga->data & DspTagMask);
+
+		break;
+    case DspWaveSampPerAdr:
+		status = (asynStatus) getIntegerParam(p_DspWaveSampPer, valueSet);
+		if( (valueSet[0] & DspWaveSampPerMask) == (pFromFpga->data & DspWaveSampPerMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspWaveSampPerString, (unsigned ) pFromFpga->data & DspWaveSampPerMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspWaveSampPerString, valueSet[0] & DspWaveSampPerMask, (unsigned ) pFromFpga->data & DspWaveSampPerMask);
+
+		break;
+    case DspWaveShiftAdr:
+		status = (asynStatus) getIntegerParam(p_DspWaveShift, valueSet);
+		if( (valueSet[0] & DspWaveShiftMask) == (pFromFpga->data & DspWaveShiftMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspWaveShiftString, (unsigned ) pFromFpga->data & DspWaveShiftMask);
+		else
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DspWaveShiftString, valueSet[0] & DspWaveShiftMask, (unsigned ) pFromFpga->data & DspWaveShiftMask);
+
+		break;
+	default:
+		status = asynError;
+		break;
+    }
+
+	// TODO: handle arrays
+
+    return status;
 }
 
 void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
@@ -891,13 +1276,14 @@ void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
 	}
 }
 
-/* Configuration routine.  Called directly, or from the iocsh function below */
 
 extern "C" {
 
+/* Configuration routine.  Called directly, or from the iocsh function below */
+
 /** EPICS iocsh callable function to call constructor for the scllrfAsynPortDriver class.
  * \param[in] portName The name of the asyn port driver to be created.
- * \param[in] maxArrayLength The maximum  number of points in the volt and time arrays */
+ * \param[in] netPortName The name of the asynIPport this will use to communicate */
 int scllrfAsynPortDriverConfigure(const char *drvPortName, const char *netPortName)
 {
 	new scllrfAsynPortDriver(drvPortName, netPortName);

@@ -174,8 +174,10 @@ drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):7 UDP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("cmocIP",-1,0xFF)
-#asynSetTraceIOMask("cmocIP",-1,ASYN_TRACEIO_HEX)
+#asynSetTraceMask("cmocIP",-1,ASYN_TRACE_ERROR)
+asynSetTraceMask("cmocIP",-1,0xFF)
+#asynSetTraceIOMask("cmocIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("cmocIP",-1,4)
 
 #epicsThreadSleep(1.0)
 scllrfAsynPortDriverConfigure( "cmocReg","cmocIP")
@@ -184,12 +186,11 @@ scllrfAsynPortDriverConfigure( "cmocReg","cmocIP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("cmocReg",-1,0xFF)
-#asynSetTraceIOMask("cmocReg",-1,ASYN_TRACEIO_HEX)
+asynSetTraceMask("cmocReg",-1,0xFF)
+#asynSetTraceIOMask("cmocReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("cmocReg",-1,4)
 #
-#epicsThreadSleep(0.2)
-#asynSetTraceMask("cmocIP",-1,ASYN_TRACE_ERROR)
-#asynSetTraceMask("cmocReg",-1,ASYN_TRACE_ERROR)
+epicsThreadSleep(0.2)
 
 # =============================================================
 # Start EPICS IOC Process (i.e. all threads will start running)
@@ -235,4 +236,7 @@ iocInit()
 #
 ## An example of using the CEXP Shell:
 ## cexpsh("-c",'printf("hello\n")')
+
+asynSetTraceMask("cmocIP",-1,1)
+asynSetTraceMask("cmocReg",-1,1)
 

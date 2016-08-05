@@ -274,7 +274,7 @@ drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):3000 UDP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("cmocIP",-1,0xFF)
+asynSetTraceMask("cmocIP",-1,0xFF)
 #asynSetTraceIOMask("cmocIP",-1,ASYN_TRACEIO_HEX)
 
 #epicsThreadSleep(1.0)
@@ -284,12 +284,12 @@ scllrfAsynPortDriverConfigure( "cmocReg","cmocIP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("cmocReg",-1,0xFF)
+asynSetTraceMask("cmocReg",-1,0xFF)
 #asynSetTraceIOMask("cmocReg",-1,ASYN_TRACEIO_HEX)
 #
 #epicsThreadSleep(0.2)
-#asynSetTraceMask("cmocIP",-1,ASYN_TRACE_ERROR)
-#asynSetTraceMask("cmocReg",-1,ASYN_TRACE_ERROR)
+asynSetTraceMask("cmocIP",-1,5)
+asynSetTraceMask("cmocReg",-1,13)
 
 # =============================================================
 # Start EPICS IOC Process (i.e. all threads will start running)

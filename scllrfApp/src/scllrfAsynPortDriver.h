@@ -31,8 +31,6 @@
 
 #include <epicsExport.h>
 
-//static const char *driverName = "scllrfAsynPortDriver";
-
 const size_t regCount = 0x20;
 
 // Move these to a common file somewhere
@@ -92,52 +90,75 @@ const unsigned waveSegmentSize = 1 + (waveBufferRegCount + waveSegmentCount)/wav
 const uint32_t wavesReadyMask = 0x100; // found in the first 0x1F registers
 
 // EPICS database driver strings
-const char *P_MagicString = "MAGIC";
-const char *P_DspFlavorString = "DSP_FLAVOR";
-const char *P_BuildYearString = "BUILD_YEAR";
-const char *P_BuildMonthString = "BUILD_MONTH";
-const char *P_BuildDayString = "BUILD_DAY";
-const char *P_BuildHourString = "BUILD_HOUR";
-const char *P_BuildMinuteString = "BUILD_MINUTE";
-const char *P_CodeIsCleanString = "CODE_IS_CLEAN";
-const char *P_ToolRevString = "TOOL_REV";
-const char *P_UserString = "USER";
-const char *P_BoardTypeString = "BOARD_TYPE";
-const char *P_VersionString = "VERSION";
-const char *P_GitSHA1aString = "GIT_SHA_1A";
-const char *P_GitSHA1bString = "GIT_SHA_1B";
-const char *P_GitSHA1cString = "GIT_SHA_1C";
-const char *P_GitSHA1dString = "GIT_SHA_1D";
-const char *P_GitSHA1eString = "GIT_SHA_1E";
-const char *P_GitSHA1fString = "GIT_SHA_1F";
-const char *P_GitSHA1gString = "GIT_SHA_1G";
-const char *P_GitSHA1hString = "GIT_SHA_1H";
-const char *P_GitSHA1iString = "GIT_SHA_1I";
-const char *P_GitSHA1jString = "GIT_SHA_1J";
-const char *P_GitSHA1kString = "GIT_SHA_1K";
-const char *P_GitSHA1lString = "GIT_SHA_1L";
-const char *P_GitSHA1mString = "GIT_SHA_1M";
-const char *P_GitSHA1nString = "GIT_SHA_1N";
-const char *P_GitSHA1oString = "GIT_SHA_1O";
-const char *P_GitSHA1pString = "GIT_SHA_1P";
-const char *P_GitSHA1qString = "GIT_SHA_1Q";
-const char *P_GitSHA1rString = "GIT_SHA_1R";
-const char *P_GitSHA1sString = "GIT_SHA_1S";
-const char *P_GitSHA1tString = "GIT_SHA_1T";
-const char *P_Waveform1String = "WAVEFORM";          /* asynInt32Array,  r/w */
+const char *RunStopString = "RUN_STOP";            /* asynInt32,    r/w */
+const char *MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS";            /* asynInt32,    r/w */
+const char *PollPeriodString = "POLL_PERIOD";            /* asynInt32,    r/w */
+const char *MagicString = "MAGIC";
+const char *DspFlavorString = "DSP_FLAVOR";
+const char *BuildYearString = "BUILD_YEAR";
+const char *BuildMonthString = "BUILD_MONTH";
+const char *BuildDayString = "BUILD_DAY";
+const char *BuildHourString = "BUILD_HOUR";
+const char *BuildMinuteString = "BUILD_MINUTE";
+const char *CodeIsCleanString = "CODE_IS_CLEAN";
+const char *ToolRevString = "TOOL_REV";
+const char *UserString = "USER";
+const char *BoardTypeString = "BOARD_TYPE";
+const char *VersionString = "VERSION";
+const char *GitSHA1aString = "GIT_SHA_1A";
+const char *GitSHA1bString = "GIT_SHA_1B";
+const char *GitSHA1cString = "GIT_SHA_1C";
+const char *GitSHA1dString = "GIT_SHA_1D";
+const char *GitSHA1eString = "GIT_SHA_1E";
+const char *GitSHA1fString = "GIT_SHA_1F";
+const char *GitSHA1gString = "GIT_SHA_1G";
+const char *GitSHA1hString = "GIT_SHA_1H";
+const char *GitSHA1iString = "GIT_SHA_1I";
+const char *GitSHA1jString = "GIT_SHA_1J";
+const char *GitSHA1kString = "GIT_SHA_1K";
+const char *GitSHA1lString = "GIT_SHA_1L";
+const char *GitSHA1mString = "GIT_SHA_1M";
+const char *GitSHA1nString = "GIT_SHA_1N";
+const char *GitSHA1oString = "GIT_SHA_1O";
+const char *GitSHA1pString = "GIT_SHA_1P";
+const char *GitSHA1qString = "GIT_SHA_1Q";
+const char *GitSHA1rString = "GIT_SHA_1R";
+const char *GitSHA1sString = "GIT_SHA_1S";
+const char *GitSHA1tString = "GIT_SHA_1T";
+const char *DspFdbkCoreMpProcCoeffString = "DSP_FDBK_CORE_MP_PROC_COEFF";
+const char *DspFdbkCoreMpProcLimString = "DSP_FDBK_CORE_MP_PROC_LIM";
+const char *DspFdbkCoreMpProcSetmpString = "DSP_FDBK_CORE_MP_PROC_SETMP";
+const char *DspLpNotchLp1AKxString = "DSP_LP_NOTCH_LP1A_KX";
+const char *DspLpNotchLp1AKyString = "DSP_LP_NOTCH_LP1A_KY";
+const char *DspLpNotchLp1BKxString = "DSP_LP_NOTCH_LP1B_KX";
+const char *DspLpNotchLp1BKyString = "DSP_LP_NOTCH_LP1B_KY";
+const char *DspChanKeepString = "DSP_CHAN_KEEP";
+const char *DspFdbkCoreCoarseScaleString = "DSP_FDBK_CORE_COARSE_SCALE";
+const char *DspFdbkCoreMpProcPhOffsetString = "DSP_FDBK_CORE_MP_PROC_PH_OFFSET";
+const char *DspFdbkCoreMpProcSelEnString = "DSP_FDBK_CORE_MP_PROC_SEL_EN";
+const char *DspFdbkCoreMpProcSelThreshString = "DSP_FDBK_CORE_MP_PROC_SEL_THRESH";
+const char *DspModuloString = "DSP_MODULO";
+const char *DspPhaseStepString = "DSP_PHASE_STEP";
+const char *DspPiezoPiezoDcString = "DSP_PIEZO_PIEZO_DC";
+const char *DspTagString = "DSP_TAG";
+const char *DspWaveSampPerString = "DSP_WAVE_SAMP_PER";
+const char *DspWaveShiftString = "DSP_WAVE_SHIFT";
+const char *Waveform1String = "WAVEFORM";          /* asynInt32Array,  r/w */
 
 const double readTimeout = 5.0; // seconds
 const double writeTimeout = 5.0; // seconds
-const double defaultPollPeriod = 0.1; // seconds
-const unsigned int throttlePoint = 16; // throttle requests when this many are outstanding
+const double defaultPollPeriod = 0.5; // seconds
 const double throttleLoopDelay = 0.001; // seconds, delay when sending is outstripping reading
+const unsigned int defaultMaxParallelRequests = 5; // throttle requests when this many are outstanding
 
 class scllrfAsynPortDriver : public asynPortDriver
 {
 public:
 	scllrfAsynPortDriver(const char *drvPortName, const char *netPortName);
 	virtual ~scllrfAsynPortDriver();
-	asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
+	asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+	asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
+	                                size_t nElements);
 
     /* Define a polling mechanism.
      * Sends requests for all register data at a specified period.
@@ -159,9 +180,11 @@ protected:
     // Response handler, reads data sent back from FPGA and assigns it to
     // the appropriate variables and pvs.
     virtual asynStatus startResponseHandler(); // For system startup
-    asynStatus processReadbackBuffer(const FpgaReg *pFromFpga);
+    asynStatus processReadbackBuffer(FpgaReg *pFromFpga, unsigned int readCount);
+    virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
     virtual asynStatus processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady); // parse register data, write to PVs
     virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
+    virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
     epicsEventId pollEventId_;    /**< Event ID to wake up poller */
     double pollPeriod_;           /**< The time between polls */
@@ -177,49 +200,71 @@ protected:
     unsigned int netWaitingRequests_; /**< writers increment, reader decrements */
     unsigned int newWaveAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
     unsigned int newWaveRead_;      /**< netSendCount for the most recent waveform */
-
+    enum {stop, run};
     epicsInt32 pWaveform_[wavesCount][waveBufferRegCount/wavesCount];
 
     /** Values used for pasynUser->reason, and indexes into the parameter library.
      * For this prototype, it's read only values that identify the FPGA. */
-    int P_Magic;
-    #define FIRST_CMOC_COMMAND P_Magic
-    int P_DspFlavor;
-    int P_BuildYear;
-    int P_BuildMonth;
-    int P_BuildDay;
-    int P_BuildHour;
-    int P_BuildMinute;
-    int P_CodeIsClean;
-    int P_ToolRev;
-    int P_User;
-    int P_BoardType;
-    int P_Version;
-    int P_GitSHA1a;
-    int P_GitSHA1b;
-    int P_GitSHA1c;
-    int P_GitSHA1d;
-    int P_GitSHA1e;
-    int P_GitSHA1f;
-    int P_GitSHA1g;
-    int P_GitSHA1h;
-    int P_GitSHA1i;
-    int P_GitSHA1j;
-    int P_GitSHA1k;
-    int P_GitSHA1l;
-    int P_GitSHA1m;
-    int P_GitSHA1n;
-    int P_GitSHA1o;
-    int P_GitSHA1p;
-    int P_GitSHA1q;
-    int P_GitSHA1r;
-    int P_GitSHA1s;
-    int P_GitSHA1t;
-    int P_Waveform;
-    #define LAST_CMOC_COMMAND P_Waveform
+    int p_RunStop;
+#define FIRST_CMOC_COMMAND p_RunStop
+    int p_MaxParallelRequests;
+    int p_PollPeriod;
+    int p_Magic;
+    int p_DspFlavor;
+    int p_BuildYear;
+    int p_BuildMonth;
+    int p_BuildDay;
+    int p_BuildHour;
+    int p_BuildMinute;
+    int p_CodeIsClean;
+    int p_ToolRev;
+    int p_User;
+    int p_BoardType;
+    int p_Version;
+    int p_GitSHA1a;
+    int p_GitSHA1b;
+    int p_GitSHA1c;
+    int p_GitSHA1d;
+    int p_GitSHA1e;
+    int p_GitSHA1f;
+    int p_GitSHA1g;
+    int p_GitSHA1h;
+    int p_GitSHA1i;
+    int p_GitSHA1j;
+    int p_GitSHA1k;
+    int p_GitSHA1l;
+    int p_GitSHA1m;
+    int p_GitSHA1n;
+    int p_GitSHA1o;
+    int p_GitSHA1p;
+    int p_GitSHA1q;
+    int p_GitSHA1r;
+    int p_GitSHA1s;
+    int p_GitSHA1t;
+    int p_DspFdbkCoreMpProcCoeff;
+    int p_DspFdbkCoreMpProcLim;
+    int p_DspFdbkCoreMpProcSetmp;
+    int p_DspLpNotchLp1AKx;
+    int p_DspLpNotchLp1AKy;
+    int p_DspLpNotchLp1BKx;
+    int p_DspLpNotchLp1BKy;
+    int p_DspChanKeep;
+    int p_DspFdbkCoreCoarseScale;
+    int p_DspFdbkCoreMpProcPhOffset;
+    int p_DspFdbkCoreMpProcSelEn;
+    int p_DspFdbkCoreMpProcSelThresh;
+    int p_DspModulo;
+    int p_DspPhaseStep;
+    int p_DspPiezoPiezoDc;
+    int p_DspTag;
+    int p_DspWaveSampPer;
+    int p_DspWaveShift;
+    int p_Waveform;
+    #define LAST_CMOC_COMMAND p_Waveform
 
     // mapping of register names to addresses
-    enum RegAddrs
+    // Note that the same address may access a different register reading than writing
+    enum RegReadAddrs
     {
     	MagicAdr = 0x00,
     	DspFlavorAdr = 0x01,
@@ -255,9 +300,49 @@ protected:
     	GitSHA1tAdr = 0x1f
     };
 
+    enum RegWriteAddrs
+    {
+    	DspFdbkCoreMpProcCoeffAdr = 0x0000,
+    	DspFdbkCoreMpProcLimAdr = 0x0004,
+    	DspFdbkCoreMpProcSetmpAdr = 0x0008,
+    	DspLpNotchLp1AKxAdr = 0x000C,
+    	DspLpNotchLp1AKyAdr = 0x000E,
+    	DspLpNotchLp1BKxAdr = 0x0010,
+    	DspLpNotchLp1BKyAdr = 0x0012,
+    	DspChanKeepAdr = 0x0014,
+    	DspFdbkCoreCoarseScaleAdr = 0x0015,
+    	DspFdbkCoreMpProcPhOffsetAdr = 0x0016,
+    	DspFdbkCoreMpProcSelEnAdr = 0x0017,
+    	DspFdbkCoreMpProcSelThreshAdr = 0x0018,
+    	DspModuloAdr = 0x0019,
+    	DspPhaseStepAdr = 0x001A,
+    	DspPiezoPiezoDcAdr = 0x001B,
+    	DspTagAdr = 0x001C,
+    	DspWaveSampPerAdr = 0x001D,
+    	DspWaveShiftAdr = 0x001E,
+    };
+
     // masks applied to returned register data
     enum RegMasks
     {
+    	DspFdbkCoreMpProcCoeffMask =  0x0003FFFF,
+    	DspFdbkCoreMpProcLimMask =  0x0003FFFF,
+    	DspFdbkCoreMpProcSetmpMask =  0x0003FFFF,
+    	DspLpNotchLp1AKxMask =  0x0003FFFF,
+    	DspLpNotchLp1AKyMask =  0x0003FFFF,
+    	DspLpNotchLp1BKxMask =  0x0003FFFF,
+    	DspLpNotchLp1BKyMask =  0x0003FFFF,
+    	DspChanKeepMask =  0x00000FFF,
+    	DspFdbkCoreCoarseScaleMask =  0x00000003,
+    	DspFdbkCoreMpProcPhOffsetMask =  0x0003FFFF,
+    	DspFdbkCoreMpProcSelEnMask =  0x00000001,
+    	DspFdbkCoreMpProcSelThreshMask =  0x0003FFFF,
+    	DspModuloMask =  0x00000FFF,
+    	DspPhaseStepMask =  0xFFFFFFFF,
+    	DspPiezoPiezoDcMask =  0x0000FFFF,
+    	DspTagMask =  0x000000FF,
+    	DspWaveSampPerMask =  0x0000007F,
+    	DspWaveShiftMask =  0x00000007,
     	MagicMask = 0xff,
     	DspFlavorMask = 0xff,
     	BuildYearMask = 0xff,
