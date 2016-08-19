@@ -331,7 +331,7 @@ x 253
 y 99
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1A"
+controlPv "CMOC:LI_GIT_SHA1_A"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -343,7 +343,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1A"
+id "CMOC:LI_GIT_SHA1_A"
 endObjectProperties
 
 # (Text Monitor)
@@ -356,7 +356,7 @@ x 253
 y 73
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1B"
+controlPv "CMOC:LI_GIT_SHA1_B"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -368,7 +368,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1B"
+id "CMOC:LI_GIT_SHA1_B"
 endObjectProperties
 
 # (Text Monitor)
@@ -381,7 +381,7 @@ x 253
 y 47
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1C"
+controlPv "CMOC:LI_GIT_SHA1_C"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -393,7 +393,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1C"
+id "CMOC:LI_GIT_SHA1_C"
 endObjectProperties
 
 # (Text Monitor)
@@ -406,7 +406,7 @@ x 17
 y 411
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1D"
+controlPv "CMOC:LI_GIT_SHA1_D"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -418,7 +418,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1D"
+id "CMOC:LI_GIT_SHA1_D"
 endObjectProperties
 
 # (Text Monitor)
@@ -431,7 +431,7 @@ x 17
 y 385
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1E"
+controlPv "CMOC:LI_GIT_SHA1_E"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -443,7 +443,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1E"
+id "CMOC:LI_GIT_SHA1_E"
 endObjectProperties
 
 # (Text Monitor)
@@ -456,7 +456,7 @@ x 17
 y 359
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1F"
+controlPv "CMOC:LI_GIT_SHA1_F"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -468,7 +468,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1F"
+id "CMOC:LI_GIT_SHA1_F"
 endObjectProperties
 
 # (Text Monitor)
@@ -481,7 +481,7 @@ x 17
 y 333
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1G"
+controlPv "CMOC:LI_GIT_SHA1_G"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -493,7 +493,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1G"
+id "CMOC:LI_GIT_SHA1_G"
 endObjectProperties
 
 # (Text Monitor)
@@ -506,7 +506,7 @@ x 17
 y 307
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1H"
+controlPv "CMOC:LI_GIT_SHA1_H"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -518,7 +518,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1H"
+id "CMOC:LI_GIT_SHA1_H"
 endObjectProperties
 
 # (Text Monitor)
@@ -531,7 +531,7 @@ x 17
 y 281
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1I"
+controlPv "CMOC:LI_GIT_SHA1_I"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -543,7 +543,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1I"
+id "CMOC:LI_GIT_SHA1_I"
 endObjectProperties
 
 # (Text Monitor)
@@ -556,7 +556,7 @@ x 17
 y 255
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1J"
+controlPv "CMOC:LI_GIT_SHA1_J"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -568,7 +568,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1J"
+id "CMOC:LI_GIT_SHA1_J"
 endObjectProperties
 
 # (Text Monitor)
@@ -581,7 +581,7 @@ x 17
 y 229
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1K"
+controlPv "CMOC:LI_GIT_SHA1_K"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -593,7 +593,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1k"
+id "CMOC:LI_GIT_SHA1_k"
 endObjectProperties
 
 # (Text Monitor)
@@ -606,7 +606,7 @@ x 17
 y 203
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1L"
+controlPv "CMOC:LI_GIT_SHA1_L"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -618,7 +618,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1L"
+id "CMOC:LI_GIT_SHA1_L"
 endObjectProperties
 
 # (Text Monitor)
@@ -631,7 +631,7 @@ x 17
 y 177
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1M"
+controlPv "CMOC:LI_GIT_SHA1_M"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -643,7 +643,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1M"
+id "CMOC:LI_GIT_SHA1_M"
 endObjectProperties
 
 # (Text Monitor)
@@ -656,7 +656,7 @@ x 17
 y 151
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1N"
+controlPv "CMOC:LI_GIT_SHA1_N"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -668,7 +668,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1N"
+id "CMOC:LI_GIT_SHA1_N"
 endObjectProperties
 
 # (Text Monitor)
@@ -681,7 +681,7 @@ x 17
 y 125
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1O"
+controlPv "CMOC:LI_GIT_SHA1_O"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -693,7 +693,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1O"
+id "CMOC:LI_GIT_SHA1_O"
 endObjectProperties
 
 # (Text Monitor)
@@ -706,7 +706,7 @@ x 17
 y 99
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1P"
+controlPv "CMOC:LI_GIT_SHA1_P"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -718,7 +718,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1P"
+id "CMOC:LI_GIT_SHA1_P"
 endObjectProperties
 
 # (Text Monitor)
@@ -731,7 +731,7 @@ x 17
 y 73
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1Q"
+controlPv "CMOC:LI_GIT_SHA1_Q"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -743,7 +743,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1Q"
+id "CMOC:LI_GIT_SHA1_Q"
 endObjectProperties
 
 # (Text Monitor)
@@ -756,7 +756,7 @@ x 17
 y 47
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1R"
+controlPv "CMOC:LI_GIT_SHA1_R"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -768,7 +768,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1R"
+id "CMOC:LI_GIT_SHA1_R"
 endObjectProperties
 
 # (Text Monitor)
@@ -781,7 +781,7 @@ x 17
 y 21
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1S"
+controlPv "CMOC:LI_GIT_SHA1_S"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -793,7 +793,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1S"
+id "CMOC:LI_GIT_SHA1_S"
 endObjectProperties
 
 # (Text Monitor)
@@ -806,7 +806,7 @@ x 253
 y 21
 w 205
 h 21
-controlPv "CMOC:LI_GIT_SHA_1T"
+controlPv "CMOC:LI_GIT_SHA1_T"
 format "hex"
 font "helvetica-medium-r-18.0"
 fgColor index 14
@@ -818,7 +818,7 @@ nullColor index 0
 useHexPrefix
 newPos
 objType "monitors"
-id "CMOC:LI_GIT_SHA_1T"
+id "CMOC:LI_GIT_SHA1_T"
 endObjectProperties
 
 # (X-Y Graph)

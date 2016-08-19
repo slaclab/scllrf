@@ -14,7 +14,6 @@
 using namespace std;
 #include <math.h>
 
-#define NUM_CMOC_PARAMS (&LAST_CMOC_COMMAND - &FIRST_CMOC_COMMAND + 1)
 /** Constructor for the scllrfAsynPortDriver class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] portName The name of the asyn port driver to be created.
@@ -38,13 +37,26 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 {
 	asynStatus status = asynSuccess;
 
+    /* Create the epicsMutex for locking access to communications counters from other threads */
+    comCountersMutexId_ = epicsMutexCreate();
+    if (!comCountersMutexId_) {
+        printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
+        return;
+    }
     epicsThreadSleep(defaultPollPeriod);
 
-    printf("%s creating %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
+	createParam(RunStopString, asynParamInt32, &p_RunStop);
+	createParam(MaxParallelRequestsString, asynParamInt32,
+			&p_MaxParallelRequests);
+	createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
+	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
 
-    createParam(RunStopString, asynParamInt32, (int *) &p_RunStop);
-    createParam(MaxParallelRequestsString, asynParamInt32, &p_MaxParallelRequests);
-    createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
+	// Set these early, consider adding interlock for race condition with polling loop.
+    setIntegerParam(p_RunStop, stop);
+    setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
+    setDoubleParam(p_PollPeriod, defaultPollPeriod);
+    setIntegerParam(p_CommErrorCount, 0);
+
 	createParam(MagicString, asynParamInt32, &p_Magic);
 	createParam(DspFlavorString, asynParamInt32, &p_DspFlavor);
 	createParam(BuildYearString, asynParamInt32, &p_BuildYear);
@@ -77,45 +89,133 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 	createParam(GitSHA1rString, asynParamInt32, &p_GitSHA1r);
 	createParam(GitSHA1sString, asynParamInt32, &p_GitSHA1s);
 	createParam(GitSHA1tString, asynParamInt32, &p_GitSHA1t);
-    createParam(DspFdbkCoreMpProcCoeffString, asynParamInt32Array, &p_DspFdbkCoreMpProcCoeff);
-    createParam(DspFdbkCoreMpProcLimString, asynParamInt32Array, &p_DspFdbkCoreMpProcLim);
-    createParam(DspFdbkCoreMpProcSetmpString, asynParamInt32Array, &p_DspFdbkCoreMpProcSetmp);
-    createParam(DspLpNotchLp1AKxString, asynParamInt32Array, &p_DspLpNotchLp1AKx);
-    createParam(DspLpNotchLp1AKyString, asynParamInt32Array, &p_DspLpNotchLp1AKy);
-    createParam(DspLpNotchLp1BKxString, asynParamInt32Array, &p_DspLpNotchLp1BKx);
-    createParam(DspLpNotchLp1BKyString, asynParamInt32Array, &p_DspLpNotchLp1BKy);
-    createParam(DspChanKeepString, asynParamInt32, &p_DspChanKeep);
-    createParam(DspFdbkCoreCoarseScaleString, asynParamInt32, &p_DspFdbkCoreCoarseScale);
-    createParam(DspFdbkCoreMpProcPhOffsetString, asynParamInt32, &p_DspFdbkCoreMpProcPhOffset);
-    createParam(DspFdbkCoreMpProcSelEnString, asynParamInt32, &p_DspFdbkCoreMpProcSelEn);
-    createParam(DspFdbkCoreMpProcSelThreshString, asynParamInt32, &p_DspFdbkCoreMpProcSelThresh);
-    createParam(DspModuloString, asynParamInt32, &p_DspModulo);
-    createParam(DspPhaseStepString, asynParamInt32, &p_DspPhaseStep);
-    createParam(DspPiezoPiezoDcString, asynParamInt32, &p_DspPiezoPiezoDc);
-    createParam(DspTagString, asynParamInt32, &p_DspTag);
-    createParam(DspWaveSampPerString, asynParamInt32, &p_DspWaveSampPer);
-    createParam(DspWaveShiftString, asynParamInt32, &p_DspWaveShift);
-    createParam(Waveform1String,asynParamInt32Array, &p_Waveform);
+	createParam(DspFdbkCoreMpProcCoeffString, asynParamInt32Array,
+			&p_DspFdbkCoreMpProcCoeff);
+	createParam(DspFdbkCoreMpProcLimString, asynParamInt32Array,
+			&p_DspFdbkCoreMpProcLim);
+	createParam(DspFdbkCoreMpProcSetmpString, asynParamInt32Array,
+			&p_DspFdbkCoreMpProcSetmp);
+	createParam(DspLpNotchLp1AKxString, asynParamInt32Array,
+			&p_DspLpNotchLp1AKx);
+	createParam(DspLpNotchLp1AKyString, asynParamInt32Array,
+			&p_DspLpNotchLp1AKy);
+	createParam(DspLpNotchLp1BKxString, asynParamInt32Array,
+			&p_DspLpNotchLp1BKx);
+	createParam(DspLpNotchLp1BKyString, asynParamInt32Array,
+			&p_DspLpNotchLp1BKy);
+	createParam(DspChanKeepString, asynParamInt32, &p_DspChanKeep);
+	createParam(DspFdbkCoreCoarseScaleString, asynParamInt32,
+			&p_DspFdbkCoreCoarseScale);
+	createParam(DspFdbkCoreMpProcPhOffsetString, asynParamInt32,
+			&p_DspFdbkCoreMpProcPhOffset);
+	createParam(DspFdbkCoreMpProcSelEnString, asynParamInt32,
+			&p_DspFdbkCoreMpProcSelEn);
+	createParam(DspFdbkCoreMpProcSelThreshString, asynParamInt32,
+			&p_DspFdbkCoreMpProcSelThresh);
+	createParam(DspModuloString, asynParamInt32, &p_DspModulo);
+	createParam(DspPhaseStepString, asynParamInt32, &p_DspPhaseStep);
+	createParam(DspPiezoPiezoDcString, asynParamInt32, &p_DspPiezoPiezoDc);
+	createParam(DspTagString, asynParamInt32, &p_DspTag);
+	createParam(DspWaveSampPerString, asynParamInt32, &p_DspWaveSampPer);
+	createParam(DspWaveShiftString, asynParamInt32, &p_DspWaveShift);
+	createParam(Waveform1String, asynParamInt32Array, &p_Waveform);
+	createParam(CircleAwString, asynParamInt32, &p_CircleAw);
+	createParam(ModeCountString, asynParamInt32, &p_ModeCount);
+	createParam(ModeShiftString, asynParamInt32, &p_ModeShift);
+	createParam(NMechModesString, asynParamInt32, &p_NMechModes);
+	createParam(DfScaleString, asynParamInt32, &p_DfScale);
+	createParam(SimpleDemoString, asynParamInt32, &p_SimpleDemo);
+	createParam(Cav4MechNoiseCplKOutString, asynParamInt32Array,
+			&p_Cav4MechNoiseCplKOut);
+	createParam(Cav4MechPiezoCplKOutString, asynParamInt32Array,
+			&p_Cav4MechPiezoCplKOut);
+	createParam(Cav4MechResonatorPropConstString, asynParamInt32Array,
+			&p_Cav4MechResonatorPropConst);
+	createParam(StaCav4ElecDot0KOutString, asynParamInt32Array,
+			&p_StaCav4ElecDot0KOut);
+	createParam(StaCav4ElecDot1KOutString, asynParamInt32Array,
+			&p_StaCav4ElecDot1KOut);
+	createParam(StaCav4ElecDot2KOutString, asynParamInt32Array,
+			&p_StaCav4ElecDot2KOut);
+	createParam(StaCav4ElecOuterProd0KOutString, asynParamInt32Array,
+			&p_StaCav4ElecOuterProd0KOut);
+	createParam(StaCav4ElecOuterProd1KOutString, asynParamInt32Array,
+			&p_StaCav4ElecOuterProd1KOut);
+	createParam(StaCav4ElecOuterProd2KOutString, asynParamInt32Array,
+			&p_StaCav4ElecOuterProd2KOut);
+	createParam(StaCav4ElecDrvCplOutCplngString, asynParamInt32,
+			&p_StaCav4ElecDrvCplOutCplng);
+	createParam(StaCav4ElecDrvCplOutPhOffString, asynParamInt32,
+			&p_StaCav4ElecDrvCplOutPhOff);
+	createParam(BeamModuloString, asynParamInt32, &p_BeamModulo);
+	createParam(BeamPhaseStepString, asynParamInt32, &p_BeamPhaseStep);
+	createParam(Cav4MechPrngIvaString, asynParamInt32, &p_Cav4MechPrngIva);
+	createParam(Cav4MechPrngIvbString, asynParamInt32, &p_Cav4MechPrngIvb);
+	createParam(Cav4MechPrngRandomRunString, asynParamInt32,
+			&p_Cav4MechPrngRandomRun);
+	createParam(StaACavOffsetString, asynParamInt32, &p_StaACavOffset);
+	createParam(StaAForOffsetString, asynParamInt32, &p_StaAForOffset);
+	createParam(StaARflOffsetString, asynParamInt32, &p_StaARflOffset);
+	createParam(StaAmpLpBwString, asynParamInt32, &p_StaAmpLpBw);
+	createParam(StaCav4ElecFreq0CoarseFreqString, asynParamInt32,
+			&p_StaCav4ElecFreq0CoarseFreq);
+	createParam(StaCav4ElecFreq1CoarseFreqString, asynParamInt32,
+			&p_StaCav4ElecFreq1CoarseFreq);
+	createParam(StaCav4ElecFreq2CoarseFreqString, asynParamInt32,
+			&p_StaCav4ElecFreq2CoarseFreq);
+	createParam(StaCav4ElecMode0BeamCplString, asynParamInt32,
+			&p_StaCav4ElecMode0BeamCpl);
+	createParam(StaCav4ElecMode0BwString, asynParamInt32,
+			&p_StaCav4ElecMode0Bw);
+	createParam(StaCav4ElecMode0DrvCplString, asynParamInt32,
+			&p_StaCav4ElecMode0DrvCpl);
+	createParam(StaCav4ElecMode0OutCplOutCplngString, asynParamInt32Array,
+			&p_StaCav4ElecMode0OutCplOutCplng);
+	createParam(StaCav4ElecMode0OutCplOutPhOffString, asynParamInt32,
+			&p_StaCav4ElecMode0OutCplOutPhOff);
+	createParam(StaCav4ElecMode1BeamCplString, asynParamInt32,
+			&p_StaCav4ElecMode1BeamCpl);
+	createParam(StaCav4ElecMode1BwString, asynParamInt32,
+			&p_StaCav4ElecMode1Bw);
+	createParam(StaCav4ElecMode1DrvCplString, asynParamInt32,
+			&p_StaCav4ElecMode1DrvCpl);
+	createParam(StaCav4ElecMode2BeamCplString, asynParamInt32,
+			&p_StaCav4ElecMode2BeamCpl);
+	createParam(StaCav4ElecMode2BwString, asynParamInt32,
+			&p_StaCav4ElecMode2Bw);
+	createParam(StaCav4ElecMode2DrvCplString, asynParamInt32,
+			&p_StaCav4ElecMode2DrvCpl);
+	createParam(StaCav4ElecModuloString, asynParamInt32, &p_StaCav4ElecModulo);
+	createParam(StaCav4ElecPhaseStepString, asynParamInt32,
+			&p_StaCav4ElecPhaseStep);
+	createParam(StaComprSatCtlString, asynParamInt32, &p_StaComprSatCtl);
+	createParam(StaPrngIvaString, asynParamInt32, &p_StaPrngIva);
+	createParam(StaPrngIvbString, asynParamInt32, &p_StaPrngIvb);
+	createParam(StaPrngRandomRunString, asynParamInt32, &p_StaPrngRandomRun);
+	createParam(StaCav4ElecMode1OutCplOutCplngString, asynParamInt32,
+			&p_StaCav4ElecMode1OutCplOutCplng);
+	createParam(StaCav4ElecMode1OutCplOutPhOffString, asynParamInt32,
+			&p_StaCav4ElecMode1OutCplOutPhOff);
+	createParam(StaCav4ElecMode2OutCplOutCplngString, asynParamInt32,
+			&p_StaCav4ElecMode2OutCplOutCplng);
+	createParam(StaCav4ElecMode2OutCplOutPhOffString, asynParamInt32,
+			&p_StaCav4ElecMode2OutCplOutPhOff);
 
     epicsThreadSleep(defaultPollPeriod);
 
-    printf("%s done creating %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
+    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
 
 	status=pasynCommonSyncIO->connect(netPortName, 0, &pCommonAsynUser_, 0);
 	if(status!=asynSuccess)
 		printf( "%s: connect: failed to connect to port %s with status %d\n",
 				__PRETTY_FUNCTION__,netPortName, status);
-	else  printf( "%s: connect: connected to port %s\n",__PRETTY_FUNCTION__,netPortName);
+	else  printf( "%s: connect: %s asynUser \"Common\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName, netPortName);
 
 	status=pasynOctetSyncIO->connect( netPortName,0,&pOctetAsynUser_,0);
 	if(status!=asynSuccess)
 		printf( "%s: connect: failed to connect to Read port %s with status %d\n",
 				__PRETTY_FUNCTION__,netPortName, status);
-	else  printf( "%s: connect: connected to port %s\n",__PRETTY_FUNCTION__,netPortName);
-
-    setIntegerParam(p_RunStop, stop);
-    setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
-    setDoubleParam(p_PollPeriod, defaultPollPeriod);
+	else  printf( "%s: connect: %s asynUser \"Octet\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName,netPortName);
 
     // The createParam calls are queued up rather than executed right away, so
     // give them a chance to be created before we start writing to them.
@@ -130,11 +230,10 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 
     epicsThreadSleep(defaultPollPeriod);
 
-    printf("%s starting polling thread.\n",__PRETTY_FUNCTION__);
-
 	pollEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startPoller(defaultPollPeriod);
 
+    printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 }
 
 scllrfAsynPortDriver::~scllrfAsynPortDriver()
@@ -145,6 +244,10 @@ scllrfAsynPortDriver::~scllrfAsynPortDriver()
 	wakeupPoller();
 	wakeupReader();
 	epicsThreadSleep(0.1); // Allow threads to run and exit
+	wakeupPoller(); // call this twice in case the poller was never set to run
+	wakeupReader();
+	epicsThreadSleep(0.1); // Allow threads to run and exit
+	wakeupReader();
 	pasynOctetSyncIO->disconnect(pOctetAsynUser_);
 	pasynCommonSyncIO->disconnectDevice(pCommonAsynUser_);
 	pasynCommonSyncIO->disconnect(pCommonAsynUser_);
@@ -156,88 +259,416 @@ scllrfAsynPortDriver::~scllrfAsynPortDriver()
   * \param[in] function From pAsynUser->reason, corresponding to a registered parameter.
   * \param[in] pToFpga Pointer to the {Address, Data} structure where the register address will be written
   * \param[in] nElements Number of elements to read. */
-asynStatus scllrfAsynPortDriver::functionToRegister(const int function, FpgaReg *pToFpga)
+asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
+		FpgaReg *pToFpga)
 {
-	unsigned int i;
 	asynStatus status = asynSuccess;
 
-    // Assume this is for a write function, doesn't have to include read only registers (so far)
-    if( function ==  p_DspFdbkCoreMpProcCoeff)
-    for(i=0; i<4; i++){
-		pToFpga[i].addr = DspFdbkCoreMpProcCoeffAdr+i;
-    }
-    else if( function == p_DspFdbkCoreMpProcLim )
-    for(i=0; i<4; i++){
-		pToFpga[i].addr = DspFdbkCoreMpProcLimAdr+i;
-    }
-    else if( function == p_DspFdbkCoreMpProcSetmp )
-    for(i=0; i<4; i++){
-		pToFpga[i].addr = DspFdbkCoreMpProcSetmpAdr+i;
-    }
-    else if( function == p_DspLpNotchLp1AKx )
-    for(i=0; i<2; i++){
-		pToFpga[i].addr = DspLpNotchLp1AKxAdr+i;
-    }
-    else if( function == p_DspLpNotchLp1AKy )
-    for(i=0; i<2; i++){
-		pToFpga[i].addr = DspLpNotchLp1AKyAdr+i;
-    }
-    else if( function == p_DspLpNotchLp1BKx )
-    for(i=0; i<2; i++){
-		pToFpga[i].addr = DspLpNotchLp1BKxAdr+i;
-    }
-    else if( function == p_DspLpNotchLp1BKy )
-    for(i=0; i<2; i++){
-		pToFpga[i].addr = DspLpNotchLp1BKyAdr+i;
-    }
-    else if( function == p_DspChanKeep )
-    {
+	// Assume this is for a write function, doesn't have to include read only registers (so far)
+	if (function == p_Magic)
+	{
+		pToFpga->addr = MagicAdr | flagReadMask;
+	}
+	else if (function == p_DspFlavor)
+	{
+		pToFpga->addr = DspFlavorAdr | flagReadMask;
+	}
+	else if (function == p_BuildYear)
+	{
+		pToFpga->addr = BuildYearAdr | flagReadMask;
+	}
+	else if (function == p_BuildMonth)
+	{
+		pToFpga->addr = BuildMonthAdr | flagReadMask;
+	}
+	else if (function == p_BuildDay)
+	{
+		pToFpga->addr = BuildDayAdr | flagReadMask;
+	}
+	else if (function == p_BuildHour)
+	{
+		pToFpga->addr = BuildHourAdr | flagReadMask;
+	}
+	else if (function == p_BuildMinute)
+	{
+		pToFpga->addr = BuildMinuteAdr | flagReadMask;
+	}
+	else if (function == p_CodeIsClean)
+	{
+		pToFpga->addr = CodeIsCleanAdr | flagReadMask;
+	}
+	else if (function == p_ToolRev)
+	{
+		pToFpga->addr = ToolRevAdr | flagReadMask;
+	}
+	else if (function == p_User)
+	{
+		pToFpga->addr = UserAdr | flagReadMask;
+	}
+	else if (function == p_BoardType)
+	{
+		pToFpga->addr = BoardTypeAdr | flagReadMask;
+	}
+	else if (function == p_Version)
+	{
+		pToFpga->addr = VersionAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1a)
+	{
+		pToFpga->addr = GitSHA1aAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1b)
+	{
+		pToFpga->addr = GitSHA1bAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1c)
+	{
+		pToFpga->addr = GitSHA1cAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1d)
+	{
+		pToFpga->addr = GitSHA1dAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1e)
+	{
+		pToFpga->addr = GitSHA1eAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1f)
+	{
+		pToFpga->addr = GitSHA1fAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1g)
+	{
+		pToFpga->addr = GitSHA1gAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1h)
+	{
+		pToFpga->addr = GitSHA1hAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1i)
+	{
+		pToFpga->addr = GitSHA1iAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1j)
+	{
+		pToFpga->addr = GitSHA1jAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1k)
+	{
+		pToFpga->addr = GitSHA1kAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1l)
+	{
+		pToFpga->addr = GitSHA1lAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1m)
+	{
+		pToFpga->addr = GitSHA1mAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1n)
+	{
+		pToFpga->addr = GitSHA1nAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1o)
+	{
+		pToFpga->addr = GitSHA1oAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1p)
+	{
+		pToFpga->addr = GitSHA1pAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1q)
+	{
+		pToFpga->addr = GitSHA1qAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1r)
+	{
+		pToFpga->addr = GitSHA1rAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1s)
+	{
+		pToFpga->addr = GitSHA1sAdr | flagReadMask;
+	}
+	else if (function == p_GitSHA1t)
+	{
+		pToFpga->addr = GitSHA1tAdr | flagReadMask;
+	}
+	else if (function == p_DspFdbkCoreMpProcCoeff)
+	{
+		pToFpga->addr = DspFdbkCoreMpProcCoeffAdr;
+	}
+	else if (function == p_DspFdbkCoreMpProcLim)
+	{
+		pToFpga->addr = DspFdbkCoreMpProcLimAdr;
+	}
+	else if (function == p_DspFdbkCoreMpProcSetmp)
+	{
+		pToFpga->addr = DspFdbkCoreMpProcSetmpAdr;
+	}
+	else if (function == p_DspLpNotchLp1AKx)
+	{
+		pToFpga->addr = DspLpNotchLp1AKxAdr;
+	}
+	else if (function == p_DspLpNotchLp1AKy)
+	{
+		pToFpga->addr = DspLpNotchLp1AKyAdr;
+	}
+	else if (function == p_DspLpNotchLp1BKx)
+	{
+		pToFpga->addr = DspLpNotchLp1BKxAdr;
+	}
+	else if (function == p_DspLpNotchLp1BKy)
+	{
+		pToFpga->addr = DspLpNotchLp1BKyAdr;
+	}
+	else if (function == p_DspChanKeep)
+	{
 		pToFpga->addr = DspChanKeepAdr;
-    }
-    else if( function == p_DspFdbkCoreCoarseScale )
-    {
+	}
+	else if (function == p_DspFdbkCoreCoarseScale)
+	{
 		pToFpga->addr = DspFdbkCoreCoarseScaleAdr;
-    }
-    else if( function == p_DspFdbkCoreMpProcPhOffset )
-    {
+	}
+	else if (function == p_DspFdbkCoreMpProcPhOffset)
+	{
 		pToFpga->addr = DspFdbkCoreMpProcPhOffsetAdr;
-    }
-    else if( function == p_DspFdbkCoreMpProcSelEn )
-    {
+	}
+	else if (function == p_DspFdbkCoreMpProcSelEn)
+	{
 		pToFpga->addr = DspFdbkCoreMpProcSelEnAdr;
-    }
-    else if( function == p_DspFdbkCoreMpProcSelThresh )
-    {
+	}
+	else if (function == p_DspFdbkCoreMpProcSelThresh)
+	{
 		pToFpga->addr = DspFdbkCoreMpProcSelThreshAdr;
-    }
-    else if( function == p_DspModulo )
-    {
+	}
+	else if (function == p_DspModulo)
+	{
 		pToFpga->addr = DspModuloAdr;
-    }
-    else if( function == p_DspPhaseStep )
-    {
+	}
+	else if (function == p_DspPhaseStep)
+	{
 		pToFpga->addr = DspPhaseStepAdr;
-    }
-    else if( function == p_DspPiezoPiezoDc )
-    {
+	}
+	else if (function == p_DspPiezoPiezoDc)
+	{
 		pToFpga->addr = DspPiezoPiezoDcAdr;
-    }
-    else if( function == p_DspTag )
-    {
+	}
+	else if (function == p_DspTag)
+	{
 		pToFpga->addr = DspTagAdr;
-    }
-    else if( function == p_DspWaveSampPer )
-    {
+	}
+	else if (function == p_DspWaveSampPer)
+	{
 		pToFpga->addr = DspWaveSampPerAdr;
-    }
-    else if( function == p_DspWaveShift )
-    {
+	}
+	else if (function == p_DspWaveShift)
+	{
 		pToFpga->addr = DspWaveShiftAdr;
-    }
-    else
-    	status = asynError;
+	}
+	else if (function == p_CircleAw)
+	{
+		pToFpga->addr = CircleAwAdr | flagReadMask;
+	}
+	else if (function == p_ModeCount)
+	{
+		pToFpga->addr = ModeCountAdr | flagReadMask;
+	}
+	else if (function == p_ModeShift)
+	{
+		pToFpga->addr = ModeShiftAdr | flagReadMask;
+	}
+	else if (function == p_NMechModes)
+	{
+		pToFpga->addr = NMechModesAdr | flagReadMask;
+	}
+	else if (function == p_DfScale)
+	{
+		pToFpga->addr = DfScaleAdr | flagReadMask;
+	}
+	else if (function == p_SimpleDemo)
+	{
+		pToFpga->addr = SimpleDemoAdr | flagReadMask;
+	}
+    else if( function == p_Cav4MechNoiseCplKOut )
+	{
+		pToFpga->addr = Cav4MechNoiseCplKOutAdr;
+	}
+    else if( function == p_Cav4MechPiezoCplKOut )
+	{
+		pToFpga->addr = Cav4MechPiezoCplKOutAdr;
+	}
+	else if (function == p_Cav4MechResonatorPropConst)
+	{
+		pToFpga->addr = Cav4MechResonatorPropConstAdr;
+	}
+    else if( function == p_StaCav4ElecDot0KOut )
+	{
+		pToFpga->addr = StaCav4ElecDot0KOutAdr;
+	}
+    else if( function == p_StaCav4ElecDot1KOut )
+	{
+		pToFpga->addr = StaCav4ElecDot1KOutAdr;
+	}
+    else if( function == p_StaCav4ElecDot2KOut )
+	{
+		pToFpga->addr = StaCav4ElecDot2KOutAdr;
+	}
+    else if( function == p_StaCav4ElecOuterProd0KOut )
+	{
+		pToFpga->addr = StaCav4ElecOuterProd0KOutAdr;
+	}
+    else if( function == p_StaCav4ElecOuterProd1KOut )
+	{
+		pToFpga->addr = StaCav4ElecOuterProd1KOutAdr;
+	}
+    else if( function == p_StaCav4ElecOuterProd2KOut )
+	{
+		pToFpga->addr = StaCav4ElecOuterProd2KOutAdr;
+	}
+    else if( function == p_StaCav4ElecDrvCplOutCplng )
+	{
+		pToFpga->addr = StaCav4ElecDrvCplOutCplngAdr;
+	}
+    else if( function == p_StaCav4ElecDrvCplOutPhOff )
+	{
+		pToFpga->addr = StaCav4ElecDrvCplOutPhOffAdr;
+	}
+	else if (function == p_BeamModulo)
+	{
+		pToFpga->addr = BeamModuloAdr;
+	}
+	else if (function == p_BeamPhaseStep)
+	{
+		pToFpga->addr = BeamPhaseStepAdr;
+	}
+	else if (function == p_Cav4MechPrngIva)
+	{
+		pToFpga->addr = Cav4MechPrngIvaAdr;
+	}
+	else if (function == p_Cav4MechPrngIvb)
+	{
+		pToFpga->addr = Cav4MechPrngIvbAdr;
+	}
+	else if (function == p_Cav4MechPrngRandomRun)
+	{
+		pToFpga->addr = Cav4MechPrngRandomRunAdr;
+	}
+    else if( function == p_StaACavOffset )
+	{
+		pToFpga->addr = StaACavOffsetAdr;
+	}
+    else if( function == p_StaAForOffset )
+	{
+		pToFpga->addr = StaAForOffsetAdr;
+	}
+    else if( function == p_StaARflOffset )
+	{
+		pToFpga->addr = StaARflOffsetAdr;
+	}
+    else if( function == p_StaAmpLpBw )
+	{
+		pToFpga->addr = StaAmpLpBwAdr;
+	}
+    else if( function == p_StaCav4ElecFreq0CoarseFreq )
+	{
+		pToFpga->addr = StaCav4ElecFreq0CoarseFreqAdr;
+	}
+    else if( function == p_StaCav4ElecFreq1CoarseFreq )
+	{
+		pToFpga->addr = StaCav4ElecFreq1CoarseFreqAdr;
+	}
+    else if( function == p_StaCav4ElecFreq2CoarseFreq )
+	{
+		pToFpga->addr = StaCav4ElecFreq2CoarseFreqAdr;
+	}
+    else if( function == p_StaCav4ElecMode0BeamCpl )
+	{
+		pToFpga->addr = StaCav4ElecMode0BeamCplAdr;
+	}
+    else if( function == p_StaCav4ElecMode0Bw )
+	{
+		pToFpga->addr = StaCav4ElecMode0BwAdr;
+	}
+    else if( function == p_StaCav4ElecMode0DrvCpl )
+	{
+		pToFpga->addr = StaCav4ElecMode0DrvCplAdr;
+	}
+    else if( function == p_StaCav4ElecMode0OutCplOutCplng )
+	{
+		pToFpga->addr = StaCav4ElecMode0OutCplOutCplngAdr;
+	}
+    else if( function == p_StaCav4ElecMode0OutCplOutPhOff )
+	{
+		pToFpga->addr = StaCav4ElecMode0OutCplOutPhOffAdr;
+	}
+    else if( function == p_StaCav4ElecMode1BeamCpl )
+	{
+		pToFpga->addr = StaCav4ElecMode1BeamCplAdr;
+	}
+    else if( function == p_StaCav4ElecMode1Bw )
+	{
+		pToFpga->addr = StaCav4ElecMode1BwAdr;
+	}
+    else if( function == p_StaCav4ElecMode1DrvCpl )
+	{
+		pToFpga->addr = StaCav4ElecMode1DrvCplAdr;
+	}
+    else if( function == p_StaCav4ElecMode2BeamCpl )
+	{
+		pToFpga->addr = StaCav4ElecMode2BeamCplAdr;
+	}
+    else if( function == p_StaCav4ElecMode2Bw )
+	{
+		pToFpga->addr = StaCav4ElecMode2BwAdr;
+	}
+    else if( function == p_StaCav4ElecMode2DrvCpl )
+	{
+		pToFpga->addr = StaCav4ElecMode2DrvCplAdr;
+	}
+    else if( function == p_StaCav4ElecModulo )
+	{
+		pToFpga->addr = StaCav4ElecModuloAdr;
+	}
+    else if( function == p_StaCav4ElecPhaseStep )
+	{
+		pToFpga->addr = StaCav4ElecPhaseStepAdr;
+	}
+    else if( function == p_StaComprSatCtl )
+	{
+		pToFpga->addr = StaComprSatCtlAdr;
+	}
+    else if( function == p_StaPrngIva )
+	{
+		pToFpga->addr = StaPrngIvaAdr;
+	}
+    else if( function == p_StaPrngIvb )
+	{
+		pToFpga->addr = StaPrngIvbAdr;
+	}
+    else if( function == p_StaPrngRandomRun )
+	{
+		pToFpga->addr = StaPrngRandomRunAdr|flagReadMask;
+	}
+    else if( function == p_StaCav4ElecMode1OutCplOutCplng )
+	{
+		pToFpga->addr = StaCav4ElecMode1OutCplOutCplngAdr;
+	}
+    else if( function == p_StaCav4ElecMode1OutCplOutPhOff )
+	{
+		pToFpga->addr = StaCav4ElecMode1OutCplOutPhOffAdr|flagReadMask;
+	}
+    else if( function == p_StaCav4ElecMode2OutCplOutCplng )
+	{
+		pToFpga->addr = StaCav4ElecMode2OutCplOutCplngAdr;
+	}
+    else if( function == p_StaCav4ElecMode2OutCplOutPhOff )
+	{
+		pToFpga->addr = StaCav4ElecMode2OutCplOutPhOffAdr;
+	}
+	else
+		status = asynError;
 
-    return status;
+	return status;
 }
 
 /** Called when asyn clients call pasynInt32->read().
@@ -266,11 +697,12 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
     else {
     	// Convert function to address & FpgaReg.
     	status = functionToRegister(function, &regSendBuf[1]);
-    	if (status != asynSuccess)
-    		return status;
-    	regSendBuf[1].data = (uint32_t) value;
-    	htonFpgaRegArray(regSendBuf, 2);
-    	sendRegRequest(regSendBuf, 2);
+    	if (status == asynSuccess) // Yes, this function is a register write
+    	{
+    		regSendBuf[1].data = (uint32_t) value;
+        	htonFpgaRegArray(regSendBuf, 2);
+        	sendRegRequest(regSendBuf, 2);
+    	}
     }
 
 	/* Do callbacks so higher layers see any changes */
@@ -300,31 +732,67 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 	asynStatus status = asynSuccess;
 //	int nCopy;
 	FpgaReg regSendBuf[maxMsgSize/sizeof(FpgaReg)];
-	unsigned int i;
+	unsigned int i, uOutBuffIndex;
+	uint32_t uRegAddr;
+    const char *paramName;
 
 	//getIntegerParam(P_ArrayLength, &nCopy);
 	//if ((int) nElements < nCopy)
 	//	nCopy = (int) nElements;
 
+    /* Fetch the parameter string name for possible use in debugging */
+    getParamName(function, &paramName);
+
+	if(nElements < 2)
+	{
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: array with %d elements, function=%d, %s\n",
+				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
+		return status;
+	}
+	else
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: array with %d elements, function=%d, %s\n",
+				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
+
 	status = functionToRegister(function, &regSendBuf[1]);
 	if (status != asynSuccess)
 		return status;
 
-	for(i=0; i<nElements; i++)
+	uRegAddr = regSendBuf[1].addr;
+	uOutBuffIndex = 1; // index of first register past the nonce
+
+	for(i=0; i<nElements; ++i, ++uOutBuffIndex)
 	{
-		regSendBuf[i+1].data = (uint32_t) value[i];
-		//*nIn = nCopy;
+		regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
+		regSendBuf[uOutBuffIndex].addr = (uint32_t) uRegAddr + i;
+
+		// If there's more to send than will fit in the max message size, break
+		// it up into chunks and send each chunk individually
+		if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
+		{
+			htonFpgaRegArray(regSendBuf, uOutBuffIndex);
+			sendRegRequest(regSendBuf, uOutBuffIndex+1);
+
+			if (status)
+				epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+						"%s: status=%d, function=%d, sending array segment %u of %s", __PRETTY_FUNCTION__,
+						status, function, i/uOutBuffIndex +1, paramName);
+			else
+				asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sending array segment %u of %s\n",
+						__PRETTY_FUNCTION__, function, i/uOutBuffIndex +1, paramName);
+			uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
+		}
 	}
-	htonFpgaRegArray(regSendBuf, nElements);
-	sendRegRequest(regSendBuf, nElements);
+
+	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
+	sendRegRequest(regSendBuf, uOutBuffIndex+1);
 
 	if (status)
 		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-				"%s: status=%d, function=%d", __PRETTY_FUNCTION__,
-				status, function);
+				"%s: status=%d, function=%d, sent %s", __PRETTY_FUNCTION__,
+				status, function, paramName);
 	else
-		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d\n",
-				__PRETTY_FUNCTION__, function);
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sent %s\n",
+				__PRETTY_FUNCTION__, function, paramName);
 
 	return status; //(writeArray < epicsInt32 > (pasynUser, value, nElements));
 }
@@ -357,41 +825,50 @@ void scllrfAsynPortDriver::regPoller()
     int runStop;
 
 	// A canned request to read all registers
-	static FpgaReg cmocReadAllRegMsg[regCount + 1] =
+	static FpgaReg cmocReadAllRegMsg[readRegCount + 1] =
 	{
 			{ 0, 0 },
-			{ flagReadMask | 0x00, blankData },
-			{ flagReadMask | 0x01, blankData },
-			{ flagReadMask | 0x02, blankData },
-			{ flagReadMask | 0x03, blankData },
-			{ flagReadMask | 0x04, blankData },
-			{ flagReadMask | 0x05, blankData },
-			{ flagReadMask | 0x06, blankData },
-			{ flagReadMask | 0x07, blankData },
-			{ flagReadMask | 0x08, blankData },
-			{ flagReadMask | 0x09, blankData },
-			{ flagReadMask | 0x0a, blankData },
-			{ flagReadMask | 0x0b, blankData },
-			{ flagReadMask | 0x0c, blankData },
-			{ flagReadMask | 0x0d, blankData },
-			{ flagReadMask | 0x0e, blankData },
-			{ flagReadMask | 0x0f, blankData },
-			{ flagReadMask | 0x10, blankData },
-			{ flagReadMask | 0x11, blankData },
-			{ flagReadMask | 0x12, blankData },
-			{ flagReadMask | 0x13, blankData },
-			{ flagReadMask | 0x14, blankData },
-			{ flagReadMask | 0x15, blankData },
-			{ flagReadMask | 0x16, blankData },
-			{ flagReadMask | 0x17, blankData },
-			{ flagReadMask | 0x18, blankData },
-			{ flagReadMask | 0x19, blankData },
-			{ flagReadMask | 0x1a, blankData },
-			{ flagReadMask | 0x1b, blankData },
-			{ flagReadMask | 0x1c, blankData },
-			{ flagReadMask | 0x1d, blankData },
-			{ flagReadMask | 0x1e, blankData },
-			{ flagReadMask | 0x1f, blankData } };
+			{ flagReadMask | MagicAdr, blankData | wavesReadyMask },
+			{ flagReadMask | DspFlavorAdr, blankData },
+			{ flagReadMask | BuildYearAdr, blankData },
+			{ flagReadMask | BuildMonthAdr, blankData },
+			{ flagReadMask | BuildDayAdr, blankData },
+			{ flagReadMask | BuildHourAdr, blankData },
+			{ flagReadMask | BuildMinuteAdr, blankData },
+			{ flagReadMask | CodeIsCleanAdr, blankData },
+			{ flagReadMask | ToolRevAdr, blankData },
+			{ flagReadMask | UserAdr, blankData },
+			{ flagReadMask | BoardTypeAdr, blankData },
+			{ flagReadMask | VersionAdr, blankData },
+			{ flagReadMask | GitSHA1aAdr, blankData },
+			{ flagReadMask | GitSHA1bAdr, blankData },
+			{ flagReadMask | GitSHA1cAdr, blankData },
+			{ flagReadMask | GitSHA1dAdr, blankData },
+			{ flagReadMask | GitSHA1eAdr, blankData },
+			{ flagReadMask | GitSHA1fAdr, blankData },
+			{ flagReadMask | GitSHA1gAdr, blankData },
+			{ flagReadMask | GitSHA1hAdr, blankData },
+			{ flagReadMask | GitSHA1iAdr, blankData },
+			{ flagReadMask | GitSHA1jAdr, blankData },
+			{ flagReadMask | GitSHA1kAdr, blankData },
+			{ flagReadMask | GitSHA1lAdr, blankData },
+			{ flagReadMask | GitSHA1mAdr, blankData },
+			{ flagReadMask | GitSHA1nAdr, blankData },
+			{ flagReadMask | GitSHA1oAdr, blankData },
+			{ flagReadMask | GitSHA1pAdr, blankData },
+			{ flagReadMask | GitSHA1qAdr, blankData },
+			{ flagReadMask | GitSHA1rAdr, blankData },
+			{ flagReadMask | GitSHA1sAdr, blankData },
+			{ flagReadMask | GitSHA1tAdr, blankData },
+			{ flagReadMask | CircleAwAdr, blankData },
+			{ flagReadMask | ModeCountAdr, blankData },
+			{ flagReadMask | ModeShiftAdr, blankData },
+			{ flagReadMask | NMechModesAdr, blankData },
+			{ flagReadMask | DfScaleAdr, blankData },
+			{ flagReadMask | SimpleDemoAdr, blankData },
+			{ flagReadMask | StaPrngRandomRunAdr, blankData },
+			{ flagReadMask | StaCav4ElecMode1OutCplOutPhOffAdr, blankData },
+	};
 	htonFpgaRegArray(cmocReadAllRegMsg, regCount + 1);
 
 	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
@@ -435,7 +912,9 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	assert(regBuffer != NULL);
 	assert(regBuffCount >= 2);
 	size_t writtenCount;
+	epicsInt32 errorCount;
 	asynStatus status = asynSuccess;
+	epicsMutexLockStatus mutexStatus;
 	char * pWriteBuffer;
 	pWriteBuffer = reinterpret_cast<char*>(regBuffer);
 	int maxParallelRequests;
@@ -444,12 +923,18 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	// Throttle so that we don't overflow buffers if response handling falls behind
 	if( netWaitingRequests_ > (unsigned) maxParallelRequests )
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: too many requests waiting for responses, throttling requests.\n",__PRETTY_FUNCTION__);
+				"%s: too many requests waiting for responses (%u), throttling requests.\n",__PRETTY_FUNCTION__, maxParallelRequests);
 	while( netWaitingRequests_ > (unsigned) maxParallelRequests )
+	{
+		if (isShuttingDown_)
+		{
+			return asynDisconnected;
+		}
 		epicsThreadSleep(throttleLoopDelay);
+	}
 
-	lock(); // protect netSendCount and netWaitingRequests
-	netSendCount_++; // increment and roll over if needed
+	mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
+	++netSendCount_; // increment and roll over if needed
 	// use the nonce at the start of the buffer for register count, and
 	// send counter. Can be used for error checking.
 	regBuffer[0] = (FpgaReg)
@@ -458,16 +943,19 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	status = pasynOctetSyncIO->write(pOctetAsynUser_, pWriteBuffer,
 			regBuffCount*sizeof(FpgaReg), writeTimeout, &writtenCount);
 	if (status != asynSuccess)
-		printf("%s: failed to write. %s\n", __PRETTY_FUNCTION__,
+	{
+		asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,"%s: failed to write. %s\n", __PRETTY_FUNCTION__,
 				pOctetAsynUser_->errorMessage);
+		getIntegerParam(p_CommErrorCount, &errorCount);
+		setIntegerParam(p_CommErrorCount, errorCount + 1);
+		callParamCallbacks();
+	}
 	else
 	{
-		netWaitingRequests_++;
-		//printf("%s: wrote %u registers. %u outstanding requests\n", __PRETTY_FUNCTION__,regBuffCount,
-		//		netWaitingRequests);
+		++netWaitingRequests_;
 	}
-	unlock();
-	epicsThreadSleep(0);
+	epicsMutexUnlock(comCountersMutexId_);
+	epicsThreadSleep(0); // to allow other threads to take the CPU
 	wakeupReader();
 
 	return asynSuccess;
@@ -511,14 +999,14 @@ void scllrfAsynPortDriver::waveformRequester()
 	// Split up because the packet would be too big for UDP otherwise
 	static FpgaReg cmocReadWaveformsMsg[waveSegmentCount][waveSegmentSize];
 
-	for (i=0; i<waveSegmentCount; i++)
+	for (i=0; i<waveSegmentCount; ++i)
 	{
 		cmocReadWaveformsMsg[i][0] = (FpgaReg) {0, 0}; // space for the nonce
 	}
 
-	for (waveSegmentNumber=0; waveSegmentNumber < waveSegmentCount; waveSegmentNumber++)
+	for (waveSegmentNumber=0; waveSegmentNumber < waveSegmentCount; ++waveSegmentNumber)
 	{
-		for (waveSegmentOffset = 0; waveSegmentOffset < waveSegmentSize-1; waveSegmentOffset++)
+		for (waveSegmentOffset = 0; waveSegmentOffset < waveSegmentSize-1; ++waveSegmentOffset)
 		{
 			regAddress = wavesStart + waveSegmentNumber*(waveSegmentSize-1) + waveSegmentOffset;
 			if (regAddress > wavesEnd)
@@ -551,7 +1039,7 @@ void scllrfAsynPortDriver::waveformRequester()
 		{
 			/* We got an event, rather than a timeout.
 			 **/
-			for (i=0; i<waveSegmentCount - 1; i++)
+			for (i=0; i<waveSegmentCount - 1; ++i)
 			{
 				sendRegRequest(cmocReadWaveformsMsg[i], sizeof(cmocReadWaveformsMsg[0])/sizeof(FpgaReg));
 			}
@@ -600,10 +1088,13 @@ void scllrfAsynPortDriver::responseHandler()
 {
 	asynStatus status;
 	epicsEventWaitStatus waitStatus;
+	epicsMutexLockStatus mutexStatus;
 	static char pReadBuffer[maxMsgSize];
 	FpgaReg *pRegReadback;
 	size_t readCount = 0; // Number of bytes to process from the network read
+	epicsInt32 errorCount;
 	int eomReason;
+	int noDataCounter = 0; // If we try to read this many times and get no data, give up and decrement netWaitingRequests_
 
 	while (1)
 	{
@@ -614,6 +1105,10 @@ void scllrfAsynPortDriver::responseHandler()
 				"%s: Caught up with message processing, blocking for data\n", __PRETTY_FUNCTION__);
 		waitStatus = epicsEventWaitWithTimeout(readEventId_, readTimeout_);
 
+		if (isShuttingDown_)
+		{
+			break;
+		}
 		if (waitStatus == epicsEventWaitOK) // We got an event, signaling to expect data back
 		{
 			while (netWaitingRequests_>0) // Writers increment atomic netWaitingRequests when they send a request
@@ -623,35 +1118,65 @@ void scllrfAsynPortDriver::responseHandler()
 				pRegReadback = reinterpret_cast<FpgaReg*>(pReadBuffer);
 				pRegReadback[0] = (FpgaReg) {0, 0}; // Reset count, so we won't try to process data that isn't there.
 
-				lock(); // protect netWaitingRequests from being modified by the write thread
+				mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
 				status = pasynOctetSyncIO->read(pOctetAsynUser_, pReadBuffer,
-						maxMsgSize, 0.001, &readCount, &eomReason);
-				//				printf("%s: status=0x%x, readCount=%zd, eomReason=0x%x\n", __PRETTY_FUNCTION__, status, readCount, eomReason);
+						nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
 
-				//				if (status == asynSuccess || readCount >0)
-				//				{
-				////					netWaitingRequests--;
-				//					printf("%s: woke up and read data\n", __PRETTY_FUNCTION__);
-				//				} // if (status == asynSuccess)
-				//				else
-				//				{
-				//					printf("%s: woke up but has no data yet. Expecting %u messages\n", __PRETTY_FUNCTION__,netWaitingRequests);
-				//				}
+				// Prevent an endless loop here while senders are throttled
+				if(readCount == 0)
+				{
+					++noDataCounter;
+					if(noDataCounter > (int)(defaultPollPeriod/throttleLoopDelay))
+						netWaitingRequests_--;
+					epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
+					continue;
+				}
+				else // Get the amount of data to read from the nonce presumably read in, and read that many more bytes
+				{
+					noDataCounter = 0;
+					if(ntohl(pRegReadback[0].data) < (int) maxMsgSize)
+					{ // read in the number of bytes the nonce says to expect, starting with the second register location
+						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
+								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
+						status = pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
+								ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
+						readCount += nonceSize*sizeof(FpgaReg);
+						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: got %u bytes total for response #%u\n",
+								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
+					}
+					else
+					{
+						netWaitingRequests_--;
+						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+							"%s: presumed nonce says sequence # %u with %d bytes.\n",
+							__PRETTY_FUNCTION__, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
+						epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
+						getIntegerParam(p_CommErrorCount, &errorCount);
+						setIntegerParam(p_CommErrorCount, errorCount + 1);
+						callParamCallbacks();
+						continue;
+					}
 
-				unlock(); // protect netWaitingRequests from being modified by the write thread
+				}
+				epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
 
-				ntohFpgaRegArray(pRegReadback, readCount/sizeof(FpgaReg));
+				ntohFpgaRegArray(pRegReadback, (readCount)/sizeof(FpgaReg));
 
 				processReadbackBuffer(pRegReadback, readCount);
 				/* Do callbacks so higher layers see any changes */
 				status = (asynStatus) callParamCallbacks();
 
-				epicsThreadSleep(0.002); // sleep to be nice to other threads
+				epicsThreadSleep(0); // sleep to be nice to other threads
 			} // while (netWaitingRequests>0)
 		} // if (status == epicsEventWaitOK)
-		if (isShuttingDown_)
+		else // Timed out waiting for sender to signal. Could be a network glitch, so count request as lost.
 		{
-			break;
+			if(netWaitingRequests_>0)
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+						"%s: receive thread timed out after %fs waiting for %d responses. Network losses?\n", __PRETTY_FUNCTION__, readTimeout_, netWaitingRequests_);
+				netWaitingRequests_--;
+			}
 		}
 	}
 }
@@ -664,35 +1189,71 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 	unsigned i;
 	bool waveIsReady = false; // Made this local rather than member because of concurrency concerns
 	asynStatus status = asynSuccess;
+	int bytesLeft = readCount; // signed to make error detection easier
+	epicsInt32 errorCount;
 
 	// We put the message size in the data of the first buffer element for error checking
 	// and to handle multiple messages received
-	while(readCount > 0)
+	while(bytesLeft > 0)
 	{
-		// We can read partial messages, so watch array bounds
-		if (readCount < (size_t) pRegReadback[0].data)
+
+		if (isShuttingDown_)
 		{
-			pRegReadback[0].data = readCount;
-			//pasynOctetSyncIO->flush(pOctetAsynUser); // Should we clear out waiting partial messages?
+			break;
+		}
+
+		// We can read partial messages, so watch array bounds if received message size is smaller than expected
+		if (bytesLeft < pRegReadback[0].data)
+		{
+			//pRegReadback[0].data = bytesLeft; // Testing made clear this isn't enough, so just bail.
+			pasynOctetSyncIO->flush(pOctetAsynUser_); // Should we clear out waiting partial messages?
+			netWaitingRequests_--;
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: Read %u bytes from network, %d bytes left to process, but expected %u bytes\n",
+					__PRETTY_FUNCTION__, readCount, bytesLeft, (unsigned) pRegReadback[0].data);
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: Response from request #%u, expected is request #%u\n",
+					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					lastResponseCount_ + 1);
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: Discarding this message\n",
+					__PRETTY_FUNCTION__);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+			return asynError;
 		}
 
 		if (pRegReadback[0].addr > lastResponseCount_ + 1)
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Missing response message, response from request #%u, expected is request #%u\n",
+					"%s: Missing response message, got response from request #%u, expected is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
+
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			printf("setting error count to %d\n", errorCount+1);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 		if (pRegReadback[0].addr < lastResponseCount_ + 1)
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Out-of-order response message, response from request #%u, expected is request #%u\n",
+					"%s: Out-of-order response message, got response from request #%u, expected is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
+
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 		lastResponseCount_ = pRegReadback[0].addr;
 
-		for (i = 1; i < pRegReadback[0].data / sizeof(FpgaReg); i++)
+		// Data read from the network may contain multiple responses. Take them one at a time.
+		// Use the register count from the nonce in pRegReadback[0].data to determine how much
+		// to process before the next response with its own nonce.
+		for (i = 1; i < pRegReadback[0].data / sizeof(FpgaReg); ++i)
 		{
 			if(pRegReadback[i].addr & flagReadMask)
 			{
-			status = processRegReadback(&pRegReadback[i], waveIsReady);
+				status = processRegReadback(&pRegReadback[i], waveIsReady);
 			}
 			else
 			{
@@ -701,7 +1262,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 			if (status)
 				epicsSnprintf(pOctetAsynUser_->errorMessage,
 						pOctetAsynUser_->errorMessageSize,
-						"%s: status=%d, address=0x%x, value=%u",
+						"%s: status=%d, couldn't process address=0x%x, value=%u",
 						__PRETTY_FUNCTION__, status,
 						(unsigned) pRegReadback[i].addr,
 						(unsigned) pRegReadback[i].data);
@@ -719,19 +1280,20 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 					"%s: processed response from request #%u, most recent is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					netSendCount_);
-			netWaitingRequests_--;
+			netWaitingRequests_ = netSendCount_ - pRegReadback[0].addr;
 		}
 		else
 			netWaitingRequests_ = 0; // We have the most recent, no outstanding requests
 
-		//printf("%s, buffer processing loop: readCount=%zd, pRegReadback[0].data=%d\n",__PRETTY_FUNCTION__, readCount, pRegReadback[0].data);
 		// decrement number of bytes left to process by the numbr of bytes we just processed
-		readCount -= (size_t) pRegReadback[0].data;
+		if(bytesLeft > pRegReadback[0].data)
+			bytesLeft -= pRegReadback[0].data;
+		else // guard against mangled/partial messages
+			bytesLeft = 0;
 
 		// The nonce in pRegReadback[0] contains the message size. Move pointer to the next message.
 		pRegReadback = & pRegReadback[pRegReadback[0].data/sizeof(FpgaReg)];
-		//printf("%s, buffer processing next loop: readCount=%zd, pRegReadback[0].data=%d\n",__PRETTY_FUNCTION__, readCount, pRegReadback[0].data);
-	} // while(readCount > 0)
+	} // while(bytesLeft > 0)
 
 	// If the waveIsReady flag is set,
 	if (waveIsReady &&
@@ -745,9 +1307,6 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
 				__PRETTY_FUNCTION__);
 	}
-
-	//	cout << __PRETTY_FUNCTION__ << ": waveIsReady: " << waveIsReady << ", newWaveAvailable: ";
-	//	cout << newWaveAvailable << ", newWaveRead: " << newWaveRead << "\n";
 
 	return asynSuccess;
 }
@@ -777,6 +1336,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 {
 	unsigned int i;
 	asynStatus status = asynSuccess;
+	epicsInt32 errorCount;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 
 	/* Map address to parameter, set the parameter in the parameter library. */
@@ -1075,16 +1635,76 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 		// Do we need to verify that all points of all waveforms have been received, not missing
 		// packets or some such?
 		// Basic approach: when we read in the last point of the last waveform, publish them all
-		for (i=0; i<wavesCount; i++)
+		for (i=0; i<wavesCount; ++i)
 			status = doCallbacksInt32Array(pWaveform_[i], waveBufferRegCount/wavesCount, p_Waveform, i);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
+		break;
+    case CircleAwAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_CircleAw,
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			CircleAwString, (unsigned ) pFromFpga->data);
+		break;
+    case ModeCountAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_ModeCount,
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			ModeCountString, (unsigned ) pFromFpga->data);
+		break;
+    case ModeShiftAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_ModeShift,
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			ModeShiftString, (unsigned ) pFromFpga->data);
+		break;
+    case NMechModesAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_NMechModes,
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			NMechModesString, (unsigned ) pFromFpga->data);
+		break;
+    case DfScaleAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_DfScale,
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			DfScaleString, (unsigned ) pFromFpga->data);
+		break;
+    case SimpleDemoAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_SimpleDemo,
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			SimpleDemoString, (unsigned ) pFromFpga->data);
+		break;
+    case StaPrngRandomRunAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_StaPrngRandomRun,
+			pFromFpga->data & StaPrngRandomRunMask);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			StaPrngRandomRunString,
+			(unsigned ) pFromFpga->data & StaPrngRandomRunMask);
+		break;
+    case StaCav4ElecMode1OutCplOutPhOffAdr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_StaCav4ElecMode1OutCplOutPhOff,
+			pFromFpga->data & StaCav4ElecMode1OutCplOutPhOffMask);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			StaCav4ElecMode1OutCplOutPhOffString,
+			(unsigned ) pFromFpga->data & StaCav4ElecMode1OutCplOutPhOffMask);
 		break;
 	default:
 		if( wavesStart < (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) < wavesEnd )
 			processWaveReadback(pFromFpga);
 		else
-			return asynError;
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+			status = asynError;
 		break;
 	}
 
@@ -1104,9 +1724,11 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+	epicsInt32 errorCount;
 //  variables that may be useful for checking array data
 //	asynUser *pAsynArrayUser;
 //	unsigned int i;
+	assert(!(pFromFpga->addr&flagReadMask)); // This function is only for read registers
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
@@ -1118,9 +1740,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspChanKeepString, (unsigned ) pFromFpga->data & DspChanKeepMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspChanKeepString, valueSet[0] & DspChanKeepMask, (unsigned ) pFromFpga->data & DspChanKeepMask);
+			status = asynError;
+			setParamStatus(p_DspChanKeep, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspFdbkCoreCoarseScaleAdr:
@@ -1130,9 +1758,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreCoarseScaleString, (unsigned ) pFromFpga->data & DspFdbkCoreCoarseScaleMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreCoarseScaleString, valueSet[0] & DspFdbkCoreCoarseScaleMask, (unsigned ) pFromFpga->data & DspFdbkCoreCoarseScaleMask);
+			status = asynError;
+			setParamStatus(p_DspFdbkCoreCoarseScale, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspFdbkCoreMpProcPhOffsetAdr:
@@ -1142,9 +1776,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreMpProcPhOffsetString, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcPhOffsetMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreMpProcPhOffsetString, valueSet[0] & DspFdbkCoreMpProcPhOffsetMask, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcPhOffsetMask);
+			status = asynError;
+			setParamStatus(p_DspFdbkCoreMpProcPhOffset, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspFdbkCoreMpProcSelEnAdr:
@@ -1154,9 +1794,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreMpProcSelEnString, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelEnMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreMpProcSelEnString, valueSet[0] & DspFdbkCoreMpProcSelEnMask, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelEnMask);
+			status = asynError;
+			setParamStatus(p_DspFdbkCoreMpProcSelEn, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspFdbkCoreMpProcSelThreshAdr:
@@ -1166,9 +1812,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreMpProcSelThreshString, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelThreshMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspFdbkCoreMpProcSelThreshString, valueSet[0] & DspFdbkCoreMpProcSelThreshMask, (unsigned ) pFromFpga->data & DspFdbkCoreMpProcSelThreshMask);
+			status = asynError;
+			setParamStatus(p_DspFdbkCoreMpProcSelThresh, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspModuloAdr:
@@ -1178,9 +1830,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspModuloString, (unsigned ) pFromFpga->data & DspModuloMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspModuloString, valueSet[0] & DspModuloMask, (unsigned ) pFromFpga->data & DspModuloMask);
+			status = asynError;
+			setParamStatus(p_DspModulo, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspPhaseStepAdr:
@@ -1190,9 +1848,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspPhaseStepString, (unsigned ) pFromFpga->data & DspPhaseStepMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspPhaseStepString, valueSet[0] & DspPhaseStepMask, (unsigned ) pFromFpga->data & DspPhaseStepMask);
+			status = asynError;
+			setParamStatus(p_DspPhaseStep, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspPiezoPiezoDcAdr:
@@ -1202,9 +1866,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspPiezoPiezoDcString, (unsigned ) pFromFpga->data & DspPiezoPiezoDcMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspPiezoPiezoDcString, valueSet[0] & DspPiezoPiezoDcMask, (unsigned ) pFromFpga->data & DspPiezoPiezoDcMask);
+			status = asynError;
+			setParamStatus(p_DspPiezoPiezoDc, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspTagAdr:
@@ -1214,9 +1884,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspTagString, (unsigned ) pFromFpga->data & DspTagMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspTagString, valueSet[0] & DspTagMask, (unsigned ) pFromFpga->data & DspTagMask);
+			status = asynError;
+			setParamStatus(p_DspTag, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspWaveSampPerAdr:
@@ -1226,9 +1902,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspWaveSampPerString, (unsigned ) pFromFpga->data & DspWaveSampPerMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspWaveSampPerString, valueSet[0] & DspWaveSampPerMask, (unsigned ) pFromFpga->data & DspWaveSampPerMask);
+			status = asynError;
+			setParamStatus(p_DspWaveSampPer, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
     case DspWaveShiftAdr:
@@ -1238,12 +1920,597 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DspWaveShiftString, (unsigned ) pFromFpga->data & DspWaveShiftMask);
 		else
+		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
 				DspWaveShiftString, valueSet[0] & DspWaveShiftMask, (unsigned ) pFromFpga->data & DspWaveShiftMask);
+			status = asynError;
+			setParamStatus(p_DspWaveShift, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecDrvCplOutCplngAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecDrvCplOutCplng, valueSet);
+		if( (valueSet[0] & StaCav4ElecDrvCplOutCplngMask) == (pFromFpga->data & StaCav4ElecDrvCplOutCplngMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecDrvCplOutCplngString, (unsigned ) pFromFpga->data & StaCav4ElecDrvCplOutCplngMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecDrvCplOutCplngString, valueSet[0] & StaCav4ElecDrvCplOutCplngMask, (unsigned ) pFromFpga->data & StaCav4ElecDrvCplOutCplngMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecDrvCplOutCplng, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecDrvCplOutPhOffAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecDrvCplOutPhOff, valueSet);
+		if( (valueSet[0] & StaCav4ElecDrvCplOutPhOffMask) == (pFromFpga->data & StaCav4ElecDrvCplOutPhOffMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecDrvCplOutPhOffString, (unsigned ) pFromFpga->data & StaCav4ElecDrvCplOutPhOffMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecDrvCplOutPhOffString, valueSet[0] & StaCav4ElecDrvCplOutPhOffMask, (unsigned ) pFromFpga->data & StaCav4ElecDrvCplOutPhOffMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecDrvCplOutPhOff, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case BeamModuloAdr:
+		status = (asynStatus) getIntegerParam(p_BeamModulo, valueSet);
+		if( (valueSet[0] & BeamModuloMask) == (pFromFpga->data & BeamModuloMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BeamModuloString, (unsigned ) pFromFpga->data & BeamModuloMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				BeamModuloString, valueSet[0] & BeamModuloMask, (unsigned ) pFromFpga->data & BeamModuloMask);
+			status = asynError;
+			setParamStatus(p_BeamModulo, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case BeamPhaseStepAdr:
+		status = (asynStatus) getIntegerParam(p_BeamPhaseStep, valueSet);
+		if( (valueSet[0] & BeamPhaseStepMask) == (pFromFpga->data & BeamPhaseStepMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BeamPhaseStepString, (unsigned ) pFromFpga->data & BeamPhaseStepMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				BeamPhaseStepString, valueSet[0] & BeamPhaseStepMask, (unsigned ) pFromFpga->data & BeamPhaseStepMask);
+			status = asynError;
+			setParamStatus(p_BeamPhaseStep, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case Cav4MechPrngIvaAdr:
+		status = (asynStatus) getIntegerParam(p_Cav4MechPrngIva, valueSet);
+		if( (valueSet[0] & Cav4MechPrngIvaMask) == (pFromFpga->data & Cav4MechPrngIvaMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				Cav4MechPrngIvaString, (unsigned ) pFromFpga->data & Cav4MechPrngIvaMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				Cav4MechPrngIvaString, valueSet[0] & Cav4MechPrngIvaMask, (unsigned ) pFromFpga->data & Cav4MechPrngIvaMask);
+			status = asynError;
+			setParamStatus(p_Cav4MechPrngIva, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case Cav4MechPrngIvbAdr:
+		status = (asynStatus) getIntegerParam(p_Cav4MechPrngIvb, valueSet);
+		if( (valueSet[0] & Cav4MechPrngIvbMask) == (pFromFpga->data & Cav4MechPrngIvbMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				Cav4MechPrngIvbString, (unsigned ) pFromFpga->data & Cav4MechPrngIvbMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				Cav4MechPrngIvbString, valueSet[0] & Cav4MechPrngIvbMask, (unsigned ) pFromFpga->data & Cav4MechPrngIvbMask);
+			status = asynError;
+			setParamStatus(p_Cav4MechPrngIvb, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case Cav4MechPrngRandomRunAdr:
+		status = (asynStatus) getIntegerParam(p_Cav4MechPrngRandomRun, valueSet);
+		if( (valueSet[0] & Cav4MechPrngRandomRunMask) == (pFromFpga->data & Cav4MechPrngRandomRunMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				Cav4MechPrngRandomRunString, (unsigned ) pFromFpga->data & Cav4MechPrngRandomRunMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				Cav4MechPrngRandomRunString, valueSet[0] & Cav4MechPrngRandomRunMask, (unsigned ) pFromFpga->data & Cav4MechPrngRandomRunMask);
+			status = asynError;
+			setParamStatus(p_Cav4MechPrngRandomRun, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaACavOffsetAdr:
+		status = (asynStatus) getIntegerParam(p_StaACavOffset, valueSet);
+		if( (valueSet[0] & StaACavOffsetMask) == (pFromFpga->data & StaACavOffsetMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaACavOffsetString, (unsigned ) pFromFpga->data & StaACavOffsetMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaACavOffsetString, valueSet[0] & StaACavOffsetMask, (unsigned ) pFromFpga->data & StaACavOffsetMask);
+			status = asynError;
+			setParamStatus(p_StaACavOffset, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaAForOffsetAdr:
+		status = (asynStatus) getIntegerParam(p_StaAForOffset, valueSet);
+		if( (valueSet[0] & StaAForOffsetMask) == (pFromFpga->data & StaAForOffsetMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaAForOffsetString, (unsigned ) pFromFpga->data & StaAForOffsetMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaAForOffsetString, valueSet[0] & StaAForOffsetMask, (unsigned ) pFromFpga->data & StaAForOffsetMask);
+			status = asynError;
+			setParamStatus(p_StaAForOffset, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaARflOffsetAdr:
+		status = (asynStatus) getIntegerParam(p_StaARflOffset, valueSet);
+		if( (valueSet[0] & StaARflOffsetMask) == (pFromFpga->data & StaARflOffsetMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaARflOffsetString, (unsigned ) pFromFpga->data & StaARflOffsetMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaARflOffsetString, valueSet[0] & StaARflOffsetMask, (unsigned ) pFromFpga->data & StaARflOffsetMask);
+			status = asynError;
+			setParamStatus(p_StaARflOffset, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaAmpLpBwAdr:
+		status = (asynStatus) getIntegerParam(p_StaAmpLpBw, valueSet);
+		if( (valueSet[0] & StaAmpLpBwMask) == (pFromFpga->data & StaAmpLpBwMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaAmpLpBwString, (unsigned ) pFromFpga->data & StaAmpLpBwMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaAmpLpBwString, valueSet[0] & StaAmpLpBwMask, (unsigned ) pFromFpga->data & StaAmpLpBwMask);
+			status = asynError;
+			setParamStatus(p_StaAmpLpBw, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecFreq0CoarseFreqAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecFreq0CoarseFreq, valueSet);
+		if( (valueSet[0] & StaCav4ElecFreq0CoarseFreqMask) == (pFromFpga->data & StaCav4ElecFreq0CoarseFreqMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecFreq0CoarseFreqString, (unsigned ) pFromFpga->data & StaCav4ElecFreq0CoarseFreqMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecFreq0CoarseFreqString, valueSet[0] & StaCav4ElecFreq0CoarseFreqMask, (unsigned ) pFromFpga->data & StaCav4ElecFreq0CoarseFreqMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecFreq0CoarseFreq, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecFreq1CoarseFreqAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecFreq1CoarseFreq, valueSet);
+		if( (valueSet[0] & StaCav4ElecFreq1CoarseFreqMask) == (pFromFpga->data & StaCav4ElecFreq1CoarseFreqMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecFreq1CoarseFreqString, (unsigned ) pFromFpga->data & StaCav4ElecFreq1CoarseFreqMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecFreq1CoarseFreqString, valueSet[0] & StaCav4ElecFreq1CoarseFreqMask, (unsigned ) pFromFpga->data & StaCav4ElecFreq1CoarseFreqMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecFreq1CoarseFreq, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecFreq2CoarseFreqAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecFreq2CoarseFreq, valueSet);
+		if( (valueSet[0] & StaCav4ElecFreq2CoarseFreqMask) == (pFromFpga->data & StaCav4ElecFreq2CoarseFreqMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecFreq2CoarseFreqString, (unsigned ) pFromFpga->data & StaCav4ElecFreq2CoarseFreqMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecFreq2CoarseFreqString, valueSet[0] & StaCav4ElecFreq2CoarseFreqMask, (unsigned ) pFromFpga->data & StaCav4ElecFreq2CoarseFreqMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecFreq2CoarseFreq, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode0BeamCplAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode0BeamCpl, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode0BeamCplMask) == (pFromFpga->data & StaCav4ElecMode0BeamCplMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0BeamCplString, (unsigned ) pFromFpga->data & StaCav4ElecMode0BeamCplMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0BeamCplString, valueSet[0] & StaCav4ElecMode0BeamCplMask, (unsigned ) pFromFpga->data & StaCav4ElecMode0BeamCplMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode0BeamCpl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode0BwAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode0Bw, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode0BwMask) == (pFromFpga->data & StaCav4ElecMode0BwMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0BwString, (unsigned ) pFromFpga->data & StaCav4ElecMode0BwMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0BwString, valueSet[0] & StaCav4ElecMode0BwMask, (unsigned ) pFromFpga->data & StaCav4ElecMode0BwMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode0Bw, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode0DrvCplAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode0DrvCpl, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode0DrvCplMask) == (pFromFpga->data & StaCav4ElecMode0DrvCplMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0DrvCplString, (unsigned ) pFromFpga->data & StaCav4ElecMode0DrvCplMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0DrvCplString, valueSet[0] & StaCav4ElecMode0DrvCplMask, (unsigned ) pFromFpga->data & StaCav4ElecMode0DrvCplMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode0DrvCpl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode0OutCplOutPhOffAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode0OutCplOutPhOff, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode0OutCplOutPhOffMask) == (pFromFpga->data & StaCav4ElecMode0OutCplOutPhOffMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0OutCplOutPhOffString, (unsigned ) pFromFpga->data & StaCav4ElecMode0OutCplOutPhOffMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode0OutCplOutPhOffString, valueSet[0] & StaCav4ElecMode0OutCplOutPhOffMask, (unsigned ) pFromFpga->data & StaCav4ElecMode0OutCplOutPhOffMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode0OutCplOutPhOff, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode1BeamCplAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode1BeamCpl, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode1BeamCplMask) == (pFromFpga->data & StaCav4ElecMode1BeamCplMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1BeamCplString, (unsigned ) pFromFpga->data & StaCav4ElecMode1BeamCplMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1BeamCplString, valueSet[0] & StaCav4ElecMode1BeamCplMask, (unsigned ) pFromFpga->data & StaCav4ElecMode1BeamCplMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode1BeamCpl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode1BwAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode1Bw, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode1BwMask) == (pFromFpga->data & StaCav4ElecMode1BwMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1BwString, (unsigned ) pFromFpga->data & StaCav4ElecMode1BwMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1BwString, valueSet[0] & StaCav4ElecMode1BwMask, (unsigned ) pFromFpga->data & StaCav4ElecMode1BwMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode1Bw, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode1DrvCplAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode1DrvCpl, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode1DrvCplMask) == (pFromFpga->data & StaCav4ElecMode1DrvCplMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1DrvCplString, (unsigned ) pFromFpga->data & StaCav4ElecMode1DrvCplMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1DrvCplString, valueSet[0] & StaCav4ElecMode1DrvCplMask, (unsigned ) pFromFpga->data & StaCav4ElecMode1DrvCplMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode1DrvCpl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode2BeamCplAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode2BeamCpl, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode2BeamCplMask) == (pFromFpga->data & StaCav4ElecMode2BeamCplMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2BeamCplString, (unsigned ) pFromFpga->data & StaCav4ElecMode2BeamCplMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2BeamCplString, valueSet[0] & StaCav4ElecMode2BeamCplMask, (unsigned ) pFromFpga->data & StaCav4ElecMode2BeamCplMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode2BeamCpl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode2BwAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode2Bw, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode2BwMask) == (pFromFpga->data & StaCav4ElecMode2BwMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2BwString, (unsigned ) pFromFpga->data & StaCav4ElecMode2BwMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2BwString, valueSet[0] & StaCav4ElecMode2BwMask, (unsigned ) pFromFpga->data & StaCav4ElecMode2BwMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode2Bw, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode2DrvCplAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode2DrvCpl, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode2DrvCplMask) == (pFromFpga->data & StaCav4ElecMode2DrvCplMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2DrvCplString, (unsigned ) pFromFpga->data & StaCav4ElecMode2DrvCplMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2DrvCplString, valueSet[0] & StaCav4ElecMode2DrvCplMask, (unsigned ) pFromFpga->data & StaCav4ElecMode2DrvCplMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode2DrvCpl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecModuloAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecModulo, valueSet);
+		if( (valueSet[0] & StaCav4ElecModuloMask) == (pFromFpga->data & StaCav4ElecModuloMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecModuloString, (unsigned ) pFromFpga->data & StaCav4ElecModuloMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecModuloString, valueSet[0] & StaCav4ElecModuloMask, (unsigned ) pFromFpga->data & StaCav4ElecModuloMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecModulo, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecPhaseStepAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecPhaseStep, valueSet);
+		if( (valueSet[0] & StaCav4ElecPhaseStepMask) == (pFromFpga->data & StaCav4ElecPhaseStepMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecPhaseStepString, (unsigned ) pFromFpga->data & StaCav4ElecPhaseStepMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecPhaseStepString, valueSet[0] & StaCav4ElecPhaseStepMask, (unsigned ) pFromFpga->data & StaCav4ElecPhaseStepMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecPhaseStep, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaComprSatCtlAdr:
+		status = (asynStatus) getIntegerParam(p_StaComprSatCtl, valueSet);
+		if( (valueSet[0] & StaComprSatCtlMask) == (pFromFpga->data & StaComprSatCtlMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaComprSatCtlString, (unsigned ) pFromFpga->data & StaComprSatCtlMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaComprSatCtlString, valueSet[0] & StaComprSatCtlMask, (unsigned ) pFromFpga->data & StaComprSatCtlMask);
+			status = asynError;
+			setParamStatus(p_StaComprSatCtl, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaPrngIvaAdr:
+		status = (asynStatus) getIntegerParam(p_StaPrngIva, valueSet);
+		if( (valueSet[0] & StaPrngIvaMask) == (pFromFpga->data & StaPrngIvaMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaPrngIvaString, (unsigned ) pFromFpga->data & StaPrngIvaMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaPrngIvaString, valueSet[0] & StaPrngIvaMask, (unsigned ) pFromFpga->data & StaPrngIvaMask);
+			status = asynError;
+			setParamStatus(p_StaPrngIva, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaPrngIvbAdr:
+		status = (asynStatus) getIntegerParam(p_StaPrngIvb, valueSet);
+		if( (valueSet[0] & StaPrngIvbMask) == (pFromFpga->data & StaPrngIvbMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaPrngIvbString, (unsigned ) pFromFpga->data & StaPrngIvbMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaPrngIvbString, valueSet[0] & StaPrngIvbMask, (unsigned ) pFromFpga->data & StaPrngIvbMask);
+			status = asynError;
+			setParamStatus(p_StaPrngIvb, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode1OutCplOutCplngAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode1OutCplOutCplng, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode1OutCplOutCplngMask) == (pFromFpga->data & StaCav4ElecMode1OutCplOutCplngMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1OutCplOutCplngString, (unsigned ) pFromFpga->data & StaCav4ElecMode1OutCplOutCplngMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode1OutCplOutCplngString, valueSet[0] & StaCav4ElecMode1OutCplOutCplngMask, (unsigned ) pFromFpga->data & StaCav4ElecMode1OutCplOutCplngMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode1OutCplOutCplng, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode2OutCplOutCplngAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode2OutCplOutCplng, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode2OutCplOutCplngMask) == (pFromFpga->data & StaCav4ElecMode2OutCplOutCplngMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2OutCplOutCplngString, (unsigned ) pFromFpga->data & StaCav4ElecMode2OutCplOutCplngMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2OutCplOutCplngString, valueSet[0] & StaCav4ElecMode2OutCplOutCplngMask, (unsigned ) pFromFpga->data & StaCav4ElecMode2OutCplOutCplngMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode2OutCplOutCplng, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
+
+		break;
+    case StaCav4ElecMode2OutCplOutPhOffAdr:
+		status = (asynStatus) getIntegerParam(p_StaCav4ElecMode2OutCplOutPhOff, valueSet);
+		if( (valueSet[0] & StaCav4ElecMode2OutCplOutPhOffMask) == (pFromFpga->data & StaCav4ElecMode2OutCplOutPhOffMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2OutCplOutPhOffString, (unsigned ) pFromFpga->data & StaCav4ElecMode2OutCplOutPhOffMask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				StaCav4ElecMode2OutCplOutPhOffString, valueSet[0] & StaCav4ElecMode2OutCplOutPhOffMask, (unsigned ) pFromFpga->data & StaCav4ElecMode2OutCplOutPhOffMask);
+			status = asynError;
+			setParamStatus(p_StaCav4ElecMode2OutCplOutPhOff, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+		}
 
 		break;
 	default:
+		getIntegerParam(p_CommErrorCount, &errorCount);
+		setIntegerParam(p_CommErrorCount, errorCount + 1);
+
 		status = asynError;
 		break;
     }
@@ -1257,7 +2524,7 @@ void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
 {
 	unsigned int i;
 
-	for (i=0; i<regCount; i++)
+	for (i=0; i<regCount; ++i)
 	{
 		buffer[i].addr = htonl(buffer[i].addr);
 		buffer[i].data = htonl(buffer[i].data);
@@ -1269,7 +2536,7 @@ void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
 {
 	unsigned int i;
 
-	for (i=0; i<regCount; i++)
+	for (i=0; i<regCount; ++i)
 	{
 		buffer[i].addr = ntohl(buffer[i].addr);
 		buffer[i].data = ntohl(buffer[i].data);

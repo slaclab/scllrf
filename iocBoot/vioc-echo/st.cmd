@@ -25,32 +25,17 @@ epicsEnvSet("EPICS\_IOC\_LOG_CLIENT_INET","${IOC}")
 # =====================================================================
 # Override the TOP variable set by envPaths:
 # This is now past in via $IOC/<cpuName>/<epicsIOCName>/iocStartup.cmd
-epicsEnvSet(TOP,"${IOC_APP}")
-
-# ============================================
-# Set MACROS for EVRs
-# ============================================
-# FAC = SYS0 ==> LCLS1
-# FAC = SYS1 ==> FACET
+#epicsEnvSet(TOP,"${IOC_APP}")
 
 # System Location:
 epicsEnvSet("LOCA","B34")
-
-#epicsEnvSet(EVR_DEV1,"EVR:B34:EVXX")
-#epicsEnvSet(UNIT,"EVXX")
-#epicsEnvSet(FAC,"SYS0")
-
-#epicsEnvSet(EVR_DEV2,"EVR:B34:EVYY")
-#epicsEnvSet(UNIT,"EVYY")
-#epicsEnvSet(FAC,"SYS0")
-# ===========================================
 
 # Need this path to EPICS BASE so that caRepeater can be started:
 # Let's figure out a way to pass this one in via the IOC's
 # initial startup.cmd: another job for hookIOC.py :)
 # Not needed caRepeater is started up by laci for all IOCs at
 # CPU boot up.
-#epicsEnvSet(PATH,"${EPICS_BASE}/bin/linuxRT-x86_64")
+epicsEnvSet(PATH,"${EPICS_BASE}/bin/linuxRT-x86_64")
 
 # ========================================================
 # Support Large Arrays/Waveforms; Number in Bytes
@@ -78,76 +63,76 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 # Initialize all hardware first                           #
 ###########################################################
 
-###############################################################################
-## BEGIN: Load the record databases
-###############################################################################
-## ============================================================================
-## Load iocAdmin databases to support IOC Health and monitoring
-## ============================================================================
-## The MACRO IOCNAME should be defined via the IOCs top level, "iocStartup.cmd"
-##  found in $IOC/<iocName>/<viocName>/iocStartup.cmd
-## The name must according the SLAC ICD PV naming convention.
-#dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC_NAME}")
-#dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC_NAME}")
-#
-## The following database is a result of a python parser
-## which looks at RELEASE_SITE and RELEASE to discover
-## versions of software your IOC is referencing
-## The python parser is part of iocAdmin
-#dbLoadRecords("db/iocRelease.db","IOC=${IOC_NAME}")
-#
-## =====================================================================
-## Load database for autosave status
-## =====================================================================
-#dbLoadRecords("db/save_restoreStatus.db", "P=${IOC_NAME}:")
+##############################################################################
+# BEGIN: Load the record databases
+##############################################################################
+# ============================================================================
+# Load iocAdmin databases to support IOC Health and monitoring
+# ============================================================================
+# The MACRO IOCNAME should be defined via the IOCs top level, "iocStartup.cmd"
+#  found in $IOC/<iocName>/<viocName>/iocStartup.cmd
+# The name must according the SLAC ICD PV naming convention.
+dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC}")
+dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC}")
 
-## =====================================================================
-##Load Additional databases:
-## =====================================================================
-### Load record instances
+# The following database is a result of a python parser
+# which looks at RELEASE_SITE and RELEASE to discover
+# versions of software your IOC is referencing
+# The python parser is part of iocAdmin
+dbLoadRecords("db/iocRelease.db","IOC=${IOC}")
+
+# =====================================================================
+# Load database for autosave status
+# =====================================================================
+dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
+
+# =====================================================================
+#Load Additional databases:
+# =====================================================================
+## Load record instances
 dbLoadRecords("db/cmocRegisters.db","P=CMOC,PORT=cmocReg")
 dbLoadRecords("db/cmocWaveforms.db","P=CMOC,PORT=cmocReg")
 #
-## END: Loading the record databases
-#########################################################################
-#
-## =====================================================================
-### Begin: Setup autosave/restore
-## =====================================================================
-#
-## ============================================================
-## If all PVs don't connect continue anyway
-## ============================================================
-#save_restoreSet_IncompleteSetsOk(1)
-#
-## ============================================================
-## created save/restore backup files with date string
-## useful for recovery.
-## ============================================================
-#save_restoreSet_DatedBackupFiles(1)
-#
-## ============================================================
-## Where to find the list of PVs to save
-## ============================================================
-## Where "/data" is an NFS mount point setup when linuxRT target 
-## boots up.
-#set_requestfile_path("/data/${IOC}/autosave-req")
-#
-## ============================================================
-## Where to write the save files that will be used to restore
-## ============================================================
-#set_savefile_path("/data/${IOC}/autosave")
-#
-## ============================================================
-## Prefix that is use to update save/restore status database
-## records
-## ============================================================
-#save_restoreSet_UseStatusPVs(1)
-#save_restoreSet_status_prefix("${IOC_NAME}:")
-#
-### Restore datasets
-#set_pass0_restoreFile("info_settings.sav")
-#set_pass1_restoreFile("info_settings.sav")
+# END: Loading the record databases
+########################################################################
+
+# =====================================================================
+## Begin: Setup autosave/restore
+# =====================================================================
+
+# ============================================================
+# If all PVs don't connect continue anyway
+# ============================================================
+save_restoreSet_IncompleteSetsOk(1)
+
+# ============================================================
+# created save/restore backup files with date string
+# useful for recovery.
+# ============================================================
+save_restoreSet_DatedBackupFiles(1)
+
+# ============================================================
+# Where to find the list of PVs to save
+# ============================================================
+# Where "/data" is an NFS mount point setup when linuxRT target 
+# boots up.
+set_requestfile_path("data/${IOC}/autosave-req")
+
+# ============================================================
+# Where to write the save files that will be used to restore
+# ============================================================
+set_savefile_path("data/${IOC}/autosave")
+
+# ============================================================
+# Prefix that is use to update save/restore status database
+# records
+# ============================================================
+save_restoreSet_UseStatusPVs(1)
+save_restoreSet_status_prefix("${IOC}:")
+
+## Restore datasets
+set_pass0_restoreFile("info_settings.sav")
+set_pass1_restoreFile("info_settings.sav")
 
 # =====================================================================
 # End: Setup autosave/restore
@@ -195,47 +180,49 @@ epicsThreadSleep(0.2)
 # =============================================================
 # Start EPICS IOC Process (i.e. all threads will start running)
 # =============================================================
+pwd
 iocInit()
 #
 #
-## =====================================================
-## Turn on caPutLogging:
-## Log values only on change to the iocLogServer:
-#caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
-#caPutLogShow(2)
-## =====================================================
-#
-### Start any sequence programs
-##seq sncExample,"user=gwbrownHost"
-#
-#
-### =========================================================================
-### Start autosave routines to save our data
-### =========================================================================
-## optional, needed if the IOC takes a very long time to boot.
-## epicsThreadSleep( 1.0)
-#
-#cd("/data/${IOC}/autosave-req")
-#
-## The following command makes the autosave request files 'info_settings.req',
-## and 'info_positions.req', from information (info nodes) contained in all of
-## the EPICS databases that have been loaded into this IOC.
-#
-#makeAutosaveFiles()
-#create_monitor_set("info_settings.req",60,"")
-#
-## ===========================================================================
-#
+# =====================================================
+# Turn on caPutLogging:
+# Log values only on change to the iocLogServer:
+caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
+caPutLogShow(2)
+# =====================================================
+
+## Start any sequence programs
+#seq sncExample,"user=gwbrownHost"
+
+
+## =========================================================================
+## Start autosave routines to save our data
+## =========================================================================
+# optional, needed if the IOC takes a very long time to boot.
+# epicsThreadSleep( 1.0)
+
+
+# The following command makes the autosave request files 'info_settings.req',
+# and 'info_positions.req', from information (info nodes) contained in all of
+# the EPICS databases that have been loaded into this IOC.
+
+cd("data/${IOC}/autosave-req")
+makeAutosaveFiles()
+cd("../../..")
+create_monitor_set("info_settings.req",60,"")
+
+# ===========================================================================
+
 #cd ${START_UP}
-## ===========================================================================
-## Setup Real-time priorities after iocInit for driver threads
-## ===========================================================================
+# ===========================================================================
+# Setup Real-time priorities after iocInit for driver threads
+# ===========================================================================
+#
 #system("/bin/su root -c `pwd`/rtPrioritySetup.cmd")
-#
-#cd ${IOC_BOOT}
-#
-## An example of using the CEXP Shell:
-## cexpsh("-c",'printf("hello\n")')
+
+
+# An example of using the CEXP Shell:
+# cexpsh("-c",'printf("hello\n")')
 
 asynSetTraceMask("cmocIP",-1,1)
 asynSetTraceMask("cmocReg",-1,1)

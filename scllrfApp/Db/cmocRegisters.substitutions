@@ -13,29 +13,29 @@ pattern { REG }
         { "USER" }
         { "BOARD_TYPE" }
         { "VERSION" }
-        { "GIT_SHA_1A" }
-        { "GIT_SHA_1B" }
-        { "GIT_SHA_1C" }
-        { "GIT_SHA_1D" }
-        { "GIT_SHA_1E" }
-        { "GIT_SHA_1F" }
-        { "GIT_SHA_1G" }
-        { "GIT_SHA_1H" }
-        { "GIT_SHA_1I" }
-        { "GIT_SHA_1J" }
-        { "GIT_SHA_1K" }
-        { "GIT_SHA_1L" }
-        { "GIT_SHA_1M" }
-        { "GIT_SHA_1N" }
-        { "GIT_SHA_1O" }
-        { "GIT_SHA_1P" }
-        { "GIT_SHA_1Q" }
-        { "GIT_SHA_1R" }
-        { "GIT_SHA_1S" }
-        { "GIT_SHA_1T" }
+        { "GIT_SHA1_A" }
+        { "GIT_SHA1_B" }
+        { "GIT_SHA1_C" }
+        { "GIT_SHA1_D" }
+        { "GIT_SHA1_E" }
+        { "GIT_SHA1_F" }
+        { "GIT_SHA1_G" }
+        { "GIT_SHA1_H" }
+        { "GIT_SHA1_I" }
+        { "GIT_SHA1_J" }
+        { "GIT_SHA1_K" }
+        { "GIT_SHA1_L" }
+        { "GIT_SHA1_M" }
+        { "GIT_SHA1_N" }
+        { "GIT_SHA1_O" }
+        { "GIT_SHA1_P" }
+        { "GIT_SHA1_Q" }
+        { "GIT_SHA1_R" }
+        { "GIT_SHA1_S" }
+        { "GIT_SHA1_T" }
 }
 
-file IOCregmap_llrf_shell.template
+file cmoc.template
 {
-	{DEVICE = '$(P)'}
+	{ NULL = NULL }
 }

@@ -48,20 +48,20 @@ unsigned int nonceSize = 1; // nonce is one FpgaReg big
 
 // Functions to convert arrays of registers in place.
 /**
-* Convert an array of FpgaReg elements to network byte order in place
-* @param buffer Array of FpgaReg elements to be sent over the network
-* @param regCount the dimension of the buffer, not the number of bytes
-* @see ntohFpgaRegArray
-* @return The test results
-*/
+ * Convert an array of FpgaReg elements to network byte order in place
+ * @param buffer Array of FpgaReg elements to be sent over the network
+ * @param regCount the dimension of the buffer, not the number of bytes
+ * @see ntohFpgaRegArray
+ * @return The test results
+ */
 void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount);
 /**
-* Convert an array of FpgaReg elements from network byte order in place
-* @param buffer Array of FpgaReg elements received over the network
-* @param regCount the dimension of the buffer, not the number of bytes
-* @see htonFpgaRegArray
-* @return The test results
-*/
+ * Convert an array of FpgaReg elements from network byte order in place
+ * @param buffer Array of FpgaReg elements received over the network
+ * @param regCount the dimension of the buffer, not the number of bytes
+ * @see htonFpgaRegArray
+ * @return The test results
+ */
 void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount);
 
 // Set this bit in the control portion of address to request a reg read
@@ -83,48 +83,59 @@ const unsigned wavesCount = 8; // From FPGA design, number of waveforms interlac
 const unsigned maxMsgSize = 1400; // Estimated MTU minus fudge factor, in bytes
 /**< Waveform buffer is read in waveSegmentCount segments due to network packet size limits.
  *  1+ is an approximation of "round upwards". -1 makes space for the nonce */
-const unsigned waveSegmentCount = 1 + (sizeof(FpgaReg) * waveBufferRegCount)/(maxMsgSize - sizeof(FpgaReg));
+const unsigned waveSegmentCount = 1
+		+ (sizeof(FpgaReg) * waveBufferRegCount)
+				/ (maxMsgSize - sizeof(FpgaReg));
 
 /**< Size of each segment, in number of registers */
-const unsigned waveSegmentSize = 1 + (waveBufferRegCount + waveSegmentCount)/waveSegmentCount;
+const unsigned waveSegmentSize = 1
+		+ (waveBufferRegCount + waveSegmentCount) / waveSegmentCount;
 const uint32_t wavesReadyMask = 0x100; // found in the first 0x1F registers
 
+// Communication tuning parameters
+const double readTimeout = 1.0; // seconds
+const double writeTimeout = 5.0; // seconds
+const double defaultPollPeriod = 0.1; // seconds
+const double throttleLoopDelay = 0.001; // seconds, delay when sending is outstripping reading
+const unsigned int defaultMaxParallelRequests = 5; // throttle requests when this many are outstanding
+
 // EPICS database driver strings
-const char *RunStopString = "RUN_STOP";            /* asynInt32,    r/w */
-const char *MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS";            /* asynInt32,    r/w */
-const char *PollPeriodString = "POLL_PERIOD";            /* asynInt32,    r/w */
-const char *MagicString = "MAGIC";
-const char *DspFlavorString = "DSP_FLAVOR";
-const char *BuildYearString = "BUILD_YEAR";
-const char *BuildMonthString = "BUILD_MONTH";
-const char *BuildDayString = "BUILD_DAY";
-const char *BuildHourString = "BUILD_HOUR";
-const char *BuildMinuteString = "BUILD_MINUTE";
-const char *CodeIsCleanString = "CODE_IS_CLEAN";
-const char *ToolRevString = "TOOL_REV";
-const char *UserString = "USER";
-const char *BoardTypeString = "BOARD_TYPE";
-const char *VersionString = "VERSION";
-const char *GitSHA1aString = "GIT_SHA_1A";
-const char *GitSHA1bString = "GIT_SHA_1B";
-const char *GitSHA1cString = "GIT_SHA_1C";
-const char *GitSHA1dString = "GIT_SHA_1D";
-const char *GitSHA1eString = "GIT_SHA_1E";
-const char *GitSHA1fString = "GIT_SHA_1F";
-const char *GitSHA1gString = "GIT_SHA_1G";
-const char *GitSHA1hString = "GIT_SHA_1H";
-const char *GitSHA1iString = "GIT_SHA_1I";
-const char *GitSHA1jString = "GIT_SHA_1J";
-const char *GitSHA1kString = "GIT_SHA_1K";
-const char *GitSHA1lString = "GIT_SHA_1L";
-const char *GitSHA1mString = "GIT_SHA_1M";
-const char *GitSHA1nString = "GIT_SHA_1N";
-const char *GitSHA1oString = "GIT_SHA_1O";
-const char *GitSHA1pString = "GIT_SHA_1P";
-const char *GitSHA1qString = "GIT_SHA_1Q";
-const char *GitSHA1rString = "GIT_SHA_1R";
-const char *GitSHA1sString = "GIT_SHA_1S";
-const char *GitSHA1tString = "GIT_SHA_1T";
+const char *RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
+const char *MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
+const char *PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
+const char *CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
+const char *MagicString = "MAGIC";  /* asynInt32,    r */
+const char *DspFlavorString = "DSP_FLAVOR";  /* asynInt32,    r */
+const char *BuildYearString = "BUILD_YEAR";  /* asynInt32,    r */
+const char *BuildMonthString = "BUILD_MONTH";  /* asynInt32,    r */
+const char *BuildDayString = "BUILD_DAY";  /* asynInt32,    r */
+const char *BuildHourString = "BUILD_HOUR";  /* asynInt32,    r */
+const char *BuildMinuteString = "BUILD_MINUTE";  /* asynInt32,    r */
+const char *CodeIsCleanString = "CODE_IS_CLEAN";  /* asynInt32,    r */
+const char *ToolRevString = "TOOL_REV";  /* asynInt32,    r */
+const char *UserString = "USER";  /* asynInt32,    r */
+const char *BoardTypeString = "BOARD_TYPE";  /* asynInt32,    r */
+const char *VersionString = "VERSION";  /* asynInt32,    r */
+const char *GitSHA1aString = "GIT_SHA1_A";  /* asynInt32,    r */
+const char *GitSHA1bString = "GIT_SHA1_B";  /* asynInt32,    r */
+const char *GitSHA1cString = "GIT_SHA1_C";  /* asynInt32,    r */
+const char *GitSHA1dString = "GIT_SHA1_D";  /* asynInt32,    r */
+const char *GitSHA1eString = "GIT_SHA1_E";  /* asynInt32,    r */
+const char *GitSHA1fString = "GIT_SHA1_F";  /* asynInt32,    r */
+const char *GitSHA1gString = "GIT_SHA1_G";  /* asynInt32,    r */
+const char *GitSHA1hString = "GIT_SHA1_H";  /* asynInt32,    r */
+const char *GitSHA1iString = "GIT_SHA1_I";  /* asynInt32,    r */
+const char *GitSHA1jString = "GIT_SHA1_J";  /* asynInt32,    r */
+const char *GitSHA1kString = "GIT_SHA1_K";  /* asynInt32,    r */
+const char *GitSHA1lString = "GIT_SHA1_L";  /* asynInt32,    r */
+const char *GitSHA1mString = "GIT_SHA1_M";  /* asynInt32,    r */
+const char *GitSHA1nString = "GIT_SHA1_N";  /* asynInt32,    r */
+const char *GitSHA1oString = "GIT_SHA1_O";  /* asynInt32,    r */
+const char *GitSHA1pString = "GIT_SHA1_P";  /* asynInt32,    r */
+const char *GitSHA1qString = "GIT_SHA1_Q";  /* asynInt32,    r */
+const char *GitSHA1rString = "GIT_SHA1_R";  /* asynInt32,    r */
+const char *GitSHA1sString = "GIT_SHA1_S";  /* asynInt32,    r */
+const char *GitSHA1tString = "GIT_SHA1_T";  /* asynInt32,    r */
 const char *DspFdbkCoreMpProcCoeffString = "DSP_FDBK_CORE_MP_PROC_COEFF";
 const char *DspFdbkCoreMpProcLimString = "DSP_FDBK_CORE_MP_PROC_LIM";
 const char *DspFdbkCoreMpProcSetmpString = "DSP_FDBK_CORE_MP_PROC_SETMP";
@@ -136,283 +147,457 @@ const char *DspChanKeepString = "DSP_CHAN_KEEP";
 const char *DspFdbkCoreCoarseScaleString = "DSP_FDBK_CORE_COARSE_SCALE";
 const char *DspFdbkCoreMpProcPhOffsetString = "DSP_FDBK_CORE_MP_PROC_PH_OFFSET";
 const char *DspFdbkCoreMpProcSelEnString = "DSP_FDBK_CORE_MP_PROC_SEL_EN";
-const char *DspFdbkCoreMpProcSelThreshString = "DSP_FDBK_CORE_MP_PROC_SEL_THRESH";
+const char *DspFdbkCoreMpProcSelThreshString =
+		"DSP_FDBK_CORE_MP_PROC_SEL_THRESH";
 const char *DspModuloString = "DSP_MODULO";
 const char *DspPhaseStepString = "DSP_PHASE_STEP";
 const char *DspPiezoPiezoDcString = "DSP_PIEZO_PIEZO_DC";
 const char *DspTagString = "DSP_TAG";
 const char *DspWaveSampPerString = "DSP_WAVE_SAMP_PER";
 const char *DspWaveShiftString = "DSP_WAVE_SHIFT";
-const char *Waveform1String = "WAVEFORM";          /* asynInt32Array,  r/w */
+const char *Waveform1String = "WAVEFORM"; /* asynInt32Array,  r/w */
+const char *CircleAwString = "CIRCLE_AW";
+const char *ModeCountString = "MODE_COUNT";
+const char *ModeShiftString = "MODE_SHIFT";
+const char *NMechModesString = "N_MECH_MODES";
+const char *DfScaleString = "DF_SCALE";
+const char *SimpleDemoString = "SIMPLE_DEMO";
+const char *Cav4MechNoiseCplKOutString = "CAV4_MECH_NOISE_CPL_K_OUT";
+const char *Cav4MechPiezoCplKOutString = "CAV4_MECH_PIEZO_CPL_K_OUT";
+const char *Cav4MechResonatorPropConstString = "CAV4_MECH_RESONATOR_PROP_CONST";
+const char *StaCav4ElecDot0KOutString = "STA_CAV4_ELEC_DOT_0_K_OUT";
+const char *StaCav4ElecDot1KOutString = "STA_CAV4_ELEC_DOT_1_K_OUT";
+const char *StaCav4ElecDot2KOutString = "STA_CAV4_ELEC_DOT_2_K_OUT";
+const char *StaCav4ElecOuterProd0KOutString = "STA_CAV4_ELEC_OUTER_PROD_0_K_OUT";
+const char *StaCav4ElecOuterProd1KOutString = "STA_CAV4_ELEC_OUTER_PROD_1_K_OUT";
+const char *StaCav4ElecOuterProd2KOutString = "STA_CAV4_ELEC_OUTER_PROD_2_K_OUT";
+const char *StaCav4ElecDrvCplOutCplngString = "STA_CAV4_ELEC_DRV_CPL_OUT_CPLNG";
+const char *StaCav4ElecDrvCplOutPhOffString = "STA_CAV4_ELEC_DRV_CPL_OUT_PH_OFF";
+const char *BeamModuloString = "BEAM_MODULO";
+const char *BeamPhaseStepString = "BEAM_PHASE_STEP";
+const char *Cav4MechPrngIvaString = "CAV4_MECH_PRNG_IVA";
+const char *Cav4MechPrngIvbString = "CAV4_MECH_PRNG_IVB";
+const char *Cav4MechPrngRandomRunString = "CAV4_MECH_PRNG_RANDOM_RUN";
+const char *StaACavOffsetString = "STA_A_CAV_OFFSET";
+const char *StaAForOffsetString = "STA_A_FOR_OFFSET";
+const char *StaARflOffsetString = "STA_A_RFL_OFFSET";
+const char *StaAmpLpBwString = "STA_AMP_LP_BW";
+const char *StaCav4ElecFreq0CoarseFreqString =
+		"STA_CAV4_ELEC_FREQ_0_COARSE_FREQ";
+const char *StaCav4ElecFreq1CoarseFreqString =
+		"STA_CAV4_ELEC_FREQ_1_COARSE_FREQ";
+const char *StaCav4ElecFreq2CoarseFreqString =
+		"STA_CAV4_ELEC_FREQ_2_COARSE_FREQ";
+const char *StaCav4ElecMode0BeamCplString = "STA_CAV4_ELEC_MODE_0_BEAM_CPL";
+const char *StaCav4ElecMode0BwString = "STA_CAV4_ELEC_MODE_0_BW";
+const char *StaCav4ElecMode0DrvCplString = "STA_CAV4_ELEC_MODE_0_DRV_CPL";
+const char *StaCav4ElecMode0OutCplOutCplngString =
+		"STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_CPLNG";
+const char *StaCav4ElecMode0OutCplOutPhOffString =
+		"STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_PH_OFF";
+const char *StaCav4ElecMode1BeamCplString = "STA_CAV4_ELEC_MODE_1_BEAM_CPL";
+const char *StaCav4ElecMode1BwString = "STA_CAV4_ELEC_MODE_1_BW";
+const char *StaCav4ElecMode1DrvCplString = "STA_CAV4_ELEC_MODE_1_DRV_CPL";
+const char *StaCav4ElecMode2BeamCplString = "STA_CAV4_ELEC_MODE_2_BEAM_CPL";
+const char *StaCav4ElecMode2BwString = "STA_CAV4_ELEC_MODE_2_BW";
+const char *StaCav4ElecMode2DrvCplString = "STA_CAV4_ELEC_MODE_2_DRV_CPL";
+const char *StaCav4ElecModuloString = "STA_CAV4_ELEC_MODULO";
+const char *StaCav4ElecPhaseStepString = "STA_CAV4_ELEC_PHASE_STEP";
+const char *StaComprSatCtlString = "STA_COMPR_SAT_CTL";
+const char *StaPrngIvaString = "STA_PRNG_IVA";
+const char *StaPrngIvbString = "STA_PRNG_IVB";
+const char *StaPrngRandomRunString = "STA_PRNG_RANDOM_RUN";
+const char *StaCav4ElecMode1OutCplOutCplngString =
+		"STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_CPLNG";
+const char *StaCav4ElecMode1OutCplOutPhOffString =
+		"STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_PH_OFF";
+const char *StaCav4ElecMode2OutCplOutCplngString =
+		"STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_CPLNG";
+const char *StaCav4ElecMode2OutCplOutPhOffString =
+		"STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_PH_OFF";
 
-const double readTimeout = 5.0; // seconds
-const double writeTimeout = 5.0; // seconds
-const double defaultPollPeriod = 0.5; // seconds
-const double throttleLoopDelay = 0.001; // seconds, delay when sending is outstripping reading
-const unsigned int defaultMaxParallelRequests = 5; // throttle requests when this many are outstanding
+const unsigned int readRegCount = 40;
+const unsigned int writeRegCount = 61;
 
-class scllrfAsynPortDriver : public asynPortDriver
+class scllrfAsynPortDriver: public asynPortDriver
 {
 public:
 	scllrfAsynPortDriver(const char *drvPortName, const char *netPortName);
 	virtual ~scllrfAsynPortDriver();
 	asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
-	                                size_t nElements);
+			size_t nElements);
 
-    /* Define a polling mechanism.
-     * Sends requests for all register data at a specified period.
-     * A separate thread processes the response.
-     */
+	/* Define a polling mechanism.
+	 * Sends requests for all register data at a specified period.
+	 * A separate thread processes the response.
+	 */
 	void regPoller(); // Polling loop, exits on shutdown
-    virtual asynStatus wakeupPoller(); // Alert poller to request new data
-    virtual asynStatus sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffSize); // Send out canned request for all registers
+	virtual asynStatus wakeupPoller(); // Alert poller to request new data
+	virtual asynStatus sendRegRequest(FpgaReg *regBuffer,
+			unsigned int regBuffSize); // Send out canned request for all registers
 
-    void waveformRequester(); // When signaled that waveforms are waiting, request them.
+	void waveformRequester(); // When signaled that waveforms are waiting, request them.
 
-    virtual void responseHandler(); // Readback loop, processes data from FPGAs when it arrives
-    virtual asynStatus wakeupReader(); // Alert responseHandler to expect new data
+	virtual void responseHandler(); // Readback loop, processes data from FPGAs when it arrives
+	virtual asynStatus wakeupReader(); // Alert responseHandler to expect new data
 
 protected:
 
-    virtual asynStatus startPoller(double pollPeriod); // For system startup
-    virtual asynStatus startWaveformRequester(); // For system startup
-    // Response handler, reads data sent back from FPGA and assigns it to
-    // the appropriate variables and pvs.
-    virtual asynStatus startResponseHandler(); // For system startup
-    asynStatus processReadbackBuffer(FpgaReg *pFromFpga, unsigned int readCount);
-    virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
-    virtual asynStatus processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady); // parse register data, write to PVs
-    virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
-    virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
+	virtual asynStatus startPoller(double pollPeriod); // For system startup
+	virtual asynStatus startWaveformRequester(); // For system startup
+	// Response handler, reads data sent back from FPGA and assigns it to
+	// the appropriate variables and pvs.
+	virtual asynStatus startResponseHandler(); // For system startup
+	asynStatus processReadbackBuffer(FpgaReg *pFromFpga,
+			unsigned int readCount);
+	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
+	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
+			bool &waveIsReady); // parse register data, write to PVs
+	virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
+	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
-    epicsEventId pollEventId_;    /**< Event ID to wake up poller */
-    double pollPeriod_;           /**< The time between polls */
-    epicsEventId readEventId_;    /**< Event ID to wake up poller */
-    double readTimeout_;           /**< The time between polls */
-    epicsEventId reqWaveEventId_;    /**< Event ID to signal the waveform requester */
-    bool isShuttingDown_; /**< Flag to indicate threads should exit */
-    asynUser* pCommonAsynUser_; /**< asynUser for asynCommonSyncIO */
-    asynUser* pOctetAsynUser_; /**< asynUser for asynOctetSyncIO */
-    unsigned int netSendCount_; /**< Number of messages sent to FPGA, sent in nonce for error checking */
-    unsigned int lastResponseCount_; /**< Used by response processing to check for missing or out of order responses */
+	epicsEventId pollEventId_; /**< Event ID to wake up poller */
+	double pollPeriod_; /**< The time between polls */
+	epicsEventId readEventId_; /**< Event ID to wake up poller */
+	double readTimeout_; /**< The time between polls */
+	epicsEventId reqWaveEventId_; /**< Event ID to signal the waveform requester */
+	bool isShuttingDown_; /**< Flag to indicate threads should exit */
+	asynUser* pCommonAsynUser_; /**< asynUser for asynCommonSyncIO */
+	asynUser* pOctetAsynUser_; /**< asynUser for asynOctetSyncIO */
+	epicsMutexId comCountersMutexId_;
+	unsigned int netSendCount_; /**< Number of messages sent to FPGA, sent in nonce for error checking */
+	unsigned int lastResponseCount_; /**< Used by response processing to check for missing or out of order responses */
 //  std::atomic<uint> netWaitingRequests; // writers increment, reader decrements
-    unsigned int netWaitingRequests_; /**< writers increment, reader decrements */
-    unsigned int newWaveAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
-    unsigned int newWaveRead_;      /**< netSendCount for the most recent waveform */
-    enum {stop, run};
-    epicsInt32 pWaveform_[wavesCount][waveBufferRegCount/wavesCount];
+	unsigned int netWaitingRequests_; /**< writers increment, reader decrements */
+	unsigned int newWaveAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
+	unsigned int newWaveRead_; /**< netSendCount for the most recent waveform */
+	enum
+	{
+		stop, run
+	};
+	epicsInt32 pWaveform_[wavesCount][waveBufferRegCount / wavesCount];
 
-    /** Values used for pasynUser->reason, and indexes into the parameter library.
-     * For this prototype, it's read only values that identify the FPGA. */
-    int p_RunStop;
-#define FIRST_CMOC_COMMAND p_RunStop
-    int p_MaxParallelRequests;
-    int p_PollPeriod;
-    int p_Magic;
-    int p_DspFlavor;
-    int p_BuildYear;
-    int p_BuildMonth;
-    int p_BuildDay;
-    int p_BuildHour;
-    int p_BuildMinute;
-    int p_CodeIsClean;
-    int p_ToolRev;
-    int p_User;
-    int p_BoardType;
-    int p_Version;
-    int p_GitSHA1a;
-    int p_GitSHA1b;
-    int p_GitSHA1c;
-    int p_GitSHA1d;
-    int p_GitSHA1e;
-    int p_GitSHA1f;
-    int p_GitSHA1g;
-    int p_GitSHA1h;
-    int p_GitSHA1i;
-    int p_GitSHA1j;
-    int p_GitSHA1k;
-    int p_GitSHA1l;
-    int p_GitSHA1m;
-    int p_GitSHA1n;
-    int p_GitSHA1o;
-    int p_GitSHA1p;
-    int p_GitSHA1q;
-    int p_GitSHA1r;
-    int p_GitSHA1s;
-    int p_GitSHA1t;
-    int p_DspFdbkCoreMpProcCoeff;
-    int p_DspFdbkCoreMpProcLim;
-    int p_DspFdbkCoreMpProcSetmp;
-    int p_DspLpNotchLp1AKx;
-    int p_DspLpNotchLp1AKy;
-    int p_DspLpNotchLp1BKx;
-    int p_DspLpNotchLp1BKy;
-    int p_DspChanKeep;
-    int p_DspFdbkCoreCoarseScale;
-    int p_DspFdbkCoreMpProcPhOffset;
-    int p_DspFdbkCoreMpProcSelEn;
-    int p_DspFdbkCoreMpProcSelThresh;
-    int p_DspModulo;
-    int p_DspPhaseStep;
-    int p_DspPiezoPiezoDc;
-    int p_DspTag;
-    int p_DspWaveSampPer;
-    int p_DspWaveShift;
-    int p_Waveform;
-    #define LAST_CMOC_COMMAND p_Waveform
+	/** Values used for pasynUser->reason, and indexes into the parameter library.
+	 * For this prototype, it's read only values that identify the FPGA. */
+	int p_RunStop;
+#define FIRST_CMOC_PARAM p_RunStop
+	int p_MaxParallelRequests;
+	int p_PollPeriod;
+	int p_CommErrorCount;
+	int p_Magic;
+	int p_DspFlavor;
+	int p_BuildYear;
+	int p_BuildMonth;
+	int p_BuildDay;
+	int p_BuildHour;
+	int p_BuildMinute;
+	int p_CodeIsClean;
+	int p_ToolRev;
+	int p_User;
+	int p_BoardType;
+	int p_Version;
+	int p_GitSHA1a;
+	int p_GitSHA1b;
+	int p_GitSHA1c;
+	int p_GitSHA1d;
+	int p_GitSHA1e;
+	int p_GitSHA1f;
+	int p_GitSHA1g;
+	int p_GitSHA1h;
+	int p_GitSHA1i;
+	int p_GitSHA1j;
+	int p_GitSHA1k;
+	int p_GitSHA1l;
+	int p_GitSHA1m;
+	int p_GitSHA1n;
+	int p_GitSHA1o;
+	int p_GitSHA1p;
+	int p_GitSHA1q;
+	int p_GitSHA1r;
+	int p_GitSHA1s;
+	int p_GitSHA1t;
+	int p_DspFdbkCoreMpProcCoeff;
+	int p_DspFdbkCoreMpProcLim;
+	int p_DspFdbkCoreMpProcSetmp;
+	int p_DspLpNotchLp1AKx;
+	int p_DspLpNotchLp1AKy;
+	int p_DspLpNotchLp1BKx;
+	int p_DspLpNotchLp1BKy;
+	int p_DspChanKeep;
+	int p_DspFdbkCoreCoarseScale;
+	int p_DspFdbkCoreMpProcPhOffset;
+	int p_DspFdbkCoreMpProcSelEn;
+	int p_DspFdbkCoreMpProcSelThresh;
+	int p_DspModulo;
+	int p_DspPhaseStep;
+	int p_DspPiezoPiezoDc;
+	int p_DspTag;
+	int p_DspWaveSampPer;
+	int p_DspWaveShift;
+	int p_Waveform;
+	int p_CircleAw;
+	int p_ModeCount;
+	int p_ModeShift;
+	int p_NMechModes;
+	int p_DfScale;
+	int p_SimpleDemo;
+	int p_Cav4MechNoiseCplKOut;
+	int p_Cav4MechPiezoCplKOut;
+	int p_Cav4MechResonatorPropConst;
+	int p_StaCav4ElecDot0KOut;
+	int p_StaCav4ElecDot1KOut;
+	int p_StaCav4ElecDot2KOut;
+	int p_StaCav4ElecOuterProd0KOut;
+	int p_StaCav4ElecOuterProd1KOut;
+	int p_StaCav4ElecOuterProd2KOut;
+	int p_StaCav4ElecDrvCplOutCplng;
+	int p_StaCav4ElecDrvCplOutPhOff;
+	int p_BeamModulo;
+	int p_BeamPhaseStep;
+	int p_Cav4MechPrngIva;
+	int p_Cav4MechPrngIvb;
+	int p_Cav4MechPrngRandomRun;
+	int p_StaACavOffset;
+	int p_StaAForOffset;
+	int p_StaARflOffset;
+	int p_StaAmpLpBw;
+	int p_StaCav4ElecFreq0CoarseFreq;
+	int p_StaCav4ElecFreq1CoarseFreq;
+	int p_StaCav4ElecFreq2CoarseFreq;
+	int p_StaCav4ElecMode0BeamCpl;
+	int p_StaCav4ElecMode0Bw;
+	int p_StaCav4ElecMode0DrvCpl;
+	int p_StaCav4ElecMode0OutCplOutCplng;
+	int p_StaCav4ElecMode0OutCplOutPhOff;
+	int p_StaCav4ElecMode1BeamCpl;
+	int p_StaCav4ElecMode1Bw;
+	int p_StaCav4ElecMode1DrvCpl;
+	int p_StaCav4ElecMode2BeamCpl;
+	int p_StaCav4ElecMode2Bw;
+	int p_StaCav4ElecMode2DrvCpl;
+	int p_StaCav4ElecModulo;
+	int p_StaCav4ElecPhaseStep;
+	int p_StaComprSatCtl;
+	int p_StaPrngIva;
+	int p_StaPrngIvb;
+	int p_StaPrngRandomRun;
+	int p_StaCav4ElecMode1OutCplOutCplng;
+	int p_StaCav4ElecMode1OutCplOutPhOff;
+	int p_StaCav4ElecMode2OutCplOutCplng;
+	int p_StaCav4ElecMode2OutCplOutPhOff;
+#define LAST_CMOC_PARAM p_StaCav4ElecMode2OutCplOutPhOff
 
-    // mapping of register names to addresses
-    // Note that the same address may access a different register reading than writing
-    enum RegReadAddrs
-    {
-    	MagicAdr = 0x00,
-    	DspFlavorAdr = 0x01,
-    	BuildYearAdr = 0x02,
-    	BuildMonthAdr = 0x03,
-    	BuildDayAdr = 0x04,
-    	BuildHourAdr = 0x05,
-    	BuildMinuteAdr = 0x06,
-    	CodeIsCleanAdr = 0x07,
-    	ToolRevAdr = 0x08,
-    	UserAdr = 0x09,
-    	BoardTypeAdr = 0x0a,
-    	VersionAdr = 0x0b,
-    	GitSHA1aAdr = 0x0c,
-    	GitSHA1bAdr = 0x0d,
-    	GitSHA1cAdr = 0x0e,
-    	GitSHA1dAdr = 0x0f,
-    	GitSHA1eAdr = 0x10,
-    	GitSHA1fAdr = 0x11,
-    	GitSHA1gAdr = 0x12,
-    	GitSHA1hAdr = 0x13,
-    	GitSHA1iAdr = 0x14,
-    	GitSHA1jAdr = 0x15,
-    	GitSHA1kAdr = 0x16,
-    	GitSHA1lAdr = 0x17,
-    	GitSHA1mAdr = 0x18,
-    	GitSHA1nAdr = 0x19,
-    	GitSHA1oAdr = 0x1a,
-    	GitSHA1pAdr = 0x1b,
-    	GitSHA1qAdr = 0x1c,
-    	GitSHA1rAdr = 0x1d,
-    	GitSHA1sAdr = 0x1e,
-    	GitSHA1tAdr = 0x1f
-    };
+#define NUM_CMOC_PARAMS (&LAST_CMOC_PARAM - &FIRST_CMOC_PARAM + 1)
 
-    enum RegWriteAddrs
-    {
-    	DspFdbkCoreMpProcCoeffAdr = 0x0000,
-    	DspFdbkCoreMpProcLimAdr = 0x0004,
-    	DspFdbkCoreMpProcSetmpAdr = 0x0008,
-    	DspLpNotchLp1AKxAdr = 0x000C,
-    	DspLpNotchLp1AKyAdr = 0x000E,
-    	DspLpNotchLp1BKxAdr = 0x0010,
-    	DspLpNotchLp1BKyAdr = 0x0012,
-    	DspChanKeepAdr = 0x0014,
-    	DspFdbkCoreCoarseScaleAdr = 0x0015,
-    	DspFdbkCoreMpProcPhOffsetAdr = 0x0016,
-    	DspFdbkCoreMpProcSelEnAdr = 0x0017,
-    	DspFdbkCoreMpProcSelThreshAdr = 0x0018,
-    	DspModuloAdr = 0x0019,
-    	DspPhaseStepAdr = 0x001A,
-    	DspPiezoPiezoDcAdr = 0x001B,
-    	DspTagAdr = 0x001C,
-    	DspWaveSampPerAdr = 0x001D,
-    	DspWaveShiftAdr = 0x001E,
-    };
+	// mapping of register names to addresses
+	// Note that the same address may access a different register reading than writing
+	enum RegReadAddrs
+	{
+		MagicAdr = 0x00,
+		DspFlavorAdr = 0x01,
+		BuildYearAdr = 0x02,
+		BuildMonthAdr = 0x03,
+		BuildDayAdr = 0x04,
+		BuildHourAdr = 0x05,
+		BuildMinuteAdr = 0x06,
+		CodeIsCleanAdr = 0x07,
+		ToolRevAdr = 0x08,
+		UserAdr = 0x09,
+		BoardTypeAdr = 0x0a,
+		VersionAdr = 0x0b,
+		GitSHA1aAdr = 0x0c,
+		GitSHA1bAdr = 0x0d,
+		GitSHA1cAdr = 0x0e,
+		GitSHA1dAdr = 0x0f,
+		GitSHA1eAdr = 0x10,
+		GitSHA1fAdr = 0x11,
+		GitSHA1gAdr = 0x12,
+		GitSHA1hAdr = 0x13,
+		GitSHA1iAdr = 0x14,
+		GitSHA1jAdr = 0x15,
+		GitSHA1kAdr = 0x16,
+		GitSHA1lAdr = 0x17,
+		GitSHA1mAdr = 0x18,
+		GitSHA1nAdr = 0x19,
+		GitSHA1oAdr = 0x1a,
+		GitSHA1pAdr = 0x1b,
+		GitSHA1qAdr = 0x1c,
+		GitSHA1rAdr = 0x1d,
+		GitSHA1sAdr = 0x1e,
+		GitSHA1tAdr = 0x1f,
+		CircleAwAdr = 0x00000021,
+		ModeCountAdr = 0x00000022,
+		ModeShiftAdr = 0x00000023,
+		NMechModesAdr = 0x00000024,
+		DfScaleAdr = 0x00000025,
+		SimpleDemoAdr = 0x00000026,
+		StaPrngRandomRunAdr = 0x0000642A,
+		StaCav4ElecMode1OutCplOutPhOffAdr = 0x0000640A
+	};
 
-    // masks applied to returned register data
-    enum RegMasks
-    {
-    	DspFdbkCoreMpProcCoeffMask =  0x0003FFFF,
-    	DspFdbkCoreMpProcLimMask =  0x0003FFFF,
-    	DspFdbkCoreMpProcSetmpMask =  0x0003FFFF,
-    	DspLpNotchLp1AKxMask =  0x0003FFFF,
-    	DspLpNotchLp1AKyMask =  0x0003FFFF,
-    	DspLpNotchLp1BKxMask =  0x0003FFFF,
-    	DspLpNotchLp1BKyMask =  0x0003FFFF,
-    	DspChanKeepMask =  0x00000FFF,
-    	DspFdbkCoreCoarseScaleMask =  0x00000003,
-    	DspFdbkCoreMpProcPhOffsetMask =  0x0003FFFF,
-    	DspFdbkCoreMpProcSelEnMask =  0x00000001,
-    	DspFdbkCoreMpProcSelThreshMask =  0x0003FFFF,
-    	DspModuloMask =  0x00000FFF,
-    	DspPhaseStepMask =  0xFFFFFFFF,
-    	DspPiezoPiezoDcMask =  0x0000FFFF,
-    	DspTagMask =  0x000000FF,
-    	DspWaveSampPerMask =  0x0000007F,
-    	DspWaveShiftMask =  0x00000007,
-    	MagicMask = 0xff,
-    	DspFlavorMask = 0xff,
-    	BuildYearMask = 0xff,
-    	BuildMonthMask = 0xff,
-    	BuildDayMask = 0xff,
-    	BuildHourMask = 0xff,
-    	BuildMinuteMask = 0xff,
-    	CodeIsCleanMask = 0xff,
-    	ToolRevMask = 0xff,
-    	UserMask = 0xff,
-    	BoardTypeMask = 0xff,
-    	VersionMask = 0xff,
-    	GitSHA1aMask = 0xff,
-    	GitSHA1bMask = 0xff,
-    	GitSHA1cMask = 0xff,
-    	GitSHA1dMask = 0xff,
-    	GitSHA1eMask = 0xff,
-    	GitSHA1fMask = 0xff,
-    	GitSHA1gMask = 0xff,
-    	GitSHA1hMask = 0xff,
-    	GitSHA1iMask = 0xff,
-    	GitSHA1jMask = 0xff,
-    	GitSHA1kMask = 0xff,
-    	GitSHA1lMask = 0xff,
-    	GitSHA1mMask = 0xff,
-    	GitSHA1nMask = 0xff,
-    	GitSHA1oMask = 0xff,
-    	GitSHA1pMask = 0xff,
-    	GitSHA1qMask = 0xff,
-    	GitSHA1rMask = 0xff,
-    	GitSHA1sMask = 0xff,
-    	GitSHA1tMask = 0xff
-    };
+	enum RegWriteAddrs
+	{
+		DspFdbkCoreMpProcCoeffAdr = 0x00000000,
+		DspFdbkCoreMpProcLimAdr = 0x00000004,
+		DspFdbkCoreMpProcSetmpAdr = 0x00000008,
+		DspLpNotchLp1AKxAdr = 0x0000000C,
+		DspLpNotchLp1AKyAdr = 0x0000000E,
+		DspLpNotchLp1BKxAdr = 0x00000010,
+		DspLpNotchLp1BKyAdr = 0x00000012,
+		DspChanKeepAdr = 0x00000014,
+		DspFdbkCoreCoarseScaleAdr = 0x00000015,
+		DspFdbkCoreMpProcPhOffsetAdr = 0x00000016,
+		DspFdbkCoreMpProcSelEnAdr = 0x00000017,
+		DspFdbkCoreMpProcSelThreshAdr = 0x00000018,
+		DspModuloAdr = 0x00000019,
+		DspPhaseStepAdr = 0x0000001A,
+		DspPiezoPiezoDcAdr = 0x0000001B,
+		DspTagAdr = 0x0000001C,
+		DspWaveSampPerAdr = 0x0000001D,
+		DspWaveShiftAdr = 0x0000001E,
+		Cav4MechNoiseCplKOutAdr = 0x00004000,
+		Cav4MechPiezoCplKOutAdr = 0x00004400,
+		Cav4MechResonatorPropConstAdr = 0x00004800,
+		StaCav4ElecDot0KOutAdr = 0x00004C00,
+		StaCav4ElecDot1KOutAdr = 0x00005000,
+		StaCav4ElecDot2KOutAdr = 0x00005400,
+		StaCav4ElecOuterProd0KOutAdr = 0x00005800,
+		StaCav4ElecOuterProd1KOutAdr = 0x00005C00,
+		StaCav4ElecOuterProd2KOutAdr = 0x00006000,
+		StaCav4ElecDrvCplOutCplngAdr = 0x00006400,
+		StaCav4ElecDrvCplOutPhOffAdr = 0x00006402,
+		BeamModuloAdr = 0x00006410,
+		BeamPhaseStepAdr = 0x00006411,
+		Cav4MechPrngIvaAdr = 0x00006412,
+		Cav4MechPrngIvbAdr = 0x00006413,
+		Cav4MechPrngRandomRunAdr = 0x00006414,
+		StaACavOffsetAdr = 0x00006415,
+		StaAForOffsetAdr = 0x00006416,
+		StaARflOffsetAdr = 0x00006417,
+		StaAmpLpBwAdr = 0x00006418,
+		StaCav4ElecFreq0CoarseFreqAdr = 0x00006419,
+		StaCav4ElecFreq1CoarseFreqAdr = 0x0000641A,
+		StaCav4ElecFreq2CoarseFreqAdr = 0x0000641B,
+		StaCav4ElecMode0BeamCplAdr = 0x0000641C,
+		StaCav4ElecMode0BwAdr = 0x0000641D,
+		StaCav4ElecMode0DrvCplAdr = 0x0000641E,
+		StaCav4ElecMode0OutCplOutCplngAdr = 0x00006404,
+		StaCav4ElecMode0OutCplOutPhOffAdr = 0x00006406,
+		StaCav4ElecMode1BeamCplAdr = 0x0000641F,
+		StaCav4ElecMode1BwAdr = 0x00006420,
+		StaCav4ElecMode1DrvCplAdr = 0x00006421,
+		StaCav4ElecMode2BeamCplAdr = 0x00006422,
+		StaCav4ElecMode2BwAdr = 0x00006423,
+		StaCav4ElecMode2DrvCplAdr = 0x00006424,
+		StaCav4ElecModuloAdr = 0x00006425,
+		StaCav4ElecPhaseStepAdr = 0x00006426,
+		StaComprSatCtlAdr = 0x00006427,
+		StaPrngIvaAdr = 0x00006428,
+		StaPrngIvbAdr = 0x00006429,
+		StaCav4ElecMode1OutCplOutCplngAdr = 0x0000642B,
+		StaCav4ElecMode2OutCplOutCplngAdr = 0x0000640C,
+		StaCav4ElecMode2OutCplOutPhOffAdr = 0x0000640E,
+	};
 
+	// masks applied to returned register data
+	enum RegMasks
+	{
+		MagicMask = 0xff,
+		DspFlavorMask = 0xff,
+		BuildYearMask = 0xff,
+		BuildMonthMask = 0xff,
+		BuildDayMask = 0xff,
+		BuildHourMask = 0xff,
+		BuildMinuteMask = 0xff,
+		CodeIsCleanMask = 0xff,
+		ToolRevMask = 0xff,
+		UserMask = 0xff,
+		BoardTypeMask = 0xff,
+		VersionMask = 0xff,
+		GitSHA1aMask = 0xff,
+		GitSHA1bMask = 0xff,
+		GitSHA1cMask = 0xff,
+		GitSHA1dMask = 0xff,
+		GitSHA1eMask = 0xff,
+		GitSHA1fMask = 0xff,
+		GitSHA1gMask = 0xff,
+		GitSHA1hMask = 0xff,
+		GitSHA1iMask = 0xff,
+		GitSHA1jMask = 0xff,
+		GitSHA1kMask = 0xff,
+		GitSHA1lMask = 0xff,
+		GitSHA1mMask = 0xff,
+		GitSHA1nMask = 0xff,
+		GitSHA1oMask = 0xff,
+		GitSHA1pMask = 0xff,
+		GitSHA1qMask = 0xff,
+		GitSHA1rMask = 0xff,
+		GitSHA1sMask = 0xff,
+		GitSHA1tMask = 0xff,
+		DspFdbkCoreMpProcCoeffMask = 0x0003FFFF,
+		DspFdbkCoreMpProcLimMask = 0x0003FFFF,
+		DspFdbkCoreMpProcSetmpMask = 0x0003FFFF,
+		DspLpNotchLp1AKxMask = 0x0003FFFF,
+		DspLpNotchLp1AKyMask = 0x0003FFFF,
+		DspLpNotchLp1BKxMask = 0x0003FFFF,
+		DspLpNotchLp1BKyMask = 0x0003FFFF,
+		DspChanKeepMask = 0x00000FFF,
+		DspFdbkCoreCoarseScaleMask = 0x00000003,
+		DspFdbkCoreMpProcPhOffsetMask = 0x0003FFFF,
+		DspFdbkCoreMpProcSelEnMask = 0x00000001,
+		DspFdbkCoreMpProcSelThreshMask = 0x0003FFFF,
+		DspModuloMask = 0x00000FFF,
+		DspPhaseStepMask = 0xFFFFFFFF,
+		DspPiezoPiezoDcMask = 0x0000FFFF,
+		DspTagMask = 0x000000FF,
+		DspWaveSampPerMask = 0x0000007F,
+		DspWaveShiftMask = 0x00000007,
+		Cav4MechNoiseCplKOutMask = 0x0003FFFF,
+		Cav4MechPiezoCplKOutMask = 0x0003FFFF,
+		Cav4MechResonatorPropConstMask = 0x001FFFFF,
+		StaCav4ElecDot0KOutMask = 0x0003FFFF,
+		StaCav4ElecDot1KOutMask = 0x0003FFFF,
+		StaCav4ElecDot2KOutMask = 0x0003FFFF,
+		StaCav4ElecOuterProd0KOutMask = 0x0003FFFF,
+		StaCav4ElecOuterProd1KOutMask = 0x0003FFFF,
+		StaCav4ElecOuterProd2KOutMask = 0x0003FFFF,
+		StaCav4ElecDrvCplOutCplngMask = 0x0003FFFF,
+		StaCav4ElecDrvCplOutPhOffMask = 0x0007FFFF,
+		BeamModuloMask = 0x00000FFF,
+		BeamPhaseStepMask = 0x00000FFF,
+		Cav4MechPrngIvaMask = 0xFFFFFFFF,
+		Cav4MechPrngIvbMask = 0xFFFFFFFF,
+		Cav4MechPrngRandomRunMask = 0x00000001,
+		StaACavOffsetMask = 0x000003FF,
+		StaAForOffsetMask = 0x000003FF,
+		StaARflOffsetMask = 0x000003FF,
+		StaAmpLpBwMask = 0x0003FFFF,
+		StaCav4ElecFreq0CoarseFreqMask = 0x0FFFFFFF,
+		StaCav4ElecFreq1CoarseFreqMask = 0x0FFFFFFF,
+		StaCav4ElecFreq2CoarseFreqMask = 0x0FFFFFFF,
+		StaCav4ElecMode0BeamCplMask = 0x0003FFFF,
+		StaCav4ElecMode0BwMask = 0x0003FFFF,
+		StaCav4ElecMode0DrvCplMask = 0x0003FFFF,
+		StaCav4ElecMode0OutCplOutCplngMask = 0x0003FFFF,
+		StaCav4ElecMode0OutCplOutPhOffMask = 0x0007FFFF,
+		StaCav4ElecMode1BeamCplMask = 0x0003FFFF,
+		StaCav4ElecMode1BwMask = 0x0003FFFF,
+		StaCav4ElecMode1DrvCplMask = 0x0003FFFF,
+		StaCav4ElecMode2BeamCplMask = 0x0003FFFF,
+		StaCav4ElecMode2BwMask = 0x0003FFFF,
+		StaCav4ElecMode2DrvCplMask = 0x0003FFFF,
+		StaCav4ElecModuloMask = 0x00000FFF,
+		StaCav4ElecPhaseStepMask = 0xFFFFFFFF,
+		StaComprSatCtlMask = 0x0000FFFF,
+		StaPrngIvaMask = 0xFFFFFFFF,
+		StaPrngIvbMask = 0xFFFFFFFF,
+		StaPrngRandomRunMask = 0x00000001,
+		StaCav4ElecMode1OutCplOutCplngMask = 0x0003FFFF,
+		StaCav4ElecMode1OutCplOutPhOffMask = 0x0007FFFF,
+		StaCav4ElecMode2OutCplOutCplngMask = 0x0003FFFF,
+		StaCav4ElecMode2OutCplOutPhOffMask = 0x0007FFFF,
+	};
 };
-
-/* Initial testing registers:
- *     0000:   85   //  0x55  magic
-    0001:    7   //  0x07  dsp flavor
-    0002:   16   //  0x10  year
-    0003:    6   //  0x06  month
-    0004:   15   //  0x0f  day
-    0005:    4   //  0x04  hour
-    0006:   32   //  0x20  minute
-    0007:    0   //  0x00  code is (clean), () commits after the latest tag
-    0008:    0   //  0x00  tool rev ()
-    0009:    1   //  0x01  user (larry)
-    000a:   17   //  0x11  board type (ac701)
-    000b:    0   //  0x00  version number
-    000c: 8'h8c  //  0x8c  start of git commit SHA1
-    000d: 8'hd5  //  0xd5  ...
-    000e: 8'h10  //  0x10  ...
-    000f: 8'hda  //  0xda  ...
-    0010: 8'h7b  //  0x7b  ...
-    0011: 8'hb8  //  0xb8  ...
-    0012: 8'ha1  //  0xa1  ...
-    0013: 8'hd4  //  0xd4  ...
-    0014: 8'h5d  //  0x5d  ...
-    0015: 8'h52  //  0x52  ...
-    0016: 8'hc1  //  0xc1  ...
-    0017: 8'h90  //  0x90  ...
-    0018: 8'h6d  //  0x6d  ...
-    0019: 8'hb1  //  0xb1  ...
-    001a: 8'hd0  //  0xd0  ...
-    001b: 8'hd8  //  0xd8  ...
-    001c: 8'h7e  //  0x7e  ...
-    001d: 8'he7  //  0xe7  ...
-    001e: 8'h2a  //  0x2a  ...
-    001f: 8'hc7  //  0xc7  end of SHA1
- *
- */
 
 #endif /* scllrfAPP_SRC_scllrfASYNPORTDRIVER_H_ */
