@@ -869,7 +869,7 @@ void scllrfAsynPortDriver::regPoller()
 			{ flagReadMask | StaPrngRandomRunAdr, blankData },
 			{ flagReadMask | StaCav4ElecMode1OutCplOutPhOffAdr, blankData },
 	};
-	htonFpgaRegArray(cmocReadAllRegMsg, regCount + 1);
+	htonFpgaRegArray(cmocReadAllRegMsg, readRegCount + 1);
 
 	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
@@ -885,7 +885,7 @@ void scllrfAsynPortDriver::regPoller()
 		if (isShuttingDown_) {
 			break;
 		}
-		sendRegRequest(cmocReadAllRegMsg, regCount + 1);
+		sendRegRequest(cmocReadAllRegMsg, readRegCount + 1);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
 	}

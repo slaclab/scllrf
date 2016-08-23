@@ -31,8 +31,6 @@
 
 #include <epicsExport.h>
 
-const size_t regCount = 0x20;
-
 // Move these to a common file somewhere
 
 // First byte of data is for control (read/write flag)
