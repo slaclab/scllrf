@@ -1,26 +1,26 @@
-{	"minimal":
-	{	"address" : 0x000002,
-		"access"  : "r"
+{	{"name" : "minimal",
+		"address" : 0x000002,
+		"access"  : "w"
 	},
-	"month":
-	{	"address"     : 0x000003,
+	{"name" : "maximal",
+		"address"     : 0x000003,
 		"access"      : "r",
 		"bit_width"   : 8,
 		"lsBit"       : 0,
 		"nelms"       : 1,
-		"egu"         : "m",
+		"egu"         : "My Units",
 		"signed"      : "unsigned",
 		"range_top"   : 12,
 		"range_bottom": 1,
 		"scale_eqn"   : "x",
-		"desc"        : "Month the verilog for cmoc was compiled"
+		"desc"        : "Every field"
 		"bits"        :
 		{	"wav_ready" : 0x100,
 			"bar"       : 0x200
 		}
 	},
-	"arc_faults":
-	{	"bits":
+	{"name" : "arc_faults",
+		"bits":
 		{	"cav1" : 0x0001,
 			"cav2" : 0x0002,
 			"cav3" : 0x0004,
