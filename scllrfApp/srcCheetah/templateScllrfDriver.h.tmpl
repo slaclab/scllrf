@@ -1,0 +1,121 @@
+\#ifndef ${name.upper()}_DRIVER_H
+\#define ${name.upper()}_DRIVER_H
+
+\#include <stdlib.h>
+\#include <string.h>
+\#include <stdio.h>
+\#include <stdint.h>
+\#include <sys/types.h>
+\#include <sys/stat.h>
+\#include <iostream>
+\#include <vector>
+
+\#include <epicsTypes.h>
+\#include <epicsThread.h>
+\#include <epicsEvent.h>
+\#include <iocsh.h>
+
+\#include <asynPortDriver.h>
+
+\#include <epicsExport.h>
+
+/* Registers */
+#set $readRegCount = 0
+#set $writeRegCount = 0
+#for $p in $registers
+#if $p.has_key('desc')
+// ${p.desc}
+#end if
+const char *${p.name.title().replace("_", "")}String = "${p.name.upper()}";
+#if $p.has_key('access') and $p.access == 'w'
+#set $writeRegCount +=1
+#else
+#set $readRegCount +=1
+#end if
+#end for
+
+const unsigned int readRegCount = $readRegCount;
+const unsigned int writeRegCount = $writeRegCount;
+
+/* Commands */
+#if $varExists('commands')
+#for $c in $commands
+#define C${c.name}String "C_${c.name}"
+#end for
+#end if
+
+
+ /* This class implements the AxiVersion driver. */
+class ${name}Driver : public cpswAsynDriver {
+public:
+    ${name}Driver(const char *portName, Path p, int nelms);
+
+#if $varExists('commands')
+    virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+#end if
+
+
+protected:
+    ${name} p${name};
+
+#set $first = True
+/* Registers */
+#for $p in $registers
+    int p_${p.name.title().replace("_", "")};
+    #if $first == True
+    #define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}
+    #set $first = False
+    #end if
+#end for
+#if $varExists('commands')
+/* Commands */
+#for $c in $commands
+    int p_C_${c.name.title().replace("_", "")};
+#end for
+    #define LAST_${name.upper()}_PARAM p_C_${commands[-1].name.title().replace("_", "")}
+#else
+    #define LAST_${name.upper()}_PARAM p_${registers[-1].name.title().replace("_", "")}
+#end if
+
+
+\#define NUM_${name.upper()}_PARAMS (&LAST_${name.upper()}_PARAM - &FIRST_${name.upper()}_PARAM + 1)
+
+private:
+#if $varExists('commands')
+#for $c in $commands
+    asynStatus ${c.name}();
+#end for
+#end if
+
+    // mapping of register names to addresses
+    enum ReadRegAddrs
+    {
+#for $p in $registers
+#unless $p.has_key('access') and $p.access == 'w'
+    	${p.name.title().replace("_", "")}Adr = 0x${format($p.address, '08X')},
+#end unless
+#end for
+    };
+
+    // mapping of register names to addresses
+    enum WriteRegAddrs
+    {
+#for $p in $registers
+#if $p.has_key('access') and $p.access == 'w'
+    	${p.name.title().replace("_", "")}Adr = 0x${format($p.address, '08X')},
+#end if
+#end for
+    };
+
+    // masks applied to returned register data
+    enum RegMasks
+    {
+#for $p in $registers
+#if $p.has_key('bit_width')
+    	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
+#end if
+#end for
+    };
+};
+
+\#endif

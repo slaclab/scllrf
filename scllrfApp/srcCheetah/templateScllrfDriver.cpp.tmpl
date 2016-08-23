@@ -1,0 +1,330 @@
+\#include "${name}.h"
+\#include <asynOctetSyncIO.h>
+\#include <asynCommonSyncIO.h>
+\#include <limits>
+\#include <netinet/in.h>
+\#include <iostream>
+using namespace std;
+\#include <math.h>
+
+/** Constructor for the ${name} class.
+ * Calls constructor for the asynPortDriver base class.
+ * \param[in] portName The name of the asyn port driver to be created.
+ * \param[in] path The path to the peripherial as built by the builder api
+ * \param[in] nelms The number of elements of this device (max addr)
+ * \paarm[in] nEntries The number of asyn params to be created for each device
+ *
+ * */
+${name}ScllrfDriver::${name}ScllrfDriver(const char *drvPortName, const char *netPortName)
+: asynPortDriver(drvPortName,
+		wavesCount, /* maxAddr */
+		NUM_${name.upper()}_PARAMS,
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask|asynUInt32DigitalMask, /* Interface mask */
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask,  /* Interrupt mask */
+		1, /* asynFlags.  This driver does block and it is not multi-device, so flag is 1 */
+		1, /* Autoconnect */
+		epicsThreadPriorityMedium,
+		0), /* Default stack size*/
+		isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
+		newWaveAvailable_(0), newWaveRead_ (0), p_RunStop (stop)
+{
+	asynStatus status = asynSuccess;
+
+    epicsThreadSleep(defaultPollPeriod);
+
+    printf("%s creating %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS);
+
+#for $p in $registers
+#if $p.has_key('nelms')
+    createParam(${p.name.title().replace("_", "")}String, asynParamInt32Array, &p_${p.name.title().replace("_", "")});
+#else
+    createParam(${p.name.title().replace("_", "")}String, asynParamInt32, &p_${p.name.title().replace("_", "")});
+#end if
+#end for
+
+    epicsThreadSleep(defaultPollPeriod);
+
+    printf("%s done creating %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS);
+
+    status=pasynCommonSyncIO->connect(netPortName, 0, &pCommonAsynUser_, 0);
+    if(status!=asynSuccess)
+    	printf( "%s: connect: failed to connect to port %s with status %d\n",
+    			__PRETTY_FUNCTION__,netPortName, status);
+    else  printf( "%s: connect: connected to port %s\n",__PRETTY_FUNCTION__,netPortName);
+
+    status=pasynOctetSyncIO->connect( netPortName,0,&pOctetAsynUser_,0);
+    if(status!=asynSuccess)
+    	printf( "%s: connect: failed to connect to Read port %s with status %d\n",
+    			__PRETTY_FUNCTION__,netPortName, status);
+    else  printf( "%s: connect: connected to port %s\n",__PRETTY_FUNCTION__,netPortName);
+
+    wakeupPoller();
+    wakeupReader();
+}
+
+${name}ScllrfDriver::~${name}ScllrfDriver()
+{
+	isShuttingDown_ = true;
+	epicsThreadSleep(0.1); // Allow threads to run and exit
+	wakeupPoller();
+	wakeupReader();
+	epicsThreadSleep(0.1); // Allow threads to run and exit
+	wakeupPoller(); // call this twice in case the poller was never set to run
+	epicsThreadSleep(0.1); // Allow threads to run and exit
+	pasynOctetSyncIO->disconnect(pOctetAsynUser_);
+	pasynCommonSyncIO->disconnectDevice(pCommonAsynUser_);
+	pasynCommonSyncIO->disconnect(pCommonAsynUser_);
+}
+
+/** Called when you have the asyn parameter name and want the corresponding
+ * register address.
+  * \param[in] function From pAsynUser->reason, corresponding to a registered parameter.
+  * \param[in] pToFpga Pointer to the {Address, Data} structure where the register address will be written
+  * \param[in] nElements Number of elements to read. */
+asynStatus ${name}ScllrfDriver::functionToRegister(const int function, FpgaReg *pToFpga)
+{
+	asynStatus status = asynSuccess;
+
+    // Assume this is for a write function, doesn't have to include read only registers (so far)
+#set $first = True
+#for $p in $registers
+  #if $first == True
+    if( function ==  p_${p.name.title().replace("_", "")})
+    {
+    #if $p.has_key('access')
+      #if $p.access == "w"
+		pToFpga->addr = ${p.name.title().replace("_", "")}Adr;
+      #else
+		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
+      #end if
+    #else
+		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
+    #end if
+    }
+    #set $first=False
+  #else
+    else if( function == p_${p.name.title().replace("_", "")} )
+    {
+    #if $p.has_key('access')
+      #if $p.access == "w"
+		pToFpga->addr = ${p.name.title().replace("_", "")}Adr;
+      #else
+		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
+      #end if
+    #else
+		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
+    #end if
+    }
+  #end if
+#end for
+    else
+    	status = asynError;
+
+    return status;
+}
+
+void ${name}ScllrfDriver::regPoller()
+{
+	epicsEventWaitStatus status;
+	int runStop;
+
+	// A canned request to read all registers
+	static FpgaReg cmocReadAllRegMsg[readRegCount + 1] =
+	{
+			{ 0, 0 },
+#for $p in $registers
+#unless $p.has_key('access') and $p.access == 'w'
+			{ flagReadMask | ${p.name.title().replace("_", "")}Adr, blankData },
+#end unless
+#end for
+	};
+	htonFpgaRegArray(cmocReadAllRegMsg, regCount + 1);
+
+	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
+	while(1) {
+		getDoubleParam(p_PollPeriod, &pollPeriod_);
+		getIntegerParam(p_RunStop, &runStop);
+		if (runStop == run && pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
+		else               status = epicsEventWait(pollEventId_);
+		if (status == epicsEventWaitOK) {
+			/* We got an event, rather than a timeout.  This is because other software
+			 ** knows that we should do a poll.
+			 **/
+		}
+		if (isShuttingDown_) {
+			break;
+		}
+		sendRegRequest(cmocReadAllRegMsg, regCount + 1);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
+	}
+	printf("%s: exiting\n", __PRETTY_FUNCTION__);
+}
+
+/**  Extract register address and data from the received message and set the appropriate
+ * asyn parameter.
+ * Some registers have a "new waveform data ready" flag. If they have this and it is set,
+ * set weveIsReady to true.
+ * Note: This function should not set waveIsReady to false. That is done by a loop in the
+ * calling function.
+* \param[in] pFromFpga Data returned from the FPGA for a single register
+* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
+*/
+asynStatus ${name}ScllrfDriverprocessRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+{
+	unsigned int i;
+	asynStatus status = asynSuccess;
+	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
+	epicsInt32 errorCount;
+
+	/* Map address to parameter, set the parameter in the parameter library. */
+	switch (pFromFpga->addr)
+    {
+#for $p in $registers
+#if ($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))
+  #if $p.has_key("bit_width")
+    case ${p.name.title().replace("_", "")}Adr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")},
+			pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			${p.name.title().replace("_", "")}String,
+			(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+		break;
+  #else
+    case ${p.name.title().replace("_", "")}Adr|flagReadMask:
+	status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")},
+			pFromFpga->data);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			${p.name.title().replace("_", "")}String, (unsigned ) pFromFpga->data);
+		break;
+  #end if
+#end if
+#end for
+	default:
+		getIntegerParam(p_CommErrorCount, &errorCount);
+		setIntegerParam(p_CommErrorCount, ++errorCount);
+
+		status = asynError;
+		break;
+    }
+
+    return status;
+}
+
+
+/**  Extract register address and data from the received message and set the appropriate
+ * asyn parameter.
+ * Some registers have a "new waveform data ready" flag. If they have this and it is set,
+ * set weveIsReady to true.
+ * Note: This function should not set waveIsReady to false. That is done by a loop in the
+ * calling function.
+* \param[in] pFromFpga Data returned from the FPGA for a single register
+* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
+*/
+asynStatus ${name}ScllrfDriverprocessRegWriteResponse(const FpgaReg *pFromFpga)
+{
+	asynStatus status = asynSuccess;
+	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+	epicsInt32 errorCount;
+//  variables that may be useful for checking array data
+//	asynUser *pAsynArrayUser;
+//	unsigned int i;
+
+	/* Map address to parameter, set the parameter in the parameter library. */
+	switch (pFromFpga->addr)
+    {
+#for $p in $registers
+#if $p.has_key('access')
+  #if $p.access == "w" and (($p.has_key('nelms') and $p.nelms == 1) or not($p.has_key('nelms')))
+    case ${p.name.title().replace("_", "")}Adr:
+		status = (asynStatus) getIntegerParam(p_${p.name.title().replace("_", "")}, valueSet);
+		if( (valueSet[0] & ${p.name.title().replace("_", "")}Mask) == (pFromFpga->data & ${p.name.title().replace("_", "")}Mask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}String, (unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}String, valueSet[0] & ${p.name.title().replace("_", "")}Mask, (unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+			status = asynError;
+			setParamStatus(p_${p.name.title().replace("_", "")}, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+  #end if
+#end if
+#end for
+	default:
+		getIntegerParam(p_CommErrorCount, &errorCount);
+		setIntegerParam(p_CommErrorCount, ++errorCount);
+
+		status = asynError;
+		break;
+    }
+
+	// TODO: handle arrays
+
+    return status;
+}
+
+/** Code for iocsh registration */
+static const iocshArg ${name}CreateArg0 = {"Port name", iocshArgString};
+static const iocshArg ${name}CreateArg1 = {"${name} port name", iocshArgString};
+static const iocshArg * const ${name}CreateArgs[] = {&${name}CreateArg0,
+                                                           &${name}CreateArg1};
+static const iocshFuncDef ${name}CreateDef = {"${name}Create", 2, ${name}CreateArgs};
+static void ${name}CreateContollerCallFunc(const iocshArgBuf *args)
+{
+  ${name}Create(args[0].sval, args[1].sval);
+}
+
+static void ${name}Register(void)
+{
+  iocshRegister(&${name}CreateDef, ${name}CreateContollerCallFunc);
+}
+
+extern "C" {
+epicsExportRegistrar(${name}Register);
+}
+
+extern "C" {
+
+/* Configuration routine.  Called directly, or from the iocsh function below */
+
+/** EPICS iocsh callable function to call constructor for the ${name} class.
+ * \param[in] portName The name of the asyn port driver to be created.
+ * \param[in] netPortName The name of the asynIPport this will use to communicate */
+int ${name}Configure(const char *drvPortName, const char *netPortName)
+{
+	new ${name}(drvPortName, netPortName);
+	return asynSuccess;
+}
+
+
+/* EPICS iocsh shell commands */
+
+static const iocshArg initArg0 = { "drvPortName",iocshArgString};
+static const iocshArg initArg1 = { "IP port name",iocshArgString};
+static const iocshArg * const initArgs[] = {&initArg0,
+		&initArg1};
+static const iocshFuncDef initFuncDef = {"${name}Configure",2,initArgs};
+static void initCallFunc(const iocshArgBuf *args)
+{
+	${name}Configure(args[0].sval, args[1].sval);
+}
+
+void ${name}Register(void)
+{
+	iocshRegister(&initFuncDef,initCallFunc);
+}
+
+epicsExportRegistrar(${name}Register);
+
+}
+
+

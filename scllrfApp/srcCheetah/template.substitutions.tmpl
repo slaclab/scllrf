@@ -1,0 +1,69 @@
+file testAsynPortDriverIn.template 
+{
+    pattern { NAME , driver}
+#for $p in $registers
+#if $p.has_key('nelms')
+
+#else
+#if $p.has_key('dtype')
+  #if $p.dtype != "string"
+    #if $p.access == 'r'
+           { ${p.name} , ${name} }
+    #end if
+  #end if
+#else 
+  #if $p.access == 'r'
+           { ${p.name} , ${name} }
+  #end if
+#end if
+#end if
+#end for
+}
+file testAsynPortDriverOut.template 
+{
+    pattern { NAME , driver}
+#for $p in $registers
+#if $p.has_key('nelms')
+
+#else
+#if $p.has_key('dtype')
+  #if $p.dtype == "string"
+    #if $p.access == 'w'
+           { ${p.name} , ${name} }
+    #end if
+  #end if
+#else 
+  #if $p.access == 'w'
+           { ${p.name} , ${name} }
+  #end if
+#end if
+#end if
+#end for
+#if $varExists('commands')
+\#commands
+#for $c in $commands
+           { C_${c.name}, ${name} }
+#end for
+#end if
+}
+file testAsynPortWaveform.template
+{
+    pattern {NAME, driver, DTYP, FTVL, NELM}
+#for $p in $registers
+#if $p.has_key('dtype')
+  #if $p.dtype == "string"
+    #if $p.access == 'r'
+           { ${p.name} , ${name}, asynOctetRead, CHAR, ${p.nelms} }
+    #end if
+  #else
+           { ${p.name} , ${name}, asynInt32ArrayIn, ULONG, ${p.nelms} }
+  #end if
+#else if $p.has_key('nelms')
+  #if $p.access == 'r'
+           { ${p.name} , ${name}, asynInt32ArrayIn, ULONG, ${p.nelms} }
+  #else
+           { ${p.name} , ${name}, asynInt32ArrayOut, ULONG, ${p.nelms} }
+  #end if
+#end if
+#end for
+}
