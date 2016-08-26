@@ -89,6 +89,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 	createParam(GitSHA1rString, asynParamInt32, &p_GitSHA1r);
 	createParam(GitSHA1sString, asynParamInt32, &p_GitSHA1s);
 	createParam(GitSHA1tString, asynParamInt32, &p_GitSHA1t);
+	createParam(GitSHA1String, asynParamOctet, &p_GitSHA1);
 	createParam(DspFdbkCoreMpProcCoeffString, asynParamInt32Array,
 			&p_DspFdbkCoreMpProcCoeff);
 	createParam(DspFdbkCoreMpProcLimString, asynParamInt32Array,
@@ -1015,7 +1016,7 @@ void scllrfAsynPortDriver::waveformRequester()
 				break;
 			}
 
-			cmocReadWaveformsMsg[waveSegmentNumber][waveSegmentOffset+1] = (FpgaReg) { flagReadMask | regAddress, blankData};
+			cmocReadWaveformsMsg[waveSegmentNumber][waveSegmentOffset+1] = (FpgaReg) { flagReadMask | regAddress, (int32_t) ((double) blankData * sin(regAddress/360))};
 		}
 	}
 
@@ -1192,6 +1193,10 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 	int bytesLeft = readCount; // signed to make error detection easier
 	epicsInt32 errorCount;
 
+	// Check for an invalid nonce
+	if(pRegReadback[0].addr < 1 || pRegReadback[0].data < 1)
+		return asynError;
+
 	// We put the message size in the data of the first buffer element for error checking
 	// and to handle multiple messages received
 	while(bytesLeft > 0)
@@ -1207,7 +1212,8 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		{
 			//pRegReadback[0].data = bytesLeft; // Testing made clear this isn't enough, so just bail.
 			pasynOctetSyncIO->flush(pOctetAsynUser_); // Should we clear out waiting partial messages?
-			netWaitingRequests_--;
+			if(netWaitingRequests_ > 0)
+				netWaitingRequests_--;
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 					"%s: Read %u bytes from network, %d bytes left to process, but expected %u bytes\n",
 					__PRETTY_FUNCTION__, readCount, bytesLeft, (unsigned) pRegReadback[0].data);
@@ -1235,7 +1241,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 			setIntegerParam(p_CommErrorCount, errorCount + 1);
 		}
 		if (pRegReadback[0].addr < lastResponseCount_ + 1)
-		{
+		{// NOTE: In testing so far, it has only reached here from data problems other than true out-of-order data
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 					"%s: Out-of-order response message, got response from request #%u, expected is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
@@ -1274,7 +1280,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		}
 
 		// check if this was a response to the most recent request
-		if (pRegReadback[0].addr < netSendCount_)
+		if (pRegReadback[0].addr < netSendCount_ )
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: processed response from request #%u, most recent is request #%u\n",
@@ -1319,6 +1325,27 @@ asynStatus scllrfAsynPortDriver::processWaveReadback(const FpgaReg *pFromFpga)
 	unsigned int waveIndex = bufferOffset / wavesCount;
 
 	pWaveform_[waveNumber][waveIndex] = (epicsInt32) pFromFpga->data;
+
+	return asynSuccess;
+}
+
+asynStatus scllrfAsynPortDriver::catGitSHA1()
+{
+	int oneByte;
+	int i;
+	asynStatus status;
+
+	strGitSHA1.str("");
+	strGitSHA1.clear();
+	strGitSHA1<<std::hex;
+
+	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
+	{
+		status = (asynStatus) getIntegerParam(i, &oneByte);
+		strGitSHA1<< std::setw(2) << oneByte;
+	}
+	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
+	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
 
 	return asynSuccess;
 }
@@ -1627,6 +1654,8 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				GitSHA1tString, (unsigned ) pFromFpga->data & GitSHA1tMask);
+		// Once we've read the last byte of the SHA1, put them together and push it
+		catGitSHA1();
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
@@ -1699,7 +1728,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 			(unsigned ) pFromFpga->data & StaCav4ElecMode1OutCplOutPhOffMask);
 		break;
 	default:
-		if( wavesStart < (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) < wavesEnd )
+		if( wavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) < wavesEnd )
 			processWaveReadback(pFromFpga);
 		else
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -2508,10 +2537,11 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 
 		break;
 	default:
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, errorCount + 1);
+// TODO: Add checking for arrays. Until then, we'll hit "default" for array values, so not really an error. GWB 8-23-2016
+//		getIntegerParam(p_CommErrorCount, &errorCount);
+//		setIntegerParam(p_CommErrorCount, errorCount + 1);
 
-		status = asynError;
+//		status = asynError;
 		break;
     }
 

@@ -942,3 +942,11 @@ record(longin, "$(P):COMM_ERROR_COUNT_LI")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
+record( stringin, "$(P):GIT_SHA1"){
+  field( DESC, "SHA1 string from firmware git commit")
+  field( SCAN, "I/O Intr")
+  field( DTYP, "asynOctetRead")
+  field( FVTL, "STRING")
+  field( NELM, 42)
+  field( INP,  "@asyn($(PORT),0,1) GIT_SHA1")
+}

@@ -21,6 +21,10 @@
 #include <iostream>
 #include <vector>
 //#include <atomic>
+#include <string>
+#include <sstream>
+#include <iomanip>
+
 
 #include <epicsTypes.h>
 #include <epicsThread.h>
@@ -134,6 +138,7 @@ const char *GitSHA1qString = "GIT_SHA1_Q";  /* asynInt32,    r */
 const char *GitSHA1rString = "GIT_SHA1_R";  /* asynInt32,    r */
 const char *GitSHA1sString = "GIT_SHA1_S";  /* asynInt32,    r */
 const char *GitSHA1tString = "GIT_SHA1_T";  /* asynInt32,    r */
+const char *GitSHA1String = "GIT_SHA1";  /* asynOctet,    r */
 const char *DspFdbkCoreMpProcCoeffString = "DSP_FDBK_CORE_MP_PROC_COEFF";
 const char *DspFdbkCoreMpProcLimString = "DSP_FDBK_CORE_MP_PROC_LIM";
 const char *DspFdbkCoreMpProcSetmpString = "DSP_FDBK_CORE_MP_PROC_SETMP";
@@ -253,6 +258,7 @@ protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
+	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
 	epicsEventId pollEventId_; /**< Event ID to wake up poller */
@@ -275,6 +281,7 @@ protected:
 		stop, run
 	};
 	epicsInt32 pWaveform_[wavesCount][waveBufferRegCount / wavesCount];
+	std::ostringstream strGitSHA1;
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
@@ -315,6 +322,7 @@ protected:
 	int p_GitSHA1r;
 	int p_GitSHA1s;
 	int p_GitSHA1t;
+	int p_GitSHA1;
 	int p_DspFdbkCoreMpProcCoeff;
 	int p_DspFdbkCoreMpProcLim;
 	int p_DspFdbkCoreMpProcSetmp;

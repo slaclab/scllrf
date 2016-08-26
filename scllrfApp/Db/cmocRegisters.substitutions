@@ -1,39 +1,39 @@
-file li.template
-{
-pattern { REG }
-        { "MAGIC" }
-        { "DSP_FLAVOR" }
-        { "BUILD_YEAR" }
-        { "BUILD_MONTH" }
-        { "BUILD_DAY" }
-        { "BUILD_HOUR" }
-        { "BUILD_MINUTE" }
-        { "CODE_IS_CLEAN" }
-        { "TOOL_REV" }
-        { "USER" }
-        { "BOARD_TYPE" }
-        { "VERSION" }
-        { "GIT_SHA1_A" }
-        { "GIT_SHA1_B" }
-        { "GIT_SHA1_C" }
-        { "GIT_SHA1_D" }
-        { "GIT_SHA1_E" }
-        { "GIT_SHA1_F" }
-        { "GIT_SHA1_G" }
-        { "GIT_SHA1_H" }
-        { "GIT_SHA1_I" }
-        { "GIT_SHA1_J" }
-        { "GIT_SHA1_K" }
-        { "GIT_SHA1_L" }
-        { "GIT_SHA1_M" }
-        { "GIT_SHA1_N" }
-        { "GIT_SHA1_O" }
-        { "GIT_SHA1_P" }
-        { "GIT_SHA1_Q" }
-        { "GIT_SHA1_R" }
-        { "GIT_SHA1_S" }
-        { "GIT_SHA1_T" }
-}
+#file li.template
+#{
+#pattern { REG }
+#        { "MAGIC" }
+#        { "DSP_FLAVOR" }
+#        { "BUILD_YEAR" }
+#        { "BUILD_MONTH" }
+#        { "BUILD_DAY" }
+#        { "BUILD_HOUR" }
+#        { "BUILD_MINUTE" }
+#        { "CODE_IS_CLEAN" }
+#        { "TOOL_REV" }
+#        { "USER" }
+#        { "BOARD_TYPE" }
+#        { "VERSION" }
+#        { "GIT_SHA1_A" }
+#        { "GIT_SHA1_B" }
+#        { "GIT_SHA1_C" }
+#        { "GIT_SHA1_D" }
+#        { "GIT_SHA1_E" }
+#        { "GIT_SHA1_F" }
+#        { "GIT_SHA1_G" }
+#        { "GIT_SHA1_H" }
+#        { "GIT_SHA1_I" }
+#        { "GIT_SHA1_J" }
+#        { "GIT_SHA1_K" }
+#        { "GIT_SHA1_L" }
+#        { "GIT_SHA1_M" }
+#        { "GIT_SHA1_N" }
+#        { "GIT_SHA1_O" }
+#        { "GIT_SHA1_P" }
+#        { "GIT_SHA1_Q" }
+#        { "GIT_SHA1_R" }
+#        { "GIT_SHA1_S" }
+#        { "GIT_SHA1_T" }
+#}
 
 file cmoc.template
 {

@@ -227,3 +227,5 @@ create_monitor_set("info_settings.req",60,"")
 asynSetTraceMask("cmocIP",-1,1)
 asynSetTraceMask("cmocReg",-1,1)
 
+dbpf CMOC:RUN_STOP.HIGH 0.2
+dbpf CMOC:RUN_STOP 1
