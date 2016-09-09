@@ -310,7 +310,8 @@ public:
 	 * Sends requests for all register data at a specified period.
 	 * A separate thread processes the response.
 	 */
-	void regPoller(); // Polling loop, exits on shutdown
+	void regPoller(FpgaReg *regBuffer, unsigned int regBuffCount); // Polling loop, exits on shutdown
+	void regSettingsInit(); // canned settings from LBL
 	virtual asynStatus wakeupPoller(); // Alert poller to request new data
 	virtual asynStatus sendRegRequest(FpgaReg *regBuffer,
 			unsigned int regBuffSize); // Send out canned request for all registers

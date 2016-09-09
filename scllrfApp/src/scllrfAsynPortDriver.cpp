@@ -255,302 +255,6 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 
     printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 }
-void scllrfAsynPortDriver::init()
-{
-	// A canned request to initialize the prc
-			FpgaReg prcInitAllRegMsg[142] =
-			{
-				{ 0, 0 },
-	//periph_config
-				{ 0x81, 0xfffffffd },
-	//idelayctrl_reset_r
-				{ 0x25, 0x0 },
-	//idelayctrl_reset_r
-				{ 0x25, 0x1 },
-	//idelayctrl_reset_r
-				{ 0x25, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//hw_reset
-				{ 0x80, 0x0 },
-	//hw_reset
-				{ 0x80, 0x1 },
-	//hw_reset
-				{ 0x80, 0x0 },
-	//hw_reset
-				{ 0x80, 0x0 },
-	//U18_spi_data_r,U18_spi_addr_r
-				{ 0x95, 0xffffffff },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x0 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x3 },
-	//U18_spi_data_r,U18_spi_addr_r
-				{ 0x95, 0x200aff08 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x2 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x3 },
-	//U18_spi_data_r,U18_spi_addr_r
-				{ 0x95, 0x11ff10 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x2 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x3 },
-	//U18_spi_data_r,U18_spi_addr_r
-				{ 0x95, 0x200aff08 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x2 },
-	//U18_spi_read_r,U18_spi_start_r
-				{ 0x94, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xbb301300 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x2 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0x808012c0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x2 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xffff1340 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x2 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x1 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_clk_reset_r
-				{ 0x22, 0x1 },
-	//U3_clk_reset_r
-				{ 0x22, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x1 },
-	//U3_iserdes_reset_r
-				{ 0x27, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x1 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x1 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_clk_reset_r
-				{ 0x21, 0x1 },
-	//U2_clk_reset_r
-				{ 0x21, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x1 },
-	//U2_iserdes_reset_r
-				{ 0x26, 0x0 },
-	//banyan_mask
-				{ 0x91, 0xff },
-	//rawadc_trig
-				{ 0x29, 0x1 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8000 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8040 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8080 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa80c0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8100 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8140 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8180 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa81c0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8200 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8240 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 },
-	//U15_spi_data_r,U15_spi_addr_r
-				{ 0x93, 0xaaa8280 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x0 },
-	//U15_spi_read_r,U15_spi_start_r
-				{ 0x92, 0x3 }
-			};
-			htonFpgaRegArray(prcInitAllRegMsg, 142);
-
-			sendRegRequest(prcInitAllRegMsg, 142);
-
-			epicsThreadSleep(0.03);
-
-}
 
 scllrfAsynPortDriver::~scllrfAsynPortDriver()
 {
@@ -1286,10 +990,19 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 	return status; //(writeArray < epicsInt32 > (pasynUser, value, nElements));
 }
 
+typedef struct
+{
+	FpgaReg* sendBuff;
+	size_t sendBuffSize;
+	scllrfAsynPortDriver* pDriver;
+} regPollerThreadArgs;
+
 static void regPollerC(void *drvPvt)
 {
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
-	pscllrfDriver->regPoller();
+	regPollerThreadArgs *pArgs = (regPollerThreadArgs*) drvPvt;
+	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)pArgs->pDriver;
+	pscllrfDriver->regPoller(pArgs->sendBuff, pArgs->sendBuffSize);
+
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
@@ -1301,102 +1014,69 @@ static void regPollerC(void *drvPvt)
 asynStatus scllrfAsynPortDriver::startPoller(double pollPeriod)
 {
 	pollPeriod_ = pollPeriod;
+
+	regPollerThreadArgs threadArgs;
+	threadArgs.pDriver = this;
+
+	// Pass in an array of address/value pairs, and it will be queried at the specified polling rate
+		// A canned request to read all registers
+		static FpgaReg cmocReadAllRegMsg[readRegCount + 1] =
+		{
+				{ 0, 0 },
+				{ flagReadMask | MagicAdr, blankData | wavesReadyMask },
+				{ flagReadMask | DspFlavorAdr, blankData },
+				{ flagReadMask | BuildYearAdr, blankData },
+				{ flagReadMask | BuildMonthAdr, blankData },
+				{ flagReadMask | BuildDayAdr, blankData },
+				{ flagReadMask | BuildHourAdr, blankData },
+				{ flagReadMask | BuildMinuteAdr, blankData },
+				{ flagReadMask | CodeIsCleanAdr, blankData },
+				{ flagReadMask | ToolRevAdr, blankData },
+				{ flagReadMask | UserAdr, blankData },
+				{ flagReadMask | BoardTypeAdr, blankData },
+				{ flagReadMask | VersionAdr, blankData },
+				{ flagReadMask | GitSHA1aAdr, blankData },
+				{ flagReadMask | GitSHA1bAdr, blankData },
+				{ flagReadMask | GitSHA1cAdr, blankData },
+				{ flagReadMask | GitSHA1dAdr, blankData },
+				{ flagReadMask | GitSHA1eAdr, blankData },
+				{ flagReadMask | GitSHA1fAdr, blankData },
+				{ flagReadMask | GitSHA1gAdr, blankData },
+				{ flagReadMask | GitSHA1hAdr, blankData },
+				{ flagReadMask | GitSHA1iAdr, blankData },
+				{ flagReadMask | GitSHA1jAdr, blankData },
+				{ flagReadMask | GitSHA1kAdr, blankData },
+				{ flagReadMask | GitSHA1lAdr, blankData },
+				{ flagReadMask | GitSHA1mAdr, blankData },
+				{ flagReadMask | GitSHA1nAdr, blankData },
+				{ flagReadMask | GitSHA1oAdr, blankData },
+				{ flagReadMask | GitSHA1pAdr, blankData },
+				{ flagReadMask | GitSHA1qAdr, blankData },
+				{ flagReadMask | GitSHA1rAdr, blankData },
+				{ flagReadMask | GitSHA1sAdr, blankData },
+				{ flagReadMask | GitSHA1tAdr, blankData },
+				{ flagReadMask | CircleAwAdr, blankData },
+				{ flagReadMask | ModeCountAdr, blankData },
+				{ flagReadMask | ModeShiftAdr, blankData },
+				{ flagReadMask | NMechModesAdr, blankData },
+				{ flagReadMask | DfScaleAdr, blankData },
+				{ flagReadMask | SimpleDemoAdr, blankData },
+		};
+		threadArgs.sendBuff = cmocReadAllRegMsg;
+		threadArgs.sendBuffSize = readRegCount + 1;
 	epicsThreadCreate("asynPoller",
 			epicsThreadPriorityMedium,
 			epicsThreadGetStackSize(epicsThreadStackMedium),
-			(EPICSTHREADFUNC)regPollerC, (void *)this);
+			(EPICSTHREADFUNC)regPollerC, (void *)&threadArgs);
 	return asynSuccess;
 }
 
-void scllrfAsynPortDriver::regPoller()
+void scllrfAsynPortDriver::regPoller(FpgaReg *regBuffer, unsigned int regBuffCount)
 {
 	epicsEventWaitStatus status;
     int runStop;
 
-		// A canned request to read all registers
-		static FpgaReg prcReadAllRegMsg[readRegCount + 1] =
-		{
-			{ 0, 0 },
-			{ flagReadMask | HellRAdr, blankData },
-			{ flagReadMask | O_WoRAdr, blankData },
-			{ flagReadMask | RldRAdr, blankData },
-			{ flagReadMask | x0D0A0D0ARAdr, blankData },
-			{ flagReadMask | LlspiStatusRAdr, blankData },
-			{ flagReadMask | LlspiResultRAdr, blankData },
-			{ flagReadMask | FfffffffRAdr, blankData },
-			{ flagReadMask | FrequencyRAdr, blankData },
-			{ flagReadMask | Frequency4XoutRAdr, blankData },
-			{ flagReadMask | FrequencyClkout3RAdr, blankData },
-			{ flagReadMask | FrequencyDcoRAdr, blankData },
-			{ flagReadMask | U2Dout_Lower_32_BitsRAdr, blankData },
-			{ flagReadMask | U2Dout_Upper_32_BitsRAdr, blankData },
-			{ flagReadMask | IdelayValueOutU2Bits19to0RAdr, blankData },
-			{ flagReadMask | IdelayValueOutU2Bits39to20RAdr, blankData },
-			{ flagReadMask | U3Dout_Lower_32_BitsRAdr, blankData },
-			{ flagReadMask | U3Dout_Upper_32_BitsRAdr, blankData },
-			{ flagReadMask | IdelayValueOutU3Bits19to0RAdr, blankData },
-			{ flagReadMask | IdelayValueOutU3Bits39to20RAdr, blankData },
-			{ flagReadMask | Wave0OutRAdr, blankData },
-			{ flagReadMask | Wave1OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave1OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave2OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave3OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave4OutRAdr, blankData },
-			{ flagReadMask | HistStatusRAdr, blankData },
-			{ flagReadMask | PhasexStatusRAdr, blankData },
-			{ flagReadMask | ClkPhaseDiffOutU2RAdr, blankData },
-			{ flagReadMask | ClkPhaseDiffOutU3RAdr, blankData },
-			{ flagReadMask | AdcTestTrigCntRAdr, blankData },
-			{ flagReadMask | WaveformsAvailableRAdr, blankData },
-			{ flagReadMask | BanyanStatusRAdr, blankData },
-			{ flagReadMask | SlowChainOutRAdr, blankData },
-			{ flagReadMask | TraceStatusRAdr, blankData },
-			{ flagReadMask | TraceStatus2RAdr, blankData },
-			{ flagReadMask | Idelay0RAdr, blankData },
-			{ flagReadMask | Idelay1RAdr, blankData },
-			{ flagReadMask | Idelay2RAdr, blankData },
-			{ flagReadMask | Idelay3RAdr, blankData },
-			{ flagReadMask | Idelay4RAdr, blankData },
-			{ flagReadMask | Idelay5RAdr, blankData },
-			{ flagReadMask | Idelay6RAdr, blankData },
-			{ flagReadMask | Idelay7RAdr, blankData },
-			{ flagReadMask | Idelay8RAdr, blankData },
-			{ flagReadMask | Idelay9RAdr, blankData },
-			{ flagReadMask | Idelay10RAdr, blankData },
-			{ flagReadMask | Idelay11RAdr, blankData },
-			{ flagReadMask | Idelay12RAdr, blankData },
-			{ flagReadMask | Idelay13RAdr, blankData },
-			{ flagReadMask | Idelay14RAdr, blankData },
-			{ flagReadMask | Idelay15RAdr, blankData },
-			{ flagReadMask | HwResetRAdr, blankData },
-			{ flagReadMask | PeriphConfigRAdr, blankData },
-			{ flagReadMask | AmplitudeRAdr, blankData },
-			{ flagReadMask | DdsaPhstepHRAdr, blankData },
-			{ flagReadMask | DdsaPhstepLRAdr, blankData },
-			{ flagReadMask | DdsaModuloRAdr, blankData },
-			{ flagReadMask | DacModeRAdr, blankData },
-			{ flagReadMask | Wave0SrcRAdr, blankData },
-			{ flagReadMask | Wave1SrcRAdr, blankData },
-			{ flagReadMask | AdcTestModeRAdr, blankData },
-			{ flagReadMask | PhaseStepHRAdr, blankData },
-			{ flagReadMask | PhaseStepLRAdr, blankData },
-			{ flagReadMask | ModuloRAdr, blankData },
-			{ flagReadMask | CicPeriodRAdr, blankData },
-			{ flagReadMask | CicShiftRAdr, blankData },
-			{ flagReadMask | AverageLenRAdr, blankData },
-			{ flagReadMask | TrigInternalRAdr, blankData },
-			{ flagReadMask | BanyanMaskRAdr, blankData },
-			{ flagReadMask | SyncAd7794CsetRAdr, blankData },
-			{ flagReadMask | SyncTps62210CsetRAdr, blankData },
-			{ flagReadMask | ScannerDebugRAdr, blankData },
-			{ flagReadMask | LoAmpRAdr, blankData },
-			{ flagReadMask | TraceKeepRAdr, blankData },
-			{ flagReadMask | HistDoutRAdr, blankData },
-			{ flagReadMask | PhasexDoutRAdr, blankData },
-			{ flagReadMask | BanyanBufRAdr, blankData },
-			{ flagReadMask | ScannerResultRAdr, blankData },
-		};
-	htonFpgaRegArray(prcReadAllRegMsg, readRegCount + 1);
+	htonFpgaRegArray(regBuffer, regBuffCount);
 
 	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
@@ -1404,10 +1084,6 @@ void scllrfAsynPortDriver::regPoller()
         getIntegerParam(p_RunStop, &runStop);
 		if (runStop == run && pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
 		else               status = epicsEventWait(pollEventId_);
-		////XXXX For loading default values during testing
-		init();
-		////XXXX
-
 		if (status == epicsEventWaitOK) {
 			/* We got an event, rather than a timeout.  This is because other software
 			 ** knows that we should do a poll.
@@ -1416,7 +1092,7 @@ void scllrfAsynPortDriver::regPoller()
 		if (isShuttingDown_) {
 			break;
 		}
-		sendRegRequest(prcReadAllRegMsg, readRegCount + 1);
+		sendRegRequest(regBuffer, regBuffCount);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
 	}
@@ -1872,13 +1548,13 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
 	strGitSHA1.clear();
 	strGitSHA1<<std::hex;
 
-//	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
-//	{
-//		status = (asynStatus) getIntegerParam(i, &oneByte);
-//		strGitSHA1<< std::setw(2) << oneByte;
-//	}
-//	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
-//	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
+	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
+	{
+		status = (asynStatus) getIntegerParam(i, &oneByte);
+		strGitSHA1<< std::setw(2) << oneByte;
+	}
+	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
+	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
 
 	return asynSuccess;
 }

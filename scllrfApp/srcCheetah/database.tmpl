@@ -9,6 +9,7 @@ record(longin, "\$(P):${p.name.upper()}")
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
+<<<<<<< master
     field( PINI, "NO")
     field( DTYP, "asynInt32")
     field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
@@ -39,6 +40,38 @@ record(longout, "\$(P):${p.name.upper()}")
 	field( EGU, "${p.egu}")
 	#end if
     field( PINI, "NO")
+=======
+    field( PINI, "YES")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
+    field( SCAN, "I/O Intr")
+    #if $p.has_key('range_top')
+    field( HOPR, "${p.range_top}")
+    #else if $p.has_key('bit_width')
+    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+    #end if
+    #if $p.has_key('range_bottom')
+    field( LOPR, "${p.range_bottom}")
+    #end if
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+  #end if
+#end for
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this has write access, and isn't a waveofrm
+  #if $p.has_key('access') and $p.access == 'w' and not($p.has_key('nelms') and $p.nelms>1)
+record(longout, "\$(P):${p.name.upper()}")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "YES")
+>>>>>>> 0e7f993 BROKEN start of refactoring for subclassing. segfaults, probably send buffs go out of scope.
     field( DTYP, "asynInt32")
     field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}")
     field( SCAN, "I/O Intr")
@@ -68,7 +101,11 @@ record(waveform, "\$(P):${p.name.upper()}")
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
+<<<<<<< master
     field( PINI, "NO")
+=======
+    field( PINI, "YES")
+>>>>>>> 0e7f993 BROKEN start of refactoring for subclassing. segfaults, probably send buffs go out of scope.
     #if not($p.has_key('access')) or ($p.access == 'r')
       #if $p.has_key('dtype')
         #if $p.dtype == "string"
