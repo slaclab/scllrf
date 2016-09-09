@@ -44,7 +44,6 @@ y 0
 w ${310+310*($regcount//8-1)}
 h 40
 font "helvetica-bold-r-14.0"
-fontAlign "center"
 fgColor index 14
 bgColor index 55
 value {
@@ -74,7 +73,7 @@ endObjectProperties
 #set $xoffset = 0
 #set $yoffset = 0
 
-#for $p in $registers
+#for $p in sorted($registers, key=lambda k: k['name'])
 \# (Static Text)
 object activeXTextClass
 beginObjectProperties

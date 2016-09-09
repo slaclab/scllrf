@@ -1,56 +1,108 @@
-#for $p in $registers
-  #if $p.has_key('nelms')
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: if access is specified it's 'read', and that this isn't a waveform.
+  #if (not($p.has_key('access')) or ($p.access == 'r')) and not(($p.has_key('nelms') and $p.nelms>1))
+record(longin, "\$(P):${p.name.upper()}")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "YES")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
+    field( SCAN, "I/O Intr")
+    #if $p.has_key('range_top')
+    field( HOPR, "${p.range_top}")
+    #else if $p.has_key('bit_width')
+    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+    #end if
+    #if $p.has_key('range_bottom')
+    field( LOPR, "${p.range_bottom}")
+    #end if
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+  #end if
+#end for
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this has write access, and isn't a waveofrm
+  #if $p.has_key('access') and $p.access == 'w' and not($p.has_key('nelms') and $p.nelms>1)
+record(longout, "\$(P):${p.name.upper()}")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "YES")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}")
+    field( SCAN, "I/O Intr")
+    #if $p.has_key('range_top')
+    field( HOPR, "${p.range_top}")
+    #else if $p.has_key('bit_width')
+    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+    #end if
+	#if $p.has_key('range_bottom')
+	field( LOPR, "${p.range_bottom}")
+	#end if
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+  #end if
+#end for
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this is a waveform/array
+  #if $p.has_key('nelms') and $p.nelms>1
 record(waveform, "\$(P):${p.name.upper()}")
 {
-    field(PINI, "YES")
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "YES")
     #if not($p.has_key('access')) or ($p.access == 'r')
       #if $p.has_key('dtype')
         #if $p.dtype == "string"
-    field(DTYP, "asynOctetRead")
-    field(FTVL, "CHAR")
+    field( DTYP, "asynOctetRead")
+    field( FTVL, "CHAR")
         #end if
       #else
-    field(DTYP, "asynInt32ArrayIn")
-    field(FTVL, "ULONG")
+    field( DTYP, "asynInt32ArrayIn")
+    field( FTVL, "ULONG")
       #end if
     #else
       #if $p.has_key('dtype')
         #if $p.dtype == "string"
-    field(DTYP, "asynOctetWrite")
-    field(FTVL, "CHAR")
+    field( DTYP, "asynOctetWrite")
+    field( FTVL, "CHAR")
         #end if
       #else
-    field(DTYP, "asynInt32ArrayOut")
-    field(FTVL, "ULONG")
+    field( DTYP, "asynInt32ArrayOut")
+    field( FTVL, "ULONG")
       #end if
     #end if
-    field(NELM, "${p.nelms}")
-    field(INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
-    field(SCAN, "I/O Intr")
-    info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
+    field( NELM, "${p.nelms}")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
+    #if $p.has_key('range_top')
+    field( HOPR, "${p.range_top}")
+    #else if $p.has_key('bit_width')
+    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+    #end if
+	#if $p.has_key('range_bottom')
+	field( LOPR, "${p.range_bottom}")
+	#end if
+    info( autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-  #else
-    #if not($p.has_key('access')) or ($p.access == 'r')
-record(longin, "\$(P):${p.name.upper()}")
-{
-    field(PINI, "YES")
-    field(DTYP, "asynInt32")
-    field(INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
-    field(SCAN, "I/O Intr")
-    info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-    #else if $p.access == 'w'
-record(longout, "\$(P):${p.name.upper()}")
-{
-    field(PINI, "YES")
-    field(DTYP, "asynInt32")
-    field(OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}")
-    field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
-    info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-    #end if
   #end if
 #end for
 
@@ -58,11 +110,12 @@ record(longout, "\$(P):${p.name.upper()}")
   #for $c in $commands
 record(longout, "\$(P):C_${c.name.upper()}")
 {
-    field(DTYP, "asynInt32")
-    field(OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
-    field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
-    info(autosaveFields, "DESC")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
+    field( SCAN, "I/O Intr")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "DESC")
 }
+
   #end for
 #end if
