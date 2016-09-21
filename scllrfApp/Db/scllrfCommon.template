@@ -1,0 +1,43 @@
+record(ao, "$(P):POLL_PERIOD")
+{
+    field(PINI, "YES")
+    field(DTYP, "asynFloat64")
+    field(OUT,  "@asyn($(PORT),0) POLL_PERIOD")
+    field(SCAN, "Passive")
+    field(PREC, 2)
+    info(asyn:READBACK, "1")
+    info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(bo, "$(P):RUN_STOP")
+{
+    field(PINI, "NO")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),0) RUN_STOP")
+    field(SCAN, "Passive")
+    field(ZNAM, "Stop")
+    field(ONAM, "Run")
+    info(autosaveFields, "VAL DESC HIGH")
+}
+
+record(longout, "$(P):MAX_PARALLEL_REQUESTS")
+{
+    field(PINI, "YES")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),0) MAX_PARALLEL_REQUESTS")
+    field(SCAN, "Passive")
+    info(asyn:READBACK, "1")
+    info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P):COMM_ERROR_COUNT")
+{
+    field(PINI, "YES")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),0) COMM_ERROR_COUNT")
+    field(SCAN, "I/O Intr")
+    info(autosaveFields, "DESC EGUL EGUF SMOO HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+
+

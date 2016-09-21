@@ -12,6 +12,7 @@ include $(TOP)/configure/CONFIG
 # databases, templates, substitutions like this
 DB += cmocRegisters.db
 DB += cmocWaveforms.db
+DB += PRCRegisters.db
 
 # Install Common databases needed by All IOCs
 # ========================================================
