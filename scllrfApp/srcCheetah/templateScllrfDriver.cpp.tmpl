@@ -39,18 +39,10 @@ using namespace std;
  * \paarm[in] nEntries The number of asyn params to be created for each device
  *
  * */
-${name}ScllrfDriver::${name}ScllrfDriver(const char *drvPortName, const char *netPortName)
-: asynPortDriver(drvPortName,
-		wavesCount, /* maxAddr */
-		NUM_${name.upper()}_PARAMS,
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask|asynUInt32DigitalMask, /* Interface mask */
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask,  /* Interrupt mask */
-		1, /* asynFlags.  This driver does block and it is not multi-device, so flag is 1 */
-		1, /* Autoconnect */
-		epicsThreadPriorityMedium,
-		0), /* Default stack size*/
-		isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
-		newWaveAvailable_(0), newWaveRead_ (0), p_RunStop (stop)
+${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
+: scllrfAsynPortDriver(drvPortName, netPortName,
+		1, /* maxAddr, i.e. number of channels */
+		NUM_${name.upper()}_PARAMS)
 {
 	asynStatus status = asynSuccess;
 
@@ -60,30 +52,49 @@ ${name}ScllrfDriver::${name}ScllrfDriver(const char *drvPortName, const char *ne
 #if $p.has_key('nelms')
     createParam(${p.name.title().replace("_", "")}String, asynParamInt32Array, &p_${p.name.title().replace("_", "")});
 #else
-    createParam(${p.name.title().replace("_", "")}String, asynParamInt32, &p_${p.name.title().replace("_", "")});
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+    createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
+    #if $p.has_key("bits")
+      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+	createParam(${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R);
+      #end for
+    #end if
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+    #if $p.has_key("bits")
+      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+    createParam(${p.name.title().replace("_", "")}${field.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}W);
+      #end for
+    #end if
+  #end if
 #end if
 #end for
 
+	// A canned request to read all registers
+    pPolledRegMsg_ = new FpgaReg[readRegCount + 1]
+	{
+			{ 0, 0 },
+#set $prevAdr=-1
+#for $p in sorted($registers, key=lambda k: k['address'])
+#unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
+			{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
+#end unless
+#set $prevAdr = $p.address
+#end for
+	};
+
+	htonFpgaRegArray(pPolledRegMsg_, readRegCount + 1);
+    PolledRegMsgSize_ = readRegCount + 1;
+
     epicsThreadSleep(defaultPollPeriod);
-    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
-
-    status=pasynCommonSyncIO->connect(netPortName, 0, &pCommonAsynUser_, 0);
-    if(status!=asynSuccess)
-    	printf( "%s: connect: failed to connect to port %s with status %d\n",
-    			__PRETTY_FUNCTION__,netPortName, status);
-    else  printf( "%s: connect: %s asynUser \"Common\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName, netPortName);
-
-    status=pasynOctetSyncIO->connect( netPortName,0,&pOctetAsynUser_,0);
-    if(status!=asynSuccess)
-    	printf( "%s: connect: failed to connect to Read port %s with status %d\n",
-    			__PRETTY_FUNCTION__,netPortName, status);
-    else  printf( "%s: connect: %s asynUser \"Octet\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName,netPortName);
+    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS);
 
     wakeupPoller();
     wakeupReader();
 }
 
-${name}ScllrfDriver::~${name}ScllrfDriver()
+${name}Driver::~${name}Driver()
 {
 	isShuttingDown_ = true;
 	epicsThreadSleep(0.1); // Allow threads to run and exit
@@ -104,84 +115,29 @@ ${name}ScllrfDriver::~${name}ScllrfDriver()
   * \param[in] function From pAsynUser->reason, corresponding to a registered parameter.
   * \param[in] pToFpga Pointer to the {Address, Data} structure where the register address will be written
   * \param[in] nElements Number of elements to read. */
-asynStatus ${name}ScllrfDriver::functionToRegister(const int function, FpgaReg *pToFpga)
+asynStatus ${name}Driver::functionToRegister(const int function, FpgaReg *pToFpga)
 {
 	asynStatus status = asynSuccess;
 
-    // Assume this is for a write function, doesn't have to include read only registers (so far)
-#set $first = True
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if $first == True
-    if( function ==  p_${p.name.title().replace("_", "")})
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+    if( function == p_${p.name.title().replace("_", "")}R )
     {
-    #if $p.has_key('access')
-      #if $p.access == "w"
-		pToFpga->addr = ${p.name.title().replace("_", "")}Adr;
-      #else
-		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
-      #end if
-    #else
-		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
-    #end if
+		pToFpga->addr = ${p.name.title().replace("_", "")}RAdr|flagReadMask;
     }
-    #set $first=False
-  #else
-    else if( function == p_${p.name.title().replace("_", "")} )
+    else
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+    if( function == p_${p.name.title().replace("_", "")}W )
     {
-    #if $p.has_key('access')
-      #if $p.access == "w"
-		pToFpga->addr = ${p.name.title().replace("_", "")}Adr;
-      #else
-		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
-      #end if
-    #else
-		pToFpga->addr = ${p.name.title().replace("_", "")}Adr|flagReadMask;
-    #end if
+		pToFpga->addr = ${p.name.title().replace("_", "")}WAdr;
     }
+    else
   #end if
 #end for
-    else
     	status = asynError;
 
     return status;
-}
-
-void ${name}ScllrfDriver::regPoller()
-{
-	epicsEventWaitStatus status;
-	int runStop;
-
-	// A canned request to read all registers
-	static FpgaReg cmocReadAllRegMsg[readRegCount + 1] =
-	{
-			{ 0, 0 },
-#for $p in sorted($registers, key=lambda k: k['address'])
-#unless $p.has_key('access') and $p.access == 'w'
-			{ flagReadMask | ${p.name.title().replace("_", "")}Adr, blankData },
-#end unless
-#end for
-	};
-	htonFpgaRegArray(cmocReadAllRegMsg, readRegCount + 1);
-
-	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
-	while(1) {
-		getDoubleParam(p_PollPeriod, &pollPeriod_);
-		getIntegerParam(p_RunStop, &runStop);
-		if (runStop == run && pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
-		else               status = epicsEventWait(pollEventId_);
-		if (status == epicsEventWaitOK) {
-			/* We got an event, rather than a timeout.  This is because other software
-			 ** knows that we should do a poll.
-			 **/
-		}
-		if (isShuttingDown_) {
-			break;
-		}
-		sendRegRequest(cmocReadAllRegMsg, readRegCount + 1);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
-	}
-	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
 /**  Extract register address and data from the received message and set the appropriate
@@ -193,7 +149,7 @@ void ${name}ScllrfDriver::regPoller()
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 * \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus ${name}ScllrfDriver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
 	unsigned int i;
 	asynStatus status = asynSuccess;
@@ -204,40 +160,46 @@ asynStatus ${name}ScllrfDriver::processRegReadback(const FpgaReg *pFromFpga, boo
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
+#set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
 #if ($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))
-    case ${p.name.title().replace("_", "")}Adr|flagReadMask:
+  #unless ($prevAdr == $p.address)
+    case ${p.name.title().replace("_", "")}RAdr|flagReadMask:
+  #else
+	// shared address with ${p.name.title().replace("_", "")}RAdr
+  #end unless
   #if $p.has_key("bit_width")
     #if $p.has_key("signed") and $p.signed == "signed"
 		signExtBits = pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1)? ~${p.name.title().replace("_", "")}Mask : 0;
 	#end if
-		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")},
+		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}String,
+				${p.name.title().replace("_", "")}RString,
 				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
   #else
-		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")},
+		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}String, (unsigned ) pFromFpga->data);
+				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
   #end if
 #if $p.has_key("bits")
   #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
 
-		status = (asynStatus) setUInt32Param(p_${p.name.title().replace("_", "")}${field.title().replace("_", "")},
-				(pFromFpga->data & ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask));
+		status = (asynStatus) setUIntDigitalParam(p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R,
+				pFromFpga->data, ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}${field.title().replace("_", "")}String,
+				${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString,
 				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask);
   #end for
 #end if
 	break;
 
 #end if
+#set $prevAdr = $p.address
 #end for
 	default:
 		getIntegerParam(p_CommErrorCount, &errorCount);
@@ -260,7 +222,7 @@ asynStatus ${name}ScllrfDriver::processRegReadback(const FpgaReg *pFromFpga, boo
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 * \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus ${name}ScllrfDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
+asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
@@ -272,29 +234,40 @@ asynStatus ${name}ScllrfDriver::processRegWriteResponse(const FpgaReg *pFromFpga
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
+#set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-#if $p.has_key('access')
-  #if $p.access == "w" and (($p.has_key('nelms') and $p.nelms == 1) or not($p.has_key('nelms')))
-    case ${p.name.title().replace("_", "")}Adr:
-		status = (asynStatus) getIntegerParam(p_${p.name.title().replace("_", "")}, valueSet);
-		if( (valueSet[0] & ${p.name.title().replace("_", "")}Mask) == (pFromFpga->data & ${p.name.title().replace("_", "")}Mask))
+  #if $p.has_key("bit_width")
+  #set $maskStr = "& " + $p.name.title().replace("_", "") + "Mask"
+  #else
+  #set $maskStr = ""
+  #end if
+  #if $p.has_key('access')
+    #if ( "w" in $p.access ) and (($p.has_key('nelms') and $p.nelms == 1) or not($p.has_key('nelms')))
+      #unless ($prevAdr == $p.address)
+    case ${p.name.title().replace("_", "")}WAdr:
+      #else
+	// shared address with ${p.name.title().replace("_", "")}WAdr
+      #end unless
+		status = (asynStatus) getIntegerParam(p_${p.name.title().replace("_", "")}W, valueSet);
+		if( (valueSet[0] $maskStr) == (pFromFpga->data $maskStr))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}String, (unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+				${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}String, valueSet[0] & ${p.name.title().replace("_", "")}Mask, (unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+				${p.name.title().replace("_", "")}WString, valueSet[0] $maskStr, (unsigned ) pFromFpga->data $maskStr);
 			status = asynError;
-			setParamStatus(p_${p.name.title().replace("_", "")}, status);
+			setParamStatus(p_${p.name.title().replace("_", "")}W, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
+    #end if
   #end if
-#end if
+  #set $prevAdr = $p.address
 #end for
 	default:
 		getIntegerParam(p_CommErrorCount, &errorCount);
@@ -309,25 +282,7 @@ asynStatus ${name}ScllrfDriver::processRegWriteResponse(const FpgaReg *pFromFpga
     return status;
 }
 
-/** Code for iocsh registration */
-static const iocshArg ${name}CreateArg0 = {"Port name", iocshArgString};
-static const iocshArg ${name}CreateArg1 = {"${name} port name", iocshArgString};
-static const iocshArg * const ${name}CreateArgs[] = {&${name}CreateArg0,
-                                                           &${name}CreateArg1};
-static const iocshFuncDef ${name}CreateDef = {"${name}Create", 2, ${name}CreateArgs};
-static void ${name}CreateContollerCallFunc(const iocshArgBuf *args)
-{
-  ${name}Create(args[0].sval, args[1].sval);
-}
 
-static void ${name}Register(void)
-{
-  iocshRegister(&${name}CreateDef, ${name}CreateContollerCallFunc);
-}
-
-extern "C" {
-epicsExportRegistrar(${name}Register);
-}
 
 extern "C" {
 
@@ -338,7 +293,7 @@ extern "C" {
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
 int ${name}Configure(const char *drvPortName, const char *netPortName)
 {
-	new ${name}(drvPortName, netPortName);
+	new ${name}Driver(drvPortName, netPortName);
 	return asynSuccess;
 }
 

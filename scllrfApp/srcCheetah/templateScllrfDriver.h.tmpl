@@ -24,44 +24,48 @@
  * contained in the LICENSE.txt file.
  * ----------------------------------------------------------------------------
 **/
-\#include <stdlib.h>
-\#include <string.h>
-\#include <stdio.h>
-\#include <stdint.h>
-\#include <sys/types.h>
-\#include <sys/stat.h>
-\#include <iostream>
-\#include <vector>
-
-\#include <epicsTypes.h>
-\#include <epicsThread.h>
-\#include <epicsEvent.h>
-\#include <iocsh.h>
-
-\#include <asynPortDriver.h>
-
-\#include <epicsExport.h>
+\#include "scllrfAsynPortDriver.h"
 
 /* Registers */
 #set $readRegCount = 0
 #set $writeRegCount = 0
+#set $prevWAdrs = []
+#set $prevRAdrs =[]
 #for $p in sorted($registers, key=lambda k: k['name'])
-#if $p.has_key('desc')
+  #if $p.has_key('desc')
 // ${p.desc}
-#end if
-const char *${p.name.title().replace("_", "")}String = "${p.name.upper()}";
-#if $p.has_key('access') and $p.access == 'w'
-#set $writeRegCount +=1
-#else
-#set $readRegCount +=1
-#end if
+  #end if
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
+    #if $p.address not in $prevRAdrs
+      #set $readRegCount +=1
+      #silent $prevRAdrs.append($p.address)
+    #end if
+    #if $p.has_key("bits")
+      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+static const char *${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString = "${p.name.upper()}_${field.upper()}_R";
+      #end for
+    #end if
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+static const char *${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
+    #if $p.address not in $prevWAdrs
+      #set $writeRegCount +=1
+      #silent $prevWAdrs.append($p.address)
+    #end if
+    #if $p.has_key("bits")
+      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+static const char *${p.name.title().replace("_", "")}${field.title().replace("_", "")}WString = "${p.name.upper()}_${field.upper()}_W";
+      #end for
+    #end if
+  #end if
 #end for
 
 const unsigned int readRegCount = $readRegCount;
 const unsigned int writeRegCount = $writeRegCount;
 
-/* Commands */
 #if $varExists('commands')
+/* Commands */
 #for $c in $commands
 #define C${c.name}String "C_${c.name}"
 #end for
@@ -71,7 +75,8 @@ const unsigned int writeRegCount = $writeRegCount;
  /* This class implements the AxiVersion driver. */
 class ${name}Driver : public scllrfAsynPortDriver {
 public:
-    ${name}Driver(const char *portName, Path p, int nelms);
+    ${name}Driver(const char *drvPortName, const char *netPortName);
+    virtual ~${name}Driver();
 
 #if $varExists('commands')
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
@@ -79,18 +84,45 @@ public:
 
 
 protected:
-    ${name} p${name};
+    virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
+	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
+			bool &waveIsReady); // parse register data, write to PVs
+	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 
 #set $first = True
 /* Registers */
 #for $p in sorted($registers, key=lambda k: k['name'])
-    int p_${p.name.title().replace("_", "")};
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+    int p_${p.name.title().replace("_", "")}R;
+    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "R"
     #if $first == True
-    #define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}
+    \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}R
     #set $first = False
     #end if
+    #if $p.has_key("bits")
+      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+    int p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R;
+    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + $field.title().replace("_", "") + "R"
+      #end for
+    #end if
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+    int p_${p.name.title().replace("_", "")}W;
+    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "W"
+    #if $first == True
+    \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}W
+    #set $first = False
+    #end if
+    #if $p.has_key("bits")
+      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+    int p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}W;
+    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + $field.title().replace("_", "") +"W"
+      #end for
+    #end if
+  #end if
 #end for
 #if $varExists('commands')
+
 /* Commands */
 #for $c in $commands
     int p_C_${c.name.title().replace("_", "")};
@@ -98,11 +130,10 @@ protected:
     \#define LAST_${name.upper()}_PARAM p_C_${commands[-1].name.title().replace("_", "")}
 #else
   #set $sortedRegisters = sorted($registers, key=lambda k: k['name'])
-    \#define LAST_${name.upper()}_PARAM p_${$sortedRegisters[-1].name.title().replace("_", "")}
+    \#define LAST_${name.upper()}_PARAM $p_LastParam
 #end if
 
-
-\#define NUM_${name.upper()}_PARAMS (&LAST_${name.upper()}_PARAM - &FIRST_${name.upper()}_PARAM + 1)
+\#define NUM_${name.upper()}_PARAMS (&LAST_${name.upper()}_PARAM - &FIRST_${name.upper()}_PARAM + NUM_SCLLRF_PARAMS + 1)
 
 private:
 #if $varExists('commands')
@@ -116,7 +147,7 @@ private:
     {
 #for $p in sorted($registers, key=lambda k: k['address'])
 #unless $p.has_key('access') and $p.access == 'w'
-    	${p.name.title().replace("_", "")}Adr = 0x${format($p.address, '08X')},
+    	${p.name.title().replace("_", "")}RAdr = 0x${format($p.address, '08X')},
 #end unless
 #end for
     };
@@ -125,8 +156,8 @@ private:
     enum RegWriteAddrs
     {
 #for $p in sorted($registers, key=lambda k: k['address'])
-#if $p.has_key('access') and $p.access == 'w'
-    	${p.name.title().replace("_", "")}Adr = 0x${format($p.address, '08X')},
+#if $p.has_key('access') and ('w' in $p.access )
+    	${p.name.title().replace("_", "")}WAdr = 0x${format($p.address, '08X')},
 #end if
 #end for
     };
@@ -135,20 +166,16 @@ private:
     enum RegMasks
     {
 #for $p in sorted($registers, key=lambda k: k['address'])
-#unless $p.has_key('access') and $p.access == 'w'
-#if $p.has_key('bit_width')
+  #if $p.has_key('bit_width')
     	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
-#end if
-#end unless
+  #end if
+  #if $p.has_key("bits")
+    #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+		${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask = 0x${format($p.bits[$field], '08X')},
+    #end for
+  #end if
 #end for
 
-#for $p in sorted($registers, key=lambda k: k['address'])
-#if $p.has_key('access') and $p.access == 'w'
-#if $p.has_key('bit_width')
-    	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
-#end if
-#end if
-#end for
     };
 };
 

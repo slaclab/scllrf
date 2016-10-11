@@ -35,11 +35,11 @@ def makeAsynDriver(d):
 	print(Template( file='./Makefile.tmpl', searchList = [d] ), file=f)
 	f.close()
 	
-	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'ScllrfDriver.cpp', 'w')
+	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'.cpp', 'w')
 	print(Template( file='./templateScllrfDriver.cpp.tmpl', searchList = [d] ), file=f)
 	f.close()
 	
-	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'ScllrfDriver.h', 'w')
+	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'.h', 'w')
 	print(Template( file='./templateScllrfDriver.h.tmpl', searchList = [d] ), file=f)
 	f.close()
 	

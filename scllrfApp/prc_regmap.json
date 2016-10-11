@@ -1,31 +1,6 @@
 {
 	"write_regmap":{
-		"idelay_value":1
-		,"llspi_we":5
-		,"idelay_ld":11
-		,"bitslip":12
-		,"idelay_U2_1":13
-		,"idelay_U2_2":14
-		,"idelay_U3_1":15
-		,"idelay_U3_2":16
-		,"buf_trig":28
-		,"rewind":30
-		,"adc_test_reset":31
-		,"minmax_reset":32
-		,"U2_clk_reset_r":33
-		,"U3_clk_reset_r":34
-		,"dac_dds_reset":35
-		,"hist_count":36
-		,"idelayctrl_reset_r":37
-		,"U2_iserdes_reset_r":38
-		,"U3_iserdes_reset_r":39
-		,"phasex_trig":40
-		,"rawadc_trig":41
-		,"rawadc_rewind":42
-		,"tag_now":53
-		,"scan_trigger":54
-		,"trace_ctl":55
-		,"sfp_address_set":56
+		"llspi_we":5
 		,"idelay_0":112
 		,"idelay_1":113
 		,"idelay_2":114
@@ -42,33 +17,6 @@
 		,"idelay_13":125
 		,"idelay_14":126
 		,"idelay_15":127
-		,"hw_reset":128
-		,"periph_config":129
-		,"amplitude":130
-		,"ddsa_phstep_h":131
-		,"ddsa_phstep_l":132
-		,"ddsa_modulo":133
-		,"dac_mode":134
-		,"wave0_src":135
-		,"wave1_src":136
-		,"adc_test_mode":137
-		,"phase_step_h":138
-		,"phase_step_l":139
-		,"modulo":140
-		,"cic_period":141
-		,"cic_shift":142
-		,"average_len":143
-		,"trig_internal":144
-		,"banyan_mask":145
-		,"U15_spi_read_r,U15_spi_start_r":146
-		,"U15_spi_data_r,U15_spi_addr_r":147
-		,"U18_spi_read_r,U18_spi_start_r":148
-		,"U18_spi_data_r,U18_spi_addr_r":149
-		,"sync_ad7794_cset":150
-		,"sync_tps62210_cset":151
-		,"scanner_debug":152
-		,"lo_amp":153
-		,"trace_keep":154
 	},
 	"read_regmap": {
 		"Hell": 0
@@ -78,7 +26,7 @@
 		,"llspi_status": 4
 		,"llspi_result": 5
 		,"ffffffff": 7
-		,"frequency": 8
+		,"frequency_adc": 8
 		,"frequency_4xout": 9
 		,"frequency_clkout3": 10
 		,"frequency_dco": 11
@@ -96,13 +44,16 @@
 		,"adc_test_wave2_out": 23
 		,"adc_test_wave3_out": 24
 		,"adc_test_wave4_out": 25
+		,"ctrace_running": 28
+		,"frequency_gtx_tx":29
+		,"frequency_gtx_rx":30
 		,"hist_status": 31
 		,"phasex_status": 46
 		,"clk_phase_diff_out_U2": 47
 		,"clk_phase_diff_out_U3": 48
-		,"U15_sdo_addr,U15_spi_rdbk":56
+		,"U15_sdo_addr, U15_spi_rdbk":56
 		,"U15_spi_ready,U15_sdio_as_sdo":57
-		,"U18_sdo_addr,U18_spi_rdbk":60
+		,"U18_sdo_addr, U18_spi_rdbk":60
 		,"U18_spi_ready,U18_sdio_as_sdo":61
 		,"adc_test_trig_cnt":64
 		,"waveforms_available":65
@@ -126,33 +77,6 @@
 		,"idelay_13":125
 		,"idelay_14":126
 		,"idelay_15":127
-		,"hw_reset":128
-		,"periph_config":129
-		,"amplitude":130
-		,"ddsa_phstep_h":131
-		,"ddsa_phstep_l":132
-		,"ddsa_modulo":133
-		,"dac_mode":134
-		,"wave0_src":135
-		,"wave1_src":136
-		,"adc_test_mode":137
-		,"phase_step_h":138
-		,"phase_step_l":139
-		,"modulo":140
-		,"cic_period":141
-		,"cic_shift":142
-		,"average_len":143
-		,"trig_internal":144
-		,"banyan_mask":145
-		,"U15_spi_read_r,U15_spi_start_r":146
-		,"U15_spi_data_r,U15_spi_addr_r":147
-		,"U18_spi_read_r,U18_spi_start_r":148
-		,"U18_spi_data_r,U18_spi_addr_r":149
-		,"sync_ad7794_cset":150
-		,"sync_tps62210_cset":151
-		,"scanner_debug":152
-		,"lo_amp":153
-		,"trace_keep":154
 		,"hist_dout": 1048576
 		,"phasex_dout": 1114112
 		,"banyan_buf": 1179648

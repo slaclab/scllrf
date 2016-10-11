@@ -72,26 +72,29 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 # The MACRO IOCNAME should be defined via the IOCs top level, "iocStartup.cmd"
 #  found in $IOC/<iocName>/<viocName>/iocStartup.cmd
 # The name must according the SLAC ICD PV naming convention.
-dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC}")
-dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC}")
+#dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC}")
+#dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC}")
 
 # The following database is a result of a python parser
 # which looks at RELEASE_SITE and RELEASE to discover
 # versions of software your IOC is referencing
 # The python parser is part of iocAdmin
-dbLoadRecords("db/iocRelease.db","IOC=${IOC}")
+#dbLoadRecords("db/iocRelease.db","IOC=${IOC}")
 
 # =====================================================================
 # Load database for autosave status
 # =====================================================================
-dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
+#dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
 
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/cmocRegisters.db","P=CMOC,PORT=cmocReg")
-dbLoadRecords("db/cmocWaveforms.db","P=CMOC,PORT=cmocReg")
+dbLoadRecords("db/scllrfCommon.template", "P=RES,PORT=myReg")
+#dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=myReg")
+dbLoadRecords("db/RESRegisters.db","P=RES,PORT=myReg")
+#dbLoadRecords("db/myRegisters.db","P=CMOC,PORT=myReg")
+#dbLoadRecords("db/cmocWaveforms.db","P=CMOC,PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -103,36 +106,36 @@ dbLoadRecords("db/cmocWaveforms.db","P=CMOC,PORT=cmocReg")
 # ============================================================
 # If all PVs don't connect continue anyway
 # ============================================================
-save_restoreSet_IncompleteSetsOk(1)
+#save_restoreSet_IncompleteSetsOk(1)
 
 # ============================================================
 # created save/restore backup files with date string
 # useful for recovery.
 # ============================================================
-save_restoreSet_DatedBackupFiles(1)
+#save_restoreSet_DatedBackupFiles(1)
 
 # ============================================================
 # Where to find the list of PVs to save
 # ============================================================
 # Where "/data" is an NFS mount point setup when linuxRT target 
 # boots up.
-set_requestfile_path("data/${IOC}/autosave-req")
+#set_requestfile_path("data/${IOC}/autosave-req")
 
 # ============================================================
 # Where to write the save files that will be used to restore
 # ============================================================
-set_savefile_path("data/${IOC}/autosave")
+#set_savefile_path("data/${IOC}/autosave")
 
 # ============================================================
 # Prefix that is use to update save/restore status database
 # records
 # ============================================================
-save_restoreSet_UseStatusPVs(1)
-save_restoreSet_status_prefix("${IOC}:")
+#save_restoreSet_UseStatusPVs(1)
+#save_restoreSet_status_prefix("${IOC}:")
 
 ## Restore datasets
-set_pass0_restoreFile("info_settings.sav")
-set_pass1_restoreFile("info_settings.sav")
+#set_pass0_restoreFile("info_settings.sav")
+#set_pass1_restoreFile("info_settings.sav")
 
 # =====================================================================
 # End: Setup autosave/restore
@@ -143,37 +146,37 @@ set_pass1_restoreFile("info_settings.sav")
 # This is required if you use caPutLog.
 # Set access security file
 # Load common LCLS Access Configuration File
-< ${ACF_INIT}
-epicsThreadSleep(1.0)
+#< ${ACF_INIT}
+#epicsThreadSleep(1.0)
 # Set up communication with CMOC
 
 # Echo from cdlx11 configuration for testing
 epicsEnvSet( FPGA_IP, "134.79.216.36")
-drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):7 UDP")
+drvAsynIPPortConfigure("myIP","$(FPGA_IP):7 UDP")
 
 # Real CMOC configuration
 #epicsEnvSet( FPGA_IP, "192.168.1.2")
-#drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):3000 UDP")
+#drvAsynIPPortConfigure("myIP","$(FPGA_IP):3000 UDP")
 
 # ======================================================================
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("cmocIP",-1,ASYN_TRACE_ERROR)
-asynSetTraceMask("cmocIP",-1,0xFF)
-#asynSetTraceIOMask("cmocIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("cmocIP",-1,4)
+#asynSetTraceMask("myIP",-1,ASYN_TRACE_ERROR)
+asynSetTraceMask("myIP",-1,0xFF)
+#asynSetTraceIOMask("myIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("myIP",-1,4)
 
 #epicsThreadSleep(1.0)
-scllrfAsynPortDriverConfigure( "cmocReg","cmocIP")
+scllrfRESConfigure( "myReg","myIP")
 
 # ======================================================================
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("cmocReg",-1,0xFF)
-#asynSetTraceIOMask("cmocReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("cmocReg",-1,4)
+asynSetTraceMask("myReg",-1,0xFF)
+#asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("myReg",-1,4)
 #
 epicsThreadSleep(0.2)
 
@@ -187,8 +190,8 @@ iocInit()
 # =====================================================
 # Turn on caPutLogging:
 # Log values only on change to the iocLogServer:
-caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
-caPutLogShow(2)
+#caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
+#caPutLogShow(2)
 # =====================================================
 
 ## Start any sequence programs
@@ -206,10 +209,10 @@ caPutLogShow(2)
 # and 'info_positions.req', from information (info nodes) contained in all of
 # the EPICS databases that have been loaded into this IOC.
 
-cd("data/${IOC}/autosave-req")
-makeAutosaveFiles()
-cd("../../..")
-create_monitor_set("info_settings.req",60,"")
+#cd("data/${IOC}/autosave-req")
+#makeAutosaveFiles()
+#cd("../../..")
+#create_monitor_set("info_settings.req",60,"")
 
 # ===========================================================================
 
@@ -224,8 +227,10 @@ create_monitor_set("info_settings.req",60,"")
 # An example of using the CEXP Shell:
 # cexpsh("-c",'printf("hello\n")')
 
-asynSetTraceMask("cmocIP",-1,1)
-asynSetTraceMask("cmocReg",-1,1)
+#dbpf SCLLRF:RUN_STOP.HIGH 0.11
+#dbpf SCLLRF:RUN_STOP 1
+dbpf RES:MOTOR1_ACC_W 42
+epicsThreadSleep(0.2)
+asynSetTraceMask("myIP",-1,1)
+asynSetTraceMask("myReg",-1,1)
 
-dbpf CMOC:RUN_STOP.HIGH 0.2
-dbpf CMOC:RUN_STOP 1

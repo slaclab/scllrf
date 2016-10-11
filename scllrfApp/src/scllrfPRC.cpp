@@ -23,7 +23,7 @@
  * ----------------------------------------------------------------------------
 **/
 
-#include "scllrfAsynPortDriver.h"
+#include "scllrfPRC.h"
 #include <asynOctetSyncIO.h>
 #include <asynCommonSyncIO.h>
 #include <limits>
@@ -40,51 +40,47 @@ using namespace std;
  * \paarm[in] nEntries The number of asyn params to be created for each device
  *
  * */
-scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *netPortName)
-: asynPortDriver(drvPortName,
-		wavesCount, /* maxAddr */
-		NUM_CMOC_PARAMS,
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask|asynUInt32DigitalMask, /* Interface mask */
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask,  /* Interrupt mask */
-		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
-		1, /* Autoconnect */
-		epicsThreadPriorityMedium,
-		0), /* Default stack size*/
-		isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
-		newWaveAvailable_(0), newWaveRead_ (0), p_RunStop (stop)
+scllrfPRC::scllrfPRC(const char *drvPortName, const char *netPortName)
+: scllrfAsynPortDriver(drvPortName, netPortName,
+		maxWavesCount, /* maxAddr */
+		NUM_PRC_PARAMS)
 {
-	asynStatus status = asynSuccess;
-
-    /* Create the epicsMutex for locking access to communications counters from other threads */
-    comCountersMutexId_ = epicsMutexCreate();
-    if (!comCountersMutexId_) {
-        printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
-        return;
-    }
-    epicsThreadSleep(defaultPollPeriod);
-
-	createParam(RunStopString, asynParamInt32, &p_RunStop);
-	createParam(MaxParallelRequestsString, asynParamInt32,
-			&p_MaxParallelRequests);
-	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
-	createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
-
-	// Set these early, consider adding interlock for race condition with polling loop.
-    setIntegerParam(p_RunStop, stop);
-    setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
-    setIntegerParam(p_CommErrorCount, 0);
-    setDoubleParam(p_PollPeriod, defaultPollPeriod);
+//	asynStatus status = asynSuccess;
 
     createParam(x0D0A0D0ARString, asynParamInt32, &p_x0D0A0D0AR);
     createParam(HellRString, asynParamInt32, &p_HellR);
+    createParam(U15SdioAsSdoRString, asynParamInt32, &p_U15SdioAsSdoR);
+    createParam(U15SdoAddrRString, asynParamInt32, &p_U15SdoAddrR);
+    createParam(U15SpiAddrRRString, asynParamInt32, &p_U15SpiAddrRR);
+    createParam(U15SpiAddrRWString, asynParamInt32, &p_U15SpiAddrRW);
+    createParam(U15SpiDataRRString, asynParamInt32, &p_U15SpiDataRR);
+    createParam(U15SpiDataRWString, asynParamInt32, &p_U15SpiDataRW);
+    createParam(U15SpiReadRRString, asynParamInt32, &p_U15SpiReadRR);
+    createParam(U15SpiReadRWString, asynParamInt32, &p_U15SpiReadRW);
+    createParam(U15SpiReadyRString, asynParamInt32, &p_U15SpiReadyR);
+    createParam(U15SpiStartRRString, asynParamInt32, &p_U15SpiStartRR);
+    createParam(U15SpiStartRWString, asynParamInt32, &p_U15SpiStartRW);
+    createParam(U18SdioAsSdoRString, asynParamInt32, &p_U18SdioAsSdoR);
+    createParam(U18SdoAddrRString, asynParamInt32, &p_U18SdoAddrR);
+    createParam(U18SpiAddrRRString, asynParamInt32, &p_U18SpiAddrRR);
+    createParam(U18SpiAddrRWString, asynParamInt32, &p_U18SpiAddrRW);
+    createParam(U18SpiDataRRString, asynParamInt32, &p_U18SpiDataRR);
+    createParam(U18SpiDataRWString, asynParamInt32, &p_U18SpiDataRW);
+    createParam(U18SpiReadRRString, asynParamInt32, &p_U18SpiReadRR);
+    createParam(U18SpiReadRWString, asynParamInt32, &p_U18SpiReadRW);
+    createParam(U18SpiReadyRString, asynParamInt32, &p_U18SpiReadyR);
+    createParam(U18SpiStartRRString, asynParamInt32, &p_U18SpiStartRR);
+    createParam(U18SpiStartRWString, asynParamInt32, &p_U18SpiStartRW);
     createParam(U2ClkResetRWString, asynParamInt32, &p_U2ClkResetRW);
     createParam(U2IserdesResetRWString, asynParamInt32, &p_U2IserdesResetRW);
-    createParam(U2Dout_Lower_32_BitsRString, asynParamInt32, &p_U2Dout_Lower_32_BitsR);
-    createParam(U2Dout_Upper_32_BitsRString, asynParamInt32, &p_U2Dout_Upper_32_BitsR);
+    createParam(U2Doutbits31To0RString, asynParamInt32, &p_U2Doutbits31To0R);
+    createParam(U2Doutbits63To32RString, asynParamInt32, &p_U2Doutbits63To32R);
     createParam(U3ClkResetRWString, asynParamInt32, &p_U3ClkResetRW);
     createParam(U3IserdesResetRWString, asynParamInt32, &p_U3IserdesResetRW);
-    createParam(U3Dout_Lower_32_BitsRString, asynParamInt32, &p_U3Dout_Lower_32_BitsR);
-    createParam(U3Dout_Upper_32_BitsRString, asynParamInt32, &p_U3Dout_Upper_32_BitsR);
+    createParam(U3Doutbits31To0RString, asynParamInt32, &p_U3Doutbits31To0R);
+    createParam(U3Doutbits63To32RString, asynParamInt32, &p_U3Doutbits63To32R);
+    createParam(U15SpiRdbkRString, asynParamInt32, &p_U15SpiRdbkR);
+    createParam(U18SpiRdbkRString, asynParamInt32, &p_U18SpiRdbkR);
     createParam(AdcTestModeRString, asynParamInt32, &p_AdcTestModeR);
     createParam(AdcTestModeWString, asynParamInt32, &p_AdcTestModeW);
     createParam(AdcTestResetWString, asynParamInt32, &p_AdcTestResetW);
@@ -165,10 +161,10 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
     createParam(IdelayU31WString, asynParamInt32, &p_IdelayU31W);
     createParam(IdelayU32WString, asynParamInt32, &p_IdelayU32W);
     createParam(IdelayLdWString, asynParamInt32, &p_IdelayLdW);
-    createParam(IdelayValueOutU2Bits19to0RString, asynParamInt32, &p_IdelayValueOutU2Bits19to0R);
-    createParam(IdelayValueOutU2Bits39to20RString, asynParamInt32, &p_IdelayValueOutU2Bits39to20R);
-    createParam(IdelayValueOutU3Bits19to0RString, asynParamInt32, &p_IdelayValueOutU3Bits19to0R);
-    createParam(IdelayValueOutU3Bits39to20RString, asynParamInt32, &p_IdelayValueOutU3Bits39to20R);
+    createParam(IdelayValueOutU2Bits19To0RString, asynParamInt32, &p_IdelayValueOutU2Bits19To0R);
+    createParam(IdelayValueOutU2Bits39To20RString, asynParamInt32, &p_IdelayValueOutU2Bits39To20R);
+    createParam(IdelayValueOutU3Bits19To0RString, asynParamInt32, &p_IdelayValueOutU3Bits19To0R);
+    createParam(IdelayValueOutU3Bits39To20RString, asynParamInt32, &p_IdelayValueOutU3Bits39To20R);
     createParam(IdelayValueWString, asynParamInt32, &p_IdelayValueW);
     createParam(IdelayctrlResetRWString, asynParamInt32, &p_IdelayctrlResetRW);
     createParam(LlspiResultRString, asynParamInt32, &p_LlspiResultR);
@@ -204,9 +200,8 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
     createParam(SyncTps62210CsetRString, asynParamInt32, &p_SyncTps62210CsetR);
     createParam(SyncTps62210CsetWString, asynParamInt32, &p_SyncTps62210CsetW);
     createParam(TagNowWString, asynParamInt32, &p_TagNowW);
-    createParam(TraceCtlWString, asynParamInt32, &p_TraceCtlW);
-    createParam(TraceKeepRString, asynParamInt32, &p_TraceKeepR);
-    createParam(TraceKeepWString, asynParamInt32, &p_TraceKeepW);
+    createParam(TraceKeepRString, asynParamUInt32Digital, &p_TraceKeepR);
+    createParam(TraceKeepWString, asynParamUInt32Digital, &p_TraceKeepW);
     createParam(TraceStatus2RString, asynParamInt32, &p_TraceStatus2R);
     createParam(TraceStatusRString, asynParamInt32, &p_TraceStatusR);
     createParam(TrigInternalRString, asynParamInt32, &p_TrigInternalR);
@@ -221,42 +216,107 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 
     createParam(WaveformString, asynParamInt32Array, &p_Waveform);
 
+	// A canned request to read all registers
+    pPolledRegMsg_ = new FpgaReg[readRegCount + 1]
+	{
+		{ 0, 0 },
+		{ flagReadMask | HellRAdr, blankData },
+		{ flagReadMask | O_WoRAdr, blankData },
+		{ flagReadMask | RldRAdr, blankData },
+		{ flagReadMask | x0D0A0D0ARAdr, blankData },
+		{ flagReadMask | LlspiStatusRAdr, blankData },
+		{ flagReadMask | LlspiResultRAdr, blankData },
+		{ flagReadMask | FfffffffRAdr, blankData },
+		{ flagReadMask | FrequencyRAdr, blankData },
+		{ flagReadMask | Frequency4XoutRAdr, blankData },
+		{ flagReadMask | FrequencyClkout3RAdr, blankData },
+		{ flagReadMask | FrequencyDcoRAdr, blankData },
+		{ flagReadMask | U2Doutbits31To0RAdr, blankData },
+		{ flagReadMask | U2Doutbits63To32RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU2Bits19To0RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU2Bits39To20RAdr, blankData },
+		{ flagReadMask | U3Doutbits31To0RAdr, blankData },
+		{ flagReadMask | U3Doutbits63To32RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU3Bits19To0RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU3Bits39To20RAdr, blankData },
+		{ flagReadMask | Wave0OutRAdr, blankData },
+		{ flagReadMask | Wave1OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave1OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave2OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave3OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave4OutRAdr, blankData },
+		{ flagReadMask | HistStatusRAdr, blankData },
+		{ flagReadMask | PhasexStatusRAdr, blankData },
+		{ flagReadMask | ClkPhaseDiffOutU2RAdr, blankData },
+		{ flagReadMask | ClkPhaseDiffOutU3RAdr, blankData },
+		{ flagReadMask | AdcTestTrigCntRAdr, blankData },
+		{ flagReadMask | WaveformsAvailableRAdr, blankData },
+		{ flagReadMask | BanyanStatusRAdr, blankData },
+		{ flagReadMask | SlowChainOutRAdr, blankData },
+		{ flagReadMask | TraceKeepRAdr, blankData }, // Needs to go before TraceStatus for waveform decoding
+		{ flagReadMask | TraceStatusRAdr, blankData },
+		{ flagReadMask | TraceStatus2RAdr, blankData },
+		{ flagReadMask | Idelay0RAdr, blankData },
+		{ flagReadMask | Idelay1RAdr, blankData },
+		{ flagReadMask | Idelay2RAdr, blankData },
+		{ flagReadMask | Idelay3RAdr, blankData },
+		{ flagReadMask | Idelay4RAdr, blankData },
+		{ flagReadMask | Idelay5RAdr, blankData },
+		{ flagReadMask | Idelay6RAdr, blankData },
+		{ flagReadMask | Idelay7RAdr, blankData },
+		{ flagReadMask | Idelay8RAdr, blankData },
+		{ flagReadMask | Idelay9RAdr, blankData },
+		{ flagReadMask | Idelay10RAdr, blankData },
+		{ flagReadMask | Idelay11RAdr, blankData },
+		{ flagReadMask | Idelay12RAdr, blankData },
+		{ flagReadMask | Idelay13RAdr, blankData },
+		{ flagReadMask | Idelay14RAdr, blankData },
+		{ flagReadMask | Idelay15RAdr, blankData },
+		{ flagReadMask | HwResetRAdr, blankData },
+		{ flagReadMask | PeriphConfigRAdr, blankData },
+		{ flagReadMask | AmplitudeRAdr, blankData },
+		{ flagReadMask | DdsaPhstepHRAdr, blankData },
+		{ flagReadMask | DdsaPhstepLRAdr, blankData },
+		{ flagReadMask | DdsaModuloRAdr, blankData },
+		{ flagReadMask | DacModeRAdr, blankData },
+		{ flagReadMask | Wave0SrcRAdr, blankData },
+		{ flagReadMask | Wave1SrcRAdr, blankData },
+		{ flagReadMask | AdcTestModeRAdr, blankData },
+		{ flagReadMask | PhaseStepHRAdr, blankData },
+		{ flagReadMask | PhaseStepLRAdr, blankData },
+		{ flagReadMask | ModuloRAdr, blankData },
+		{ flagReadMask | CicPeriodRAdr, blankData },
+		{ flagReadMask | CicShiftRAdr, blankData },
+		{ flagReadMask | AverageLenRAdr, blankData },
+		{ flagReadMask | TrigInternalRAdr, blankData },
+		{ flagReadMask | BanyanMaskRAdr, blankData },
+		{ flagReadMask | SyncAd7794CsetRAdr, blankData },
+		{ flagReadMask | SyncTps62210CsetRAdr, blankData },
+		{ flagReadMask | ScannerDebugRAdr, blankData },
+		{ flagReadMask | LoAmpRAdr, blankData },
+		{ flagReadMask | HistDoutRAdr, blankData },
+		{ flagReadMask | PhasexDoutRAdr, blankData },
+		{ flagReadMask | BanyanBufRAdr, blankData },
+		{ flagReadMask | ScannerResultRAdr, blankData },
+	};
+    printf("\n%s calling htonFpgaRegArray for %u registers\n", __PRETTY_FUNCTION__, readRegCount +1 );
+    htonFpgaRegArray(pPolledRegMsg_, readRegCount + 1);
+    PolledRegMsgSize_ = readRegCount + 1;
+
     epicsThreadSleep(defaultPollPeriod);
 
-    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_CMOC_PARAMS);
-
-	status=pasynCommonSyncIO->connect(netPortName, 0, &pCommonAsynUser_, 0);
-	if(status!=asynSuccess)
-		printf( "%s: connect: failed to connect to port %s with status %d\n",
-				__PRETTY_FUNCTION__,netPortName, status);
-	else  printf( "%s: connect: %s asynUser \"Common\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName, netPortName);
-
-	status=pasynOctetSyncIO->connect( netPortName,0,&pOctetAsynUser_,0);
-	if(status!=asynSuccess)
-		printf( "%s: connect: failed to connect to Read port %s with status %d\n",
-				__PRETTY_FUNCTION__,netPortName, status);
-	else  printf( "%s: connect: %s asynUser \"Octet\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName,netPortName);
-
-    // The createParam calls are queued up rather than executed right away, so
-    // give them a chance to be created before we start writing to them.
-    // TODO: Is there a way to check that the params were finished being created?
-    epicsThreadSleep(defaultPollPeriod);
-
-	readEventId_ = epicsEventMustCreate(epicsEventEmpty);
-	startResponseHandler();
+    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_PRC_PARAMS);
 
 	reqWaveEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startWaveformRequester();
 
     epicsThreadSleep(defaultPollPeriod);
 
-	pollEventId_ = epicsEventMustCreate(epicsEventEmpty);
-	startPoller(defaultPollPeriod);
-
     printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 }
-void scllrfAsynPortDriver::init()
+void scllrfPRC::init()
 {
+	return;
 	// A canned request to initialize the prc
 			FpgaReg prcInitAllRegMsg[142] =
 			{
@@ -544,6 +604,8 @@ void scllrfAsynPortDriver::init()
 	//U15_spi_read_r,U15_spi_start_r
 				{ 0x92, 0x3 }
 			};
+    printf("\n%s calling htonFpgaRegArray for %u registers\n", __PRETTY_FUNCTION__, 142 );
+
 			htonFpgaRegArray(prcInitAllRegMsg, 142);
 
 			sendRegRequest(prcInitAllRegMsg, 142);
@@ -552,7 +614,7 @@ void scllrfAsynPortDriver::init()
 
 }
 
-scllrfAsynPortDriver::~scllrfAsynPortDriver()
+scllrfPRC::~scllrfPRC()
 {
 	isShuttingDown_ = true;
 	epicsThreadSleep(0.1); // Allow threads to run and exit
@@ -575,7 +637,7 @@ scllrfAsynPortDriver::~scllrfAsynPortDriver()
   * \param[in] function From pAsynUser->reason, corresponding to a registered parameter.
   * \param[in] pToFpga Pointer to the {Address, Data} structure where the register address will be written
   * \param[in] nElements Number of elements to read. */
-asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
+asynStatus scllrfPRC::functionToRegister(const int function,
 		FpgaReg *pToFpga)
 {
 	asynStatus status = asynSuccess;
@@ -589,6 +651,94 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
     {
 		pToFpga->addr = HellRAdr|flagReadMask;
     }
+    else if( function == p_U15SdioAsSdoR )
+    {
+		pToFpga->addr = U15SdioAsSdoRAdr|flagReadMask;
+    }
+    else if( function == p_U15SdoAddrR )
+    {
+		pToFpga->addr = U15SdoAddrRAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiAddrRR )
+    {
+		pToFpga->addr = U15SpiAddrRRAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiAddrRW )
+    {
+		pToFpga->addr = U15SpiAddrRWAdr;
+    }
+    else if( function == p_U15SpiDataRR )
+    {
+		pToFpga->addr = U15SpiDataRRAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiDataRW )
+    {
+		pToFpga->addr = U15SpiDataRWAdr;
+    }
+    else if( function == p_U15SpiReadRR )
+    {
+		pToFpga->addr = U15SpiReadRRAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiReadRW )
+    {
+		pToFpga->addr = U15SpiReadRWAdr;
+    }
+    else if( function == p_U15SpiReadyR )
+    {
+		pToFpga->addr = U15SpiReadyRAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiStartRR )
+    {
+		pToFpga->addr = U15SpiStartRRAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiStartRW )
+    {
+		pToFpga->addr = U15SpiStartRWAdr;
+    }
+    else if( function == p_U18SdioAsSdoR )
+    {
+		pToFpga->addr = U18SdioAsSdoRAdr|flagReadMask;
+    }
+    else if( function == p_U18SdoAddrR )
+    {
+		pToFpga->addr = U18SdoAddrRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiAddrRR )
+    {
+		pToFpga->addr = U18SpiAddrRRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiAddrRW )
+    {
+		pToFpga->addr = U18SpiAddrRWAdr;
+    }
+    else if( function == p_U18SpiDataRR )
+    {
+		pToFpga->addr = U18SpiDataRRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiDataRW )
+    {
+		pToFpga->addr = U18SpiDataRWAdr;
+    }
+    else if( function == p_U18SpiReadRR )
+    {
+		pToFpga->addr = U18SpiReadRRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiReadRW )
+    {
+		pToFpga->addr = U18SpiReadRWAdr;
+    }
+    else if( function == p_U18SpiReadyR )
+    {
+		pToFpga->addr = U18SpiReadyRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiStartRR )
+    {
+		pToFpga->addr = U18SpiStartRRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiStartRW )
+    {
+		pToFpga->addr = U18SpiStartRWAdr;
+    }
     else if( function == p_U2ClkResetRW )
     {
 		pToFpga->addr = U2ClkResetRWAdr;
@@ -597,13 +747,13 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
     {
 		pToFpga->addr = U2IserdesResetRWAdr;
     }
-    else if( function == p_U2Dout_Lower_32_BitsR )
+    else if( function == p_U2Doutbits31To0R )
     {
-		pToFpga->addr = U2Dout_Lower_32_BitsRAdr|flagReadMask;
+		pToFpga->addr = U2Doutbits31To0RAdr|flagReadMask;
     }
-    else if( function == p_U2Dout_Upper_32_BitsR )
+    else if( function == p_U2Doutbits63To32R )
     {
-		pToFpga->addr = U2Dout_Upper_32_BitsRAdr|flagReadMask;
+		pToFpga->addr = U2Doutbits63To32RAdr|flagReadMask;
     }
     else if( function == p_U3ClkResetRW )
     {
@@ -613,13 +763,21 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
     {
 		pToFpga->addr = U3IserdesResetRWAdr;
     }
-    else if( function == p_U3Dout_Lower_32_BitsR )
+    else if( function == p_U3Doutbits31To0R )
     {
-		pToFpga->addr = U3Dout_Lower_32_BitsRAdr|flagReadMask;
+		pToFpga->addr = U3Doutbits31To0RAdr|flagReadMask;
     }
-    else if( function == p_U3Dout_Upper_32_BitsR )
+    else if( function == p_U3Doutbits63To32R )
     {
-		pToFpga->addr = U3Dout_Upper_32_BitsRAdr|flagReadMask;
+		pToFpga->addr = U3Doutbits63To32RAdr|flagReadMask;
+    }
+    else if( function == p_U15SpiRdbkR )
+    {
+		pToFpga->addr = U15SpiRdbkRAdr|flagReadMask;
+    }
+    else if( function == p_U18SpiRdbkR )
+    {
+		pToFpga->addr = U18SpiRdbkRAdr|flagReadMask;
     }
     else if( function == p_AdcTestModeR )
     {
@@ -941,21 +1099,21 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
     {
 		pToFpga->addr = IdelayLdWAdr;
     }
-    else if( function == p_IdelayValueOutU2Bits19to0R )
+    else if( function == p_IdelayValueOutU2Bits19To0R )
     {
-		pToFpga->addr = IdelayValueOutU2Bits19to0RAdr|flagReadMask;
+		pToFpga->addr = IdelayValueOutU2Bits19To0RAdr|flagReadMask;
     }
-    else if( function == p_IdelayValueOutU2Bits39to20R )
+    else if( function == p_IdelayValueOutU2Bits39To20R )
     {
-		pToFpga->addr = IdelayValueOutU2Bits39to20RAdr|flagReadMask;
+		pToFpga->addr = IdelayValueOutU2Bits39To20RAdr|flagReadMask;
     }
-    else if( function == p_IdelayValueOutU3Bits19to0R )
+    else if( function == p_IdelayValueOutU3Bits19To0R )
     {
-		pToFpga->addr = IdelayValueOutU3Bits19to0RAdr|flagReadMask;
+		pToFpga->addr = IdelayValueOutU3Bits19To0RAdr|flagReadMask;
     }
-    else if( function == p_IdelayValueOutU3Bits39to20R )
+    else if( function == p_IdelayValueOutU3Bits39To20R )
     {
-		pToFpga->addr = IdelayValueOutU3Bits39to20RAdr|flagReadMask;
+		pToFpga->addr = IdelayValueOutU3Bits39To20RAdr|flagReadMask;
     }
     else if( function == p_IdelayValueW )
     {
@@ -1097,17 +1255,15 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
     {
 		pToFpga->addr = TagNowWAdr;
     }
-    else if( function == p_TraceCtlW )
-    {
-		pToFpga->addr = TraceCtlWAdr;
-    }
     else if( function == p_TraceKeepR )
     {
 		pToFpga->addr = TraceKeepRAdr|flagReadMask;
+	    printf("%s got address 0x%x for TraceKeepRAdr\n",__PRETTY_FUNCTION__,pToFpga->addr);
     }
     else if( function == p_TraceKeepW )
     {
 		pToFpga->addr = TraceKeepWAdr;
+	    printf("%s got address 0x%x for TraceKeepWAdr\n",__PRETTY_FUNCTION__,pToFpga->addr);
     }
     else if( function == p_TraceStatus2R )
     {
@@ -1163,13 +1319,13 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
 /** Called when asyn clients call pasynInt32->read().
  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
  * \param[in] value Pointer to the value to read. */
-asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
+asynStatus scllrfPRC::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[2];
+//    FpgaReg regSendBuf[2];
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
@@ -1178,21 +1334,10 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
+    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, %s, set to %d\n",
+			__PRETTY_FUNCTION__, function, paramName, value);
 
-    if (function == p_RunStop) {
-        if (value == run)
-        	epicsEventSignal(pollEventId_);
-    }
-    else {
-    	// Convert function to address & FpgaReg.
-    	status = functionToRegister(function, &regSendBuf[1]);
-    	if (status == asynSuccess) // Yes, this function is a register write
-    	{
-    		regSendBuf[1].data = (uint32_t) value;
-        	htonFpgaRegArray(regSendBuf, 2);
-        	sendRegRequest(regSendBuf, 2);
-    	}
-    }
+    scllrfAsynPortDriver::writeInt32(pasynUser, value);
 
 	/* Do callbacks so higher layers see any changes */
 	status = (asynStatus) callParamCallbacks();
@@ -1203,7 +1348,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 				  __PRETTY_FUNCTION__, status, function, paramName, value);
     else
         asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-              "%s: function=%d, name=%s, value=%d\n",
+              "<-- %s: function=%d, name=%s, value=%d\n",
 			  __PRETTY_FUNCTION__, function, paramName, value);
     return status;
 }
@@ -1214,7 +1359,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
   * \param[in] pasynUser pasynUser structure that encodes the reason and address.
   * \param[in] value Pointer to the array to write.
   * \param[in] nElements Number of elements to write. */
-asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
+asynStatus scllrfPRC::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
                                 size_t nElements)
 {
 	int function = pasynUser->reason;
@@ -1258,7 +1403,8 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 		// it up into chunks and send each chunk individually
 		if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
 		{
-			htonFpgaRegArray(regSendBuf, uOutBuffIndex);
+			printf("\n%s calling htonFpgaRegArray for %u registers\n", __PRETTY_FUNCTION__, uOutBuffIndex );
+                        htonFpgaRegArray(regSendBuf, uOutBuffIndex);
 			sendRegRequest(regSendBuf, uOutBuffIndex+1);
 
 			if (status)
@@ -1271,6 +1417,7 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 			uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
 		}
 	}
+        printf("\n%s calling htonFpgaRegArray for %u registers\n", __PRETTY_FUNCTION__, uOutBuffIndex );
 
 	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
 	sendRegRequest(regSendBuf, uOutBuffIndex+1);
@@ -1288,216 +1435,16 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 
 static void regPollerC(void *drvPvt)
 {
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	scllrfPRC *pscllrfDriver = (scllrfPRC*)drvPvt;
 	pscllrfDriver->regPoller();
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
-
-/** Starts the poller thread.
- ** Derived classes will typically call this at near the end of their constructor.
- ** Derived classes can typically use the base class implementation of the poller thread,
- ** but are free to re-implement it if necessary.
- ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startPoller(double pollPeriod)
-{
-	pollPeriod_ = pollPeriod;
-	epicsThreadCreate("asynPoller",
-			epicsThreadPriorityMedium,
-			epicsThreadGetStackSize(epicsThreadStackMedium),
-			(EPICSTHREADFUNC)regPollerC, (void *)this);
-	return asynSuccess;
-}
-
-void scllrfAsynPortDriver::regPoller()
-{
-	epicsEventWaitStatus status;
-    int runStop;
-
-		// A canned request to read all registers
-		static FpgaReg prcReadAllRegMsg[readRegCount + 1] =
-		{
-			{ 0, 0 },
-			{ flagReadMask | HellRAdr, blankData },
-			{ flagReadMask | O_WoRAdr, blankData },
-			{ flagReadMask | RldRAdr, blankData },
-			{ flagReadMask | x0D0A0D0ARAdr, blankData },
-			{ flagReadMask | LlspiStatusRAdr, blankData },
-			{ flagReadMask | LlspiResultRAdr, blankData },
-			{ flagReadMask | FfffffffRAdr, blankData },
-			{ flagReadMask | FrequencyRAdr, blankData },
-			{ flagReadMask | Frequency4XoutRAdr, blankData },
-			{ flagReadMask | FrequencyClkout3RAdr, blankData },
-			{ flagReadMask | FrequencyDcoRAdr, blankData },
-			{ flagReadMask | U2Dout_Lower_32_BitsRAdr, blankData },
-			{ flagReadMask | U2Dout_Upper_32_BitsRAdr, blankData },
-			{ flagReadMask | IdelayValueOutU2Bits19to0RAdr, blankData },
-			{ flagReadMask | IdelayValueOutU2Bits39to20RAdr, blankData },
-			{ flagReadMask | U3Dout_Lower_32_BitsRAdr, blankData },
-			{ flagReadMask | U3Dout_Upper_32_BitsRAdr, blankData },
-			{ flagReadMask | IdelayValueOutU3Bits19to0RAdr, blankData },
-			{ flagReadMask | IdelayValueOutU3Bits39to20RAdr, blankData },
-			{ flagReadMask | Wave0OutRAdr, blankData },
-			{ flagReadMask | Wave1OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave1OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave2OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave3OutRAdr, blankData },
-			{ flagReadMask | AdcTestWave4OutRAdr, blankData },
-			{ flagReadMask | HistStatusRAdr, blankData },
-			{ flagReadMask | PhasexStatusRAdr, blankData },
-			{ flagReadMask | ClkPhaseDiffOutU2RAdr, blankData },
-			{ flagReadMask | ClkPhaseDiffOutU3RAdr, blankData },
-			{ flagReadMask | AdcTestTrigCntRAdr, blankData },
-			{ flagReadMask | WaveformsAvailableRAdr, blankData },
-			{ flagReadMask | BanyanStatusRAdr, blankData },
-			{ flagReadMask | SlowChainOutRAdr, blankData },
-			{ flagReadMask | TraceStatusRAdr, blankData },
-			{ flagReadMask | TraceStatus2RAdr, blankData },
-			{ flagReadMask | Idelay0RAdr, blankData },
-			{ flagReadMask | Idelay1RAdr, blankData },
-			{ flagReadMask | Idelay2RAdr, blankData },
-			{ flagReadMask | Idelay3RAdr, blankData },
-			{ flagReadMask | Idelay4RAdr, blankData },
-			{ flagReadMask | Idelay5RAdr, blankData },
-			{ flagReadMask | Idelay6RAdr, blankData },
-			{ flagReadMask | Idelay7RAdr, blankData },
-			{ flagReadMask | Idelay8RAdr, blankData },
-			{ flagReadMask | Idelay9RAdr, blankData },
-			{ flagReadMask | Idelay10RAdr, blankData },
-			{ flagReadMask | Idelay11RAdr, blankData },
-			{ flagReadMask | Idelay12RAdr, blankData },
-			{ flagReadMask | Idelay13RAdr, blankData },
-			{ flagReadMask | Idelay14RAdr, blankData },
-			{ flagReadMask | Idelay15RAdr, blankData },
-			{ flagReadMask | HwResetRAdr, blankData },
-			{ flagReadMask | PeriphConfigRAdr, blankData },
-			{ flagReadMask | AmplitudeRAdr, blankData },
-			{ flagReadMask | DdsaPhstepHRAdr, blankData },
-			{ flagReadMask | DdsaPhstepLRAdr, blankData },
-			{ flagReadMask | DdsaModuloRAdr, blankData },
-			{ flagReadMask | DacModeRAdr, blankData },
-			{ flagReadMask | Wave0SrcRAdr, blankData },
-			{ flagReadMask | Wave1SrcRAdr, blankData },
-			{ flagReadMask | AdcTestModeRAdr, blankData },
-			{ flagReadMask | PhaseStepHRAdr, blankData },
-			{ flagReadMask | PhaseStepLRAdr, blankData },
-			{ flagReadMask | ModuloRAdr, blankData },
-			{ flagReadMask | CicPeriodRAdr, blankData },
-			{ flagReadMask | CicShiftRAdr, blankData },
-			{ flagReadMask | AverageLenRAdr, blankData },
-			{ flagReadMask | TrigInternalRAdr, blankData },
-			{ flagReadMask | BanyanMaskRAdr, blankData },
-			{ flagReadMask | SyncAd7794CsetRAdr, blankData },
-			{ flagReadMask | SyncTps62210CsetRAdr, blankData },
-			{ flagReadMask | ScannerDebugRAdr, blankData },
-			{ flagReadMask | LoAmpRAdr, blankData },
-			{ flagReadMask | TraceKeepRAdr, blankData },
-			{ flagReadMask | HistDoutRAdr, blankData },
-			{ flagReadMask | PhasexDoutRAdr, blankData },
-			{ flagReadMask | BanyanBufRAdr, blankData },
-			{ flagReadMask | ScannerResultRAdr, blankData },
-		};
-	htonFpgaRegArray(prcReadAllRegMsg, readRegCount + 1);
-
-	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
-	while(1) {
-		getDoubleParam(p_PollPeriod, &pollPeriod_);
-        getIntegerParam(p_RunStop, &runStop);
-		if (runStop == run && pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
-		else               status = epicsEventWait(pollEventId_);
-		////XXXX For loading default values during testing
-		init();
-		////XXXX
-
-		if (status == epicsEventWaitOK) {
-			/* We got an event, rather than a timeout.  This is because other software
-			 ** knows that we should do a poll.
-			 **/
-		}
-		if (isShuttingDown_) {
-			break;
-		}
-		sendRegRequest(prcReadAllRegMsg, readRegCount + 1);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
-	}
-	printf("%s: exiting\n", __PRETTY_FUNCTION__);
-}
-
-/** Wakes up the poller thread to make it start polling. */
-asynStatus scllrfAsynPortDriver::wakeupPoller()
-{
-	epicsEventSignal(pollEventId_);
-	return asynSuccess;
-}
-
-/** Polls the device
-  * \param[in] regBuffer array of FpgaReg messages in network byte order.
-  * Note that the first "register" regBuffer[0] is really the nonce, not data.
-  * This function will set the nonce before sending.
-  * Other than the nonce, data in the array is not changed. This reduces the
-  * processing required, since most messages are canned and repeated at regular intervals.
-  * \param[in] regBuffCount is the number of FpgaReg type elements, including the nonce
- **  */
-asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount)
-{
-	assert(regBuffer != NULL);
-	assert(regBuffCount >= 2);
-	size_t writtenCount;
-	epicsInt32 errorCount;
-	asynStatus status = asynSuccess;
-	epicsMutexLockStatus mutexStatus;
-	char * pWriteBuffer;
-	pWriteBuffer = reinterpret_cast<char*>(regBuffer);
-	int maxParallelRequests;
-	getIntegerParam(p_MaxParallelRequests, &maxParallelRequests);
-
-	// Throttle so that we don't overflow buffers if response handling falls behind
-	if( netWaitingRequests_ > (unsigned) maxParallelRequests )
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: too many requests waiting for responses (%u), throttling requests.\n",__PRETTY_FUNCTION__, maxParallelRequests);
-	while( netWaitingRequests_ > (unsigned) maxParallelRequests )
-	{
-		if (isShuttingDown_)
-		{
-			return asynDisconnected;
-		}
-		epicsThreadSleep(throttleLoopDelay);
-	}
-
-	mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
-	++netSendCount_; // increment and roll over if needed
-	// use the nonce at the start of the buffer for register count, and
-	// send counter. Can be used for error checking.
-	regBuffer[0] = (FpgaReg)
-							{ (uint32_t) htonl(netSendCount_), (int32_t) htonl(regBuffCount*sizeof(FpgaReg)) };
-
-	status = pasynOctetSyncIO->write(pOctetAsynUser_, pWriteBuffer,
-			regBuffCount*sizeof(FpgaReg), writeTimeout, &writtenCount);
-	if (status != asynSuccess)
-	{
-		asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,"%s: failed to write. %s\n", __PRETTY_FUNCTION__,
-				pOctetAsynUser_->errorMessage);
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, errorCount + 1);
-		callParamCallbacks();
-	}
-	else
-	{
-		++netWaitingRequests_;
-	}
-	epicsMutexUnlock(comCountersMutexId_);
-	epicsThreadSleep(0); // to allow other threads to take the CPU
-	wakeupReader();
-
-	return asynSuccess;
-}
-
 
 
 static void waveformRequesterC(void *drvPvt)
 {
 	printf("%s: starting\n", __PRETTY_FUNCTION__);
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	scllrfPRC *pscllrfDriver = (scllrfPRC*)drvPvt;
 	pscllrfDriver->waveformRequester();
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -1507,7 +1454,7 @@ static void waveformRequesterC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startWaveformRequester()
+asynStatus scllrfPRC::startWaveformRequester()
 {
 	epicsThreadCreate("waveformRequester",
 			epicsThreadPriorityMedium,
@@ -1516,42 +1463,131 @@ asynStatus scllrfAsynPortDriver::startWaveformRequester()
 	return asynSuccess;
 }
 
-void scllrfAsynPortDriver::waveformRequester()
+void scllrfPRC::fillWavReqMsg()
+{
+	int i, segmentNum, segmentOffset;
+	unsigned int addr, segStartAddr = wavesStart;
+	FpgaReg reqWaveMsg[waveSegmentCount][waveSegmentSize];
+
+	for(i = 0; i<4; i++)
+	{
+		segmentNum = 0;
+		segmentOffset = 1; // Start data past the nonce
+		reqWaveMsg[segmentNum][0] = {0,0};
+		printf("\n%s filling waveform request %d: [%u][%u]={0x%x,0x%x}", __PRETTY_FUNCTION__, i, segmentNum, segmentOffset,
+				addr, reqWaveMsg[segmentNum][0].data);
+		for (addr = segStartAddr; addr < segStartAddr+npt_; addr++, segmentOffset++)
+		{
+			reqWaveMsg[segmentNum][segmentOffset].addr = (uint32_t) (addr | flagReadMask);
+			reqWaveMsg[segmentNum][segmentOffset].data = blankData + addr;
+			printf(", [%u][%u]={0x%x,0x%x}", segmentNum, segmentOffset,
+					addr, reqWaveMsg[segmentNum][segmentOffset].data);
+
+			// If there's more to send than will fit in the max message size, break
+			// it up into chunks and send each chunk individually
+			if(segmentOffset == maxMsgSize/sizeof(FpgaReg)-1)
+			{
+				segmentNum++;
+				reqWaveMsg[segmentNum][0] = {0,0};
+				printf(" %lu bytes in this segment.\n", (segmentOffset +1) * sizeof (FpgaReg));
+				segmentOffset = 0; // will be incremented to 1 at the top of the loop
+				printf("\nfilling waveform request %d: [%u][%u]={0x0,0x0}", i, segmentNum, segmentOffset);
+			}
+		}
+		printf(" %lu of %lu bytes filled in this segment.\n",
+				(segmentOffset +1) * sizeof (FpgaReg), waveSegmentSize * sizeof (FpgaReg));
+
+		// Each segment has unused elements at the end. Safest to convert whole thing.
+		printf("\n%s calling htonFpgaRegArray for waveform %u, %u registers\n", __PRETTY_FUNCTION__, i, waveSegmentCount * waveSegmentSize );
+                htonFpgaRegArray(reqWaveMsg[0], waveSegmentCount * waveSegmentSize);
+
+		switch (i)
+		{
+		case 0:
+			std::copy(&reqWaveMsg[0][0], &reqWaveMsg[0][0]+waveSegmentCount * waveSegmentSize,
+					&pReqIQ16bAMsg_[0][0]); // Canned message to request 16 bit I/Q data, first npt_ points
+			break;
+		case 1:
+			std::copy(&reqWaveMsg[0][0], &reqWaveMsg[0][0]+waveSegmentCount * waveSegmentSize,
+					&pReqIQ16bBMsg_[0][0]); // Canned message to request 16 bit I/Q data, last npt_ points
+			break;
+		case 2:
+			std::copy(&reqWaveMsg[0][0], &reqWaveMsg[0][0]+waveSegmentCount * waveSegmentSize,
+					&pReqI22bMsg_[0][0]); // Canned message to request 22 bit I data
+			break;
+		case 3:
+			std::copy(&reqWaveMsg[0][0], &reqWaveMsg[0][0]+waveSegmentCount * waveSegmentSize,
+					&pReqQ22bMsg_[0][0]); // Canned message to request 22 bit Q data
+			break;
+		}
+		printf("Filled up %d of %d segments, last one with %d points\n",
+				segmentNum, waveSegmentCount, segmentOffset);
+		printf("Setting start address of next waveform segment to 0x%x\n", addr);
+		segStartAddr = addr;
+	}
+}
+
+
+void scllrfPRC::reqOneWaveform(FpgaReg (*readWaveformsMsg)[waveSegmentSize])
+{
+	int regsLeftToSend = npt_;
+	uint i;
+
+	for (i=0; i<waveSegmentCount - 1; ++i)
+	{
+		if(regsLeftToSend > (int) (maxMsgSize/sizeof(FpgaReg)))
+		{
+		//	sendRegRequest(&readWaveformsMsg[i][0], maxMsgSize/sizeof(FpgaReg));
+			regsLeftToSend -= maxMsgSize/sizeof(FpgaReg);
+		}
+		else
+		{
+		//	sendRegRequest(&readWaveformsMsg[i][0], regsLeftToSend);
+			break;
+		}
+	}
+}
+
+void scllrfPRC::waveformRequester()
 {
 	epicsEventWaitStatus status;
-	//	unsigned int regNum;
-	unsigned int regAddress;
-	unsigned int i;
-	unsigned int waveSegmentNumber;
-	unsigned int waveSegmentOffset;
-	unsigned int lastPointIndex=0; // The index of the last register in the last segment
+	static FpgaReg traceAck[5] =
+	{
+			{0,0},
+			{TraceResetWAdr,1},
+			{BufTrigWAdr,0},
+			{BufTrigWAdr,1},
+			{BufTrigWAdr,0}
+	};
+	printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
+        htonFpgaRegArray(traceAck, 5);
 
 	// A canned request to read all waveforms
 	// Split up because the packet would be too big for UDP otherwise
-	static FpgaReg cmocReadWaveformsMsg[waveSegmentCount][waveSegmentSize];
-
-	for (i=0; i<waveSegmentCount; ++i)
-	{
-		cmocReadWaveformsMsg[i][0] = (FpgaReg) {0, 0}; // space for the nonce
-	}
-
-	for (waveSegmentNumber=0; waveSegmentNumber < waveSegmentCount; ++waveSegmentNumber)
-	{
-		for (waveSegmentOffset = 0; waveSegmentOffset < waveSegmentSize-1; ++waveSegmentOffset)
-		{
-			regAddress = wavesStart + waveSegmentNumber*(waveSegmentSize-1) + waveSegmentOffset;
-			if (regAddress > wavesEnd)
-			{
-				lastPointIndex = waveSegmentOffset+1;
-				break;
-			}
-			// put in some data that's a little interesting, but obviously unnatural.
-			cmocReadWaveformsMsg[waveSegmentNumber][waveSegmentOffset+1] = (FpgaReg) { flagReadMask | regAddress, (int32_t) ((double) blankData + 10000.0 * sin((double)regAddress* (regAddress % wavesCount)/360.0))};
-		}
-	}
-
-
-	htonFpgaRegArray(cmocReadWaveformsMsg[0], sizeof(cmocReadWaveformsMsg)/sizeof(FpgaReg));
+	//	static FpgaReg readWaveformsMsg[waveSegmentCount][waveSegmentSize];
+	//
+	//	for (i=0; i<waveSegmentCount; ++i)
+	//	{
+	//		readWaveformsMsg[i][0] = (FpgaReg) {0, 0}; // space for the nonce
+	//	}
+	//
+	//	for (waveSegmentNumber=0; waveSegmentNumber < waveSegmentCount; ++waveSegmentNumber)
+	//	{
+	//		for (waveSegmentOffset = 0; waveSegmentOffset < waveSegmentSize-1; ++waveSegmentOffset)
+	//		{
+	//			regAddress = wavesStart + waveSegmentNumber*(waveSegmentSize-1) + waveSegmentOffset;
+	//			if (regAddress > wavesEnd)
+	//			{
+	//				lastPointIndex = waveSegmentOffset+1;
+	//				break;
+	//			}
+	//			// put in some data that's a little interesting, but obviously unnatural.
+	//			readWaveformsMsg[waveSegmentNumber][waveSegmentOffset+1] = (FpgaReg) { flagReadMask | regAddress, (int32_t) ((double) blankData + 10000.0 * sin((double)regAddress* (regAddress % maxWavesCount)/360.0))};
+	//		}
+	//	}
+	//
+	//
+	//	htonFpgaRegArray(cmocReadWaveformsMsg[0], sizeof(cmocReadWaveformsMsg)/sizeof(FpgaReg));
 
 	// Main polling loop
 	while (1)
@@ -1570,15 +1606,22 @@ void scllrfAsynPortDriver::waveformRequester()
 		{
 			/* We got an event, rather than a timeout.
 			 **/
-			for (i=0; i<waveSegmentCount - 1; ++i)
+			switch (wavBitWidth)
 			{
-				sendRegRequest(cmocReadWaveformsMsg[i], sizeof(cmocReadWaveformsMsg[0])/sizeof(FpgaReg));
+			case read16bit:
+				reqOneWaveform(pReqIQ16bAMsg_);
+				reqOneWaveform(pReqIQ16bBMsg_);
+				break;
+			case read22bit:
+				reqOneWaveform(pReqI22bMsg_);
+				reqOneWaveform(pReqQ22bMsg_);
+				break;
+			default:
+				printf("%s: impossible bit width\n", __PRETTY_FUNCTION__);
 			}
-			// The last segment probably has a different number of points in it
-			sendRegRequest(cmocReadWaveformsMsg[waveSegmentCount-1], lastPointIndex);
 
 			newWaveRead_ = newWaveAvailable_; // Indicate that we got the signal
-
+			sendRegRequest(traceAck, 5);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: done sending waveform request\n", __PRETTY_FUNCTION__);
 		}
@@ -1589,299 +1632,44 @@ void scllrfAsynPortDriver::waveformRequester()
 
 static void responseHandlerC(void *drvPvt)
 {
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	scllrfPRC *pscllrfDriver = (scllrfPRC*)drvPvt;
 	pscllrfDriver->responseHandler();
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
-/** Starts the poller thread.
- ** Derived classes will typically call this at near the end of their constructor.
- ** Derived classes can typically use the base class implementation of the poller thread,
- ** but are free to re-implement it if necessary.
- ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startResponseHandler()
-{
-	readTimeout_ = readTimeout;
-	epicsThreadCreate("responseHandler",
-			epicsThreadPriorityMedium, epicsThreadGetStackSize(epicsThreadStackMedium),
-			(EPICSTHREADFUNC) responseHandlerC, (void *) this);
-	return asynSuccess;
-}
-
-/** Wakes up the reader thread to check for data. */
-asynStatus scllrfAsynPortDriver::wakeupReader()
-{
-	epicsEventSignal(readEventId_);
-	return asynSuccess;
-}
-
-void scllrfAsynPortDriver::responseHandler()
-{
-	asynStatus status;
-	epicsEventWaitStatus waitStatus;
-	epicsMutexLockStatus mutexStatus;
-	static char pReadBuffer[maxMsgSize];
-	FpgaReg *pRegReadback;
-	size_t readCount = 0; // Number of bytes to process from the network read
-	epicsInt32 errorCount;
-	int eomReason;
-	int noDataCounter = 0; // If we try to read this many times and get no data, give up and decrement netWaitingRequests_
-
-	while (1)
-	{
-
-		// The asyn framework doesn't allow writes while a read is blocking,
-		// so the same behavior is approximated here with events.
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: Caught up with message processing, blocking for data\n", __PRETTY_FUNCTION__);
-		waitStatus = epicsEventWaitWithTimeout(readEventId_, readTimeout_);
-
-		if (isShuttingDown_)
-		{
-			break;
-		}
-		if (waitStatus == epicsEventWaitOK) // We got an event, signaling to expect data back
-		{
-			while (netWaitingRequests_>0) // Writers increment atomic netWaitingRequests when they send a request
-			{
-				// Note: pRegReadback/pReadBuffer would have reentrancy problems, except only this one
-				// thread reads it. More than one read thread and it could break.
-				pRegReadback = reinterpret_cast<FpgaReg*>(pReadBuffer);
-				pRegReadback[0] = (FpgaReg) {0, 0}; // Reset count, so we won't try to process data that isn't there.
-
-				mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
-
-				// First read just the nonce for a sanity check.
-				status = pasynOctetSyncIO->read(pOctetAsynUser_, pReadBuffer,
-						nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
-
-				// Prevent an endless loop here while senders are throttled
-				if(readCount == 0)
-				{
-					++noDataCounter;
-					if(noDataCounter > (int)(defaultPollPeriod/throttleLoopDelay))
-						netWaitingRequests_--;
-					epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
-					continue;
-				}
-				else // Get the amount of data to read from the nonce presumably read in, and read that many more bytes
-				{
-					noDataCounter = 0;
-					if(ntohl(pRegReadback[0].data) < (int) maxMsgSize)
-					{ // read in the number of bytes the nonce says to expect, starting with the second register location
-						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
-								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
-						status = pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
-								ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
-						readCount += nonceSize*sizeof(FpgaReg);
-						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: got %u bytes total for response #%u\n",
-								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
-					}
-					else
-					{
-						netWaitingRequests_--;
-						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-							"%s: presumed nonce says sequence # %u with %d bytes.\n",
-							__PRETTY_FUNCTION__, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
-						epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
-						getIntegerParam(p_CommErrorCount, &errorCount);
-						setIntegerParam(p_CommErrorCount, errorCount + 1);
-						callParamCallbacks();
-						continue;
-					}
-
-				}
-				epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
-
-				ntohFpgaRegArray(pRegReadback, (readCount)/sizeof(FpgaReg));
-
-				processReadbackBuffer(pRegReadback, readCount);
-				/* Do callbacks so higher layers see any changes */
-				status = (asynStatus) callParamCallbacks();
-
-				epicsThreadSleep(0); // sleep to be nice to other threads
-			} // while (netWaitingRequests>0)
-		} // if (status == epicsEventWaitOK)
-		else // Timed out waiting for sender to signal. Could be a network glitch, so count request as lost.
-		{
-			if(netWaitingRequests_>0)
-			{
-				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-						"%s: receive thread timed out after %fs waiting for %d responses. Network losses?\n", __PRETTY_FUNCTION__, readTimeout_, netWaitingRequests_);
-				netWaitingRequests_--;
-			}
-		}
-		// Clear out any cruft left over that we didn't process.
-		pasynOctetSyncIO->flush(pOctetAsynUser_);
-	}
-}
-
-// Iterate over each register in the buffer returned from the FPGA
-// Array passed to this function contains the nonce, with the buffer
-// size at pRegReadback[0].data
-asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, unsigned int readCount)
-{
-	unsigned i;
-	bool waveIsReady = false; // Made this local rather than member because of concurrency concerns
-	asynStatus status = asynSuccess;
-	int bytesLeft = readCount; // signed to make error detection easier
-	epicsInt32 errorCount;
-
-	// Check for an invalid nonce
-	if(pRegReadback[0].addr < 1 || pRegReadback[0].data < 1)
-		return asynError;
-
-	// We put the message size in the data of the first buffer element for error checking
-	// and to handle multiple messages received
-	while(bytesLeft > 0)
-	{
-
-		if (isShuttingDown_)
-		{
-			break;
-		}
-
-		// We can read partial messages, so watch array bounds if received message size is smaller than expected
-		if (bytesLeft < pRegReadback[0].data)
-		{
-			//pRegReadback[0].data = bytesLeft; // Testing made clear this isn't enough, so just bail.
-			pasynOctetSyncIO->flush(pOctetAsynUser_); // Should we clear out waiting partial messages?
-			if(netWaitingRequests_ > 0)
-				netWaitingRequests_--;
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Read %u bytes from network, %d bytes left to process, but expected %u bytes\n",
-					__PRETTY_FUNCTION__, readCount, bytesLeft, (unsigned) pRegReadback[0].data);
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Response from request #%u, expected is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-					lastResponseCount_ + 1);
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Discarding this message\n",
-					__PRETTY_FUNCTION__);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, errorCount + 1);
-			return asynError;
-		}
-
-		if (pRegReadback[0].addr > lastResponseCount_ + 1)
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Missing response message, got response from request #%u, expected is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-					lastResponseCount_ + 1);
-
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, errorCount + 1);
-		}
-		if (pRegReadback[0].addr < lastResponseCount_ + 1)
-		{// NOTE: In testing so far, it has only reached here from data problems other than true out-of-order data
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: Out-of-order response message, got response from request #%u, expected is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-					lastResponseCount_ + 1);
-
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, errorCount + 1);
-		}
-		lastResponseCount_ = pRegReadback[0].addr;
-
-		// Data read from the network may contain multiple responses. Take them one at a time.
-		// Use the register count from the nonce in pRegReadback[0].data to determine how much
-		// to process before the next response with its own nonce.
-		for (i = 1; i < pRegReadback[0].data / sizeof(FpgaReg); ++i)
-		{
-			if(pRegReadback[i].addr & flagReadMask)
-			{
-				status = processRegReadback(&pRegReadback[i], waveIsReady);
-			}
-			else
-			{
-				processRegWriteResponse(&pRegReadback[i]);
-			}
-			if (status)
-				epicsSnprintf(pOctetAsynUser_->errorMessage,
-						pOctetAsynUser_->errorMessageSize,
-						"%s: status=%d, couldn't process address=0x%x, value=%u",
-						__PRETTY_FUNCTION__, status,
-						(unsigned) pRegReadback[i].addr,
-						(unsigned) pRegReadback[i].data);
-			//		else
-			//			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-			//					"%s: address=0x%x, value=%u\n", __PRETTY_FUNCTION__,
-			//					(unsigned ) pRegReadback[i].addr,
-			//					(unsigned ) pRegReadback[i].data);
-		}
-
-		// check if this was a response to the most recent request
-		if (pRegReadback[0].addr < netSendCount_ )
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-					"%s: processed response from request #%u, most recent is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
-					netSendCount_);
-			netWaitingRequests_ = netSendCount_ - pRegReadback[0].addr;
-		}
-		else
-			netWaitingRequests_ = 0; // We have the most recent, no outstanding requests
-
-		// decrement number of bytes left to process by the numbr of bytes we just processed
-		if(bytesLeft > pRegReadback[0].data)
-			bytesLeft -= pRegReadback[0].data;
-		else // guard against mangled/partial messages
-			bytesLeft = 0;
-
-		// The nonce in pRegReadback[0] contains the message size. Move pointer to the next message.
-		pRegReadback = & pRegReadback[pRegReadback[0].data/sizeof(FpgaReg)];
-	} // while(bytesLeft > 0)
-
-	// If the waveIsReady flag is set,
-	if (waveIsReady &&
-			// and there isn't a pending waveform read
-			(newWaveAvailable_ == newWaveRead_))
-	{
-		// Set the message counter with a "new waveform" notification
-		// to the message counter value for the message we just received
-		newWaveAvailable_ = pRegReadback[0].addr;
-		epicsEventSignal(reqWaveEventId_);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
-				__PRETTY_FUNCTION__);
-	}
-
-	return asynSuccess;
-}
 
 // parse register data, write to array PV
-asynStatus scllrfAsynPortDriver::processWaveReadback(const FpgaReg *pFromFpga)
+asynStatus scllrfPRC::processWaveReadback(const FpgaReg *pFromFpga)
 {
 	unsigned int bufferOffset = (pFromFpga->addr & addrMask) - wavesStart;
-	unsigned int waveNumber = bufferOffset % wavesCount;
-	unsigned int waveIndex = bufferOffset / wavesCount;
+	unsigned int waveNumber = bufferOffset % nchan_;
+	unsigned int waveIndex = bufferOffset / nchan_;
 
 	pWaveform_[waveNumber][waveIndex] = (epicsInt32) pFromFpga->data;
 
 	return asynSuccess;
 }
 
-asynStatus scllrfAsynPortDriver::catGitSHA1()
-{
-	int oneByte;
-	int i;
-	asynStatus status;
-
-	strGitSHA1.str("");
-	strGitSHA1.clear();
-	strGitSHA1<<std::hex;
-
-//	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
-//	{
-//		status = (asynStatus) getIntegerParam(i, &oneByte);
-//		strGitSHA1<< std::setw(2) << oneByte;
-//	}
-//	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
-//	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
-
-	return asynSuccess;
-}
+//asynStatus scllrfPRC::catGitSHA1()
+//{
+//	int oneByte;
+//	int i;
+//	asynStatus status;
+//
+//	strGitSHA1.str("");
+//	strGitSHA1.clear();
+//	strGitSHA1<<std::hex;
+//
+////	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
+////	{
+////		status = (asynStatus) getIntegerParam(i, &oneByte);
+////		strGitSHA1<< std::setw(2) << oneByte;
+////	}
+////	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
+////	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
+//
+//	return asynSuccess;
+//}
 
 /**  Extract register address and data from the received message and set the appropriate
  * asyn parameter.
@@ -1892,11 +1680,13 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 * \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+asynStatus scllrfPRC::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
 	unsigned int i;
 	asynStatus status = asynSuccess;
 	epicsInt32 errorCount;
+	epicsInt32 tmpData;
+	int32_t signExtBits = 0;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 
 	/* Map address to parameter, set the parameter in the parameter library. */
@@ -1990,68 +1780,71 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 				FrequencyDcoRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case U2Dout_Lower_32_BitsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_U2Dout_Lower_32_BitsR,
+    case U2Doutbits31To0RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U2Doutbits31To0R,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				U2Dout_Lower_32_BitsRString, (unsigned ) pFromFpga->data);
+				U2Doutbits31To0RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case U2Dout_Upper_32_BitsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_U2Dout_Upper_32_BitsR,
+    case U2Doutbits63To32RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U2Doutbits63To32R,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				U2Dout_Upper_32_BitsRString, (unsigned ) pFromFpga->data);
+							U2Doutbits63To32RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case IdelayValueOutU2Bits19to0RAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_IdelayValueOutU2Bits19to0R,
+    case IdelayValueOutU2Bits19To0RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_IdelayValueOutU2Bits19To0R,
+
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				IdelayValueOutU2Bits19to0RString, (unsigned ) pFromFpga->data);
+				IdelayValueOutU2Bits19To0RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case IdelayValueOutU2Bits39to20RAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_IdelayValueOutU2Bits39to20R,
+    case IdelayValueOutU2Bits39To20RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_IdelayValueOutU2Bits39To20R,
+
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				IdelayValueOutU2Bits39to20RString, (unsigned ) pFromFpga->data);
+				IdelayValueOutU2Bits39To20RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case U3Dout_Lower_32_BitsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_U3Dout_Lower_32_BitsR,
+    case U3Doutbits31To0RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U3Doutbits31To0R,
+
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				U3Dout_Lower_32_BitsRString, (unsigned ) pFromFpga->data);
+				U3Doutbits31To0RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case U3Dout_Upper_32_BitsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_U3Dout_Upper_32_BitsR,
+    case U3Doutbits63To32RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U3Doutbits63To32R,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				U3Dout_Upper_32_BitsRString, (unsigned ) pFromFpga->data);
+				U3Doutbits63To32RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case IdelayValueOutU3Bits19to0RAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_IdelayValueOutU3Bits19to0R,
+    case IdelayValueOutU3Bits19To0RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_IdelayValueOutU3Bits19To0R,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				IdelayValueOutU3Bits19to0RString, (unsigned ) pFromFpga->data);
+				IdelayValueOutU3Bits19To0RString, (unsigned ) pFromFpga->data);
 	break;
 
-    case IdelayValueOutU3Bits39to20RAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_IdelayValueOutU3Bits39to20R,
+    case IdelayValueOutU3Bits39To20RAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_IdelayValueOutU3Bits39To20R,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				IdelayValueOutU3Bits39to20RString, (unsigned ) pFromFpga->data);
+				IdelayValueOutU3Bits39To20RString, (unsigned ) pFromFpga->data);
 	break;
 
     case Wave0OutRAdr|flagReadMask:
@@ -2134,6 +1927,66 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 				ClkPhaseDiffOutU3RString, (unsigned ) pFromFpga->data);
 	break;
 
+    case U15SpiRdbkRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SpiRdbkR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SpiRdbkRString, (unsigned ) pFromFpga->data);
+// TODO: Generate something sensible for shared addresses
+//    case U15SdoAddrRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SdoAddrR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SdoAddrRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case U15SpiReadyRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SpiReadyR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SpiReadyRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//case U15SdioAsSdoRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SdioAsSdoR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SdioAsSdoRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case U18SdoAddrRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SdoAddrR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SdoAddrRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//    case U18SpiRdbkRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SpiRdbkR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SpiRdbkRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case U18SdioAsSdoRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SdioAsSdoR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SdioAsSdoRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//case U18SpiReadyRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SpiReadyR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SpiReadyRString, (unsigned ) pFromFpga->data);
+	break;
+
     case AdcTestTrigCntRAdr|flagReadMask:
 		status = (asynStatus) setIntegerParam(p_AdcTestTrigCntR,
 				pFromFpga->data);
@@ -2169,9 +2022,14 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
     case TraceStatusRAdr|flagReadMask:
 		status = (asynStatus) setIntegerParam(p_TraceStatusR,
 				pFromFpga->data);
-		if (pFromFpga->data & 0x4000000)
+		if (pFromFpga->data & waveIsReadyMask)
 		{
 			waveIsReady = true;
+		}
+		if(npt_ != (size_t) (1 << ((pFromFpga->data & nptMask)>> 24)))
+		{
+			npt_ = 1 << ((pFromFpga->data & nptMask)>> 24);
+			fillWavReqMsg();
 		}
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -2458,6 +2316,66 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 				BanyanMaskRString, (unsigned ) pFromFpga->data);
 	break;
 
+    case U15SpiStartRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SpiStartRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SpiStartRRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//    case U15SpiReadRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SpiReadRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SpiReadRRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case U15SpiAddrRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SpiAddrRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SpiAddrRRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//    case U15SpiDataRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U15SpiDataRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U15SpiDataRRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case U18SpiReadRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SpiReadRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SpiReadRRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//    case U18SpiStartRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SpiStartRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SpiStartRRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case U18SpiAddrRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SpiAddrRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SpiAddrRRString, (unsigned ) pFromFpga->data);
+		// TODO: Generate something sensible for shared addresses
+		//    case U18SpiDataRRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_U18SpiDataRR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				U18SpiDataRRString, (unsigned ) pFromFpga->data);
+	break;
+
     case SyncAd7794CsetRAdr|flagReadMask:
 		status = (asynStatus) setIntegerParam(p_SyncAd7794CsetR,
 				pFromFpga->data);
@@ -2491,11 +2409,21 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 	break;
 
     case TraceKeepRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_TraceKeepR,
-				pFromFpga->data);
+	tmpData = pFromFpga->data & TraceKeepRMask;
+    printf("%s got data 0x%x for TraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
+		status = (asynStatus) setUIntDigitalParam(p_TraceKeepR,
+				tmpData, TraceKeepRMask);
+
+		// Count the number of bits set
+		for (nchan_ = 0; tmpData; nchan_++)
+		{
+		  tmpData &= tmpData - 1; // clear the least significant bit set
+		}
+	    printf("%s TraceKeepRAdr says %d bits\n",__PRETTY_FUNCTION__,nchan_);
+
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceKeepRString, (unsigned ) pFromFpga->data);
+				TraceKeepRString, (unsigned ) tmpData);
 	break;
 
     case HistDoutRAdr|flagReadMask:
@@ -2535,8 +2463,8 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 		// Do we need to verify that all points of all waveforms have been received, not missing
 		// packets or some such?
 		// Basic approach: when we read in the last point of the last waveform, publish them all
-		for (i=0; i<wavesCount; ++i)
-			status = doCallbacksInt32Array(pWaveform_[i], waveBufferRegCount/wavesCount, p_Waveform, i);
+		for (i=0; i<nchan_; ++i)
+			status = doCallbacksInt32Array(pWaveform_[i], waveBufferRegCount/nchan_, p_Waveform, i);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
 		break;
@@ -2567,10 +2495,11 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 * \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
+asynStatus scllrfPRC::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+	epicsUInt32 uValueSet;
 	epicsInt32 errorCount;
 //  variables that may be useful for checking array data
 //	asynUser *pAsynArrayUser;
@@ -3031,25 +2960,6 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 			status = asynError;
 			setParamStatus(p_ScanTriggerW, status);
 			setIntegerParam(p_ScanTriggerW, pFromFpga->data);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case TraceCtlWAdr:
-		status = (asynStatus) getIntegerParam(p_TraceCtlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceCtlWString, (unsigned ) pFromFpga->data );
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceCtlWString, valueSet[0] , (unsigned ) pFromFpga->data );
-			status = asynError;
-			setParamStatus(p_TraceCtlW, status);
-			setIntegerParam(p_TraceCtlW, pFromFpga->data);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
@@ -3797,19 +3707,24 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 
 		break;
     case TraceKeepWAdr:
-		status = (asynStatus) getIntegerParam(p_TraceKeepW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+        printf("%s got data 0x%x back for TraceKeepWAdr\n",__PRETTY_FUNCTION__,pFromFpga->data);
+		setUIntDigitalParam(p_TraceKeepR, pFromFpga->data, TraceKeepRMask);
+		status = (asynStatus) getUIntDigitalParam(p_TraceKeepW, &uValueSet, TraceKeepWMask);
+		if( uValueSet == (epicsUInt32)pFromFpga->data )
+		{
+			setUIntDigitalParam(p_TraceKeepR, pFromFpga->data, TraceKeepRMask);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceKeepWString, (unsigned ) pFromFpga->data );
+				TraceKeepWString, (unsigned ) pFromFpga->data | TraceKeepWMask);
+		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceKeepWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				TraceKeepWString, uValueSet , (unsigned ) pFromFpga->data | TraceKeepWMask);
 			status = asynError;
 			setParamStatus(p_TraceKeepW, status);
-			setIntegerParam(p_TraceKeepW, pFromFpga->data);
+			setUIntDigitalParam(p_TraceKeepW, pFromFpga->data, TraceKeepWMask);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
@@ -3830,40 +3745,16 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
     return status;
 }
 
-void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
-{
-	unsigned int i;
-
-	for (i=0; i<regCount; ++i)
-	{
-		buffer[i].addr = htonl(buffer[i].addr);
-		buffer[i].data = htonl(buffer[i].data);
-	}
-}
-
-
-void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
-{
-	unsigned int i;
-
-	for (i=0; i<regCount; ++i)
-	{
-		buffer[i].addr = ntohl(buffer[i].addr);
-		buffer[i].data = ntohl(buffer[i].data);
-	}
-}
-
-
 extern "C" {
 
 /* Configuration routine.  Called directly, or from the iocsh function below */
 
-/** EPICS iocsh callable function to call constructor for the scllrfAsynPortDriver class.
+/** EPICS iocsh callable function to call constructor for the scllrfPRC class.
  * \param[in] portName The name of the asyn port driver to be created.
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
-int scllrfAsynPortDriverConfigure(const char *drvPortName, const char *netPortName)
+int scllrfPRCConfigure(const char *drvPortName, const char *netPortName)
 {
-	new scllrfAsynPortDriver(drvPortName, netPortName);
+	new scllrfPRC(drvPortName, netPortName);
 	return asynSuccess;
 }
 
@@ -3874,18 +3765,18 @@ static const iocshArg initArg0 = { "drvPortName",iocshArgString};
 static const iocshArg initArg1 = { "IP port name",iocshArgString};
 static const iocshArg * const initArgs[] = {&initArg0,
 		&initArg1};
-static const iocshFuncDef initFuncDef = {"scllrfAsynPortDriverConfigure",2,initArgs};
+static const iocshFuncDef initFuncDef = {"scllrfPRCConfigure",2,initArgs};
 static void initCallFunc(const iocshArgBuf *args)
 {
-	scllrfAsynPortDriverConfigure(args[0].sval, args[1].sval);
+	scllrfPRCConfigure(args[0].sval, args[1].sval);
 }
 
-void scllrfAsynPortDriverRegister(void)
+void scllrfPRCRegister(void)
 {
 	iocshRegister(&initFuncDef,initCallFunc);
 }
 
-epicsExportRegistrar(scllrfAsynPortDriverRegister);
+epicsExportRegistrar(scllrfPRCRegister);
 
 }
 

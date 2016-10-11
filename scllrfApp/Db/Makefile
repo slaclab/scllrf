@@ -13,6 +13,7 @@ include $(TOP)/configure/CONFIG
 DB += cmocRegisters.db
 DB += cmocWaveforms.db
 DB += PRCRegisters.db
+DB += RESRegisters.db
 
 # Install Common databases needed by All IOCs
 # ========================================================
@@ -33,6 +34,8 @@ IOCRELEASE_DB += iocRelease.db
 DB_INSTALLS += $(AUTOSAVE)/db/save_restoreStatus.db
 
 # =======================================================================
+DB_INSTALLS += scllrfCommon.template
+DB_INSTALLS += $(ASYN)/db/asynRecord.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

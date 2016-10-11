@@ -51,7 +51,9 @@ scllrf_SRCS_vxWorks += -nil-
 # ========================================================================
 # scllrf_SRCS += file1.c
  scllrf_SRCS += scllrfAsynPortDriver.cpp
- #scllrf_SRCS += scllrfCMOC.cpp
+# scllrf_SRCS += scllrfCMOC.cpp
+ scllrf_SRCS += scllrfPRC.cpp
+ scllrf_SRCS += scllrfRES.cpp
  #USR_CXXFLAGS += -std=c++0x
 
 # =====================================================
