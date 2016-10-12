@@ -1,3 +1,6 @@
+#ifndef SCLLRFPRC_DRIVER_H
+#define SCLLRFPRC_DRIVER_H
+
 /**
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
