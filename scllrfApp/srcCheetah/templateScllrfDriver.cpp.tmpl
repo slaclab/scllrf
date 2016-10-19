@@ -79,8 +79,8 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
 #for $p in sorted($registers, key=lambda k: k['address'])
 #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
 			{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
-#end unless
 #set $prevAdr = $p.address
+#end unless
 #end for
 	};
 
@@ -164,10 +164,13 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 #for $p in sorted($registers, key=lambda k: k['address'])
 #if ($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))
   #unless ($prevAdr == $p.address)
+	break;
+
     case ${p.name.title().replace("_", "")}RAdr|flagReadMask:
   #else
-	// shared address with ${p.name.title().replace("_", "")}RAdr
+	// shared address with ${p.name.title().replace("_", "")}RAdr  $prevAdr == $p.address
   #end unless
+  #set $prevAdr = $p.address
   #if $p.has_key("bit_width")
     #if $p.has_key("signed") and $p.signed == "signed"
 		signExtBits = pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1)? ~${p.name.title().replace("_", "")}Mask : 0;
@@ -185,8 +188,8 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
   #end if
-#if $p.has_key("bits")
-  #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
+  #if $p.has_key("bits")
+    #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
 
 		status = (asynStatus) setUIntDigitalParam(p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R,
 				pFromFpga->data, ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask);
@@ -194,13 +197,12 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString,
 				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask);
-  #end for
+    #end for
+  #end if
 #end if
-	break;
-
-#end if
-#set $prevAdr = $p.address
 #end for
+		break;
+
 	default:
 		getIntegerParam(p_CommErrorCount, &errorCount);
 		setIntegerParam(p_CommErrorCount, ++errorCount);
@@ -248,6 +250,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
       #else
 	// shared address with ${p.name.title().replace("_", "")}WAdr
       #end unless
+      #set $prevAdr = $p.address
 		status = (asynStatus) getIntegerParam(p_${p.name.title().replace("_", "")}W, valueSet);
 		if( (valueSet[0] $maskStr) == (pFromFpga->data $maskStr))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
@@ -267,7 +270,6 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     #end if
   #end if
-  #set $prevAdr = $p.address
 #end for
 	default:
 		getIntegerParam(p_CommErrorCount, &errorCount);

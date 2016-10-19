@@ -368,7 +368,7 @@ asynStatus scllrfAsynPortDriver::wakeupPoller()
   * Other than the nonce, data in the array is not changed. This reduces the
   * processing required, since most messages are canned and repeated at regular intervals.
   * \param[in] regBuffCount is the number of FpgaReg type elements, including the nonce
- **  */
+  **  */
 asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount)
 {
 	assert(regBuffer != NULL);
@@ -383,12 +383,12 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	getIntegerParam(p_MaxParallelRequests, &maxParallelRequests);
 
 	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "--> %s( regBuffer=%p, regBuffCount=%u\n",
-					__PRETTY_FUNCTION__, regBuffer, regBuffCount);
+			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
 	// Throttle so that we don't overflow buffers if response handling falls behind
-	if( netWaitingRequests_ > (unsigned) maxParallelRequests )
+	if( netWaitingRequests_ >= (unsigned) maxParallelRequests )
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: too many requests waiting for responses (%u), throttling requests.\n",__PRETTY_FUNCTION__, maxParallelRequests);
-	while( netWaitingRequests_ > (unsigned) maxParallelRequests )
+	while( netWaitingRequests_ >= (unsigned) maxParallelRequests )
 	{
 		if (isShuttingDown_)
 		{
@@ -402,7 +402,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	// use the nonce at the start of the buffer for register count, and
 	// send counter. Can be used for error checking.
 	regBuffer[0] = (FpgaReg)
-							{ (uint32_t) htonl(netSendCount_), (int32_t) htonl(regBuffCount*sizeof(FpgaReg)) };
+									{ (uint32_t) htonl(netSendCount_), (int32_t) htonl(regBuffCount*sizeof(FpgaReg)) };
 
 	status = pasynOctetSyncIO->write(pOctetAsynUser_, pWriteBuffer,
 			regBuffCount*sizeof(FpgaReg), writeTimeout, &writtenCount);
@@ -423,7 +423,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	wakeupReader();
 
 	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "<-- %s( regBuffer=%p, regBuffCount=%u\n",
-					__PRETTY_FUNCTION__, regBuffer, regBuffCount);
+			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
 	return asynSuccess;
 }
 
@@ -467,9 +467,11 @@ void scllrfAsynPortDriver::responseHandler()
 	epicsInt32 errorCount;
 	int eomReason;
 	int noDataCounter = 0; // If we try to read this many times and get no data, give up and decrement netWaitingRequests_
+	int maxParallelRequests;
 
 	while (1)
 	{
+		getIntegerParam(p_MaxParallelRequests, &maxParallelRequests);
 
 		// The asyn framework doesn't allow writes while a read is blocking,
 		// so the same behavior is approximated here with events.
@@ -508,7 +510,7 @@ void scllrfAsynPortDriver::responseHandler()
 				else // Get the amount of data to read from the nonce presumably read in, and read that many more bytes
 				{
 					noDataCounter = 0;
-					if(ntohl(pRegReadback[0].data) < (int) maxMsgSize)
+					if(ntohl(pRegReadback[0].data) <= (int) maxMsgSize)
 					{ // read in the number of bytes the nonce says to expect, starting with the second register location
 						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
 								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
@@ -531,6 +533,10 @@ void scllrfAsynPortDriver::responseHandler()
 						continue;
 					}
 
+				}
+				if (maxParallelRequests == 1) // Not sending out multiple requests at once
+				{
+					pasynOctetSyncIO->flush(pOctetAsynUser_); // so it's safe to clear any "junk bits" out of the buffer
 				}
 				epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
 

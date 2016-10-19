@@ -91,7 +91,7 @@ dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
 # =====================================================================
 ## Load record instances
 dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=prcReg")
-dbLoadRecords("db/cmocWaveforms.db","P=PRC,PORT=prcReg")
+#dbLoadRecords("db/cmocWaveforms.db","P=PRC,PORT=prcReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -224,7 +224,12 @@ caPutLogShow(2)
 
 # An example of using the CEXP Shell:
 # cexpsh("-c",'printf("hello\n")')
-
 asynSetTraceMask("prcIP",-1,1)
 asynSetTraceMask("prcReg",-1,1)
+
+dbpf("PRC:DIG_DSP_TRACE_KEEP_W", 5)
+dbpf("PRC:RUN_STOP.HIGH", 0.05)
+dbpf("PRC:RUN_STOP", 1)
+epicsThreadSleep 5
+
 

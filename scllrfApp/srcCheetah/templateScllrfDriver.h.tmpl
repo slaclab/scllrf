@@ -40,6 +40,8 @@ static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()
     #if $p.address not in $prevRAdrs
       #set $readRegCount +=1
       #silent $prevRAdrs.append($p.address)
+    #else
+// shared address $p.address for $p.name
     #end if
     #if $p.has_key("bits")
       #for $field in sorted($p.bits, key=lambda k: k.__getitem__)

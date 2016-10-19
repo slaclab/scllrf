@@ -423,350 +423,350 @@ d = { "name" : "scllrfPRC",
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U15_spi_data_addr_r",
+        "name": "dig_cfg_U15_spi_data_addr_r",
         "access": "rw",
         "address": 8388609,
         "bit_width": 32,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U15_spi_read_and_start_r",
+        "name": "dig_cfg_U15_spi_read_and_start_r",
         "access": "rw",
         "address": 8388610,
         "bit_width": 2,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U18_spi_data_addr_r",
+        "name": "dig_cfg_U18_spi_data_addr_r",
         "access": "rw",
         "address": 8388611,
         "bit_width": 32,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U18_spi_read_and_start_r",
+        "name": "dig_cfg_U18_spi_read_and_start_r",
         "access": "rw",
         "address": 8388612,
         "bit_width": 2,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U2_clk_reset_r",
+        "name": "dig_cfg_U2_clk_reset_r",
         "access": "rw",
         "address": 8388613,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U2_iserdes_reset_r",
+        "name": "dig_cfg_U2_iserdes_reset_r",
         "access": "rw",
         "address": 8388614,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U3_clk_reset_r",
+        "name": "dig_cfg_U3_clk_reset_r",
         "access": "rw",
         "address": 8388615,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U3_iserdes_reset_r",
+        "name": "dig_cfg_U3_iserdes_reset_r",
         "access": "rw",
         "address": 8388616,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_U4_reset_r",
+        "name": "dig_cfg_U4_reset_r",
         "access": "rw",
         "address": 8388617,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_banyan_mask",
+        "name": "dig_cfg_banyan_mask",
         "access": "rw",
         "address": 8388618,
         "bit_width": 8,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_bitslip",
+        "name": "dig_cfg_bitslip",
         "access": "rw",
         "address": 8388619,
         "bit_width": 16,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_idelayctrl_reset_r",
+        "name": "dig_cfg_idelayctrl_reset_r",
         "access": "rw",
         "address": 8388620,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_llspi_we",
+        "name": "dig_cfg_llspi_we",
         "access": "rw",
         "address": 8388621,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_mmcm_reset_r",
+        "name": "dig_cfg_mmcm_reset_r",
         "access": "rw",
         "address": 8388622,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_periph_config",
+        "name": "dig_cfg_periph_config",
         "access": "rw",
         "address": 8388623,
         "bit_width": 32,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_phasex_trig",
+        "name": "dig_cfg_phasex_trig",
         "access": "rw",
         "address": 8388624,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_rawadc_trig",
+        "name": "dig_cfg_rawadc_trig",
         "access": "rw",
         "address": 8388625,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_scan_trigger_we",
+        "name": "dig_cfg_scan_trigger_we",
         "access": "rw",
         "address": 8388626,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_scanner_debug",
+        "name": "dig_cfg_scanner_debug",
         "access": "rw",
         "address": 8388627,
         "bit_width": 5,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_sync_ad7794_cset",
+        "name": "dig_cfg_sync_ad7794_cset",
         "access": "rw",
         "address": 8388628,
         "bit_width": 10,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_config_sync_tps62210_cset",
+        "name": "dig_cfg_sync_tps62210_cset",
         "access": "rw",
         "address": 8388629,
         "bit_width": 6,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_adc_test_mode",
+        "name": "dig_dsp_adc_test_mode",
         "access": "rw",
         "address": 8388630,
         "bit_width": 3,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_adc_test_reset",
+        "name": "dig_dsp_adc_test_reset",
         "access": "rw",
         "address": 8388631,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_amplitude",
+        "name": "dig_dsp_amplitude",
         "access": "rw",
         "address": 8388632,
         "bit_width": 16,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_average_len",
+        "name": "dig_dsp_average_len",
         "access": "rw",
         "address": 8388633,
         "bit_width": 30,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_buf_trig",
+        "name": "dig_dsp_buf_trig",
         "access": "rw",
         "address": 8388634,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_cic_period",
+        "name": "dig_dsp_cic_period",
         "access": "rw",
         "address": 8388635,
         "bit_width": 14,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_cic_shift",
+        "name": "dig_dsp_cic_shift",
         "access": "rw",
         "address": 8388636,
         "bit_width": 4,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_dac_dds_reset",
+        "name": "dig_dsp_dac_dds_reset",
         "access": "rw",
         "address": 8388637,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_dac_mode",
+        "name": "dig_dsp_dac_mode",
         "access": "rw",
         "address": 8388638,
         "bit_width": 4,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ddsa_modulo",
+        "name": "dig_dsp_ddsa_modulo",
         "access": "rw",
         "address": 8388639,
         "bit_width": 12,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ddsa_phstep_h",
+        "name": "dig_dsp_ddsa_phstep_h",
         "access": "rw",
         "address": 8388640,
         "bit_width": 20,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ddsa_phstep_l",
+        "name": "dig_dsp_ddsa_phstep_l",
         "access": "rw",
         "address": 8388641,
         "bit_width": 12,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_hist_count_w_strobe",
+        "name": "dig_dsp_hist_count_w_strobe",
         "access": "rw",
         "address": 8388642,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_lo_amp",
+        "name": "dig_dsp_lo_amp",
         "access": "rw",
         "address": 8388643,
         "bit_width": 18,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_modulo",
+        "name": "dig_dsp_modulo",
         "access": "rw",
         "address": 8388644,
         "bit_width": 12,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_phase_step_h",
+        "name": "dig_dsp_phase_step_h",
         "access": "rw",
         "address": 8388645,
         "bit_width": 20,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_phase_step_l",
+        "name": "dig_dsp_phase_step_l",
         "access": "rw",
         "address": 8388646,
         "bit_width": 12,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_rewind",
+        "name": "dig_dsp_rewind",
         "access": "rw",
         "address": 8388647,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ssa_stim_ampstep",
+        "name": "dig_dsp_ssa_stim_ampstep",
         "access": "rw",
         "address": 8388648,
         "bit_width": 16,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ssa_stim_en",
+        "name": "dig_dsp_ssa_stim_en",
         "access": "rw",
         "address": 8388649,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ssa_stim_g_period",
+        "name": "dig_dsp_ssa_stim_g_period",
         "access": "rw",
         "address": 8388650,
         "bit_width": 10,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_ssa_stim_pertstep",
+        "name": "dig_dsp_ssa_stim_pertstep",
         "access": "rw",
         "address": 8388651,
         "bit_width": 16,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_trace_keep",
+        "name": "dig_dsp_trace_keep",
         "access": "rw",
         "address": 8388652,
         "bit_width": 8,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_trace_reset_we",
+        "name": "dig_dsp_trace_reset_we",
         "access": "rw",
         "address": 8388653,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_trig_internal",
+        "name": "dig_dsp_trig_internal",
         "access": "rw",
         "address": 8388654,
         "bit_width": 1,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_trig_mode",
+        "name": "dig_dsp_trig_mode",
         "access": "rw",
         "address": 8388655,
         "bit_width": 2,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_wave0_src",
+        "name": "dig_dsp_wave0_src",
         "access": "rw",
         "address": 8388656,
         "bit_width": 3,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_dsp_wave1_src",
+        "name": "dig_dsp_wave1_src",
         "access": "rw",
         "address": 8388657,
         "bit_width": 3,
         "sign": "unsigned"
     },
     {
-        "name": "digitizer_slowread_tag_now",
+        "name": "dig_slowread_tag_now",
         "access": "rw",
         "address": 8388658,
         "bit_width": 8,

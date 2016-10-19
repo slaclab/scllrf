@@ -35,6 +35,8 @@ scllrf_DBD += drvAsynIPPort.dbd
 scllrf_DBD += asynRecord.dbd
 scllrf_DBD += asyn.dbd
 scllrf_DBD += scllrfAsynPortDriver.dbd
+scllrf_DBD += aCalcoutRecord.dbd
+scllrf_DBD += calcSupport.dbd
 
 # ======================================================================
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
@@ -72,6 +74,8 @@ scllrf_LIBS += caPutLog
 scllrf_LIBS += $(CEXP_LIBS)
 
 scllrf_LIBS += asyn
+scllrf_LIBS += calc
+scllrf_LIBS += sscan
 
 # =====================================================
 # END EVR libraries
