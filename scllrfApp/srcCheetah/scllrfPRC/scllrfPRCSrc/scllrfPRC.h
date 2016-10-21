@@ -55,6 +55,7 @@ static const char *BanyanBufRString = "BANYAN_BUF_R";
 static const char *BanyanStatusRString = "BANYAN_STATUS_R";
 static const char *ClkPhaseDiffOutU2RString = "CLK_PHASE_DIFF_OUT_U2_R";
 static const char *ClkPhaseDiffOutU3RString = "CLK_PHASE_DIFF_OUT_U3_R";
+static const char *CrcErrorsRString = "CRC_ERRORS_R";
 static const char *CtraceRunningRString = "CTRACE_RUNNING_R";
 static const char *DigCfgU15SpiDataAddrRRString = "DIG_CFG_U15_SPI_DATA_ADDR_R_R";
 static const char *DigCfgU15SpiDataAddrRWString = "DIG_CFG_U15_SPI_DATA_ADDR_R_W";
@@ -112,6 +113,8 @@ static const char *DigDspCicPeriodRString = "DIG_DSP_CIC_PERIOD_R";
 static const char *DigDspCicPeriodWString = "DIG_DSP_CIC_PERIOD_W";
 static const char *DigDspCicShiftRString = "DIG_DSP_CIC_SHIFT_R";
 static const char *DigDspCicShiftWString = "DIG_DSP_CIC_SHIFT_W";
+static const char *DigDspCircleBufFlipRString = "DIG_DSP_CIRCLE_BUF_FLIP_R";
+static const char *DigDspCircleBufFlipWString = "DIG_DSP_CIRCLE_BUF_FLIP_W";
 static const char *DigDspDacDdsResetRString = "DIG_DSP_DAC_DDS_RESET_R";
 static const char *DigDspDacDdsResetWString = "DIG_DSP_DAC_DDS_RESET_W";
 static const char *DigDspDacModeRString = "DIG_DSP_DAC_MODE_R";
@@ -124,6 +127,8 @@ static const char *DigDspDdsaPhstepLRString = "DIG_DSP_DDSA_PHSTEP_L_R";
 static const char *DigDspDdsaPhstepLWString = "DIG_DSP_DDSA_PHSTEP_L_W";
 static const char *DigDspHistCountWStrobeRString = "DIG_DSP_HIST_COUNT_W_STROBE_R";
 static const char *DigDspHistCountWStrobeWString = "DIG_DSP_HIST_COUNT_W_STROBE_W";
+static const char *DigDspLlrfDspDacEnRString = "DIG_DSP_LLRF_DSP_DAC_EN_R";
+static const char *DigDspLlrfDspDacEnWString = "DIG_DSP_LLRF_DSP_DAC_EN_W";
 static const char *DigDspLoAmpRString = "DIG_DSP_LO_AMP_R";
 static const char *DigDspLoAmpWString = "DIG_DSP_LO_AMP_W";
 static const char *DigDspModuloRString = "DIG_DSP_MODULO_R";
@@ -132,6 +137,236 @@ static const char *DigDspPhaseStepHRString = "DIG_DSP_PHASE_STEP_H_R";
 static const char *DigDspPhaseStepHWString = "DIG_DSP_PHASE_STEP_H_W";
 static const char *DigDspPhaseStepLRString = "DIG_DSP_PHASE_STEP_L_R";
 static const char *DigDspPhaseStepLWString = "DIG_DSP_PHASE_STEP_L_W";
+static const char *DigDspPrcDspCavSelRString = "DIG_DSP_PRC_DSP_CAV_SEL_R";
+static const char *DigDspPrcDspCavSelWString = "DIG_DSP_PRC_DSP_CAV_SEL_W";
+static const char *DigDspPrcDspPrlCfgRString = "DIG_DSP_PRC_DSP_PRL_CFG_R";
+static const char *DigDspPrcDspPrlCfgWString = "DIG_DSP_PRC_DSP_PRL_CFG_W";
+static const char *DigDspPrcDspPrlGainRString = "DIG_DSP_PRC_DSP_PRL_GAIN_R";
+static const char *DigDspPrcDspPrlGainWString = "DIG_DSP_PRC_DSP_PRL_GAIN_W";
+static const char *DigDspRealSimMuxBeam0ModuloRString = "DIG_DSP_REAL_SIM_MUX_BEAM_0_MODULO_R";
+static const char *DigDspRealSimMuxBeam0ModuloWString = "DIG_DSP_REAL_SIM_MUX_BEAM_0_MODULO_W";
+static const char *DigDspRealSimMuxBeam0PhaseInitRString = "DIG_DSP_REAL_SIM_MUX_BEAM_0_PHASE_INIT_R";
+static const char *DigDspRealSimMuxBeam0PhaseInitWString = "DIG_DSP_REAL_SIM_MUX_BEAM_0_PHASE_INIT_W";
+static const char *DigDspRealSimMuxBeam0PhaseStepRString = "DIG_DSP_REAL_SIM_MUX_BEAM_0_PHASE_STEP_R";
+static const char *DigDspRealSimMuxBeam0PhaseStepWString = "DIG_DSP_REAL_SIM_MUX_BEAM_0_PHASE_STEP_W";
+static const char *DigDspRealSimMuxBeam1ModuloRString = "DIG_DSP_REAL_SIM_MUX_BEAM_1_MODULO_R";
+static const char *DigDspRealSimMuxBeam1ModuloWString = "DIG_DSP_REAL_SIM_MUX_BEAM_1_MODULO_W";
+static const char *DigDspRealSimMuxBeam1PhaseInitRString = "DIG_DSP_REAL_SIM_MUX_BEAM_1_PHASE_INIT_R";
+static const char *DigDspRealSimMuxBeam1PhaseInitWString = "DIG_DSP_REAL_SIM_MUX_BEAM_1_PHASE_INIT_W";
+static const char *DigDspRealSimMuxBeam1PhaseStepRString = "DIG_DSP_REAL_SIM_MUX_BEAM_1_PHASE_STEP_R";
+static const char *DigDspRealSimMuxBeam1PhaseStepWString = "DIG_DSP_REAL_SIM_MUX_BEAM_1_PHASE_STEP_W";
+static const char *DigDspRealSimMuxCav4MechNoiseCoupleKOutRString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_NOISE_COUPLE_K_OUT_R";
+static const char *DigDspRealSimMuxCav4MechNoiseCoupleKOutWString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_NOISE_COUPLE_K_OUT_W";
+static const char *DigDspRealSimMuxCav4MechPrngIvaRString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_PRNG_IVA_R";
+static const char *DigDspRealSimMuxCav4MechPrngIvaWString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_PRNG_IVA_W";
+static const char *DigDspRealSimMuxCav4MechPrngIvbRString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_PRNG_IVB_R";
+static const char *DigDspRealSimMuxCav4MechPrngIvbWString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_PRNG_IVB_W";
+static const char *DigDspRealSimMuxCav4MechPrngRandomRunRString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_PRNG_RANDOM_RUN_R";
+static const char *DigDspRealSimMuxCav4MechPrngRandomRunWString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_PRNG_RANDOM_RUN_W";
+static const char *DigDspRealSimMuxCav4MechResonatorPropConstRString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_RESONATOR_PROP_CONST_R";
+static const char *DigDspRealSimMuxCav4MechResonatorPropConstWString = "DIG_DSP_REAL_SIM_MUX_CAV4_MECH_RESONATOR_PROP_CONST_W";
+static const char *DigDspRealSimMuxCavity0ACavOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_A_CAV_OFFSET_R";
+static const char *DigDspRealSimMuxCavity0ACavOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_A_CAV_OFFSET_W";
+static const char *DigDspRealSimMuxCavity0AForOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_A_FOR_OFFSET_R";
+static const char *DigDspRealSimMuxCavity0AForOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_A_FOR_OFFSET_W";
+static const char *DigDspRealSimMuxCavity0ARflOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_A_RFL_OFFSET_R";
+static const char *DigDspRealSimMuxCavity0ARflOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_A_RFL_OFFSET_W";
+static const char *DigDspRealSimMuxCavity0AmpLpBwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_AMP_LP_BW_R";
+static const char *DigDspRealSimMuxCavity0AmpLpBwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_AMP_LP_BW_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDot0KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DOT_0_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDot0KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DOT_0_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDot1KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DOT_1_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDot1KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DOT_1_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDot2KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DOT_2_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDot2KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DOT_2_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DRIVE_COUPLE_OUT_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DRIVE_COUPLE_OUT_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DRIVE_COUPLE_OUT_PHASE_OFFSET_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_DRIVE_COUPLE_OUT_PHASE_OFFSET_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_FREQ_0_COARSE_FREQ_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_FREQ_0_COARSE_FREQ_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_FREQ_1_COARSE_FREQ_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_FREQ_1_COARSE_FREQ_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_FREQ_2_COARSE_FREQ_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_FREQ_2_COARSE_FREQ_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_0_BEAM_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_0_BEAM_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode0BwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_0_BW_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode0BwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_0_BW_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_0_DRIVE_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_0_DRIVE_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_1_BEAM_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_1_BEAM_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode1BwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_1_BW_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode1BwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_1_BW_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_1_DRIVE_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_1_DRIVE_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_2_BEAM_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_2_BEAM_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode2BwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_2_BW_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode2BwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_2_BW_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_2_DRIVE_COUPLING_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODE_2_DRIVE_COUPLING_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecModuloRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODULO_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecModuloWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_MODULO_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_OUTER_PROD_0_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_OUTER_PROD_0_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_OUTER_PROD_1_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_OUTER_PROD_1_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_OUTER_PROD_2_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_OUTER_PROD_2_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0Cav4ElecPhaseStepRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_PHASE_STEP_R";
+static const char *DigDspRealSimMuxCavity0Cav4ElecPhaseStepWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_CAV4_ELEC_PHASE_STEP_W";
+static const char *DigDspRealSimMuxCavity0ComprSatCtlRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_COMPR_SAT_CTL_R";
+static const char *DigDspRealSimMuxCavity0ComprSatCtlWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_COMPR_SAT_CTL_W";
+static const char *DigDspRealSimMuxCavity0PiezoCoupleKOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PIEZO_COUPLE_K_OUT_R";
+static const char *DigDspRealSimMuxCavity0PiezoCoupleKOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PIEZO_COUPLE_K_OUT_W";
+static const char *DigDspRealSimMuxCavity0PrngIvaRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PRNG_IVA_R";
+static const char *DigDspRealSimMuxCavity0PrngIvaWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PRNG_IVA_W";
+static const char *DigDspRealSimMuxCavity0PrngIvbRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PRNG_IVB_R";
+static const char *DigDspRealSimMuxCavity0PrngIvbWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PRNG_IVB_W";
+static const char *DigDspRealSimMuxCavity0PrngRandomRunRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PRNG_RANDOM_RUN_R";
+static const char *DigDspRealSimMuxCavity0PrngRandomRunWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_0_PRNG_RANDOM_RUN_W";
+static const char *DigDspRealSimMuxCavity1ACavOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_A_CAV_OFFSET_R";
+static const char *DigDspRealSimMuxCavity1ACavOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_A_CAV_OFFSET_W";
+static const char *DigDspRealSimMuxCavity1AForOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_A_FOR_OFFSET_R";
+static const char *DigDspRealSimMuxCavity1AForOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_A_FOR_OFFSET_W";
+static const char *DigDspRealSimMuxCavity1ARflOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_A_RFL_OFFSET_R";
+static const char *DigDspRealSimMuxCavity1ARflOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_A_RFL_OFFSET_W";
+static const char *DigDspRealSimMuxCavity1AmpLpBwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_AMP_LP_BW_R";
+static const char *DigDspRealSimMuxCavity1AmpLpBwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_AMP_LP_BW_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDot0KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DOT_0_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDot0KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DOT_0_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDot1KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DOT_1_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDot1KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DOT_1_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDot2KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DOT_2_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDot2KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DOT_2_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DRIVE_COUPLE_OUT_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DRIVE_COUPLE_OUT_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DRIVE_COUPLE_OUT_PHASE_OFFSET_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_DRIVE_COUPLE_OUT_PHASE_OFFSET_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_FREQ_0_COARSE_FREQ_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_FREQ_0_COARSE_FREQ_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_FREQ_1_COARSE_FREQ_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_FREQ_1_COARSE_FREQ_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_FREQ_2_COARSE_FREQ_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_FREQ_2_COARSE_FREQ_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_0_BEAM_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_0_BEAM_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode0BwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_0_BW_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode0BwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_0_BW_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_0_DRIVE_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_0_DRIVE_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_1_BEAM_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_1_BEAM_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode1BwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_1_BW_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode1BwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_1_BW_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_1_DRIVE_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_1_DRIVE_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_2_BEAM_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_2_BEAM_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode2BwRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_2_BW_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode2BwWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_2_BW_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_2_DRIVE_COUPLING_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODE_2_DRIVE_COUPLING_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecModuloRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODULO_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecModuloWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_MODULO_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_OUTER_PROD_0_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_OUTER_PROD_0_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_OUTER_PROD_1_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_OUTER_PROD_1_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_OUTER_PROD_2_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_OUTER_PROD_2_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1Cav4ElecPhaseStepRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_PHASE_STEP_R";
+static const char *DigDspRealSimMuxCavity1Cav4ElecPhaseStepWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_CAV4_ELEC_PHASE_STEP_W";
+static const char *DigDspRealSimMuxCavity1ComprSatCtlRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_COMPR_SAT_CTL_R";
+static const char *DigDspRealSimMuxCavity1ComprSatCtlWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_COMPR_SAT_CTL_W";
+static const char *DigDspRealSimMuxCavity1PiezoCoupleKOutRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PIEZO_COUPLE_K_OUT_R";
+static const char *DigDspRealSimMuxCavity1PiezoCoupleKOutWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PIEZO_COUPLE_K_OUT_W";
+static const char *DigDspRealSimMuxCavity1PrngIvaRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PRNG_IVA_R";
+static const char *DigDspRealSimMuxCavity1PrngIvaWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PRNG_IVA_W";
+static const char *DigDspRealSimMuxCavity1PrngIvbRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PRNG_IVB_R";
+static const char *DigDspRealSimMuxCavity1PrngIvbWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PRNG_IVB_W";
+static const char *DigDspRealSimMuxCavity1PrngRandomRunRString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PRNG_RANDOM_RUN_R";
+static const char *DigDspRealSimMuxCavity1PrngRandomRunWString = "DIG_DSP_REAL_SIM_MUX_CAVITY_1_PRNG_RANDOM_RUN_W";
+static const char *DigDspRealSimMuxDacIqPhaseRString = "DIG_DSP_REAL_SIM_MUX_DAC_IQ_PHASE_R";
+static const char *DigDspRealSimMuxDacIqPhaseWString = "DIG_DSP_REAL_SIM_MUX_DAC_IQ_PHASE_W";
+static const char *DigDspRealSimMuxShell0DspChanKeepRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_CHAN_KEEP_R";
+static const char *DigDspRealSimMuxShell0DspChanKeepWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_CHAN_KEEP_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_COARSE_SCALE_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_COARSE_SCALE_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_COEFF_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_COEFF_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcLimRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_LIM_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcLimWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_LIM_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_EN_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_EN_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_W";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_SETMP_R";
+static const char *DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_FDBK_CORE_MP_PROC_SETMP_W";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1AKxRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1A_KX_R";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1AKxWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1A_KX_W";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1AKyRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1A_KY_R";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1AKyWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1A_KY_W";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1BKxRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1B_KX_R";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1BKxWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1B_KX_W";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1BKyRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1B_KY_R";
+static const char *DigDspRealSimMuxShell0DspLpNotchLp1BKyWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_LP_NOTCH_LP1B_KY_W";
+static const char *DigDspRealSimMuxShell0DspModuloRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_MODULO_R";
+static const char *DigDspRealSimMuxShell0DspModuloWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_MODULO_W";
+static const char *DigDspRealSimMuxShell0DspPhaseStepRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_PHASE_STEP_R";
+static const char *DigDspRealSimMuxShell0DspPhaseStepWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_PHASE_STEP_W";
+static const char *DigDspRealSimMuxShell0DspPiezoPiezoDcRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_PIEZO_PIEZO_DC_R";
+static const char *DigDspRealSimMuxShell0DspPiezoPiezoDcWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_PIEZO_PIEZO_DC_W";
+static const char *DigDspRealSimMuxShell0DspTagRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_TAG_R";
+static const char *DigDspRealSimMuxShell0DspTagWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_TAG_W";
+static const char *DigDspRealSimMuxShell0DspUseFiberIqRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_USE_FIBER_IQ_R";
+static const char *DigDspRealSimMuxShell0DspUseFiberIqWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_USE_FIBER_IQ_W";
+static const char *DigDspRealSimMuxShell0DspWaveSampPerRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_WAVE_SAMP_PER_R";
+static const char *DigDspRealSimMuxShell0DspWaveSampPerWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_WAVE_SAMP_PER_W";
+static const char *DigDspRealSimMuxShell0DspWaveShiftRString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_WAVE_SHIFT_R";
+static const char *DigDspRealSimMuxShell0DspWaveShiftWString = "DIG_DSP_REAL_SIM_MUX_SHELL_0_DSP_WAVE_SHIFT_W";
+static const char *DigDspRealSimMuxShell1DspChanKeepRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_CHAN_KEEP_R";
+static const char *DigDspRealSimMuxShell1DspChanKeepWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_CHAN_KEEP_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_COARSE_SCALE_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_COARSE_SCALE_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_COEFF_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_COEFF_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcLimRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_LIM_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcLimWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_LIM_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_EN_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_EN_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_W";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_SETMP_R";
+static const char *DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_FDBK_CORE_MP_PROC_SETMP_W";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1AKxRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1A_KX_R";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1AKxWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1A_KX_W";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1AKyRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1A_KY_R";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1AKyWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1A_KY_W";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1BKxRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1B_KX_R";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1BKxWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1B_KX_W";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1BKyRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1B_KY_R";
+static const char *DigDspRealSimMuxShell1DspLpNotchLp1BKyWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_LP_NOTCH_LP1B_KY_W";
+static const char *DigDspRealSimMuxShell1DspModuloRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_MODULO_R";
+static const char *DigDspRealSimMuxShell1DspModuloWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_MODULO_W";
+static const char *DigDspRealSimMuxShell1DspPhaseStepRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_PHASE_STEP_R";
+static const char *DigDspRealSimMuxShell1DspPhaseStepWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_PHASE_STEP_W";
+static const char *DigDspRealSimMuxShell1DspPiezoPiezoDcRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_PIEZO_PIEZO_DC_R";
+static const char *DigDspRealSimMuxShell1DspPiezoPiezoDcWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_PIEZO_PIEZO_DC_W";
+static const char *DigDspRealSimMuxShell1DspTagRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_TAG_R";
+static const char *DigDspRealSimMuxShell1DspTagWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_TAG_W";
+static const char *DigDspRealSimMuxShell1DspUseFiberIqRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_USE_FIBER_IQ_R";
+static const char *DigDspRealSimMuxShell1DspUseFiberIqWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_USE_FIBER_IQ_W";
+static const char *DigDspRealSimMuxShell1DspWaveSampPerRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_WAVE_SAMP_PER_R";
+static const char *DigDspRealSimMuxShell1DspWaveSampPerWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_WAVE_SAMP_PER_W";
+static const char *DigDspRealSimMuxShell1DspWaveShiftRString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_WAVE_SHIFT_R";
+static const char *DigDspRealSimMuxShell1DspWaveShiftWString = "DIG_DSP_REAL_SIM_MUX_SHELL_1_DSP_WAVE_SHIFT_W";
 static const char *DigDspRewindRString = "DIG_DSP_REWIND_R";
 static const char *DigDspRewindWString = "DIG_DSP_REWIND_W";
 static const char *DigDspSsaStimAmpstepRString = "DIG_DSP_SSA_STIM_AMPSTEP_R";
@@ -154,8 +389,8 @@ static const char *DigDspWave0SrcRString = "DIG_DSP_WAVE0_SRC_R";
 static const char *DigDspWave0SrcWString = "DIG_DSP_WAVE0_SRC_W";
 static const char *DigDspWave1SrcRString = "DIG_DSP_WAVE1_SRC_R";
 static const char *DigDspWave1SrcWString = "DIG_DSP_WAVE1_SRC_W";
-static const char *DigSlowreadTagNowRString = "DIG_SLOWREAD_TAG_NOW_R";
-static const char *DigSlowreadTagNowWString = "DIG_SLOWREAD_TAG_NOW_W";
+static const char *DomainJumpRealignRString = "DOMAIN_JUMP_REALIGN_R";
+static const char *DomainJumpRealignWString = "DOMAIN_JUMP_REALIGN_W";
 static const char *FfffffffRString = "FFFFFFFF_R";
 static const char *Frequency4XoutRString = "FREQUENCY_4XOUT_R";
 static const char *FrequencyAdcRString = "FREQUENCY_ADC_R";
@@ -168,48 +403,17 @@ static const char *HistDoutRString = "HIST_DOUT_R";
 static const char *HistStatusRString = "HIST_STATUS_R";
 static const char *IccCfgRString = "ICC_CFG_R";
 static const char *IccCfgWString = "ICC_CFG_W";
-static const char *Idelay0WString = "IDELAY_0_W";
-static const char *Idelay0RString = "IDELAY_0_R";
-static const char *Idelay1WString = "IDELAY_1_W";
-static const char *Idelay1RString = "IDELAY_1_R";
-static const char *Idelay10WString = "IDELAY_10_W";
-static const char *Idelay10RString = "IDELAY_10_R";
-static const char *Idelay11WString = "IDELAY_11_W";
-static const char *Idelay11RString = "IDELAY_11_R";
-static const char *Idelay12WString = "IDELAY_12_W";
-static const char *Idelay12RString = "IDELAY_12_R";
-static const char *Idelay13WString = "IDELAY_13_W";
-static const char *Idelay13RString = "IDELAY_13_R";
-static const char *Idelay14WString = "IDELAY_14_W";
-static const char *Idelay14RString = "IDELAY_14_R";
-static const char *Idelay15WString = "IDELAY_15_W";
-static const char *Idelay15RString = "IDELAY_15_R";
-static const char *Idelay2WString = "IDELAY_2_W";
-static const char *Idelay2RString = "IDELAY_2_R";
-static const char *Idelay3WString = "IDELAY_3_W";
-static const char *Idelay3RString = "IDELAY_3_R";
-static const char *Idelay4WString = "IDELAY_4_W";
-static const char *Idelay4RString = "IDELAY_4_R";
-static const char *Idelay5WString = "IDELAY_5_W";
-static const char *Idelay5RString = "IDELAY_5_R";
-static const char *Idelay6WString = "IDELAY_6_W";
-static const char *Idelay6RString = "IDELAY_6_R";
-static const char *Idelay7WString = "IDELAY_7_W";
-static const char *Idelay7RString = "IDELAY_7_R";
-static const char *Idelay8WString = "IDELAY_8_W";
-static const char *Idelay8RString = "IDELAY_8_R";
-static const char *Idelay9WString = "IDELAY_9_W";
-static const char *Idelay9RString = "IDELAY_9_R";
+static const char *IdelayBaseRString = "IDELAY_BASE_R";
 static const char *IdelayValueOutU2Bits19To0RString = "IDELAY_VALUE_OUT_U2BITS19TO0_R";
 static const char *IdelayValueOutU2Bits39To20RString = "IDELAY_VALUE_OUT_U2BITS39TO20_R";
 static const char *IdelayValueOutU3Bits19To0RString = "IDELAY_VALUE_OUT_U3BITS19TO0_R";
 static const char *IdelayValueOutU3Bits39To20RString = "IDELAY_VALUE_OUT_U3BITS39TO20_R";
 static const char *LlspiResultRString = "LLSPI_RESULT_R";
 static const char *LlspiStatusRString = "LLSPI_STATUS_R";
-static const char *LlspiWeWString = "LLSPI_WE_W";
 static const char *OWoRString = "O_WO_R";
 static const char *PhasexDoutRString = "PHASEX_DOUT_R";
 static const char *PhasexStatusRString = "PHASEX_STATUS_R";
+static const char *QsfpBufRString = "QSFP_BUF_R";
 static const char *QsfpI2CRegRString = "QSFP_I2C_REG_R";
 static const char *QsfpI2CRegWString = "QSFP_I2C_REG_W";
 static const char *RldRString = "RLD__R";
@@ -217,14 +421,19 @@ static const char *ScannerResultRString = "SCANNER_RESULT_R";
 static const char *SfpAddressSetRString = "SFP_ADDRESS_SET_R";
 static const char *SfpAddressSetWString = "SFP_ADDRESS_SET_W";
 static const char *SlowChainOutRString = "SLOW_CHAIN_OUT_R";
-static const char *TraceStatusRString = "TRACE_STATUS_R";
+static const char *TagNowRString = "TAG_NOW_R";
+static const char *TagNowWString = "TAG_NOW_W";
+static const char *TraceIBufRString = "TRACE_I_BUF_R";
+static const char *TraceIqBufRString = "TRACE_IQ_BUF_R";
+static const char *TraceQBufRString = "TRACE_Q_BUF_R";
+static const char *TraceStatus1RString = "TRACE_STATUS1_R";
 static const char *TraceStatus2RString = "TRACE_STATUS2_R";
 static const char *Wave0OutRString = "WAVE0_OUT_R";
 static const char *Wave1OutRString = "WAVE1_OUT_R";
 static const char *WaveformsAvailableRString = "WAVEFORMS_AVAILABLE_R";
 
-const unsigned int readRegCount = 116;
-const unsigned int writeRegCount = 71;
+const unsigned int readRegCount = 224;
+const unsigned int writeRegCount = 172;
 
 
 
@@ -268,6 +477,7 @@ protected:
     int p_BanyanStatusR;
     int p_ClkPhaseDiffOutU2R;
     int p_ClkPhaseDiffOutU3R;
+    int p_CrcErrorsR;
     int p_CtraceRunningR;
     int p_DigCfgU15SpiDataAddrRR;
     int p_DigCfgU15SpiDataAddrRW;
@@ -325,6 +535,8 @@ protected:
     int p_DigDspCicPeriodW;
     int p_DigDspCicShiftR;
     int p_DigDspCicShiftW;
+    int p_DigDspCircleBufFlipR;
+    int p_DigDspCircleBufFlipW;
     int p_DigDspDacDdsResetR;
     int p_DigDspDacDdsResetW;
     int p_DigDspDacModeR;
@@ -337,6 +549,8 @@ protected:
     int p_DigDspDdsaPhstepLW;
     int p_DigDspHistCountWStrobeR;
     int p_DigDspHistCountWStrobeW;
+    int p_DigDspLlrfDspDacEnR;
+    int p_DigDspLlrfDspDacEnW;
     int p_DigDspLoAmpR;
     int p_DigDspLoAmpW;
     int p_DigDspModuloR;
@@ -345,6 +559,236 @@ protected:
     int p_DigDspPhaseStepHW;
     int p_DigDspPhaseStepLR;
     int p_DigDspPhaseStepLW;
+    int p_DigDspPrcDspCavSelR;
+    int p_DigDspPrcDspCavSelW;
+    int p_DigDspPrcDspPrlCfgR;
+    int p_DigDspPrcDspPrlCfgW;
+    int p_DigDspPrcDspPrlGainR;
+    int p_DigDspPrcDspPrlGainW;
+    int p_DigDspRealSimMuxBeam0ModuloR;
+    int p_DigDspRealSimMuxBeam0ModuloW;
+    int p_DigDspRealSimMuxBeam0PhaseInitR;
+    int p_DigDspRealSimMuxBeam0PhaseInitW;
+    int p_DigDspRealSimMuxBeam0PhaseStepR;
+    int p_DigDspRealSimMuxBeam0PhaseStepW;
+    int p_DigDspRealSimMuxBeam1ModuloR;
+    int p_DigDspRealSimMuxBeam1ModuloW;
+    int p_DigDspRealSimMuxBeam1PhaseInitR;
+    int p_DigDspRealSimMuxBeam1PhaseInitW;
+    int p_DigDspRealSimMuxBeam1PhaseStepR;
+    int p_DigDspRealSimMuxBeam1PhaseStepW;
+    int p_DigDspRealSimMuxCav4MechNoiseCoupleKOutR;
+    int p_DigDspRealSimMuxCav4MechNoiseCoupleKOutW;
+    int p_DigDspRealSimMuxCav4MechPrngIvaR;
+    int p_DigDspRealSimMuxCav4MechPrngIvaW;
+    int p_DigDspRealSimMuxCav4MechPrngIvbR;
+    int p_DigDspRealSimMuxCav4MechPrngIvbW;
+    int p_DigDspRealSimMuxCav4MechPrngRandomRunR;
+    int p_DigDspRealSimMuxCav4MechPrngRandomRunW;
+    int p_DigDspRealSimMuxCav4MechResonatorPropConstR;
+    int p_DigDspRealSimMuxCav4MechResonatorPropConstW;
+    int p_DigDspRealSimMuxCavity0ACavOffsetR;
+    int p_DigDspRealSimMuxCavity0ACavOffsetW;
+    int p_DigDspRealSimMuxCavity0AForOffsetR;
+    int p_DigDspRealSimMuxCavity0AForOffsetW;
+    int p_DigDspRealSimMuxCavity0ARflOffsetR;
+    int p_DigDspRealSimMuxCavity0ARflOffsetW;
+    int p_DigDspRealSimMuxCavity0AmpLpBwR;
+    int p_DigDspRealSimMuxCavity0AmpLpBwW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDot0KOutR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDot0KOutW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDot1KOutR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDot1KOutW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDot2KOutR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDot2KOutW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode0BwR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode0BwW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode1BwR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode1BwW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode2BwR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode2BwW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecModuloR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecModuloW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutW;
+    int p_DigDspRealSimMuxCavity0Cav4ElecPhaseStepR;
+    int p_DigDspRealSimMuxCavity0Cav4ElecPhaseStepW;
+    int p_DigDspRealSimMuxCavity0ComprSatCtlR;
+    int p_DigDspRealSimMuxCavity0ComprSatCtlW;
+    int p_DigDspRealSimMuxCavity0PiezoCoupleKOutR;
+    int p_DigDspRealSimMuxCavity0PiezoCoupleKOutW;
+    int p_DigDspRealSimMuxCavity0PrngIvaR;
+    int p_DigDspRealSimMuxCavity0PrngIvaW;
+    int p_DigDspRealSimMuxCavity0PrngIvbR;
+    int p_DigDspRealSimMuxCavity0PrngIvbW;
+    int p_DigDspRealSimMuxCavity0PrngRandomRunR;
+    int p_DigDspRealSimMuxCavity0PrngRandomRunW;
+    int p_DigDspRealSimMuxCavity1ACavOffsetR;
+    int p_DigDspRealSimMuxCavity1ACavOffsetW;
+    int p_DigDspRealSimMuxCavity1AForOffsetR;
+    int p_DigDspRealSimMuxCavity1AForOffsetW;
+    int p_DigDspRealSimMuxCavity1ARflOffsetR;
+    int p_DigDspRealSimMuxCavity1ARflOffsetW;
+    int p_DigDspRealSimMuxCavity1AmpLpBwR;
+    int p_DigDspRealSimMuxCavity1AmpLpBwW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDot0KOutR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDot0KOutW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDot1KOutR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDot1KOutW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDot2KOutR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDot2KOutW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode0BwR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode0BwW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode1BwR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode1BwW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode2BwR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode2BwW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecModuloR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecModuloW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutW;
+    int p_DigDspRealSimMuxCavity1Cav4ElecPhaseStepR;
+    int p_DigDspRealSimMuxCavity1Cav4ElecPhaseStepW;
+    int p_DigDspRealSimMuxCavity1ComprSatCtlR;
+    int p_DigDspRealSimMuxCavity1ComprSatCtlW;
+    int p_DigDspRealSimMuxCavity1PiezoCoupleKOutR;
+    int p_DigDspRealSimMuxCavity1PiezoCoupleKOutW;
+    int p_DigDspRealSimMuxCavity1PrngIvaR;
+    int p_DigDspRealSimMuxCavity1PrngIvaW;
+    int p_DigDspRealSimMuxCavity1PrngIvbR;
+    int p_DigDspRealSimMuxCavity1PrngIvbW;
+    int p_DigDspRealSimMuxCavity1PrngRandomRunR;
+    int p_DigDspRealSimMuxCavity1PrngRandomRunW;
+    int p_DigDspRealSimMuxDacIqPhaseR;
+    int p_DigDspRealSimMuxDacIqPhaseW;
+    int p_DigDspRealSimMuxShell0DspChanKeepR;
+    int p_DigDspRealSimMuxShell0DspChanKeepW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcLimR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcLimW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshW;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpR;
+    int p_DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpW;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1AKxR;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1AKxW;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1AKyR;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1AKyW;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1BKxR;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1BKxW;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1BKyR;
+    int p_DigDspRealSimMuxShell0DspLpNotchLp1BKyW;
+    int p_DigDspRealSimMuxShell0DspModuloR;
+    int p_DigDspRealSimMuxShell0DspModuloW;
+    int p_DigDspRealSimMuxShell0DspPhaseStepR;
+    int p_DigDspRealSimMuxShell0DspPhaseStepW;
+    int p_DigDspRealSimMuxShell0DspPiezoPiezoDcR;
+    int p_DigDspRealSimMuxShell0DspPiezoPiezoDcW;
+    int p_DigDspRealSimMuxShell0DspTagR;
+    int p_DigDspRealSimMuxShell0DspTagW;
+    int p_DigDspRealSimMuxShell0DspUseFiberIqR;
+    int p_DigDspRealSimMuxShell0DspUseFiberIqW;
+    int p_DigDspRealSimMuxShell0DspWaveSampPerR;
+    int p_DigDspRealSimMuxShell0DspWaveSampPerW;
+    int p_DigDspRealSimMuxShell0DspWaveShiftR;
+    int p_DigDspRealSimMuxShell0DspWaveShiftW;
+    int p_DigDspRealSimMuxShell1DspChanKeepR;
+    int p_DigDspRealSimMuxShell1DspChanKeepW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcLimR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcLimW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshW;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpR;
+    int p_DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpW;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1AKxR;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1AKxW;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1AKyR;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1AKyW;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1BKxR;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1BKxW;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1BKyR;
+    int p_DigDspRealSimMuxShell1DspLpNotchLp1BKyW;
+    int p_DigDspRealSimMuxShell1DspModuloR;
+    int p_DigDspRealSimMuxShell1DspModuloW;
+    int p_DigDspRealSimMuxShell1DspPhaseStepR;
+    int p_DigDspRealSimMuxShell1DspPhaseStepW;
+    int p_DigDspRealSimMuxShell1DspPiezoPiezoDcR;
+    int p_DigDspRealSimMuxShell1DspPiezoPiezoDcW;
+    int p_DigDspRealSimMuxShell1DspTagR;
+    int p_DigDspRealSimMuxShell1DspTagW;
+    int p_DigDspRealSimMuxShell1DspUseFiberIqR;
+    int p_DigDspRealSimMuxShell1DspUseFiberIqW;
+    int p_DigDspRealSimMuxShell1DspWaveSampPerR;
+    int p_DigDspRealSimMuxShell1DspWaveSampPerW;
+    int p_DigDspRealSimMuxShell1DspWaveShiftR;
+    int p_DigDspRealSimMuxShell1DspWaveShiftW;
     int p_DigDspRewindR;
     int p_DigDspRewindW;
     int p_DigDspSsaStimAmpstepR;
@@ -367,8 +811,8 @@ protected:
     int p_DigDspWave0SrcW;
     int p_DigDspWave1SrcR;
     int p_DigDspWave1SrcW;
-    int p_DigSlowreadTagNowR;
-    int p_DigSlowreadTagNowW;
+    int p_DomainJumpRealignR;
+    int p_DomainJumpRealignW;
     int p_FfffffffR;
     int p_Frequency4XoutR;
     int p_FrequencyAdcR;
@@ -381,48 +825,17 @@ protected:
     int p_HistStatusR;
     int p_IccCfgR;
     int p_IccCfgW;
-    int p_Idelay0W;
-    int p_Idelay0R;
-    int p_Idelay1W;
-    int p_Idelay1R;
-    int p_Idelay10W;
-    int p_Idelay10R;
-    int p_Idelay11W;
-    int p_Idelay11R;
-    int p_Idelay12W;
-    int p_Idelay12R;
-    int p_Idelay13W;
-    int p_Idelay13R;
-    int p_Idelay14W;
-    int p_Idelay14R;
-    int p_Idelay15W;
-    int p_Idelay15R;
-    int p_Idelay2W;
-    int p_Idelay2R;
-    int p_Idelay3W;
-    int p_Idelay3R;
-    int p_Idelay4W;
-    int p_Idelay4R;
-    int p_Idelay5W;
-    int p_Idelay5R;
-    int p_Idelay6W;
-    int p_Idelay6R;
-    int p_Idelay7W;
-    int p_Idelay7R;
-    int p_Idelay8W;
-    int p_Idelay8R;
-    int p_Idelay9W;
-    int p_Idelay9R;
+    int p_IdelayBaseR;
     int p_IdelayValueOutU2Bits19To0R;
     int p_IdelayValueOutU2Bits39To20R;
     int p_IdelayValueOutU3Bits19To0R;
     int p_IdelayValueOutU3Bits39To20R;
     int p_LlspiResultR;
     int p_LlspiStatusR;
-    int p_LlspiWeW;
     int p_OWoR;
     int p_PhasexDoutR;
     int p_PhasexStatusR;
+    int p_QsfpBufR;
     int p_QsfpI2CRegR;
     int p_QsfpI2CRegW;
     int p_RldR;
@@ -430,7 +843,12 @@ protected:
     int p_SfpAddressSetR;
     int p_SfpAddressSetW;
     int p_SlowChainOutR;
-    int p_TraceStatusR;
+    int p_TagNowR;
+    int p_TagNowW;
+    int p_TraceIBufR;
+    int p_TraceIqBufR;
+    int p_TraceQBufR;
+    int p_TraceStatus1R;
     int p_TraceStatus2R;
     int p_Wave0OutR;
     int p_Wave1OutR;
@@ -476,10 +894,11 @@ private:
     	PhasexStatusRAdr = 0x0000002E,
     	ClkPhaseDiffOutU2RAdr = 0x0000002F,
     	ClkPhaseDiffOutU3RAdr = 0x00000030,
-    	U15SdoAddrRAdr = 0x00000038,
+    	CrcErrorsRAdr = 0x00000031,
     	U15SpiRdbkRAdr = 0x00000038,
-    	U15SdioAsSdoRAdr = 0x00000039,
+    	U15SdoAddrRAdr = 0x00000038,
     	U15SpiReadyRAdr = 0x00000039,
+    	U15SdioAsSdoRAdr = 0x00000039,
     	U18SdoAddrRAdr = 0x0000003C,
     	U18SpiRdbkRAdr = 0x0000003C,
     	U18SdioAsSdoRAdr = 0x0000003D,
@@ -488,163 +907,461 @@ private:
     	WaveformsAvailableRAdr = 0x00000041,
     	BanyanStatusRAdr = 0x00000042,
     	SlowChainOutRAdr = 0x00000043,
-    	TraceStatusRAdr = 0x00000044,
+    	TraceStatus1RAdr = 0x00000044,
     	TraceStatus2RAdr = 0x00000045,
-    	Idelay0RAdr = 0x00000070,
-    	Idelay1RAdr = 0x00000071,
-    	Idelay2RAdr = 0x00000072,
-    	Idelay3RAdr = 0x00000073,
-    	Idelay4RAdr = 0x00000074,
-    	Idelay5RAdr = 0x00000075,
-    	Idelay6RAdr = 0x00000076,
-    	Idelay7RAdr = 0x00000077,
-    	Idelay8RAdr = 0x00000078,
-    	Idelay9RAdr = 0x00000079,
-    	Idelay10RAdr = 0x0000007A,
-    	Idelay11RAdr = 0x0000007B,
-    	Idelay12RAdr = 0x0000007C,
-    	Idelay13RAdr = 0x0000007D,
-    	Idelay14RAdr = 0x0000007E,
-    	Idelay15RAdr = 0x0000007F,
+    	IdelayBaseRAdr = 0x00000070,
     	HistDoutRAdr = 0x00100000,
     	PhasexDoutRAdr = 0x00110000,
     	BanyanBufRAdr = 0x00120000,
     	ScannerResultRAdr = 0x00130000,
-    	AdcMmcmRAdr = 0x00800000,
-    	DigCfgU15SpiDataAddrRRAdr = 0x00800001,
-    	DigCfgU15SpiReadAndStartRRAdr = 0x00800002,
-    	DigCfgU18SpiDataAddrRRAdr = 0x00800003,
-    	DigCfgU18SpiReadAndStartRRAdr = 0x00800004,
-    	DigCfgU2ClkResetRRAdr = 0x00800005,
-    	DigCfgU2IserdesResetRRAdr = 0x00800006,
-    	DigCfgU3ClkResetRRAdr = 0x00800007,
-    	DigCfgU3IserdesResetRRAdr = 0x00800008,
-    	DigCfgU4ResetRRAdr = 0x00800009,
-    	DigCfgBanyanMaskRAdr = 0x0080000A,
-    	DigCfgBitslipRAdr = 0x0080000B,
-    	DigCfgIdelayctrlResetRRAdr = 0x0080000C,
-    	DigCfgLlspiWeRAdr = 0x0080000D,
-    	DigCfgMmcmResetRRAdr = 0x0080000E,
-    	DigCfgPeriphConfigRAdr = 0x0080000F,
-    	DigCfgPhasexTrigRAdr = 0x00800010,
-    	DigCfgRawadcTrigRAdr = 0x00800011,
-    	DigCfgScanTriggerWeRAdr = 0x00800012,
-    	DigCfgScannerDebugRAdr = 0x00800013,
-    	DigCfgSyncAd7794CsetRAdr = 0x00800014,
-    	DigCfgSyncTps62210CsetRAdr = 0x00800015,
-    	DigDspAdcTestModeRAdr = 0x00800016,
-    	DigDspAdcTestResetRAdr = 0x00800017,
-    	DigDspAmplitudeRAdr = 0x00800018,
-    	DigDspAverageLenRAdr = 0x00800019,
-    	DigDspBufTrigRAdr = 0x0080001A,
-    	DigDspCicPeriodRAdr = 0x0080001B,
-    	DigDspCicShiftRAdr = 0x0080001C,
-    	DigDspDacDdsResetRAdr = 0x0080001D,
-    	DigDspDacModeRAdr = 0x0080001E,
-    	DigDspDdsaModuloRAdr = 0x0080001F,
-    	DigDspDdsaPhstepHRAdr = 0x00800020,
-    	DigDspDdsaPhstepLRAdr = 0x00800021,
-    	DigDspHistCountWStrobeRAdr = 0x00800022,
-    	DigDspLoAmpRAdr = 0x00800023,
-    	DigDspModuloRAdr = 0x00800024,
-    	DigDspPhaseStepHRAdr = 0x00800025,
-    	DigDspPhaseStepLRAdr = 0x00800026,
-    	DigDspRewindRAdr = 0x00800027,
-    	DigDspSsaStimAmpstepRAdr = 0x00800028,
-    	DigDspSsaStimEnRAdr = 0x00800029,
-    	DigDspSsaStimGPeriodRAdr = 0x0080002A,
-    	DigDspSsaStimPertstepRAdr = 0x0080002B,
-    	DigDspTraceKeepRAdr = 0x0080002C,
-    	DigDspTraceResetWeRAdr = 0x0080002D,
-    	DigDspTrigInternalRAdr = 0x0080002E,
-    	DigDspTrigModeRAdr = 0x0080002F,
-    	DigDspWave0SrcRAdr = 0x00800030,
-    	DigDspWave1SrcRAdr = 0x00800031,
-    	DigSlowreadTagNowRAdr = 0x00800032,
-    	IccCfgRAdr = 0x00800033,
-    	QsfpI2CRegRAdr = 0x00800034,
-    	SfpAddressSetRAdr = 0x00800035,
+    	TraceIqBufRAdr = 0x00140000,
+    	TraceIBufRAdr = 0x00148000,
+    	TraceQBufRAdr = 0x0014C000,
+    	QsfpBufRAdr = 0x00153000,
+    	DigDspRealSimMuxCav4MechNoiseCoupleKOutRAdr = 0x00800000,
+    	DigDspRealSimMuxCav4MechResonatorPropConstRAdr = 0x00800400,
+    	DigDspRealSimMuxCavity0Cav4ElecDot0KOutRAdr = 0x00800800,
+    	DigDspRealSimMuxCavity0Cav4ElecDot1KOutRAdr = 0x00800C00,
+    	DigDspRealSimMuxCavity0Cav4ElecDot2KOutRAdr = 0x00801000,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutRAdr = 0x00801400,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutRAdr = 0x00801800,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutRAdr = 0x00801C00,
+    	DigDspRealSimMuxCavity0PiezoCoupleKOutRAdr = 0x00802000,
+    	DigDspRealSimMuxCavity1Cav4ElecDot0KOutRAdr = 0x00802400,
+    	DigDspRealSimMuxCavity1Cav4ElecDot1KOutRAdr = 0x00802800,
+    	DigDspRealSimMuxCavity1Cav4ElecDot2KOutRAdr = 0x00802C00,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutRAdr = 0x00803000,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutRAdr = 0x00803400,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutRAdr = 0x00803800,
+    	DigDspRealSimMuxCavity1PiezoCoupleKOutRAdr = 0x00803C00,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffRAdr = 0x00804000,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcLimRAdr = 0x00804004,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpRAdr = 0x00804008,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffRAdr = 0x0080400C,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcLimRAdr = 0x00804010,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpRAdr = 0x00804014,
+    	DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingRAdr = 0x00804018,
+    	DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetRAdr = 0x0080401A,
+    	DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingRAdr = 0x0080401C,
+    	DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetRAdr = 0x0080401E,
+    	DigDspRealSimMuxShell0DspLpNotchLp1AKxRAdr = 0x00804020,
+    	DigDspRealSimMuxShell0DspLpNotchLp1AKyRAdr = 0x00804022,
+    	DigDspRealSimMuxShell0DspLpNotchLp1BKxRAdr = 0x00804024,
+    	DigDspRealSimMuxShell0DspLpNotchLp1BKyRAdr = 0x00804026,
+    	DigDspRealSimMuxShell1DspLpNotchLp1AKxRAdr = 0x00804028,
+    	DigDspRealSimMuxShell1DspLpNotchLp1AKyRAdr = 0x0080402A,
+    	DigDspRealSimMuxShell1DspLpNotchLp1BKxRAdr = 0x0080402C,
+    	DigDspRealSimMuxShell1DspLpNotchLp1BKyRAdr = 0x0080402E,
+    	AdcMmcmRAdr = 0x00804030,
+    	DigCfgU15SpiDataAddrRRAdr = 0x00804031,
+    	DigCfgU15SpiReadAndStartRRAdr = 0x00804032,
+    	DigCfgU18SpiDataAddrRRAdr = 0x00804033,
+    	DigCfgU18SpiReadAndStartRRAdr = 0x00804034,
+    	DigCfgU2ClkResetRRAdr = 0x00804035,
+    	DigCfgU2IserdesResetRRAdr = 0x00804036,
+    	DigCfgU3ClkResetRRAdr = 0x00804037,
+    	DigCfgU3IserdesResetRRAdr = 0x00804038,
+    	DigCfgU4ResetRRAdr = 0x00804039,
+    	DigCfgBanyanMaskRAdr = 0x0080403A,
+    	DigCfgBitslipRAdr = 0x0080403B,
+    	DigCfgIdelayctrlResetRRAdr = 0x0080403C,
+    	DigCfgLlspiWeRAdr = 0x0080403D,
+    	DigCfgMmcmResetRRAdr = 0x0080403E,
+    	DigCfgPeriphConfigRAdr = 0x0080403F,
+    	DigCfgPhasexTrigRAdr = 0x00804040,
+    	DigCfgRawadcTrigRAdr = 0x00804041,
+    	DigCfgScanTriggerWeRAdr = 0x00804042,
+    	DigCfgScannerDebugRAdr = 0x00804043,
+    	DigCfgSyncAd7794CsetRAdr = 0x00804044,
+    	DigCfgSyncTps62210CsetRAdr = 0x00804045,
+    	DigDspAdcTestModeRAdr = 0x00804046,
+    	DigDspAdcTestResetRAdr = 0x00804047,
+    	DigDspAmplitudeRAdr = 0x00804048,
+    	DigDspAverageLenRAdr = 0x00804049,
+    	DigDspBufTrigRAdr = 0x0080404A,
+    	DigDspCicPeriodRAdr = 0x0080404B,
+    	DigDspCicShiftRAdr = 0x0080404C,
+    	DigDspCircleBufFlipRAdr = 0x0080404D,
+    	DigDspDacDdsResetRAdr = 0x0080404E,
+    	DigDspDacModeRAdr = 0x0080404F,
+    	DigDspDdsaModuloRAdr = 0x00804050,
+    	DigDspDdsaPhstepHRAdr = 0x00804051,
+    	DigDspDdsaPhstepLRAdr = 0x00804052,
+    	DigDspHistCountWStrobeRAdr = 0x00804053,
+    	DigDspLlrfDspDacEnRAdr = 0x00804054,
+    	DigDspLoAmpRAdr = 0x00804055,
+    	DigDspModuloRAdr = 0x00804056,
+    	DigDspPhaseStepHRAdr = 0x00804057,
+    	DigDspPhaseStepLRAdr = 0x00804058,
+    	DigDspPrcDspCavSelRAdr = 0x00804059,
+    	DigDspPrcDspPrlCfgRAdr = 0x0080405A,
+    	DigDspPrcDspPrlGainRAdr = 0x0080405B,
+    	DigDspRealSimMuxBeam0ModuloRAdr = 0x0080405C,
+    	DigDspRealSimMuxBeam0PhaseInitRAdr = 0x0080405D,
+    	DigDspRealSimMuxBeam0PhaseStepRAdr = 0x0080405E,
+    	DigDspRealSimMuxBeam1ModuloRAdr = 0x0080405F,
+    	DigDspRealSimMuxBeam1PhaseInitRAdr = 0x00804060,
+    	DigDspRealSimMuxBeam1PhaseStepRAdr = 0x00804061,
+    	DigDspRealSimMuxCav4MechPrngIvaRAdr = 0x00804062,
+    	DigDspRealSimMuxCav4MechPrngIvbRAdr = 0x00804063,
+    	DigDspRealSimMuxCav4MechPrngRandomRunRAdr = 0x00804064,
+    	DigDspRealSimMuxCavity0ACavOffsetRAdr = 0x00804065,
+    	DigDspRealSimMuxCavity0AForOffsetRAdr = 0x00804066,
+    	DigDspRealSimMuxCavity0ARflOffsetRAdr = 0x00804067,
+    	DigDspRealSimMuxCavity0AmpLpBwRAdr = 0x00804068,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqRAdr = 0x00804069,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqRAdr = 0x0080406A,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqRAdr = 0x0080406B,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingRAdr = 0x0080406C,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0BwRAdr = 0x0080406D,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingRAdr = 0x0080406E,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingRAdr = 0x0080406F,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1BwRAdr = 0x00804070,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingRAdr = 0x00804071,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingRAdr = 0x00804072,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2BwRAdr = 0x00804073,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingRAdr = 0x00804074,
+    	DigDspRealSimMuxCavity0Cav4ElecModuloRAdr = 0x00804075,
+    	DigDspRealSimMuxCavity0Cav4ElecPhaseStepRAdr = 0x00804076,
+    	DigDspRealSimMuxCavity0ComprSatCtlRAdr = 0x00804077,
+    	DigDspRealSimMuxCavity0PrngIvaRAdr = 0x00804078,
+    	DigDspRealSimMuxCavity0PrngIvbRAdr = 0x00804079,
+    	DigDspRealSimMuxCavity0PrngRandomRunRAdr = 0x0080407A,
+    	DigDspRealSimMuxCavity1ACavOffsetRAdr = 0x0080407B,
+    	DigDspRealSimMuxCavity1AForOffsetRAdr = 0x0080407C,
+    	DigDspRealSimMuxCavity1ARflOffsetRAdr = 0x0080407D,
+    	DigDspRealSimMuxCavity1AmpLpBwRAdr = 0x0080407E,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqRAdr = 0x0080407F,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqRAdr = 0x00804080,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqRAdr = 0x00804081,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingRAdr = 0x00804082,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0BwRAdr = 0x00804083,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingRAdr = 0x00804084,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingRAdr = 0x00804085,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1BwRAdr = 0x00804086,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingRAdr = 0x00804087,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingRAdr = 0x00804088,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2BwRAdr = 0x00804089,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingRAdr = 0x0080408A,
+    	DigDspRealSimMuxCavity1Cav4ElecModuloRAdr = 0x0080408B,
+    	DigDspRealSimMuxCavity1Cav4ElecPhaseStepRAdr = 0x0080408C,
+    	DigDspRealSimMuxCavity1ComprSatCtlRAdr = 0x0080408D,
+    	DigDspRealSimMuxCavity1PrngIvaRAdr = 0x0080408E,
+    	DigDspRealSimMuxCavity1PrngIvbRAdr = 0x0080408F,
+    	DigDspRealSimMuxCavity1PrngRandomRunRAdr = 0x00804090,
+    	DigDspRealSimMuxDacIqPhaseRAdr = 0x00804091,
+    	DigDspRealSimMuxShell0DspChanKeepRAdr = 0x00804092,
+    	DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleRAdr = 0x00804093,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetRAdr = 0x00804094,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnRAdr = 0x00804095,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshRAdr = 0x00804096,
+    	DigDspRealSimMuxShell0DspModuloRAdr = 0x00804097,
+    	DigDspRealSimMuxShell0DspPhaseStepRAdr = 0x00804098,
+    	DigDspRealSimMuxShell0DspPiezoPiezoDcRAdr = 0x00804099,
+    	DigDspRealSimMuxShell0DspTagRAdr = 0x0080409A,
+    	DigDspRealSimMuxShell0DspUseFiberIqRAdr = 0x0080409B,
+    	DigDspRealSimMuxShell0DspWaveSampPerRAdr = 0x0080409C,
+    	DigDspRealSimMuxShell0DspWaveShiftRAdr = 0x0080409D,
+    	DigDspRealSimMuxShell1DspChanKeepRAdr = 0x0080409E,
+    	DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleRAdr = 0x0080409F,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetRAdr = 0x008040A0,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnRAdr = 0x008040A1,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshRAdr = 0x008040A2,
+    	DigDspRealSimMuxShell1DspModuloRAdr = 0x008040A3,
+    	DigDspRealSimMuxShell1DspPhaseStepRAdr = 0x008040A4,
+    	DigDspRealSimMuxShell1DspPiezoPiezoDcRAdr = 0x008040A5,
+    	DigDspRealSimMuxShell1DspTagRAdr = 0x008040A6,
+    	DigDspRealSimMuxShell1DspUseFiberIqRAdr = 0x008040A7,
+    	DigDspRealSimMuxShell1DspWaveSampPerRAdr = 0x008040A8,
+    	DigDspRealSimMuxShell1DspWaveShiftRAdr = 0x008040A9,
+    	DigDspRewindRAdr = 0x008040AA,
+    	DigDspSsaStimAmpstepRAdr = 0x008040AB,
+    	DigDspSsaStimEnRAdr = 0x008040AC,
+    	DigDspSsaStimGPeriodRAdr = 0x008040AD,
+    	DigDspSsaStimPertstepRAdr = 0x008040AE,
+    	DigDspTraceKeepRAdr = 0x008040AF,
+    	DigDspTraceResetWeRAdr = 0x008040B0,
+    	DigDspTrigInternalRAdr = 0x008040B1,
+    	DigDspTrigModeRAdr = 0x008040B2,
+    	DigDspWave0SrcRAdr = 0x008040B3,
+    	DigDspWave1SrcRAdr = 0x008040B4,
+    	DomainJumpRealignRAdr = 0x008040B5,
+    	IccCfgRAdr = 0x008040B6,
+    	QsfpI2CRegRAdr = 0x008040B7,
+    	SfpAddressSetRAdr = 0x008040B8,
+    	TagNowRAdr = 0x008040B9,
     };
 
     // mapping of register names to addresses
     enum RegWriteAddrs
     {
-    	LlspiWeWAdr = 0x00000005,
-    	Idelay0WAdr = 0x00000070,
-    	Idelay1WAdr = 0x00000071,
-    	Idelay2WAdr = 0x00000072,
-    	Idelay3WAdr = 0x00000073,
-    	Idelay4WAdr = 0x00000074,
-    	Idelay5WAdr = 0x00000075,
-    	Idelay6WAdr = 0x00000076,
-    	Idelay7WAdr = 0x00000077,
-    	Idelay8WAdr = 0x00000078,
-    	Idelay9WAdr = 0x00000079,
-    	Idelay10WAdr = 0x0000007A,
-    	Idelay11WAdr = 0x0000007B,
-    	Idelay12WAdr = 0x0000007C,
-    	Idelay13WAdr = 0x0000007D,
-    	Idelay14WAdr = 0x0000007E,
-    	Idelay15WAdr = 0x0000007F,
-    	AdcMmcmWAdr = 0x00800000,
-    	DigCfgU15SpiDataAddrRWAdr = 0x00800001,
-    	DigCfgU15SpiReadAndStartRWAdr = 0x00800002,
-    	DigCfgU18SpiDataAddrRWAdr = 0x00800003,
-    	DigCfgU18SpiReadAndStartRWAdr = 0x00800004,
-    	DigCfgU2ClkResetRWAdr = 0x00800005,
-    	DigCfgU2IserdesResetRWAdr = 0x00800006,
-    	DigCfgU3ClkResetRWAdr = 0x00800007,
-    	DigCfgU3IserdesResetRWAdr = 0x00800008,
-    	DigCfgU4ResetRWAdr = 0x00800009,
-    	DigCfgBanyanMaskWAdr = 0x0080000A,
-    	DigCfgBitslipWAdr = 0x0080000B,
-    	DigCfgIdelayctrlResetRWAdr = 0x0080000C,
-    	DigCfgLlspiWeWAdr = 0x0080000D,
-    	DigCfgMmcmResetRWAdr = 0x0080000E,
-    	DigCfgPeriphConfigWAdr = 0x0080000F,
-    	DigCfgPhasexTrigWAdr = 0x00800010,
-    	DigCfgRawadcTrigWAdr = 0x00800011,
-    	DigCfgScanTriggerWeWAdr = 0x00800012,
-    	DigCfgScannerDebugWAdr = 0x00800013,
-    	DigCfgSyncAd7794CsetWAdr = 0x00800014,
-    	DigCfgSyncTps62210CsetWAdr = 0x00800015,
-    	DigDspAdcTestModeWAdr = 0x00800016,
-    	DigDspAdcTestResetWAdr = 0x00800017,
-    	DigDspAmplitudeWAdr = 0x00800018,
-    	DigDspAverageLenWAdr = 0x00800019,
-    	DigDspBufTrigWAdr = 0x0080001A,
-    	DigDspCicPeriodWAdr = 0x0080001B,
-    	DigDspCicShiftWAdr = 0x0080001C,
-    	DigDspDacDdsResetWAdr = 0x0080001D,
-    	DigDspDacModeWAdr = 0x0080001E,
-    	DigDspDdsaModuloWAdr = 0x0080001F,
-    	DigDspDdsaPhstepHWAdr = 0x00800020,
-    	DigDspDdsaPhstepLWAdr = 0x00800021,
-    	DigDspHistCountWStrobeWAdr = 0x00800022,
-    	DigDspLoAmpWAdr = 0x00800023,
-    	DigDspModuloWAdr = 0x00800024,
-    	DigDspPhaseStepHWAdr = 0x00800025,
-    	DigDspPhaseStepLWAdr = 0x00800026,
-    	DigDspRewindWAdr = 0x00800027,
-    	DigDspSsaStimAmpstepWAdr = 0x00800028,
-    	DigDspSsaStimEnWAdr = 0x00800029,
-    	DigDspSsaStimGPeriodWAdr = 0x0080002A,
-    	DigDspSsaStimPertstepWAdr = 0x0080002B,
-    	DigDspTraceKeepWAdr = 0x0080002C,
-    	DigDspTraceResetWeWAdr = 0x0080002D,
-    	DigDspTrigInternalWAdr = 0x0080002E,
-    	DigDspTrigModeWAdr = 0x0080002F,
-    	DigDspWave0SrcWAdr = 0x00800030,
-    	DigDspWave1SrcWAdr = 0x00800031,
-    	DigSlowreadTagNowWAdr = 0x00800032,
-    	IccCfgWAdr = 0x00800033,
-    	QsfpI2CRegWAdr = 0x00800034,
-    	SfpAddressSetWAdr = 0x00800035,
+    	DigDspRealSimMuxCav4MechNoiseCoupleKOutWAdr = 0x00800000,
+    	DigDspRealSimMuxCav4MechResonatorPropConstWAdr = 0x00800400,
+    	DigDspRealSimMuxCavity0Cav4ElecDot0KOutWAdr = 0x00800800,
+    	DigDspRealSimMuxCavity0Cav4ElecDot1KOutWAdr = 0x00800C00,
+    	DigDspRealSimMuxCavity0Cav4ElecDot2KOutWAdr = 0x00801000,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutWAdr = 0x00801400,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutWAdr = 0x00801800,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutWAdr = 0x00801C00,
+    	DigDspRealSimMuxCavity0PiezoCoupleKOutWAdr = 0x00802000,
+    	DigDspRealSimMuxCavity1Cav4ElecDot0KOutWAdr = 0x00802400,
+    	DigDspRealSimMuxCavity1Cav4ElecDot1KOutWAdr = 0x00802800,
+    	DigDspRealSimMuxCavity1Cav4ElecDot2KOutWAdr = 0x00802C00,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutWAdr = 0x00803000,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutWAdr = 0x00803400,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutWAdr = 0x00803800,
+    	DigDspRealSimMuxCavity1PiezoCoupleKOutWAdr = 0x00803C00,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffWAdr = 0x00804000,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcLimWAdr = 0x00804004,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpWAdr = 0x00804008,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffWAdr = 0x0080400C,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcLimWAdr = 0x00804010,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpWAdr = 0x00804014,
+    	DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingWAdr = 0x00804018,
+    	DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetWAdr = 0x0080401A,
+    	DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingWAdr = 0x0080401C,
+    	DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetWAdr = 0x0080401E,
+    	DigDspRealSimMuxShell0DspLpNotchLp1AKxWAdr = 0x00804020,
+    	DigDspRealSimMuxShell0DspLpNotchLp1AKyWAdr = 0x00804022,
+    	DigDspRealSimMuxShell0DspLpNotchLp1BKxWAdr = 0x00804024,
+    	DigDspRealSimMuxShell0DspLpNotchLp1BKyWAdr = 0x00804026,
+    	DigDspRealSimMuxShell1DspLpNotchLp1AKxWAdr = 0x00804028,
+    	DigDspRealSimMuxShell1DspLpNotchLp1AKyWAdr = 0x0080402A,
+    	DigDspRealSimMuxShell1DspLpNotchLp1BKxWAdr = 0x0080402C,
+    	DigDspRealSimMuxShell1DspLpNotchLp1BKyWAdr = 0x0080402E,
+    	AdcMmcmWAdr = 0x00804030,
+    	DigCfgU15SpiDataAddrRWAdr = 0x00804031,
+    	DigCfgU15SpiReadAndStartRWAdr = 0x00804032,
+    	DigCfgU18SpiDataAddrRWAdr = 0x00804033,
+    	DigCfgU18SpiReadAndStartRWAdr = 0x00804034,
+    	DigCfgU2ClkResetRWAdr = 0x00804035,
+    	DigCfgU2IserdesResetRWAdr = 0x00804036,
+    	DigCfgU3ClkResetRWAdr = 0x00804037,
+    	DigCfgU3IserdesResetRWAdr = 0x00804038,
+    	DigCfgU4ResetRWAdr = 0x00804039,
+    	DigCfgBanyanMaskWAdr = 0x0080403A,
+    	DigCfgBitslipWAdr = 0x0080403B,
+    	DigCfgIdelayctrlResetRWAdr = 0x0080403C,
+    	DigCfgLlspiWeWAdr = 0x0080403D,
+    	DigCfgMmcmResetRWAdr = 0x0080403E,
+    	DigCfgPeriphConfigWAdr = 0x0080403F,
+    	DigCfgPhasexTrigWAdr = 0x00804040,
+    	DigCfgRawadcTrigWAdr = 0x00804041,
+    	DigCfgScanTriggerWeWAdr = 0x00804042,
+    	DigCfgScannerDebugWAdr = 0x00804043,
+    	DigCfgSyncAd7794CsetWAdr = 0x00804044,
+    	DigCfgSyncTps62210CsetWAdr = 0x00804045,
+    	DigDspAdcTestModeWAdr = 0x00804046,
+    	DigDspAdcTestResetWAdr = 0x00804047,
+    	DigDspAmplitudeWAdr = 0x00804048,
+    	DigDspAverageLenWAdr = 0x00804049,
+    	DigDspBufTrigWAdr = 0x0080404A,
+    	DigDspCicPeriodWAdr = 0x0080404B,
+    	DigDspCicShiftWAdr = 0x0080404C,
+    	DigDspCircleBufFlipWAdr = 0x0080404D,
+    	DigDspDacDdsResetWAdr = 0x0080404E,
+    	DigDspDacModeWAdr = 0x0080404F,
+    	DigDspDdsaModuloWAdr = 0x00804050,
+    	DigDspDdsaPhstepHWAdr = 0x00804051,
+    	DigDspDdsaPhstepLWAdr = 0x00804052,
+    	DigDspHistCountWStrobeWAdr = 0x00804053,
+    	DigDspLlrfDspDacEnWAdr = 0x00804054,
+    	DigDspLoAmpWAdr = 0x00804055,
+    	DigDspModuloWAdr = 0x00804056,
+    	DigDspPhaseStepHWAdr = 0x00804057,
+    	DigDspPhaseStepLWAdr = 0x00804058,
+    	DigDspPrcDspCavSelWAdr = 0x00804059,
+    	DigDspPrcDspPrlCfgWAdr = 0x0080405A,
+    	DigDspPrcDspPrlGainWAdr = 0x0080405B,
+    	DigDspRealSimMuxBeam0ModuloWAdr = 0x0080405C,
+    	DigDspRealSimMuxBeam0PhaseInitWAdr = 0x0080405D,
+    	DigDspRealSimMuxBeam0PhaseStepWAdr = 0x0080405E,
+    	DigDspRealSimMuxBeam1ModuloWAdr = 0x0080405F,
+    	DigDspRealSimMuxBeam1PhaseInitWAdr = 0x00804060,
+    	DigDspRealSimMuxBeam1PhaseStepWAdr = 0x00804061,
+    	DigDspRealSimMuxCav4MechPrngIvaWAdr = 0x00804062,
+    	DigDspRealSimMuxCav4MechPrngIvbWAdr = 0x00804063,
+    	DigDspRealSimMuxCav4MechPrngRandomRunWAdr = 0x00804064,
+    	DigDspRealSimMuxCavity0ACavOffsetWAdr = 0x00804065,
+    	DigDspRealSimMuxCavity0AForOffsetWAdr = 0x00804066,
+    	DigDspRealSimMuxCavity0ARflOffsetWAdr = 0x00804067,
+    	DigDspRealSimMuxCavity0AmpLpBwWAdr = 0x00804068,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqWAdr = 0x00804069,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqWAdr = 0x0080406A,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqWAdr = 0x0080406B,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingWAdr = 0x0080406C,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0BwWAdr = 0x0080406D,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingWAdr = 0x0080406E,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingWAdr = 0x0080406F,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1BwWAdr = 0x00804070,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingWAdr = 0x00804071,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingWAdr = 0x00804072,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2BwWAdr = 0x00804073,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingWAdr = 0x00804074,
+    	DigDspRealSimMuxCavity0Cav4ElecModuloWAdr = 0x00804075,
+    	DigDspRealSimMuxCavity0Cav4ElecPhaseStepWAdr = 0x00804076,
+    	DigDspRealSimMuxCavity0ComprSatCtlWAdr = 0x00804077,
+    	DigDspRealSimMuxCavity0PrngIvaWAdr = 0x00804078,
+    	DigDspRealSimMuxCavity0PrngIvbWAdr = 0x00804079,
+    	DigDspRealSimMuxCavity0PrngRandomRunWAdr = 0x0080407A,
+    	DigDspRealSimMuxCavity1ACavOffsetWAdr = 0x0080407B,
+    	DigDspRealSimMuxCavity1AForOffsetWAdr = 0x0080407C,
+    	DigDspRealSimMuxCavity1ARflOffsetWAdr = 0x0080407D,
+    	DigDspRealSimMuxCavity1AmpLpBwWAdr = 0x0080407E,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqWAdr = 0x0080407F,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqWAdr = 0x00804080,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqWAdr = 0x00804081,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingWAdr = 0x00804082,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0BwWAdr = 0x00804083,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingWAdr = 0x00804084,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingWAdr = 0x00804085,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1BwWAdr = 0x00804086,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingWAdr = 0x00804087,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingWAdr = 0x00804088,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2BwWAdr = 0x00804089,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingWAdr = 0x0080408A,
+    	DigDspRealSimMuxCavity1Cav4ElecModuloWAdr = 0x0080408B,
+    	DigDspRealSimMuxCavity1Cav4ElecPhaseStepWAdr = 0x0080408C,
+    	DigDspRealSimMuxCavity1ComprSatCtlWAdr = 0x0080408D,
+    	DigDspRealSimMuxCavity1PrngIvaWAdr = 0x0080408E,
+    	DigDspRealSimMuxCavity1PrngIvbWAdr = 0x0080408F,
+    	DigDspRealSimMuxCavity1PrngRandomRunWAdr = 0x00804090,
+    	DigDspRealSimMuxDacIqPhaseWAdr = 0x00804091,
+    	DigDspRealSimMuxShell0DspChanKeepWAdr = 0x00804092,
+    	DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleWAdr = 0x00804093,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetWAdr = 0x00804094,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnWAdr = 0x00804095,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshWAdr = 0x00804096,
+    	DigDspRealSimMuxShell0DspModuloWAdr = 0x00804097,
+    	DigDspRealSimMuxShell0DspPhaseStepWAdr = 0x00804098,
+    	DigDspRealSimMuxShell0DspPiezoPiezoDcWAdr = 0x00804099,
+    	DigDspRealSimMuxShell0DspTagWAdr = 0x0080409A,
+    	DigDspRealSimMuxShell0DspUseFiberIqWAdr = 0x0080409B,
+    	DigDspRealSimMuxShell0DspWaveSampPerWAdr = 0x0080409C,
+    	DigDspRealSimMuxShell0DspWaveShiftWAdr = 0x0080409D,
+    	DigDspRealSimMuxShell1DspChanKeepWAdr = 0x0080409E,
+    	DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleWAdr = 0x0080409F,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetWAdr = 0x008040A0,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnWAdr = 0x008040A1,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshWAdr = 0x008040A2,
+    	DigDspRealSimMuxShell1DspModuloWAdr = 0x008040A3,
+    	DigDspRealSimMuxShell1DspPhaseStepWAdr = 0x008040A4,
+    	DigDspRealSimMuxShell1DspPiezoPiezoDcWAdr = 0x008040A5,
+    	DigDspRealSimMuxShell1DspTagWAdr = 0x008040A6,
+    	DigDspRealSimMuxShell1DspUseFiberIqWAdr = 0x008040A7,
+    	DigDspRealSimMuxShell1DspWaveSampPerWAdr = 0x008040A8,
+    	DigDspRealSimMuxShell1DspWaveShiftWAdr = 0x008040A9,
+    	DigDspRewindWAdr = 0x008040AA,
+    	DigDspSsaStimAmpstepWAdr = 0x008040AB,
+    	DigDspSsaStimEnWAdr = 0x008040AC,
+    	DigDspSsaStimGPeriodWAdr = 0x008040AD,
+    	DigDspSsaStimPertstepWAdr = 0x008040AE,
+    	DigDspTraceKeepWAdr = 0x008040AF,
+    	DigDspTraceResetWeWAdr = 0x008040B0,
+    	DigDspTrigInternalWAdr = 0x008040B1,
+    	DigDspTrigModeWAdr = 0x008040B2,
+    	DigDspWave0SrcWAdr = 0x008040B3,
+    	DigDspWave1SrcWAdr = 0x008040B4,
+    	DomainJumpRealignWAdr = 0x008040B5,
+    	IccCfgWAdr = 0x008040B6,
+    	QsfpI2CRegWAdr = 0x008040B7,
+    	SfpAddressSetWAdr = 0x008040B8,
+    	TagNowWAdr = 0x008040B9,
     };
 
     // masks applied to returned register data
     enum RegMasks
     {
+    	HellMask =  0xFFFFFFFF,
+    	OWoMask =  0xFFFFFFFF,
+    	RldMask =  0xFFFFFFFF,
+    	H0D0A0D0AMask =  0xFFFFFFFF,
+    	LlspiStatusMask =  0x000000FF,
+    	LlspiResultMask =  0x000000FF,
+    	FfffffffMask =  0xFFFFFFFF,
+    	FrequencyAdcMask =  0x0FFFFFFF,
+    	Frequency4XoutMask =  0x0FFFFFFF,
+    	FrequencyClkout3Mask =  0x0FFFFFFF,
+    	FrequencyDcoMask =  0x0FFFFFFF,
+    	U2Doutbits31To0Mask =  0xFFFFFFFF,
+    	U2Doutbits63To32Mask =  0xFFFFFFFF,
+    	IdelayValueOutU2Bits19To0Mask =  0x000FFFFF,
+    	IdelayValueOutU2Bits39To20Mask =  0x000FFFFF,
+    	U3Doutbits31To0Mask =  0xFFFFFFFF,
+    	U3Doutbits63To32Mask =  0xFFFFFFFF,
+    	IdelayValueOutU3Bits19To0Mask =  0x000FFFFF,
+    	IdelayValueOutU3Bits39To20Mask =  0x000FFFFF,
+    	Wave0OutMask =  0x000FFFFF,
+    	Wave1OutMask =  0x000FFFFF,
+    	AdcTestWave1OutMask =  0x000FFFFF,
+    	AdcTestWave2OutMask =  0x000FFFFF,
+    	AdcTestWave3OutMask =  0x000FFFFF,
+    	AdcTestWave4OutMask =  0x000FFFFF,
+    	CtraceRunningMask =  0x00003FFF,
+    	FrequencyGtxTxMask =  0xFFFFFFFF,
+    	FrequencyGtxRxMask =  0x0FFFFFFF,
+    	HistStatusMask =  0x00000003,
+    	PhasexStatusMask =  0x00000003,
+    	ClkPhaseDiffOutU2Mask =  0x00001FFF,
+    	ClkPhaseDiffOutU3Mask =  0x00001FFF,
+    	CrcErrorsMask =  0x0000FFFF,
+    	U15SpiRdbkMask =  0xFFFFFFFF,
+    	U15SdoAddrMask =  0xFFFFFFFF,
+    	U15SpiReadyMask =  0xFFFFFFFF,
+    	U15SdioAsSdoMask =  0xFFFFFFFF,
+    	U18SdoAddrMask =  0xFFFFFFFF,
+    	U18SpiRdbkMask =  0xFFFFFFFF,
+    	U18SdioAsSdoMask =  0xFFFFFFFF,
+    	U18SpiReadyMask =  0xFFFFFFFF,
+    	AdcTestTrigCntMask =  0xFFFFFFFF,
+    	WaveformsAvailableMask =  0xFFFFFFFF,
+    	BanyanStatusMask =  0xFFFFFFFF,
+    	SlowChainOutMask =  0x000000FF,
+    	TraceStatus1Mask =  0xFFFFFFFF,
+    	TraceStatus2Mask =  0xFFFFFFFF,
+    	IdelayBaseMask =  0x0000007F,
+    	HistDoutMask =  0x0000FFFF,
+    	PhasexDoutMask =  0x0000FFFF,
+    	BanyanBufMask =  0xFFFFFFFF,
+    	ScannerResultMask =  0x000000FF,
+    	TraceIqBufMask =  0xFFFFFFFF,
+    	TraceIBufMask =  0xFFFFFFFF,
+    	TraceQBufMask =  0xFFFFFFFF,
+    	QsfpBufMask =  0x000000FF,
+    	DigDspRealSimMuxCav4MechNoiseCoupleKOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCav4MechResonatorPropConstMask =  0x001FFFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecDot0KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecDot1KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecDot2KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd0KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd1KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecOuterProd2KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0PiezoCoupleKOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecDot0KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecDot1KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecDot2KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd0KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd1KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecOuterProd2KOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1PiezoCoupleKOutMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcCoeffMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcLimMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSetmpMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcCoeffMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcLimMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSetmpMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecDriveCoupleOutPhaseOffsetMask =  0x0007FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecDriveCoupleOutPhaseOffsetMask =  0x0007FFFF,
+    	DigDspRealSimMuxShell0DspLpNotchLp1AKxMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspLpNotchLp1AKyMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspLpNotchLp1BKxMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspLpNotchLp1BKyMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspLpNotchLp1AKxMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspLpNotchLp1AKyMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspLpNotchLp1BKxMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspLpNotchLp1BKyMask =  0x0003FFFF,
     	AdcMmcmMask =  0x00000003,
     	DigCfgU15SpiDataAddrRMask =  0xFFFFFFFF,
     	DigCfgU15SpiReadAndStartRMask =  0x00000003,
@@ -674,16 +1391,99 @@ private:
     	DigDspBufTrigMask =  0x00000001,
     	DigDspCicPeriodMask =  0x00003FFF,
     	DigDspCicShiftMask =  0x0000000F,
+    	DigDspCircleBufFlipMask =  0x00000003,
     	DigDspDacDdsResetMask =  0x00000001,
     	DigDspDacModeMask =  0x0000000F,
     	DigDspDdsaModuloMask =  0x00000FFF,
     	DigDspDdsaPhstepHMask =  0x000FFFFF,
     	DigDspDdsaPhstepLMask =  0x00000FFF,
     	DigDspHistCountWStrobeMask =  0x00000001,
+    	DigDspLlrfDspDacEnMask =  0x00000001,
     	DigDspLoAmpMask =  0x0003FFFF,
     	DigDspModuloMask =  0x00000FFF,
     	DigDspPhaseStepHMask =  0x000FFFFF,
     	DigDspPhaseStepLMask =  0x00000FFF,
+    	DigDspPrcDspCavSelMask =  0x00000003,
+    	DigDspPrcDspPrlCfgMask =  0x000001FF,
+    	DigDspPrcDspPrlGainMask =  0x0000FFFF,
+    	DigDspRealSimMuxBeam0ModuloMask =  0x00000FFF,
+    	DigDspRealSimMuxBeam0PhaseInitMask =  0x00000FFF,
+    	DigDspRealSimMuxBeam0PhaseStepMask =  0x00000FFF,
+    	DigDspRealSimMuxBeam1ModuloMask =  0x00000FFF,
+    	DigDspRealSimMuxBeam1PhaseInitMask =  0x00000FFF,
+    	DigDspRealSimMuxBeam1PhaseStepMask =  0x00000FFF,
+    	DigDspRealSimMuxCav4MechPrngIvaMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCav4MechPrngIvbMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCav4MechPrngRandomRunMask =  0x00000001,
+    	DigDspRealSimMuxCavity0ACavOffsetMask =  0x000003FF,
+    	DigDspRealSimMuxCavity0AForOffsetMask =  0x000003FF,
+    	DigDspRealSimMuxCavity0ARflOffsetMask =  0x000003FF,
+    	DigDspRealSimMuxCavity0AmpLpBwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq0CoarseFreqMask =  0x0FFFFFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq1CoarseFreqMask =  0x0FFFFFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecFreq2CoarseFreqMask =  0x0FFFFFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0BeamCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0BwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode0DriveCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1BeamCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1BwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode1DriveCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2BeamCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2BwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecMode2DriveCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity0Cav4ElecModuloMask =  0x00000FFF,
+    	DigDspRealSimMuxCavity0Cav4ElecPhaseStepMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCavity0ComprSatCtlMask =  0x0000FFFF,
+    	DigDspRealSimMuxCavity0PrngIvaMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCavity0PrngIvbMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCavity0PrngRandomRunMask =  0x00000001,
+    	DigDspRealSimMuxCavity1ACavOffsetMask =  0x000003FF,
+    	DigDspRealSimMuxCavity1AForOffsetMask =  0x000003FF,
+    	DigDspRealSimMuxCavity1ARflOffsetMask =  0x000003FF,
+    	DigDspRealSimMuxCavity1AmpLpBwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq0CoarseFreqMask =  0x0FFFFFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq1CoarseFreqMask =  0x0FFFFFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecFreq2CoarseFreqMask =  0x0FFFFFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0BeamCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0BwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode0DriveCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1BeamCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1BwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode1DriveCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2BeamCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2BwMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecMode2DriveCouplingMask =  0x0003FFFF,
+    	DigDspRealSimMuxCavity1Cav4ElecModuloMask =  0x00000FFF,
+    	DigDspRealSimMuxCavity1Cav4ElecPhaseStepMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCavity1ComprSatCtlMask =  0x0000FFFF,
+    	DigDspRealSimMuxCavity1PrngIvaMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCavity1PrngIvbMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxCavity1PrngRandomRunMask =  0x00000001,
+    	DigDspRealSimMuxDacIqPhaseMask =  0x00000001,
+    	DigDspRealSimMuxShell0DspChanKeepMask =  0x00000FFF,
+    	DigDspRealSimMuxShell0DspFdbkCoreCoarseScaleMask =  0x00000003,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcPhOffsetMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSelEnMask =  0x00000001,
+    	DigDspRealSimMuxShell0DspFdbkCoreMpProcSelThreshMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell0DspModuloMask =  0x00000FFF,
+    	DigDspRealSimMuxShell0DspPhaseStepMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxShell0DspPiezoPiezoDcMask =  0x0000FFFF,
+    	DigDspRealSimMuxShell0DspTagMask =  0x000000FF,
+    	DigDspRealSimMuxShell0DspUseFiberIqMask =  0x00000001,
+    	DigDspRealSimMuxShell0DspWaveSampPerMask =  0x0000007F,
+    	DigDspRealSimMuxShell0DspWaveShiftMask =  0x00000007,
+    	DigDspRealSimMuxShell1DspChanKeepMask =  0x00000FFF,
+    	DigDspRealSimMuxShell1DspFdbkCoreCoarseScaleMask =  0x00000003,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcPhOffsetMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSelEnMask =  0x00000001,
+    	DigDspRealSimMuxShell1DspFdbkCoreMpProcSelThreshMask =  0x0003FFFF,
+    	DigDspRealSimMuxShell1DspModuloMask =  0x00000FFF,
+    	DigDspRealSimMuxShell1DspPhaseStepMask =  0xFFFFFFFF,
+    	DigDspRealSimMuxShell1DspPiezoPiezoDcMask =  0x0000FFFF,
+    	DigDspRealSimMuxShell1DspTagMask =  0x000000FF,
+    	DigDspRealSimMuxShell1DspUseFiberIqMask =  0x00000001,
+    	DigDspRealSimMuxShell1DspWaveSampPerMask =  0x0000007F,
+    	DigDspRealSimMuxShell1DspWaveShiftMask =  0x00000007,
     	DigDspRewindMask =  0x00000001,
     	DigDspSsaStimAmpstepMask =  0x0000FFFF,
     	DigDspSsaStimEnMask =  0x00000001,
@@ -695,10 +1495,11 @@ private:
     	DigDspTrigModeMask =  0x00000003,
     	DigDspWave0SrcMask =  0x00000007,
     	DigDspWave1SrcMask =  0x00000007,
-    	DigSlowreadTagNowMask =  0x000000FF,
+    	DomainJumpRealignMask =  0x00000003,
     	IccCfgMask =  0xFFFFFFFF,
     	QsfpI2CRegMask =  0xFFFFFFFF,
     	SfpAddressSetMask =  0x0000FFFF,
+    	TagNowMask =  0x000000FF,
 
     };
 };
