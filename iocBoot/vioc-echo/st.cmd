@@ -163,7 +163,7 @@ drvAsynIPPortConfigure("myIP","$(FPGA_IP):7 UDP")
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
 #asynSetTraceMask("myIP",-1,ASYN_TRACE_ERROR)
-asynSetTraceMask("myIP",-1,0xFF)
+asynSetTraceMask("myIP",-1,0xB)
 #asynSetTraceIOMask("myIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myIP",-1,4)
 
@@ -175,7 +175,7 @@ scllrfPRCConfigure( "myReg","myIP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("myReg",-1,0xFF)
+asynSetTraceMask("myReg",-1,0xB)
 #asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myReg",-1,4)
 #

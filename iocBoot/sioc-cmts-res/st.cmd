@@ -160,7 +160,7 @@ dbLoadRecords("db/asynRecord.db","P=RES1:CMTS,R=ASYN_IP,PORT=resIP,ADDR=0,IMAX=0
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("resIP",-1,0xFF)
+asynSetTraceMask("resIP",-1,0xB)
 #asynSetTraceIOMask("resIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("resIP",-1,4)
 
@@ -172,7 +172,7 @@ dbLoadRecords("db/asynRecord.db","P=RES1:CMTS,R=ASYN_REG,PORT=resReg,ADDR=0,IMAX
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("resReg",-1,0xFF)
+asynSetTraceMask("resReg",-1,0xB)
 #asynSetTraceIOMask("resReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("resReg",-1,4)
 #

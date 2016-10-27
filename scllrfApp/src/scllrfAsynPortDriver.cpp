@@ -44,8 +44,8 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 : asynPortDriver(drvPortName,
 		maxAddr, /* maxAddr */
 		paramTableSize,
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask|asynUInt32DigitalMask, /* Interface mask */
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask,  /* Interrupt mask */
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask | asynInt16ArrayMask,  /* Interrupt mask */
 		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
@@ -163,7 +163,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, %s\n",
+    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
 			__PRETTY_FUNCTION__, function, paramName);
 
     if (function == p_RunStop) {
@@ -332,26 +332,56 @@ void scllrfAsynPortDriver::regPoller()
 {
 	epicsEventWaitStatus status;
     int runStop;
+    unsigned int regBuffCount;
+    FpgaReg *pTempRegMsg = pPolledRegMsg_;
 
 	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
 		getDoubleParam(p_PollPeriod, &pollPeriod_);
-        getIntegerParam(p_RunStop, &runStop);
-		if (runStop == run && pollPeriod_ != 0.0) status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
-		else               status = epicsEventWait(pollEventId_);
-		if (status == epicsEventWaitOK) {
+		getIntegerParam(p_RunStop, &runStop);
+		if (runStop == run && pollPeriod_ != 0.0)
+		{
+			status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
+		}
+		else
+		{
+			status = epicsEventWait(pollEventId_);
+		}
+
+		if (status == epicsEventWaitOK)
+		{
 			/* We got an event, rather than a timeout.  This is because other software
 			 ** knows that we should do a poll.
 			 **/
 		}
+		else
+		{
+			getIntegerParam(p_RunStop, &runStop);
+			if (runStop == stop)
+			{
+				continue;
+			}
+		}
 		if (isShuttingDown_) {
 			break;
 		}
-		sendRegRequest(pPolledRegMsg_, PolledRegMsgSize_);
+
+		pTempRegMsg = pPolledRegMsg_;
+		regBuffCount = PolledRegMsgSize_;
+
+		// The register polling message may be too big for a single request.
+		// If so, it is expected to have an extra "nonce" element every
+		// maxMsgSize/sizeof(FpgaReg)
+		while (regBuffCount > maxMsgSize/sizeof(FpgaReg))
+		{
+			sendRegRequest(pTempRegMsg, maxMsgSize/sizeof(FpgaReg));
+			regBuffCount -= maxMsgSize/sizeof(FpgaReg);
+			pTempRegMsg = &pTempRegMsg[maxMsgSize/sizeof(FpgaReg)];
+		}
+		sendRegRequest(pTempRegMsg, regBuffCount);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
 	}
-	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
 /** Wakes up the poller thread to make it start polling. */
@@ -382,30 +412,35 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	int maxParallelRequests;
 	getIntegerParam(p_MaxParallelRequests, &maxParallelRequests);
 
-	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "--> %s( regBuffer=%p, regBuffCount=%u\n",
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "--> %s( regBuffer=%p, regBuffCount=%u )\n",
 			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
+
+	mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
 	// Throttle so that we don't overflow buffers if response handling falls behind
 	if( netWaitingRequests_ >= (unsigned) maxParallelRequests )
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: too many requests waiting for responses (%u), throttling requests.\n",__PRETTY_FUNCTION__, maxParallelRequests);
+
 	while( netWaitingRequests_ >= (unsigned) maxParallelRequests )
 	{
+		// Go outside mutex if we need to exit or sleep
+		epicsMutexUnlock(comCountersMutexId_);
 		if (isShuttingDown_)
 		{
 			return asynDisconnected;
 		}
 		epicsThreadSleep(throttleLoopDelay);
+		mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
 	}
 
-	mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
 	++netSendCount_; // increment and roll over if needed
+
 	// use the nonce at the start of the buffer for register count, and
 	// send counter. Can be used for error checking.
-	regBuffer[0] = (FpgaReg)
-									{ (uint32_t) htonl(netSendCount_), (int32_t) htonl(regBuffCount*sizeof(FpgaReg)) };
-
+	regBuffer[0] = (FpgaReg) { (uint32_t) htonl(netSendCount_), (int32_t) htonl(regBuffCount*sizeof(FpgaReg)) };
 	status = pasynOctetSyncIO->write(pOctetAsynUser_, pWriteBuffer,
 			regBuffCount*sizeof(FpgaReg), writeTimeout, &writtenCount);
+
 	if (status != asynSuccess)
 	{
 		asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,"%s: failed to write. %s\n", __PRETTY_FUNCTION__,
@@ -419,10 +454,10 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 		++netWaitingRequests_;
 	}
 	epicsMutexUnlock(comCountersMutexId_);
-	epicsThreadSleep(0); // to allow other threads to take the CPU
 	wakeupReader();
+	epicsThreadSleep(0); // to allow other threads to take the CPU
 
-	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "<-- %s( regBuffer=%p, regBuffCount=%u\n",
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "<-- %s( regBuffer=%p, regBuffCount=%u )\n",
 			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
 	return asynSuccess;
 }
@@ -522,6 +557,8 @@ void scllrfAsynPortDriver::responseHandler()
 					}
 					else
 					{
+						// Clear out any cruft left over that we didn't process.
+						pasynOctetSyncIO->flush(pOctetAsynUser_);
 						netWaitingRequests_--;
 						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 							"%s: presumed nonce says sequence # %u with %d bytes.\n",
@@ -558,8 +595,6 @@ void scllrfAsynPortDriver::responseHandler()
 				netWaitingRequests_--;
 			}
 		}
-		// Clear out any cruft left over that we didn't process.
-		pasynOctetSyncIO->flush(pOctetAsynUser_);
 	}
 }
 

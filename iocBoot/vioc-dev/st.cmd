@@ -159,7 +159,7 @@ drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):3000 UDP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("cmocIP",-1,0xFF)
+asynSetTraceMask("cmocIP",-1,0xB)
 #asynSetTraceIOMask("cmocIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("cmocIP",-1,4)
 
@@ -170,7 +170,7 @@ scllrfAsynPortDriverConfigure( "cmocReg","cmocIP")
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("cmocReg",-1,0xFF)
+asynSetTraceMask("cmocReg",-1,0xB)
 #asynSetTraceIOMask("cmocReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("cmocReg",-1,4)
 #

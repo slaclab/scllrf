@@ -14,8 +14,8 @@ def mkdir_p(path):
         
 def makeDirectory(d):
 	mkdir_p(d['name'])
-	mkdir_p(d['name']+'/deviceLibrary')
-	mkdir_p(d['name']+'/'+d['name']+'Src')
+#	mkdir_p(d['name']+'/deviceLibrary')
+	mkdir_p(d['name']+'/src')
 	mkdir_p(d['name']+'/Db')
 	mkdir_p(d['name']+'/ui')
 
@@ -31,19 +31,19 @@ def makeDirectory(d):
 
 #asyn driver
 def makeAsynDriver(d):
-	f=open(d['name']+'/'+d['name']+'Src/Makefile', 'w')
+	f=open(d['name']+'/src/Makefile', 'w')
 	print(Template( file='./Makefile.tmpl', searchList = [d] ), file=f)
 	f.close()
 	
-	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'.cpp', 'w')
+	f=open(d['name']+'/src/'+d['name']+'.cpp', 'w')
 	print(Template( file='./templateScllrfDriver.cpp.tmpl', searchList = [d] ), file=f)
 	f.close()
 	
-	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'.h', 'w')
+	f=open(d['name']+'/src/'+d['name']+'.h', 'w')
 	print(Template( file='./templateScllrfDriver.h.tmpl', searchList = [d] ), file=f)
 	f.close()
 	
-	f=open(d['name']+'/'+d['name']+'Src/'+d['name']+'DriverSupportInclude.dbd', 'w')
+	f=open(d['name']+'/src/'+d['name']+'DriverSupportInclude.dbd', 'w')
 	print(Template( file='./templateDriverSupportInclude.dbd.tmpl', searchList = [d] ), file=f)
 	f.close()
 

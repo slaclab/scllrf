@@ -6,7 +6,7 @@
 record(waveform, "$(P):WF_I16_$(N)") {
   field(DESC, "Ch $(N) I Waveform, 16 bit data")
   field(SCAN, "I/O Intr")
-  field(DTYP, "asynInt32ArrayIn")
+  field(DTYP, "asynInt16ArrayIn")
   field(INP, "@asyn($(PORT),$(N),1)WAVEFORM_I_16_BIT")
   field(PREC, "1")
   field(EGU, "$(EGU)")
@@ -18,7 +18,7 @@ record(waveform, "$(P):WF_I16_$(N)") {
 record(waveform, "$(P):WF_Q16_$(N)") {
   field(DESC, "Ch $(N) Q Waveform, 16 bit data")
   field(SCAN, "I/O Intr")
-  field(DTYP, "asynInt32ArrayIn")
+  field(DTYP, "asynInt16ArrayIn")
   field(INP, "@asyn($(PORT),$(N),1)WAVEFORM_Q_16_BIT")
   field(PREC, "1")
   field(EGU, "$(EGU)")

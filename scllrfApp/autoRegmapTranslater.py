@@ -7,25 +7,49 @@ import re
 import time,os,struct,json,getopt
 
 if __name__ == "__main__":
-    with open ("regmap_application_top.json") as regmapfile:
+    with open ("live_prc_regmap.json") as regmapfile:
         regmap=json.load(regmapfile)
     regmapfile.close()
     
-    f=open("regmap_application_top.py.tmp", 'w')
+    # for names that contain a ',' these are really two values. Split them.
+    find_reg = re.compile('([^,]+),([^,]+)')
+    find_bits = re.compile('(.*)\[(.*):(.*)\]')
+    #find_second_reg = re.compile('(?<=,)[^,]+')
+    expanded_regmap = {}
+    for reg, val in regmap.iteritems():
+        if ',' in reg:
+            split_names = find_reg.match(reg)
+            expanded_regmap[split_names.group(1)] = val
+            expanded_regmap[split_names.group(2)] = val
+        elif '[' in reg:
+            new_reg = re.sub(r'(.*)\[(.*):(.*)\]', r'\1Bits\2to\3', reg)
+            expanded_regmap[new_reg] = val
+        else:
+            expanded_regmap[reg] = val
+    
+    # Python didn't like trying to change a dictionary while iterating over it,
+    # so I created the expanded_* new dictionaries. If we clear the old ones, we can reuse them.
+    regmap.clear()
+    # get rid of any characters from keys that aren't allowed in C++ variable names
+    for reg, val in expanded_regmap.iteritems():
+        regmap[re.sub(r'\W', r'_', str(reg))] = expanded_regmap[reg]
+    
+    f=open("prc_regmap.py", 'w')
 
     f.write('d = { "name" : "scllrfPRC",\n')
     f.write("\t'registers': [\n")
 
-    for regName, regAttrs in regmap.iteritems():
+    for regName, regAttrs in sorted(regmap.items(), key=lambda k: k[1]['base_addr']):
         f.write('\t{\t"name" :"' + regName + '",\n')
         f.write('\t\t"address"     : ' + repr(regAttrs['base_addr']) + ',\n')
         if regAttrs.has_key('data_width'):
-            f.write('\t\t"bit_width"      : "' + repr(regAttrs['data_width']) + '",\n')
+            f.write('\t\t"bit_width"      : ' + repr(regAttrs['data_width']) + ',\n')
         if regAttrs.has_key('addr_width'):
-            f.write('\t\t"nelm"      : "' + repr(2**regAttrs['addr_width']) + '",\n')
-        f.write('\t\t"access"      : "w",\n')
+            f.write('\t\t"nelm"      : ' + repr(2**regAttrs['addr_width']) + ',\n')
+        if regAttrs.has_key('access'):
+            f.write('\t\t"access"      : "' + regAttrs['access'] + '",\n')
         if regAttrs.has_key('sign'):
-            f.write('\t\t"signed"      : ' + regAttrs['sign'] + '"\n')
+            f.write('\t\t"signed"      : "' + regAttrs['sign'] + '"\n')
         f.write('\t},\n')
         
         

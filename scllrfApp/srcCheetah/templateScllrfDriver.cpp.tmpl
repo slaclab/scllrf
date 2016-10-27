@@ -72,20 +72,24 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
 #end for
 
 	// A canned request to read all registers
-    pPolledRegMsg_ = new FpgaReg[readRegCount + 1]
+    pPolledRegMsg_ = new FpgaReg[readRegCount + (readRegCount / 175)]
 	{
-			{ 0, 0 },
+#set $msgRegCount = 0
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-#unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
+  #if msgRegCount % 174 == 0
+		{ 0, 0 },
+  #end if
+  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
 			{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
-#set $prevAdr = $p.address
-#end unless
+  #set $prevAdr = $p.address
+  #set $msgRegCount += 1
+  #end unless
 #end for
 	};
 
-	htonFpgaRegArray(pPolledRegMsg_, readRegCount + 1);
-    PolledRegMsgSize_ = readRegCount + 1;
+	htonFpgaRegArray(pPolledRegMsg_, readRegCount + (readRegCount / 175));
+    PolledRegMsgSize_ = readRegCount + (readRegCount / 175);
 
     epicsThreadSleep(defaultPollPeriod);
     printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS);
@@ -173,10 +177,13 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
   #set $prevAdr = $p.address
   #if $p.has_key("bit_width")
     #if $p.has_key("signed") and $p.signed == "signed"
-		signExtBits = pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1)? ~${p.name.title().replace("_", "")}Mask : 0;
-	#end if
+		signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
+    #else
+		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
+				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
+    #end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString,

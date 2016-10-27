@@ -160,7 +160,7 @@ dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_IP,PORT=prcIP,ADDR=0,IMAX=0
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("prcIP",-1,0xFF)
+asynSetTraceMask("prcIP",-1,0xB)
 #asynSetTraceIOMask("prcIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("prcIP",-1,4)
 
@@ -172,7 +172,7 @@ dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_REG,PORT=prcReg,ADDR=0,IMAX
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("prcReg",-1,0xFF)
+asynSetTraceMask("prcReg",-1,0xB)
 #asynSetTraceIOMask("prcReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("prcReg",-1,4)
 #
