@@ -3,3 +3,5 @@ include "asyn.dbd"
 registrar("scllrfAsynPortDriverRegister")
 registrar("scllrfPRCRegister")
 registrar("scllrfRESRegister")
+registrar(scllrfINTRegister)
+

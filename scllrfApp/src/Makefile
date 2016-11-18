@@ -11,7 +11,7 @@ include $(TOP)/configure/CONFIG
 # This will attempt to build an IOC application 
 # for every target including the host computer.
 PROD_IOC = scllrf
-
+#LIBRARY_IOC= scllrf
 # Use the following for RTEMS Only IOCs
 #PROD_IOC_RTEMS = scllrf
 
@@ -54,6 +54,7 @@ scllrf_SRCS_vxWorks += -nil-
 # scllrf_SRCS += file1.c
  scllrf_SRCS += scllrfAsynPortDriver.cpp
 # scllrf_SRCS += scllrfCMOC.cpp
+ scllrf_SRCS += scllrfINT.cpp
  scllrf_SRCS += scllrfPRC.cpp
  scllrf_SRCS += scllrfRES.cpp
  #USR_CXXFLAGS += -std=c++0x

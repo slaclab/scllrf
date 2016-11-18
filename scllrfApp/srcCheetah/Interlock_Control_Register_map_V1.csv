@@ -1,0 +1,122 @@
+name,address,Hex,access,signed/unsigned,,description
+1CWAV,0,0,r,unsigned,,cavity1 arc detector voltage readback
+2CWAV,1,1,r,unsigned,,cavity2 arc detector voltage readback
+3CWAV,2,2,r,unsigned,,cavity3 arc detector voltage readback
+4CWAV,3,3,r,unsigned,,cavity4 arc detector voltage readback
+1CWAPS,4,4,rw,unsigned,,cavity 1 arc detector power supply set voltage
+2CWAPS,5,5,rw,unsigned,,cavity 2 arc detector power supply set voltage
+3CWAPS,6,6,rw,unsigned,,cavity 3 arc detector power supply set voltage
+4CWAPS,7,7,rw,unsigned,,cavity 4 arc detector power supply set voltage
+1CWAL,8,8,rw,unsigned,,cavity 1 arc detector limit volts
+2CWAL,9,9,rw,unsigned,,cavity 2 arc detector limit volts
+3CWAL,10,A,rw,unsigned,,cavity 3 arc detector limit volts
+4CWAL,11,B,rw,unsigned,,cavity 4 arc detector limit volts
+1CWAP,12,C,rw,unsigned,,cavity 1 arc detector period usec
+2CWAP,13,D,rw,unsigned,,cavity 2 arc detector period usec
+3CWAP,14,E,rw,unsigned,,cavity 3 arc detector period usec
+4CWAP,15,F,rw,unsigned,,cavity 4 arc detector period usec
+XCWAD,16,10,r,unsigned,bits,arc faults latched and instantaneous
+XCWAM,17,11,rw,unsigned,bits,arc fault mask
+XCWAT,18,12,rw,unsigned,bits,arc detector led test
+XATFLT,19,13,r,unsigned,bits,arc detector led test fault status
+XCWAFC,20,14,rw,unsigned,bits,arc fault clear
+1CWWT,21,15,r,signed,,cavity 1 window voltage readback
+2CWWT,22,16,r,signed,,cavity 2 window voltage readback
+3CWWT,23,17,r,signed,,cavity 3 window voltage readback
+4CWWT,24,18,r,signed,,cavity 4 window voltage readback
+1CWWL,25,19,rw,signed,,cavity 1 window limit volts
+2CWWL,26,1A,rw,signed,,cavity 2 window limit volts
+3CWWL,27,1B,rw,signed,,cavity 3 window limit volts
+4CWWL,28,1C,rw,signed,,cavity 4 window limit volts
+XCWWD,29,1D,r,unsigned,bits,window faults latched and instantaneous
+XCWWTS,30,1E,rw,unsigned,bits,window ir sensor test
+XCWWM,31,1F,r,unsigned,bits,window fault mask
+XCWWFC,32,20,r,unsigned,bits,window fault clear
+1STMPI,33,21,rw,unsigned,,cavity 1 stepper motor PT100 excitaion current mA
+2STMPI,34,22,rw,unsigned,,cavity 2 stepper motor PT100 excitaion current mA
+3STMPI,35,23,rw,unsigned,,cavity 3 stepper motor PT100 excitaion current mA
+4STMPI,36,24,rw,unsigned,,cavity 4 stepper motor PT100 excitaion current mA
+1STMPV,37,25,r,unsigned,,cavity 1 stepper motor PT100 voltage readback
+2STMPV,38,26,r,unsigned,,cavity 2 stepper motor PT100 voltage readback
+3STMPV,39,27,r,unsigned,,cavity 3 stepper motor PT100 voltage readback
+4STMPV,40,28,r,unsigned,,cavity 4 stepper motor PT100 voltage readback
+1STMPVL,41,29,rw,unsigned,,cavity 1 stepper motor PT100 voltage limit
+2STMPVL,42,2A,rw,unsigned,,cavity 2 stepper motor PT100 voltage limit
+3STMPVL,43,2B,rw,unsigned,,cavity 3 stepper motor PT100 voltage limit
+4STMPVL,44,2C,rw,unsigned,,cavity 4 stepper motor PT100 voltage limit
+XSTMPLS,45,2D,r,unsigned,bits,stepper motor temperature limit status
+1CPLTMP1I,46,2E,rw,unsigned,,cavity 1 coupler PT100 1 excitation current mA
+1CPLTMP2I,47,2F,rw,unsigned,,cavity 1 coupler PT100 2 excitation current mA
+2CPLTMP1I,48,30,rw,unsigned,,cavity 2 coupler PT100 1 excitation current mA
+2CPLTMP2I,49,31,rw,unsigned,,cavity 2 coupler PT100 2 excitation current mA
+3CPLTMP1I,50,32,rw,unsigned,,cavity 3 coupler PT100 1 excitation current mA
+3CPLTMP2I,51,33,rw,unsigned,,cavity 3 coupler PT100 2 excitation current mA
+4CPLTMP1I,52,34,rw,unsigned,,cavity 4 coupler PT100 1 excitation current mA
+4CPLTMP2I,53,35,rw,unsigned,,cavity 4 coupler PT100 2 excitation current mA
+1CPLTMP1V,54,36,r,unsigned,,cavity 1 coupler PT100 1 voltage readback
+1CPLTMP2V,55,37,r,unsigned,,cavity 1 coupler PT100 2 voltage readback
+2CPLTMP1V,56,38,r,unsigned,,cavity 2 coupler PT100 1 voltage readback
+2CPLTMP2V,57,39,r,unsigned,,cavity 2 coupler PT100 2 voltage readback
+3CPLTMP1V,58,3A,r,unsigned,,cavity 3 coupler PT100 1 voltage readback
+3CPLTMP2V,59,3B,r,unsigned,,cavity 3 coupler PT100 2 voltage readback
+4CPLTMP1V,60,3C,r,unsigned,,cavity 4 coupler PT100 1 voltage readback
+4CPLTMP2V,61,3D,r,unsigned,,cavity 4 coupler PT100 2 voltage readback
+1CPLTMP1VL,62,3E,rw,unsigned,,cavity 1 coupler PT100 1 voltage limit
+1CPLTMP2VL,63,3F,rw,unsigned,,cavity 1 coupler PT100 2 voltage limit
+2CPLTMP1VL,64,40,rw,unsigned,,cavity 2 coupler PT100 1 voltage limit
+2CPLTMP2VL,65,41,rw,unsigned,,cavity 2 coupler PT100 2 voltage limit
+3CPLTMP1VL,66,42,rw,unsigned,,cavity 3 coupler PT100 1 voltage limit
+3CPLTMP2VL,67,43,rw,unsigned,,cavity 3 coupler PT100 2 voltage limit
+4CPLTMP1VL,68,44,rw,unsigned,,cavity 4 coupler PT100 1 voltage limit
+4CPLTMP2VL,69,45,rw,unsigned,,cavity 4 coupler PT100 2 voltage limit
+XCPLTMPLS,70,46,r,unsigned,bits,coupler temperature limit status
+1CPLFEP1I,71,47,r,signed,,coupler 1 electron probe 1 current readback uA
+1CPLFEP2I,72,48,r,signed,,coupler 1 electron probe 2 current readback uA
+1CPLFEP3I,73,49,r,signed,,coupler 1 electron probe 3 current readback uA
+2CPLFEP1I,74,4A,r,signed,,coupler 2 electron probe 1 current readback uA
+2CPLFEP2I,75,4B,r,signed,,coupler 2 electron probe 2 current readback uA
+2CPLFEP3I,76,4C,r,signed,,coupler 2 electron probe 3 current readback uA
+3CPLFEP1I,77,4D,r,signed,,coupler 3 electron probe 1 current readback uA
+3CPLFEP2I,78,4E,r,signed,,coupler 3 electron probe 2 current readback uA
+3CPLFEP3I,79,4F,r,signed,,coupler 3 electron probe 3 current readback uA
+4CPLFEP1I,80,50,r,signed,,coupler 4 electron probe 1 current readback uA
+4CPLFEP2I,81,51,r,signed,,coupler 4 electron probe 2 current readback uA
+4CPLFEP3I,82,52,r,signed,,coupler 4 electron probe 3 current readback uA
+1CPLFEP1ILH,83,53,rw,signed,,coupler 1 electron probe 1 current limit high
+1CPLFEP2ILH,84,54,rw,signed,,coupler 1 electron probe 2 current limit high
+1CPLFEP3ILH,85,55,rw,signed,,coupler 1 electron probe 3 current limit high
+2CPLFEP1ILH,86,56,rw,signed,,coupler 2 electron probe 1 current limit high
+2CPLFEP2ILH,87,57,rw,signed,,coupler 2 electron probe 2 current limit high
+2CPLFEP3ILH,88,58,rw,signed,,coupler 2 electron probe 3 current limit high
+3CPLFEP1ILH,89,59,rw,signed,,coupler 3 electron probe 1 current limit high
+3CPLFEP2ILH,90,5A,rw,signed,,coupler 3 electron probe 2 current limit high
+3CPLFEP3ILH,91,5B,rw,signed,,coupler 3 electron probe 3 current limit high
+4CPLFEP1ILH,92,5C,rw,signed,,coupler 4 electron probe 1 current limit high
+4CPLFEP2ILH,93,5D,rw,signed,,coupler 4 electron probe 2 current limit high
+4CPLFEP3ILH,94,5E,rw,signed,,coupler 4 electron probe 3 current limit high
+1CPLFEP1ILL,95,5F,rw,signed,,coupler 1 electron probe 1 current limit low
+1CPLFEP2ILL,96,60,rw,signed,,coupler 1 electron probe 2 current limit low
+1CPLFEP3ILL,97,61,rw,signed,,coupler 1 electron probe 3 current limit low
+2CPLFEP1ILL,98,62,rw,signed,,coupler 2 electron probe 1 current limit low
+2CPLFEP2ILL,99,63,rw,signed,,coupler 2 electron probe 2 current limit low
+2CPLFEP3ILL,100,64,rw,signed,,coupler 2 electron probe 3 current limit low
+3CPLFEP1ILL,101,65,rw,signed,,coupler 3 electron probe 1 current limit low
+3CPLFEP2ILL,102,66,rw,signed,,coupler 3 electron probe 2 current limit low
+3CPLFEP3ILL,103,67,rw,signed,,coupler 3 electron probe 3 current limit low
+4CPLFEP1ILL,104,68,rw,signed,,coupler 4 electron probe 1 current limit low
+4CPLFEP2ILL,105,69,rw,signed,,coupler 4 electron probe 2 current limit low
+4CPLFEP3ILL,106,6A,rw,signed,,coupler 4 electron probe 3 current limit low
+XCPLFEPLS,107,6B,r,unsigned,bits,coupler electron probe limit status
+XCPLFEPFC,108,6C,r,unsigned,bits,coupler electro probe fault clear
+XCVF,109,6D,r,unsigned,bits,vacuum fault status
+XCVFM,110,6E,rw,unsigned,bits,vacuum fault mask
+XCVFC,111,6F,rw,unsigned,bits,vacuum fault clear
+XCIEN,112,70,r,unsigned,bits,interlock enable latch and present from FCC
+XCIENM,113,71,rw,unsigned,bits,interlock enable latch and present from FCC mask
+XCIENC,114,72,rw,unsigned,bits,interlock enable clear
+XFFSD,115,73,r,unsigned,bits,FSD to field control latch and present
+XFFSDM,116,74,rw,unsigned,bits,FSD to field control latch and present mask
+XFFSDC,117,75,rw,unsigned,bits,FSD to field control clear
+XISTAT,118,76,r,unsigned,bits,miscellaneous status bits
+XICTL,119,77,rw,unsigned,bits,miscellaneous control bits
+XIVER,120,78,r,unsigned,,firmware version

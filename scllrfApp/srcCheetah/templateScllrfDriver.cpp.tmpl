@@ -71,8 +71,10 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
 #end if
 #end for
 
+    // Message size is the number of read registers, plus 1 nonce for every 175 read registers
+    PolledRegMsgSize_ = ${name}ReadRegCount + (${name}ReadRegCount / 175) + 1;
 	// A canned request to read all registers
-    pPolledRegMsg_ = new FpgaReg[readRegCount + (readRegCount / 175)]
+    pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 #set $msgRegCount = 0
 #set $prevAdr=-1
@@ -81,15 +83,14 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
 		{ 0, 0 },
   #end if
   #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
-			{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
+		{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
   #set $prevAdr = $p.address
   #set $msgRegCount += 1
   #end unless
 #end for
 	};
 
-	htonFpgaRegArray(pPolledRegMsg_, readRegCount + (readRegCount / 175));
-    PolledRegMsgSize_ = readRegCount + (readRegCount / 175);
+	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
 
     epicsThreadSleep(defaultPollPeriod);
     printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS);

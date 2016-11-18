@@ -63,8 +63,8 @@ static const char *${p.name.title().replace("_", "")}${field.title().replace("_"
   #end if
 #end for
 
-const unsigned int readRegCount = $readRegCount;
-const unsigned int writeRegCount = $writeRegCount;
+const unsigned int ${name}ReadRegCount = $readRegCount;
+const unsigned int ${name}WriteRegCount = $writeRegCount;
 
 #if $varExists('commands')
 /* Commands */

@@ -49,7 +49,7 @@ def makeAsynDriver(d):
 
 #database template
 def makeDatabase(d):
-	f=open(d['name']+'/Db/'+d['name']+'.template', 'w')
+	f=open(d['name']+'/Db/'+d['name']+'Registers.template', 'w')
 	print(Template( file='./database.tmpl', searchList = [d] ), file=f)
 	f.close()
 

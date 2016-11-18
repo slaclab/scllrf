@@ -5,7 +5,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x0,
 		"access": "rw",
 		"signed": "unsigned",
-		"desc": "acceleration Hz/\(Sec^2\)"
+		"desc": "acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor1_vlcty",
@@ -40,7 +40,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x5,
 		"access": "r",
 		"signed": "unsigned",
-		"desc": "last acceleration Hz/\(Sec^2\)"
+		"desc": "last acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor1_lvlcty",
@@ -189,7 +189,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x18,
 		"access": "rw",
 		"signed": "unsigned",
-		"desc": "acceleration Hz/\(Sec^2\)"
+		"desc": "acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor2_vlcty",
@@ -224,7 +224,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x1D,
 		"access": "r",
 		"signed": "unsigned",
-		"desc": "last acceleration Hz/\(Sec^2\)"
+		"desc": "last acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor2_lvlcty",
@@ -373,7 +373,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x30,
 		"access": "rw",
 		"signed": "unsigned",
-		"desc": "acceleration Hz/\(Sec^2\)"
+		"desc": "acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor3_vlcty",
@@ -408,7 +408,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x35,
 		"access": "r",
 		"signed": "unsigned",
-		"desc": "last acceleration Hz/\(Sec^2\)"
+		"desc": "last acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor3_lvlcty",
@@ -557,7 +557,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x48,
 		"access": "rw",
 		"signed": "unsigned",
-		"desc": "acceleration Hz/\(Sec^2\)"
+		"desc": "acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor4_vlcty",
@@ -592,7 +592,7 @@ d = { "name" : "scllrfRES",
 		"address": 0x4D,
 		"access": "r",
 		"signed": "unsigned",
-		"desc": "last acceleration Hz/\(Sec^2\)"
+		"desc": "last acceleration Hz/(Sec^2)"
 	},
 	{
 		"name": "motor4_lvlcty",

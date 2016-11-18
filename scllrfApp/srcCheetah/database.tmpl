@@ -1,7 +1,7 @@
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: if access is specified it's 'read', and that this isn't a waveform.
   #if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelms') and $p.nelms>1))
-record(longin, "\$(P):${p.name.upper()}_R")
+record(longin, "\$(P)${p.name.upper()}_R")
 {
 	#if $p.has_key('desc')
 	field( DESC, "${p.desc}")
@@ -32,7 +32,7 @@ record(longin, "\$(P):${p.name.upper()}_R")
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: this has write access, and isn't a waveofrm
   #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
-record(longout, "\$(P):${p.name.upper()}_W")
+record(longout, "\$(P)${p.name.upper()}_W")
 {
 	#if $p.has_key('desc')
 	field( DESC, "${p.desc}")
@@ -66,9 +66,9 @@ record(longout, "\$(P):${p.name.upper()}_W")
   ## Check that: this is a waveform/array
   #if $p.has_key('nelms') and $p.nelms>1
     #if not($p.has_key('access')) or ($p.access == 'r')
-record(waveform, "\$(P):${p.name.upper()}_R")
+record(waveform, "\$(P)${p.name.upper()}_R")
     #else
-record(waveform, "\$(P):${p.name.upper()}_W")
+record(waveform, "\$(P)${p.name.upper()}_W")
     #end if
 {
 	#if $p.has_key('desc')
@@ -123,7 +123,7 @@ record(waveform, "\$(P):${p.name.upper()}_W")
 
 #if $varExists('commands')
   #for $c in $commands
-record(longout, "\$(P):C_${c.name.upper()}")
+record(longout, "\$(P)C_${c.name.upper()}")
 {
     field( DTYP, "asynInt32")
     field( OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
