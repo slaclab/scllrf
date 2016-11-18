@@ -1,0 +1,1448 @@
+record(longin, "$(P)MOTOR1_ACC_R")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_ACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_VLCTY_R")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_VLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_STEPS_R")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_SGN_STEPS_R")
+{
+	field( DESC, "signed steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_SGN_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_ABS_STEPS_R")
+{
+	field( DESC, "absolute steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_ABS_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_LACC_R")
+{
+	field( DESC, "last acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_LACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_LVLCTY_R")
+{
+	field( DESC, "last velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_LVLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_LSTEPS_R")
+{
+	field( DESC, "last steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_LSTEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_DRVI_R")
+{
+	field( DESC, "drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_DRVI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR1_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR1_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_DAC1_R")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_DAC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_DAC2_R")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_DAC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_ADC1_R")
+{
+	field( DESC, "position readback adc1 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_ADC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_ADC2_R")
+{
+	field( DESC, "position readback adc2 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_ADC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_HIGH_WINDOW_R")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_HIGH_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_LOW_WINDOW_R")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_LOW_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_BRD_SERNUM_R")
+{
+	field( DESC, "serial number")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_BRD_SERNUM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO1_IGAIN_R")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO1_IGAIN_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)CAVITY1_DETUNE_ERR_R")
+{
+	field( DESC, "detune frequency error Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CAVITY1_DETUNE_ERR_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_ACC_R")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_ACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_VLCTY_R")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_VLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_STEPS_R")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_SGN_STEPS_R")
+{
+	field( DESC, "signed steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_SGN_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_ABS_STEPS_R")
+{
+	field( DESC, "absolute steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_ABS_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_LACC_R")
+{
+	field( DESC, "last acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_LACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_LVLCTY_R")
+{
+	field( DESC, "last velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_LVLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_LSTEPS_R")
+{
+	field( DESC, "last steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_LSTEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_DRVI_R")
+{
+	field( DESC, "motor drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_DRVI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR2_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR2_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_DAC1_R")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_DAC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_DAC2_R")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_DAC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_ADC1_R")
+{
+	field( DESC, "position readback adc1 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_ADC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_ADC2_R")
+{
+	field( DESC, "position readback adc2 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_ADC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_HIGH_WINDOW_R")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_HIGH_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_LOW_WINDOW_R")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_LOW_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_BRD_SERNUM_R")
+{
+	field( DESC, "serial number")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_BRD_SERNUM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO2_IGAIN_R")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO2_IGAIN_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)CAVITY2_DETUNE_ERR_R")
+{
+	field( DESC, "detune frequency error Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CAVITY2_DETUNE_ERR_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_ACC_R")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_ACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_VLCTY_R")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_VLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_STEPS_R")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_SGN_STEPS_R")
+{
+	field( DESC, "signed steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_SGN_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_ABS_STEPS_R")
+{
+	field( DESC, "absolute steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_ABS_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_LACC_R")
+{
+	field( DESC, "last acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_LACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_LVLCTY_R")
+{
+	field( DESC, "last velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_LVLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_LSTEPS_R")
+{
+	field( DESC, "last steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_LSTEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_DRVI_R")
+{
+	field( DESC, "drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_DRVI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR3_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR3_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_DAC1_R")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_DAC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_DAC2_R")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_DAC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_ADC1_R")
+{
+	field( DESC, "position readback adc1 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_ADC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_ADC2_R")
+{
+	field( DESC, "position readback adc2 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_ADC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_HIGH_WINDOW_R")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_HIGH_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_LOW_WINDOW_R")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_LOW_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_BRD_SERNUM_R")
+{
+	field( DESC, "serial number")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_BRD_SERNUM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO3_IGAIN_R")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO3_IGAIN_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)CAVITY3_DETUNE_ERR_R")
+{
+	field( DESC, "detune frequency error Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CAVITY3_DETUNE_ERR_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_ACC_R")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_ACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_VLCTY_R")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_VLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_STEPS_R")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_SGN_STEPS_R")
+{
+	field( DESC, "signed steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_SGN_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_ABS_STEPS_R")
+{
+	field( DESC, "absolute steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_ABS_STEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_LACC_R")
+{
+	field( DESC, "last acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_LACC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_LVLCTY_R")
+{
+	field( DESC, "last velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_LVLCTY_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_LSTEPS_R")
+{
+	field( DESC, "last steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_LSTEPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_DRVI_R")
+{
+	field( DESC, "drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_DRVI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MOTOR4_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MOTOR4_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_DAC1_R")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_DAC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_DAC2_R")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_DAC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_ADC1_R")
+{
+	field( DESC, "position readback adc1 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_ADC1_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_ADC2_R")
+{
+	field( DESC, "position readback adc2 Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_ADC2_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_HIGH_WINDOW_R")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_HIGH_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_LOW_WINDOW_R")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_LOW_WINDOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_CNTL_R")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_CNTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_STAT_R")
+{
+	field( DESC, "status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_BRD_TMP_R")
+{
+	field( DESC, "board temp deg C")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_BRD_TMP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_BRD_SERNUM_R")
+{
+	field( DESC, "serial number")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_BRD_SERNUM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)PIEZO4_IGAIN_R")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PIEZO4_IGAIN_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)CAVITY4_DETUNE_ERR_R")
+{
+	field( DESC, "detune frequency error Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CAVITY4_DETUNE_ERR_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+
+record(longout, "$(P)MOTOR1_ACC_W")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR1_ACC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR1_VLCTY_W")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR1_VLCTY_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR1_STEPS_W")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR1_STEPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR1_DRVI_W")
+{
+	field( DESC, "drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR1_DRVI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR1_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR1_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO1_DAC1_W")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO1_DAC1_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO1_DAC2_W")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO1_DAC2_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO1_HIGH_WINDOW_W")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO1_HIGH_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO1_LOW_WINDOW_W")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO1_LOW_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO1_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO1_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO1_IGAIN_W")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO1_IGAIN_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR2_ACC_W")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR2_ACC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR2_VLCTY_W")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR2_VLCTY_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR2_STEPS_W")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR2_STEPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR2_DRVI_W")
+{
+	field( DESC, "motor drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR2_DRVI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR2_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR2_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO2_DAC1_W")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO2_DAC1_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO2_DAC2_W")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO2_DAC2_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO2_HIGH_WINDOW_W")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO2_HIGH_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO2_LOW_WINDOW_W")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO2_LOW_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO2_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO2_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO2_IGAIN_W")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO2_IGAIN_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR3_ACC_W")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR3_ACC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR3_VLCTY_W")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR3_VLCTY_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR3_STEPS_W")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR3_STEPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR3_DRVI_W")
+{
+	field( DESC, "drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR3_DRVI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR3_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR3_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO3_DAC1_W")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO3_DAC1_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO3_DAC2_W")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO3_DAC2_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO3_HIGH_WINDOW_W")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO3_HIGH_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO3_LOW_WINDOW_W")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO3_LOW_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO3_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO3_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO3_IGAIN_W")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO3_IGAIN_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR4_ACC_W")
+{
+	field( DESC, "acceleration Hz/(Sec^2)")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR4_ACC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR4_VLCTY_W")
+{
+	field( DESC, "velocity Hz/Sec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR4_VLCTY_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR4_STEPS_W")
+{
+	field( DESC, "steps Hz")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR4_STEPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR4_DRVI_W")
+{
+	field( DESC, "drive current Amps")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR4_DRVI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)MOTOR4_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) MOTOR4_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO4_DAC1_W")
+{
+	field( DESC, "drive dac1 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO4_DAC1_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO4_DAC2_W")
+{
+	field( DESC, "drive dac2 set point Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO4_DAC2_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO4_HIGH_WINDOW_W")
+{
+	field( DESC, "position limit high Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO4_HIGH_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO4_LOW_WINDOW_W")
+{
+	field( DESC, "position limit low Volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO4_LOW_WINDOW_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO4_CNTL_W")
+{
+	field( DESC, "control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO4_CNTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)PIEZO4_IGAIN_W")
+{
+	field( DESC, "I controller gain")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) PIEZO4_IGAIN_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+
+
+

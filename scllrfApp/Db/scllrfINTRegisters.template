@@ -1,0 +1,1843 @@
+record(longin, "$(P)C1WAV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1WAV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2WAV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2WAV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3WAV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3WAV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4WAV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4WAV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1WAPS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1WAPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2WAPS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2WAPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3WAPS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3WAPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4WAPS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4WAPS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1WAL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1WAL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2WAL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2WAL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3WAL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3WAL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4WAL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4WAL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1WAP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1WAP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2WAP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2WAP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3WAP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3WAP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4WAP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4WAP_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWAD_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWAD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWAM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWAM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWAT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XATFLT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XATFLT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWAFC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWAFC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1WWT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1WWT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2WWT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2WWT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3WWT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3WWT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4WWT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4WWT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1WWL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1WWL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2WWL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2WWL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3WWL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3WWL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4WWL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4WWL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWWD_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWWD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWWTS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWWTS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWWM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWWM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCWWFC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCWWFC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1STMPI_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2STMPI_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3STMPI_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4STMPI_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1STMPV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2STMPV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3STMPV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4STMPV_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1STMPVL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1STMPVL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2STMPVL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2STMPVL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3STMPVL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3STMPVL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4STMPVL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4STMPVL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XSTMPLS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XSTMPLS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLTMP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLTMP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLTMP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLTMP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLTMP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLTMP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLTMP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLTMP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLTMP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLTMP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLTMP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLTMP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLTMP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLTMP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLTMP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLTMP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLTMP1V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLTMP1V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLTMP2V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLTMP2V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLTMP1V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLTMP1V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLTMP2V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLTMP2V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLTMP1V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLTMP1V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLTMP2V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLTMP2V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLTMP1V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLTMP1V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLTMP2V_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLTMP2V_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLTMP1VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLTMP1VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLTMP2VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLTMP2VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLTMP1VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLTMP1VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLTMP2VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLTMP2VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLTMP1VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLTMP1VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLTMP2VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLTMP2VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLTMP1VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLTMP1VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLTMP2VL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLTMP2VL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCPLTMPLS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCPLTMPLS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP3I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP3I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP3I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP3I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP3I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP3I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP1I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP1I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP2I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP2I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP3I_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP3I_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP1ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP1ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP2ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP2ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP3ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP3ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP1ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP1ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP2ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP2ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP3ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP3ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP1ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP1ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP2ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP2ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP3ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP3ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP1ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP1ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP2ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP2ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP3ILH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP3ILH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP1ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP1ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP2ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP2ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C1PLFEP3ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C1PLFEP3ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP1ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP1ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP2ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP2ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C2PLFEP3ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C2PLFEP3ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP1ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP1ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP2ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP2ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C3PLFEP3ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C3PLFEP3ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP1ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP1ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP2ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP2ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)C4PLFEP3ILL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) C4PLFEP3ILL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCPLFEPLS_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCPLFEPLS_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCPLFEPFC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCPLFEPFC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCVF_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCVF_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCVFM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCVFM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCVFC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCVFC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCIEN_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCIEN_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCIENM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCIENM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XCIENC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XCIENC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XFFSD_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XFFSD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XFFSDM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XFFSDM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XFFSDC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XFFSDC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XISTAT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XISTAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XICTL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XICTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)XIVER_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) XIVER_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+
+record(longout, "$(P)C1WAPS_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1WAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2WAPS_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2WAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3WAPS_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3WAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4WAPS_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4WAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1WAL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1WAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2WAL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2WAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3WAL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3WAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4WAL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4WAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1WAP_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1WAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2WAP_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2WAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3WAP_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3WAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4WAP_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4WAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCWAM_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCWAM_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCWAT_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCWAT_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCWAFC_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCWAFC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1WWL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1WWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2WWL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2WWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3WWL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3WWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4WWL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4WWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCWWTS_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCWWTS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1STMPI_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1STMPI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2STMPI_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2STMPI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3STMPI_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3STMPI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4STMPI_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4STMPI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1STMPVL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1STMPVL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2STMPVL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2STMPVL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3STMPVL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3STMPVL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4STMPVL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4STMPVL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLTMP1I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLTMP1I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLTMP2I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLTMP2I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLTMP1I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLTMP1I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLTMP2I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLTMP2I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLTMP1I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLTMP1I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLTMP2I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLTMP2I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLTMP1I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLTMP1I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLTMP2I_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLTMP2I_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLTMP1VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLTMP1VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLTMP2VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLTMP2VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLTMP1VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLTMP1VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLTMP2VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLTMP2VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLTMP1VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLTMP1VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLTMP2VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLTMP2VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLTMP1VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLTMP1VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLTMP2VL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLTMP2VL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLFEP1ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLFEP1ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLFEP2ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLFEP2ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLFEP3ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLFEP3ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLFEP1ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLFEP1ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLFEP2ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLFEP2ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLFEP3ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLFEP3ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLFEP1ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLFEP1ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLFEP2ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLFEP2ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLFEP3ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLFEP3ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLFEP1ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLFEP1ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLFEP2ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLFEP2ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLFEP3ILH_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLFEP3ILH_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLFEP1ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLFEP1ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLFEP2ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLFEP2ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C1PLFEP3ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C1PLFEP3ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLFEP1ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLFEP1ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLFEP2ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLFEP2ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C2PLFEP3ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C2PLFEP3ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLFEP1ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLFEP1ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLFEP2ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLFEP2ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C3PLFEP3ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C3PLFEP3ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLFEP1ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLFEP1ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLFEP2ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLFEP2ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)C4PLFEP3ILL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) C4PLFEP3ILL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCVFM_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCVFM_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCVFC_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCVFC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCIENM_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCIENM_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XCIENC_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XCIENC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XFFSDM_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XFFSDM_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XFFSDC_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XFFSDC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longout, "$(P)XICTL_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) XICTL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+
+
+

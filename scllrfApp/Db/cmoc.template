@@ -1,4 +1,4 @@
-record(longin, "$(P):MAGIC")
+record(longin, "$(P)MAGIC")
 {
     field( PINI, "YES")
     field( DTYP, "asynInt32")
@@ -7,7 +7,7 @@ record(longin, "$(P):MAGIC")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):DSP_FLAVOR")
+record(longin, "$(P)DSP_FLAVOR")
 {
     field( PINI, "YES")
     field( DTYP, "asynInt32")
@@ -16,7 +16,7 @@ record(longin, "$(P):DSP_FLAVOR")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):BUILD_YEAR")
+record(longin, "$(P)BUILD_YEAR")
 {
     field( PINI, "YES")
     field( DTYP, "asynInt32")
@@ -25,7 +25,7 @@ record(longin, "$(P):BUILD_YEAR")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):BUILD_MONTH")
+record(longin, "$(P)BUILD_MONTH")
 {
     field( PINI, "YES")
     field( DTYP, "asynInt32")
@@ -34,7 +34,7 @@ record(longin, "$(P):BUILD_MONTH")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):BUILD_DAY")
+record(longin, "$(P)BUILD_DAY")
 {
     field( PINI, "YES")
     field( DTYP, "asynInt32")
@@ -43,7 +43,7 @@ record(longin, "$(P):BUILD_DAY")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):BUILD_HOUR")
+record(longin, "$(P)BUILD_HOUR")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -52,7 +52,7 @@ record(longin, "$(P):BUILD_HOUR")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):BUILD_MINUTE")
+record(longin, "$(P)BUILD_MINUTE")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -61,7 +61,7 @@ record(longin, "$(P):BUILD_MINUTE")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):CODE_IS_CLEAN")
+record(longin, "$(P)CODE_IS_CLEAN")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -70,7 +70,7 @@ record(longin, "$(P):CODE_IS_CLEAN")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):TOOL_REV")
+record(longin, "$(P)TOOL_REV")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -79,7 +79,7 @@ record(longin, "$(P):TOOL_REV")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):USER")
+record(longin, "$(P)USER")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -88,7 +88,7 @@ record(longin, "$(P):USER")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):BOARD_TYPE")
+record(longin, "$(P)BOARD_TYPE")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -97,7 +97,7 @@ record(longin, "$(P):BOARD_TYPE")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):VERSION")
+record(longin, "$(P)VERSION")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -106,7 +106,7 @@ record(longin, "$(P):VERSION")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_A")
+record(longin, "$(P)GIT_SHA1_A")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -115,7 +115,7 @@ record(longin, "$(P):GIT_SHA1_A")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_B")
+record(longin, "$(P)GIT_SHA1_B")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -124,7 +124,7 @@ record(longin, "$(P):GIT_SHA1_B")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_C")
+record(longin, "$(P)GIT_SHA1_C")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -133,7 +133,7 @@ record(longin, "$(P):GIT_SHA1_C")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_D")
+record(longin, "$(P)GIT_SHA1_D")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -142,7 +142,7 @@ record(longin, "$(P):GIT_SHA1_D")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_E")
+record(longin, "$(P)GIT_SHA1_E")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -151,7 +151,7 @@ record(longin, "$(P):GIT_SHA1_E")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_F")
+record(longin, "$(P)GIT_SHA1_F")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -160,7 +160,7 @@ record(longin, "$(P):GIT_SHA1_F")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_G")
+record(longin, "$(P)GIT_SHA1_G")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -169,7 +169,7 @@ record(longin, "$(P):GIT_SHA1_G")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_H")
+record(longin, "$(P)GIT_SHA1_H")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -178,7 +178,7 @@ record(longin, "$(P):GIT_SHA1_H")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_I")
+record(longin, "$(P)GIT_SHA1_I")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -187,7 +187,7 @@ record(longin, "$(P):GIT_SHA1_I")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_J")
+record(longin, "$(P)GIT_SHA1_J")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -196,7 +196,7 @@ record(longin, "$(P):GIT_SHA1_J")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_K")
+record(longin, "$(P)GIT_SHA1_K")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -205,7 +205,7 @@ record(longin, "$(P):GIT_SHA1_K")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_L")
+record(longin, "$(P)GIT_SHA1_L")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -214,7 +214,7 @@ record(longin, "$(P):GIT_SHA1_L")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_M")
+record(longin, "$(P)GIT_SHA1_M")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -223,7 +223,7 @@ record(longin, "$(P):GIT_SHA1_M")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_N")
+record(longin, "$(P)GIT_SHA1_N")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -232,7 +232,7 @@ record(longin, "$(P):GIT_SHA1_N")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_O")
+record(longin, "$(P)GIT_SHA1_O")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -241,7 +241,7 @@ record(longin, "$(P):GIT_SHA1_O")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_P")
+record(longin, "$(P)GIT_SHA1_P")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -250,7 +250,7 @@ record(longin, "$(P):GIT_SHA1_P")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_Q")
+record(longin, "$(P)GIT_SHA1_Q")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -259,7 +259,7 @@ record(longin, "$(P):GIT_SHA1_Q")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_R")
+record(longin, "$(P)GIT_SHA1_R")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -268,7 +268,7 @@ record(longin, "$(P):GIT_SHA1_R")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_S")
+record(longin, "$(P)GIT_SHA1_S")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -277,7 +277,7 @@ record(longin, "$(P):GIT_SHA1_S")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):GIT_SHA1_T")
+record(longin, "$(P)GIT_SHA1_T")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -286,7 +286,7 @@ record(longin, "$(P):GIT_SHA1_T")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):CIRCLE_AW")
+record(longin, "$(P)CIRCLE_AW")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -295,7 +295,7 @@ record(longin, "$(P):CIRCLE_AW")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):MODE_COUNT")
+record(longin, "$(P)MODE_COUNT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -304,7 +304,7 @@ record(longin, "$(P):MODE_COUNT")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):MODE_SHIFT")
+record(longin, "$(P)MODE_SHIFT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -313,7 +313,7 @@ record(longin, "$(P):MODE_SHIFT")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):N_MECH_MODES")
+record(longin, "$(P)N_MECH_MODES")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -322,7 +322,7 @@ record(longin, "$(P):N_MECH_MODES")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):DF_SCALE")
+record(longin, "$(P)DF_SCALE")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -331,7 +331,7 @@ record(longin, "$(P):DF_SCALE")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):SIMPLE_DEMO")
+record(longin, "$(P)SIMPLE_DEMO")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -341,7 +341,7 @@ record(longin, "$(P):SIMPLE_DEMO")
 }
 
 
-record(longout, "$(P):DSP_CHAN_KEEP")
+record(longout, "$(P)DSP_CHAN_KEEP")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -351,7 +351,7 @@ record(longout, "$(P):DSP_CHAN_KEEP")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_FDBK_CORE_COARSE_SCALE")
+record(longout, "$(P)DSP_FDBK_CORE_COARSE_SCALE")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -361,7 +361,7 @@ record(longout, "$(P):DSP_FDBK_CORE_COARSE_SCALE")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
+record(longout, "$(P)DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -371,7 +371,7 @@ record(longout, "$(P):DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_FDBK_CORE_MP_PROC_SEL_EN")
+record(longout, "$(P)DSP_FDBK_CORE_MP_PROC_SEL_EN")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -381,7 +381,7 @@ record(longout, "$(P):DSP_FDBK_CORE_MP_PROC_SEL_EN")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
+record(longout, "$(P)DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -391,7 +391,7 @@ record(longout, "$(P):DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_MODULO")
+record(longout, "$(P)DSP_MODULO")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -401,7 +401,7 @@ record(longout, "$(P):DSP_MODULO")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_PHASE_STEP")
+record(longout, "$(P)DSP_PHASE_STEP")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -411,7 +411,7 @@ record(longout, "$(P):DSP_PHASE_STEP")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_PIEZO_PIEZO_DC")
+record(longout, "$(P)DSP_PIEZO_PIEZO_DC")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -421,7 +421,7 @@ record(longout, "$(P):DSP_PIEZO_PIEZO_DC")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_TAG")
+record(longout, "$(P)DSP_TAG")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -431,7 +431,7 @@ record(longout, "$(P):DSP_TAG")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_WAVE_SAMP_PER")
+record(longout, "$(P)DSP_WAVE_SAMP_PER")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -441,7 +441,7 @@ record(longout, "$(P):DSP_WAVE_SAMP_PER")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):DSP_WAVE_SHIFT")
+record(longout, "$(P)DSP_WAVE_SHIFT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -451,7 +451,7 @@ record(longout, "$(P):DSP_WAVE_SHIFT")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_DRV_CPL_OUT_CPLNG")
+record(longout, "$(P)STA_CAV4_ELEC_DRV_CPL_OUT_CPLNG")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -461,7 +461,7 @@ record(longout, "$(P):STA_CAV4_ELEC_DRV_CPL_OUT_CPLNG")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_DRV_CPL_OUT_PH_OFF")
+record(longout, "$(P)STA_CAV4_ELEC_DRV_CPL_OUT_PH_OFF")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -471,7 +471,7 @@ record(longout, "$(P):STA_CAV4_ELEC_DRV_CPL_OUT_PH_OFF")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_PH_OFF")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_PH_OFF")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -481,7 +481,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_PH_OFF")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_PH_OFF")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_PH_OFF")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -491,7 +491,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_PH_OFF")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_CPLNG")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_CPLNG")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -501,7 +501,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_CPLNG")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_PH_OFF")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_PH_OFF")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -511,7 +511,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_PH_OFF")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):BEAM_MODULO")
+record(longout, "$(P)BEAM_MODULO")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -521,7 +521,7 @@ record(longout, "$(P):BEAM_MODULO")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):BEAM_PHASE_STEP")
+record(longout, "$(P)BEAM_PHASE_STEP")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -531,7 +531,7 @@ record(longout, "$(P):BEAM_PHASE_STEP")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):CAV4_MECH_PRNG_IVA")
+record(longout, "$(P)CAV4_MECH_PRNG_IVA")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -541,7 +541,7 @@ record(longout, "$(P):CAV4_MECH_PRNG_IVA")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):CAV4_MECH_PRNG_IVB")
+record(longout, "$(P)CAV4_MECH_PRNG_IVB")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -551,7 +551,7 @@ record(longout, "$(P):CAV4_MECH_PRNG_IVB")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):CAV4_MECH_PRNG_RANDOM_RUN")
+record(longout, "$(P)CAV4_MECH_PRNG_RANDOM_RUN")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -561,7 +561,7 @@ record(longout, "$(P):CAV4_MECH_PRNG_RANDOM_RUN")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_A_CAV_OFFSET")
+record(longout, "$(P)STA_A_CAV_OFFSET")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -571,7 +571,7 @@ record(longout, "$(P):STA_A_CAV_OFFSET")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_A_FOR_OFFSET")
+record(longout, "$(P)STA_A_FOR_OFFSET")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -581,7 +581,7 @@ record(longout, "$(P):STA_A_FOR_OFFSET")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_A_RFL_OFFSET")
+record(longout, "$(P)STA_A_RFL_OFFSET")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -591,7 +591,7 @@ record(longout, "$(P):STA_A_RFL_OFFSET")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_AMP_LP_BW")
+record(longout, "$(P)STA_AMP_LP_BW")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -601,7 +601,7 @@ record(longout, "$(P):STA_AMP_LP_BW")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_FREQ_0_COARSE_FREQ")
+record(longout, "$(P)STA_CAV4_ELEC_FREQ_0_COARSE_FREQ")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -611,7 +611,7 @@ record(longout, "$(P):STA_CAV4_ELEC_FREQ_0_COARSE_FREQ")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_FREQ_1_COARSE_FREQ")
+record(longout, "$(P)STA_CAV4_ELEC_FREQ_1_COARSE_FREQ")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -621,7 +621,7 @@ record(longout, "$(P):STA_CAV4_ELEC_FREQ_1_COARSE_FREQ")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_FREQ_2_COARSE_FREQ")
+record(longout, "$(P)STA_CAV4_ELEC_FREQ_2_COARSE_FREQ")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -631,7 +631,7 @@ record(longout, "$(P):STA_CAV4_ELEC_FREQ_2_COARSE_FREQ")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_0_BEAM_CPL")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_0_BEAM_CPL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -641,7 +641,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_0_BEAM_CPL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_0_BW")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_0_BW")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -651,7 +651,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_0_BW")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_0_DRV_CPL")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_0_DRV_CPL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -661,7 +661,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_0_DRV_CPL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_1_BEAM_CPL")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_1_BEAM_CPL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -671,7 +671,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_1_BEAM_CPL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_1_BW")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_1_BW")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -681,7 +681,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_1_BW")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_1_DRV_CPL")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_1_DRV_CPL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -691,7 +691,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_1_DRV_CPL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_2_BEAM_CPL")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_2_BEAM_CPL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -701,7 +701,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_2_BEAM_CPL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_2_BW")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_2_BW")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -711,7 +711,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_2_BW")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_2_DRV_CPL")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_2_DRV_CPL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -721,7 +721,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_2_DRV_CPL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODULO")
+record(longout, "$(P)STA_CAV4_ELEC_MODULO")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -731,7 +731,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODULO")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_PHASE_STEP")
+record(longout, "$(P)STA_CAV4_ELEC_PHASE_STEP")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -741,7 +741,7 @@ record(longout, "$(P):STA_CAV4_ELEC_PHASE_STEP")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_COMPR_SAT_CTL")
+record(longout, "$(P)STA_COMPR_SAT_CTL")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -751,7 +751,7 @@ record(longout, "$(P):STA_COMPR_SAT_CTL")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_PRNG_IVA")
+record(longout, "$(P)STA_PRNG_IVA")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -761,7 +761,7 @@ record(longout, "$(P):STA_PRNG_IVA")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_PRNG_IVB")
+record(longout, "$(P)STA_PRNG_IVB")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -771,7 +771,7 @@ record(longout, "$(P):STA_PRNG_IVB")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_PRNG_RANDOM_RUN")
+record(longout, "$(P)STA_PRNG_RANDOM_RUN")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -781,7 +781,7 @@ record(longout, "$(P):STA_PRNG_RANDOM_RUN")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P):STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_CPLNG")
+record(longout, "$(P)STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_CPLNG")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -792,7 +792,7 @@ record(longout, "$(P):STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_CPLNG")
 }
 
 
-record(waveform, "$(P):DSP_FDBK_CORE_MP_PROC_COEFF")
+record(waveform, "$(P)DSP_FDBK_CORE_MP_PROC_COEFF")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -802,7 +802,7 @@ record(waveform, "$(P):DSP_FDBK_CORE_MP_PROC_COEFF")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):DSP_FDBK_CORE_MP_PROC_LIM")
+record(waveform, "$(P)DSP_FDBK_CORE_MP_PROC_LIM")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -812,7 +812,7 @@ record(waveform, "$(P):DSP_FDBK_CORE_MP_PROC_LIM")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):DSP_FDBK_CORE_MP_PROC_SETMP")
+record(waveform, "$(P)DSP_FDBK_CORE_MP_PROC_SETMP")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -822,7 +822,7 @@ record(waveform, "$(P):DSP_FDBK_CORE_MP_PROC_SETMP")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):DSP_LP_NOTCH_LP1A_KX")
+record(waveform, "$(P)DSP_LP_NOTCH_LP1A_KX")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -832,7 +832,7 @@ record(waveform, "$(P):DSP_LP_NOTCH_LP1A_KX")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):DSP_LP_NOTCH_LP1A_KY")
+record(waveform, "$(P)DSP_LP_NOTCH_LP1A_KY")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -842,7 +842,7 @@ record(waveform, "$(P):DSP_LP_NOTCH_LP1A_KY")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):DSP_LP_NOTCH_LP1B_KX")
+record(waveform, "$(P)DSP_LP_NOTCH_LP1B_KX")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -852,7 +852,7 @@ record(waveform, "$(P):DSP_LP_NOTCH_LP1B_KX")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):DSP_LP_NOTCH_LP1B_KY")
+record(waveform, "$(P)DSP_LP_NOTCH_LP1B_KY")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -862,7 +862,7 @@ record(waveform, "$(P):DSP_LP_NOTCH_LP1B_KY")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):CAV4_MECH_NOISE_CPL_K_OUT")
+record(waveform, "$(P)CAV4_MECH_NOISE_CPL_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -872,7 +872,7 @@ record(waveform, "$(P):CAV4_MECH_NOISE_CPL_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):CAV4_MECH_PIEZO_CPL_K_OUT")
+record(waveform, "$(P)CAV4_MECH_PIEZO_CPL_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -882,7 +882,7 @@ record(waveform, "$(P):CAV4_MECH_PIEZO_CPL_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):CAV4_MECH_RESONATOR_PROP_CONST")
+record(waveform, "$(P)CAV4_MECH_RESONATOR_PROP_CONST")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -892,7 +892,7 @@ record(waveform, "$(P):CAV4_MECH_RESONATOR_PROP_CONST")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_DOT_0_K_OUT")
+record(waveform, "$(P)STA_CAV4_ELEC_DOT_0_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -902,7 +902,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_DOT_0_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_DOT_1_K_OUT")
+record(waveform, "$(P)STA_CAV4_ELEC_DOT_1_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -912,7 +912,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_DOT_1_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_DOT_2_K_OUT")
+record(waveform, "$(P)STA_CAV4_ELEC_DOT_2_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -922,7 +922,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_DOT_2_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_OUTER_PROD_0_K_OUT")
+record(waveform, "$(P)STA_CAV4_ELEC_OUTER_PROD_0_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -932,7 +932,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_OUTER_PROD_0_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_OUTER_PROD_1_K_OUT")
+record(waveform, "$(P)STA_CAV4_ELEC_OUTER_PROD_1_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -942,7 +942,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_OUTER_PROD_1_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_OUTER_PROD_2_K_OUT")
+record(waveform, "$(P)STA_CAV4_ELEC_OUTER_PROD_2_K_OUT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -952,7 +952,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_OUTER_PROD_2_K_OUT")
     info(autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
 
-record(waveform, "$(P):STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_CPLNG")
+record(waveform, "$(P)STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_CPLNG")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32ArrayOut")
@@ -963,7 +963,7 @@ record(waveform, "$(P):STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_CPLNG")
 }
 
 
-record(ao, "$(P):POLL_PERIOD")
+record(ao, "$(P)POLL_PERIOD")
 {
     field(PINI, "YES")
     field(DTYP, "asynFloat64")
@@ -973,7 +973,7 @@ record(ao, "$(P):POLL_PERIOD")
     info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(bo, "$(P):RUN_STOP")
+record(bo, "$(P)RUN_STOP")
 {
     field(PINI, "NO")
     field(DTYP, "asynInt32")
@@ -984,7 +984,7 @@ record(bo, "$(P):RUN_STOP")
     info(autosaveFields, "VAL DESC")
 }
 
-record(longout, "$(P):MAX_PARALLEL_REQUESTS")
+record(longout, "$(P)MAX_PARALLEL_REQUESTS")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -994,7 +994,7 @@ record(longout, "$(P):MAX_PARALLEL_REQUESTS")
     info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ai, "$(P):COMM_ERROR_COUNT")
+record(ai, "$(P)COMM_ERROR_COUNT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -1003,7 +1003,7 @@ record(ai, "$(P):COMM_ERROR_COUNT")
     info(autosaveFields, "DESC EGUL EGUF SMOO HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P):COMM_ERROR_COUNT_LI")
+record(longin, "$(P)COMM_ERROR_COUNT_LI")
 {
     field(PINI, "YES")
     field( DTYP, "asynInt32")
@@ -1012,7 +1012,7 @@ record(longin, "$(P):COMM_ERROR_COUNT_LI")
     info(autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record( stringin, "$(P):GIT_SHA1"){
+record( stringin, "$(P)GIT_SHA1"){
   field( DESC, "SHA1 string from firmware git commit")
   field( SCAN, "I/O Intr")
   field( DTYP, "asynOctetRead")

@@ -1,13 +1,3 @@
-file scllrfPRC.template
-{
-	{ NULL = NULL }
-}
-
-file scllrfCommon.template
-{
-	{ NULL = NULL }
-}
-
 file PRCwaves.template
 {
 pattern { N, EGU }
