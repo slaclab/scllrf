@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 875
-y 57
+x 948
+y 78
 w 884
 h 1032
 font "helvetica-medium-r-18.0"
@@ -59,7 +59,7 @@ y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
 numTraces 8
-yPv {
+xPv {
   0 "$(P):WF_I22_0"
   1 "$(P):WF_I22_1"
   2 "$(P):WF_I22_2"
@@ -68,6 +68,16 @@ yPv {
   5 "$(P):WF_I22_5"
   6 "$(P):WF_I22_6"
   7 "$(P):WF_I22_7"
+}
+yPv {
+  0 "$(P):WF_Q22_0"
+  1 "$(P):WF_Q22_1"
+  2 "$(P):WF_Q22_2"
+  3 "$(P):WF_Q22_3"
+  4 "$(P):WF_Q22_4"
+  5 "$(P):WF_Q22_5"
+  6 "$(P):WF_Q22_6"
+  7 "$(P):WF_Q22_7"
 }
 nPv {
   0 "$(P):I_Q_22BIT_NELM"
@@ -284,84 +294,6 @@ botShadowColor index 12
 controlPv "$(P):RUN_STOP"
 font "helvetica-medium-r-18.0"
 orientation "horizontal"
-endObjectProperties
-
-# (X-Y Graph)
-object xyGraphClass
-beginObjectProperties
-major 4
-minor 8
-release 0
-# Geometry
-x 20
-y 510
-w 640
-h 480
-# Appearance
-border
-graphTitle "Q Waveforms"
-xLabel "Point"
-yLabel "Count"
-fgColor index 14
-bgColor index 0
-gridColor index 14
-font "helvetica-medium-r-18.0"
-# Operating Modes
-nPts 2
-# X axis properties
-showXAxis
-xAxisSrc "AutoScale"
-xMax 1
-# Y axis properties
-showYAxis
-yAxisSrc "AutoScale"
-yMax 1
-# Y2 axis properties
-showY2Axis
-y2AxisSrc "AutoScale"
-y2Max 1
-# Trace Properties
-numTraces 8
-yPv {
-  0 "$(P):WF_Q22_0"
-  1 "$(P):WF_Q22_1"
-  2 "$(P):WF_Q22_2"
-  3 "$(P):WF_Q22_3"
-  4 "$(P):WF_Q22_4"
-  5 "$(P):WF_Q22_5"
-  6 "$(P):WF_Q22_6"
-  7 "$(P):WF_Q22_7"
-}
-nPv {
-  0 "$(P):I_Q_22BIT_NELM"
-  1 "$(P):I_Q_22BIT_NELM"
-  2 "$(P):I_Q_22BIT_NELM"
-  3 "$(P):I_Q_22BIT_NELM"
-  4 "$(P):I_Q_22BIT_NELM"
-  5 "$(P):I_Q_22BIT_NELM"
-  6 "$(P):I_Q_22BIT_NELM"
-  7 "$(P):I_Q_22BIT_NELM"
-}
-ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
-}
-plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 58
-  7 index 63
-}
 endObjectProperties
 
 # (Byte)
