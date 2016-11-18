@@ -459,11 +459,11 @@ scllrfPRC::scllrfPRC(const char *drvPortName, const char *netPortName)
     createParam(IQ16BitNELMString, asynParamInt32, &p_IQ16BitNELM);
     createParam(IQ22BitNELMString, asynParamInt32, &p_IQ22BitNELM);
 
-    printf("readRegCount = %d, readRegCount/175 = %d\n", readRegCount, readRegCount/175);
+    PolledRegMsgSize_ = readRegCount + (readRegCount / 175) + 1;
 	// A canned request to read all registers
     // NOTE: To avoid side effects, any registers with U or spi in their name have been
     // manually replaced with H0D0A0D0ARAdr
-    pPolledRegMsg_ = new FpgaReg[readRegCount + (readRegCount / 175) + 1]
+    pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 			{ 0, 0 },
 			{ flagReadMask | HellRAdr, blankData },
@@ -693,8 +693,8 @@ scllrfPRC::scllrfPRC(const char *drvPortName, const char *netPortName)
 			{ flagReadMask | TagNowRAdr, blankData },
 	};
 
-	htonFpgaRegArray(pPolledRegMsg_, readRegCount + (readRegCount / 175) + 1);
-    PolledRegMsgSize_ = readRegCount + (readRegCount / 175) + 1;
+    printf(" polled register msg size is %d.\n", PolledRegMsgSize_);
+	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
 
     epicsThreadSleep(defaultPollPeriod);
     printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_SCLLRFPRC_PARAMS);
@@ -2985,43 +2985,16 @@ void scllrfPRC::reqOneWaveform(FpgaReg (*readWaveformsMsg)[waveSegmentSize])
 void scllrfPRC::waveformRequester()
 {
 	epicsEventWaitStatus status;
-	static FpgaReg traceAck[5] =
+	static FpgaReg traceAck[] =
 	{
 			{0,0},
-			{DigDspTraceResetWeWAdr,1},
+//			{DigDspTraceResetWeWAdr,1},
 			{DigDspBufTrigWAdr,0},
 			{DigDspBufTrigWAdr,1},
 			{DigDspBufTrigWAdr,0}
 	};
 	//printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
-    htonFpgaRegArray(traceAck, 5);
-
-	// A canned request to read all waveforms
-	// Split up because the packet would be too big for UDP otherwise
-	//	static FpgaReg readWaveformsMsg[waveSegmentCount][waveSegmentSize];
-	//
-	//	for (i=0; i<waveSegmentCount; ++i)
-	//	{
-	//		readWaveformsMsg[i][0] = (FpgaReg) {0, 0}; // space for the nonce
-	//	}
-	//
-	//	for (waveSegmentNumber=0; waveSegmentNumber < waveSegmentCount; ++waveSegmentNumber)
-	//	{
-	//		for (waveSegmentOffset = 0; waveSegmentOffset < waveSegmentSize-1; ++waveSegmentOffset)
-	//		{
-	//			regAddress = wavesStart + waveSegmentNumber*(waveSegmentSize-1) + waveSegmentOffset;
-	//			if (regAddress > wavesEnd)
-	//			{
-	//				lastPointIndex = waveSegmentOffset+1;
-	//				break;
-	//			}
-	//			// put in some data that's a little interesting, but obviously unnatural.
-	//			readWaveformsMsg[waveSegmentNumber][waveSegmentOffset+1] = (FpgaReg) { flagReadMask | regAddress, (int32_t) ((double) blankData + 10000.0 * sin((double)regAddress* (regAddress % maxWavesCount)/360.0))};
-	//		}
-	//	}
-	//
-	//
-	//	htonFpgaRegArray(cmocReadWaveformsMsg[0], sizeof(cmocReadWaveformsMsg)/sizeof(FpgaReg));
+    htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
 
 	// Main polling loop
 	while (1)
@@ -3055,7 +3028,7 @@ void scllrfPRC::waveformRequester()
 			}
 
 			newWaveRead_ = newWaveAvailable_; // Indicate that we got the signal
-			sendRegRequest(traceAck, 5);
+			sendRegRequest(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: done sending waveform request\n", __PRETTY_FUNCTION__);
 		}
