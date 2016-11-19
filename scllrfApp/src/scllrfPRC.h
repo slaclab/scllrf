@@ -41,7 +41,7 @@ static const uint32_t wavesStart = 0x140000; // From FPGA design, base address
 static const uint32_t wavesEnd = 0x14ffff; // max possible
 static const unsigned waveBufferRegCount = wavesEnd - wavesStart + 1;
 static const unsigned maxWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
-static const unsigned waveBuffSize = waveBufferRegCount/4 + waveBufferRegCount/maxMsgSize; // divide by number of buffers
+static const unsigned waveBuffSize = waveBufferRegCount/4 + waveBufferRegCount/(maxMsgSize-sizeof(FpgaReg)); // divide by number of buffers
 /**< Waveform buffer is read in waveSegmentCount segments due to network packet size limits.
  *  1+ is an approximation of "round upwards". -sizeof(FpgaReg) makes space for the nonce */
 static const unsigned waveSegmentCount = 1 + (sizeof(FpgaReg) * waveBuffSize)

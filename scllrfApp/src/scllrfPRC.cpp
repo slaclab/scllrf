@@ -3594,6 +3594,10 @@ asynStatus scllrfPRC::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		if(npt_ != (size_t) (1 << ((pFromFpga->data & nptMask)>> 24)))
 		{
 			npt_ = 1 << ((pFromFpga->data & nptMask)>> 24);
+			if(npt_ > waveSegmentCount * (waveSegmentSize - 1)) // protect against register saying more points than buffer space
+			{
+				npt_ = waveSegmentCount * (waveSegmentSize - 1);
+			}
 			fillWavReqMsg();
 		}
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
