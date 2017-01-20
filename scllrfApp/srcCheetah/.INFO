@@ -1,0 +1,104 @@
+What:  Information about this directory.
+Dir:   ~lahti/RF_SLAC.2/scllrf/scllrfApp/srcCheetah
+File:  .INFO
+Me:    George Lahti
+Date:  02 Dec 2016
+
+[688] lahti@devl14 > 
+[688] lahti@devl14 > date
+Fri Dec  2 10:33:55 EST 2016
+[689] lahti@devl14 > 
+[689] lahti@devl14 > dirs
+~/RF_SLAC.2/scllrf/scllrfApp/srcCheetah 
+[690] lahti@devl14 > 
+[690] lahti@devl14 > tree
+.
+|-- Interlock_Control_Register_map_V1.csv
+|-- Interlock_Control_Register_map_V1.py
+|-- Makefile
+|-- Makefile.tmpl
+|-- RegistersScreen.edl.tmpl
+|-- Resonance_Control_Register_map_V2.csv
+|-- Resonance_Control_Register_map_V2a.py
+|-- Resonance_Control_Register_map_V2b.py
+|-- Resonance_Control_Wav_map.py
+|-- aiLimits.edl
+|-- aoLimits.edl
+|-- cmoc.json
+|-- cmoc.py
+|-- database.tmpl
+|-- deviceGeneration.py
+|-- example
+|   |-- Db
+|   |   |-- example.template
+|   |   `-- exampleRegisters.template
+|   |-- src
+|   |   |-- Makefile
+|   |   |-- example.cpp
+|   |   |-- example.h
+|   |   `-- exampleDriverSupportInclude.dbd
+|   `-- ui
+|       `-- exampleRegisters.edl
+|-- oneButton.edl
+|-- prc_regmap.py
+|-- prc_regmap.py.pre-auto
+|-- regmap_application_top.json
+|-- sampleRegMap.py
+|-- scllrf.patch
+|-- scllrfINT
+|   |-- Db
+|   |   `-- scllrfINTRegisters.template
+|   |-- src
+|   |   |-- Makefile
+|   |   |-- scllrfINT.cpp
+|   |   |-- scllrfINT.h
+|   |   `-- scllrfINTDriverSupportInclude.dbd
+|   `-- ui
+|       `-- scllrfINTRegisters.edl
+|-- scllrfLongToShortNames.cpp.patch
+|-- scllrfLongToShortNames.h.patch
+|-- scllrfPRC
+|   |-- Db
+|   |   |-- scllrfPRC.template
+|   |   `-- scllrfPRCRegisters.template
+|   |-- src
+|   |   |-- Makefile
+|   |   |-- scllrfPRC.cpp
+|   |   |-- scllrfPRC.h
+|   |   `-- scllrfPRCDriverSupportInclude.dbd
+|   `-- ui
+|       `-- scllrfPRCRegisters.edl
+|-- scllrfRES
+|   |-- Db
+|   |   |-- scllrfRES.template
+|   |   `-- scllrfRESRegisters.template
+|   |-- src
+|   |   |-- Makefile
+|   |   |-- scllrfRES.cpp
+|   |   |-- scllrfRES.h
+|   |   `-- scllrfRESDriverSupportInclude.dbd
+|   `-- ui
+|       `-- scllrfRESRegisters.edl
+|-- scllrfRESwav
+|   |-- Db
+|   |   |-- scllrfRESwav.template
+|   |   `-- scllrfRESwavRegisters.template
+|   |-- src
+|   |   |-- Makefile
+|   |   |-- scllrfRESwav.cpp
+|   |   |-- scllrfRESwav.h
+|   |   `-- scllrfRESwavDriverSupportInclude.dbd
+|   `-- ui
+|       `-- scllrfRESwavRegisters.edl
+|-- sortedCmocGenerated
+|-- sortedCmocOld
+|-- template.substitutions.tmpl
+|-- templateDriverSupportInclude.dbd.tmpl
+|-- templateScllrfDriver.cpp.tmpl
+|-- templateScllrfDriver.h.tmpl
+|-- wavLimits.edl
+`-- zzz
+
+20 directories, 65 files
+[691] lahti@devl14 > 
+

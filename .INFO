@@ -1,0 +1,19 @@
+What:  Information about this directory.
+Dir:   ~lahti/RF_SLAC.2/scllrf
+File:  .INFO
+Me:    George Lahti
+Date:  01 Dec 2016
+
+ToDo:  > cd ~lahti/RF_SLAC.2/scllrf
+       > make clean
+       > make
+
+Why:   To create/build/make the following for both RES and INT1:
+       1. The executable code for the soft-ioc.
+       2. To create the database files from the HardwareRegisterTable.
+       3. To create the Edm screen files from the HardwareRegisterTable.
+
+Note:  RES  = Resonance control chassis.
+       INT1 = Interlocks #1 chassis.
+       scllrf = super conducting low level RF
+
