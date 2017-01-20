@@ -1,1838 +1,2569 @@
-record(longin, "$(P)C1WAV_R")
+record(ai, "$(P)R1CWAV_R")
 {
+	field( DESC, "cavity1 arc detector voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1WAV_R")
+    field( INP,  "@asyn($(PORT),0) R1CWAV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2WAV_R")
+record(ai, "$(P)R2CWAV_R")
 {
+	field( DESC, "cavity2 arc detector voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2WAV_R")
+    field( INP,  "@asyn($(PORT),0) R2CWAV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3WAV_R")
+record(ai, "$(P)R3CWAV_R")
 {
+	field( DESC, "cavity3 arc detector voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3WAV_R")
+    field( INP,  "@asyn($(PORT),0) R3CWAV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4WAV_R")
+record(ai, "$(P)R4CWAV_R")
 {
+	field( DESC, "cavity4 arc detector voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4WAV_R")
+    field( INP,  "@asyn($(PORT),0) R4CWAV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1WAPS_R")
+record(ai, "$(P)R1CWAPS_R")
 {
+	field( DESC, "cavity 1 arc detector power supply set")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1WAPS_R")
+    field( INP,  "@asyn($(PORT),0) R1CWAPS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2WAPS_R")
+record(ai, "$(P)R2CWAPS_R")
 {
+	field( DESC, "cavity 2 arc detector power supply set")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2WAPS_R")
+    field( INP,  "@asyn($(PORT),0) R2CWAPS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3WAPS_R")
+record(ai, "$(P)R3CWAPS_R")
 {
+	field( DESC, "cavity 3 arc detector power supply set")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3WAPS_R")
+    field( INP,  "@asyn($(PORT),0) R3CWAPS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4WAPS_R")
+record(ai, "$(P)R4CWAPS_R")
 {
+	field( DESC, "cavity 4 arc detector power supply set")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4WAPS_R")
+    field( INP,  "@asyn($(PORT),0) R4CWAPS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1WAL_R")
+record(ai, "$(P)R1CWAL_R")
 {
+	field( DESC, "cavity 1 arc detector limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1WAL_R")
+    field( INP,  "@asyn($(PORT),0) R1CWAL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2WAL_R")
+record(ai, "$(P)R2CWAL_R")
 {
+	field( DESC, "cavity 2 arc detector limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2WAL_R")
+    field( INP,  "@asyn($(PORT),0) R2CWAL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3WAL_R")
+record(ai, "$(P)R3CWAL_R")
 {
+	field( DESC, "cavity 3 arc detector limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3WAL_R")
+    field( INP,  "@asyn($(PORT),0) R3CWAL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4WAL_R")
+record(ai, "$(P)R4CWAL_R")
 {
+	field( DESC, "cavity 4 arc detector limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4WAL_R")
+    field( INP,  "@asyn($(PORT),0) R4CWAL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1WAP_R")
+record(ai, "$(P)R1CWAP_R")
 {
+	field( DESC, "cavity 1 arc detector period usec")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1WAP_R")
+    field( INP,  "@asyn($(PORT),0) R1CWAP_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2WAP_R")
+record(ai, "$(P)R2CWAP_R")
 {
+	field( DESC, "cavity 2 arc detector period usec")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2WAP_R")
+    field( INP,  "@asyn($(PORT),0) R2CWAP_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3WAP_R")
+record(ai, "$(P)R3CWAP_R")
 {
+	field( DESC, "cavity 3 arc detector period usec")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3WAP_R")
+    field( INP,  "@asyn($(PORT),0) R3CWAP_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4WAP_R")
+record(ai, "$(P)R4CWAP_R")
 {
+	field( DESC, "cavity 4 arc detector period usec")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4WAP_R")
+    field( INP,  "@asyn($(PORT),0) R4CWAP_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWAD_R")
+record(ai, "$(P)RXCWAD_R")
 {
+	field( DESC, "arc faults latched and instantaneous")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWAD_R")
+    field( INP,  "@asyn($(PORT),0) RXCWAD_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWAM_R")
+record(ai, "$(P)RXCWAM_R")
 {
+	field( DESC, "arc fault mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWAM_R")
+    field( INP,  "@asyn($(PORT),0) RXCWAM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWAT_R")
+record(ai, "$(P)RXCWAT_R")
 {
+	field( DESC, "arc detector led test")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWAT_R")
+    field( INP,  "@asyn($(PORT),0) RXCWAT_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XATFLT_R")
+record(ai, "$(P)RXATFLT_R")
 {
+	field( DESC, "arc detector led test fault status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XATFLT_R")
+    field( INP,  "@asyn($(PORT),0) RXATFLT_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWAFC_R")
+record(ai, "$(P)RXCWAFC_R")
 {
+	field( DESC, "arc fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWAFC_R")
+    field( INP,  "@asyn($(PORT),0) RXCWAFC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1WWT_R")
+record(ai, "$(P)R1CWWT_R")
 {
+	field( DESC, "cavity 1 window voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1WWT_R")
+    field( INP,  "@asyn($(PORT),0) R1CWWT_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2WWT_R")
+record(ai, "$(P)R2CWWT_R")
 {
+	field( DESC, "cavity 2 window voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2WWT_R")
+    field( INP,  "@asyn($(PORT),0) R2CWWT_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3WWT_R")
+record(ai, "$(P)R3CWWT_R")
 {
+	field( DESC, "cavity 3 window voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3WWT_R")
+    field( INP,  "@asyn($(PORT),0) R3CWWT_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4WWT_R")
+record(ai, "$(P)R4CWWT_R")
 {
+	field( DESC, "cavity 4 window voltage readback")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4WWT_R")
+    field( INP,  "@asyn($(PORT),0) R4CWWT_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1WWL_R")
+record(ai, "$(P)R1CWWL_R")
 {
+	field( DESC, "cavity 1 window limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1WWL_R")
+    field( INP,  "@asyn($(PORT),0) R1CWWL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2WWL_R")
+record(ai, "$(P)R2CWWL_R")
 {
+	field( DESC, "cavity 2 window limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2WWL_R")
+    field( INP,  "@asyn($(PORT),0) R2CWWL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3WWL_R")
+record(ai, "$(P)R3CWWL_R")
 {
+	field( DESC, "cavity 3 window limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3WWL_R")
+    field( INP,  "@asyn($(PORT),0) R3CWWL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4WWL_R")
+record(ai, "$(P)R4CWWL_R")
 {
+	field( DESC, "cavity 4 window limit volts")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4WWL_R")
+    field( INP,  "@asyn($(PORT),0) R4CWWL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWWD_R")
+record(ai, "$(P)RXCWWD_R")
 {
+	field( DESC, "window faults latched and instantaneou")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWWD_R")
+    field( INP,  "@asyn($(PORT),0) RXCWWD_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWWTS_R")
+record(ai, "$(P)RXCWWTS_R")
 {
+	field( DESC, "window ir sensor test")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWWTS_R")
+    field( INP,  "@asyn($(PORT),0) RXCWWTS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWWM_R")
+record(ai, "$(P)RXCWWM_R")
 {
+	field( DESC, "window fault mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWWM_R")
+    field( INP,  "@asyn($(PORT),0) RXCWWM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCWWFC_R")
+record(ai, "$(P)RXCWWFC_R")
 {
+	field( DESC, "window fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCWWFC_R")
+    field( INP,  "@asyn($(PORT),0) RXCWWFC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1STMPI_R")
+record(ai, "$(P)R1STMPI_R")
 {
+	field( DESC, "cavity 1 stepper motor PT100 excitaion")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1STMPI_R")
+    field( INP,  "@asyn($(PORT),0) R1STMPI_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2STMPI_R")
+record(ai, "$(P)R2STMPI_R")
 {
+	field( DESC, "cavity 2 stepper motor PT100 excitaion")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2STMPI_R")
+    field( INP,  "@asyn($(PORT),0) R2STMPI_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3STMPI_R")
+record(ai, "$(P)R3STMPI_R")
 {
+	field( DESC, "cavity 3 stepper motor PT100 excitaion")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3STMPI_R")
+    field( INP,  "@asyn($(PORT),0) R3STMPI_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4STMPI_R")
+record(ai, "$(P)R4STMPI_R")
 {
+	field( DESC, "cavity 4 stepper motor PT100 excitaion")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4STMPI_R")
+    field( INP,  "@asyn($(PORT),0) R4STMPI_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1STMPV_R")
+record(ai, "$(P)R1STMPV_R")
 {
+	field( DESC, "cavity 1 stepper motor PT100 voltage r")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1STMPV_R")
+    field( INP,  "@asyn($(PORT),0) R1STMPV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2STMPV_R")
+record(ai, "$(P)R2STMPV_R")
 {
+	field( DESC, "cavity 2 stepper motor PT100 voltage r")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2STMPV_R")
+    field( INP,  "@asyn($(PORT),0) R2STMPV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3STMPV_R")
+record(ai, "$(P)R3STMPV_R")
 {
+	field( DESC, "cavity 3 stepper motor PT100 voltage r")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3STMPV_R")
+    field( INP,  "@asyn($(PORT),0) R3STMPV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4STMPV_R")
+record(ai, "$(P)R4STMPV_R")
 {
+	field( DESC, "cavity 4 stepper motor PT100 voltage r")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4STMPV_R")
+    field( INP,  "@asyn($(PORT),0) R4STMPV_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1STMPVL_R")
+record(ai, "$(P)R1STMPVL_R")
 {
+	field( DESC, "cavity 1 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1STMPVL_R")
+    field( INP,  "@asyn($(PORT),0) R1STMPVL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2STMPVL_R")
+record(ai, "$(P)R2STMPVL_R")
 {
+	field( DESC, "cavity 2 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2STMPVL_R")
+    field( INP,  "@asyn($(PORT),0) R2STMPVL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3STMPVL_R")
+record(ai, "$(P)R3STMPVL_R")
 {
+	field( DESC, "cavity 3 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3STMPVL_R")
+    field( INP,  "@asyn($(PORT),0) R3STMPVL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4STMPVL_R")
+record(ai, "$(P)R4STMPVL_R")
 {
+	field( DESC, "cavity 4 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4STMPVL_R")
+    field( INP,  "@asyn($(PORT),0) R4STMPVL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XSTMPLS_R")
+record(ai, "$(P)RXSTMPLS_R")
 {
+	field( DESC, "stepper motor temperature limit status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XSTMPLS_R")
+    field( INP,  "@asyn($(PORT),0) RXSTMPLS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLTMP1I_R")
+record(ai, "$(P)RXSTMPM_R")
 {
+	field( DESC, "stepper motor temperature limit mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLTMP1I_R")
+    field( INP,  "@asyn($(PORT),0) RXSTMPM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLTMP2I_R")
+record(ai, "$(P)RXSTMPFC_R")
 {
+	field( DESC, "stepper motor temperature limit fault ")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLTMP2I_R")
+    field( INP,  "@asyn($(PORT),0) RXSTMPFC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLTMP1I_R")
+record(ai, "$(P)R1CPLTMP1I_R")
 {
+	field( DESC, "cavity 1 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLTMP1I_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLTMP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLTMP2I_R")
+record(ai, "$(P)R1CPLTMP2I_R")
 {
+	field( DESC, "cavity 1 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLTMP2I_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLTMP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLTMP1I_R")
+record(ai, "$(P)R2CPLTMP1I_R")
 {
+	field( DESC, "cavity 2 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLTMP1I_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLTMP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLTMP2I_R")
+record(ai, "$(P)R2CPLTMP2I_R")
 {
+	field( DESC, "cavity 2 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLTMP2I_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLTMP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLTMP1I_R")
+record(ai, "$(P)R3CPLTMP1I_R")
 {
+	field( DESC, "cavity 3 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLTMP1I_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLTMP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLTMP2I_R")
+record(ai, "$(P)R3CPLTMP2I_R")
 {
+	field( DESC, "cavity 3 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLTMP2I_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLTMP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLTMP1V_R")
+record(ai, "$(P)R4CPLTMP1I_R")
 {
+	field( DESC, "cavity 4 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLTMP1V_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLTMP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLTMP2V_R")
+record(ai, "$(P)R4CPLTMP2I_R")
 {
+	field( DESC, "cavity 4 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLTMP2V_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLTMP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLTMP1V_R")
+record(ai, "$(P)R1CPLTMP1V_R")
 {
+	field( DESC, "cavity 1 coupler PT100 1 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLTMP1V_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLTMP1V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLTMP2V_R")
+record(ai, "$(P)R1CPLTMP2V_R")
 {
+	field( DESC, "cavity 1 coupler PT100 2 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLTMP2V_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLTMP2V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLTMP1V_R")
+record(ai, "$(P)R2CPLTMP1V_R")
 {
+	field( DESC, "cavity 2 coupler PT100 1 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLTMP1V_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLTMP1V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLTMP2V_R")
+record(ai, "$(P)R2CPLTMP2V_R")
 {
+	field( DESC, "cavity 2 coupler PT100 2 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLTMP2V_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLTMP2V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLTMP1V_R")
+record(ai, "$(P)R3CPLTMP1V_R")
 {
+	field( DESC, "cavity 3 coupler PT100 1 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLTMP1V_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLTMP1V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLTMP2V_R")
+record(ai, "$(P)R3CPLTMP2V_R")
 {
+	field( DESC, "cavity 3 coupler PT100 2 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLTMP2V_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLTMP2V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLTMP1VL_R")
+record(ai, "$(P)R4CPLTMP1V_R")
 {
+	field( DESC, "cavity 4 coupler PT100 1 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLTMP1VL_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLTMP1V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLTMP2VL_R")
+record(ai, "$(P)R4CPLTMP2V_R")
 {
+	field( DESC, "cavity 4 coupler PT100 2 voltage readb")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLTMP2VL_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLTMP2V_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLTMP1VL_R")
+record(ai, "$(P)R1CPLTMP1VL_R")
 {
+	field( DESC, "cavity 1 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLTMP1VL_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLTMP1VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLTMP2VL_R")
+record(ai, "$(P)R1CPLTMP2VL_R")
 {
+	field( DESC, "cavity 1 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLTMP2VL_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLTMP2VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLTMP1VL_R")
+record(ai, "$(P)R2CPLTMP1VL_R")
 {
+	field( DESC, "cavity 2 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLTMP1VL_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLTMP1VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLTMP2VL_R")
+record(ai, "$(P)R2CPLTMP2VL_R")
 {
+	field( DESC, "cavity 2 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLTMP2VL_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLTMP2VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLTMP1VL_R")
+record(ai, "$(P)R3CPLTMP1VL_R")
 {
+	field( DESC, "cavity 3 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLTMP1VL_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLTMP1VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLTMP2VL_R")
+record(ai, "$(P)R3CPLTMP2VL_R")
 {
+	field( DESC, "cavity 3 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLTMP2VL_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLTMP2VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCPLTMPLS_R")
+record(ai, "$(P)R4CPLTMP1VL_R")
 {
+	field( DESC, "cavity 4 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCPLTMPLS_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLTMP1VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP1I_R")
+record(ai, "$(P)R4CPLTMP2VL_R")
 {
+	field( DESC, "cavity 4 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP1I_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLTMP2VL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP2I_R")
+record(ai, "$(P)RXCPLTMPLS_R")
 {
+	field( DESC, "coupler temperature limit status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP2I_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLTMPLS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP3I_R")
+record(ai, "$(P)RXCPLTMPM_R")
 {
+	field( DESC, "coupler temperature limit mask status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP3I_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLTMPM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP1I_R")
+record(ai, "$(P)RXCPLTMPFC_R")
 {
+	field( DESC, "coupler temperature limit fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP1I_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLTMPFC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP2I_R")
+record(ai, "$(P)R1CPLFEP1I_R")
 {
+	field( DESC, "coupler 1 electron probe 1 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP2I_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP3I_R")
+record(ai, "$(P)R1CPLFEP2I_R")
 {
+	field( DESC, "coupler 1 electron probe 2 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP3I_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP1I_R")
+record(ai, "$(P)R1CPLFEP3I_R")
 {
+	field( DESC, "coupler 1 electron probe 3 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP1I_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP3I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP2I_R")
+record(ai, "$(P)R2CPLFEP1I_R")
 {
+	field( DESC, "coupler 2 electron probe 1 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP2I_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP3I_R")
+record(ai, "$(P)R2CPLFEP2I_R")
 {
+	field( DESC, "coupler 2 electron probe 2 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP3I_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP1I_R")
+record(ai, "$(P)R2CPLFEP3I_R")
 {
+	field( DESC, "coupler 2 electron probe 3 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP1I_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP3I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP2I_R")
+record(ai, "$(P)R3CPLFEP1I_R")
 {
+	field( DESC, "coupler 3 electron probe 1 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP2I_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP3I_R")
+record(ai, "$(P)R3CPLFEP2I_R")
 {
+	field( DESC, "coupler 3 electron probe 2 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP3I_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP1ILH_R")
+record(ai, "$(P)R3CPLFEP3I_R")
 {
+	field( DESC, "coupler 3 electron probe 3 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP1ILH_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP3I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP2ILH_R")
+record(ai, "$(P)R4CPLFEP1I_R")
 {
+	field( DESC, "coupler 4 electron probe 1 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP2ILH_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP1I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP3ILH_R")
+record(ai, "$(P)R4CPLFEP2I_R")
 {
+	field( DESC, "coupler 4 electron probe 2 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP3ILH_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP2I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP1ILH_R")
+record(ai, "$(P)R4CPLFEP3I_R")
 {
+	field( DESC, "coupler 4 electron probe 3 current rea")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP1ILH_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP3I_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP2ILH_R")
+record(ai, "$(P)R1CPLFEP1ILH_R")
 {
+	field( DESC, "coupler 1 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP2ILH_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP1ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP3ILH_R")
+record(ai, "$(P)R1CPLFEP2ILH_R")
 {
+	field( DESC, "coupler 1 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP3ILH_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP2ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP1ILH_R")
+record(ai, "$(P)R1CPLFEP3ILH_R")
 {
+	field( DESC, "coupler 1 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP1ILH_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP3ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP2ILH_R")
+record(ai, "$(P)R2CPLFEP1ILH_R")
 {
+	field( DESC, "coupler 2 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP2ILH_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP1ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP3ILH_R")
+record(ai, "$(P)R2CPLFEP2ILH_R")
 {
+	field( DESC, "coupler 2 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP3ILH_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP2ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP1ILH_R")
+record(ai, "$(P)R2CPLFEP3ILH_R")
 {
+	field( DESC, "coupler 2 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP1ILH_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP3ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP2ILH_R")
+record(ai, "$(P)R3CPLFEP1ILH_R")
 {
+	field( DESC, "coupler 3 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP2ILH_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP1ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP3ILH_R")
+record(ai, "$(P)R3CPLFEP2ILH_R")
 {
+	field( DESC, "coupler 3 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP3ILH_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP2ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP1ILL_R")
+record(ai, "$(P)R3CPLFEP3ILH_R")
 {
+	field( DESC, "coupler 3 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP1ILL_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP3ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP2ILL_R")
+record(ai, "$(P)R4CPLFEP1ILH_R")
 {
+	field( DESC, "coupler 4 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP2ILL_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP1ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C1PLFEP3ILL_R")
+record(ai, "$(P)R4CPLFEP2ILH_R")
 {
+	field( DESC, "coupler 4 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C1PLFEP3ILL_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP2ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP1ILL_R")
+record(ai, "$(P)R4CPLFEP3ILH_R")
 {
+	field( DESC, "coupler 4 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP1ILL_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP3ILH_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP2ILL_R")
+record(ai, "$(P)R1CPLFEP1ILL_R")
 {
+	field( DESC, "coupler 1 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP2ILL_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP1ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C2PLFEP3ILL_R")
+record(ai, "$(P)R1CPLFEP2ILL_R")
 {
+	field( DESC, "coupler 1 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C2PLFEP3ILL_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP2ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP1ILL_R")
+record(ai, "$(P)R1CPLFEP3ILL_R")
 {
+	field( DESC, "coupler 1 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP1ILL_R")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP3ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP2ILL_R")
+record(ai, "$(P)R2CPLFEP1ILL_R")
 {
+	field( DESC, "coupler 2 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP2ILL_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP1ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C3PLFEP3ILL_R")
+record(ai, "$(P)R2CPLFEP2ILL_R")
 {
+	field( DESC, "coupler 2 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C3PLFEP3ILL_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP2ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP1ILL_R")
+record(ai, "$(P)R2CPLFEP3ILL_R")
 {
+	field( DESC, "coupler 2 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP1ILL_R")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP3ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP2ILL_R")
+record(ai, "$(P)R3CPLFEP1ILL_R")
 {
+	field( DESC, "coupler 3 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP2ILL_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP1ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)C4PLFEP3ILL_R")
+record(ai, "$(P)R3CPLFEP2ILL_R")
 {
+	field( DESC, "coupler 3 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) C4PLFEP3ILL_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP2ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCPLFEPLS_R")
+record(ai, "$(P)R3CPLFEP3ILL_R")
 {
+	field( DESC, "coupler 3 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCPLFEPLS_R")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP3ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCPLFEPFC_R")
+record(ai, "$(P)R4CPLFEP1ILL_R")
 {
+	field( DESC, "coupler 4 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCPLFEPFC_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP1ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCVF_R")
+record(ai, "$(P)R4CPLFEP2ILL_R")
 {
+	field( DESC, "coupler 4 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCVF_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP2ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCVFM_R")
+record(ai, "$(P)R4CPLFEP3ILL_R")
 {
+	field( DESC, "coupler 4 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCVFM_R")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP3ILL_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCVFC_R")
+record(ai, "$(P)RXCPLFEPM_R")
 {
+	field( DESC, "coupler electron probe limit mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCVFC_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLFEPM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCIEN_R")
+record(ai, "$(P)RXCPLFEPLS_R")
 {
+	field( DESC, "coupler electron probe limit status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCIEN_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLFEPLS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCIENM_R")
+record(ai, "$(P)RXCPLFEPFS_R")
 {
+	field( DESC, "coupler electron probe limit latched s")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCIENM_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLFEPFS_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XCIENC_R")
+record(ai, "$(P)RXCPLFEPFC_R")
 {
+	field( DESC, "coupler electro probe fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XCIENC_R")
+    field( INP,  "@asyn($(PORT),0) RXCPLFEPFC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XFFSD_R")
+record(ai, "$(P)RXCVF_R")
 {
+	field( DESC, "vacuum fault status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XFFSD_R")
+    field( INP,  "@asyn($(PORT),0) RXCVF_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XFFSDM_R")
+record(ai, "$(P)RXCVFM_R")
 {
+	field( DESC, "vacuum fault mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XFFSDM_R")
+    field( INP,  "@asyn($(PORT),0) RXCVFM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XFFSDC_R")
+record(ai, "$(P)RXCVFC_R")
 {
+	field( DESC, "vacuum fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XFFSDC_R")
+    field( INP,  "@asyn($(PORT),0) RXCVFC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XISTAT_R")
+record(ai, "$(P)RXCIEN_R")
 {
+	field( DESC, "interlock enable latch and present fro")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XISTAT_R")
+    field( INP,  "@asyn($(PORT),0) RXCIEN_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XICTL_R")
+record(ai, "$(P)RXCIENM_R")
 {
+	field( DESC, "interlock enable latch and present fro")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XICTL_R")
+    field( INP,  "@asyn($(PORT),0) RXCIENM_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)XIVER_R")
+record(ai, "$(P)RXCIENC_R")
 {
+	field( DESC, "interlock enable clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) XIVER_R")
+    field( INP,  "@asyn($(PORT),0) RXCIENC_R")
     field( SCAN, "I/O Intr")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
+record(ai, "$(P)RXFFSD_R")
+{
+	field( DESC, "FSD to field control latch and present")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) RXFFSD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)RXFFSDM_R")
+{
+	field( DESC, "FSD to field control latch and present")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) RXFFSDM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)RXFFSDC_R")
+{
+	field( DESC, "FSD to field control clear")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) RXFFSDC_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)RXISTAT_R")
+{
+	field( DESC, "miscellaneous status bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) RXISTAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)RXICTL_R")
+{
+	field( DESC, "miscellaneous control bits")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) RXICTL_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)RXIVER_R")
+{
+	field( DESC, "firmware version")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) RXIVER_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R1CPLFEP1PERD_R")
+{
+	field( DESC, "Coupler 1 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP1PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R1CPLFEP2PERD_R")
+{
+	field( DESC, "Coupler 2 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP2PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R1CPLFEP3PERD_R")
+{
+	field( DESC, "Coupler 3 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R1CPLFEP3PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R2CPLFEP1PERD_R")
+{
+	field( DESC, "Coupler 4 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP1PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R2CPLFEP2PERD_R")
+{
+	field( DESC, "Coupler 5 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP2PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R2CPLFEP3PERD_R")
+{
+	field( DESC, "Coupler 6 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R2CPLFEP3PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R3CPLFEP1PERD_R")
+{
+	field( DESC, "Coupler 7 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP1PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R3CPLFEP2PERD_R")
+{
+	field( DESC, "Coupler 8 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP2PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R3CPLFEP3PERD_R")
+{
+	field( DESC, "Coupler 9 field emission detection win")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R3CPLFEP3PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R4CPLFEP1PERD_R")
+{
+	field( DESC, "Coupler 10 field emission detection wi")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP1PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R4CPLFEP2PERD_R")
+{
+	field( DESC, "Coupler 11 field emission detection wi")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP2PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R4CPLFEP3PERD_R")
+{
+	field( DESC, "Coupler 12 field emission detection wi")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R4CPLFEP3PERD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R5STMPI_R")
+{
+	field( DESC, "Spare 1 PT100 excitaion current mA")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R5STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R6STMPI_R")
+{
+	field( DESC, "Spare 2 PT100 excitaion current mA")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R6STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R7STMPI_R")
+{
+	field( DESC, "Spare 3 PT100 excitaion current mA")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R7STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R8STMPI_R")
+{
+	field( DESC, "Spare 4 PT100 excitaion current mA")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R8STMPI_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R5STMPV_R")
+{
+	field( DESC, "spare 1 PT100 voltage readback")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R5STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R6STMPV_R")
+{
+	field( DESC, "Spare 2 PT100 voltage readback")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R6STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R7STMPV_R")
+{
+	field( DESC, "Spare 3 PT100 voltage readback")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R7STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)R8STMPV_R")
+{
+	field( DESC, "Spare 4 PT100 voltage readback")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) R8STMPV_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+
+record(ao, "$(P)R1CWAPS_W")
+{
+	field( DESC, "cavity 1 arc detector power supply set")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R1CWAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R2CWAPS_W")
+{
+	field( DESC, "cavity 2 arc detector power supply set")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R2CWAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R3CWAPS_W")
+{
+	field( DESC, "cavity 3 arc detector power supply set")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R3CWAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R4CWAPS_W")
+{
+	field( DESC, "cavity 4 arc detector power supply set")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R4CWAPS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R1CWAL_W")
+{
+	field( DESC, "cavity 1 arc detector limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R1CWAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R2CWAL_W")
+{
+	field( DESC, "cavity 2 arc detector limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R2CWAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R3CWAL_W")
+{
+	field( DESC, "cavity 3 arc detector limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R3CWAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R4CWAL_W")
+{
+	field( DESC, "cavity 4 arc detector limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R4CWAL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R1CWAP_W")
+{
+	field( DESC, "cavity 1 arc detector period usec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R1CWAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R2CWAP_W")
+{
+	field( DESC, "cavity 2 arc detector period usec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R2CWAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R3CWAP_W")
+{
+	field( DESC, "cavity 3 arc detector period usec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R3CWAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R4CWAP_W")
+{
+	field( DESC, "cavity 4 arc detector period usec")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R4CWAP_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXCWAM_W")
+{
+	field( DESC, "arc fault mask")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXCWAM_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXCWAT_W")
+{
+	field( DESC, "arc detector led test")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXCWAT_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXATFLT_W")
+{
+	field( DESC, "arc detector led test fault status")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXATFLT_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXCWAFC_W")
+{
+	field( DESC, "arc fault clear")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXCWAFC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R1CWWL_W")
+{
+	field( DESC, "cavity 1 window limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R1CWWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R2CWWL_W")
+{
+	field( DESC, "cavity 2 window limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R2CWWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R3CWWL_W")
+{
+	field( DESC, "cavity 3 window limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R3CWWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R4CWWL_W")
+{
+	field( DESC, "cavity 4 window limit volts")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R4CWWL_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXCWWTS_W")
+{
+	field( DESC, "window ir sensor test")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXCWWTS_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXCWWM_W")
+{
+	field( DESC, "window fault mask")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXCWWM_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)RXCWWFC_W")
+{
+	field( DESC, "window fault clear")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) RXCWWFC_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R1STMPI_W")
+{
+	field( DESC, "cavity 1 stepper motor PT100 excitaion")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R1STMPI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ao, "$(P)R2STMPI_W")
+{
+	field( DESC, "cavity 2 stepper motor PT100 excitaion")
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0) R2STMPI_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
 
-record(longout, "$(P)C1WAPS_W")
+record(ao, "$(P)R3STMPI_W")
 {
+	field( DESC, "cavity 3 stepper motor PT100 excitaion")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1WAPS_W")
+    field( OUT,  "@asyn($(PORT),0) R3STMPI_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2WAPS_W")
+record(ao, "$(P)R4STMPI_W")
 {
+	field( DESC, "cavity 4 stepper motor PT100 excitaion")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2WAPS_W")
+    field( OUT,  "@asyn($(PORT),0) R4STMPI_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3WAPS_W")
+record(ao, "$(P)R1STMPVL_W")
 {
+	field( DESC, "cavity 1 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3WAPS_W")
+    field( OUT,  "@asyn($(PORT),0) R1STMPVL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4WAPS_W")
+record(ao, "$(P)R2STMPVL_W")
 {
+	field( DESC, "cavity 2 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4WAPS_W")
+    field( OUT,  "@asyn($(PORT),0) R2STMPVL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1WAL_W")
+record(ao, "$(P)R3STMPVL_W")
 {
+	field( DESC, "cavity 3 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1WAL_W")
+    field( OUT,  "@asyn($(PORT),0) R3STMPVL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2WAL_W")
+record(ao, "$(P)R4STMPVL_W")
 {
+	field( DESC, "cavity 4 stepper motor PT100 voltage l")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2WAL_W")
+    field( OUT,  "@asyn($(PORT),0) R4STMPVL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3WAL_W")
+record(ao, "$(P)RXSTMPM_W")
 {
+	field( DESC, "stepper motor temperature limit mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3WAL_W")
+    field( OUT,  "@asyn($(PORT),0) RXSTMPM_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4WAL_W")
+record(ao, "$(P)RXSTMPFC_W")
 {
+	field( DESC, "stepper motor temperature limit fault ")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4WAL_W")
+    field( OUT,  "@asyn($(PORT),0) RXSTMPFC_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1WAP_W")
+record(ao, "$(P)R1CPLTMP1I_W")
 {
+	field( DESC, "cavity 1 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1WAP_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLTMP1I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2WAP_W")
+record(ao, "$(P)R1CPLTMP2I_W")
 {
+	field( DESC, "cavity 1 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2WAP_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLTMP2I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3WAP_W")
+record(ao, "$(P)R2CPLTMP1I_W")
 {
+	field( DESC, "cavity 2 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3WAP_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLTMP1I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4WAP_W")
+record(ao, "$(P)R2CPLTMP2I_W")
 {
+	field( DESC, "cavity 2 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4WAP_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLTMP2I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCWAM_W")
+record(ao, "$(P)R3CPLTMP1I_W")
 {
+	field( DESC, "cavity 3 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCWAM_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLTMP1I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCWAT_W")
+record(ao, "$(P)R3CPLTMP2I_W")
 {
+	field( DESC, "cavity 3 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCWAT_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLTMP2I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCWAFC_W")
+record(ao, "$(P)R4CPLTMP1I_W")
 {
+	field( DESC, "cavity 4 coupler PT100 1 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCWAFC_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLTMP1I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1WWL_W")
+record(ao, "$(P)R4CPLTMP2I_W")
 {
+	field( DESC, "cavity 4 coupler PT100 2 excitation cu")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1WWL_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLTMP2I_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2WWL_W")
+record(ao, "$(P)R1CPLTMP1VL_W")
 {
+	field( DESC, "cavity 1 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2WWL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLTMP1VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3WWL_W")
+record(ao, "$(P)R1CPLTMP2VL_W")
 {
+	field( DESC, "cavity 1 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3WWL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLTMP2VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4WWL_W")
+record(ao, "$(P)R2CPLTMP1VL_W")
 {
+	field( DESC, "cavity 2 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4WWL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLTMP1VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCWWTS_W")
+record(ao, "$(P)R2CPLTMP2VL_W")
 {
+	field( DESC, "cavity 2 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCWWTS_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLTMP2VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1STMPI_W")
+record(ao, "$(P)R3CPLTMP1VL_W")
 {
+	field( DESC, "cavity 3 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1STMPI_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLTMP1VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2STMPI_W")
+record(ao, "$(P)R3CPLTMP2VL_W")
 {
+	field( DESC, "cavity 3 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2STMPI_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLTMP2VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3STMPI_W")
+record(ao, "$(P)R4CPLTMP1VL_W")
 {
+	field( DESC, "cavity 4 coupler PT100 1 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3STMPI_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLTMP1VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4STMPI_W")
+record(ao, "$(P)R4CPLTMP2VL_W")
 {
+	field( DESC, "cavity 4 coupler PT100 2 voltage limit")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4STMPI_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLTMP2VL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1STMPVL_W")
+record(ao, "$(P)RXCPLTMPM_W")
 {
+	field( DESC, "coupler temperature limit mask status")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1STMPVL_W")
+    field( OUT,  "@asyn($(PORT),0) RXCPLTMPM_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2STMPVL_W")
+record(ao, "$(P)RXCPLTMPFC_W")
 {
+	field( DESC, "coupler temperature limit fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2STMPVL_W")
+    field( OUT,  "@asyn($(PORT),0) RXCPLTMPFC_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3STMPVL_W")
+record(ao, "$(P)R1CPLFEP1ILH_W")
 {
+	field( DESC, "coupler 1 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3STMPVL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP1ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4STMPVL_W")
+record(ao, "$(P)R1CPLFEP2ILH_W")
 {
+	field( DESC, "coupler 1 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4STMPVL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP2ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLTMP1I_W")
+record(ao, "$(P)R1CPLFEP3ILH_W")
 {
+	field( DESC, "coupler 1 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLTMP1I_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP3ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLTMP2I_W")
+record(ao, "$(P)R2CPLFEP1ILH_W")
 {
+	field( DESC, "coupler 2 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLTMP2I_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP1ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLTMP1I_W")
+record(ao, "$(P)R2CPLFEP2ILH_W")
 {
+	field( DESC, "coupler 2 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLTMP1I_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP2ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLTMP2I_W")
+record(ao, "$(P)R2CPLFEP3ILH_W")
 {
+	field( DESC, "coupler 2 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLTMP2I_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP3ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLTMP1I_W")
+record(ao, "$(P)R3CPLFEP1ILH_W")
 {
+	field( DESC, "coupler 3 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLTMP1I_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP1ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLTMP2I_W")
+record(ao, "$(P)R3CPLFEP2ILH_W")
 {
+	field( DESC, "coupler 3 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLTMP2I_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP2ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLTMP1I_W")
+record(ao, "$(P)R3CPLFEP3ILH_W")
 {
+	field( DESC, "coupler 3 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLTMP1I_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP3ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLTMP2I_W")
+record(ao, "$(P)R4CPLFEP1ILH_W")
 {
+	field( DESC, "coupler 4 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLTMP2I_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP1ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLTMP1VL_W")
+record(ao, "$(P)R4CPLFEP2ILH_W")
 {
+	field( DESC, "coupler 4 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLTMP1VL_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP2ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLTMP2VL_W")
+record(ao, "$(P)R4CPLFEP3ILH_W")
 {
+	field( DESC, "coupler 4 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLTMP2VL_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP3ILH_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLTMP1VL_W")
+record(ao, "$(P)R1CPLFEP1ILL_W")
 {
+	field( DESC, "coupler 1 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLTMP1VL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP1ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLTMP2VL_W")
+record(ao, "$(P)R1CPLFEP2ILL_W")
 {
+	field( DESC, "coupler 1 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLTMP2VL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP2ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLTMP1VL_W")
+record(ao, "$(P)R1CPLFEP3ILL_W")
 {
+	field( DESC, "coupler 1 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLTMP1VL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP3ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLTMP2VL_W")
+record(ao, "$(P)R2CPLFEP1ILL_W")
 {
+	field( DESC, "coupler 2 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLTMP2VL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP1ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLTMP1VL_W")
+record(ao, "$(P)R2CPLFEP2ILL_W")
 {
+	field( DESC, "coupler 2 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLTMP1VL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP2ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLTMP2VL_W")
+record(ao, "$(P)R2CPLFEP3ILL_W")
 {
+	field( DESC, "coupler 2 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLTMP2VL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP3ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLFEP1ILH_W")
+record(ao, "$(P)R3CPLFEP1ILL_W")
 {
+	field( DESC, "coupler 3 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLFEP1ILH_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP1ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLFEP2ILH_W")
+record(ao, "$(P)R3CPLFEP2ILL_W")
 {
+	field( DESC, "coupler 3 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLFEP2ILH_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP2ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLFEP3ILH_W")
+record(ao, "$(P)R3CPLFEP3ILL_W")
 {
+	field( DESC, "coupler 3 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLFEP3ILH_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP3ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLFEP1ILH_W")
+record(ao, "$(P)R4CPLFEP1ILL_W")
 {
+	field( DESC, "coupler 4 electron probe 1 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLFEP1ILH_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP1ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLFEP2ILH_W")
+record(ao, "$(P)R4CPLFEP2ILL_W")
 {
+	field( DESC, "coupler 4 electron probe 2 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLFEP2ILH_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP2ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLFEP3ILH_W")
+record(ao, "$(P)R4CPLFEP3ILL_W")
 {
+	field( DESC, "coupler 4 electron probe 3 current lim")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLFEP3ILH_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP3ILL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLFEP1ILH_W")
+record(ao, "$(P)RXCPLFEPM_W")
 {
+	field( DESC, "coupler electron probe limit mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLFEP1ILH_W")
+    field( OUT,  "@asyn($(PORT),0) RXCPLFEPM_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLFEP2ILH_W")
+record(ao, "$(P)RXCPLFEPFC_W")
 {
+	field( DESC, "coupler electro probe fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLFEP2ILH_W")
+    field( OUT,  "@asyn($(PORT),0) RXCPLFEPFC_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLFEP3ILH_W")
+record(ao, "$(P)RXCVFM_W")
 {
+	field( DESC, "vacuum fault mask")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLFEP3ILH_W")
+    field( OUT,  "@asyn($(PORT),0) RXCVFM_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLFEP1ILH_W")
+record(ao, "$(P)RXCVFC_W")
 {
+	field( DESC, "vacuum fault clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLFEP1ILH_W")
+    field( OUT,  "@asyn($(PORT),0) RXCVFC_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLFEP2ILH_W")
+record(ao, "$(P)RXCIENM_W")
 {
+	field( DESC, "interlock enable latch and present fro")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLFEP2ILH_W")
+    field( OUT,  "@asyn($(PORT),0) RXCIENM_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLFEP3ILH_W")
+record(ao, "$(P)RXCIENC_W")
 {
+	field( DESC, "interlock enable clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLFEP3ILH_W")
+    field( OUT,  "@asyn($(PORT),0) RXCIENC_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLFEP1ILL_W")
+record(ao, "$(P)RXFFSDM_W")
 {
+	field( DESC, "FSD to field control latch and present")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLFEP1ILL_W")
+    field( OUT,  "@asyn($(PORT),0) RXFFSDM_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLFEP2ILL_W")
+record(ao, "$(P)RXFFSDC_W")
 {
+	field( DESC, "FSD to field control clear")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLFEP2ILL_W")
+    field( OUT,  "@asyn($(PORT),0) RXFFSDC_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C1PLFEP3ILL_W")
+record(ao, "$(P)RXICTL_W")
 {
+	field( DESC, "miscellaneous control bits")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C1PLFEP3ILL_W")
+    field( OUT,  "@asyn($(PORT),0) RXICTL_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLFEP1ILL_W")
+record(ao, "$(P)R1CPLFEP1PERD_W")
 {
+	field( DESC, "Coupler 1 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLFEP1ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP1PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLFEP2ILL_W")
+record(ao, "$(P)R1CPLFEP2PERD_W")
 {
+	field( DESC, "Coupler 2 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLFEP2ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP2PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C2PLFEP3ILL_W")
+record(ao, "$(P)R1CPLFEP3PERD_W")
 {
+	field( DESC, "Coupler 3 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C2PLFEP3ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R1CPLFEP3PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLFEP1ILL_W")
+record(ao, "$(P)R2CPLFEP1PERD_W")
 {
+	field( DESC, "Coupler 4 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLFEP1ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP1PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLFEP2ILL_W")
+record(ao, "$(P)R2CPLFEP2PERD_W")
 {
+	field( DESC, "Coupler 5 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLFEP2ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP2PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C3PLFEP3ILL_W")
+record(ao, "$(P)R2CPLFEP3PERD_W")
 {
+	field( DESC, "Coupler 6 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C3PLFEP3ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R2CPLFEP3PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLFEP1ILL_W")
+record(ao, "$(P)R3CPLFEP1PERD_W")
 {
+	field( DESC, "Coupler 7 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLFEP1ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP1PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLFEP2ILL_W")
+record(ao, "$(P)R3CPLFEP2PERD_W")
 {
+	field( DESC, "Coupler 8 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLFEP2ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP2PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)C4PLFEP3ILL_W")
+record(ao, "$(P)R3CPLFEP3PERD_W")
 {
+	field( DESC, "Coupler 9 field emission detection win")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) C4PLFEP3ILL_W")
+    field( OUT,  "@asyn($(PORT),0) R3CPLFEP3PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCVFM_W")
+record(ao, "$(P)R4CPLFEP1PERD_W")
 {
+	field( DESC, "Coupler 10 field emission detection wi")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCVFM_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP1PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCVFC_W")
+record(ao, "$(P)R4CPLFEP2PERD_W")
 {
+	field( DESC, "Coupler 11 field emission detection wi")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCVFC_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP2PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCIENM_W")
+record(ao, "$(P)R4CPLFEP3PERD_W")
 {
+	field( DESC, "Coupler 12 field emission detection wi")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCIENM_W")
+    field( OUT,  "@asyn($(PORT),0) R4CPLFEP3PERD_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XCIENC_W")
+record(ao, "$(P)R5STMPI_W")
 {
+	field( DESC, "Spare 1 PT100 excitaion current mA")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XCIENC_W")
+    field( OUT,  "@asyn($(PORT),0) R5STMPI_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XFFSDM_W")
+record(ao, "$(P)R6STMPI_W")
 {
+	field( DESC, "Spare 2 PT100 excitaion current mA")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XFFSDM_W")
+    field( OUT,  "@asyn($(PORT),0) R6STMPI_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XFFSDC_W")
+record(ao, "$(P)R7STMPI_W")
 {
+	field( DESC, "Spare 3 PT100 excitaion current mA")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XFFSDC_W")
+    field( OUT,  "@asyn($(PORT),0) R7STMPI_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longout, "$(P)XICTL_W")
+record(ao, "$(P)R8STMPI_W")
 {
+	field( DESC, "Spare 4 PT100 excitaion current mA")
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) XICTL_W")
+    field( OUT,  "@asyn($(PORT),0) R8STMPI_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")

@@ -48,237 +48,253 @@ scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortNam
 
     epicsThreadSleep(defaultPollPeriod);
 
-    createParam(C1Plfep1IRString, asynParamInt32, &p_C1Plfep1IR);
-    createParam(C1Plfep1IlhRString, asynParamInt32, &p_C1Plfep1IlhR);
-    createParam(C1Plfep1IlhWString, asynParamInt32, &p_C1Plfep1IlhW);
-    createParam(C1Plfep1IllRString, asynParamInt32, &p_C1Plfep1IllR);
-    createParam(C1Plfep1IllWString, asynParamInt32, &p_C1Plfep1IllW);
-    createParam(C1Plfep2IRString, asynParamInt32, &p_C1Plfep2IR);
-    createParam(C1Plfep2IlhRString, asynParamInt32, &p_C1Plfep2IlhR);
-    createParam(C1Plfep2IlhWString, asynParamInt32, &p_C1Plfep2IlhW);
-    createParam(C1Plfep2IllRString, asynParamInt32, &p_C1Plfep2IllR);
-    createParam(C1Plfep2IllWString, asynParamInt32, &p_C1Plfep2IllW);
-    createParam(C1Plfep3IRString, asynParamInt32, &p_C1Plfep3IR);
-    createParam(C1Plfep3IlhRString, asynParamInt32, &p_C1Plfep3IlhR);
-    createParam(C1Plfep3IlhWString, asynParamInt32, &p_C1Plfep3IlhW);
-    createParam(C1Plfep3IllRString, asynParamInt32, &p_C1Plfep3IllR);
-    createParam(C1Plfep3IllWString, asynParamInt32, &p_C1Plfep3IllW);
-    createParam(C1Pltmp1IRString, asynParamInt32, &p_C1Pltmp1IR);
-    createParam(C1Pltmp1IWString, asynParamInt32, &p_C1Pltmp1IW);
-    createParam(C1Pltmp1VRString, asynParamInt32, &p_C1Pltmp1VR);
-    createParam(C1Pltmp1VlRString, asynParamInt32, &p_C1Pltmp1VlR);
-    createParam(C1Pltmp1VlWString, asynParamInt32, &p_C1Pltmp1VlW);
-    createParam(C1Pltmp2IRString, asynParamInt32, &p_C1Pltmp2IR);
-    createParam(C1Pltmp2IWString, asynParamInt32, &p_C1Pltmp2IW);
-    createParam(C1Pltmp2VRString, asynParamInt32, &p_C1Pltmp2VR);
-    createParam(C1Pltmp2VlRString, asynParamInt32, &p_C1Pltmp2VlR);
-    createParam(C1Pltmp2VlWString, asynParamInt32, &p_C1Pltmp2VlW);
-    createParam(C1StmpiRString, asynParamInt32, &p_C1StmpiR);
-    createParam(C1StmpiWString, asynParamInt32, &p_C1StmpiW);
-    createParam(C1StmpvRString, asynParamInt32, &p_C1StmpvR);
-    createParam(C1StmpvlRString, asynParamInt32, &p_C1StmpvlR);
-    createParam(C1StmpvlWString, asynParamInt32, &p_C1StmpvlW);
-    createParam(C1WalRString, asynParamInt32, &p_C1WalR);
-    createParam(C1WalWString, asynParamInt32, &p_C1WalW);
-    createParam(C1WapRString, asynParamInt32, &p_C1WapR);
-    createParam(C1WapWString, asynParamInt32, &p_C1WapW);
-    createParam(C1WapsRString, asynParamInt32, &p_C1WapsR);
-    createParam(C1WapsWString, asynParamInt32, &p_C1WapsW);
-    createParam(C1WavRString, asynParamInt32, &p_C1WavR);
-    createParam(C1WwlRString, asynParamInt32, &p_C1WwlR);
-    createParam(C1WwlWString, asynParamInt32, &p_C1WwlW);
-    createParam(C1WwtRString, asynParamInt32, &p_C1WwtR);
-    createParam(C2Plfep1IRString, asynParamInt32, &p_C2Plfep1IR);
-    createParam(C2Plfep1IlhRString, asynParamInt32, &p_C2Plfep1IlhR);
-    createParam(C2Plfep1IlhWString, asynParamInt32, &p_C2Plfep1IlhW);
-    createParam(C2Plfep1IllRString, asynParamInt32, &p_C2Plfep1IllR);
-    createParam(C2Plfep1IllWString, asynParamInt32, &p_C2Plfep1IllW);
-    createParam(C2Plfep2IRString, asynParamInt32, &p_C2Plfep2IR);
-    createParam(C2Plfep2IlhRString, asynParamInt32, &p_C2Plfep2IlhR);
-    createParam(C2Plfep2IlhWString, asynParamInt32, &p_C2Plfep2IlhW);
-    createParam(C2Plfep2IllRString, asynParamInt32, &p_C2Plfep2IllR);
-    createParam(C2Plfep2IllWString, asynParamInt32, &p_C2Plfep2IllW);
-    createParam(C2Plfep3IRString, asynParamInt32, &p_C2Plfep3IR);
-    createParam(C2Plfep3IlhRString, asynParamInt32, &p_C2Plfep3IlhR);
-    createParam(C2Plfep3IlhWString, asynParamInt32, &p_C2Plfep3IlhW);
-    createParam(C2Plfep3IllRString, asynParamInt32, &p_C2Plfep3IllR);
-    createParam(C2Plfep3IllWString, asynParamInt32, &p_C2Plfep3IllW);
-    createParam(C2Pltmp1IRString, asynParamInt32, &p_C2Pltmp1IR);
-    createParam(C2Pltmp1IWString, asynParamInt32, &p_C2Pltmp1IW);
-    createParam(C2Pltmp1VRString, asynParamInt32, &p_C2Pltmp1VR);
-    createParam(C2Pltmp1VlRString, asynParamInt32, &p_C2Pltmp1VlR);
-    createParam(C2Pltmp1VlWString, asynParamInt32, &p_C2Pltmp1VlW);
-    createParam(C2Pltmp2IRString, asynParamInt32, &p_C2Pltmp2IR);
-    createParam(C2Pltmp2IWString, asynParamInt32, &p_C2Pltmp2IW);
-    createParam(C2Pltmp2VRString, asynParamInt32, &p_C2Pltmp2VR);
-    createParam(C2Pltmp2VlRString, asynParamInt32, &p_C2Pltmp2VlR);
-    createParam(C2Pltmp2VlWString, asynParamInt32, &p_C2Pltmp2VlW);
-    createParam(C2StmpiRString, asynParamInt32, &p_C2StmpiR);
-    createParam(C2StmpiWString, asynParamInt32, &p_C2StmpiW);
-    createParam(C2StmpvRString, asynParamInt32, &p_C2StmpvR);
-    createParam(C2StmpvlRString, asynParamInt32, &p_C2StmpvlR);
-    createParam(C2StmpvlWString, asynParamInt32, &p_C2StmpvlW);
-    createParam(C2WalRString, asynParamInt32, &p_C2WalR);
-    createParam(C2WalWString, asynParamInt32, &p_C2WalW);
-    createParam(C2WapRString, asynParamInt32, &p_C2WapR);
-    createParam(C2WapWString, asynParamInt32, &p_C2WapW);
-    createParam(C2WapsRString, asynParamInt32, &p_C2WapsR);
-    createParam(C2WapsWString, asynParamInt32, &p_C2WapsW);
-    createParam(C2WavRString, asynParamInt32, &p_C2WavR);
-    createParam(C2WwlRString, asynParamInt32, &p_C2WwlR);
-    createParam(C2WwlWString, asynParamInt32, &p_C2WwlW);
-    createParam(C2WwtRString, asynParamInt32, &p_C2WwtR);
-    createParam(C3Plfep1IRString, asynParamInt32, &p_C3Plfep1IR);
-    createParam(C3Plfep1IlhRString, asynParamInt32, &p_C3Plfep1IlhR);
-    createParam(C3Plfep1IlhWString, asynParamInt32, &p_C3Plfep1IlhW);
-    createParam(C3Plfep1IllRString, asynParamInt32, &p_C3Plfep1IllR);
-    createParam(C3Plfep1IllWString, asynParamInt32, &p_C3Plfep1IllW);
-    createParam(C3Plfep2IRString, asynParamInt32, &p_C3Plfep2IR);
-    createParam(C3Plfep2IlhRString, asynParamInt32, &p_C3Plfep2IlhR);
-    createParam(C3Plfep2IlhWString, asynParamInt32, &p_C3Plfep2IlhW);
-    createParam(C3Plfep2IllRString, asynParamInt32, &p_C3Plfep2IllR);
-    createParam(C3Plfep2IllWString, asynParamInt32, &p_C3Plfep2IllW);
-    createParam(C3Plfep3IRString, asynParamInt32, &p_C3Plfep3IR);
-    createParam(C3Plfep3IlhRString, asynParamInt32, &p_C3Plfep3IlhR);
-    createParam(C3Plfep3IlhWString, asynParamInt32, &p_C3Plfep3IlhW);
-    createParam(C3Plfep3IllRString, asynParamInt32, &p_C3Plfep3IllR);
-    createParam(C3Plfep3IllWString, asynParamInt32, &p_C3Plfep3IllW);
-    createParam(C3Pltmp1IRString, asynParamInt32, &p_C3Pltmp1IR);
-    createParam(C3Pltmp1IWString, asynParamInt32, &p_C3Pltmp1IW);
-    createParam(C3Pltmp1VRString, asynParamInt32, &p_C3Pltmp1VR);
-    createParam(C3Pltmp1VlRString, asynParamInt32, &p_C3Pltmp1VlR);
-    createParam(C3Pltmp1VlWString, asynParamInt32, &p_C3Pltmp1VlW);
-    createParam(C3Pltmp2IRString, asynParamInt32, &p_C3Pltmp2IR);
-    createParam(C3Pltmp2IWString, asynParamInt32, &p_C3Pltmp2IW);
-    createParam(C3Pltmp2VRString, asynParamInt32, &p_C3Pltmp2VR);
-    createParam(C3Pltmp2VlRString, asynParamInt32, &p_C3Pltmp2VlR);
-    createParam(C3Pltmp2VlWString, asynParamInt32, &p_C3Pltmp2VlW);
-    createParam(C3StmpiRString, asynParamInt32, &p_C3StmpiR);
-    createParam(C3StmpiWString, asynParamInt32, &p_C3StmpiW);
-    createParam(C3StmpvRString, asynParamInt32, &p_C3StmpvR);
-    createParam(C3StmpvlRString, asynParamInt32, &p_C3StmpvlR);
-    createParam(C3StmpvlWString, asynParamInt32, &p_C3StmpvlW);
-    createParam(C3WalRString, asynParamInt32, &p_C3WalR);
-    createParam(C3WalWString, asynParamInt32, &p_C3WalW);
-    createParam(C3WapRString, asynParamInt32, &p_C3WapR);
-    createParam(C3WapWString, asynParamInt32, &p_C3WapW);
-    createParam(C3WapsRString, asynParamInt32, &p_C3WapsR);
-    createParam(C3WapsWString, asynParamInt32, &p_C3WapsW);
-    createParam(C3WavRString, asynParamInt32, &p_C3WavR);
-    createParam(C3WwlRString, asynParamInt32, &p_C3WwlR);
-    createParam(C3WwlWString, asynParamInt32, &p_C3WwlW);
-    createParam(C3WwtRString, asynParamInt32, &p_C3WwtR);
-    createParam(C4Plfep1IRString, asynParamInt32, &p_C4Plfep1IR);
-    createParam(C4Plfep1IlhRString, asynParamInt32, &p_C4Plfep1IlhR);
-    createParam(C4Plfep1IlhWString, asynParamInt32, &p_C4Plfep1IlhW);
-    createParam(C4Plfep1IllRString, asynParamInt32, &p_C4Plfep1IllR);
-    createParam(C4Plfep1IllWString, asynParamInt32, &p_C4Plfep1IllW);
-    createParam(C4Plfep2IRString, asynParamInt32, &p_C4Plfep2IR);
-    createParam(C4Plfep2IlhRString, asynParamInt32, &p_C4Plfep2IlhR);
-    createParam(C4Plfep2IlhWString, asynParamInt32, &p_C4Plfep2IlhW);
-    createParam(C4Plfep2IllRString, asynParamInt32, &p_C4Plfep2IllR);
-    createParam(C4Plfep2IllWString, asynParamInt32, &p_C4Plfep2IllW);
-    createParam(C4Plfep3IRString, asynParamInt32, &p_C4Plfep3IR);
-    createParam(C4Plfep3IlhRString, asynParamInt32, &p_C4Plfep3IlhR);
-    createParam(C4Plfep3IlhWString, asynParamInt32, &p_C4Plfep3IlhW);
-    createParam(C4Plfep3IllRString, asynParamInt32, &p_C4Plfep3IllR);
-    createParam(C4Plfep3IllWString, asynParamInt32, &p_C4Plfep3IllW);
-    createParam(C4Pltmp1IRString, asynParamInt32, &p_C4Pltmp1IR);
-    createParam(C4Pltmp1IWString, asynParamInt32, &p_C4Pltmp1IW);
-    createParam(C4Pltmp1VRString, asynParamInt32, &p_C4Pltmp1VR);
-    createParam(C4Pltmp1VlRString, asynParamInt32, &p_C4Pltmp1VlR);
-    createParam(C4Pltmp1VlWString, asynParamInt32, &p_C4Pltmp1VlW);
-    createParam(C4Pltmp2IRString, asynParamInt32, &p_C4Pltmp2IR);
-    createParam(C4Pltmp2IWString, asynParamInt32, &p_C4Pltmp2IW);
-    createParam(C4Pltmp2VRString, asynParamInt32, &p_C4Pltmp2VR);
-    createParam(C4Pltmp2VlRString, asynParamInt32, &p_C4Pltmp2VlR);
-    createParam(C4Pltmp2VlWString, asynParamInt32, &p_C4Pltmp2VlW);
-    createParam(C4StmpiRString, asynParamInt32, &p_C4StmpiR);
-    createParam(C4StmpiWString, asynParamInt32, &p_C4StmpiW);
-    createParam(C4StmpvRString, asynParamInt32, &p_C4StmpvR);
-    createParam(C4StmpvlRString, asynParamInt32, &p_C4StmpvlR);
-    createParam(C4StmpvlWString, asynParamInt32, &p_C4StmpvlW);
-    createParam(C4WalRString, asynParamInt32, &p_C4WalR);
-    createParam(C4WalWString, asynParamInt32, &p_C4WalW);
-    createParam(C4WapRString, asynParamInt32, &p_C4WapR);
-    createParam(C4WapWString, asynParamInt32, &p_C4WapW);
-    createParam(C4WapsRString, asynParamInt32, &p_C4WapsR);
-    createParam(C4WapsWString, asynParamInt32, &p_C4WapsW);
-    createParam(C4WavRString, asynParamInt32, &p_C4WavR);
-    createParam(C4WwlRString, asynParamInt32, &p_C4WwlR);
-    createParam(C4WwlWString, asynParamInt32, &p_C4WwlW);
-    createParam(C4WwtRString, asynParamInt32, &p_C4WwtR);
-    createParam(XatfltRString, asynParamInt32, &p_XatfltR);
-	createParam(XatfltBit0RString, asynParamUInt32Digital, &p_XatfltBit0R);
-    createParam(XcienRString, asynParamInt32, &p_XcienR);
-	createParam(XcienBit0RString, asynParamUInt32Digital, &p_XcienBit0R);
-    createParam(XciencRString, asynParamInt32, &p_XciencR);
-	createParam(XciencBit0RString, asynParamUInt32Digital, &p_XciencBit0R);
-    createParam(XciencWString, asynParamInt32, &p_XciencW);
-    createParam(XciencBit0WString, asynParamUInt32Digital, &p_XciencBit0W);
-    createParam(XcienmRString, asynParamInt32, &p_XcienmR);
-	createParam(XcienmBit0RString, asynParamUInt32Digital, &p_XcienmBit0R);
-    createParam(XcienmWString, asynParamInt32, &p_XcienmW);
-    createParam(XcienmBit0WString, asynParamUInt32Digital, &p_XcienmBit0W);
-    createParam(XcplfepfcRString, asynParamInt32, &p_XcplfepfcR);
-	createParam(XcplfepfcBit0RString, asynParamUInt32Digital, &p_XcplfepfcBit0R);
-    createParam(XcplfeplsRString, asynParamInt32, &p_XcplfeplsR);
-	createParam(XcplfeplsBit0RString, asynParamUInt32Digital, &p_XcplfeplsBit0R);
-    createParam(XcpltmplsRString, asynParamInt32, &p_XcpltmplsR);
-	createParam(XcpltmplsBit0RString, asynParamUInt32Digital, &p_XcpltmplsBit0R);
-    createParam(XcvfRString, asynParamInt32, &p_XcvfR);
-	createParam(XcvfBit0RString, asynParamUInt32Digital, &p_XcvfBit0R);
-    createParam(XcvfcRString, asynParamInt32, &p_XcvfcR);
-	createParam(XcvfcBit0RString, asynParamUInt32Digital, &p_XcvfcBit0R);
-    createParam(XcvfcWString, asynParamInt32, &p_XcvfcW);
-    createParam(XcvfcBit0WString, asynParamUInt32Digital, &p_XcvfcBit0W);
-    createParam(XcvfmRString, asynParamInt32, &p_XcvfmR);
-	createParam(XcvfmBit0RString, asynParamUInt32Digital, &p_XcvfmBit0R);
-    createParam(XcvfmWString, asynParamInt32, &p_XcvfmW);
-    createParam(XcvfmBit0WString, asynParamUInt32Digital, &p_XcvfmBit0W);
-    createParam(XcwadRString, asynParamInt32, &p_XcwadR);
-	createParam(XcwadBit0RString, asynParamUInt32Digital, &p_XcwadBit0R);
-    createParam(XcwafcRString, asynParamInt32, &p_XcwafcR);
-	createParam(XcwafcBit0RString, asynParamUInt32Digital, &p_XcwafcBit0R);
-    createParam(XcwafcWString, asynParamInt32, &p_XcwafcW);
-    createParam(XcwafcBit0WString, asynParamUInt32Digital, &p_XcwafcBit0W);
-    createParam(XcwamRString, asynParamInt32, &p_XcwamR);
-	createParam(XcwamBit0RString, asynParamUInt32Digital, &p_XcwamBit0R);
-    createParam(XcwamWString, asynParamInt32, &p_XcwamW);
-    createParam(XcwamBit0WString, asynParamUInt32Digital, &p_XcwamBit0W);
-    createParam(XcwatRString, asynParamInt32, &p_XcwatR);
-	createParam(XcwatBit0RString, asynParamUInt32Digital, &p_XcwatBit0R);
-    createParam(XcwatWString, asynParamInt32, &p_XcwatW);
-    createParam(XcwatBit0WString, asynParamUInt32Digital, &p_XcwatBit0W);
-    createParam(XcwwdRString, asynParamInt32, &p_XcwwdR);
-	createParam(XcwwdBit0RString, asynParamUInt32Digital, &p_XcwwdBit0R);
-    createParam(XcwwfcRString, asynParamInt32, &p_XcwwfcR);
-	createParam(XcwwfcBit0RString, asynParamUInt32Digital, &p_XcwwfcBit0R);
-    createParam(XcwwmRString, asynParamInt32, &p_XcwwmR);
-	createParam(XcwwmBit0RString, asynParamUInt32Digital, &p_XcwwmBit0R);
-    createParam(XcwwtsRString, asynParamInt32, &p_XcwwtsR);
-	createParam(XcwwtsBit0RString, asynParamUInt32Digital, &p_XcwwtsBit0R);
-    createParam(XcwwtsWString, asynParamInt32, &p_XcwwtsW);
-    createParam(XcwwtsBit0WString, asynParamUInt32Digital, &p_XcwwtsBit0W);
-    createParam(XffsdRString, asynParamInt32, &p_XffsdR);
-	createParam(XffsdBit0RString, asynParamUInt32Digital, &p_XffsdBit0R);
-    createParam(XffsdcRString, asynParamInt32, &p_XffsdcR);
-	createParam(XffsdcBit0RString, asynParamUInt32Digital, &p_XffsdcBit0R);
-    createParam(XffsdcWString, asynParamInt32, &p_XffsdcW);
-    createParam(XffsdcBit0WString, asynParamUInt32Digital, &p_XffsdcBit0W);
-    createParam(XffsdmRString, asynParamInt32, &p_XffsdmR);
-	createParam(XffsdmBit0RString, asynParamUInt32Digital, &p_XffsdmBit0R);
-    createParam(XffsdmWString, asynParamInt32, &p_XffsdmW);
-    createParam(XffsdmBit0WString, asynParamUInt32Digital, &p_XffsdmBit0W);
-    createParam(XictlRString, asynParamInt32, &p_XictlR);
-	createParam(XictlBit0RString, asynParamUInt32Digital, &p_XictlBit0R);
-    createParam(XictlWString, asynParamInt32, &p_XictlW);
-    createParam(XictlBit0WString, asynParamUInt32Digital, &p_XictlBit0W);
-    createParam(XistatRString, asynParamInt32, &p_XistatR);
-	createParam(XistatBit0RString, asynParamUInt32Digital, &p_XistatBit0R);
-    createParam(XiverRString, asynParamInt32, &p_XiverR);
-    createParam(XstmplsRString, asynParamInt32, &p_XstmplsR);
-	createParam(XstmplsBit0RString, asynParamUInt32Digital, &p_XstmplsBit0R);
+    createParam(R1Cplfep1IRString, asynParamInt32, &p_R1Cplfep1IR);
+    createParam(R1Cplfep1IlhRString, asynParamInt32, &p_R1Cplfep1IlhR);
+    createParam(R1Cplfep1IlhWString, asynParamInt32, &p_R1Cplfep1IlhW);
+    createParam(R1Cplfep1IllRString, asynParamInt32, &p_R1Cplfep1IllR);
+    createParam(R1Cplfep1IllWString, asynParamInt32, &p_R1Cplfep1IllW);
+    createParam(R1Cplfep1PerdRString, asynParamInt32, &p_R1Cplfep1PerdR);
+    createParam(R1Cplfep1PerdWString, asynParamInt32, &p_R1Cplfep1PerdW);
+    createParam(R1Cplfep2IRString, asynParamInt32, &p_R1Cplfep2IR);
+    createParam(R1Cplfep2IlhRString, asynParamInt32, &p_R1Cplfep2IlhR);
+    createParam(R1Cplfep2IlhWString, asynParamInt32, &p_R1Cplfep2IlhW);
+    createParam(R1Cplfep2IllRString, asynParamInt32, &p_R1Cplfep2IllR);
+    createParam(R1Cplfep2IllWString, asynParamInt32, &p_R1Cplfep2IllW);
+    createParam(R1Cplfep2PerdRString, asynParamInt32, &p_R1Cplfep2PerdR);
+    createParam(R1Cplfep2PerdWString, asynParamInt32, &p_R1Cplfep2PerdW);
+    createParam(R1Cplfep3IRString, asynParamInt32, &p_R1Cplfep3IR);
+    createParam(R1Cplfep3IlhRString, asynParamInt32, &p_R1Cplfep3IlhR);
+    createParam(R1Cplfep3IlhWString, asynParamInt32, &p_R1Cplfep3IlhW);
+    createParam(R1Cplfep3IllRString, asynParamInt32, &p_R1Cplfep3IllR);
+    createParam(R1Cplfep3IllWString, asynParamInt32, &p_R1Cplfep3IllW);
+    createParam(R1Cplfep3PerdRString, asynParamInt32, &p_R1Cplfep3PerdR);
+    createParam(R1Cplfep3PerdWString, asynParamInt32, &p_R1Cplfep3PerdW);
+    createParam(R1Cpltmp1IRString, asynParamInt32, &p_R1Cpltmp1IR);
+    createParam(R1Cpltmp1IWString, asynParamInt32, &p_R1Cpltmp1IW);
+    createParam(R1Cpltmp1VRString, asynParamInt32, &p_R1Cpltmp1VR);
+    createParam(R1Cpltmp1VlRString, asynParamInt32, &p_R1Cpltmp1VlR);
+    createParam(R1Cpltmp1VlWString, asynParamInt32, &p_R1Cpltmp1VlW);
+    createParam(R1Cpltmp2IRString, asynParamInt32, &p_R1Cpltmp2IR);
+    createParam(R1Cpltmp2IWString, asynParamInt32, &p_R1Cpltmp2IW);
+    createParam(R1Cpltmp2VRString, asynParamInt32, &p_R1Cpltmp2VR);
+    createParam(R1Cpltmp2VlRString, asynParamInt32, &p_R1Cpltmp2VlR);
+    createParam(R1Cpltmp2VlWString, asynParamInt32, &p_R1Cpltmp2VlW);
+    createParam(R1CwalRString, asynParamInt32, &p_R1CwalR);
+    createParam(R1CwalWString, asynParamInt32, &p_R1CwalW);
+    createParam(R1CwapRString, asynParamInt32, &p_R1CwapR);
+    createParam(R1CwapWString, asynParamInt32, &p_R1CwapW);
+    createParam(R1CwapsRString, asynParamInt32, &p_R1CwapsR);
+    createParam(R1CwapsWString, asynParamInt32, &p_R1CwapsW);
+    createParam(R1CwavRString, asynParamInt32, &p_R1CwavR);
+    createParam(R1CwwlRString, asynParamInt32, &p_R1CwwlR);
+    createParam(R1CwwlWString, asynParamInt32, &p_R1CwwlW);
+    createParam(R1CwwtRString, asynParamInt32, &p_R1CwwtR);
+    createParam(R1StmpiRString, asynParamInt32, &p_R1StmpiR);
+    createParam(R1StmpiWString, asynParamInt32, &p_R1StmpiW);
+    createParam(R1StmpvRString, asynParamInt32, &p_R1StmpvR);
+    createParam(R1StmpvlRString, asynParamInt32, &p_R1StmpvlR);
+    createParam(R1StmpvlWString, asynParamInt32, &p_R1StmpvlW);
+    createParam(R2Cplfep1IRString, asynParamInt32, &p_R2Cplfep1IR);
+    createParam(R2Cplfep1IlhRString, asynParamInt32, &p_R2Cplfep1IlhR);
+    createParam(R2Cplfep1IlhWString, asynParamInt32, &p_R2Cplfep1IlhW);
+    createParam(R2Cplfep1IllRString, asynParamInt32, &p_R2Cplfep1IllR);
+    createParam(R2Cplfep1IllWString, asynParamInt32, &p_R2Cplfep1IllW);
+    createParam(R2Cplfep1PerdRString, asynParamInt32, &p_R2Cplfep1PerdR);
+    createParam(R2Cplfep1PerdWString, asynParamInt32, &p_R2Cplfep1PerdW);
+    createParam(R2Cplfep2IRString, asynParamInt32, &p_R2Cplfep2IR);
+    createParam(R2Cplfep2IlhRString, asynParamInt32, &p_R2Cplfep2IlhR);
+    createParam(R2Cplfep2IlhWString, asynParamInt32, &p_R2Cplfep2IlhW);
+    createParam(R2Cplfep2IllRString, asynParamInt32, &p_R2Cplfep2IllR);
+    createParam(R2Cplfep2IllWString, asynParamInt32, &p_R2Cplfep2IllW);
+    createParam(R2Cplfep2PerdRString, asynParamInt32, &p_R2Cplfep2PerdR);
+    createParam(R2Cplfep2PerdWString, asynParamInt32, &p_R2Cplfep2PerdW);
+    createParam(R2Cplfep3IRString, asynParamInt32, &p_R2Cplfep3IR);
+    createParam(R2Cplfep3IlhRString, asynParamInt32, &p_R2Cplfep3IlhR);
+    createParam(R2Cplfep3IlhWString, asynParamInt32, &p_R2Cplfep3IlhW);
+    createParam(R2Cplfep3IllRString, asynParamInt32, &p_R2Cplfep3IllR);
+    createParam(R2Cplfep3IllWString, asynParamInt32, &p_R2Cplfep3IllW);
+    createParam(R2Cplfep3PerdRString, asynParamInt32, &p_R2Cplfep3PerdR);
+    createParam(R2Cplfep3PerdWString, asynParamInt32, &p_R2Cplfep3PerdW);
+    createParam(R2Cpltmp1IRString, asynParamInt32, &p_R2Cpltmp1IR);
+    createParam(R2Cpltmp1IWString, asynParamInt32, &p_R2Cpltmp1IW);
+    createParam(R2Cpltmp1VRString, asynParamInt32, &p_R2Cpltmp1VR);
+    createParam(R2Cpltmp1VlRString, asynParamInt32, &p_R2Cpltmp1VlR);
+    createParam(R2Cpltmp1VlWString, asynParamInt32, &p_R2Cpltmp1VlW);
+    createParam(R2Cpltmp2IRString, asynParamInt32, &p_R2Cpltmp2IR);
+    createParam(R2Cpltmp2IWString, asynParamInt32, &p_R2Cpltmp2IW);
+    createParam(R2Cpltmp2VRString, asynParamInt32, &p_R2Cpltmp2VR);
+    createParam(R2Cpltmp2VlRString, asynParamInt32, &p_R2Cpltmp2VlR);
+    createParam(R2Cpltmp2VlWString, asynParamInt32, &p_R2Cpltmp2VlW);
+    createParam(R2CwalRString, asynParamInt32, &p_R2CwalR);
+    createParam(R2CwalWString, asynParamInt32, &p_R2CwalW);
+    createParam(R2CwapRString, asynParamInt32, &p_R2CwapR);
+    createParam(R2CwapWString, asynParamInt32, &p_R2CwapW);
+    createParam(R2CwapsRString, asynParamInt32, &p_R2CwapsR);
+    createParam(R2CwapsWString, asynParamInt32, &p_R2CwapsW);
+    createParam(R2CwavRString, asynParamInt32, &p_R2CwavR);
+    createParam(R2CwwlRString, asynParamInt32, &p_R2CwwlR);
+    createParam(R2CwwlWString, asynParamInt32, &p_R2CwwlW);
+    createParam(R2CwwtRString, asynParamInt32, &p_R2CwwtR);
+    createParam(R2StmpiRString, asynParamInt32, &p_R2StmpiR);
+    createParam(R2StmpiWString, asynParamInt32, &p_R2StmpiW);
+    createParam(R2StmpvRString, asynParamInt32, &p_R2StmpvR);
+    createParam(R2StmpvlRString, asynParamInt32, &p_R2StmpvlR);
+    createParam(R2StmpvlWString, asynParamInt32, &p_R2StmpvlW);
+    createParam(R3Cplfep1IRString, asynParamInt32, &p_R3Cplfep1IR);
+    createParam(R3Cplfep1IlhRString, asynParamInt32, &p_R3Cplfep1IlhR);
+    createParam(R3Cplfep1IlhWString, asynParamInt32, &p_R3Cplfep1IlhW);
+    createParam(R3Cplfep1IllRString, asynParamInt32, &p_R3Cplfep1IllR);
+    createParam(R3Cplfep1IllWString, asynParamInt32, &p_R3Cplfep1IllW);
+    createParam(R3Cplfep1PerdRString, asynParamInt32, &p_R3Cplfep1PerdR);
+    createParam(R3Cplfep1PerdWString, asynParamInt32, &p_R3Cplfep1PerdW);
+    createParam(R3Cplfep2IRString, asynParamInt32, &p_R3Cplfep2IR);
+    createParam(R3Cplfep2IlhRString, asynParamInt32, &p_R3Cplfep2IlhR);
+    createParam(R3Cplfep2IlhWString, asynParamInt32, &p_R3Cplfep2IlhW);
+    createParam(R3Cplfep2IllRString, asynParamInt32, &p_R3Cplfep2IllR);
+    createParam(R3Cplfep2IllWString, asynParamInt32, &p_R3Cplfep2IllW);
+    createParam(R3Cplfep2PerdRString, asynParamInt32, &p_R3Cplfep2PerdR);
+    createParam(R3Cplfep2PerdWString, asynParamInt32, &p_R3Cplfep2PerdW);
+    createParam(R3Cplfep3IRString, asynParamInt32, &p_R3Cplfep3IR);
+    createParam(R3Cplfep3IlhRString, asynParamInt32, &p_R3Cplfep3IlhR);
+    createParam(R3Cplfep3IlhWString, asynParamInt32, &p_R3Cplfep3IlhW);
+    createParam(R3Cplfep3IllRString, asynParamInt32, &p_R3Cplfep3IllR);
+    createParam(R3Cplfep3IllWString, asynParamInt32, &p_R3Cplfep3IllW);
+    createParam(R3Cplfep3PerdRString, asynParamInt32, &p_R3Cplfep3PerdR);
+    createParam(R3Cplfep3PerdWString, asynParamInt32, &p_R3Cplfep3PerdW);
+    createParam(R3Cpltmp1IRString, asynParamInt32, &p_R3Cpltmp1IR);
+    createParam(R3Cpltmp1IWString, asynParamInt32, &p_R3Cpltmp1IW);
+    createParam(R3Cpltmp1VRString, asynParamInt32, &p_R3Cpltmp1VR);
+    createParam(R3Cpltmp1VlRString, asynParamInt32, &p_R3Cpltmp1VlR);
+    createParam(R3Cpltmp1VlWString, asynParamInt32, &p_R3Cpltmp1VlW);
+    createParam(R3Cpltmp2IRString, asynParamInt32, &p_R3Cpltmp2IR);
+    createParam(R3Cpltmp2IWString, asynParamInt32, &p_R3Cpltmp2IW);
+    createParam(R3Cpltmp2VRString, asynParamInt32, &p_R3Cpltmp2VR);
+    createParam(R3Cpltmp2VlRString, asynParamInt32, &p_R3Cpltmp2VlR);
+    createParam(R3Cpltmp2VlWString, asynParamInt32, &p_R3Cpltmp2VlW);
+    createParam(R3CwalRString, asynParamInt32, &p_R3CwalR);
+    createParam(R3CwalWString, asynParamInt32, &p_R3CwalW);
+    createParam(R3CwapRString, asynParamInt32, &p_R3CwapR);
+    createParam(R3CwapWString, asynParamInt32, &p_R3CwapW);
+    createParam(R3CwapsRString, asynParamInt32, &p_R3CwapsR);
+    createParam(R3CwapsWString, asynParamInt32, &p_R3CwapsW);
+    createParam(R3CwavRString, asynParamInt32, &p_R3CwavR);
+    createParam(R3CwwlRString, asynParamInt32, &p_R3CwwlR);
+    createParam(R3CwwlWString, asynParamInt32, &p_R3CwwlW);
+    createParam(R3CwwtRString, asynParamInt32, &p_R3CwwtR);
+    createParam(R3StmpiRString, asynParamInt32, &p_R3StmpiR);
+    createParam(R3StmpiWString, asynParamInt32, &p_R3StmpiW);
+    createParam(R3StmpvRString, asynParamInt32, &p_R3StmpvR);
+    createParam(R3StmpvlRString, asynParamInt32, &p_R3StmpvlR);
+    createParam(R3StmpvlWString, asynParamInt32, &p_R3StmpvlW);
+    createParam(R4Cplfep1IRString, asynParamInt32, &p_R4Cplfep1IR);
+    createParam(R4Cplfep1IlhRString, asynParamInt32, &p_R4Cplfep1IlhR);
+    createParam(R4Cplfep1IlhWString, asynParamInt32, &p_R4Cplfep1IlhW);
+    createParam(R4Cplfep1IllRString, asynParamInt32, &p_R4Cplfep1IllR);
+    createParam(R4Cplfep1IllWString, asynParamInt32, &p_R4Cplfep1IllW);
+    createParam(R4Cplfep1PerdRString, asynParamInt32, &p_R4Cplfep1PerdR);
+    createParam(R4Cplfep1PerdWString, asynParamInt32, &p_R4Cplfep1PerdW);
+    createParam(R4Cplfep2IRString, asynParamInt32, &p_R4Cplfep2IR);
+    createParam(R4Cplfep2IlhRString, asynParamInt32, &p_R4Cplfep2IlhR);
+    createParam(R4Cplfep2IlhWString, asynParamInt32, &p_R4Cplfep2IlhW);
+    createParam(R4Cplfep2IllRString, asynParamInt32, &p_R4Cplfep2IllR);
+    createParam(R4Cplfep2IllWString, asynParamInt32, &p_R4Cplfep2IllW);
+    createParam(R4Cplfep2PerdRString, asynParamInt32, &p_R4Cplfep2PerdR);
+    createParam(R4Cplfep2PerdWString, asynParamInt32, &p_R4Cplfep2PerdW);
+    createParam(R4Cplfep3IRString, asynParamInt32, &p_R4Cplfep3IR);
+    createParam(R4Cplfep3IlhRString, asynParamInt32, &p_R4Cplfep3IlhR);
+    createParam(R4Cplfep3IlhWString, asynParamInt32, &p_R4Cplfep3IlhW);
+    createParam(R4Cplfep3IllRString, asynParamInt32, &p_R4Cplfep3IllR);
+    createParam(R4Cplfep3IllWString, asynParamInt32, &p_R4Cplfep3IllW);
+    createParam(R4Cplfep3PerdRString, asynParamInt32, &p_R4Cplfep3PerdR);
+    createParam(R4Cplfep3PerdWString, asynParamInt32, &p_R4Cplfep3PerdW);
+    createParam(R4Cpltmp1IRString, asynParamInt32, &p_R4Cpltmp1IR);
+    createParam(R4Cpltmp1IWString, asynParamInt32, &p_R4Cpltmp1IW);
+    createParam(R4Cpltmp1VRString, asynParamInt32, &p_R4Cpltmp1VR);
+    createParam(R4Cpltmp1VlRString, asynParamInt32, &p_R4Cpltmp1VlR);
+    createParam(R4Cpltmp1VlWString, asynParamInt32, &p_R4Cpltmp1VlW);
+    createParam(R4Cpltmp2IRString, asynParamInt32, &p_R4Cpltmp2IR);
+    createParam(R4Cpltmp2IWString, asynParamInt32, &p_R4Cpltmp2IW);
+    createParam(R4Cpltmp2VRString, asynParamInt32, &p_R4Cpltmp2VR);
+    createParam(R4Cpltmp2VlRString, asynParamInt32, &p_R4Cpltmp2VlR);
+    createParam(R4Cpltmp2VlWString, asynParamInt32, &p_R4Cpltmp2VlW);
+    createParam(R4CwalRString, asynParamInt32, &p_R4CwalR);
+    createParam(R4CwalWString, asynParamInt32, &p_R4CwalW);
+    createParam(R4CwapRString, asynParamInt32, &p_R4CwapR);
+    createParam(R4CwapWString, asynParamInt32, &p_R4CwapW);
+    createParam(R4CwapsRString, asynParamInt32, &p_R4CwapsR);
+    createParam(R4CwapsWString, asynParamInt32, &p_R4CwapsW);
+    createParam(R4CwavRString, asynParamInt32, &p_R4CwavR);
+    createParam(R4CwwlRString, asynParamInt32, &p_R4CwwlR);
+    createParam(R4CwwlWString, asynParamInt32, &p_R4CwwlW);
+    createParam(R4CwwtRString, asynParamInt32, &p_R4CwwtR);
+    createParam(R4StmpiRString, asynParamInt32, &p_R4StmpiR);
+    createParam(R4StmpiWString, asynParamInt32, &p_R4StmpiW);
+    createParam(R4StmpvRString, asynParamInt32, &p_R4StmpvR);
+    createParam(R4StmpvlRString, asynParamInt32, &p_R4StmpvlR);
+    createParam(R4StmpvlWString, asynParamInt32, &p_R4StmpvlW);
+    createParam(R5StmpiRString, asynParamInt32, &p_R5StmpiR);
+    createParam(R5StmpiWString, asynParamInt32, &p_R5StmpiW);
+    createParam(R5StmpvRString, asynParamInt32, &p_R5StmpvR);
+    createParam(R6StmpiRString, asynParamInt32, &p_R6StmpiR);
+    createParam(R6StmpiWString, asynParamInt32, &p_R6StmpiW);
+    createParam(R6StmpvRString, asynParamInt32, &p_R6StmpvR);
+    createParam(R7StmpiRString, asynParamInt32, &p_R7StmpiR);
+    createParam(R7StmpiWString, asynParamInt32, &p_R7StmpiW);
+    createParam(R7StmpvRString, asynParamInt32, &p_R7StmpvR);
+    createParam(R8StmpiRString, asynParamInt32, &p_R8StmpiR);
+    createParam(R8StmpiWString, asynParamInt32, &p_R8StmpiW);
+    createParam(R8StmpvRString, asynParamInt32, &p_R8StmpvR);
+    createParam(RxatfltRString, asynParamInt32, &p_RxatfltR);
+    createParam(RxatfltWString, asynParamInt32, &p_RxatfltW);
+    createParam(RxcienRString, asynParamInt32, &p_RxcienR);
+    createParam(RxciencRString, asynParamInt32, &p_RxciencR);
+    createParam(RxciencWString, asynParamInt32, &p_RxciencW);
+    createParam(RxcienmRString, asynParamInt32, &p_RxcienmR);
+    createParam(RxcienmWString, asynParamInt32, &p_RxcienmW);
+    createParam(RxcplfepfcRString, asynParamInt32, &p_RxcplfepfcR);
+    createParam(RxcplfepfcWString, asynParamInt32, &p_RxcplfepfcW);
+    createParam(RxcplfepfsRString, asynParamInt32, &p_RxcplfepfsR);
+    createParam(RxcplfeplsRString, asynParamInt32, &p_RxcplfeplsR);
+    createParam(RxcplfepmRString, asynParamInt32, &p_RxcplfepmR);
+    createParam(RxcplfepmWString, asynParamInt32, &p_RxcplfepmW);
+    createParam(RxcpltmpfcRString, asynParamInt32, &p_RxcpltmpfcR);
+    createParam(RxcpltmpfcWString, asynParamInt32, &p_RxcpltmpfcW);
+    createParam(RxcpltmplsRString, asynParamInt32, &p_RxcpltmplsR);
+    createParam(RxcpltmpmRString, asynParamInt32, &p_RxcpltmpmR);
+    createParam(RxcpltmpmWString, asynParamInt32, &p_RxcpltmpmW);
+    createParam(RxcvfRString, asynParamInt32, &p_RxcvfR);
+    createParam(RxcvfcRString, asynParamInt32, &p_RxcvfcR);
+    createParam(RxcvfcWString, asynParamInt32, &p_RxcvfcW);
+    createParam(RxcvfmRString, asynParamInt32, &p_RxcvfmR);
+    createParam(RxcvfmWString, asynParamInt32, &p_RxcvfmW);
+    createParam(RxcwadRString, asynParamInt32, &p_RxcwadR);
+    createParam(RxcwafcRString, asynParamInt32, &p_RxcwafcR);
+    createParam(RxcwafcWString, asynParamInt32, &p_RxcwafcW);
+    createParam(RxcwamRString, asynParamInt32, &p_RxcwamR);
+    createParam(RxcwamWString, asynParamInt32, &p_RxcwamW);
+    createParam(RxcwatRString, asynParamInt32, &p_RxcwatR);
+    createParam(RxcwatWString, asynParamInt32, &p_RxcwatW);
+    createParam(RxcwwdRString, asynParamInt32, &p_RxcwwdR);
+    createParam(RxcwwfcRString, asynParamInt32, &p_RxcwwfcR);
+    createParam(RxcwwfcWString, asynParamInt32, &p_RxcwwfcW);
+    createParam(RxcwwmRString, asynParamInt32, &p_RxcwwmR);
+    createParam(RxcwwmWString, asynParamInt32, &p_RxcwwmW);
+    createParam(RxcwwtsRString, asynParamInt32, &p_RxcwwtsR);
+    createParam(RxcwwtsWString, asynParamInt32, &p_RxcwwtsW);
+    createParam(RxffsdRString, asynParamInt32, &p_RxffsdR);
+    createParam(RxffsdcRString, asynParamInt32, &p_RxffsdcR);
+    createParam(RxffsdcWString, asynParamInt32, &p_RxffsdcW);
+    createParam(RxffsdmRString, asynParamInt32, &p_RxffsdmR);
+    createParam(RxffsdmWString, asynParamInt32, &p_RxffsdmW);
+    createParam(RxictlRString, asynParamInt32, &p_RxictlR);
+    createParam(RxictlWString, asynParamInt32, &p_RxictlW);
+    createParam(RxistatRString, asynParamInt32, &p_RxistatR);
+    createParam(RxiverRString, asynParamInt32, &p_RxiverR);
+    createParam(RxstmpfcRString, asynParamInt32, &p_RxstmpfcR);
+    createParam(RxstmpfcWString, asynParamInt32, &p_RxstmpfcW);
+    createParam(RxstmplsRString, asynParamInt32, &p_RxstmplsR);
+    createParam(RxstmpmRString, asynParamInt32, &p_RxstmpmR);
+    createParam(RxstmpmWString, asynParamInt32, &p_RxstmpmW);
 
     // Message size is the number of read registers, plus 1 nonce for every 175 read registers
     PolledRegMsgSize_ = scllrfINTReadRegCount + (scllrfINTReadRegCount / 175) + 1;
@@ -286,127 +302,153 @@ scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortNam
     pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 		{ 0, 0 },
-		{ flagReadMask | C1WavRAdr, blankData },
-		{ flagReadMask | C2WavRAdr, blankData },
-		{ flagReadMask | C3WavRAdr, blankData },
-		{ flagReadMask | C4WavRAdr, blankData },
-		{ flagReadMask | C1WapsRAdr, blankData },
-		{ flagReadMask | C2WapsRAdr, blankData },
-		{ flagReadMask | C3WapsRAdr, blankData },
-		{ flagReadMask | C4WapsRAdr, blankData },
-		{ flagReadMask | C1WalRAdr, blankData },
-		{ flagReadMask | C2WalRAdr, blankData },
-		{ flagReadMask | C3WalRAdr, blankData },
-		{ flagReadMask | C4WalRAdr, blankData },
-		{ flagReadMask | C1WapRAdr, blankData },
-		{ flagReadMask | C2WapRAdr, blankData },
-		{ flagReadMask | C3WapRAdr, blankData },
-		{ flagReadMask | C4WapRAdr, blankData },
-		{ flagReadMask | XcwadRAdr, blankData },
-		{ flagReadMask | XcwamRAdr, blankData },
-		{ flagReadMask | XcwatRAdr, blankData },
-		{ flagReadMask | XatfltRAdr, blankData },
-		{ flagReadMask | XcwafcRAdr, blankData },
-		{ flagReadMask | C1WwtRAdr, blankData },
-		{ flagReadMask | C2WwtRAdr, blankData },
-		{ flagReadMask | C3WwtRAdr, blankData },
-		{ flagReadMask | C4WwtRAdr, blankData },
-		{ flagReadMask | C1WwlRAdr, blankData },
-		{ flagReadMask | C2WwlRAdr, blankData },
-		{ flagReadMask | C3WwlRAdr, blankData },
-		{ flagReadMask | C4WwlRAdr, blankData },
-		{ flagReadMask | XcwwdRAdr, blankData },
-		{ flagReadMask | XcwwtsRAdr, blankData },
-		{ flagReadMask | XcwwmRAdr, blankData },
-		{ flagReadMask | XcwwfcRAdr, blankData },
-		{ flagReadMask | C1StmpiRAdr, blankData },
-		{ flagReadMask | C2StmpiRAdr, blankData },
-		{ flagReadMask | C3StmpiRAdr, blankData },
-		{ flagReadMask | C4StmpiRAdr, blankData },
-		{ flagReadMask | C1StmpvRAdr, blankData },
-		{ flagReadMask | C2StmpvRAdr, blankData },
-		{ flagReadMask | C3StmpvRAdr, blankData },
-		{ flagReadMask | C4StmpvRAdr, blankData },
-		{ flagReadMask | C1StmpvlRAdr, blankData },
-		{ flagReadMask | C2StmpvlRAdr, blankData },
-		{ flagReadMask | C3StmpvlRAdr, blankData },
-		{ flagReadMask | C4StmpvlRAdr, blankData },
-		{ flagReadMask | XstmplsRAdr, blankData },
-		{ flagReadMask | C1Pltmp1IRAdr, blankData },
-		{ flagReadMask | C1Pltmp2IRAdr, blankData },
-		{ flagReadMask | C2Pltmp1IRAdr, blankData },
-		{ flagReadMask | C2Pltmp2IRAdr, blankData },
-		{ flagReadMask | C3Pltmp1IRAdr, blankData },
-		{ flagReadMask | C3Pltmp2IRAdr, blankData },
-		{ flagReadMask | C4Pltmp1IRAdr, blankData },
-		{ flagReadMask | C4Pltmp2IRAdr, blankData },
-		{ flagReadMask | C1Pltmp1VRAdr, blankData },
-		{ flagReadMask | C1Pltmp2VRAdr, blankData },
-		{ flagReadMask | C2Pltmp1VRAdr, blankData },
-		{ flagReadMask | C2Pltmp2VRAdr, blankData },
-		{ flagReadMask | C3Pltmp1VRAdr, blankData },
-		{ flagReadMask | C3Pltmp2VRAdr, blankData },
-		{ flagReadMask | C4Pltmp1VRAdr, blankData },
-		{ flagReadMask | C4Pltmp2VRAdr, blankData },
-		{ flagReadMask | C1Pltmp1VlRAdr, blankData },
-		{ flagReadMask | C1Pltmp2VlRAdr, blankData },
-		{ flagReadMask | C2Pltmp1VlRAdr, blankData },
-		{ flagReadMask | C2Pltmp2VlRAdr, blankData },
-		{ flagReadMask | C3Pltmp1VlRAdr, blankData },
-		{ flagReadMask | C3Pltmp2VlRAdr, blankData },
-		{ flagReadMask | C4Pltmp1VlRAdr, blankData },
-		{ flagReadMask | C4Pltmp2VlRAdr, blankData },
-		{ flagReadMask | XcpltmplsRAdr, blankData },
-		{ flagReadMask | C1Plfep1IRAdr, blankData },
-		{ flagReadMask | C1Plfep2IRAdr, blankData },
-		{ flagReadMask | C1Plfep3IRAdr, blankData },
-		{ flagReadMask | C2Plfep1IRAdr, blankData },
-		{ flagReadMask | C2Plfep2IRAdr, blankData },
-		{ flagReadMask | C2Plfep3IRAdr, blankData },
-		{ flagReadMask | C3Plfep1IRAdr, blankData },
-		{ flagReadMask | C3Plfep2IRAdr, blankData },
-		{ flagReadMask | C3Plfep3IRAdr, blankData },
-		{ flagReadMask | C4Plfep1IRAdr, blankData },
-		{ flagReadMask | C4Plfep2IRAdr, blankData },
-		{ flagReadMask | C4Plfep3IRAdr, blankData },
-		{ flagReadMask | C1Plfep1IlhRAdr, blankData },
-		{ flagReadMask | C1Plfep2IlhRAdr, blankData },
-		{ flagReadMask | C1Plfep3IlhRAdr, blankData },
-		{ flagReadMask | C2Plfep1IlhRAdr, blankData },
-		{ flagReadMask | C2Plfep2IlhRAdr, blankData },
-		{ flagReadMask | C2Plfep3IlhRAdr, blankData },
-		{ flagReadMask | C3Plfep1IlhRAdr, blankData },
-		{ flagReadMask | C3Plfep2IlhRAdr, blankData },
-		{ flagReadMask | C3Plfep3IlhRAdr, blankData },
-		{ flagReadMask | C4Plfep1IlhRAdr, blankData },
-		{ flagReadMask | C4Plfep2IlhRAdr, blankData },
-		{ flagReadMask | C4Plfep3IlhRAdr, blankData },
-		{ flagReadMask | C1Plfep1IllRAdr, blankData },
-		{ flagReadMask | C1Plfep2IllRAdr, blankData },
-		{ flagReadMask | C1Plfep3IllRAdr, blankData },
-		{ flagReadMask | C2Plfep1IllRAdr, blankData },
-		{ flagReadMask | C2Plfep2IllRAdr, blankData },
-		{ flagReadMask | C2Plfep3IllRAdr, blankData },
-		{ flagReadMask | C3Plfep1IllRAdr, blankData },
-		{ flagReadMask | C3Plfep2IllRAdr, blankData },
-		{ flagReadMask | C3Plfep3IllRAdr, blankData },
-		{ flagReadMask | C4Plfep1IllRAdr, blankData },
-		{ flagReadMask | C4Plfep2IllRAdr, blankData },
-		{ flagReadMask | C4Plfep3IllRAdr, blankData },
-		{ flagReadMask | XcplfeplsRAdr, blankData },
-		{ flagReadMask | XcplfepfcRAdr, blankData },
-		{ flagReadMask | XcvfRAdr, blankData },
-		{ flagReadMask | XcvfmRAdr, blankData },
-		{ flagReadMask | XcvfcRAdr, blankData },
-		{ flagReadMask | XcienRAdr, blankData },
-		{ flagReadMask | XcienmRAdr, blankData },
-		{ flagReadMask | XciencRAdr, blankData },
-		{ flagReadMask | XffsdRAdr, blankData },
-		{ flagReadMask | XffsdmRAdr, blankData },
-		{ flagReadMask | XffsdcRAdr, blankData },
-		{ flagReadMask | XistatRAdr, blankData },
-		{ flagReadMask | XictlRAdr, blankData },
-		{ flagReadMask | XiverRAdr, blankData },
+		{ flagReadMask | R1CwavRAdr, blankData },
+		{ flagReadMask | R2CwavRAdr, blankData },
+		{ flagReadMask | R3CwavRAdr, blankData },
+		{ flagReadMask | R4CwavRAdr, blankData },
+		{ flagReadMask | R1CwapsRAdr, blankData },
+		{ flagReadMask | R2CwapsRAdr, blankData },
+		{ flagReadMask | R3CwapsRAdr, blankData },
+		{ flagReadMask | R4CwapsRAdr, blankData },
+		{ flagReadMask | R1CwalRAdr, blankData },
+		{ flagReadMask | R2CwalRAdr, blankData },
+		{ flagReadMask | R3CwalRAdr, blankData },
+		{ flagReadMask | R4CwalRAdr, blankData },
+		{ flagReadMask | R1CwapRAdr, blankData },
+		{ flagReadMask | R2CwapRAdr, blankData },
+		{ flagReadMask | R3CwapRAdr, blankData },
+		{ flagReadMask | R4CwapRAdr, blankData },
+		{ flagReadMask | RxcwadRAdr, blankData },
+		{ flagReadMask | RxcwamRAdr, blankData },
+		{ flagReadMask | RxcwatRAdr, blankData },
+		{ flagReadMask | RxatfltRAdr, blankData },
+		{ flagReadMask | RxcwafcRAdr, blankData },
+		{ flagReadMask | R1CwwtRAdr, blankData },
+		{ flagReadMask | R2CwwtRAdr, blankData },
+		{ flagReadMask | R3CwwtRAdr, blankData },
+		{ flagReadMask | R4CwwtRAdr, blankData },
+		{ flagReadMask | R1CwwlRAdr, blankData },
+		{ flagReadMask | R2CwwlRAdr, blankData },
+		{ flagReadMask | R3CwwlRAdr, blankData },
+		{ flagReadMask | R4CwwlRAdr, blankData },
+		{ flagReadMask | RxcwwdRAdr, blankData },
+		{ flagReadMask | RxcwwtsRAdr, blankData },
+		{ flagReadMask | RxcwwmRAdr, blankData },
+		{ flagReadMask | RxcwwfcRAdr, blankData },
+		{ flagReadMask | R1StmpiRAdr, blankData },
+		{ flagReadMask | R2StmpiRAdr, blankData },
+		{ flagReadMask | R3StmpiRAdr, blankData },
+		{ flagReadMask | R4StmpiRAdr, blankData },
+		{ flagReadMask | R1StmpvRAdr, blankData },
+		{ flagReadMask | R2StmpvRAdr, blankData },
+		{ flagReadMask | R3StmpvRAdr, blankData },
+		{ flagReadMask | R4StmpvRAdr, blankData },
+		{ flagReadMask | R1StmpvlRAdr, blankData },
+		{ flagReadMask | R2StmpvlRAdr, blankData },
+		{ flagReadMask | R3StmpvlRAdr, blankData },
+		{ flagReadMask | R4StmpvlRAdr, blankData },
+		{ flagReadMask | RxstmplsRAdr, blankData },
+		{ flagReadMask | RxstmpmRAdr, blankData },
+		{ flagReadMask | RxstmpfcRAdr, blankData },
+		{ flagReadMask | R1Cpltmp1IRAdr, blankData },
+		{ flagReadMask | R1Cpltmp2IRAdr, blankData },
+		{ flagReadMask | R2Cpltmp1IRAdr, blankData },
+		{ flagReadMask | R2Cpltmp2IRAdr, blankData },
+		{ flagReadMask | R3Cpltmp1IRAdr, blankData },
+		{ flagReadMask | R3Cpltmp2IRAdr, blankData },
+		{ flagReadMask | R4Cpltmp1IRAdr, blankData },
+		{ flagReadMask | R4Cpltmp2IRAdr, blankData },
+		{ flagReadMask | R1Cpltmp1VRAdr, blankData },
+		{ flagReadMask | R1Cpltmp2VRAdr, blankData },
+		{ flagReadMask | R2Cpltmp1VRAdr, blankData },
+		{ flagReadMask | R2Cpltmp2VRAdr, blankData },
+		{ flagReadMask | R3Cpltmp1VRAdr, blankData },
+		{ flagReadMask | R3Cpltmp2VRAdr, blankData },
+		{ flagReadMask | R4Cpltmp1VRAdr, blankData },
+		{ flagReadMask | R4Cpltmp2VRAdr, blankData },
+		{ flagReadMask | R1Cpltmp1VlRAdr, blankData },
+		{ flagReadMask | R1Cpltmp2VlRAdr, blankData },
+		{ flagReadMask | R2Cpltmp1VlRAdr, blankData },
+		{ flagReadMask | R2Cpltmp2VlRAdr, blankData },
+		{ flagReadMask | R3Cpltmp1VlRAdr, blankData },
+		{ flagReadMask | R3Cpltmp2VlRAdr, blankData },
+		{ flagReadMask | R4Cpltmp1VlRAdr, blankData },
+		{ flagReadMask | R4Cpltmp2VlRAdr, blankData },
+		{ flagReadMask | RxcpltmplsRAdr, blankData },
+		{ flagReadMask | RxcpltmpmRAdr, blankData },
+		{ flagReadMask | RxcpltmpfcRAdr, blankData },
+		{ flagReadMask | R1Cplfep1IRAdr, blankData },
+		{ flagReadMask | R1Cplfep2IRAdr, blankData },
+		{ flagReadMask | R1Cplfep3IRAdr, blankData },
+		{ flagReadMask | R2Cplfep1IRAdr, blankData },
+		{ flagReadMask | R2Cplfep2IRAdr, blankData },
+		{ flagReadMask | R2Cplfep3IRAdr, blankData },
+		{ flagReadMask | R3Cplfep1IRAdr, blankData },
+		{ flagReadMask | R3Cplfep2IRAdr, blankData },
+		{ flagReadMask | R3Cplfep3IRAdr, blankData },
+		{ flagReadMask | R4Cplfep1IRAdr, blankData },
+		{ flagReadMask | R4Cplfep2IRAdr, blankData },
+		{ flagReadMask | R4Cplfep3IRAdr, blankData },
+		{ flagReadMask | R1Cplfep1IlhRAdr, blankData },
+		{ flagReadMask | R1Cplfep2IlhRAdr, blankData },
+		{ flagReadMask | R1Cplfep3IlhRAdr, blankData },
+		{ flagReadMask | R2Cplfep1IlhRAdr, blankData },
+		{ flagReadMask | R2Cplfep2IlhRAdr, blankData },
+		{ flagReadMask | R2Cplfep3IlhRAdr, blankData },
+		{ flagReadMask | R3Cplfep1IlhRAdr, blankData },
+		{ flagReadMask | R3Cplfep2IlhRAdr, blankData },
+		{ flagReadMask | R3Cplfep3IlhRAdr, blankData },
+		{ flagReadMask | R4Cplfep1IlhRAdr, blankData },
+		{ flagReadMask | R4Cplfep2IlhRAdr, blankData },
+		{ flagReadMask | R4Cplfep3IlhRAdr, blankData },
+		{ flagReadMask | R1Cplfep1IllRAdr, blankData },
+		{ flagReadMask | R1Cplfep2IllRAdr, blankData },
+		{ flagReadMask | R1Cplfep3IllRAdr, blankData },
+		{ flagReadMask | R2Cplfep1IllRAdr, blankData },
+		{ flagReadMask | R2Cplfep2IllRAdr, blankData },
+		{ flagReadMask | R2Cplfep3IllRAdr, blankData },
+		{ flagReadMask | R3Cplfep1IllRAdr, blankData },
+		{ flagReadMask | R3Cplfep2IllRAdr, blankData },
+		{ flagReadMask | R3Cplfep3IllRAdr, blankData },
+		{ flagReadMask | R4Cplfep1IllRAdr, blankData },
+		{ flagReadMask | R4Cplfep2IllRAdr, blankData },
+		{ flagReadMask | R4Cplfep3IllRAdr, blankData },
+		{ flagReadMask | RxcplfepmRAdr, blankData },
+		{ flagReadMask | RxcplfeplsRAdr, blankData },
+		{ flagReadMask | RxcplfepfsRAdr, blankData },
+		{ flagReadMask | RxcplfepfcRAdr, blankData },
+		{ flagReadMask | RxcvfRAdr, blankData },
+		{ flagReadMask | RxcvfmRAdr, blankData },
+		{ flagReadMask | RxcvfcRAdr, blankData },
+		{ flagReadMask | RxcienRAdr, blankData },
+		{ flagReadMask | RxcienmRAdr, blankData },
+		{ flagReadMask | RxciencRAdr, blankData },
+		{ flagReadMask | RxffsdRAdr, blankData },
+		{ flagReadMask | RxffsdmRAdr, blankData },
+		{ flagReadMask | RxffsdcRAdr, blankData },
+		{ flagReadMask | RxistatRAdr, blankData },
+		{ flagReadMask | RxictlRAdr, blankData },
+		{ flagReadMask | RxiverRAdr, blankData },
+		{ flagReadMask | R1Cplfep1PerdRAdr, blankData },
+		{ flagReadMask | R1Cplfep2PerdRAdr, blankData },
+		{ flagReadMask | R1Cplfep3PerdRAdr, blankData },
+		{ flagReadMask | R2Cplfep1PerdRAdr, blankData },
+		{ flagReadMask | R2Cplfep2PerdRAdr, blankData },
+		{ flagReadMask | R2Cplfep3PerdRAdr, blankData },
+		{ flagReadMask | R3Cplfep1PerdRAdr, blankData },
+		{ flagReadMask | R3Cplfep2PerdRAdr, blankData },
+		{ flagReadMask | R3Cplfep3PerdRAdr, blankData },
+		{ flagReadMask | R4Cplfep1PerdRAdr, blankData },
+		{ flagReadMask | R4Cplfep2PerdRAdr, blankData },
+		{ flagReadMask | R4Cplfep3PerdRAdr, blankData },
+		{ flagReadMask | R5StmpiRAdr, blankData },
+		{ flagReadMask | R6StmpiRAdr, blankData },
+		{ flagReadMask | R7StmpiRAdr, blankData },
+		{ flagReadMask | R8StmpiRAdr, blankData },
+		{ flagReadMask | R5StmpvRAdr, blankData },
+		{ flagReadMask | R6StmpvRAdr, blankData },
+		{ flagReadMask | R7StmpvRAdr, blankData },
+		{ flagReadMask | R8StmpvRAdr, blankData },
 	};
 
 	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
@@ -443,984 +485,1239 @@ asynStatus scllrfINTDriver::functionToRegister(const int function, FpgaReg *pToF
 {
 	asynStatus status = asynSuccess;
 
-    if( function == p_C1Plfep1IR )
+    if( function == p_R1Cplfep1IR )
     {
-		pToFpga->addr = C1Plfep1IRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep1IlhR )
+    if( function == p_R1Cplfep1IlhR )
     {
-		pToFpga->addr = C1Plfep1IlhRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep1IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep1IlhW )
+    if( function == p_R1Cplfep1IlhW )
     {
-		pToFpga->addr = C1Plfep1IlhWAdr;
+		pToFpga->addr = R1Cplfep1IlhWAdr;
     }
     else
-    if( function == p_C1Plfep1IllR )
+    if( function == p_R1Cplfep1IllR )
     {
-		pToFpga->addr = C1Plfep1IllRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep1IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep1IllW )
+    if( function == p_R1Cplfep1IllW )
     {
-		pToFpga->addr = C1Plfep1IllWAdr;
+		pToFpga->addr = R1Cplfep1IllWAdr;
     }
     else
-    if( function == p_C1Plfep2IR )
+    if( function == p_R1Cplfep1PerdR )
     {
-		pToFpga->addr = C1Plfep2IRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep1PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep2IlhR )
+    if( function == p_R1Cplfep1PerdW )
     {
-		pToFpga->addr = C1Plfep2IlhRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep1PerdWAdr;
     }
     else
-    if( function == p_C1Plfep2IlhW )
+    if( function == p_R1Cplfep2IR )
     {
-		pToFpga->addr = C1Plfep2IlhWAdr;
+		pToFpga->addr = R1Cplfep2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep2IllR )
+    if( function == p_R1Cplfep2IlhR )
     {
-		pToFpga->addr = C1Plfep2IllRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep2IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep2IllW )
+    if( function == p_R1Cplfep2IlhW )
     {
-		pToFpga->addr = C1Plfep2IllWAdr;
+		pToFpga->addr = R1Cplfep2IlhWAdr;
     }
     else
-    if( function == p_C1Plfep3IR )
+    if( function == p_R1Cplfep2IllR )
     {
-		pToFpga->addr = C1Plfep3IRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep2IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep3IlhR )
+    if( function == p_R1Cplfep2IllW )
     {
-		pToFpga->addr = C1Plfep3IlhRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep2IllWAdr;
     }
     else
-    if( function == p_C1Plfep3IlhW )
+    if( function == p_R1Cplfep2PerdR )
     {
-		pToFpga->addr = C1Plfep3IlhWAdr;
+		pToFpga->addr = R1Cplfep2PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Plfep3IllR )
+    if( function == p_R1Cplfep2PerdW )
     {
-		pToFpga->addr = C1Plfep3IllRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep2PerdWAdr;
     }
     else
-    if( function == p_C1Plfep3IllW )
+    if( function == p_R1Cplfep3IR )
     {
-		pToFpga->addr = C1Plfep3IllWAdr;
+		pToFpga->addr = R1Cplfep3IRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Pltmp1IR )
+    if( function == p_R1Cplfep3IlhR )
     {
-		pToFpga->addr = C1Pltmp1IRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep3IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Pltmp1IW )
+    if( function == p_R1Cplfep3IlhW )
     {
-		pToFpga->addr = C1Pltmp1IWAdr;
+		pToFpga->addr = R1Cplfep3IlhWAdr;
     }
     else
-    if( function == p_C1Pltmp1VR )
+    if( function == p_R1Cplfep3IllR )
     {
-		pToFpga->addr = C1Pltmp1VRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep3IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Pltmp1VlR )
+    if( function == p_R1Cplfep3IllW )
     {
-		pToFpga->addr = C1Pltmp1VlRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep3IllWAdr;
     }
     else
-    if( function == p_C1Pltmp1VlW )
+    if( function == p_R1Cplfep3PerdR )
     {
-		pToFpga->addr = C1Pltmp1VlWAdr;
+		pToFpga->addr = R1Cplfep3PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Pltmp2IR )
+    if( function == p_R1Cplfep3PerdW )
     {
-		pToFpga->addr = C1Pltmp2IRAdr|flagReadMask;
+		pToFpga->addr = R1Cplfep3PerdWAdr;
     }
     else
-    if( function == p_C1Pltmp2IW )
+    if( function == p_R1Cpltmp1IR )
     {
-		pToFpga->addr = C1Pltmp2IWAdr;
+		pToFpga->addr = R1Cpltmp1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Pltmp2VR )
+    if( function == p_R1Cpltmp1IW )
     {
-		pToFpga->addr = C1Pltmp2VRAdr|flagReadMask;
+		pToFpga->addr = R1Cpltmp1IWAdr;
     }
     else
-    if( function == p_C1Pltmp2VlR )
+    if( function == p_R1Cpltmp1VR )
     {
-		pToFpga->addr = C1Pltmp2VlRAdr|flagReadMask;
+		pToFpga->addr = R1Cpltmp1VRAdr|flagReadMask;
     }
     else
-    if( function == p_C1Pltmp2VlW )
+    if( function == p_R1Cpltmp1VlR )
     {
-		pToFpga->addr = C1Pltmp2VlWAdr;
+		pToFpga->addr = R1Cpltmp1VlRAdr|flagReadMask;
     }
     else
-    if( function == p_C1StmpiR )
+    if( function == p_R1Cpltmp1VlW )
     {
-		pToFpga->addr = C1StmpiRAdr|flagReadMask;
+		pToFpga->addr = R1Cpltmp1VlWAdr;
     }
     else
-    if( function == p_C1StmpiW )
+    if( function == p_R1Cpltmp2IR )
     {
-		pToFpga->addr = C1StmpiWAdr;
+		pToFpga->addr = R1Cpltmp2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C1StmpvR )
+    if( function == p_R1Cpltmp2IW )
     {
-		pToFpga->addr = C1StmpvRAdr|flagReadMask;
+		pToFpga->addr = R1Cpltmp2IWAdr;
     }
     else
-    if( function == p_C1StmpvlR )
+    if( function == p_R1Cpltmp2VR )
     {
-		pToFpga->addr = C1StmpvlRAdr|flagReadMask;
+		pToFpga->addr = R1Cpltmp2VRAdr|flagReadMask;
     }
     else
-    if( function == p_C1StmpvlW )
+    if( function == p_R1Cpltmp2VlR )
     {
-		pToFpga->addr = C1StmpvlWAdr;
+		pToFpga->addr = R1Cpltmp2VlRAdr|flagReadMask;
     }
     else
-    if( function == p_C1WalR )
+    if( function == p_R1Cpltmp2VlW )
     {
-		pToFpga->addr = C1WalRAdr|flagReadMask;
+		pToFpga->addr = R1Cpltmp2VlWAdr;
     }
     else
-    if( function == p_C1WalW )
+    if( function == p_R1CwalR )
     {
-		pToFpga->addr = C1WalWAdr;
+		pToFpga->addr = R1CwalRAdr|flagReadMask;
     }
     else
-    if( function == p_C1WapR )
+    if( function == p_R1CwalW )
     {
-		pToFpga->addr = C1WapRAdr|flagReadMask;
+		pToFpga->addr = R1CwalWAdr;
     }
     else
-    if( function == p_C1WapW )
+    if( function == p_R1CwapR )
     {
-		pToFpga->addr = C1WapWAdr;
+		pToFpga->addr = R1CwapRAdr|flagReadMask;
     }
     else
-    if( function == p_C1WapsR )
+    if( function == p_R1CwapW )
     {
-		pToFpga->addr = C1WapsRAdr|flagReadMask;
+		pToFpga->addr = R1CwapWAdr;
     }
     else
-    if( function == p_C1WapsW )
+    if( function == p_R1CwapsR )
     {
-		pToFpga->addr = C1WapsWAdr;
+		pToFpga->addr = R1CwapsRAdr|flagReadMask;
     }
     else
-    if( function == p_C1WavR )
+    if( function == p_R1CwapsW )
     {
-		pToFpga->addr = C1WavRAdr|flagReadMask;
+		pToFpga->addr = R1CwapsWAdr;
     }
     else
-    if( function == p_C1WwlR )
+    if( function == p_R1CwavR )
     {
-		pToFpga->addr = C1WwlRAdr|flagReadMask;
+		pToFpga->addr = R1CwavRAdr|flagReadMask;
     }
     else
-    if( function == p_C1WwlW )
+    if( function == p_R1CwwlR )
     {
-		pToFpga->addr = C1WwlWAdr;
+		pToFpga->addr = R1CwwlRAdr|flagReadMask;
     }
     else
-    if( function == p_C1WwtR )
+    if( function == p_R1CwwlW )
     {
-		pToFpga->addr = C1WwtRAdr|flagReadMask;
+		pToFpga->addr = R1CwwlWAdr;
     }
     else
-    if( function == p_C2Plfep1IR )
+    if( function == p_R1CwwtR )
     {
-		pToFpga->addr = C2Plfep1IRAdr|flagReadMask;
+		pToFpga->addr = R1CwwtRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep1IlhR )
+    if( function == p_R1StmpiR )
     {
-		pToFpga->addr = C2Plfep1IlhRAdr|flagReadMask;
+		pToFpga->addr = R1StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep1IlhW )
+    if( function == p_R1StmpiW )
     {
-		pToFpga->addr = C2Plfep1IlhWAdr;
+		pToFpga->addr = R1StmpiWAdr;
     }
     else
-    if( function == p_C2Plfep1IllR )
+    if( function == p_R1StmpvR )
     {
-		pToFpga->addr = C2Plfep1IllRAdr|flagReadMask;
+		pToFpga->addr = R1StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep1IllW )
+    if( function == p_R1StmpvlR )
     {
-		pToFpga->addr = C2Plfep1IllWAdr;
+		pToFpga->addr = R1StmpvlRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep2IR )
+    if( function == p_R1StmpvlW )
     {
-		pToFpga->addr = C2Plfep2IRAdr|flagReadMask;
+		pToFpga->addr = R1StmpvlWAdr;
     }
     else
-    if( function == p_C2Plfep2IlhR )
+    if( function == p_R2Cplfep1IR )
     {
-		pToFpga->addr = C2Plfep2IlhRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep2IlhW )
+    if( function == p_R2Cplfep1IlhR )
     {
-		pToFpga->addr = C2Plfep2IlhWAdr;
+		pToFpga->addr = R2Cplfep1IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep2IllR )
+    if( function == p_R2Cplfep1IlhW )
     {
-		pToFpga->addr = C2Plfep2IllRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep1IlhWAdr;
     }
     else
-    if( function == p_C2Plfep2IllW )
+    if( function == p_R2Cplfep1IllR )
     {
-		pToFpga->addr = C2Plfep2IllWAdr;
+		pToFpga->addr = R2Cplfep1IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep3IR )
+    if( function == p_R2Cplfep1IllW )
     {
-		pToFpga->addr = C2Plfep3IRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep1IllWAdr;
     }
     else
-    if( function == p_C2Plfep3IlhR )
+    if( function == p_R2Cplfep1PerdR )
     {
-		pToFpga->addr = C2Plfep3IlhRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep1PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep3IlhW )
+    if( function == p_R2Cplfep1PerdW )
     {
-		pToFpga->addr = C2Plfep3IlhWAdr;
+		pToFpga->addr = R2Cplfep1PerdWAdr;
     }
     else
-    if( function == p_C2Plfep3IllR )
+    if( function == p_R2Cplfep2IR )
     {
-		pToFpga->addr = C2Plfep3IllRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Plfep3IllW )
+    if( function == p_R2Cplfep2IlhR )
     {
-		pToFpga->addr = C2Plfep3IllWAdr;
+		pToFpga->addr = R2Cplfep2IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Pltmp1IR )
+    if( function == p_R2Cplfep2IlhW )
     {
-		pToFpga->addr = C2Pltmp1IRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep2IlhWAdr;
     }
     else
-    if( function == p_C2Pltmp1IW )
+    if( function == p_R2Cplfep2IllR )
     {
-		pToFpga->addr = C2Pltmp1IWAdr;
+		pToFpga->addr = R2Cplfep2IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Pltmp1VR )
+    if( function == p_R2Cplfep2IllW )
     {
-		pToFpga->addr = C2Pltmp1VRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep2IllWAdr;
     }
     else
-    if( function == p_C2Pltmp1VlR )
+    if( function == p_R2Cplfep2PerdR )
     {
-		pToFpga->addr = C2Pltmp1VlRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep2PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Pltmp1VlW )
+    if( function == p_R2Cplfep2PerdW )
     {
-		pToFpga->addr = C2Pltmp1VlWAdr;
+		pToFpga->addr = R2Cplfep2PerdWAdr;
     }
     else
-    if( function == p_C2Pltmp2IR )
+    if( function == p_R2Cplfep3IR )
     {
-		pToFpga->addr = C2Pltmp2IRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep3IRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Pltmp2IW )
+    if( function == p_R2Cplfep3IlhR )
     {
-		pToFpga->addr = C2Pltmp2IWAdr;
+		pToFpga->addr = R2Cplfep3IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Pltmp2VR )
+    if( function == p_R2Cplfep3IlhW )
     {
-		pToFpga->addr = C2Pltmp2VRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep3IlhWAdr;
     }
     else
-    if( function == p_C2Pltmp2VlR )
+    if( function == p_R2Cplfep3IllR )
     {
-		pToFpga->addr = C2Pltmp2VlRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep3IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C2Pltmp2VlW )
+    if( function == p_R2Cplfep3IllW )
     {
-		pToFpga->addr = C2Pltmp2VlWAdr;
+		pToFpga->addr = R2Cplfep3IllWAdr;
     }
     else
-    if( function == p_C2StmpiR )
+    if( function == p_R2Cplfep3PerdR )
     {
-		pToFpga->addr = C2StmpiRAdr|flagReadMask;
+		pToFpga->addr = R2Cplfep3PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C2StmpiW )
+    if( function == p_R2Cplfep3PerdW )
     {
-		pToFpga->addr = C2StmpiWAdr;
+		pToFpga->addr = R2Cplfep3PerdWAdr;
     }
     else
-    if( function == p_C2StmpvR )
+    if( function == p_R2Cpltmp1IR )
     {
-		pToFpga->addr = C2StmpvRAdr|flagReadMask;
+		pToFpga->addr = R2Cpltmp1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C2StmpvlR )
+    if( function == p_R2Cpltmp1IW )
     {
-		pToFpga->addr = C2StmpvlRAdr|flagReadMask;
+		pToFpga->addr = R2Cpltmp1IWAdr;
     }
     else
-    if( function == p_C2StmpvlW )
+    if( function == p_R2Cpltmp1VR )
     {
-		pToFpga->addr = C2StmpvlWAdr;
+		pToFpga->addr = R2Cpltmp1VRAdr|flagReadMask;
     }
     else
-    if( function == p_C2WalR )
+    if( function == p_R2Cpltmp1VlR )
     {
-		pToFpga->addr = C2WalRAdr|flagReadMask;
+		pToFpga->addr = R2Cpltmp1VlRAdr|flagReadMask;
     }
     else
-    if( function == p_C2WalW )
+    if( function == p_R2Cpltmp1VlW )
     {
-		pToFpga->addr = C2WalWAdr;
+		pToFpga->addr = R2Cpltmp1VlWAdr;
     }
     else
-    if( function == p_C2WapR )
+    if( function == p_R2Cpltmp2IR )
     {
-		pToFpga->addr = C2WapRAdr|flagReadMask;
+		pToFpga->addr = R2Cpltmp2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C2WapW )
+    if( function == p_R2Cpltmp2IW )
     {
-		pToFpga->addr = C2WapWAdr;
+		pToFpga->addr = R2Cpltmp2IWAdr;
     }
     else
-    if( function == p_C2WapsR )
+    if( function == p_R2Cpltmp2VR )
     {
-		pToFpga->addr = C2WapsRAdr|flagReadMask;
+		pToFpga->addr = R2Cpltmp2VRAdr|flagReadMask;
     }
     else
-    if( function == p_C2WapsW )
+    if( function == p_R2Cpltmp2VlR )
     {
-		pToFpga->addr = C2WapsWAdr;
+		pToFpga->addr = R2Cpltmp2VlRAdr|flagReadMask;
     }
     else
-    if( function == p_C2WavR )
+    if( function == p_R2Cpltmp2VlW )
     {
-		pToFpga->addr = C2WavRAdr|flagReadMask;
+		pToFpga->addr = R2Cpltmp2VlWAdr;
     }
     else
-    if( function == p_C2WwlR )
+    if( function == p_R2CwalR )
     {
-		pToFpga->addr = C2WwlRAdr|flagReadMask;
+		pToFpga->addr = R2CwalRAdr|flagReadMask;
     }
     else
-    if( function == p_C2WwlW )
+    if( function == p_R2CwalW )
     {
-		pToFpga->addr = C2WwlWAdr;
+		pToFpga->addr = R2CwalWAdr;
     }
     else
-    if( function == p_C2WwtR )
+    if( function == p_R2CwapR )
     {
-		pToFpga->addr = C2WwtRAdr|flagReadMask;
+		pToFpga->addr = R2CwapRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep1IR )
+    if( function == p_R2CwapW )
     {
-		pToFpga->addr = C3Plfep1IRAdr|flagReadMask;
+		pToFpga->addr = R2CwapWAdr;
     }
     else
-    if( function == p_C3Plfep1IlhR )
+    if( function == p_R2CwapsR )
     {
-		pToFpga->addr = C3Plfep1IlhRAdr|flagReadMask;
+		pToFpga->addr = R2CwapsRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep1IlhW )
+    if( function == p_R2CwapsW )
     {
-		pToFpga->addr = C3Plfep1IlhWAdr;
+		pToFpga->addr = R2CwapsWAdr;
     }
     else
-    if( function == p_C3Plfep1IllR )
+    if( function == p_R2CwavR )
     {
-		pToFpga->addr = C3Plfep1IllRAdr|flagReadMask;
+		pToFpga->addr = R2CwavRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep1IllW )
+    if( function == p_R2CwwlR )
     {
-		pToFpga->addr = C3Plfep1IllWAdr;
+		pToFpga->addr = R2CwwlRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep2IR )
+    if( function == p_R2CwwlW )
     {
-		pToFpga->addr = C3Plfep2IRAdr|flagReadMask;
+		pToFpga->addr = R2CwwlWAdr;
     }
     else
-    if( function == p_C3Plfep2IlhR )
+    if( function == p_R2CwwtR )
     {
-		pToFpga->addr = C3Plfep2IlhRAdr|flagReadMask;
+		pToFpga->addr = R2CwwtRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep2IlhW )
+    if( function == p_R2StmpiR )
     {
-		pToFpga->addr = C3Plfep2IlhWAdr;
+		pToFpga->addr = R2StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep2IllR )
+    if( function == p_R2StmpiW )
     {
-		pToFpga->addr = C3Plfep2IllRAdr|flagReadMask;
+		pToFpga->addr = R2StmpiWAdr;
     }
     else
-    if( function == p_C3Plfep2IllW )
+    if( function == p_R2StmpvR )
     {
-		pToFpga->addr = C3Plfep2IllWAdr;
+		pToFpga->addr = R2StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep3IR )
+    if( function == p_R2StmpvlR )
     {
-		pToFpga->addr = C3Plfep3IRAdr|flagReadMask;
+		pToFpga->addr = R2StmpvlRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep3IlhR )
+    if( function == p_R2StmpvlW )
     {
-		pToFpga->addr = C3Plfep3IlhRAdr|flagReadMask;
+		pToFpga->addr = R2StmpvlWAdr;
     }
     else
-    if( function == p_C3Plfep3IlhW )
+    if( function == p_R3Cplfep1IR )
     {
-		pToFpga->addr = C3Plfep3IlhWAdr;
+		pToFpga->addr = R3Cplfep1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep3IllR )
+    if( function == p_R3Cplfep1IlhR )
     {
-		pToFpga->addr = C3Plfep3IllRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep1IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Plfep3IllW )
+    if( function == p_R3Cplfep1IlhW )
     {
-		pToFpga->addr = C3Plfep3IllWAdr;
+		pToFpga->addr = R3Cplfep1IlhWAdr;
     }
     else
-    if( function == p_C3Pltmp1IR )
+    if( function == p_R3Cplfep1IllR )
     {
-		pToFpga->addr = C3Pltmp1IRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep1IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Pltmp1IW )
+    if( function == p_R3Cplfep1IllW )
     {
-		pToFpga->addr = C3Pltmp1IWAdr;
+		pToFpga->addr = R3Cplfep1IllWAdr;
     }
     else
-    if( function == p_C3Pltmp1VR )
+    if( function == p_R3Cplfep1PerdR )
     {
-		pToFpga->addr = C3Pltmp1VRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep1PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Pltmp1VlR )
+    if( function == p_R3Cplfep1PerdW )
     {
-		pToFpga->addr = C3Pltmp1VlRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep1PerdWAdr;
     }
     else
-    if( function == p_C3Pltmp1VlW )
+    if( function == p_R3Cplfep2IR )
     {
-		pToFpga->addr = C3Pltmp1VlWAdr;
+		pToFpga->addr = R3Cplfep2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Pltmp2IR )
+    if( function == p_R3Cplfep2IlhR )
     {
-		pToFpga->addr = C3Pltmp2IRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep2IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Pltmp2IW )
+    if( function == p_R3Cplfep2IlhW )
     {
-		pToFpga->addr = C3Pltmp2IWAdr;
+		pToFpga->addr = R3Cplfep2IlhWAdr;
     }
     else
-    if( function == p_C3Pltmp2VR )
+    if( function == p_R3Cplfep2IllR )
     {
-		pToFpga->addr = C3Pltmp2VRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep2IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C3Pltmp2VlR )
+    if( function == p_R3Cplfep2IllW )
     {
-		pToFpga->addr = C3Pltmp2VlRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep2IllWAdr;
     }
     else
-    if( function == p_C3Pltmp2VlW )
+    if( function == p_R3Cplfep2PerdR )
     {
-		pToFpga->addr = C3Pltmp2VlWAdr;
+		pToFpga->addr = R3Cplfep2PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C3StmpiR )
+    if( function == p_R3Cplfep2PerdW )
     {
-		pToFpga->addr = C3StmpiRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep2PerdWAdr;
     }
     else
-    if( function == p_C3StmpiW )
+    if( function == p_R3Cplfep3IR )
     {
-		pToFpga->addr = C3StmpiWAdr;
+		pToFpga->addr = R3Cplfep3IRAdr|flagReadMask;
     }
     else
-    if( function == p_C3StmpvR )
+    if( function == p_R3Cplfep3IlhR )
     {
-		pToFpga->addr = C3StmpvRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep3IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C3StmpvlR )
+    if( function == p_R3Cplfep3IlhW )
     {
-		pToFpga->addr = C3StmpvlRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep3IlhWAdr;
     }
     else
-    if( function == p_C3StmpvlW )
+    if( function == p_R3Cplfep3IllR )
     {
-		pToFpga->addr = C3StmpvlWAdr;
+		pToFpga->addr = R3Cplfep3IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C3WalR )
+    if( function == p_R3Cplfep3IllW )
     {
-		pToFpga->addr = C3WalRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep3IllWAdr;
     }
     else
-    if( function == p_C3WalW )
+    if( function == p_R3Cplfep3PerdR )
     {
-		pToFpga->addr = C3WalWAdr;
+		pToFpga->addr = R3Cplfep3PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C3WapR )
+    if( function == p_R3Cplfep3PerdW )
     {
-		pToFpga->addr = C3WapRAdr|flagReadMask;
+		pToFpga->addr = R3Cplfep3PerdWAdr;
     }
     else
-    if( function == p_C3WapW )
+    if( function == p_R3Cpltmp1IR )
     {
-		pToFpga->addr = C3WapWAdr;
+		pToFpga->addr = R3Cpltmp1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C3WapsR )
+    if( function == p_R3Cpltmp1IW )
     {
-		pToFpga->addr = C3WapsRAdr|flagReadMask;
+		pToFpga->addr = R3Cpltmp1IWAdr;
     }
     else
-    if( function == p_C3WapsW )
+    if( function == p_R3Cpltmp1VR )
     {
-		pToFpga->addr = C3WapsWAdr;
+		pToFpga->addr = R3Cpltmp1VRAdr|flagReadMask;
     }
     else
-    if( function == p_C3WavR )
+    if( function == p_R3Cpltmp1VlR )
     {
-		pToFpga->addr = C3WavRAdr|flagReadMask;
+		pToFpga->addr = R3Cpltmp1VlRAdr|flagReadMask;
     }
     else
-    if( function == p_C3WwlR )
+    if( function == p_R3Cpltmp1VlW )
     {
-		pToFpga->addr = C3WwlRAdr|flagReadMask;
+		pToFpga->addr = R3Cpltmp1VlWAdr;
     }
     else
-    if( function == p_C3WwlW )
+    if( function == p_R3Cpltmp2IR )
     {
-		pToFpga->addr = C3WwlWAdr;
+		pToFpga->addr = R3Cpltmp2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C3WwtR )
+    if( function == p_R3Cpltmp2IW )
     {
-		pToFpga->addr = C3WwtRAdr|flagReadMask;
+		pToFpga->addr = R3Cpltmp2IWAdr;
     }
     else
-    if( function == p_C4Plfep1IR )
+    if( function == p_R3Cpltmp2VR )
     {
-		pToFpga->addr = C4Plfep1IRAdr|flagReadMask;
+		pToFpga->addr = R3Cpltmp2VRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep1IlhR )
+    if( function == p_R3Cpltmp2VlR )
     {
-		pToFpga->addr = C4Plfep1IlhRAdr|flagReadMask;
+		pToFpga->addr = R3Cpltmp2VlRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep1IlhW )
+    if( function == p_R3Cpltmp2VlW )
     {
-		pToFpga->addr = C4Plfep1IlhWAdr;
+		pToFpga->addr = R3Cpltmp2VlWAdr;
     }
     else
-    if( function == p_C4Plfep1IllR )
+    if( function == p_R3CwalR )
     {
-		pToFpga->addr = C4Plfep1IllRAdr|flagReadMask;
+		pToFpga->addr = R3CwalRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep1IllW )
+    if( function == p_R3CwalW )
     {
-		pToFpga->addr = C4Plfep1IllWAdr;
+		pToFpga->addr = R3CwalWAdr;
     }
     else
-    if( function == p_C4Plfep2IR )
+    if( function == p_R3CwapR )
     {
-		pToFpga->addr = C4Plfep2IRAdr|flagReadMask;
+		pToFpga->addr = R3CwapRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep2IlhR )
+    if( function == p_R3CwapW )
     {
-		pToFpga->addr = C4Plfep2IlhRAdr|flagReadMask;
+		pToFpga->addr = R3CwapWAdr;
     }
     else
-    if( function == p_C4Plfep2IlhW )
+    if( function == p_R3CwapsR )
     {
-		pToFpga->addr = C4Plfep2IlhWAdr;
+		pToFpga->addr = R3CwapsRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep2IllR )
+    if( function == p_R3CwapsW )
     {
-		pToFpga->addr = C4Plfep2IllRAdr|flagReadMask;
+		pToFpga->addr = R3CwapsWAdr;
     }
     else
-    if( function == p_C4Plfep2IllW )
+    if( function == p_R3CwavR )
     {
-		pToFpga->addr = C4Plfep2IllWAdr;
+		pToFpga->addr = R3CwavRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep3IR )
+    if( function == p_R3CwwlR )
     {
-		pToFpga->addr = C4Plfep3IRAdr|flagReadMask;
+		pToFpga->addr = R3CwwlRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep3IlhR )
+    if( function == p_R3CwwlW )
     {
-		pToFpga->addr = C4Plfep3IlhRAdr|flagReadMask;
+		pToFpga->addr = R3CwwlWAdr;
     }
     else
-    if( function == p_C4Plfep3IlhW )
+    if( function == p_R3CwwtR )
     {
-		pToFpga->addr = C4Plfep3IlhWAdr;
+		pToFpga->addr = R3CwwtRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep3IllR )
+    if( function == p_R3StmpiR )
     {
-		pToFpga->addr = C4Plfep3IllRAdr|flagReadMask;
+		pToFpga->addr = R3StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Plfep3IllW )
+    if( function == p_R3StmpiW )
     {
-		pToFpga->addr = C4Plfep3IllWAdr;
+		pToFpga->addr = R3StmpiWAdr;
     }
     else
-    if( function == p_C4Pltmp1IR )
+    if( function == p_R3StmpvR )
     {
-		pToFpga->addr = C4Pltmp1IRAdr|flagReadMask;
+		pToFpga->addr = R3StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Pltmp1IW )
+    if( function == p_R3StmpvlR )
     {
-		pToFpga->addr = C4Pltmp1IWAdr;
+		pToFpga->addr = R3StmpvlRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Pltmp1VR )
+    if( function == p_R3StmpvlW )
     {
-		pToFpga->addr = C4Pltmp1VRAdr|flagReadMask;
+		pToFpga->addr = R3StmpvlWAdr;
     }
     else
-    if( function == p_C4Pltmp1VlR )
+    if( function == p_R4Cplfep1IR )
     {
-		pToFpga->addr = C4Pltmp1VlRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep1IRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Pltmp1VlW )
+    if( function == p_R4Cplfep1IlhR )
     {
-		pToFpga->addr = C4Pltmp1VlWAdr;
+		pToFpga->addr = R4Cplfep1IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Pltmp2IR )
+    if( function == p_R4Cplfep1IlhW )
     {
-		pToFpga->addr = C4Pltmp2IRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep1IlhWAdr;
     }
     else
-    if( function == p_C4Pltmp2IW )
+    if( function == p_R4Cplfep1IllR )
     {
-		pToFpga->addr = C4Pltmp2IWAdr;
+		pToFpga->addr = R4Cplfep1IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Pltmp2VR )
+    if( function == p_R4Cplfep1IllW )
     {
-		pToFpga->addr = C4Pltmp2VRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep1IllWAdr;
     }
     else
-    if( function == p_C4Pltmp2VlR )
+    if( function == p_R4Cplfep1PerdR )
     {
-		pToFpga->addr = C4Pltmp2VlRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep1PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C4Pltmp2VlW )
+    if( function == p_R4Cplfep1PerdW )
     {
-		pToFpga->addr = C4Pltmp2VlWAdr;
+		pToFpga->addr = R4Cplfep1PerdWAdr;
     }
     else
-    if( function == p_C4StmpiR )
+    if( function == p_R4Cplfep2IR )
     {
-		pToFpga->addr = C4StmpiRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep2IRAdr|flagReadMask;
     }
     else
-    if( function == p_C4StmpiW )
+    if( function == p_R4Cplfep2IlhR )
     {
-		pToFpga->addr = C4StmpiWAdr;
+		pToFpga->addr = R4Cplfep2IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C4StmpvR )
+    if( function == p_R4Cplfep2IlhW )
     {
-		pToFpga->addr = C4StmpvRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep2IlhWAdr;
     }
     else
-    if( function == p_C4StmpvlR )
+    if( function == p_R4Cplfep2IllR )
     {
-		pToFpga->addr = C4StmpvlRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep2IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C4StmpvlW )
+    if( function == p_R4Cplfep2IllW )
     {
-		pToFpga->addr = C4StmpvlWAdr;
+		pToFpga->addr = R4Cplfep2IllWAdr;
     }
     else
-    if( function == p_C4WalR )
+    if( function == p_R4Cplfep2PerdR )
     {
-		pToFpga->addr = C4WalRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep2PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C4WalW )
+    if( function == p_R4Cplfep2PerdW )
     {
-		pToFpga->addr = C4WalWAdr;
+		pToFpga->addr = R4Cplfep2PerdWAdr;
     }
     else
-    if( function == p_C4WapR )
+    if( function == p_R4Cplfep3IR )
     {
-		pToFpga->addr = C4WapRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep3IRAdr|flagReadMask;
     }
     else
-    if( function == p_C4WapW )
+    if( function == p_R4Cplfep3IlhR )
     {
-		pToFpga->addr = C4WapWAdr;
+		pToFpga->addr = R4Cplfep3IlhRAdr|flagReadMask;
     }
     else
-    if( function == p_C4WapsR )
+    if( function == p_R4Cplfep3IlhW )
     {
-		pToFpga->addr = C4WapsRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep3IlhWAdr;
     }
     else
-    if( function == p_C4WapsW )
+    if( function == p_R4Cplfep3IllR )
     {
-		pToFpga->addr = C4WapsWAdr;
+		pToFpga->addr = R4Cplfep3IllRAdr|flagReadMask;
     }
     else
-    if( function == p_C4WavR )
+    if( function == p_R4Cplfep3IllW )
     {
-		pToFpga->addr = C4WavRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep3IllWAdr;
     }
     else
-    if( function == p_C4WwlR )
+    if( function == p_R4Cplfep3PerdR )
     {
-		pToFpga->addr = C4WwlRAdr|flagReadMask;
+		pToFpga->addr = R4Cplfep3PerdRAdr|flagReadMask;
     }
     else
-    if( function == p_C4WwlW )
+    if( function == p_R4Cplfep3PerdW )
     {
-		pToFpga->addr = C4WwlWAdr;
+		pToFpga->addr = R4Cplfep3PerdWAdr;
     }
     else
-    if( function == p_C4WwtR )
+    if( function == p_R4Cpltmp1IR )
     {
-		pToFpga->addr = C4WwtRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp1IRAdr|flagReadMask;
     }
     else
-    if( function == p_XatfltR )
+    if( function == p_R4Cpltmp1IW )
     {
-		pToFpga->addr = XatfltRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp1IWAdr;
     }
     else
-    if( function == p_XcienR )
+    if( function == p_R4Cpltmp1VR )
     {
-		pToFpga->addr = XcienRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp1VRAdr|flagReadMask;
     }
     else
-    if( function == p_XciencR )
+    if( function == p_R4Cpltmp1VlR )
     {
-		pToFpga->addr = XciencRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp1VlRAdr|flagReadMask;
     }
     else
-    if( function == p_XciencW )
+    if( function == p_R4Cpltmp1VlW )
     {
-		pToFpga->addr = XciencWAdr;
+		pToFpga->addr = R4Cpltmp1VlWAdr;
     }
     else
-    if( function == p_XcienmR )
+    if( function == p_R4Cpltmp2IR )
     {
-		pToFpga->addr = XcienmRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp2IRAdr|flagReadMask;
     }
     else
-    if( function == p_XcienmW )
+    if( function == p_R4Cpltmp2IW )
     {
-		pToFpga->addr = XcienmWAdr;
+		pToFpga->addr = R4Cpltmp2IWAdr;
     }
     else
-    if( function == p_XcplfepfcR )
+    if( function == p_R4Cpltmp2VR )
     {
-		pToFpga->addr = XcplfepfcRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp2VRAdr|flagReadMask;
     }
     else
-    if( function == p_XcplfeplsR )
+    if( function == p_R4Cpltmp2VlR )
     {
-		pToFpga->addr = XcplfeplsRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp2VlRAdr|flagReadMask;
     }
     else
-    if( function == p_XcpltmplsR )
+    if( function == p_R4Cpltmp2VlW )
     {
-		pToFpga->addr = XcpltmplsRAdr|flagReadMask;
+		pToFpga->addr = R4Cpltmp2VlWAdr;
     }
     else
-    if( function == p_XcvfR )
+    if( function == p_R4CwalR )
     {
-		pToFpga->addr = XcvfRAdr|flagReadMask;
+		pToFpga->addr = R4CwalRAdr|flagReadMask;
     }
     else
-    if( function == p_XcvfcR )
+    if( function == p_R4CwalW )
     {
-		pToFpga->addr = XcvfcRAdr|flagReadMask;
+		pToFpga->addr = R4CwalWAdr;
     }
     else
-    if( function == p_XcvfcW )
+    if( function == p_R4CwapR )
     {
-		pToFpga->addr = XcvfcWAdr;
+		pToFpga->addr = R4CwapRAdr|flagReadMask;
     }
     else
-    if( function == p_XcvfmR )
+    if( function == p_R4CwapW )
     {
-		pToFpga->addr = XcvfmRAdr|flagReadMask;
+		pToFpga->addr = R4CwapWAdr;
     }
     else
-    if( function == p_XcvfmW )
+    if( function == p_R4CwapsR )
     {
-		pToFpga->addr = XcvfmWAdr;
+		pToFpga->addr = R4CwapsRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwadR )
+    if( function == p_R4CwapsW )
     {
-		pToFpga->addr = XcwadRAdr|flagReadMask;
+		pToFpga->addr = R4CwapsWAdr;
     }
     else
-    if( function == p_XcwafcR )
+    if( function == p_R4CwavR )
     {
-		pToFpga->addr = XcwafcRAdr|flagReadMask;
+		pToFpga->addr = R4CwavRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwafcW )
+    if( function == p_R4CwwlR )
     {
-		pToFpga->addr = XcwafcWAdr;
+		pToFpga->addr = R4CwwlRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwamR )
+    if( function == p_R4CwwlW )
     {
-		pToFpga->addr = XcwamRAdr|flagReadMask;
+		pToFpga->addr = R4CwwlWAdr;
     }
     else
-    if( function == p_XcwamW )
+    if( function == p_R4CwwtR )
     {
-		pToFpga->addr = XcwamWAdr;
+		pToFpga->addr = R4CwwtRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwatR )
+    if( function == p_R4StmpiR )
     {
-		pToFpga->addr = XcwatRAdr|flagReadMask;
+		pToFpga->addr = R4StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwatW )
+    if( function == p_R4StmpiW )
     {
-		pToFpga->addr = XcwatWAdr;
+		pToFpga->addr = R4StmpiWAdr;
     }
     else
-    if( function == p_XcwwdR )
+    if( function == p_R4StmpvR )
     {
-		pToFpga->addr = XcwwdRAdr|flagReadMask;
+		pToFpga->addr = R4StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwwfcR )
+    if( function == p_R4StmpvlR )
     {
-		pToFpga->addr = XcwwfcRAdr|flagReadMask;
+		pToFpga->addr = R4StmpvlRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwwmR )
+    if( function == p_R4StmpvlW )
     {
-		pToFpga->addr = XcwwmRAdr|flagReadMask;
+		pToFpga->addr = R4StmpvlWAdr;
     }
     else
-    if( function == p_XcwwtsR )
+    if( function == p_R5StmpiR )
     {
-		pToFpga->addr = XcwwtsRAdr|flagReadMask;
+		pToFpga->addr = R5StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_XcwwtsW )
+    if( function == p_R5StmpiW )
     {
-		pToFpga->addr = XcwwtsWAdr;
+		pToFpga->addr = R5StmpiWAdr;
     }
     else
-    if( function == p_XffsdR )
+    if( function == p_R5StmpvR )
     {
-		pToFpga->addr = XffsdRAdr|flagReadMask;
+		pToFpga->addr = R5StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_XffsdcR )
+    if( function == p_R6StmpiR )
     {
-		pToFpga->addr = XffsdcRAdr|flagReadMask;
+		pToFpga->addr = R6StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_XffsdcW )
+    if( function == p_R6StmpiW )
     {
-		pToFpga->addr = XffsdcWAdr;
+		pToFpga->addr = R6StmpiWAdr;
     }
     else
-    if( function == p_XffsdmR )
+    if( function == p_R6StmpvR )
     {
-		pToFpga->addr = XffsdmRAdr|flagReadMask;
+		pToFpga->addr = R6StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_XffsdmW )
+    if( function == p_R7StmpiR )
     {
-		pToFpga->addr = XffsdmWAdr;
+		pToFpga->addr = R7StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_XictlR )
+    if( function == p_R7StmpiW )
     {
-		pToFpga->addr = XictlRAdr|flagReadMask;
+		pToFpga->addr = R7StmpiWAdr;
     }
     else
-    if( function == p_XictlW )
+    if( function == p_R7StmpvR )
     {
-		pToFpga->addr = XictlWAdr;
+		pToFpga->addr = R7StmpvRAdr|flagReadMask;
     }
     else
-    if( function == p_XistatR )
+    if( function == p_R8StmpiR )
     {
-		pToFpga->addr = XistatRAdr|flagReadMask;
+		pToFpga->addr = R8StmpiRAdr|flagReadMask;
     }
     else
-    if( function == p_XiverR )
+    if( function == p_R8StmpiW )
     {
-		pToFpga->addr = XiverRAdr|flagReadMask;
+		pToFpga->addr = R8StmpiWAdr;
     }
     else
-    if( function == p_XstmplsR )
+    if( function == p_R8StmpvR )
     {
-		pToFpga->addr = XstmplsRAdr|flagReadMask;
+		pToFpga->addr = R8StmpvRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxatfltR )
+    {
+		pToFpga->addr = RxatfltRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxatfltW )
+    {
+		pToFpga->addr = RxatfltWAdr;
+    }
+    else
+    if( function == p_RxcienR )
+    {
+		pToFpga->addr = RxcienRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxciencR )
+    {
+		pToFpga->addr = RxciencRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxciencW )
+    {
+		pToFpga->addr = RxciencWAdr;
+    }
+    else
+    if( function == p_RxcienmR )
+    {
+		pToFpga->addr = RxcienmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcienmW )
+    {
+		pToFpga->addr = RxcienmWAdr;
+    }
+    else
+    if( function == p_RxcplfepfcR )
+    {
+		pToFpga->addr = RxcplfepfcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcplfepfcW )
+    {
+		pToFpga->addr = RxcplfepfcWAdr;
+    }
+    else
+    if( function == p_RxcplfepfsR )
+    {
+		pToFpga->addr = RxcplfepfsRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcplfeplsR )
+    {
+		pToFpga->addr = RxcplfeplsRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcplfepmR )
+    {
+		pToFpga->addr = RxcplfepmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcplfepmW )
+    {
+		pToFpga->addr = RxcplfepmWAdr;
+    }
+    else
+    if( function == p_RxcpltmpfcR )
+    {
+		pToFpga->addr = RxcpltmpfcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcpltmpfcW )
+    {
+		pToFpga->addr = RxcpltmpfcWAdr;
+    }
+    else
+    if( function == p_RxcpltmplsR )
+    {
+		pToFpga->addr = RxcpltmplsRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcpltmpmR )
+    {
+		pToFpga->addr = RxcpltmpmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcpltmpmW )
+    {
+		pToFpga->addr = RxcpltmpmWAdr;
+    }
+    else
+    if( function == p_RxcvfR )
+    {
+		pToFpga->addr = RxcvfRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcvfcR )
+    {
+		pToFpga->addr = RxcvfcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcvfcW )
+    {
+		pToFpga->addr = RxcvfcWAdr;
+    }
+    else
+    if( function == p_RxcvfmR )
+    {
+		pToFpga->addr = RxcvfmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcvfmW )
+    {
+		pToFpga->addr = RxcvfmWAdr;
+    }
+    else
+    if( function == p_RxcwadR )
+    {
+		pToFpga->addr = RxcwadRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwafcR )
+    {
+		pToFpga->addr = RxcwafcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwafcW )
+    {
+		pToFpga->addr = RxcwafcWAdr;
+    }
+    else
+    if( function == p_RxcwamR )
+    {
+		pToFpga->addr = RxcwamRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwamW )
+    {
+		pToFpga->addr = RxcwamWAdr;
+    }
+    else
+    if( function == p_RxcwatR )
+    {
+		pToFpga->addr = RxcwatRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwatW )
+    {
+		pToFpga->addr = RxcwatWAdr;
+    }
+    else
+    if( function == p_RxcwwdR )
+    {
+		pToFpga->addr = RxcwwdRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwwfcR )
+    {
+		pToFpga->addr = RxcwwfcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwwfcW )
+    {
+		pToFpga->addr = RxcwwfcWAdr;
+    }
+    else
+    if( function == p_RxcwwmR )
+    {
+		pToFpga->addr = RxcwwmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwwmW )
+    {
+		pToFpga->addr = RxcwwmWAdr;
+    }
+    else
+    if( function == p_RxcwwtsR )
+    {
+		pToFpga->addr = RxcwwtsRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxcwwtsW )
+    {
+		pToFpga->addr = RxcwwtsWAdr;
+    }
+    else
+    if( function == p_RxffsdR )
+    {
+		pToFpga->addr = RxffsdRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxffsdcR )
+    {
+		pToFpga->addr = RxffsdcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxffsdcW )
+    {
+		pToFpga->addr = RxffsdcWAdr;
+    }
+    else
+    if( function == p_RxffsdmR )
+    {
+		pToFpga->addr = RxffsdmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxffsdmW )
+    {
+		pToFpga->addr = RxffsdmWAdr;
+    }
+    else
+    if( function == p_RxictlR )
+    {
+		pToFpga->addr = RxictlRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxictlW )
+    {
+		pToFpga->addr = RxictlWAdr;
+    }
+    else
+    if( function == p_RxistatR )
+    {
+		pToFpga->addr = RxistatRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxiverR )
+    {
+		pToFpga->addr = RxiverRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxstmpfcR )
+    {
+		pToFpga->addr = RxstmpfcRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxstmpfcW )
+    {
+		pToFpga->addr = RxstmpfcWAdr;
+    }
+    else
+    if( function == p_RxstmplsR )
+    {
+		pToFpga->addr = RxstmplsRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxstmpmR )
+    {
+		pToFpga->addr = RxstmpmRAdr|flagReadMask;
+    }
+    else
+    if( function == p_RxstmpmW )
+    {
+		pToFpga->addr = RxstmpmWAdr;
     }
     else
     	status = asynError;
@@ -1450,1140 +1747,1180 @@ asynStatus scllrfINTDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
     {
 	break;
 
-    case C1WavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1WavR,
+    case R1CwavRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1CwavR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WavRString, (unsigned ) pFromFpga->data);
+				R1CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2WavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2WavR,
+    case R2CwavRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2CwavR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WavRString, (unsigned ) pFromFpga->data);
+				R2CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3WavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3WavR,
+    case R3CwavRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3CwavR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WavRString, (unsigned ) pFromFpga->data);
+				R3CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4WavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4WavR,
+    case R4CwavRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4CwavR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WavRString, (unsigned ) pFromFpga->data);
+				R4CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1WapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1WapsR,
+    case R1CwapsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1CwapsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WapsRString, (unsigned ) pFromFpga->data);
+				R1CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2WapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2WapsR,
+    case R2CwapsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2CwapsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WapsRString, (unsigned ) pFromFpga->data);
+				R2CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3WapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3WapsR,
+    case R3CwapsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3CwapsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WapsRString, (unsigned ) pFromFpga->data);
+				R3CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4WapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4WapsR,
+    case R4CwapsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4CwapsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WapsRString, (unsigned ) pFromFpga->data);
+				R4CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1WalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1WalR,
+    case R1CwalRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1CwalR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WalRString, (unsigned ) pFromFpga->data);
+				R1CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2WalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2WalR,
+    case R2CwalRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2CwalR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WalRString, (unsigned ) pFromFpga->data);
+				R2CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3WalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3WalR,
+    case R3CwalRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3CwalR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WalRString, (unsigned ) pFromFpga->data);
+				R3CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4WalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4WalR,
+    case R4CwalRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4CwalR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WalRString, (unsigned ) pFromFpga->data);
+				R4CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1WapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1WapR,
+    case R1CwapRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1CwapR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WapRString, (unsigned ) pFromFpga->data);
+				R1CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2WapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2WapR,
+    case R2CwapRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2CwapR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WapRString, (unsigned ) pFromFpga->data);
+				R2CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3WapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3WapR,
+    case R3CwapRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3CwapR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WapRString, (unsigned ) pFromFpga->data);
+				R3CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4WapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4WapR,
+    case R4CwapRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4CwapR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WapRString, (unsigned ) pFromFpga->data);
+				R4CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwadRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwadR,
+    case RxcwadRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwadR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwadRString, (unsigned ) pFromFpga->data);
+				RxcwadRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case RxcwamRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwamR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcwamRString, (unsigned ) pFromFpga->data);
+	break;
+
+    case RxcwatRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwatR,
+				pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcwatRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwadBit0R,
-				pFromFpga->data, XcwadBit0Mask);
+    case RxatfltRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxatfltR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwadBit0RString,
-				(unsigned ) pFromFpga->data & XcwadBit0Mask);
+				RxatfltRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwamRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwamR,
+    case RxcwafcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwafcR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwamRString, (unsigned ) pFromFpga->data);
+				RxcwafcRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwamBit0R,
-				pFromFpga->data, XcwamBit0Mask);
+    case R1CwwtRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1CwwtR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwamBit0RString,
-				(unsigned ) pFromFpga->data & XcwamBit0Mask);
+				R1CwwtRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwatRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwatR,
+    case R2CwwtRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2CwwtR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwatRString, (unsigned ) pFromFpga->data);
+				R2CwwtRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwatBit0R,
-				pFromFpga->data, XcwatBit0Mask);
+    case R3CwwtRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3CwwtR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwatBit0RString,
-				(unsigned ) pFromFpga->data & XcwatBit0Mask);
+				R3CwwtRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XatfltRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XatfltR,
+    case R4CwwtRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4CwwtR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XatfltRString, (unsigned ) pFromFpga->data);
+				R4CwwtRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XatfltBit0R,
-				pFromFpga->data, XatfltBit0Mask);
+    case R1CwwlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1CwwlR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XatfltBit0RString,
-				(unsigned ) pFromFpga->data & XatfltBit0Mask);
+				R1CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwafcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwafcR,
+    case R2CwwlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2CwwlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwafcRString, (unsigned ) pFromFpga->data);
+				R2CwwlRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwafcBit0R,
-				pFromFpga->data, XcwafcBit0Mask);
+    case R3CwwlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3CwwlR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwafcBit0RString,
-				(unsigned ) pFromFpga->data & XcwafcBit0Mask);
+				R3CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1WwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1WwtR,
+    case R4CwwlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4CwwlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WwtRString, (unsigned ) pFromFpga->data);
+				R4CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2WwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2WwtR,
+    case RxcwwdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwwdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WwtRString, (unsigned ) pFromFpga->data);
+				RxcwwdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3WwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3WwtR,
+    case RxcwwtsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwwtsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WwtRString, (unsigned ) pFromFpga->data);
+				RxcwwtsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4WwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4WwtR,
+    case RxcwwmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwwmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WwtRString, (unsigned ) pFromFpga->data);
+				RxcwwmRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1WwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1WwlR,
+    case RxcwwfcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcwwfcR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WwlRString, (unsigned ) pFromFpga->data);
+				RxcwwfcRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2WwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2WwlR,
+    case R1StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1StmpiR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WwlRString, (unsigned ) pFromFpga->data);
+				R1StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3WwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3WwlR,
+    case R2StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2StmpiR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WwlRString, (unsigned ) pFromFpga->data);
+				R2StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4WwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4WwlR,
+    case R3StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3StmpiR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WwlRString, (unsigned ) pFromFpga->data);
+				R3StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwwdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwwdR,
+    case R4StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4StmpiR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwdRString, (unsigned ) pFromFpga->data);
+				R4StmpiRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwwdBit0R,
-				pFromFpga->data, XcwwdBit0Mask);
+    case R1StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1StmpvR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwdBit0RString,
-				(unsigned ) pFromFpga->data & XcwwdBit0Mask);
+				R1StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwwtsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwwtsR,
+    case R2StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2StmpvR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwtsRString, (unsigned ) pFromFpga->data);
+				R2StmpvRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwwtsBit0R,
-				pFromFpga->data, XcwwtsBit0Mask);
+    case R3StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3StmpvR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwtsBit0RString,
-				(unsigned ) pFromFpga->data & XcwwtsBit0Mask);
+				R3StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwwmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwwmR,
+    case R4StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4StmpvR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwmRString, (unsigned ) pFromFpga->data);
+				R4StmpvRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwwmBit0R,
-				pFromFpga->data, XcwwmBit0Mask);
+    case R1StmpvlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1StmpvlR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwmBit0RString,
-				(unsigned ) pFromFpga->data & XcwwmBit0Mask);
+				R1StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcwwfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcwwfcR,
+    case R2StmpvlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2StmpvlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwfcRString, (unsigned ) pFromFpga->data);
+				R2StmpvlRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcwwfcBit0R,
-				pFromFpga->data, XcwwfcBit0Mask);
+    case R3StmpvlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3StmpvlR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwfcBit0RString,
-				(unsigned ) pFromFpga->data & XcwwfcBit0Mask);
+				R3StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1StmpiR,
+    case R4StmpvlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4StmpvlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpiRString, (unsigned ) pFromFpga->data);
+				R4StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2StmpiR,
+    case RxstmplsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxstmplsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpiRString, (unsigned ) pFromFpga->data);
+				RxstmplsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3StmpiR,
+    case RxstmpmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxstmpmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpiRString, (unsigned ) pFromFpga->data);
+				RxstmpmRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4StmpiR,
+    case RxstmpfcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxstmpfcR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpiRString, (unsigned ) pFromFpga->data);
+				RxstmpfcRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1StmpvR,
+    case R1Cpltmp1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cpltmp1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpvRString, (unsigned ) pFromFpga->data);
+				R1Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2StmpvR,
+    case R1Cpltmp2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cpltmp2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpvRString, (unsigned ) pFromFpga->data);
+				R1Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3StmpvR,
+    case R2Cpltmp1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cpltmp1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpvRString, (unsigned ) pFromFpga->data);
+				R2Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4StmpvR,
+    case R2Cpltmp2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cpltmp2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpvRString, (unsigned ) pFromFpga->data);
+				R2Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1StmpvlR,
+    case R3Cpltmp1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cpltmp1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpvlRString, (unsigned ) pFromFpga->data);
+				R3Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2StmpvlR,
+    case R3Cpltmp2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cpltmp2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpvlRString, (unsigned ) pFromFpga->data);
+				R3Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3StmpvlR,
+    case R4Cpltmp1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cpltmp1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpvlRString, (unsigned ) pFromFpga->data);
+				R4Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4StmpvlR,
+    case R4Cpltmp2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cpltmp2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpvlRString, (unsigned ) pFromFpga->data);
+				R4Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XstmplsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XstmplsR,
+    case R1Cpltmp1VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cpltmp1VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XstmplsRString, (unsigned ) pFromFpga->data);
+				R1Cpltmp1VRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XstmplsBit0R,
-				pFromFpga->data, XstmplsBit0Mask);
+    case R1Cpltmp2VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cpltmp2VR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XstmplsBit0RString,
-				(unsigned ) pFromFpga->data & XstmplsBit0Mask);
+				R1Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Pltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Pltmp1IR,
+    case R2Cpltmp1VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cpltmp1VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1IRString, (unsigned ) pFromFpga->data);
+				R2Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Pltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Pltmp2IR,
+    case R2Cpltmp2VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cpltmp2VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2IRString, (unsigned ) pFromFpga->data);
+				R2Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Pltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Pltmp1IR,
+    case R3Cpltmp1VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cpltmp1VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1IRString, (unsigned ) pFromFpga->data);
+				R3Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Pltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Pltmp2IR,
+    case R3Cpltmp2VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cpltmp2VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2IRString, (unsigned ) pFromFpga->data);
+				R3Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Pltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Pltmp1IR,
+    case R4Cpltmp1VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cpltmp1VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1IRString, (unsigned ) pFromFpga->data);
+				R4Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Pltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Pltmp2IR,
+    case R4Cpltmp2VRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cpltmp2VR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2IRString, (unsigned ) pFromFpga->data);
+				R4Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Pltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Pltmp1IR,
+    case R1Cpltmp1VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cpltmp1VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1IRString, (unsigned ) pFromFpga->data);
+				R1Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Pltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Pltmp2IR,
+    case R1Cpltmp2VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cpltmp2VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2IRString, (unsigned ) pFromFpga->data);
+				R1Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Pltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Pltmp1VR,
+    case R2Cpltmp1VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cpltmp1VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1VRString, (unsigned ) pFromFpga->data);
+				R2Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Pltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Pltmp2VR,
+    case R2Cpltmp2VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cpltmp2VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2VRString, (unsigned ) pFromFpga->data);
+				R2Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Pltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Pltmp1VR,
+    case R3Cpltmp1VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cpltmp1VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1VRString, (unsigned ) pFromFpga->data);
+				R3Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Pltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Pltmp2VR,
+    case R3Cpltmp2VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cpltmp2VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2VRString, (unsigned ) pFromFpga->data);
+				R3Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Pltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Pltmp1VR,
+    case R4Cpltmp1VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cpltmp1VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1VRString, (unsigned ) pFromFpga->data);
+				R4Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Pltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Pltmp2VR,
+    case R4Cpltmp2VlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cpltmp2VlR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2VRString, (unsigned ) pFromFpga->data);
+				R4Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Pltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Pltmp1VR,
+    case RxcpltmplsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcpltmplsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1VRString, (unsigned ) pFromFpga->data);
+				RxcpltmplsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Pltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Pltmp2VR,
+    case RxcpltmpmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcpltmpmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2VRString, (unsigned ) pFromFpga->data);
+				RxcpltmpmRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Pltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Pltmp1VlR,
+    case RxcpltmpfcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcpltmpfcR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1VlRString, (unsigned ) pFromFpga->data);
+				RxcpltmpfcRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Pltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Pltmp2VlR,
+    case R1Cplfep1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2VlRString, (unsigned ) pFromFpga->data);
+				R1Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Pltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Pltmp1VlR,
+    case R1Cplfep2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1VlRString, (unsigned ) pFromFpga->data);
+				R1Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Pltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Pltmp2VlR,
+    case R1Cplfep3IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep3IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2VlRString, (unsigned ) pFromFpga->data);
+				R1Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Pltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Pltmp1VlR,
+    case R2Cplfep1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1VlRString, (unsigned ) pFromFpga->data);
+				R2Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Pltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Pltmp2VlR,
+    case R2Cplfep2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2VlRString, (unsigned ) pFromFpga->data);
+				R2Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Pltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Pltmp1VlR,
+    case R2Cplfep3IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep3IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1VlRString, (unsigned ) pFromFpga->data);
+				R2Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Pltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Pltmp2VlR,
+    case R3Cplfep1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2VlRString, (unsigned ) pFromFpga->data);
+				R3Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcpltmplsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcpltmplsR,
+    case R3Cplfep2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcpltmplsRString, (unsigned ) pFromFpga->data);
+				R3Cplfep2IRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcpltmplsBit0R,
-				pFromFpga->data, XcpltmplsBit0Mask);
+    case R3Cplfep3IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep3IR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcpltmplsBit0RString,
-				(unsigned ) pFromFpga->data & XcpltmplsBit0Mask);
+				R3Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep1IR,
+    case R4Cplfep1IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep1IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IRString, (unsigned ) pFromFpga->data);
+				R4Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep2IR,
+    case R4Cplfep2IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep2IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IRString, (unsigned ) pFromFpga->data);
+				R4Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep3IR,
+    case R4Cplfep3IRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep3IR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IRString, (unsigned ) pFromFpga->data);
+				R4Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep1IR,
+    case R1Cplfep1IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep1IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IRString, (unsigned ) pFromFpga->data);
+				R1Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep2IR,
+    case R1Cplfep2IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep2IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IRString, (unsigned ) pFromFpga->data);
+				R1Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep3IR,
+    case R1Cplfep3IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep3IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IRString, (unsigned ) pFromFpga->data);
+				R1Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep1IR,
+    case R2Cplfep1IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep1IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IRString, (unsigned ) pFromFpga->data);
+				R2Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep2IR,
+    case R2Cplfep2IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep2IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IRString, (unsigned ) pFromFpga->data);
+				R2Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep3IR,
+    case R2Cplfep3IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep3IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IRString, (unsigned ) pFromFpga->data);
+				R2Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep1IR,
+    case R3Cplfep1IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep1IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IRString, (unsigned ) pFromFpga->data);
+				R3Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep2IR,
+    case R3Cplfep2IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep2IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IRString, (unsigned ) pFromFpga->data);
+				R3Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep3IR,
+    case R3Cplfep3IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep3IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IRString, (unsigned ) pFromFpga->data);
+				R3Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep1IlhR,
+    case R4Cplfep1IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep1IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IlhRString, (unsigned ) pFromFpga->data);
+				R4Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep2IlhR,
+    case R4Cplfep2IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep2IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IlhRString, (unsigned ) pFromFpga->data);
+				R4Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep3IlhR,
+    case R4Cplfep3IlhRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep3IlhR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IlhRString, (unsigned ) pFromFpga->data);
+				R4Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep1IlhR,
+    case R1Cplfep1IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep1IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IlhRString, (unsigned ) pFromFpga->data);
+				R1Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep2IlhR,
+    case R1Cplfep2IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep2IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IlhRString, (unsigned ) pFromFpga->data);
+				R1Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep3IlhR,
+    case R1Cplfep3IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep3IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IlhRString, (unsigned ) pFromFpga->data);
+				R1Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep1IlhR,
+    case R2Cplfep1IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep1IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IlhRString, (unsigned ) pFromFpga->data);
+				R2Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep2IlhR,
+    case R2Cplfep2IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep2IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IlhRString, (unsigned ) pFromFpga->data);
+				R2Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep3IlhR,
+    case R2Cplfep3IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep3IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IlhRString, (unsigned ) pFromFpga->data);
+				R2Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep1IlhR,
+    case R3Cplfep1IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep1IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IlhRString, (unsigned ) pFromFpga->data);
+				R3Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep2IlhR,
+    case R3Cplfep2IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep2IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IlhRString, (unsigned ) pFromFpga->data);
+				R3Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep3IlhR,
+    case R3Cplfep3IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep3IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IlhRString, (unsigned ) pFromFpga->data);
+				R3Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep1IllR,
+    case R4Cplfep1IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep1IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IllRString, (unsigned ) pFromFpga->data);
+				R4Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep2IllR,
+    case R4Cplfep2IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep2IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IllRString, (unsigned ) pFromFpga->data);
+				R4Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C1Plfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C1Plfep3IllR,
+    case R4Cplfep3IllRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep3IllR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IllRString, (unsigned ) pFromFpga->data);
+				R4Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep1IllR,
+    case RxcplfepmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcplfepmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IllRString, (unsigned ) pFromFpga->data);
+				RxcplfepmRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep2IllR,
+    case RxcplfeplsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcplfeplsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IllRString, (unsigned ) pFromFpga->data);
+				RxcplfeplsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C2Plfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C2Plfep3IllR,
+    case RxcplfepfsRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcplfepfsR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IllRString, (unsigned ) pFromFpga->data);
+				RxcplfepfsRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep1IllR,
+    case RxcplfepfcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcplfepfcR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IllRString, (unsigned ) pFromFpga->data);
+				RxcplfepfcRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep2IllR,
+    case RxcvfRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcvfR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IllRString, (unsigned ) pFromFpga->data);
+				RxcvfRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C3Plfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C3Plfep3IllR,
+    case RxcvfmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcvfmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IllRString, (unsigned ) pFromFpga->data);
+				RxcvfmRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep1IllR,
+    case RxcvfcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcvfcR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IllRString, (unsigned ) pFromFpga->data);
+				RxcvfcRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep2IllR,
+    case RxcienRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcienR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IllRString, (unsigned ) pFromFpga->data);
+				RxcienRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case C4Plfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_C4Plfep3IllR,
+    case RxcienmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxcienmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IllRString, (unsigned ) pFromFpga->data);
+				RxcienmRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcplfeplsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcplfeplsR,
+    case RxciencRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxciencR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcplfeplsRString, (unsigned ) pFromFpga->data);
+				RxciencRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcplfeplsBit0R,
-				pFromFpga->data, XcplfeplsBit0Mask);
+    case RxffsdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxffsdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcplfeplsBit0RString,
-				(unsigned ) pFromFpga->data & XcplfeplsBit0Mask);
+				RxffsdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcplfepfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcplfepfcR,
+    case RxffsdmRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxffsdmR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcplfepfcRString, (unsigned ) pFromFpga->data);
+				RxffsdmRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcplfepfcBit0R,
-				pFromFpga->data, XcplfepfcBit0Mask);
+    case RxffsdcRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxffsdcR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcplfepfcBit0RString,
-				(unsigned ) pFromFpga->data & XcplfepfcBit0Mask);
+				RxffsdcRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcvfRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcvfR,
+    case RxistatRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxistatR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfRString, (unsigned ) pFromFpga->data);
+				RxistatRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcvfBit0R,
-				pFromFpga->data, XcvfBit0Mask);
+    case RxictlRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxictlR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfBit0RString,
-				(unsigned ) pFromFpga->data & XcvfBit0Mask);
+				RxictlRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcvfmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcvfmR,
+    case RxiverRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_RxiverR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfmRString, (unsigned ) pFromFpga->data);
+				RxiverRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcvfmBit0R,
-				pFromFpga->data, XcvfmBit0Mask);
+    case R1Cplfep1PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep1PerdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfmBit0RString,
-				(unsigned ) pFromFpga->data & XcvfmBit0Mask);
+				R1Cplfep1PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcvfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcvfcR,
+    case R1Cplfep2PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep2PerdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfcRString, (unsigned ) pFromFpga->data);
+				R1Cplfep2PerdRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcvfcBit0R,
-				pFromFpga->data, XcvfcBit0Mask);
+    case R1Cplfep3PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R1Cplfep3PerdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfcBit0RString,
-				(unsigned ) pFromFpga->data & XcvfcBit0Mask);
+				R1Cplfep3PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcienRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcienR,
+    case R2Cplfep1PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep1PerdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcienRString, (unsigned ) pFromFpga->data);
+				R2Cplfep1PerdRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcienBit0R,
-				pFromFpga->data, XcienBit0Mask);
+    case R2Cplfep2PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep2PerdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcienBit0RString,
-				(unsigned ) pFromFpga->data & XcienBit0Mask);
+				R2Cplfep2PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XcienmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XcienmR,
+    case R2Cplfep3PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R2Cplfep3PerdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcienmRString, (unsigned ) pFromFpga->data);
+				R2Cplfep3PerdRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XcienmBit0R,
-				pFromFpga->data, XcienmBit0Mask);
+    case R3Cplfep1PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep1PerdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcienmBit0RString,
-				(unsigned ) pFromFpga->data & XcienmBit0Mask);
+				R3Cplfep1PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XciencRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XciencR,
+    case R3Cplfep2PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep2PerdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XciencRString, (unsigned ) pFromFpga->data);
+				R3Cplfep2PerdRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XciencBit0R,
-				pFromFpga->data, XciencBit0Mask);
+    case R3Cplfep3PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R3Cplfep3PerdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XciencBit0RString,
-				(unsigned ) pFromFpga->data & XciencBit0Mask);
+				R3Cplfep3PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XffsdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XffsdR,
+    case R4Cplfep1PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep1PerdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdRString, (unsigned ) pFromFpga->data);
+				R4Cplfep1PerdRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XffsdBit0R,
-				pFromFpga->data, XffsdBit0Mask);
+    case R4Cplfep2PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep2PerdR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdBit0RString,
-				(unsigned ) pFromFpga->data & XffsdBit0Mask);
+				R4Cplfep2PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XffsdmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XffsdmR,
+    case R4Cplfep3PerdRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R4Cplfep3PerdR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdmRString, (unsigned ) pFromFpga->data);
+				R4Cplfep3PerdRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XffsdmBit0R,
-				pFromFpga->data, XffsdmBit0Mask);
+    case R5StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R5StmpiR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdmBit0RString,
-				(unsigned ) pFromFpga->data & XffsdmBit0Mask);
+				R5StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XffsdcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XffsdcR,
+    case R6StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R6StmpiR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdcRString, (unsigned ) pFromFpga->data);
+				R6StmpiRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XffsdcBit0R,
-				pFromFpga->data, XffsdcBit0Mask);
+    case R7StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R7StmpiR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdcBit0RString,
-				(unsigned ) pFromFpga->data & XffsdcBit0Mask);
+				R7StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XistatRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XistatR,
+    case R8StmpiRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R8StmpiR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XistatRString, (unsigned ) pFromFpga->data);
+				R8StmpiRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XistatBit0R,
-				pFromFpga->data, XistatBit0Mask);
+    case R5StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R5StmpvR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XistatBit0RString,
-				(unsigned ) pFromFpga->data & XistatBit0Mask);
+				R5StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XictlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XictlR,
+    case R6StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R6StmpvR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XictlRString, (unsigned ) pFromFpga->data);
+				R6StmpvRString, (unsigned ) pFromFpga->data);
+	break;
 
-		status = (asynStatus) setUIntDigitalParam(p_XictlBit0R,
-				pFromFpga->data, XictlBit0Mask);
+    case R7StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R7StmpvR,
+				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XictlBit0RString,
-				(unsigned ) pFromFpga->data & XictlBit0Mask);
+				R7StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
-    case XiverRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_XiverR,
+    case R8StmpvRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_R8StmpvR,
 				pFromFpga->data);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XiverRString, (unsigned ) pFromFpga->data);
+				R8StmpvRString, (unsigned ) pFromFpga->data);
 		break;
 
 	default:
@@ -2619,1351 +2956,1801 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
-    case C1WapsWAdr:
-		status = (asynStatus) getIntegerParam(p_C1WapsW, valueSet);
+    case R1CwapsWAdr:
+		status = (asynStatus) getIntegerParam(p_R1CwapsW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WapsWString, (unsigned ) pFromFpga->data );
+				R1CwapsWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1WapsW, status);
+			setParamStatus(p_R1CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2WapsWAdr:
-		status = (asynStatus) getIntegerParam(p_C2WapsW, valueSet);
+    case R2CwapsWAdr:
+		status = (asynStatus) getIntegerParam(p_R2CwapsW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WapsWString, (unsigned ) pFromFpga->data );
+				R2CwapsWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2WapsW, status);
+			setParamStatus(p_R2CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3WapsWAdr:
-		status = (asynStatus) getIntegerParam(p_C3WapsW, valueSet);
+    case R3CwapsWAdr:
+		status = (asynStatus) getIntegerParam(p_R3CwapsW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WapsWString, (unsigned ) pFromFpga->data );
+				R3CwapsWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3WapsW, status);
+			setParamStatus(p_R3CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4WapsWAdr:
-		status = (asynStatus) getIntegerParam(p_C4WapsW, valueSet);
+    case R4CwapsWAdr:
+		status = (asynStatus) getIntegerParam(p_R4CwapsW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WapsWString, (unsigned ) pFromFpga->data );
+				R4CwapsWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4WapsW, status);
+			setParamStatus(p_R4CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1WalWAdr:
-		status = (asynStatus) getIntegerParam(p_C1WalW, valueSet);
+    case R1CwalWAdr:
+		status = (asynStatus) getIntegerParam(p_R1CwalW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WalWString, (unsigned ) pFromFpga->data );
+				R1CwalWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1WalW, status);
+			setParamStatus(p_R1CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2WalWAdr:
-		status = (asynStatus) getIntegerParam(p_C2WalW, valueSet);
+    case R2CwalWAdr:
+		status = (asynStatus) getIntegerParam(p_R2CwalW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WalWString, (unsigned ) pFromFpga->data );
+				R2CwalWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2WalW, status);
+			setParamStatus(p_R2CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3WalWAdr:
-		status = (asynStatus) getIntegerParam(p_C3WalW, valueSet);
+    case R3CwalWAdr:
+		status = (asynStatus) getIntegerParam(p_R3CwalW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WalWString, (unsigned ) pFromFpga->data );
+				R3CwalWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3WalW, status);
+			setParamStatus(p_R3CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4WalWAdr:
-		status = (asynStatus) getIntegerParam(p_C4WalW, valueSet);
+    case R4CwalWAdr:
+		status = (asynStatus) getIntegerParam(p_R4CwalW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WalWString, (unsigned ) pFromFpga->data );
+				R4CwalWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4WalW, status);
+			setParamStatus(p_R4CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1WapWAdr:
-		status = (asynStatus) getIntegerParam(p_C1WapW, valueSet);
+    case R1CwapWAdr:
+		status = (asynStatus) getIntegerParam(p_R1CwapW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WapWString, (unsigned ) pFromFpga->data );
+				R1CwapWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1WapW, status);
+			setParamStatus(p_R1CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2WapWAdr:
-		status = (asynStatus) getIntegerParam(p_C2WapW, valueSet);
+    case R2CwapWAdr:
+		status = (asynStatus) getIntegerParam(p_R2CwapW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WapWString, (unsigned ) pFromFpga->data );
+				R2CwapWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2WapW, status);
+			setParamStatus(p_R2CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3WapWAdr:
-		status = (asynStatus) getIntegerParam(p_C3WapW, valueSet);
+    case R3CwapWAdr:
+		status = (asynStatus) getIntegerParam(p_R3CwapW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WapWString, (unsigned ) pFromFpga->data );
+				R3CwapWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3WapW, status);
+			setParamStatus(p_R3CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4WapWAdr:
-		status = (asynStatus) getIntegerParam(p_C4WapW, valueSet);
+    case R4CwapWAdr:
+		status = (asynStatus) getIntegerParam(p_R4CwapW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WapWString, (unsigned ) pFromFpga->data );
+				R4CwapWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4WapW, status);
+			setParamStatus(p_R4CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcwamWAdr:
-		status = (asynStatus) getIntegerParam(p_XcwamW, valueSet);
+    case RxcwamWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcwamW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwamWString, (unsigned ) pFromFpga->data );
+				RxcwamWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwamWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwamWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcwamW, status);
+			setParamStatus(p_RxcwamW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcwatWAdr:
-		status = (asynStatus) getIntegerParam(p_XcwatW, valueSet);
+    case RxcwatWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcwatW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwatWString, (unsigned ) pFromFpga->data );
+				RxcwatWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwatWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwatWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcwatW, status);
+			setParamStatus(p_RxcwatW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcwafcWAdr:
-		status = (asynStatus) getIntegerParam(p_XcwafcW, valueSet);
+    case RxatfltWAdr:
+		status = (asynStatus) getIntegerParam(p_RxatfltW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwafcWString, (unsigned ) pFromFpga->data );
+				RxatfltWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwafcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxatfltWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcwafcW, status);
+			setParamStatus(p_RxatfltW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1WwlWAdr:
-		status = (asynStatus) getIntegerParam(p_C1WwlW, valueSet);
+    case RxcwafcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcwafcW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WwlWString, (unsigned ) pFromFpga->data );
+				RxcwafcWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1WwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwafcWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1WwlW, status);
+			setParamStatus(p_RxcwafcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2WwlWAdr:
-		status = (asynStatus) getIntegerParam(p_C2WwlW, valueSet);
+    case R1CwwlWAdr:
+		status = (asynStatus) getIntegerParam(p_R1CwwlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WwlWString, (unsigned ) pFromFpga->data );
+				R1CwwlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2WwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2WwlW, status);
+			setParamStatus(p_R1CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3WwlWAdr:
-		status = (asynStatus) getIntegerParam(p_C3WwlW, valueSet);
+    case R2CwwlWAdr:
+		status = (asynStatus) getIntegerParam(p_R2CwwlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WwlWString, (unsigned ) pFromFpga->data );
+				R2CwwlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3WwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3WwlW, status);
+			setParamStatus(p_R2CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4WwlWAdr:
-		status = (asynStatus) getIntegerParam(p_C4WwlW, valueSet);
+    case R3CwwlWAdr:
+		status = (asynStatus) getIntegerParam(p_R3CwwlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WwlWString, (unsigned ) pFromFpga->data );
+				R3CwwlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4WwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4WwlW, status);
+			setParamStatus(p_R3CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcwwtsWAdr:
-		status = (asynStatus) getIntegerParam(p_XcwwtsW, valueSet);
+    case R4CwwlWAdr:
+		status = (asynStatus) getIntegerParam(p_R4CwwlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwtsWString, (unsigned ) pFromFpga->data );
+				R4CwwlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcwwtsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcwwtsW, status);
+			setParamStatus(p_R4CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_C1StmpiW, valueSet);
+    case RxcwwtsWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcwwtsW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpiWString, (unsigned ) pFromFpga->data );
+				RxcwwtsWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwwtsWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1StmpiW, status);
+			setParamStatus(p_RxcwwtsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_C2StmpiW, valueSet);
+    case RxcwwmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcwwmW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpiWString, (unsigned ) pFromFpga->data );
+				RxcwwmWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwwmWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2StmpiW, status);
+			setParamStatus(p_RxcwwmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_C3StmpiW, valueSet);
+    case RxcwwfcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcwwfcW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpiWString, (unsigned ) pFromFpga->data );
+				RxcwwfcWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwwfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3StmpiW, status);
+			setParamStatus(p_RxcwwfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_C4StmpiW, valueSet);
+    case R1StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R1StmpiW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpiWString, (unsigned ) pFromFpga->data );
+				R1StmpiWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4StmpiW, status);
+			setParamStatus(p_R1StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_C1StmpvlW, valueSet);
+    case R2StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R2StmpiW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpvlWString, (unsigned ) pFromFpga->data );
+				R2StmpiWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1StmpvlW, status);
+			setParamStatus(p_R2StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_C2StmpvlW, valueSet);
+    case R3StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R3StmpiW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpvlWString, (unsigned ) pFromFpga->data );
+				R3StmpiWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2StmpvlW, status);
+			setParamStatus(p_R3StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_C3StmpvlW, valueSet);
+    case R4StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R4StmpiW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpvlWString, (unsigned ) pFromFpga->data );
+				R4StmpiWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3StmpvlW, status);
+			setParamStatus(p_R4StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_C4StmpvlW, valueSet);
+    case R1StmpvlWAdr:
+		status = (asynStatus) getIntegerParam(p_R1StmpvlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpvlWString, (unsigned ) pFromFpga->data );
+				R1StmpvlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4StmpvlW, status);
+			setParamStatus(p_R1StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Pltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Pltmp1IW, valueSet);
+    case R2StmpvlWAdr:
+		status = (asynStatus) getIntegerParam(p_R2StmpvlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1IWString, (unsigned ) pFromFpga->data );
+				R2StmpvlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Pltmp1IW, status);
+			setParamStatus(p_R2StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Pltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Pltmp2IW, valueSet);
+    case R3StmpvlWAdr:
+		status = (asynStatus) getIntegerParam(p_R3StmpvlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2IWString, (unsigned ) pFromFpga->data );
+				R3StmpvlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Pltmp2IW, status);
+			setParamStatus(p_R3StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Pltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Pltmp1IW, valueSet);
+    case R4StmpvlWAdr:
+		status = (asynStatus) getIntegerParam(p_R4StmpvlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1IWString, (unsigned ) pFromFpga->data );
+				R4StmpvlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Pltmp1IW, status);
+			setParamStatus(p_R4StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Pltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Pltmp2IW, valueSet);
+    case RxstmpmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxstmpmW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2IWString, (unsigned ) pFromFpga->data );
+				RxstmpmWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxstmpmWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Pltmp2IW, status);
+			setParamStatus(p_RxstmpmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Pltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Pltmp1IW, valueSet);
+    case RxstmpfcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxstmpfcW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1IWString, (unsigned ) pFromFpga->data );
+				RxstmpfcWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxstmpfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Pltmp1IW, status);
+			setParamStatus(p_RxstmpfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Pltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Pltmp2IW, valueSet);
+    case R1Cpltmp1IWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cpltmp1IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2IWString, (unsigned ) pFromFpga->data );
+				R1Cpltmp1IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Pltmp2IW, status);
+			setParamStatus(p_R1Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Pltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Pltmp1IW, valueSet);
+    case R1Cpltmp2IWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cpltmp2IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1IWString, (unsigned ) pFromFpga->data );
+				R1Cpltmp2IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Pltmp1IW, status);
+			setParamStatus(p_R1Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Pltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Pltmp2IW, valueSet);
+    case R2Cpltmp1IWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cpltmp1IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2IWString, (unsigned ) pFromFpga->data );
+				R2Cpltmp1IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Pltmp2IW, status);
+			setParamStatus(p_R2Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Pltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Pltmp1VlW, valueSet);
+    case R2Cpltmp2IWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cpltmp2IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1VlWString, (unsigned ) pFromFpga->data );
+				R2Cpltmp2IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Pltmp1VlW, status);
+			setParamStatus(p_R2Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Pltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Pltmp2VlW, valueSet);
+    case R3Cpltmp1IWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cpltmp1IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2VlWString, (unsigned ) pFromFpga->data );
+				R3Cpltmp1IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Pltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Pltmp2VlW, status);
+			setParamStatus(p_R3Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Pltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Pltmp1VlW, valueSet);
+    case R3Cpltmp2IWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cpltmp2IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1VlWString, (unsigned ) pFromFpga->data );
+				R3Cpltmp2IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Pltmp1VlW, status);
+			setParamStatus(p_R3Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Pltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Pltmp2VlW, valueSet);
+    case R4Cpltmp1IWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cpltmp1IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2VlWString, (unsigned ) pFromFpga->data );
+				R4Cpltmp1IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Pltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Pltmp2VlW, status);
+			setParamStatus(p_R4Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Pltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Pltmp1VlW, valueSet);
+    case R4Cpltmp2IWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cpltmp2IW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1VlWString, (unsigned ) pFromFpga->data );
+				R4Cpltmp2IWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Pltmp1VlW, status);
+			setParamStatus(p_R4Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Pltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Pltmp2VlW, valueSet);
+    case R1Cpltmp1VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cpltmp1VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2VlWString, (unsigned ) pFromFpga->data );
+				R1Cpltmp1VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Pltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Pltmp2VlW, status);
+			setParamStatus(p_R1Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Pltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Pltmp1VlW, valueSet);
+    case R1Cpltmp2VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cpltmp2VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1VlWString, (unsigned ) pFromFpga->data );
+				R1Cpltmp2VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Pltmp1VlW, status);
+			setParamStatus(p_R1Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Pltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Pltmp2VlW, valueSet);
+    case R2Cpltmp1VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cpltmp1VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2VlWString, (unsigned ) pFromFpga->data );
+				R2Cpltmp1VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Pltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Pltmp2VlW, status);
+			setParamStatus(p_R2Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Plfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Plfep1IlhW, valueSet);
+    case R2Cpltmp2VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cpltmp2VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IlhWString, (unsigned ) pFromFpga->data );
+				R2Cpltmp2VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Plfep1IlhW, status);
+			setParamStatus(p_R2Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Plfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Plfep2IlhW, valueSet);
+    case R3Cpltmp1VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cpltmp1VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IlhWString, (unsigned ) pFromFpga->data );
+				R3Cpltmp1VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Plfep2IlhW, status);
+			setParamStatus(p_R3Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Plfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Plfep3IlhW, valueSet);
+    case R3Cpltmp2VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cpltmp2VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IlhWString, (unsigned ) pFromFpga->data );
+				R3Cpltmp2VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Plfep3IlhW, status);
+			setParamStatus(p_R3Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Plfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Plfep1IlhW, valueSet);
+    case R4Cpltmp1VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cpltmp1VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IlhWString, (unsigned ) pFromFpga->data );
+				R4Cpltmp1VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Plfep1IlhW, status);
+			setParamStatus(p_R4Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Plfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Plfep2IlhW, valueSet);
+    case R4Cpltmp2VlWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cpltmp2VlW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IlhWString, (unsigned ) pFromFpga->data );
+				R4Cpltmp2VlWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Plfep2IlhW, status);
+			setParamStatus(p_R4Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Plfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Plfep3IlhW, valueSet);
+    case RxcpltmpmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcpltmpmW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IlhWString, (unsigned ) pFromFpga->data );
+				RxcpltmpmWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcpltmpmWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Plfep3IlhW, status);
+			setParamStatus(p_RxcpltmpmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Plfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Plfep1IlhW, valueSet);
+    case RxcpltmpfcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcpltmpfcW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IlhWString, (unsigned ) pFromFpga->data );
+				RxcpltmpfcWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcpltmpfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Plfep1IlhW, status);
+			setParamStatus(p_RxcpltmpfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Plfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Plfep2IlhW, valueSet);
+    case R1Cplfep1IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep1IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IlhWString, (unsigned ) pFromFpga->data );
+				R1Cplfep1IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Plfep2IlhW, status);
+			setParamStatus(p_R1Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Plfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Plfep3IlhW, valueSet);
+    case R1Cplfep2IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep2IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IlhWString, (unsigned ) pFromFpga->data );
+				R1Cplfep2IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Plfep3IlhW, status);
+			setParamStatus(p_R1Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Plfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Plfep1IlhW, valueSet);
+    case R1Cplfep3IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep3IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IlhWString, (unsigned ) pFromFpga->data );
+				R1Cplfep3IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Plfep1IlhW, status);
+			setParamStatus(p_R1Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Plfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Plfep2IlhW, valueSet);
+    case R2Cplfep1IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep1IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IlhWString, (unsigned ) pFromFpga->data );
+				R2Cplfep1IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Plfep2IlhW, status);
+			setParamStatus(p_R2Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Plfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Plfep3IlhW, valueSet);
+    case R2Cplfep2IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep2IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IlhWString, (unsigned ) pFromFpga->data );
+				R2Cplfep2IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Plfep3IlhW, status);
+			setParamStatus(p_R2Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Plfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Plfep1IllW, valueSet);
+    case R2Cplfep3IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep3IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IllWString, (unsigned ) pFromFpga->data );
+				R2Cplfep3IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Plfep1IllW, status);
+			setParamStatus(p_R2Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Plfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Plfep2IllW, valueSet);
+    case R3Cplfep1IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep1IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IllWString, (unsigned ) pFromFpga->data );
+				R3Cplfep1IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Plfep2IllW, status);
+			setParamStatus(p_R3Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C1Plfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C1Plfep3IllW, valueSet);
+    case R3Cplfep2IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep2IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IllWString, (unsigned ) pFromFpga->data );
+				R3Cplfep2IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C1Plfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C1Plfep3IllW, status);
+			setParamStatus(p_R3Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Plfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Plfep1IllW, valueSet);
+    case R3Cplfep3IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep3IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IllWString, (unsigned ) pFromFpga->data );
+				R3Cplfep3IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Plfep1IllW, status);
+			setParamStatus(p_R3Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Plfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Plfep2IllW, valueSet);
+    case R4Cplfep1IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep1IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IllWString, (unsigned ) pFromFpga->data );
+				R4Cplfep1IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Plfep2IllW, status);
+			setParamStatus(p_R4Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C2Plfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C2Plfep3IllW, valueSet);
+    case R4Cplfep2IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep2IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IllWString, (unsigned ) pFromFpga->data );
+				R4Cplfep2IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C2Plfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C2Plfep3IllW, status);
+			setParamStatus(p_R4Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Plfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Plfep1IllW, valueSet);
+    case R4Cplfep3IlhWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep3IlhW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IllWString, (unsigned ) pFromFpga->data );
+				R4Cplfep3IlhWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Plfep1IllW, status);
+			setParamStatus(p_R4Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Plfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Plfep2IllW, valueSet);
+    case R1Cplfep1IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep1IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IllWString, (unsigned ) pFromFpga->data );
+				R1Cplfep1IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Plfep2IllW, status);
+			setParamStatus(p_R1Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C3Plfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C3Plfep3IllW, valueSet);
+    case R1Cplfep2IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep2IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IllWString, (unsigned ) pFromFpga->data );
+				R1Cplfep2IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C3Plfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C3Plfep3IllW, status);
+			setParamStatus(p_R1Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Plfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Plfep1IllW, valueSet);
+    case R1Cplfep3IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep3IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IllWString, (unsigned ) pFromFpga->data );
+				R1Cplfep3IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Plfep1IllW, status);
+			setParamStatus(p_R1Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Plfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Plfep2IllW, valueSet);
+    case R2Cplfep1IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep1IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IllWString, (unsigned ) pFromFpga->data );
+				R2Cplfep1IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Plfep2IllW, status);
+			setParamStatus(p_R2Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case C4Plfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_C4Plfep3IllW, valueSet);
+    case R2Cplfep2IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep2IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IllWString, (unsigned ) pFromFpga->data );
+				R2Cplfep2IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				C4Plfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_C4Plfep3IllW, status);
+			setParamStatus(p_R2Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcvfmWAdr:
-		status = (asynStatus) getIntegerParam(p_XcvfmW, valueSet);
+    case R2Cplfep3IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep3IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfmWString, (unsigned ) pFromFpga->data );
+				R2Cplfep3IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcvfmW, status);
+			setParamStatus(p_R2Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcvfcWAdr:
-		status = (asynStatus) getIntegerParam(p_XcvfcW, valueSet);
+    case R3Cplfep1IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep1IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfcWString, (unsigned ) pFromFpga->data );
+				R3Cplfep1IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcvfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcvfcW, status);
+			setParamStatus(p_R3Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XcienmWAdr:
-		status = (asynStatus) getIntegerParam(p_XcienmW, valueSet);
+    case R3Cplfep2IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep2IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XcienmWString, (unsigned ) pFromFpga->data );
+				R3Cplfep2IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XcienmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XcienmW, status);
+			setParamStatus(p_R3Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XciencWAdr:
-		status = (asynStatus) getIntegerParam(p_XciencW, valueSet);
+    case R3Cplfep3IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep3IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XciencWString, (unsigned ) pFromFpga->data );
+				R3Cplfep3IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XciencWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XciencW, status);
+			setParamStatus(p_R3Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XffsdmWAdr:
-		status = (asynStatus) getIntegerParam(p_XffsdmW, valueSet);
+    case R4Cplfep1IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep1IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdmWString, (unsigned ) pFromFpga->data );
+				R4Cplfep1IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XffsdmW, status);
+			setParamStatus(p_R4Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XffsdcWAdr:
-		status = (asynStatus) getIntegerParam(p_XffsdcW, valueSet);
+    case R4Cplfep2IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep2IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdcWString, (unsigned ) pFromFpga->data );
+				R4Cplfep2IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XffsdcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XffsdcW, status);
+			setParamStatus(p_R4Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case XictlWAdr:
-		status = (asynStatus) getIntegerParam(p_XictlW, valueSet);
+    case R4Cplfep3IllWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep3IllW, valueSet);
 		if( (valueSet[0] ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				XictlWString, (unsigned ) pFromFpga->data );
+				R4Cplfep3IllWString, (unsigned ) pFromFpga->data );
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				XictlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
 			status = asynError;
-			setParamStatus(p_XictlW, status);
+			setParamStatus(p_R4Cplfep3IllW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxcplfepmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcplfepmW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcplfepmWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcplfepmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxcplfepmW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxcplfepfcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcplfepfcW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcplfepfcWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcplfepfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxcplfepfcW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxcvfmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcvfmW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcvfmWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcvfmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxcvfmW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxcvfcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcvfcW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcvfcWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcvfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxcvfcW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxcienmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxcienmW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcienmWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxcienmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxcienmW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxciencWAdr:
+		status = (asynStatus) getIntegerParam(p_RxciencW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxciencWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxciencWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxciencW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxffsdmWAdr:
+		status = (asynStatus) getIntegerParam(p_RxffsdmW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxffsdmWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxffsdmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxffsdmW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxffsdcWAdr:
+		status = (asynStatus) getIntegerParam(p_RxffsdcW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxffsdcWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxffsdcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxffsdcW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case RxictlWAdr:
+		status = (asynStatus) getIntegerParam(p_RxictlW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				RxictlWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				RxictlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_RxictlW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R1Cplfep1PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep1PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R1Cplfep1PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R1Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R1Cplfep1PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R1Cplfep2PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep2PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R1Cplfep2PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R1Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R1Cplfep2PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R1Cplfep3PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R1Cplfep3PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R1Cplfep3PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R1Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R1Cplfep3PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R2Cplfep1PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep1PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R2Cplfep1PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R2Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R2Cplfep1PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R2Cplfep2PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep2PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R2Cplfep2PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R2Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R2Cplfep2PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R2Cplfep3PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R2Cplfep3PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R2Cplfep3PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R2Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R2Cplfep3PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R3Cplfep1PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep1PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R3Cplfep1PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R3Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R3Cplfep1PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R3Cplfep2PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep2PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R3Cplfep2PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R3Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R3Cplfep2PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R3Cplfep3PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R3Cplfep3PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R3Cplfep3PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R3Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R3Cplfep3PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R4Cplfep1PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep1PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R4Cplfep1PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R4Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R4Cplfep1PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R4Cplfep2PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep2PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R4Cplfep2PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R4Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R4Cplfep2PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R4Cplfep3PerdWAdr:
+		status = (asynStatus) getIntegerParam(p_R4Cplfep3PerdW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R4Cplfep3PerdWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R4Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R4Cplfep3PerdW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R5StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R5StmpiW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R5StmpiWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R5StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R5StmpiW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R6StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R6StmpiW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R6StmpiWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R6StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R6StmpiW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R7StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R7StmpiW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R7StmpiWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R7StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R7StmpiW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case R8StmpiWAdr:
+		status = (asynStatus) getIntegerParam(p_R8StmpiW, valueSet);
+		if( (valueSet[0] ) == (pFromFpga->data ))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				R8StmpiWString, (unsigned ) pFromFpga->data );
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				R8StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+			status = asynError;
+			setParamStatus(p_R8StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}

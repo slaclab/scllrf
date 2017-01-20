@@ -1,10 +1,10 @@
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: if access is specified it's 'read', and that this isn't a waveform.
   #if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelms') and $p.nelms>1))
-record(longin, "\$(P)${p.name.upper()}_R")
+record(ai, "\$(P)${p.name.upper()}_R")
 {
 	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
+	field( DESC, "${p.desc[:38]}")
 	#end if
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
@@ -23,19 +23,32 @@ record(longin, "\$(P)${p.name.upper()}_R")
     #else if $p.has_key('bit_width')
     field( LOPR, 0)
     #end if
+	#if $p.has_key('ASLO')
+	field( ASLO, "${p.ASLO}")
+	#end if
+	#if $p.has_key('AOFF')
+	field( AOFF, "${p.AOFF}")
+	#end if
+	#if $p.has_key('PREC')
+	field(PREC, "${p.PREC}")
+	#else
+	field(PREC, 3)
+	#end if
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
   #end if
 #end for
 
+
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: this has write access, and isn't a waveofrm
   #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
-record(longout, "\$(P)${p.name.upper()}_W")
+  #if not $p.has_key('bits')
+record(ao, "\$(P)${p.name.upper()}_W")
 {
 	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
+	field( DESC, "${p.desc[:38]}")
 	#end if
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
@@ -54,12 +67,50 @@ record(longout, "\$(P)${p.name.upper()}_W")
     #else if $p.has_key('bit_width')
     field( LOPR, 0)
 	#end if
+	#if $p.has_key('ASLO')
+	field( ASLO, "${p.ASLO}")
+	#end if
+	#if $p.has_key('AOFF')
+	field( AOFF, "${p.AOFF}")
+	#end if
+	#if $p.has_key('PREC')
+	field(PREC, "${p.PREC}")
+	#else
+	field(PREC, 3)
+	#end if
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
   #end if
+  #end if
 #end for
+
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this has write access, and isn't a waveofrm
+  #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
+  #if $p.has_key('bits')
+record(mbboDirect, "\$(P)${p.name.upper()}_W")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( OUT,  "@asyn(\$(PORT),0, 0xFFFFFFFF) ${p.name.upper()}_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC")
+}
+
+  #end if
+  #end if
+#end for
+
 
 ## For now we aren't supporting read/write arrays. So far, no need.
 #for $p in sorted($registers, key=lambda k: k['address'])
@@ -72,7 +123,7 @@ record(waveform, "\$(P)${p.name.upper()}_W")
     #end if
 {
 	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
+	field( DESC, "${p.desc[:38]}")
 	#end if
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")

@@ -56,7 +56,12 @@ scllrf_SRCS_vxWorks += -nil-
 # scllrf_SRCS += scllrfCMOC.cpp
  scllrf_SRCS += scllrfINT.cpp
  scllrf_SRCS += scllrfPRC.cpp
+ scllrf_SRCS += scllrfPRCextra.cpp
  scllrf_SRCS += scllrfRES.cpp
+ scllrf_SRCS += INTmbboCopy.st
+ scllrf_SRCS += INTres2tmp.c
+ scllrf_SRCS += INTarcTest.st
+ scllrf_SRCS += INTheLevel.st
  #USR_CXXFLAGS += -std=c++0x
 
 # =====================================================
@@ -90,7 +95,7 @@ scllrf_LIBS += sscan
 #    scllrf_SNCFLAGS += +r
 #    scllrf_DBD += sncExample.dbd
 #    scllrf_SRCS += sncExample.stt
-#    scllrf_LIBS += seq pv
+scllrf_LIBS += seq pv
 #
 #    # The following builds sncProgram as a standalone application
 #  ifneq ($(T_A),linuxRT-x86)
