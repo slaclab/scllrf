@@ -2,7 +2,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : templateScllrfDriver.h
+ * File       : ${name}Driver.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -41,8 +41,18 @@ using namespace std;
  * */
 ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
 : scllrfAsynPortDriver(drvPortName, netPortName,
-		1, /* maxAddr, i.e. number of channels */
+		8, /* maxAddr, i.e. number of channels */
 		NUM_${name.upper()}_PARAMS)
+{
+	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
+	// which the compiler has problems with..
+	${name}Driver(drvPortName, netPortName, 8, NUM_${name.upper()}_PARAMS);
+};
+
+${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds)
+: scllrfAsynPortDriver(drvPortName, netPortName,
+		maxAddr, /* maxAddr, i.e. number of channels */
+		paramTableAdds + NUM_${name.upper()}_PARAMS)
 {
 	asynStatus status = asynSuccess;
 
@@ -93,7 +103,7 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
 	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
 
     epicsThreadSleep(defaultPollPeriod);
-    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS);
+    printf("%s created %ld of %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS, paramTableAdds+NUM_${name.upper()}_PARAMS);
 
     wakeupPoller();
     wakeupReader();

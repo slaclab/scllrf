@@ -117,6 +117,7 @@ public:
 	asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
+	asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
 
 	/* Define a polling mechanism.
 	 * Sends requests for all register data at a specified period.

@@ -1,3 +1,4 @@
+# Load the chassis-specific database indicated by the TYPE macro
 include "db/scllrf$(TYPE)Registers.template"
 
 record(ao, "$(P)POLL_PERIOD")

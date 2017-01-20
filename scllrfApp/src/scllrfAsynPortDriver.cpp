@@ -45,7 +45,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 		maxAddr, /* maxAddr */
 		paramTableSize,
 		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask | asynInt16ArrayMask,  /* Interrupt mask */
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
 		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
@@ -143,6 +143,64 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
 {
 	// base class has no registers defined
 	return asynError;
+}
+
+
+asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
+{
+asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
+	int function = pasynUser->reason;
+//	int addr = 0;
+	asynStatus status = asynSuccess;
+    const char *paramName;
+    FpgaReg regSendBuf[2];
+
+	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
+
+    /* Set the parameter in the parameter library. */
+    status = (asynStatus) setUIntDigitalParam(function, value, mask);
+
+    /* Fetch the parameter string name for possible use in debugging */
+    getParamName(function, &paramName);
+    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
+			__PRETTY_FUNCTION__, function, paramName);
+
+    if (function == p_RunStop) {
+        if (value == run)
+        	epicsEventSignal(pollEventId_);
+    }
+    else {
+    	// Convert function to address & FpgaReg.
+    	status = functionToRegister(function, &regSendBuf[1]);
+    	if (status == asynSuccess) // Yes, this function is a register write
+    	{
+    		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+                "%s: found function=%d, name=%s, at address %d\n",
+  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
+    		regSendBuf[1].data = (uint32_t) value;
+        	htonFpgaRegArray(regSendBuf, 2);
+        	sendRegRequest(regSendBuf, 2);
+    	}
+    	else
+    	{
+    		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+                "%s: function=%d, name=%s not a register, skip network request\n",
+  			  __PRETTY_FUNCTION__, function, paramName);
+    	}
+    }
+
+	/* Do callbacks so higher layers see any changes */
+	status = (asynStatus) callParamCallbacks();
+
+    if (status)
+        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+                  "%s: status=%d, function=%d, name=%s, value=%d",
+				  __PRETTY_FUNCTION__, status, function, paramName, value);
+    else
+        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+              "<-- %s: function=%d, name=%s, value=%d\n",
+			  __PRETTY_FUNCTION__, function, paramName, value);
+    return status;
 }
 
 /** Called when asyn clients call pasynInt32->read().

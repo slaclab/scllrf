@@ -13,7 +13,7 @@ epicsEnvSet("TYPE","RES")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
 # PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "$(TYPE)$(N)")
+epicsEnvSet("P", "$(TYPE)$(N):")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "134.79.216.36")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc

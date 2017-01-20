@@ -90,8 +90,8 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-#dbLoadRecords("db/scllrfCommon.template", "P=RES,PORT=myReg")
-dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=myReg")
+dbLoadRecords("db/scllrfCommon.template", "P=RES,PORT=myReg")
+#dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=myReg")
 #dbLoadRecords("db/RESRegisters.db","P=RES,PORT=myReg")
 #dbLoadRecords("db/myRegisters.db","P=CMOC,PORT=myReg")
 #dbLoadRecords("db/cmocWaveforms.db","P=CMOC,PORT=myReg")
@@ -168,8 +168,7 @@ asynSetTraceMask("myIP",-1,0xB)
 asynSetTraceIOMask("myIP",-1,4)
 
 #epicsThreadSleep(1.0)
-#scllrfRESConfigure( "myReg","myIP")
-scllrfPRCConfigure( "myReg","myIP")
+scllrfAsynPortDriverConfigure( "myReg","myIP")
 
 # ======================================================================
 ### Asyn Debugging #####################################################

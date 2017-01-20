@@ -91,7 +91,7 @@ dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
 # =====================================================================
 ## Load record instances
 dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=prcReg")
-dbLoadRecords("db/cmocWaveforms.db","P=PRC,PORT=prcReg")
+#dbLoadRecords("db/cmocWaveforms.db","P=PRC,PORT=prcReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -103,36 +103,36 @@ dbLoadRecords("db/cmocWaveforms.db","P=PRC,PORT=prcReg")
 # ============================================================
 # If all PVs don't connect continue anyway
 # ============================================================
-save_restoreSet_IncompleteSetsOk(1)
+#save_restoreSet_IncompleteSetsOk(1)
 
 # ============================================================
 # created save/restore backup files with date string
 # useful for recovery.
 # ============================================================
-save_restoreSet_DatedBackupFiles(1)
+#save_restoreSet_DatedBackupFiles(1)
 
 # ============================================================
 # Where to find the list of PVs to save
 # ============================================================
 # Where "/data" is an NFS mount point setup when linuxRT target 
 # boots up.
-set_requestfile_path("data/${IOC}/autosave-req")
+#set_requestfile_path("data/${IOC}/autosave-req")
 
 # ============================================================
 # Where to write the save files that will be used to restore
 # ============================================================
-set_savefile_path("data/${IOC}/autosave")
+#set_savefile_path("data/${IOC}/autosave")
 
 # ============================================================
 # Prefix that is use to update save/restore status database
 # records
 # ============================================================
-save_restoreSet_UseStatusPVs(1)
-save_restoreSet_status_prefix("${IOC}:")
+#save_restoreSet_UseStatusPVs(1)
+#save_restoreSet_status_prefix("${IOC}:")
 
 ## Restore datasets
-set_pass0_restoreFile("info_settings.sav")
-set_pass1_restoreFile("info_settings.sav")
+#set_pass0_restoreFile("info_settings.sav")
+#set_pass1_restoreFile("info_settings.sav")
 
 # =====================================================================
 # End: Setup autosave/restore
@@ -152,7 +152,7 @@ set_pass1_restoreFile("info_settings.sav")
 #drvAsynIPPortConfigure("prcIP","$(FPGA_IP):7 UDP")
 
 # Real PRC configuration
-epicsEnvSet( FPGA_IP, "sys1_rfs1_s_a")
+epicsEnvSet( FPGA_IP, "prc")
 drvAsynIPPortConfigure("prcIP","$(FPGA_IP):50006 UDP")
 dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_IP,PORT=prcIP,ADDR=0,IMAX=0,OMAX=0")
 
@@ -165,7 +165,7 @@ asynSetTraceMask("prcIP",-1,0xB)
 asynSetTraceIOMask("prcIP",-1,4)
 
 #epicsThreadSleep(1.0)
-scllrfAsynPortDriverConfigure( "prcReg","prcIP")
+scllrfPRCConfigure( "prcReg","prcIP")
 dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_REG,PORT=prcReg,ADDR=0,IMAX=0,OMAX=0")
 
 # ======================================================================
@@ -206,10 +206,10 @@ caPutLogShow(2)
 # and 'info_positions.req', from information (info nodes) contained in all of
 # the EPICS databases that have been loaded into this IOC.
 
-cd("data/${IOC}/autosave-req")
-makeAutosaveFiles()
-cd("../../..")
-create_monitor_set("info_settings.req",60,"")
+#cd("data/${IOC}/autosave-req")
+#makeAutosaveFiles()
+#cd("../../..")
+#create_monitor_set("info_settings.req",60,"")
 
 # ===========================================================================
 
