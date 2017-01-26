@@ -1,25 +1,23 @@
-#!../../bin/linux-x86_64/scllrf
-# Later will run as:
-#!../../bin/linuxRT-x86_64/scllrf
-## You may have to change scllrf to something else
-## everywhere it appears in this file
+#####../../bin/rhel-6-ia32/scllrf
 
 < envPaths
 
 # System Location:
-epicsEnvSet("LOCA","B34")
-# Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("LOCA","CMTF")
+# Hardware type [PRC, RES, INT]
+epicsEnvSet("TYPE","INT")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "$(TYPE)$(N):")
+# PV prefix name
+epicsEnvSet("P","INT1")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.48")
+#................................epicsEnvSet( FPGA_IP, "SET IP ADDRESS HERE")
+epicsEnvSet( FPGA_IP, "129.57.231.89")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 
 < ../common/regInterface.cmd
+# regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
 # ======================================================================
@@ -38,20 +36,18 @@ asynSetTraceIOMask("myIP",-1,4)
 asynSetTraceMask("myReg",-1,0xB)
 #asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myReg",-1,4)
-#
-# regInterface.cmd leaves us in $(TOP) directory
+####XXXX End Turn on heavy logging for development
 
 ##############################################################################
 # BEGIN: Load the record databases
 ##############################################################################
-< iocBoot/common/iocAdmin.cmd
-< iocBoot/common/autoSaveConf.cmd
+#< iocBoot/common/iocAdmin.cmd
+#< iocBoot/common/autoSaveConf.cmd
 
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
-dbLoadRecords("db/scllrfPRCRegisterAsync.db","P=$(P),PORT=myReg")
+#dbLoadRecords("db/scllrf$(TYPE)extra.template","P=ICC,PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -82,7 +78,7 @@ iocInit()
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
 
-< iocBoot/common/autoSaveStart.cmd
+#< iocBoot/common/autoSaveStart.cmd
 
 # ===========================================================================
 
@@ -98,13 +94,13 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpr $(P)GET_HELL_R
-dbpf $(P)GET_HELL_R
-epicsThreadSleep(0.2)
-dbpr $(P)GET_HELL_R
-#dbpf $(P)RUN_STOP.HIGH 0.11
-#dbpf $(P)RUN_STOP 1
+dbpf $(TYPE)$(N):RUN_STOP.HIGH 0.11
+dbpf $(TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)
+
+< /usr/devuser/lahti/RF_SLAC.2/scllrf/iocBoot/sioc-cmtf-int1/aslo.init
+
+< /usr/devuser/lahti/RF_SLAC.2/scllrf/iocBoot/sioc-cmtf-int1/prec.init
 

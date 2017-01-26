@@ -9,15 +9,15 @@
 # System Location:
 epicsEnvSet("LOCA","B34")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("TYPE","RES")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
 # PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
 epicsEnvSet("P", "$(TYPE)$(N):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.48")
+epicsEnvSet( FPGA_IP, "134.79.216.36")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
-epicsEnvSet( PORT, "50006")
+epicsEnvSet( PORT, "7")
 
 < ../common/regInterface.cmd
 
@@ -50,8 +50,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
-dbLoadRecords("db/scllrfPRCRegisterAsync.db","P=$(P),PORT=myReg")
+#dbLoadRecords("db/scllrfICCextra.template","P=ICC,PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -98,12 +97,8 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpr $(P)GET_HELL_R
-dbpf $(P)GET_HELL_R
-epicsThreadSleep(0.2)
-dbpr $(P)GET_HELL_R
-#dbpf $(P)RUN_STOP.HIGH 0.11
-#dbpf $(P)RUN_STOP 1
+dbpf $(TYPE)$(N):RUN_STOP.HIGH 0.11
+dbpf $(TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

@@ -115,6 +115,7 @@ public:
 	scllrfAsynPortDriver(const char *drvPortName, const char *netPortName, int maxAddr=0, int paramTableSize=7);
 	virtual ~scllrfAsynPortDriver();
 	asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+	asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
 	asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
 	asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
@@ -152,7 +153,7 @@ protected:
 
 	epicsEventId pollEventId_; /**< Event ID to wake up poller */
 	double pollPeriod_; /**< The time between polls */
-	epicsEventId readEventId_; /**< Event ID to wake up poller */
+	epicsEventId readEventId_; /**< Event ID to wake up network message response reader */
 	double readTimeout_; /**< The time between polls */
 	epicsEventId reqWaveEventId_; /**< Event ID to signal the waveform requester */
 	bool isShuttingDown_; /**< Flag to indicate threads should exit */

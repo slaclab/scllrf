@@ -26,6 +26,7 @@
  * ----------------------------------------------------------------------------
 **/
 #include "scllrfPRC.h"
+#include <epicsMessageQueue.h>
 
 
 // Waveform data is packed as 2D arrays, not one after the other
@@ -79,11 +80,17 @@ public:
 
 	enum WavBitWidth { read22bit, read16bit };
 	void waveformRequester(); // When signaled that waveforms are waiting, request them.
+	void singleMessageQueuer(); // When signaled that waveforms are waiting, request them.
 
 protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
+
+	virtual asynStatus startSingleMessageQueuer();
+	epicsEventId singleMsgQueueEventId_; /**< Event ID to signal the waveform requester */
+	epicsMessageQueueId _singleMsgQId;
+
 
 	virtual asynStatus startWaveformRequester(); // For system startup
 	WavBitWidth wavBitWidth_;
@@ -98,8 +105,12 @@ protected:
 	//	std::ostringstream strGitSHA1;
 	epicsInt16 pWave16bitI_[maxWavesCount][waveBuffSize *2];
 	epicsInt16 pWave16bitQ_[maxWavesCount][waveBuffSize *2];
+	epicsInt16 pWave16bitA_[maxWavesCount][waveBuffSize *2];
+	epicsInt16 pWave16bitP_[maxWavesCount][waveBuffSize *2];
 	epicsInt32 pWave22bitI_[maxWavesCount][waveBuffSize];
 	epicsInt32 pWave22bitQ_[maxWavesCount][waveBuffSize];
+	epicsInt32 pWave22bitA_[maxWavesCount][waveBuffSize];
+	epicsInt32 pWave22bitP_[maxWavesCount][waveBuffSize];
 
 	virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
 //	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string

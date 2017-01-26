@@ -72,26 +72,29 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 # The MACRO IOCNAME should be defined via the IOCs top level, "iocStartup.cmd"
 #  found in $IOC/<iocName>/<viocName>/iocStartup.cmd
 # The name must according the SLAC ICD PV naming convention.
-dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC}")
-dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC}")
+#dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC}")
+#dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC}")
 
 # The following database is a result of a python parser
 # which looks at RELEASE_SITE and RELEASE to discover
 # versions of software your IOC is referencing
 # The python parser is part of iocAdmin
-dbLoadRecords("db/iocRelease.db","IOC=${IOC}")
+#dbLoadRecords("db/iocRelease.db","IOC=${IOC}")
 
 # =====================================================================
 # Load database for autosave status
 # =====================================================================
-dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
+#dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
 
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=prcReg")
-#dbLoadRecords("db/cmocWaveforms.db","P=PRC,PORT=prcReg")
+dbLoadRecords("db/scllrfCommon.template", "P=RES,PORT=myReg")
+#dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=myReg")
+#dbLoadRecords("db/RESRegisters.db","P=RES,PORT=myReg")
+#dbLoadRecords("db/myRegisters.db","P=CMOC,PORT=myReg")
+#dbLoadRecords("db/cmocWaveforms.db","P=CMOC,PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -145,50 +148,50 @@ dbLoadRecords("db/PRCRegisters.db","P=PRC,PORT=prcReg")
 # Load common LCLS Access Configuration File
 #< ${ACF_INIT}
 #epicsThreadSleep(1.0)
-# Set up communication with PRC
+# Set up communication with CMOC
 
 # Echo from cdlx11 configuration for testing
-#epicsEnvSet( FPGA_IP, "134.79.216.36")
-#drvAsynIPPortConfigure("prcIP","$(FPGA_IP):7 UDP")
+epicsEnvSet( FPGA_IP, "134.79.216.36")
+drvAsynIPPortConfigure("myIP","$(FPGA_IP):7 UDP")
 
-# Real PRC configuration
-epicsEnvSet( FPGA_IP, "prc")
-drvAsynIPPortConfigure("prcIP","$(FPGA_IP):50006 UDP")
-dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_IP,PORT=prcIP,ADDR=0,IMAX=0,OMAX=0")
+# Real CMOC configuration
+#epicsEnvSet( FPGA_IP, "192.168.1.2")
+#drvAsynIPPortConfigure("myIP","$(FPGA_IP):3000 UDP")
 
 # ======================================================================
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("prcIP",-1,0xB)
-#asynSetTraceIOMask("prcIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("prcIP",-1,4)
+#asynSetTraceMask("myIP",-1,ASYN_TRACE_ERROR)
+asynSetTraceMask("myIP",-1,0xB)
+#asynSetTraceIOMask("myIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("myIP",-1,4)
 
 #epicsThreadSleep(1.0)
-scllrfPRCConfigure( "prcReg","prcIP")
-dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_REG,PORT=prcReg,ADDR=0,IMAX=0,OMAX=0")
+scllrfAsynPortDriverConfigure( "myReg","myIP")
 
 # ======================================================================
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("prcReg",-1,0xB)
-#asynSetTraceIOMask("prcReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("prcReg",-1,4)
+asynSetTraceMask("myReg",-1,0xB)
+#asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("myReg",-1,4)
 #
 epicsThreadSleep(0.2)
 
 # =============================================================
 # Start EPICS IOC Process (i.e. all threads will start running)
 # =============================================================
+pwd
 iocInit()
 #
 #
 # =====================================================
 # Turn on caPutLogging:
 # Log values only on change to the iocLogServer:
-caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
-caPutLogShow(2)
+#caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
+#caPutLogShow(2)
 # =====================================================
 
 ## Start any sequence programs
@@ -224,6 +227,10 @@ caPutLogShow(2)
 # An example of using the CEXP Shell:
 # cexpsh("-c",'printf("hello\n")')
 
-asynSetTraceMask("prcIP",-1,1)
-asynSetTraceMask("prcReg",-1,1)
+#dbpf SCLLRF:RUN_STOP.HIGH 0.11
+#dbpf SCLLRF:RUN_STOP 1
+dbpf RES:MOTOR1_ACC_W 42
+epicsThreadSleep(0.2)
+asynSetTraceMask("myIP",-1,1)
+asynSetTraceMask("myReg",-1,1)
 

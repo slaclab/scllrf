@@ -6,18 +6,28 @@
 
 < envPaths
 
+
+# Real PRC configuration
+epicsEnvSet( FPGA_IP, "prc")
+drvAsynIPPortConfigure("prcIP","$(FPGA_IP):50006 UDP")
+dbLoadRecords("db/asynRecord.db","P=PRC1:CMTS,R=ASYN_IP,PORT=prcIP,ADDR=0,IMAX=0,OMAX=0")
+# Real CMOC configuration
+epicsEnvSet( FPGA_IP, "192.168.1.2")
+drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):3000 UDP")
+dbLoadRecords("db/cmocWaveforms.db","P=CMOC1,PORT=cmocReg")
+
 # System Location:
 epicsEnvSet("LOCA","B34")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("TYPE","CMOC")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
 # PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
 epicsEnvSet("P", "$(TYPE)$(N):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.48")
+epicsEnvSet( FPGA_IP, "192.168.1.2")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
-epicsEnvSet( PORT, "50006")
+epicsEnvSet( PORT, "3000")
 
 < ../common/regInterface.cmd
 
@@ -50,8 +60,8 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
-dbLoadRecords("db/scllrfPRCRegisterAsync.db","P=$(P),PORT=myReg")
+#dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/cmocWaveforms.db","P=CMOC1,PORT=cmocReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -98,12 +108,8 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpr $(P)GET_HELL_R
-dbpf $(P)GET_HELL_R
-epicsThreadSleep(0.2)
-dbpr $(P)GET_HELL_R
-#dbpf $(P)RUN_STOP.HIGH 0.11
-#dbpf $(P)RUN_STOP 1
+dbpf $(P)RUN_STOP.HIGH 0.11
+dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)
