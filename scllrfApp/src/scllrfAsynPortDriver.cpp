@@ -64,6 +64,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
     epicsThreadSleep(defaultPollPeriod);
 
 	createParam(RunStopString, asynParamInt32, &p_RunStop);
+printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(MaxParallelRequestsString, asynParamInt32,
 			&p_MaxParallelRequests);
 	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
@@ -73,6 +74,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 
 	// Set these early, consider adding interlock for race condition with polling loop.
     setIntegerParam(p_RunStop, stop);
+printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
     setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
     setIntegerParam(p_CommErrorCount, 0);
     setDoubleParam(p_PollPeriod, defaultPollPeriod);
@@ -166,6 +168,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 			__PRETTY_FUNCTION__, function, paramName);
 
     if (function == p_RunStop) {
+printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
         if (value == run)
         	epicsEventSignal(pollEventId_);
     }
@@ -225,6 +228,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 			__PRETTY_FUNCTION__, function, paramName);
 
     if (function == p_RunStop) {
+printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
         if (value == run)
         	epicsEventSignal(pollEventId_);
     }
@@ -282,7 +286,7 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 
     // Convert function to address & FpgaReg.
     status = functionToRegister(function, &regSendBuf[1]);
-    if (status == asynSuccess) // Yes, this function is a register write
+    if ((status == asynSuccess) && (regSendBuf[1].addr & flagReadMask)) // Yes, this function is a register write
     {
     	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
     			"%s: found function=%d, name=%s, at address %d\n",
@@ -296,23 +300,8 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
     			"%s: function=%d, name=%s not a register, skip network request\n",
 				__PRETTY_FUNCTION__, function, paramName);
+        status=asynPortDriver::readInt32(pasynUser, value);
     }
-
-
-    /* Set the parameter in the parameter library. */
-    status = (asynStatus) setIntegerParam(function, *value);
-
-	/* Do callbacks so higher layers see any changes */
-	status = (asynStatus) callParamCallbacks();
-
-    if (status)
-        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                  "%s: status=%d, function=%d, name=%s, value=%d",
-				  __PRETTY_FUNCTION__, status, function, paramName, *value);
-    else
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-              "<-- %s: function=%d, name=%s, value=%d\n",
-			  __PRETTY_FUNCTION__, function, paramName, *value);
     return status;
 }
 
@@ -622,8 +611,8 @@ void scllrfAsynPortDriver::responseHandler()
 
 		// The asyn framework doesn't allow writes while a read is blocking,
 		// so the same behavior is approximated here with events.
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: Caught up with message processing, blocking for data\n", __PRETTY_FUNCTION__);
+		//asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		//		"waiting for data... ");
 		waitStatus = epicsEventWaitWithTimeout(readEventId_, readTimeout_);
 
 		if (isShuttingDown_)

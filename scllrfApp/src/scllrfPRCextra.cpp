@@ -308,7 +308,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 	startSingleMessageQueuer();
 
     epicsThreadSleep(defaultPollPeriod);
-
+    wakeupPoller();
+    wakeupReader();
 }
 
 scllrfPRCextra::~scllrfPRCextra()
@@ -910,12 +911,13 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	default:
 		if( wavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= wavesEnd )
 		{
-//			printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
+			printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
 			processWaveReadback(pFromFpga);
 		}
 		else
 		{
-			status = scllrfPRCDriver::processRegWriteResponse(pFromFpga);
+                        printf("%s passing processing of register 0c%x to parent class\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask));
+			status = scllrfPRCDriver::processRegReadback(pFromFpga, waveIsReady);
 		}
 		break;
     }
