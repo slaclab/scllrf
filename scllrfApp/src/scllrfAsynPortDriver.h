@@ -23,8 +23,8 @@
  * ----------------------------------------------------------------------------
 **/
 
-#ifndef scllrfAPP_SRC_scllrfASYNPORTDRIVER_H_
-#define scllrfAPP_SRC_scllrfASYNPORTDRIVER_H_
+#ifndef SCLLRFAPP_SRC_SCLLRFASYNPORTDRIVER_H_
+#define SCLLRFAPP_SRC_SCLLRFASYNPORTDRIVER_H_
 
 #include <stdlib.h>
 #include <string.h>
@@ -60,7 +60,7 @@ typedef struct
 	int32_t data;
 } FpgaReg;
 
-unsigned int nonceSize = 1; // nonce is one FpgaReg big
+static const unsigned int nonceSize = 1; // nonce is one FpgaReg big
 
 // Functions to convert arrays of registers in place.
 /**
@@ -81,242 +81,54 @@ void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount);
 void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount);
 
 // Set this bit in the control portion of address to request a reg read
-const uint32_t flagReadMask = 0x10000000;
+static const uint32_t flagReadMask = 0x10000000;
 
 // Mask for the lower 24 bits of the addr field
-const uint32_t addrMask = 0x00FFFFFF;
+static const uint32_t addrMask = 0x00FFFFFF;
 
 // Something easy to spot assigned to uninitialized data
-const int32_t blankData = 0xDEADBEEF;
+static const int32_t blankData = 0xDEADBEEF;
 
-// Waveform data is packed as 2D arrays, not one after the other
-// in the network data. See cmoc code "submodules/common_hdl/circle.txt" for more details.
-// Summary: (array 1, data 1 and 2), (array 2, data 1 and 2), (array 3, data 1 and 2)....
-const uint32_t wavesStart = 0x004000; // From FPGA design, base address
-const uint32_t wavesEnd = 0x005fff; // From FPGA design
-const unsigned waveBufferRegCount = wavesEnd - wavesStart + 1;
-const unsigned wavesCount = 8; // From FPGA design, number of waveforms interlaced in waveform buffer
-const unsigned maxMsgSize = 1400; // Estimated MTU minus fudge factor, in bytes
-/**< Waveform buffer is read in waveSegmentCount segments due to network packet size limits.
- *  1+ is an approximation of "round upwards". -1 makes space for the nonce */
-const unsigned waveSegmentCount = 1
-		+ (sizeof(FpgaReg) * waveBufferRegCount)
-				/ (maxMsgSize - sizeof(FpgaReg));
-
-/**< Size of each segment, in number of registers */
-const unsigned waveSegmentSize = 1
-		+ (waveBufferRegCount + waveSegmentCount) / waveSegmentCount;
-const uint32_t wavesReadyMask = 0x100; // found in the first 0x1F registers
+static const unsigned maxMsgSize = 1400; // Estimated MTU minus fudge factor, in bytes
 
 // Communication tuning parameters
-const double readTimeout = 1.0; // seconds
-const double writeTimeout = 5.0; // seconds
-const double defaultPollPeriod = 0.1; // seconds
-const double throttleLoopDelay = 0.001; // seconds, delay when sending is outstripping reading
-const unsigned int defaultMaxParallelRequests = 1; // throttle requests when this many are outstanding
+static const double readTimeout = 1.0; // seconds
+static const double writeTimeout = 5.0; // seconds
+static const double defaultPollPeriod = 0.1; // seconds
+static const double throttleLoopDelay = 0.001; // seconds, delay when sending is outstripping reading
+static const unsigned int defaultMaxParallelRequests = 1; // throttle requests when this many are outstanding
 
 // EPICS database driver strings
-const char *RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
-const char *MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
-const char *PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
-const char *CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
+static const char *RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
+static const char *ReadOneRegString = "READ_ONE_REG"; /* asynInt32 array[2] w */
+static const char *WriteOneRegString = "WRITE_ONE_REG"; /* asynInt32 array[2] w */
+static const char *MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
+static const char *PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
+static const char *CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
 
 /* Registers */
-const char *x0D0A0D0ARString = "0D0A0D0A_R";
-const char *HellRString = "HELL_R";
-const char *U15SdioAsSdoRString = "U15_SDIO_AS_SDO_R";
-const char *U15SdoAddrRString = "U15_SDO_ADDR_R";
-const char *U15SpiAddrRRString = "U15_SPI_ADDR_R_R";
-const char *U15SpiAddrRWString = "U15_SPI_ADDR_R_W";
-const char *U15SpiDataRRString = "U15_SPI_DATA_R_R";
-const char *U15SpiDataRWString = "U15_SPI_DATA_R_W";
-const char *U15SpiReadRRString = "U15_SPI_READ_R_R";
-const char *U15SpiReadRWString = "U15_SPI_READ_R_W";
-const char *U15SpiReadyRString = "U15_SPI_READY_R";
-const char *U15SpiStartRRString = "U15_SPI_START_R_R";
-const char *U15SpiStartRWString = "U15_SPI_START_R_W";
-const char *U18SdioAsSdoRString = "U18_SDIO_AS_SDO_R";
-const char *U18SdoAddrRString = "U18_SDO_ADDR_R";
-const char *U18SpiAddrRRString = "U18_SPI_ADDR_R_R";
-const char *U18SpiAddrRWString = "U18_SPI_ADDR_R_W";
-const char *U18SpiDataRRString = "U18_SPI_DATA_R_R";
-const char *U18SpiDataRWString = "U18_SPI_DATA_R_W";
-const char *U18SpiReadRRString = "U18_SPI_READ_R_R";
-const char *U18SpiReadRWString = "U18_SPI_READ_R_W";
-const char *U18SpiReadyRString = "U18_SPI_READY_R";
-const char *U18SpiStartRRString = "U18_SPI_START_R_R";
-const char *U18SpiStartRWString = "U18_SPI_START_R_W";
-const char *U2ClkResetRWString = "U2_CLK_RESET_R_W";
-const char *U2IserdesResetRWString = "U2_ISERDES_RESET_R_W";
-const char *U2Doutbits31To0RString = "U2DOUTBITS31TO0_R";
-const char *U2Doutbits63To32RString = "U2DOUTBITS63TO32_R";
-const char *U3ClkResetRWString = "U3_CLK_RESET_R_W";
-const char *U3IserdesResetRWString = "U3_ISERDES_RESET_R_W";
-const char *U3Doutbits31To0RString = "U3DOUTBITS31TO0_R";
-const char *U3Doutbits63To32RString = "U3DOUTBITS63TO32_R";
-const char *U15SpiRdbkRString = "U15_SPI_RDBK_R";
-const char *U18SpiRdbkRString = "U18_SPI_RDBK_R";
-const char *AdcTestModeRString = "ADC_TEST_MODE_R";
-const char *AdcTestModeWString = "ADC_TEST_MODE_W";
-const char *AdcTestResetWString = "ADC_TEST_RESET_W";
-const char *AdcTestTrigCntRString = "ADC_TEST_TRIG_CNT_R";
-const char *AdcTestWave1OutRString = "ADC_TEST_WAVE1_OUT_R";
-const char *AdcTestWave2OutRString = "ADC_TEST_WAVE2_OUT_R";
-const char *AdcTestWave3OutRString = "ADC_TEST_WAVE3_OUT_R";
-const char *AdcTestWave4OutRString = "ADC_TEST_WAVE4_OUT_R";
-const char *AmplitudeRString = "AMPLITUDE_R";
-const char *AmplitudeWString = "AMPLITUDE_W";
-const char *AverageLenRString = "AVERAGE_LEN_R";
-const char *AverageLenWString = "AVERAGE_LEN_W";
-const char *BanyanBufRString = "BANYAN_BUF_R";
-const char *BanyanMaskRString = "BANYAN_MASK_R";
-const char *BanyanMaskWString = "BANYAN_MASK_W";
-const char *BanyanStatusRString = "BANYAN_STATUS_R";
-const char *BitslipWString = "BITSLIP_W";
-const char *BufTrigWString = "BUF_TRIG_W";
-const char *CicPeriodRString = "CIC_PERIOD_R";
-const char *CicPeriodWString = "CIC_PERIOD_W";
-const char *CicShiftRString = "CIC_SHIFT_R";
-const char *CicShiftWString = "CIC_SHIFT_W";
-const char *ClkPhaseDiffOutU2RString = "CLK_PHASE_DIFF_OUT_U2_R";
-const char *ClkPhaseDiffOutU3RString = "CLK_PHASE_DIFF_OUT_U3_R";
-const char *DacDdsResetWString = "DAC_DDS_RESET_W";
-const char *DacModeRString = "DAC_MODE_R";
-const char *DacModeWString = "DAC_MODE_W";
-const char *DdsaModuloRString = "DDSA_MODULO_R";
-const char *DdsaModuloWString = "DDSA_MODULO_W";
-const char *DdsaPhstepHRString = "DDSA_PHSTEP_H_R";
-const char *DdsaPhstepHWString = "DDSA_PHSTEP_H_W";
-const char *DdsaPhstepLRString = "DDSA_PHSTEP_L_R";
-const char *DdsaPhstepLWString = "DDSA_PHSTEP_L_W";
-const char *FfffffffRString = "FFFFFFFF_R";
-const char *Frequency4XoutRString = "FREQUENCY_4XOUT_R";
-const char *FrequencyClkout3RString = "FREQUENCY_CLKOUT3_R";
-const char *FrequencyDcoRString = "FREQUENCY_DCO_R";
-const char *FrequencyRString = "FREQUENCY_R";
-const char *HistCountWString = "HIST_COUNT_W";
-const char *HistDoutRString = "HIST_DOUT_R";
-const char *HistStatusRString = "HIST_STATUS_R";
-const char *HwResetRString = "HW_RESET_R";
-const char *HwResetWString = "HW_RESET_W";
-const char *Idelay0RString = "IDELAY_0_R";
-const char *Idelay0WString = "IDELAY_0_W";
-const char *Idelay10RString = "IDELAY_10_R";
-const char *Idelay10WString = "IDELAY_10_W";
-const char *Idelay11RString = "IDELAY_11_R";
-const char *Idelay11WString = "IDELAY_11_W";
-const char *Idelay12RString = "IDELAY_12_R";
-const char *Idelay12WString = "IDELAY_12_W";
-const char *Idelay13RString = "IDELAY_13_R";
-const char *Idelay13WString = "IDELAY_13_W";
-const char *Idelay14RString = "IDELAY_14_R";
-const char *Idelay14WString = "IDELAY_14_W";
-const char *Idelay15RString = "IDELAY_15_R";
-const char *Idelay15WString = "IDELAY_15_W";
-const char *Idelay1RString = "IDELAY_1_R";
-const char *Idelay1WString = "IDELAY_1_W";
-const char *Idelay2RString = "IDELAY_2_R";
-const char *Idelay2WString = "IDELAY_2_W";
-const char *Idelay3RString = "IDELAY_3_R";
-const char *Idelay3WString = "IDELAY_3_W";
-const char *Idelay4RString = "IDELAY_4_R";
-const char *Idelay4WString = "IDELAY_4_W";
-const char *Idelay5RString = "IDELAY_5_R";
-const char *Idelay5WString = "IDELAY_5_W";
-const char *Idelay6RString = "IDELAY_6_R";
-const char *Idelay6WString = "IDELAY_6_W";
-const char *Idelay7RString = "IDELAY_7_R";
-const char *Idelay7WString = "IDELAY_7_W";
-const char *Idelay8RString = "IDELAY_8_R";
-const char *Idelay8WString = "IDELAY_8_W";
-const char *Idelay9RString = "IDELAY_9_R";
-const char *Idelay9WString = "IDELAY_9_W";
-const char *IdelayU21WString = "IDELAY_U2_1_W";
-const char *IdelayU22WString = "IDELAY_U2_2_W";
-const char *IdelayU31WString = "IDELAY_U3_1_W";
-const char *IdelayU32WString = "IDELAY_U3_2_W";
-const char *IdelayLdWString = "IDELAY_LD_W";
-const char *IdelayValueOutU2Bits19To0RString = "IDELAY_VALUE_OUT_U2BITS19TO0_R";
-const char *IdelayValueOutU2Bits39To20RString = "IDELAY_VALUE_OUT_U2BITS39TO20_R";
-const char *IdelayValueOutU3Bits19To0RString = "IDELAY_VALUE_OUT_U3BITS19TO0_R";
-const char *IdelayValueOutU3Bits39To20RString = "IDELAY_VALUE_OUT_U3BITS39TO20_R";
-const char *IdelayValueWString = "IDELAY_VALUE_W";
-const char *IdelayctrlResetRWString = "IDELAYCTRL_RESET_R_W";
-const char *LlspiResultRString = "LLSPI_RESULT_R";
-const char *LlspiStatusRString = "LLSPI_STATUS_R";
-const char *LlspiWeWString = "LLSPI_WE_W";
-const char *LoAmpRString = "LO_AMP_R";
-const char *LoAmpWString = "LO_AMP_W";
-const char *MinmaxResetWString = "MINMAX_RESET_W";
-const char *ModuloRString = "MODULO_R";
-const char *ModuloWString = "MODULO_W";
-const char *O_WoRString = "O_WO_R";
-const char *PeriphConfigRString = "PERIPH_CONFIG_R";
-const char *PeriphConfigWString = "PERIPH_CONFIG_W";
-const char *PhaseStepHRString = "PHASE_STEP_H_R";
-const char *PhaseStepHWString = "PHASE_STEP_H_W";
-const char *PhaseStepLRString = "PHASE_STEP_L_R";
-const char *PhaseStepLWString = "PHASE_STEP_L_W";
-const char *PhasexDoutRString = "PHASEX_DOUT_R";
-const char *PhasexStatusRString = "PHASEX_STATUS_R";
-const char *PhasexTrigWString = "PHASEX_TRIG_W";
-const char *RawadcRewindWString = "RAWADC_REWIND_W";
-const char *RawadcTrigWString = "RAWADC_TRIG_W";
-const char *RewindWString = "REWIND_W";
-const char *RldRString = "RLD_R";
-const char *ScanTriggerWString = "SCAN_TRIGGER_W";
-const char *ScannerDebugRString = "SCANNER_DEBUG_R";
-const char *ScannerDebugWString = "SCANNER_DEBUG_W";
-const char *ScannerResultRString = "SCANNER_RESULT_R";
-const char *SfpAddressSetWString = "SFP_ADDRESS_SET_W";
-const char *SlowChainOutRString = "SLOW_CHAIN_OUT_R";
-const char *SyncAd7794CsetRString = "SYNC_AD7794_CSET_R";
-const char *SyncAd7794CsetWString = "SYNC_AD7794_CSET_W";
-const char *SyncTps62210CsetRString = "SYNC_TPS62210_CSET_R";
-const char *SyncTps62210CsetWString = "SYNC_TPS62210_CSET_W";
-const char *TagNowWString = "TAG_NOW_W";
-const char *TraceCtlWString = "TRACE_CTL_W";
-const char *TraceKeepRString = "TRACE_KEEP_R";
-const char *TraceKeepWString = "TRACE_KEEP_W";
-const char *TraceStatus2RString = "TRACE_STATUS2_R";
-const char *TraceStatusRString = "TRACE_STATUS_R";
-const char *TrigInternalRString = "TRIG_INTERNAL_R";
-const char *TrigInternalWString = "TRIG_INTERNAL_W";
-const char *Wave0OutRString = "WAVE0_OUT_R";
-const char *Wave0SrcRString = "WAVE0_SRC_R";
-const char *Wave0SrcWString = "WAVE0_SRC_W";
-const char *Wave1OutRString = "WAVE1_OUT_R";
-const char *Wave1SrcRString = "WAVE1_SRC_R";
-const char *Wave1SrcWString = "WAVE1_SRC_W";
-const char *WaveformsAvailableRString = "WAVEFORMS_AVAILABLE_R";
-
-const unsigned int readRegCount = 94;
-const unsigned int writeRegCount = 73;
-
-
-const char *WaveformString = "WAVEFORM";
 
 
 class scllrfAsynPortDriver: public asynPortDriver
 {
 public:
-	scllrfAsynPortDriver(const char *drvPortName, const char *netPortName);
+	scllrfAsynPortDriver(const char *drvPortName, const char *netPortName, int maxAddr=0, int paramTableSize=7);
 	virtual ~scllrfAsynPortDriver();
 	asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+	asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
 	asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
+	asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
 
 	/* Define a polling mechanism.
 	 * Sends requests for all register data at a specified period.
 	 * A separate thread processes the response.
 	 */
-	void regPoller(FpgaReg *regBuffer, unsigned int regBuffCount); // Polling loop, exits on shutdown
+	void regPoller(); // Polling loop, exits on shutdown
 	void regSettingsInit(); // canned settings from LBL
 	virtual asynStatus wakeupPoller(); // Alert poller to request new data
 	virtual asynStatus sendRegRequest(FpgaReg *regBuffer,
 			unsigned int regBuffSize); // Send out canned request for all registers
-
-	void waveformRequester(); // When signaled that waveforms are waiting, request them.
 
 	virtual void responseHandler(); // Readback loop, processes data from FPGAs when it arrives
 	virtual asynStatus wakeupReader(); // Alert responseHandler to expect new data
@@ -324,8 +136,11 @@ public:
 
 protected:
 
+	// For readable registers that are polled together at the set polling rate
+	FpgaReg *pPolledRegMsg_; // Leave the first array element blank, for use as the nonce
+	size_t PolledRegMsgSize_; // number of registers plus one for the nonce
 	virtual asynStatus startPoller(double pollPeriod); // For system startup
-	virtual asynStatus startWaveformRequester(); // For system startup
+
 	// Response handler, reads data sent back from FPGA and assigns it to
 	// the appropriate variables and pvs.
 	virtual asynStatus startResponseHandler(); // For system startup
@@ -334,13 +149,11 @@ protected:
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
-	virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
-	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
 	epicsEventId pollEventId_; /**< Event ID to wake up poller */
 	double pollPeriod_; /**< The time between polls */
-	epicsEventId readEventId_; /**< Event ID to wake up poller */
+	epicsEventId readEventId_; /**< Event ID to wake up network message response reader */
 	double readTimeout_; /**< The time between polls */
 	epicsEventId reqWaveEventId_; /**< Event ID to signal the waveform requester */
 	bool isShuttingDown_; /**< Flag to indicate threads should exit */
@@ -357,375 +170,33 @@ protected:
 	{
 		stop, run
 	};
-	epicsInt32 pWaveform_[wavesCount][waveBufferRegCount / wavesCount];
-	std::ostringstream strGitSHA1;
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
 	int p_RunStop;
-#define FIRST_CMOC_PARAM p_RunStop
+#define FIRST_SCLLRF_PARAM p_RunStop
+	int p_ReadOneReg;
+	int p_WriteOneReg;
 	int p_MaxParallelRequests;
 	int p_PollPeriod;
 	int p_CommErrorCount;
-	int p_Waveform;
 
 /* Registers */
-    int p_x0D0A0D0AR;
-    int p_HellR;
-    int p_U15SdioAsSdoR;
-    int p_U15SdoAddrR;
-    int p_U15SpiAddrRR;
-    int p_U15SpiAddrRW;
-    int p_U15SpiDataRR;
-    int p_U15SpiDataRW;
-    int p_U15SpiReadRR;
-    int p_U15SpiReadRW;
-    int p_U15SpiReadyR;
-    int p_U15SpiStartRR;
-    int p_U15SpiStartRW;
-    int p_U18SdioAsSdoR;
-    int p_U18SdoAddrR;
-    int p_U18SpiAddrRR;
-    int p_U18SpiAddrRW;
-    int p_U18SpiDataRR;
-    int p_U18SpiDataRW;
-    int p_U18SpiReadRR;
-    int p_U18SpiReadRW;
-    int p_U18SpiReadyR;
-    int p_U18SpiStartRR;
-    int p_U18SpiStartRW;
-    int p_U2ClkResetRW;
-    int p_U2IserdesResetRW;
-    int p_U2Doutbits31To0R;
-    int p_U2Doutbits63To32R;
-    int p_U3ClkResetRW;
-    int p_U3IserdesResetRW;
-    int p_U3Doutbits31To0R;
-    int p_U3Doutbits63To32R;
-    int p_U15SpiRdbkR;
-    int p_U18SpiRdbkR;
-    int p_AdcTestModeR;
-    int p_AdcTestModeW;
-    int p_AdcTestResetW;
-    int p_AdcTestTrigCntR;
-    int p_AdcTestWave1OutR;
-    int p_AdcTestWave2OutR;
-    int p_AdcTestWave3OutR;
-    int p_AdcTestWave4OutR;
-    int p_AmplitudeR;
-    int p_AmplitudeW;
-    int p_AverageLenR;
-    int p_AverageLenW;
-    int p_BanyanBufR;
-    int p_BanyanMaskR;
-    int p_BanyanMaskW;
-    int p_BanyanStatusR;
-    int p_BitslipW;
-    int p_BufTrigW;
-    int p_CicPeriodR;
-    int p_CicPeriodW;
-    int p_CicShiftR;
-    int p_CicShiftW;
-    int p_ClkPhaseDiffOutU2R;
-    int p_ClkPhaseDiffOutU3R;
-    int p_DacDdsResetW;
-    int p_DacModeR;
-    int p_DacModeW;
-    int p_DdsaModuloR;
-    int p_DdsaModuloW;
-    int p_DdsaPhstepHR;
-    int p_DdsaPhstepHW;
-    int p_DdsaPhstepLR;
-    int p_DdsaPhstepLW;
-    int p_FfffffffR;
-    int p_Frequency4XoutR;
-    int p_FrequencyClkout3R;
-    int p_FrequencyDcoR;
-    int p_FrequencyR;
-    int p_HistCountW;
-    int p_HistDoutR;
-    int p_HistStatusR;
-    int p_HwResetR;
-    int p_HwResetW;
-    int p_Idelay0R;
-    int p_Idelay0W;
-    int p_Idelay10R;
-    int p_Idelay10W;
-    int p_Idelay11R;
-    int p_Idelay11W;
-    int p_Idelay12R;
-    int p_Idelay12W;
-    int p_Idelay13R;
-    int p_Idelay13W;
-    int p_Idelay14R;
-    int p_Idelay14W;
-    int p_Idelay15R;
-    int p_Idelay15W;
-    int p_Idelay1R;
-    int p_Idelay1W;
-    int p_Idelay2R;
-    int p_Idelay2W;
-    int p_Idelay3R;
-    int p_Idelay3W;
-    int p_Idelay4R;
-    int p_Idelay4W;
-    int p_Idelay5R;
-    int p_Idelay5W;
-    int p_Idelay6R;
-    int p_Idelay6W;
-    int p_Idelay7R;
-    int p_Idelay7W;
-    int p_Idelay8R;
-    int p_Idelay8W;
-    int p_Idelay9R;
-    int p_Idelay9W;
-    int p_IdelayU21W;
-    int p_IdelayU22W;
-    int p_IdelayU31W;
-    int p_IdelayU32W;
-    int p_IdelayLdW;
-    int p_IdelayValueOutU2Bits19To0R;
-    int p_IdelayValueOutU2Bits39To20R;
-    int p_IdelayValueOutU3Bits19To0R;
-    int p_IdelayValueOutU3Bits39To20R;
-    int p_IdelayValueW;
-    int p_IdelayctrlResetRW;
-    int p_LlspiResultR;
-    int p_LlspiStatusR;
-    int p_LlspiWeW;
-    int p_LoAmpR;
-    int p_LoAmpW;
-    int p_MinmaxResetW;
-    int p_ModuloR;
-    int p_ModuloW;
-    int p_O_WoR;
-    int p_PeriphConfigR;
-    int p_PeriphConfigW;
-    int p_PhaseStepHR;
-    int p_PhaseStepHW;
-    int p_PhaseStepLR;
-    int p_PhaseStepLW;
-    int p_PhasexDoutR;
-    int p_PhasexStatusR;
-    int p_PhasexTrigW;
-    int p_RawadcRewindW;
-    int p_RawadcTrigW;
-    int p_RewindW;
-    int p_RldR;
-    int p_ScanTriggerW;
-    int p_ScannerDebugR;
-    int p_ScannerDebugW;
-    int p_ScannerResultR;
-    int p_SfpAddressSetW;
-    int p_SlowChainOutR;
-    int p_SyncAd7794CsetR;
-    int p_SyncAd7794CsetW;
-    int p_SyncTps62210CsetR;
-    int p_SyncTps62210CsetW;
-    int p_TagNowW;
-    int p_TraceCtlW;
-    int p_TraceKeepR;
-    int p_TraceKeepW;
-    int p_TraceStatus2R;
-    int p_TraceStatusR;
-    int p_TrigInternalR;
-    int p_TrigInternalW;
-    int p_Wave0OutR;
-    int p_Wave0SrcR;
-    int p_Wave0SrcW;
-    int p_Wave1OutR;
-    int p_Wave1SrcR;
-    int p_Wave1SrcW;
-    int p_WaveformsAvailableR;
-    #define LAST_CMOC_PARAM p_WaveformsAvailableR
+    #define LAST_SCLLRF_PARAM p_CommErrorCount
 
+	epicsUInt32 uReadOneRegAddr, uWriteOneRegAddr;
 
-#define NUM_CMOC_PARAMS (&LAST_CMOC_PARAM - &FIRST_CMOC_PARAM + 1)
+	//Note: the number of parameters must be manually set in the iocsh binding,
+	// the addresses of the parameters used in the #define are out of scope there.
+#define NUM_SCLLRF_PARAMS (&LAST_SCLLRF_PARAM - &FIRST_SCLLRF_PARAM + 1)
 
 	// mapping of register names to addresses
 
     // mapping of register names to addresses
-    enum ReadRegAddrs
-    {
-    	HellRAdr = 0x00000000,
-    	O_WoRAdr = 0x00000001,
-    	RldRAdr = 0x00000002,
-    	x0D0A0D0ARAdr = 0x00000003,
-    	LlspiStatusRAdr = 0x00000004,
-    	LlspiResultRAdr = 0x00000005,
-    	FfffffffRAdr = 0x00000007,
-    	FrequencyRAdr = 0x00000008,
-    	Frequency4XoutRAdr = 0x00000009,
-    	FrequencyClkout3RAdr = 0x0000000A,
-    	FrequencyDcoRAdr = 0x0000000B,
-    	U2Doutbits31To0RAdr = 0x0000000C,
-    	U2Doutbits63To32RAdr = 0x0000000D,
-    	IdelayValueOutU2Bits19To0RAdr = 0x0000000E,
-    	IdelayValueOutU2Bits39To20RAdr = 0x0000000F,
-    	U3Doutbits31To0RAdr = 0x00000010,
-    	U3Doutbits63To32RAdr = 0x00000011,
-    	IdelayValueOutU3Bits19To0RAdr = 0x00000012,
-    	IdelayValueOutU3Bits39To20RAdr = 0x00000013,
-    	Wave0OutRAdr = 0x00000014,
-    	Wave1OutRAdr = 0x00000015,
-    	AdcTestWave1OutRAdr = 0x00000016,
-    	AdcTestWave2OutRAdr = 0x00000017,
-    	AdcTestWave3OutRAdr = 0x00000018,
-    	AdcTestWave4OutRAdr = 0x00000019,
-    	HistStatusRAdr = 0x0000001F,
-    	PhasexStatusRAdr = 0x0000002E,
-    	ClkPhaseDiffOutU2RAdr = 0x0000002F,
-    	ClkPhaseDiffOutU3RAdr = 0x00000030,
-    	U15SpiRdbkRAdr = 0x00000038,
-    	U15SdoAddrRAdr = 0x00000038,
-    	U15SpiReadyRAdr = 0x00000039,
-    	U15SdioAsSdoRAdr = 0x00000039,
-    	U18SdoAddrRAdr = 0x0000003C,
-    	U18SpiRdbkRAdr = 0x0000003C,
-    	U18SdioAsSdoRAdr = 0x0000003D,
-    	U18SpiReadyRAdr = 0x0000003D,
-    	AdcTestTrigCntRAdr = 0x00000040,
-    	WaveformsAvailableRAdr = 0x00000041,
-    	BanyanStatusRAdr = 0x00000042,
-    	SlowChainOutRAdr = 0x00000043,
-    	TraceStatusRAdr = 0x00000044,
-    	TraceStatus2RAdr = 0x00000045,
-    	Idelay0RAdr = 0x00000070,
-    	Idelay1RAdr = 0x00000071,
-    	Idelay2RAdr = 0x00000072,
-    	Idelay3RAdr = 0x00000073,
-    	Idelay4RAdr = 0x00000074,
-    	Idelay5RAdr = 0x00000075,
-    	Idelay6RAdr = 0x00000076,
-    	Idelay7RAdr = 0x00000077,
-    	Idelay8RAdr = 0x00000078,
-    	Idelay9RAdr = 0x00000079,
-    	Idelay10RAdr = 0x0000007A,
-    	Idelay11RAdr = 0x0000007B,
-    	Idelay12RAdr = 0x0000007C,
-    	Idelay13RAdr = 0x0000007D,
-    	Idelay14RAdr = 0x0000007E,
-    	Idelay15RAdr = 0x0000007F,
-    	HwResetRAdr = 0x00000080,
-    	PeriphConfigRAdr = 0x00000081,
-    	AmplitudeRAdr = 0x00000082,
-    	DdsaPhstepHRAdr = 0x00000083,
-    	DdsaPhstepLRAdr = 0x00000084,
-    	DdsaModuloRAdr = 0x00000085,
-    	DacModeRAdr = 0x00000086,
-    	Wave0SrcRAdr = 0x00000087,
-    	Wave1SrcRAdr = 0x00000088,
-    	AdcTestModeRAdr = 0x00000089,
-    	PhaseStepHRAdr = 0x0000008A,
-    	PhaseStepLRAdr = 0x0000008B,
-    	ModuloRAdr = 0x0000008C,
-    	CicPeriodRAdr = 0x0000008D,
-    	CicShiftRAdr = 0x0000008E,
-    	AverageLenRAdr = 0x0000008F,
-    	TrigInternalRAdr = 0x00000090,
-    	BanyanMaskRAdr = 0x00000091,
-    	U15SpiStartRRAdr = 0x00000092,
-    	U15SpiReadRRAdr = 0x00000092,
-    	U15SpiAddrRRAdr = 0x00000093,
-    	U15SpiDataRRAdr = 0x00000093,
-    	U18SpiReadRRAdr = 0x00000094,
-    	U18SpiStartRRAdr = 0x00000094,
-    	U18SpiAddrRRAdr = 0x00000095,
-    	U18SpiDataRRAdr = 0x00000095,
-    	SyncAd7794CsetRAdr = 0x00000096,
-    	SyncTps62210CsetRAdr = 0x00000097,
-    	ScannerDebugRAdr = 0x00000098,
-    	LoAmpRAdr = 0x00000099,
-    	TraceKeepRAdr = 0x0000009A,
-    	HistDoutRAdr = 0x00100000,
-    	PhasexDoutRAdr = 0x00110000,
-    	BanyanBufRAdr = 0x00120000,
-    	ScannerResultRAdr = 0x00130000,
-    };
 
     // mapping of register names to addresses
-    enum RegWriteAddrs
-    {
-    	IdelayValueWAdr = 0x00000001,
-    	LlspiWeWAdr = 0x00000005,
-    	IdelayLdWAdr = 0x0000000B,
-    	BitslipWAdr = 0x0000000C,
-    	IdelayU21WAdr = 0x0000000D,
-    	IdelayU22WAdr = 0x0000000E,
-    	IdelayU31WAdr = 0x0000000F,
-    	IdelayU32WAdr = 0x00000010,
-    	BufTrigWAdr = 0x0000001C,
-    	RewindWAdr = 0x0000001E,
-    	AdcTestResetWAdr = 0x0000001F,
-    	MinmaxResetWAdr = 0x00000020,
-    	U2ClkResetRWAdr = 0x00000021,
-    	U3ClkResetRWAdr = 0x00000022,
-    	DacDdsResetWAdr = 0x00000023,
-    	HistCountWAdr = 0x00000024,
-    	IdelayctrlResetRWAdr = 0x00000025,
-    	U2IserdesResetRWAdr = 0x00000026,
-    	U3IserdesResetRWAdr = 0x00000027,
-    	PhasexTrigWAdr = 0x00000028,
-    	RawadcTrigWAdr = 0x00000029,
-    	RawadcRewindWAdr = 0x0000002A,
-    	TagNowWAdr = 0x00000035,
-    	ScanTriggerWAdr = 0x00000036,
-    	TraceCtlWAdr = 0x00000037,
-    	SfpAddressSetWAdr = 0x00000038,
-    	Idelay0WAdr = 0x00000070,
-    	Idelay1WAdr = 0x00000071,
-    	Idelay2WAdr = 0x00000072,
-    	Idelay3WAdr = 0x00000073,
-    	Idelay4WAdr = 0x00000074,
-    	Idelay5WAdr = 0x00000075,
-    	Idelay6WAdr = 0x00000076,
-    	Idelay7WAdr = 0x00000077,
-    	Idelay8WAdr = 0x00000078,
-    	Idelay9WAdr = 0x00000079,
-    	Idelay10WAdr = 0x0000007A,
-    	Idelay11WAdr = 0x0000007B,
-    	Idelay12WAdr = 0x0000007C,
-    	Idelay13WAdr = 0x0000007D,
-    	Idelay14WAdr = 0x0000007E,
-    	Idelay15WAdr = 0x0000007F,
-    	HwResetWAdr = 0x00000080,
-    	PeriphConfigWAdr = 0x00000081,
-    	AmplitudeWAdr = 0x00000082,
-    	DdsaPhstepHWAdr = 0x00000083,
-    	DdsaPhstepLWAdr = 0x00000084,
-    	DdsaModuloWAdr = 0x00000085,
-    	DacModeWAdr = 0x00000086,
-    	Wave0SrcWAdr = 0x00000087,
-    	Wave1SrcWAdr = 0x00000088,
-    	AdcTestModeWAdr = 0x00000089,
-    	PhaseStepHWAdr = 0x0000008A,
-    	PhaseStepLWAdr = 0x0000008B,
-    	ModuloWAdr = 0x0000008C,
-    	CicPeriodWAdr = 0x0000008D,
-    	CicShiftWAdr = 0x0000008E,
-    	AverageLenWAdr = 0x0000008F,
-    	TrigInternalWAdr = 0x00000090,
-    	BanyanMaskWAdr = 0x00000091,
-    	U15SpiReadRWAdr = 0x00000092,
-    	U15SpiStartRWAdr = 0x00000092,
-    	U15SpiAddrRWAdr = 0x00000093,
-    	U15SpiDataRWAdr = 0x00000093,
-    	U18SpiStartRWAdr = 0x00000094,
-    	U18SpiReadRWAdr = 0x00000094,
-    	U18SpiAddrRWAdr = 0x00000095,
-    	U18SpiDataRWAdr = 0x00000095,
-    	SyncAd7794CsetWAdr = 0x00000096,
-    	SyncTps62210CsetWAdr = 0x00000097,
-    	ScannerDebugWAdr = 0x00000098,
-    	LoAmpWAdr = 0x00000099,
-    	TraceKeepWAdr = 0x0000009A,
-    };
 
     // masks applied to returned register data
-    enum RegMasks
-    {
-
-    };
 };
 
-#endif /* scllrfAPP_SRC_scllrfASYNPORTDRIVER_H_ */
+#endif /* SCLLRFAPP_SRC_SCLLRFASYNPORTDRIVER_H_ */

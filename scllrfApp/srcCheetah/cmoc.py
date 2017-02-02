@@ -8,7 +8,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },  
     {
     "name" : "Magic",
@@ -18,7 +18,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Build_year",
@@ -30,7 +30,7 @@ d = { "name" : "cmoc",
         "egu"         : "Yr",
         "scale_eqn"   : "x",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Build_month",
@@ -44,7 +44,7 @@ d = { "name" : "cmoc",
         "range_bottom": 1,
         "scale_eqn"   : "x",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Build_day",
@@ -58,7 +58,7 @@ d = { "name" : "cmoc",
         "range_bottom": 1,
         "scale_eqn"   : "x",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Build_hour",
@@ -72,7 +72,7 @@ d = { "name" : "cmoc",
         "range_bottom": 0,
         "scale_eqn"   : "x",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Build_minute",
@@ -86,7 +86,7 @@ d = { "name" : "cmoc",
         "range_bottom": 0,
         "scale_eqn"   : "x",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Code_is_clean",
@@ -96,7 +96,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Tool_rev",
@@ -106,7 +106,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "User",
@@ -116,7 +116,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Name of person compiling firmware",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Board_type",
@@ -126,7 +126,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Version",
@@ -136,7 +136,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_a",
@@ -146,7 +146,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_b",
@@ -156,7 +156,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_c",
@@ -166,7 +166,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_d",
@@ -176,7 +176,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_e",
@@ -186,7 +186,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_f",
@@ -196,7 +196,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_g",
@@ -206,7 +206,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_h",
@@ -216,7 +216,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_i",
@@ -226,7 +226,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_j",
@@ -236,7 +236,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_k",
@@ -246,7 +246,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_l",
@@ -256,7 +256,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_m",
@@ -266,7 +266,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_n",
@@ -276,7 +276,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_o",
@@ -286,7 +286,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_p",
@@ -296,7 +296,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_q",
@@ -306,7 +306,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_r",
@@ -316,7 +316,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_s",
@@ -326,7 +326,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" : "Git_sha1_t",
@@ -336,7 +336,7 @@ d = { "name" : "cmoc",
         "access"      : "r",
         "desc" : "Enter real description here",
         "bits":
-        {    "wavesReady" : 0x100 }
+        {    "waves_ready" : 0x100 }
     },
     {
     "name" :  "dsp_fdbk_core_mp_proc_coeff1",

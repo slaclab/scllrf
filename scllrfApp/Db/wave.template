@@ -1,5 +1,5 @@
 
-record( waveform, "$(P):WF_$(N)"){
+record( waveform, "$(P)WF_$(N)"){
   field( DESC, "Ch $(N) Waveform Data")
   field( SCAN, "I/O Intr")
   field( DTYP, "asynInt32ArrayIn")

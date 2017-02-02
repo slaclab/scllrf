@@ -1,4 +1,7 @@
-record(ao, "$(P):POLL_PERIOD")
+# Load the chassis-specific database indicated by the TYPE macro
+include "db/scllrf$(TYPE)Registers.template"
+
+record(ao, "$(P)POLL_PERIOD")
 {
     field(PINI, "YES")
     field(DTYP, "asynFloat64")
@@ -9,7 +12,7 @@ record(ao, "$(P):POLL_PERIOD")
     info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(bo, "$(P):RUN_STOP")
+record(bo, "$(P)RUN_STOP")
 {
     field(PINI, "NO")
     field(DTYP, "asynInt32")
@@ -20,7 +23,7 @@ record(bo, "$(P):RUN_STOP")
     info(autosaveFields, "VAL DESC HIGH")
 }
 
-record(longout, "$(P):MAX_PARALLEL_REQUESTS")
+record(longout, "$(P)MAX_PARALLEL_REQUESTS")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -30,7 +33,7 @@ record(longout, "$(P):MAX_PARALLEL_REQUESTS")
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ai, "$(P):COMM_ERROR_COUNT")
+record(ai, "$(P)COMM_ERROR_COUNT")
 {
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -39,5 +42,23 @@ record(ai, "$(P):COMM_ERROR_COUNT")
     info(autosaveFields, "DESC EGUL EGUF SMOO HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
+record( waveform, "$(P)READ_ONE_REG"){
+  field( DESC, "Simple single register access")
+  field( SCAN, "Passive")
+  field( DTYP, "asynInt32ArrayIn")
+  field( INP,  "@asyn($(PORT),0,1)READ_ONE_REG")
+  field( PREC, "1")
+  field( NELM, "2")
+  field( FTVL, "LONG")
+}
 
+record( waveform, "$(P)WRITE_ONE_REG"){
+  field( DESC, "Simple single register access")
+  field( SCAN, "Passive")
+  field( DTYP, "asynInt32ArrayOut")
+  field( INP,  "@asyn($(PORT),0,1)WRITE_ONE_REG")
+  field( PREC, "1")
+  field( NELM, "2")
+  field( FTVL, "LONG")
+}
 

@@ -1,0 +1,85 @@
+{
+	"write_regmap":{
+		"llspi_we":5
+		,"idelay_0":112
+		,"idelay_1":113
+		,"idelay_2":114
+		,"idelay_3":115
+		,"idelay_4":116
+		,"idelay_5":117
+		,"idelay_6":118
+		,"idelay_7":119
+		,"idelay_8":120
+		,"idelay_9":121
+		,"idelay_10":122
+		,"idelay_11":123
+		,"idelay_12":124
+		,"idelay_13":125
+		,"idelay_14":126
+		,"idelay_15":127
+	},
+	"read_regmap": {
+		"Hell": 0
+		,"o wo": 1
+		,"rld!": 2
+		,"0d0a0d0a": 3
+		,"llspi_status": 4
+		,"llspi_result": 5
+		,"ffffffff": 7
+		,"frequency_adc": 8
+		,"frequency_4xout": 9
+		,"frequency_clkout3": 10
+		,"frequency_dco": 11
+		,"U2dout[31:0]": 12
+		,"U2dout[63:32]": 13
+		,"idelay_value_out_U2[19:0]": 14
+		,"idelay_value_out_U2[39:20]": 15
+		,"U3dout[31:0]": 16
+		,"U3dout[63:32]": 17
+		,"idelay_value_out_U3[19:0]": 18
+		,"idelay_value_out_U3[39:20]": 19
+		,"wave0_out": 20
+		,"wave1_out": 21
+		,"adc_test_wave1_out": 22
+		,"adc_test_wave2_out": 23
+		,"adc_test_wave3_out": 24
+		,"adc_test_wave4_out": 25
+		,"ctrace_running": 28
+		,"frequency_gtx_tx":29
+		,"frequency_gtx_rx":30
+		,"hist_status": 31
+		,"phasex_status": 46
+		,"clk_phase_diff_out_U2": 47
+		,"clk_phase_diff_out_U3": 48
+		,"U15_sdo_addr, U15_spi_rdbk":56
+		,"U15_spi_ready,U15_sdio_as_sdo":57
+		,"U18_sdo_addr, U18_spi_rdbk":60
+		,"U18_spi_ready,U18_sdio_as_sdo":61
+		,"adc_test_trig_cnt":64
+		,"waveforms_available":65
+		,"banyan_status":66
+		,"slow_chain_out":67
+		,"trace_status":68
+		,"trace_status2":69
+		,"idelay_0":112
+		,"idelay_1":113
+		,"idelay_2":114
+		,"idelay_3":115
+		,"idelay_4":116
+		,"idelay_5":117
+		,"idelay_6":118
+		,"idelay_7":119
+		,"idelay_8":120
+		,"idelay_9":121
+		,"idelay_10":122
+		,"idelay_11":123
+		,"idelay_12":124
+		,"idelay_13":125
+		,"idelay_14":126
+		,"idelay_15":127
+		,"hist_dout": 1048576
+		,"phasex_dout": 1114112
+		,"banyan_buf": 1179648
+		,"scanner_result":1245184
+	}
+}

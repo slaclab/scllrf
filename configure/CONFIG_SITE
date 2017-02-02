@@ -20,12 +20,12 @@ CHECK_RELEASE = YES
 #   for a subset of the cross-compiled target architectures
 #   that Base is built for.
 #CROSS_COMPILER_TARGET_ARCHS = vxWorks-mpc8540 vxWorks-ppc604_long vxWorks-ppc604_altivec
-#CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik RTEMS-mvme3100 RTEMS-uC5282 linuxRT-x86
+#CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linux-x86
 
 # If you only want to build for the host then uncomment the line below and no cross targets
 # will be built.  Remember EPICS will build for the HOST ARCH by default.
 CROSS_COMPILER_TARGET_ARCHS =
-#CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linuxRT_glibc-x86_64
+#CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linuxRT_glibc-x86_64 linux-x86
 
 # To install files into a location other than $(TOP) define
 #   INSTALL_LOCATION here.

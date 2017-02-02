@@ -58,18 +58,18 @@ if __name__ == "__main__":
     
     f=open("prc_regmap.py.tmp", 'w')
 
-    f.write('d = { "name" : "scllrfPRC\n",')
+    f.write('d = { "name" : "scllrfPRC",\n')
     f.write("\t'registers': [\n")
 
     for reg in sorted(write_regmap.iteritems(), key=lambda x: x[1]):
-        f.write('\t\t{ "name" :"' + reg[0] + '_w",\n')
+        f.write('\t\t{ "name" :"' + reg[0] + '",\n')
         f.write('\t\t"address"     : ' + repr(reg[1]) + ',\n')
         f.write('\t\t"access"      : "w",\n')
         f.write('\t\t"signed"      : "signed"\n')
         f.write('\t\t},\n')
 
     for reg in sorted(read_regmap.iteritems(), key=lambda x: x[1]):
-        f.write('\t\t{ "name" :"' + reg[0] + '_r",\n')
+        f.write('\t\t{ "name" :"' + reg[0] + '",\n')
         f.write('\t\t"address"     : ' + repr(reg[1]) + ',\n')
         f.write('\t\t"access"      : "r",\n')
         f.write('\t\t"signed"      : "signed"\n')

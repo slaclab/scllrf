@@ -1,18 +1,17 @@
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: if access is specified it's 'read', and that this isn't a waveform.
-  #if (not($p.has_key('access')) or ($p.access == 'r')) and not(($p.has_key('nelms') and $p.nelms>1))
-record(longin, "\$(P):${p.name.upper()}")
+  #if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelms') and $p.nelms>1))
+record(ai, "\$(P)${p.name.upper()}_R")
 {
 	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
+	field( DESC, "${p.desc[:38]}")
 	#end if
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
-<<<<<<< master
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
     field( SCAN, "I/O Intr")
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
@@ -21,60 +20,43 @@ record(longin, "\$(P):${p.name.upper()}")
     #end if
     #if $p.has_key('range_bottom')
     field( LOPR, "${p.range_bottom}")
+    #else if $p.has_key('bit_width')
+    field( LOPR, 0)
     #end if
+	#if $p.has_key('ASLO')
+	field( ASLO, "${p.ASLO}")
+	#end if
+	#if $p.has_key('AOFF')
+	field( AOFF, "${p.AOFF}")
+	#end if
+	#if $p.has_key('PREC')
+	field(PREC, "${p.PREC}")
+	#else
+	field(PREC, 3)
+	#end if
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
   #end if
 #end for
 
+
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: this has write access, and isn't a waveofrm
-  #if $p.has_key('access') and $p.access == 'w' and not($p.has_key('nelms') and $p.nelms>1)
-record(longout, "\$(P):${p.name.upper()}")
+  #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
+  #if not $p.has_key('bits')
+record(ao, "\$(P)${p.name.upper()}_W")
 {
 	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
+	field( DESC, "${p.desc[:38]}")
 	#end if
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
     field( PINI, "NO")
-=======
-    field( PINI, "YES")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
-    field( SCAN, "I/O Intr")
-    #if $p.has_key('range_top')
-    field( HOPR, "${p.range_top}")
-    #else if $p.has_key('bit_width')
-    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
-    #end if
-    #if $p.has_key('range_bottom')
-    field( LOPR, "${p.range_bottom}")
-    #end if
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-  #end if
-#end for
-
-#for $p in sorted($registers, key=lambda k: k['address'])
-  ## Check that: this has write access, and isn't a waveofrm
-  #if $p.has_key('access') and $p.access == 'w' and not($p.has_key('nelms') and $p.nelms>1)
-record(longout, "\$(P):${p.name.upper()}")
-{
-	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
-	#end if
-	#if $p.has_key('egu')
-	field( EGU, "${p.egu}")
-	#end if
-    field( PINI, "YES")
->>>>>>> 0e7f993 BROKEN start of refactoring for subclassing. segfaults, probably send buffs go out of scope.
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}")
-    field( SCAN, "I/O Intr")
+    field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
+    field( SCAN, "Passive")
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
@@ -82,30 +64,71 @@ record(longout, "\$(P):${p.name.upper()}")
     #end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
+    #else if $p.has_key('bit_width')
+    field( LOPR, 0)
+	#end if
+	#if $p.has_key('ASLO')
+	field( ASLO, "${p.ASLO}")
+	#end if
+	#if $p.has_key('AOFF')
+	field( AOFF, "${p.AOFF}")
+	#end if
+	#if $p.has_key('PREC')
+	field(PREC, "${p.PREC}")
+	#else
+	field(PREC, 3)
 	#end if
     info( asyn:READBACK, "1")
     info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
   #end if
+  #end if
 #end for
 
+
 #for $p in sorted($registers, key=lambda k: k['address'])
-  ## Check that: this is a waveform/array
-  #if $p.has_key('nelms') and $p.nelms>1
-record(waveform, "\$(P):${p.name.upper()}")
+  ## Check that: this has write access, and isn't a waveofrm
+  #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
+  #if $p.has_key('bits')
+record(mbboDirect, "\$(P)${p.name.upper()}_W")
 {
 	#if $p.has_key('desc')
-	field( DESC, "${p.desc}")
+	field( DESC, "${p.desc[:38]}")
 	#end if
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
-<<<<<<< master
     field( PINI, "NO")
-=======
-    field( PINI, "YES")
->>>>>>> 0e7f993 BROKEN start of refactoring for subclassing. segfaults, probably send buffs go out of scope.
+    field( DTYP, "asynUInt32Digital")
+    field( OUT,  "@asyn(\$(PORT),0, 0xFFFFFFFF) ${p.name.upper()}_W")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "VAL DESC")
+}
+
+  #end if
+  #end if
+#end for
+
+
+## For now we aren't supporting read/write arrays. So far, no need.
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this is a waveform/array
+  #if $p.has_key('nelms') and $p.nelms>1
+    #if not($p.has_key('access')) or ($p.access == 'r')
+record(waveform, "\$(P)${p.name.upper()}_R")
+    #else
+record(waveform, "\$(P)${p.name.upper()}_W")
+    #end if
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "NO")
     #if not($p.has_key('access')) or ($p.access == 'r')
       #if $p.has_key('dtype')
         #if $p.dtype == "string"
@@ -128,7 +151,11 @@ record(waveform, "\$(P):${p.name.upper()}")
       #end if
     #end if
     field( NELM, "${p.nelms}")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}")
+    #if not($p.has_key('access')) or ($p.access == 'r')
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+	#else
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
+    #end if
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
@@ -136,6 +163,8 @@ record(waveform, "\$(P):${p.name.upper()}")
     #end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
+    #else if $p.has_key('bit_width')
+    field( LOPR, 0)
 	#end if
     info( autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
 }
@@ -145,7 +174,7 @@ record(waveform, "\$(P):${p.name.upper()}")
 
 #if $varExists('commands')
   #for $c in $commands
-record(longout, "\$(P):C_${c.name.upper()}")
+record(longout, "\$(P)C_${c.name.upper()}")
 {
     field( DTYP, "asynInt32")
     field( OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
