@@ -1,0 +1,7 @@
+# File:    restore.init
+# Example: (Put this at the end of st.cmd file.)
+# This is the list of PVs and their values to restore.
+# See restore.csh file.
+dbpf("INT2:R1CWAPS_W", "123")
+dbpf("INT2:R1zzzzz_W", "456")
+

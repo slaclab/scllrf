@@ -1,0 +1,10 @@
+#! /bin/csh -f
+
+set myHome = /usr/devuser/lahti/RF_SLAC.2/scllrf/iocBoot/sioc-cmtf-int1
+set runObj = ${myHome}/../../bin/rhel-6-ia32/scllrf
+set runArg = ${myHome}/zz.cmd
+
+${runObj} ${runArg}
+
+exit 0
+
