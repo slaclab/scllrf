@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 8
-y 30
-w 884
-h 1032
+x 1945
+y 1331
+w 857
+h 693
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -335,7 +335,7 @@ x 670
 y 630
 w 160
 h 20
-controlPv "$(P):DIG_DSP_TRACE_KEEP_R"
+controlPv "$(P):DIGDSPTRACE_KEEP_R"
 lineColor index 14
 onColor index 15
 offColor index 0
@@ -378,7 +378,7 @@ x 680
 y 530
 w 140
 h 30
-controlPv "$(P):DIG_DSP_TRACE_KEEP_W"
+controlPv "$(P):DIGDSPTRACE_KEEP_W"
 format "hex"
 font "helvetica-medium-r-14.0"
 fgColor index 26
@@ -430,7 +430,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Ch 8"
+  "Ch 7"
 }
 autoSize
 endObjectProperties

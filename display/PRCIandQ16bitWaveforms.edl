@@ -315,7 +315,7 @@ x 670
 y 630
 w 160
 h 20
-controlPv "$(P):DIG_DSP_TRACE_KEEP_R"
+controlPv "$(P):DIGDSPTRACE_KEEP_R"
 lineColor index 14
 onColor index 15
 offColor index 0
@@ -358,7 +358,7 @@ x 680
 y 530
 w 140
 h 30
-controlPv "$(P):DIG_DSP_TRACE_KEEP_W"
+controlPv "$(P):DIGDSPTRACE_KEEP_W"
 format "hex"
 font "helvetica-medium-r-14.0"
 fgColor index 26

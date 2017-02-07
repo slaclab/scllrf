@@ -62,237 +62,265 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     	printf("%s rejects the base class's message and replaces it with its own.\n",__PRETTY_FUNCTION__);
     	delete pPolledRegMsg_;
     }
-	// A canned request to read all registers
+
+    // A canned request to read all registers
     // NOTE: To avoid side effects, any registers with U or spi in their name have been
     // manually replaced with H0D0A0D0ARAdr
     pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
-			{ 0, 0 },
-			{ flagReadMask | HellRAdr, blankData },
-			{ flagReadMask | OWoRAdr, blankData },
-			{ flagReadMask | RldRAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | FfffffffRAdr, blankData },
-			{ flagReadMask | FquencyAdcRAdr, blankData },
-			{ flagReadMask | Fquency4XoutRAdr, blankData },
-			{ flagReadMask | FquencyClkout3RAdr, blankData },
-			{ flagReadMask | FquencyDcoRAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | Wv0OutRAdr, blankData },
-			{ flagReadMask | Wv1OutRAdr, blankData },
-			{ flagReadMask | AdcTestWv1OutRAdr, blankData },
-			{ flagReadMask | AdcTestWv2OutRAdr, blankData },
-			{ flagReadMask | AdcTestWv3OutRAdr, blankData },
-			{ flagReadMask | AdcTestWv4OutRAdr, blankData },
-			{ flagReadMask | CtraceRunningRAdr, blankData },
-			{ flagReadMask | FquencyGtxTxRAdr, blankData },
-			{ flagReadMask | FquencyGtxRxRAdr, blankData },
-			{ flagReadMask | HistStatusRAdr, blankData },
-			{ flagReadMask | PhxStatusRAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | CrcErrorsRAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | AdcTestTrigCntRAdr, blankData },
-			{ flagReadMask | WvformsAvailableRAdr, blankData },
-			{ flagReadMask | BanyanStatusRAdr, blankData },
-			{ flagReadMask | SlowChainOutRAdr, blankData },
-			{ flagReadMask | TraceStatus1RAdr, blankData },
-			{ flagReadMask | TraceStatus2RAdr, blankData },
-			{ flagReadMask | IdelayBaseRAdr, blankData },
-			{ flagReadMask | HistDoutRAdr, blankData },
-			{ flagReadMask | PhxDoutRAdr, blankData },
-			{ flagReadMask | BanyanBufRAdr, blankData },
-			{ flagReadMask | ScannerResultRAdr, blankData },
-			{ flagReadMask | TraceIqBufRAdr, blankData },
-			{ flagReadMask | TraceIBufRAdr, blankData },
-			{ flagReadMask | TraceQBufRAdr, blankData },
-			{ flagReadMask | QsfpBufRAdr, blankData },
-			{ flagReadMask | DigDspRsmC4MechNoiseCplKOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC4MechResnrPropConstRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecDot0KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecDot1KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecDot2KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecOuterProd0KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecOuterProd1KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecOuterProd2KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0PiezoCplKOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecDot0KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecDot1KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecDot2KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecOuterProd0KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecOuterProd1KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecOuterProd2KOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1PiezoCplKOutRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkMpProcCoeffRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkMpProcLimRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkMpProcSetmpRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkMpProcCoeffRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkMpProcLimRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkMpProcSetmpRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4EdcoCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4EdcoPhOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4EdcoCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4EdcoPhOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspLpNotchLp1AKxRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspLpNotchLp1AKyRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspLpNotchLp1BKxRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspLpNotchLp1BKyRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspLpNotchLp1AKxRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspLpNotchLp1AKyRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspLpNotchLp1BKxRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspLpNotchLp1BKyRAdr, blankData },
-			{ flagReadMask | AdcMmcmRAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | DigCfgBanyanMaskRAdr, blankData },
-			{ flagReadMask | DigCfgBitslipRAdr, blankData },
-			{ flagReadMask | DigCfgIdelayctrlResetRRAdr, blankData },
-			{ flagReadMask | H0D0A0D0ARAdr, blankData },
-			{ flagReadMask | DigCfgMmcmResetRRAdr, blankData },
-			{ flagReadMask | DigCfgPeriphConfigRAdr, blankData },
-			{ flagReadMask | DigCfgPhxTrigRAdr, blankData },
-			{ flagReadMask | DigCfgRawadcTrigRAdr, blankData },
-			{ flagReadMask | DigCfgScanTriggerWeRAdr, blankData },
-			{ flagReadMask | DigCfgScannerDebugRAdr, blankData },
-			{ flagReadMask | DigCfgSyncAd7794CsetRAdr, blankData },
-			{ flagReadMask | DigCfgSyncTps62210CsetRAdr, blankData },
-			{ flagReadMask | DigDspAdcTestMdRAdr, blankData },
-			{ flagReadMask | DigDspAdcTestResetRAdr, blankData },
-			{ flagReadMask | DigDspAmplitudeRAdr, blankData },
-			{ flagReadMask | DigDspAverageLenRAdr, blankData },
-			{ flagReadMask | DigDspBufTrigRAdr, blankData },
-			{ flagReadMask | DigDspCicPeriodRAdr, blankData },
-			{ flagReadMask | DigDspCicShiftRAdr, blankData },
-			{ flagReadMask | DigDspCircleBufFlipRAdr, blankData },
-			{ flagReadMask | DigDspDacDdsResetRAdr, blankData },
-			{ flagReadMask | DigDspDacMdRAdr, blankData },
-			{ flagReadMask | DigDspDdsaModRAdr, blankData },
-			{ flagReadMask | DigDspDdsaPhstepHRAdr, blankData },
-			{ flagReadMask | DigDspDdsaPhstepLRAdr, blankData },
-			{ flagReadMask | DigDspHistCountWStrobeRAdr, blankData },
-			{ flagReadMask | DigDspLlrfDspDacEnRAdr, blankData },
-			{ flagReadMask | DigDspLoAmpRAdr, blankData },
-			{ flagReadMask | DigDspModRAdr, blankData },
-			{ flagReadMask | DigDspPhStepHRAdr, blankData },
-			{ flagReadMask | DigDspPhStepLRAdr, blankData },
-			{ flagReadMask | DigDspPrcDspCselRAdr, blankData },
-			{ flagReadMask | DigDspPrcDspPrlCfgRAdr, blankData },
-			{ flagReadMask | DigDspPrcDspPrlGainRAdr, blankData },
-			{ flagReadMask | DigDspRsmBeam0ModRAdr, blankData },
-			{ flagReadMask | DigDspRsmBeam0PhInitRAdr, blankData },
-			{ flagReadMask | DigDspRsmBeam0PhStepRAdr, blankData },
-			{ flagReadMask | DigDspRsmBeam1ModRAdr, blankData },
-			{ flagReadMask | DigDspRsmBeam1PhInitRAdr, blankData },
-			{ flagReadMask | DigDspRsmBeam1PhStepRAdr, blankData },
-			{ flagReadMask | DigDspRsmC4MechPrngIvaRAdr, blankData },
-			{ flagReadMask | DigDspRsmC4MechPrngIvbRAdr, blankData },
-			{ flagReadMask | DigDspRsmC4MechPrngRndRunRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0ACoffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0AForOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0ARflOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0AmpLpBwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Efrq0CrsFqRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Efrq1CrsFqRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Efrq2CrsFqRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode0BeamCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode0BwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode0DrvCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode1BeamCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode1BwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode1DrvCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode2BeamCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode2BwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4Emode2DrvCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecModRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0C4ElecPhStepRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0ComprSatCtlRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0PrngIvaRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0PrngIvbRAdr, blankData },
-			{ flagReadMask | DigDspRsmC0PrngRndRunRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1ACoffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1AForOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1ARflOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1AmpLpBwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Efrq0CrsFqRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Efrq1CrsFqRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Efrq2CrsFqRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode0BeamCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode0BwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode0DrvCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode1BeamCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode1BwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode1DrvCplRAdr, blankData },
 		{ 0, 0 },
-			{ flagReadMask | DigDspRsmC1C4Emode2BeamCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode2BwRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4Emode2DrvCplRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecModRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1C4ElecPhStepRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1ComprSatCtlRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1PrngIvaRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1PrngIvbRAdr, blankData },
-			{ flagReadMask | DigDspRsmC1PrngRndRunRAdr, blankData },
-			{ flagReadMask | DigDspRsmDacIqPhRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspChanKeepRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkCrsScaleRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkMpProcPhOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkMpProcSelEnRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspFdbkMpProcSelThreshRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspModRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspPhStepRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspPiezoPiezoDcRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspTagRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspUseFiberIqRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspWvSampPerRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh0DspWvShiftRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspChanKeepRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkCrsScaleRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkMpProcPhOffsetRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkMpProcSelEnRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspFdbkMpProcSelThreshRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspModRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspPhStepRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspPiezoPiezoDcRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspTagRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspUseFiberIqRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspWvSampPerRAdr, blankData },
-			{ flagReadMask | DigDspRsmSh1DspWvShiftRAdr, blankData },
-			{ flagReadMask | DigDspRewindRAdr, blankData },
-			{ flagReadMask | DigDspSsaStimAmpstepRAdr, blankData },
-			{ flagReadMask | DigDspSsaStimEnRAdr, blankData },
-			{ flagReadMask | DigDspSsaStimGPeriodRAdr, blankData },
-			{ flagReadMask | DigDspSsaStimPertstepRAdr, blankData },
-			{ flagReadMask | DigDspTraceKeepRAdr, blankData },
-			{ flagReadMask | DigDspTraceResetWeRAdr, blankData },
-			{ flagReadMask | DigDspTrigInternalRAdr, blankData },
-			{ flagReadMask | DigDspTrigMdRAdr, blankData },
-			{ flagReadMask | DigDspWv0SrcRAdr, blankData },
-			{ flagReadMask | DigDspWv1SrcRAdr, blankData },
-			{ flagReadMask | DomainJumpRealignRAdr, blankData },
-			{ flagReadMask | IccCfgRAdr, blankData },
-			{ flagReadMask | QsfpI2CRegRAdr, blankData },
-			{ flagReadMask | SfpAddressSetRAdr, blankData },
-			{ flagReadMask | TagNowRAdr, blankData },
+		{ flagReadMask | HellRAdr, blankData },
+		{ flagReadMask | OWoRAdr, blankData },
+		{ flagReadMask | RldRAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | ClkStatusOutRAdr, blankData },
+		{ flagReadMask | FfffffffRAdr, blankData },
+		{ flagReadMask | FrequencyAdcRAdr, blankData },
+		{ flagReadMask | Frequency4XoutRAdr, blankData },
+		{ flagReadMask | FrequencyClkout3RAdr, blankData },
+		{ flagReadMask | FrequencyDcoRAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | Wave0OutRAdr, blankData },
+		{ flagReadMask | Wave1OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave1OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave2OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave3OutRAdr, blankData },
+		{ flagReadMask | AdcTestWave4OutRAdr, blankData },
+		{ flagReadMask | CtraceRunningRAdr, blankData },
+		{ flagReadMask | FrequencyGtxTxRAdr, blankData },
+		{ flagReadMask | FrequencyGtxRxRAdr, blankData },
+		{ flagReadMask | HistStatusRAdr, blankData },
+		{ flagReadMask | PhasexStatusRAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | CrcErrorsRAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | AdcTestTrigCntRAdr, blankData },
+		{ flagReadMask | WaveformsAvailableRAdr, blankData },
+		{ flagReadMask | BanyanStatusRAdr, blankData },
+		{ flagReadMask | SlowChainOutRAdr, blankData },
+		{ flagReadMask | TraceStatus1RAdr, blankData },
+		{ flagReadMask | TraceStatus2RAdr, blankData },
+		{ flagReadMask | LlrfCircleReadyRAdr, blankData },
+		{ flagReadMask | IdelayBaseRAdr, blankData },
+		{ flagReadMask | HistDoutRAdr, blankData },
+		{ flagReadMask | PhasexDoutRAdr, blankData },
+		{ flagReadMask | BanyanBufRAdr, blankData },
+		{ flagReadMask | ScannerResultRAdr, blankData },
+		{ flagReadMask | TraceIqBufRAdr, blankData },
+		{ flagReadMask | TraceIBufRAdr, blankData },
+		{ flagReadMask | TraceQBufRAdr, blankData },
+		{ flagReadMask | QsfpBufRAdr, blankData },
+		{ flagReadMask | LlrfCircleDataRAdr, blankData },
+		{ flagReadMask | Shell0SlowDataRAdr, blankData },
+		{ flagReadMask | Shell1SlowDataRAdr, blankData },
+		{ flagReadMask | NoiseCouplekOutRAdr, blankData },
+		{ flagReadMask | PropConstRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecdot0KOutRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecdot1KOutRAdr, blankData },
+		{ flagReadMask | Cav0Cav4Elecdot2KOutRAdr, blankData },
+		{ flagReadMask | Digdsprsmcav0Cav4ElecouterProd0KOutRAdr, blankData },
+		{ flagReadMask | Cav0Cav4ElecouterProd1KOutRAdr, blankData },
+		{ flagReadMask | C0Cav4ElecouterProd2KOutRAdr, blankData },
+		{ flagReadMask | Cav0PiezoCouplekOutRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecdot0KOutRAdr, blankData },
+		{ flagReadMask | Cav1Cav4Elecdot1KOutRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecdot2KOutRAdr, blankData },
+		{ flagReadMask | Rsmcav1Cav4ElecouterProd0KOutRAdr, blankData },
+		{ flagReadMask | Cav1Cav4ElecouterProd1KOutRAdr, blankData },
+		{ flagReadMask | C1Cav4ElecouterProd2KOutRAdr, blankData },
+		{ flagReadMask | C1PiezoCouplekOutRAdr, blankData },
+		{ flagReadMask | C0DelayPcXxxRAdr, blankData },
+		{ flagReadMask | C1DelayPcXxxRAdr, blankData },
+		{ flagReadMask | C0DsppiezosfConstsRAdr, blankData },
+		{ flagReadMask | Rsmshell1DsppiezosfConstsRAdr, blankData },
+		{ flagReadMask | Shell0DspfdbkCorempProccoeffRAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorempProclimRAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorempProcsetmp0RAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorempProcsetmp1RAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorempProcsetmp2RAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorempProcsetmp3RAdr, blankData },
+		{ flagReadMask | Digdsprsmshell1DspfdbkCorempProccoeffRAdr, blankData },
+		{ flagReadMask | C1DspfdbkCorempProclimRAdr, blankData },
+		{ flagReadMask | Shell1DspfdbkCorempProcsetmp0RAdr, blankData },
+		{ flagReadMask | Shell1DspfdbkCorempProcsetmp1RAdr, blankData },
+		{ flagReadMask | Shell1DspfdbkCorempProcsetmp2RAdr, blankData },
+		{ flagReadMask | Shell1DspfdbkCorempProcsetmp3RAdr, blankData },
+		{ flagReadMask | C0Cav4ElecdriveCoupleoutCouplingRAdr, blankData },
+		{ flagReadMask | Rsmcav0Cav4ElecdriveCoupleophoffRAdr, blankData },
+		{ flagReadMask | Cav0Cav4Elecmode0OcoupoutCouplingRAdr, blankData },
+		{ flagReadMask | Rsmcav0Cav4Elecmode0OcoupophoffRAdr, blankData },
+		{ flagReadMask | Cav0Cav4Elecmode1OcoupoutCouplingRAdr, blankData },
+		{ flagReadMask | Cav0Cav4Elecmode1OcoupophoffRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode2OcoupoutCouplingRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode2OcoupophoffRAdr, blankData },
+		{ flagReadMask | Cav1Cav4ElecdriveCoupleoutCouplingRAdr, blankData },
+		{ flagReadMask | C1Cav4ElecdriveCoupleophoffRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode0OcoupoutCouplingRAdr, blankData },
+		{ flagReadMask | Cav1Cav4Elecmode0OcoupophoffRAdr, blankData },
+		{ flagReadMask | Cav1Cav4Elecmode1OcoupoutCouplingRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode1OcoupophoffRAdr, blankData },
+		{ flagReadMask | Rsmcav1Cav4Elecmode2OcoupoutCouplingRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode2OcoupophoffRAdr, blankData },
+		{ flagReadMask | Digdsprsmshell0DsplpNotchlp1AkxRAdr, blankData },
+		{ flagReadMask | C0DsplpNotchlp1AkyRAdr, blankData },
+		{ flagReadMask | Rsmshell0DsplpNotchlp1BkxRAdr, blankData },
+		{ flagReadMask | C0DsplpNotchlp1BkyRAdr, blankData },
+		{ flagReadMask | C1DsplpNotchlp1AkxRAdr, blankData },
+		{ flagReadMask | Atopdigdsprsmshell1DsplpNotchlp1AkyRAdr, blankData },
+		{ flagReadMask | C1DsplpNotchlp1BkxRAdr, blankData },
+		{ flagReadMask | C1DsplpNotchlp1BkyRAdr, blankData },
+		{ flagReadMask | AdcMmcmRAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | BanyanMaskRAdr, blankData },
+		{ flagReadMask | BitslipRAdr, blankData },
+		{ flagReadMask | ClkStatusWeRAdr, blankData },
+		{ flagReadMask | DigcfgidelayctrlResetRRAdr, blankData },
+		{ flagReadMask | H0D0A0D0ARAdr, blankData },
+		{ flagReadMask | MmcmResetRRAdr, blankData },
+		{ flagReadMask | PeriphConfigRAdr, blankData },
+		{ flagReadMask | PhasexTrigRAdr, blankData },
+		{ flagReadMask | DigcfgrawadcTrigRAdr, blankData },
+		{ flagReadMask | ScanTriggerWeRAdr, blankData },
+		{ flagReadMask | ScannerDebugRAdr, blankData },
+		{ flagReadMask | SyncAd7794CsetRAdr, blankData },
+		{ flagReadMask | DigcfgsyncTps62210CsetRAdr, blankData },
+		{ flagReadMask | AdcTestModeRAdr, blankData },
+		{ flagReadMask | AdcTestResetRAdr, blankData },
+		{ flagReadMask | DigdspamplitudeRAdr, blankData },
+		{ flagReadMask | AverageLenRAdr, blankData },
+		{ flagReadMask | BufTrigRAdr, blankData },
+		{ flagReadMask | CicPeriodRAdr, blankData },
+		{ flagReadMask | CicShiftRAdr, blankData },
+		{ flagReadMask | CircleBufFlipRAdr, blankData },
+		{ flagReadMask | DacDdsResetRAdr, blankData },
+		{ flagReadMask | DigdspdacModeRAdr, blankData },
+		{ flagReadMask | DdsaModuloRAdr, blankData },
+		{ flagReadMask | DdsaPhstepHRAdr, blankData },
+		{ flagReadMask | DigdspddsaPhstepLRAdr, blankData },
+		{ flagReadMask | HistCountWStrobeRAdr, blankData },
+		{ flagReadMask | LlrfDspDacEnRAdr, blankData },
+		{ flagReadMask | LoAmpRAdr, blankData },
+		{ flagReadMask | DigdspmoduloRAdr, blankData },
+		{ flagReadMask | DigdspphaseStepHRAdr, blankData },
+		{ flagReadMask | PhaseStepLRAdr, blankData },
+		{ flagReadMask | CavSelRAdr, blankData },
+		{ flagReadMask | PrlCfgRAdr, blankData },
+		{ flagReadMask | PrcDspprlGainRAdr, blankData },
+		{ flagReadMask | Beam0ModuloRAdr, blankData },
+		{ flagReadMask | Rsmbeam0PhaseInitRAdr, blankData },
+		{ flagReadMask | C0PhaseStepRAdr, blankData },
+		{ flagReadMask | C1ModuloRAdr, blankData },
+		{ flagReadMask | C1PhaseInitRAdr, blankData },
+		{ flagReadMask | Rsmbeam1PhaseStepRAdr, blankData },
+		{ flagReadMask | Cav4MechprngivaRAdr, blankData },
+		{ flagReadMask | Rsmcav4MechprngivbRAdr, blankData },
+		{ flagReadMask | Cav4MechprngrandomRunRAdr, blankData },
+		{ flagReadMask | Cav0ACavoffsRAdr, blankData },
+		{ flagReadMask | C0AForoffsRAdr, blankData },
+		{ flagReadMask | C0ARfloffsRAdr, blankData },
+		{ flagReadMask | C0AmpLpbwRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecfq0CoarseFreqRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecfq1CoarseFreqRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecfq2CoarseFreqRAdr, blankData },
+		{ 0, 0 }, // This should stay on line 246, 176 registers from the start of this structure
+		{ flagReadMask | Rsmcav0Cav4Elecmode0BeamCouplingRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode0BwRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode0DriveCouplingRAdr, blankData },
+		{ flagReadMask | Atopdigdsprsmcav0Cav4Elecmode1BeamCouplingRAdr, blankData },
+		{ flagReadMask | Cav0Cav4Elecmode1BwRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode1DriveCouplingRAdr, blankData },
+		{ flagReadMask | Atopdigdsprsmcav0Cav4Elecmode2BeamCouplingRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode2BwRAdr, blankData },
+		{ flagReadMask | C0Cav4Elecmode2DriveCouplingRAdr, blankData },
+		{ flagReadMask | C0Cav4ElecmoduloRAdr, blankData },
+		{ flagReadMask | Cav0Cav4ElecphaseStepRAdr, blankData },
+		{ flagReadMask | C0ComprsatCtlRAdr, blankData },
+		{ flagReadMask | Cav0PrngivaRAdr, blankData },
+		{ flagReadMask | C0PrngivbRAdr, blankData },
+		{ flagReadMask | C0PrngrandomRunRAdr, blankData },
+		{ flagReadMask | C1ACavoffsRAdr, blankData },
+		{ flagReadMask | Digdsprsmcav1AForoffsRAdr, blankData },
+		{ flagReadMask | C1ARfloffsRAdr, blankData },
+		{ flagReadMask | Rsmcav1AmpLpbwRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecfq0CoarseFreqRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecfq1CoarseFreqRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecfq2CoarseFreqRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode0BeamCouplingRAdr, blankData },
+		{ flagReadMask | Cav1Cav4Elecmode0BwRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode0DriveCouplingRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode1BeamCouplingRAdr, blankData },
+		{ flagReadMask | Rsmcav1Cav4Elecmode1BwRAdr, blankData },
+		{ flagReadMask | C1Cav4Elecmode1DriveCouplingRAdr, blankData },
+		{ flagReadMask | Rsmcav1Cav4Elecmode2BeamCouplingRAdr, blankData },
+		{ flagReadMask | Cav1Cav4Elecmode2BwRAdr, blankData },
+		{ flagReadMask | C1Cav4ElecmoduloRAdr, blankData },
+		{ flagReadMask | C1Cav4ElecphaseStepRAdr, blankData },
+		{ flagReadMask | Rsmcav1ComprsatCtlRAdr, blankData },
+		{ flagReadMask | C1PrngivaRAdr, blankData },
+		{ flagReadMask | Cav1PrngivbRAdr, blankData },
+		{ flagReadMask | C1PrngrandomRunRAdr, blankData },
+		{ flagReadMask | RsmdacIqPhaseRAdr, blankData },
+		{ flagReadMask | C0DspchanKeepRAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorecoarseScaleRAdr, blankData },
+		{ flagReadMask | Shell0DspfdbkCorempProcphOffsetRAdr, blankData },
+		{ flagReadMask | Shell0DspfdbkCorempProcselEnRAdr, blankData },
+		{ flagReadMask | C0DspfdbkCorempProcselThreshRAdr, blankData },
+		{ flagReadMask | Shell0DspmoduloRAdr, blankData },
+		{ flagReadMask | Shell0DspphaseStepRAdr, blankData },
+		{ flagReadMask | C0DsppiezopiezoDcRAdr, blankData },
+		{ flagReadMask | Shell0DsptagRAdr, blankData },
+		{ flagReadMask | C0DspuseFiberIqRAdr, blankData },
+		{ flagReadMask | C0DspwaveSampPerRAdr, blankData },
+		{ flagReadMask | C0DspwaveShiftRAdr, blankData },
+		{ flagReadMask | Shell1DspchanKeepRAdr, blankData },
+		{ flagReadMask | C1DspfdbkCorecoarseScaleRAdr, blankData },
+		{ flagReadMask | C1DspfdbkCorempProcphOffsetRAdr, blankData },
+		{ flagReadMask | C1DspfdbkCorempProcselEnRAdr, blankData },
+		{ flagReadMask | C1DspfdbkCorempProcselThreshRAdr, blankData },
+		{ flagReadMask | C1DspmoduloRAdr, blankData },
+		{ flagReadMask | C1DspphaseStepRAdr, blankData },
+		{ flagReadMask | C1DsppiezopiezoDcRAdr, blankData },
+		{ flagReadMask | C1DsptagRAdr, blankData },
+		{ flagReadMask | C1DspuseFiberIqRAdr, blankData },
+		{ flagReadMask | C1DspwaveSampPerRAdr, blankData },
+		{ flagReadMask | Shell1DspwaveShiftRAdr, blankData },
+		{ flagReadMask | AtopdigdsprewindRAdr, blankData },
+		{ flagReadMask | AmpstepRAdr, blankData },
+		{ flagReadMask | SsaStimEnRAdr, blankData },
+		{ flagReadMask | SsaStimgPeriodRAdr, blankData },
+		{ flagReadMask | SsaStimpertstepRAdr, blankData },
+		{ flagReadMask | DigdsptraceKeepRAdr, blankData },
+		{ flagReadMask | TraceResetWeRAdr, blankData },
+		{ flagReadMask | TrigInternalRAdr, blankData },
+		{ flagReadMask | TrigModeRAdr, blankData },
+		{ flagReadMask | Wave0SrcRAdr, blankData },
+		{ flagReadMask | Wave1SrcRAdr, blankData },
+		{ flagReadMask | DomainJumpRealignRAdr, blankData },
+		{ flagReadMask | IccCfgRAdr, blankData },
+		{ flagReadMask | QsfpI2CRegRAdr, blankData },
+		{ flagReadMask | SfpAddressSetRAdr, blankData },
+		{ flagReadMask | TagNowRAdr, blankData },
 	};
 
     printf(" polled register msg size is %d.\n", (int) PolledRegMsgSize_);
@@ -389,6 +417,7 @@ asynStatus scllrfPRCextra::writeInt32Array(asynUser *pasynUser, epicsInt32 *valu
 	uint32_t uRegAddr;
     const char *paramName;
 
+    printf("%s: %d elements\n", __PRETTY_FUNCTION__, (int) nElements);
 	//getIntegerParam(P_ArrayLength, &nCopy);
 	//if ((int) nElements < nCopy)
 	//	nCopy = (int) nElements;
@@ -575,13 +604,22 @@ void scllrfPRCextra::reqOneWaveform(FpgaReg (*readWaveformsMsg)[waveSegmentSize]
 void scllrfPRCextra::waveformRequester()
 {
 	epicsEventWaitStatus status;
+//	FpgaReg traceAck[5] =
+//	{
+//			{0,0},
+//			{TraceResetWeWAdr,1},
+//			{BufTrigWAdr,0},
+//			{BufTrigWAdr,1},
+//			{BufTrigWAdr,0}
+//	};
+
 	FpgaReg traceAck[5] =
 	{
 			{0,0},
-			{DigDspTraceResetWeWAdr,1},
-			{DigDspBufTrigWAdr,0},
-			{DigDspBufTrigWAdr,1},
-			{DigDspBufTrigWAdr,0}
+			{CircleBufFlipWAdr,1},
+			{CircleBufFlipWAdr,2},
+			{CircleBufFlipRAdr | flagReadMask,1},
+			{CircleBufFlipRAdr | flagReadMask,2},
 	};
 	//printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
     htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
@@ -677,7 +715,7 @@ asynStatus scllrfPRCextra::processWaveReadback(const FpgaReg *pFromFpga)
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
 		// Amplitude = sqrt(I^2+Q^2)
-		pWave16bitA_[waveNumber][waveIndex] = (epicsInt16) sqrt(pWave16bitI_[waveNumber][waveIndex]^2+pWave16bitQ_[waveNumber][waveIndex]^2);
+		//pWave16bitA_[waveNumber][waveIndex] = (epicsInt16) sqrt(pWave16bitI_[waveNumber][waveIndex]^2+pWave16bitQ_[waveNumber][waveIndex]^2);
 		// phase = arctan(Q/I)
 		break;
 
@@ -705,7 +743,7 @@ asynStatus scllrfPRCextra::processWaveReadback(const FpgaReg *pFromFpga)
 		break;
 
 	case 2:
-		pWave22bitI_[waveNumber][waveIndex] = 
+		pWave22bitI_[waveNumber][waveIndex] =
                      ((epicsInt32) pFromFpga->data) >> 10;
         //             (epicsInt32) signextend<signed int,22>(pFromFpga->data);
 
@@ -727,7 +765,7 @@ asynStatus scllrfPRCextra::processWaveReadback(const FpgaReg *pFromFpga)
 		break;
 
 	case 3:
-		pWave22bitQ_[waveNumber][waveIndex] = 
+		pWave22bitQ_[waveNumber][waveIndex] =
                      ((epicsInt32) pFromFpga->data) >> 10;
         //             (epicsInt32) signextend<signed int,22>(pFromFpga->data);
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
@@ -804,10 +842,10 @@ void scllrfPRCextra::singleMessageQueuer()
 //	static FpgaReg traceAck[] =
 //	{
 //			{0,0},
-////			{DigDspTraceResetWeWAdr,1},
-//			{DigDspBufTrigWAdr,0},
-//			{DigDspBufTrigWAdr,1},
-//			{DigDspBufTrigWAdr,0}
+////			{TraceResetWeWAdr,1},
+//			{BufTrigWAdr,0},
+//			{BufTrigWAdr,1},
+//			{BufTrigWAdr,0}
 //	};
 //	//printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
 //    htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
@@ -904,33 +942,55 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 				(unsigned ) pFromFpga->data & TraceStatus1Mask);
 	break;
 
-    case DigDspTraceKeepRAdr|flagReadMask:
-	tmpData = pFromFpga->data & DigDspTraceKeepMask;
-//    printf("%s got data 0x%x for DigDspTraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
-		status = (asynStatus) setIntegerParam(p_DigDspTraceKeepR,
-				(pFromFpga->data & DigDspTraceKeepMask));
+    case DigdsptraceKeepRAdr|flagReadMask:
+	tmpData = pFromFpga->data & DigdsptraceKeepMask;
+//    printf("%s got data 0x%x for DigdsptraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
+		status = (asynStatus) setIntegerParam(p_DigdsptraceKeepR,
+				(pFromFpga->data & DigdsptraceKeepMask));
 		// Count the number of bits set
 		for (nchan_ = 0; tmpData; nchan_++)
 		{
 		  tmpData &= tmpData - 1; // clear the least significant bit set
 		}
 		setIntegerParam(p_IQNActive, nchan_);
-//	    printf("%s DigDspTraceKeepRAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
+//	    printf("%s DigdsptraceKeepRAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceKeepRString,
-				(unsigned ) pFromFpga->data & DigDspTraceKeepMask);
+				DigdsptraceKeepRString,
+				(unsigned ) pFromFpga->data & DigdsptraceKeepMask);
+	break;
+
+    case CircleBufFlipRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_CircleBufFlipR,
+				(pFromFpga->data & CircleBufFlipMask));
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				CircleBufFlipRString,
+				(unsigned ) pFromFpga->data & CircleBufFlipMask);
+	break;
+
+    case LlrfCircleReadyRAdr|flagReadMask:
+		status = (asynStatus) setIntegerParam(p_LlrfCircleReadyR,
+				(pFromFpga->data & LlrfCircleReadyMask));
+		if ((pFromFpga->data & 0x1) || (pFromFpga->data & 0x2))
+		{
+			waveIsReady = true;
+		}
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				LlrfCircleReadyRString,
+				(unsigned ) pFromFpga->data & LlrfCircleReadyMask);
 	break;
 
 	default:
 		if( wavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= wavesEnd )
 		{
-			printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
+			//printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
 			processWaveReadback(pFromFpga);
 		}
 		else
 		{
-                        printf("%s passing processing of register 0c%x to parent class\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask));
+                       // printf("%s passing processing of register 0c%x to parent class\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask));
 			status = scllrfPRCDriver::processRegReadback(pFromFpga, waveIsReady);
 		}
 		break;
@@ -964,55 +1024,67 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
-    case DigDspBufTrigWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspBufTrigW, valueSet);
-		if( (valueSet[0] & DigDspBufTrigMask) == (pFromFpga->data & DigDspBufTrigMask))
+    case BufTrigWAdr:
+		status = (asynStatus) getIntegerParam(p_BufTrigW, valueSet);
+		if( (valueSet[0] & BufTrigMask) == (pFromFpga->data & BufTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspBufTrigWString, (unsigned ) pFromFpga->data & DigDspBufTrigMask);
+				BufTrigWString, (unsigned ) pFromFpga->data & BufTrigMask);
 		else
 		{
 			// We don't care, since this is typically part of a canned sequence of writes
 		}
 
 		break;
-    case DigDspTraceKeepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTraceKeepW, valueSet);
-		if( (valueSet[0] & DigDspTraceKeepMask) == (pFromFpga->data & DigDspTraceKeepMask))
+    case DigdsptraceKeepWAdr:
+		status = (asynStatus) getIntegerParam(p_DigdsptraceKeepW, valueSet);
+		if( (valueSet[0] & DigdsptraceKeepMask) == (pFromFpga->data & DigdsptraceKeepMask))
 		{		// Count the number of bits set
-			tmpData = (pFromFpga->data & DigDspTraceKeepMask);
+			tmpData = (pFromFpga->data & DigdsptraceKeepMask);
 			for (nchan_ = 0; tmpData; nchan_++)
 			{
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_IQNActive, nchan_);
-		    printf("%s DigDspTraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
+		    printf("%s DigdsptraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceKeepWString, (unsigned ) pFromFpga->data & DigDspTraceKeepMask);
+				DigdsptraceKeepWString, (unsigned ) pFromFpga->data & DigdsptraceKeepMask);
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceKeepWString, valueSet[0] & DigDspTraceKeepMask, (unsigned ) pFromFpga->data & DigDspTraceKeepMask);
+				DigdsptraceKeepWString, valueSet[0] & DigdsptraceKeepMask, (unsigned ) pFromFpga->data & DigdsptraceKeepMask);
 			status = asynError;
-			setParamStatus(p_DigDspTraceKeepW, status);
+			setParamStatus(p_DigdsptraceKeepW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case DigDspTraceResetWeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTraceResetWeW, valueSet);
-		if( (valueSet[0] & DigDspTraceResetWeMask) == (pFromFpga->data & DigDspTraceResetWeMask))
+    case TraceResetWeWAdr:
+		status = (asynStatus) getIntegerParam(p_TraceResetWeW, valueSet);
+		if( (valueSet[0] & TraceResetWeMask) == (pFromFpga->data & TraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceResetWeWString, (unsigned ) pFromFpga->data & DigDspTraceResetWeMask);
+				TraceResetWeWString, (unsigned ) pFromFpga->data & TraceResetWeMask);
 		else
 		{
 			// We don't care, since there are typically several writes to this per message: 0, 1, 0
+		}
+
+		break;
+    case CircleBufFlipWAdr:
+		status = (asynStatus) getIntegerParam(p_CircleBufFlipW, valueSet);
+		if( (valueSet[0] & CircleBufFlipMask) == (pFromFpga->data & CircleBufFlipMask))
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				CircleBufFlipWString, (unsigned ) pFromFpga->data & CircleBufFlipMask);
+		else
+		{
+			// That's normal for this register
 		}
 
 		break;
@@ -1021,7 +1093,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 //		getIntegerParam(p_CommErrorCount, &errorCount);
 //		setIntegerParam(p_CommErrorCount, errorCount + 1);
 		status = scllrfPRCDriver::processRegWriteResponse(pFromFpga);
-		
+
 		break;
     }
 
