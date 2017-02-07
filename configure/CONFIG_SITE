@@ -24,8 +24,8 @@ CHECK_RELEASE = YES
 
 # If you only want to build for the host then uncomment the line below and no cross targets
 # will be built.  Remember EPICS will build for the HOST ARCH by default.
-#CROSS_COMPILER_TARGET_ARCHS =
-CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linuxRT_glibc-x86_64 linux-x86
+CROSS_COMPILER_TARGET_ARCHS =
+#CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linuxRT_glibc-x86_64 linux-x86
 
 # To install files into a location other than $(TOP) define
 #   INSTALL_LOCATION here.

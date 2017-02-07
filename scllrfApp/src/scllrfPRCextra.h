@@ -1,3 +1,4 @@
+
 #ifndef SCLLRFPRCEXTRA_DRIVER_H
 #define SCLLRFPRCEXTRA_DRIVER_H
 
@@ -38,8 +39,8 @@
 	//   1 * npt  16-bit I and Q
 	//   2 * npt  22-bit I
 	//   3 * npt  22-bit Q
-static const uint32_t wavesStart = 0x140000; // From FPGA design, base address
-static const uint32_t wavesEnd = 0x14ffff; // max possible
+static const uint32_t wavesStart = 0x170000; // From FPGA design, base address
+static const uint32_t wavesEnd = 0x170fff; // max possible
 static const unsigned waveBufferRegCount = wavesEnd - wavesStart + 1;
 static const unsigned maxWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
 static const unsigned waveBuffSize = waveBufferRegCount/4 + waveBufferRegCount/(maxMsgSize-sizeof(FpgaReg)); // divide by number of buffers
@@ -51,6 +52,36 @@ static const unsigned waveSegmentCount = 1 + (sizeof(FpgaReg) * waveBuffSize)
 /**< Size of each segment, in number of registers */
 static const unsigned waveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
 //		+ (waveBuffSize + waveSegmentCount) / waveSegmentCount;
+
+// Waveform data at 0x170000, "circle buffer"
+// CircleBufFlip register: write 1 to bit 0 or bit 1 to flip between the buffer
+// with ready data and the buffer that is filling, for cavities 0 or 1 respectively.
+// LlrfCircleReady register: bits 0 or 1 indicate that the active buffer is full
+// and ready to be read
+// shell_0_slow_data, shell_1_slow_data: status data that correlates with the
+// waveforms, should be read at the same time.
+// The sequence would be to wait for a bit in the LlrfCircleReady register to be set,
+// read the corresponding buffer, read shell_*_slow_data, then write a 1 to the bit in CircleBufFlip to
+// indicate that you're done reading that buffer and ready for data from the next
+//
+// Data is two 16 bit signed values per 32 bit register
+// First 16 is for one cavity, second for another cavity
+// C0DspChan_Keep Shell1DspChan_Keep, 12 bits to activate I or Q for 6 channels
+// Each of the above registers looks like:
+// msb _________________________________________________________________________________________ lsb
+// | Ch5 Q | Ch5 I | Ch4 Q | Ch4 I | Ch3 Q | Ch3 I | Ch2 Q | Ch2 I | Ch1 Q | Ch1 I | Ch0 Q | Ch0 I |
+// -------------------------------------------------------------------------------------------------
+// Data is interleaved, based on the number of active channels. For example, if C0 has Ch4 I/Q enabled,
+// and C1 has Ch5 and 4 I/Q enabled, it would be packed like:
+// | High 16 bits | Low 16 bits |
+// |   C1 Ch4 I   |   C0 Ch4 I  |
+// |   C1 Ch4 Q   |   C0 Ch4 Q  |
+// |   C1 Ch5 I   |   C0 Ch4 I  |
+// |   C1 Ch5 Q   |   C0 Ch4 Q  |
+// |   C1 Ch4 I   |   C0 Ch4 I  |
+// |   C1 Ch4 Q   |   C0 Ch4 Q  |
+// .....
+//
 
 /* Registers */
 
@@ -74,8 +105,8 @@ class scllrfPRCextra: public scllrfPRCDriver
 public:
 	scllrfPRCextra(const char *drvPortName, const char *netPortName);
 	virtual ~scllrfPRCextra();
-	asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
-	asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
+	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+	virtual asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
 
 	enum WavBitWidth { read22bit, read16bit };

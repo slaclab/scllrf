@@ -476,6 +476,9 @@ protected:
     int p_AdcTestWv4OutR;
     int p_BanyanBufR;
     int p_BanyanStatusR;
+    int p_Beam0ModuloR;
+    int p_Beam0ModuloW;
+    int p_BitslipR;
     int p_ClkPhDiffOutU2R;
     int p_ClkPhDiffOutU3R;
     int p_CrcErrorsR;
@@ -833,6 +836,7 @@ protected:
     int p_IdelayValueOutU3Bits39To20R;
     int p_LlspiResultR;
     int p_LlspiStatusR;
+    int p_LlspiWeR;
     int p_OWoR;
     int p_PhxDoutR;
     int p_PhxStatusR;
@@ -843,7 +847,39 @@ protected:
     int p_ScannerResultR;
     int p_SfpAddressSetR;
     int p_SfpAddressSetW;
+    int p_Shell0DspfdbkCorempProccoeffR;
+    int p_Shell0DspfdbkCorempProccoeffW;
+    int p_Shell0DspfdbkCorempProcphOffsetR;
+    int p_Shell0DspfdbkCorempProcphOffsetW;
+    int p_Shell0DspfdbkCorempProcselEnR;
+    int p_Shell0DspfdbkCorempProcselEnW;
+    int p_Shell0DspmoduloR;
+    int p_Shell0DspmoduloW;
+    int p_Shell0DspphaseStepR;
+    int p_Shell0DspphaseStepW;
+    int p_Shell0DsptagR;
+    int p_Shell0DsptagW;
+    int p_Shell1DspchanKeepR;
+    int p_Shell1DspchanKeepW;
+    int p_Shell1DspfdbkCorempProcsetmp0R;
+    int p_Shell1DspfdbkCorempProcsetmp0W;
+    int p_Shell1DspfdbkCorempProcsetmp1R;
+    int p_Shell1DspfdbkCorempProcsetmp1W;
+    int p_Shell1DspfdbkCorempProcsetmp2R;
+    int p_Shell1DspfdbkCorempProcsetmp2W;
+    int p_Shell1DspfdbkCorempProcsetmp3R;
+    int p_Shell1DspfdbkCorempProcsetmp3W;
+    int p_Shell1DspwaveShiftR;
+    int p_Shell1DspwaveShiftW;
+    int p_Shell0SlowDataR;
+    int p_Shell1SlowDataR;
     int p_SlowChainOutR;
+    int p_SsaStimgPeriodR;
+    int p_SsaStimgPeriodW;
+    int p_SsaStimpertstepR;
+    int p_SsaStimpertstepW;
+    int p_SsaStimEnR;
+    int p_SsaStimEnW;
     int p_TagNowR;
     int p_TagNowW;
     int p_TraceIBufR;
@@ -868,6 +904,7 @@ protected:
     	H0D0A0D0ARAdr = 0x00000003,
     	LlspiStatusRAdr = 0x00000004,
     	LlspiResultRAdr = 0x00000005,
+    	ClkStatusOutRAdr = 0x00000006,
     	FfffffffRAdr = 0x00000007,
     	FquencyAdcRAdr = 0x00000008,
     	Fquency4XoutRAdr = 0x00000009,
@@ -890,13 +927,17 @@ protected:
     	CtraceRunningRAdr = 0x0000001C,
     	FquencyGtxTxRAdr = 0x0000001D,
     	FquencyGtxRxRAdr = 0x0000001E,
+    	CtraceRunningRAdr = 0x0000001C,
+    	FrequencyGtxTxRAdr = 0x0000001D,
+    	FrequencyGtxRxRAdr = 0x0000001E,
     	HistStatusRAdr = 0x0000001F,
     	PhxStatusRAdr = 0x0000002E,
     	ClkPhDiffOutU2RAdr = 0x0000002F,
     	ClkPhDiffOutU3RAdr = 0x00000030,
     	CrcErrorsRAdr = 0x00000031,
-    	U15SpiRdbkRAdr = 0x00000038,
+    	CrcErrorsRAdr = 0x00000031,
     	U15SdoAddrRAdr = 0x00000038,
+    	U15SpiRdbkRAdr = 0x00000038,
     	U15SpiReadyRAdr = 0x00000039,
     	U15SdioAsSdoRAdr = 0x00000039,
     	U18SdoAddrRAdr = 0x0000003C,

@@ -322,6 +322,7 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 	uint32_t uRegAddr;
     const char *paramName;
 
+    printf("%s: %d elements\n", __PRETTY_FUNCTION__, (int) nElements);
 	//getIntegerParam(P_ArrayLength, &nCopy);
 	//if ((int) nElements < nCopy)
 	//	nCopy = (int) nElements;

@@ -80,6 +80,9 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(AdcTestWv4OutRString, asynParamInt32, &p_AdcTestWv4OutR);
     createParam(BanyanBufRString, asynParamInt32, &p_BanyanBufR);
     createParam(BanyanStatusRString, asynParamInt32, &p_BanyanStatusR);
+    createParam(Beam0ModuloRString, asynParamInt32, &p_Beam0ModuloR);
+    createParam(Beam0ModuloWString, asynParamInt32, &p_Beam0ModuloW);
+    createParam(BitslipRString, asynParamInt32, &p_BitslipR);
     createParam(ClkPhDiffOutU2RString, asynParamInt32, &p_ClkPhDiffOutU2R);
     createParam(ClkPhDiffOutU3RString, asynParamInt32, &p_ClkPhDiffOutU3R);
     createParam(CrcErrorsRString, asynParamInt32, &p_CrcErrorsR);
@@ -437,6 +440,7 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(IdelayValueOutU3Bits39To20RString, asynParamInt32, &p_IdelayValueOutU3Bits39To20R);
     createParam(LlspiResultRString, asynParamInt32, &p_LlspiResultR);
     createParam(LlspiStatusRString, asynParamInt32, &p_LlspiStatusR);
+    createParam(LlspiWeRString, asynParamInt32, &p_LlspiWeR);
     createParam(OWoRString, asynParamInt32, &p_OWoR);
     createParam(PhxDoutRString, asynParamInt32, &p_PhxDoutR);
     createParam(PhxStatusRString, asynParamInt32, &p_PhxStatusR);
@@ -447,7 +451,39 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(ScannerResultRString, asynParamInt32, &p_ScannerResultR);
     createParam(SfpAddressSetRString, asynParamInt32, &p_SfpAddressSetR);
     createParam(SfpAddressSetWString, asynParamInt32, &p_SfpAddressSetW);
+    createParam(Shell0DspfdbkCorempProccoeffRString, asynParamInt32, &p_Shell0DspfdbkCorempProccoeffR);
+    createParam(Shell0DspfdbkCorempProccoeffWString, asynParamInt32, &p_Shell0DspfdbkCorempProccoeffW);
+    createParam(Shell0DspfdbkCorempProcphOffsetRString, asynParamInt32, &p_Shell0DspfdbkCorempProcphOffsetR);
+    createParam(Shell0DspfdbkCorempProcphOffsetWString, asynParamInt32, &p_Shell0DspfdbkCorempProcphOffsetW);
+    createParam(Shell0DspfdbkCorempProcselEnRString, asynParamInt32, &p_Shell0DspfdbkCorempProcselEnR);
+    createParam(Shell0DspfdbkCorempProcselEnWString, asynParamInt32, &p_Shell0DspfdbkCorempProcselEnW);
+    createParam(Shell0DspmoduloRString, asynParamInt32, &p_Shell0DspmoduloR);
+    createParam(Shell0DspmoduloWString, asynParamInt32, &p_Shell0DspmoduloW);
+    createParam(Shell0DspphaseStepRString, asynParamInt32, &p_Shell0DspphaseStepR);
+    createParam(Shell0DspphaseStepWString, asynParamInt32, &p_Shell0DspphaseStepW);
+    createParam(Shell0DsptagRString, asynParamInt32, &p_Shell0DsptagR);
+    createParam(Shell0DsptagWString, asynParamInt32, &p_Shell0DsptagW);
+    createParam(Shell1DspchanKeepRString, asynParamInt32, &p_Shell1DspchanKeepR);
+    createParam(Shell1DspchanKeepWString, asynParamInt32, &p_Shell1DspchanKeepW);
+    createParam(Shell1DspfdbkCorempProcsetmp0RString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp0R);
+    createParam(Shell1DspfdbkCorempProcsetmp0WString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp0W);
+    createParam(Shell1DspfdbkCorempProcsetmp1RString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp1R);
+    createParam(Shell1DspfdbkCorempProcsetmp1WString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp1W);
+    createParam(Shell1DspfdbkCorempProcsetmp2RString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp2R);
+    createParam(Shell1DspfdbkCorempProcsetmp2WString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp2W);
+    createParam(Shell1DspfdbkCorempProcsetmp3RString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp3R);
+    createParam(Shell1DspfdbkCorempProcsetmp3WString, asynParamInt32, &p_Shell1DspfdbkCorempProcsetmp3W);
+    createParam(Shell1DspwaveShiftRString, asynParamInt32, &p_Shell1DspwaveShiftR);
+    createParam(Shell1DspwaveShiftWString, asynParamInt32, &p_Shell1DspwaveShiftW);
+    createParam(Shell0SlowDataRString, asynParamInt32, &p_Shell0SlowDataR);
+    createParam(Shell1SlowDataRString, asynParamInt32, &p_Shell1SlowDataR);
     createParam(SlowChainOutRString, asynParamInt32, &p_SlowChainOutR);
+    createParam(SsaStimgPeriodRString, asynParamInt32, &p_SsaStimgPeriodR);
+    createParam(SsaStimgPeriodWString, asynParamInt32, &p_SsaStimgPeriodW);
+    createParam(SsaStimpertstepRString, asynParamInt32, &p_SsaStimpertstepR);
+    createParam(SsaStimpertstepWString, asynParamInt32, &p_SsaStimpertstepW);
+    createParam(SsaStimEnRString, asynParamInt32, &p_SsaStimEnR);
+    createParam(SsaStimEnWString, asynParamInt32, &p_SsaStimEnW);
     createParam(TagNowRString, asynParamInt32, &p_TagNowR);
     createParam(TagNowWString, asynParamInt32, &p_TagNowW);
     createParam(TraceIBufRString, asynParamInt32, &p_TraceIBufR);
@@ -458,6 +494,8 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(Wv0OutRString, asynParamInt32, &p_Wv0OutR);
     createParam(Wv1OutRString, asynParamInt32, &p_Wv1OutR);
     createParam(WvformsAvailableRString, asynParamInt32, &p_WvformsAvailableR);
+    createParam(U15SpiRdbkRString, asynParamInt32, &p_U15SpiRdbkR);
+    createParam(U18SpiRdbkRString, asynParamInt32, &p_U18SpiRdbkR);
 
     // Message size is the number of read registers, plus 1 nonce for every 175 read registers
     PolledRegMsgSize_ = scllrfPRCReadRegCount + (scllrfPRCReadRegCount / 175) + 1;
@@ -803,7 +841,7 @@ asynStatus scllrfPRCDriver::functionToRegister(const int function, FpgaReg *pToF
     else
     if( function == p_AdcTestTrigCntR )
     {
-		pToFpga->addr = AdcTestTrigCntRAdr|flagReadMask;
+		pToFpga->addr = AtopdigdsprewindWAdr;
     }
     else
     if( function == p_AdcTestWv1OutR )

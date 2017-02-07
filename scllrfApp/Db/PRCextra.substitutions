@@ -1,5 +1,4 @@
-file PRCwaves.template
-{
+file PRCwaves.template {
 pattern { N, EGU }
         { 0, V   }
         { 1, V   }
@@ -11,7 +10,7 @@ pattern { N, EGU }
         { 7, V   }
 }
 
-file PRCextra.template
+file PRCmore.template
 {
 	{ NULL = NULL }
 }

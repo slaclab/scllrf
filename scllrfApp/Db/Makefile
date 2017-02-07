@@ -39,7 +39,6 @@ DB_INSTALLS += scllrfCommon.template
 DB_INSTALLS += scllrfINTRegisters.template
 DB_INSTALLS += scllrfPRCRegisters.template
 DB_INSTALLS += scllrfPRCRegisterAsync.db
-DB_INSTALLS += PRCextra.template
 DB_INSTALLS += scllrfRESRegisters.template
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
 DB_INSTALLS += ZZZextra.template
