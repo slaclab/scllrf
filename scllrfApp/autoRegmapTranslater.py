@@ -7,13 +7,13 @@ import re
 import time,os,struct,json,getopt
 
 if __name__ == "__main__":
-    with open ("live_prc_regmap.json") as regmapfile:
+    with open ("prc_regmap_epics.json") as regmapfile:
         regmap=json.load(regmapfile)
     regmapfile.close()
     
     # for names that contain a ',' these are really two values. Split them.
     find_reg = re.compile('([^,]+),([^,]+)')
-    find_bits = re.compile('(.*)\[(.*):(.*)\]')
+    find_bits = re.compile('(.*)_([0-9]*):([0-9]*)_')
     #find_second_reg = re.compile('(?<=,)[^,]+')
     expanded_regmap = {}
     for reg, val in regmap.iteritems():
@@ -21,8 +21,8 @@ if __name__ == "__main__":
             split_names = find_reg.match(reg)
             expanded_regmap[split_names.group(1)] = val
             expanded_regmap[split_names.group(2)] = val
-        elif '[' in reg:
-            new_reg = re.sub(r'(.*)\[(.*):(.*)\]', r'\1Bits\2to\3', reg)
+        elif ':' in reg:
+            new_reg = re.sub(r'(.*)_([0-9]*):([0-9]*)_', r'\1_Bits\2to\3', reg)
             expanded_regmap[new_reg] = val
         else:
             expanded_regmap[reg] = val
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     for reg, val in expanded_regmap.iteritems():
         regmap[re.sub(r'\W', r'_', str(reg))] = expanded_regmap[reg]
     
-    f=open("prc_regmap.py", 'w')
+    f=open("prc_regmap_new.py", 'w')
 
     f.write('d = { "name" : "scllrfPRC",\n')
     f.write("\t'registers': [\n")

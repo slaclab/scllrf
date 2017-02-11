@@ -29,6 +29,7 @@
 #include <limits>
 #include <netinet/in.h>
 #include <iostream>
+#include <initializer_list>
 using namespace std;
 #include <math.h>
 
@@ -155,7 +156,8 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[2];
+    FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
+    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
@@ -181,8 +183,8 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
                 "%s: found function=%d, name=%s, at address %d\n",
   			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
     		regSendBuf[1].data = (uint32_t) value;
-        	htonFpgaRegArray(regSendBuf, 2);
-        	sendRegRequest(regSendBuf, 2);
+        	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+        	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     	}
     	else
     	{
@@ -215,7 +217,9 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[2];
+    FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
+    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
+    int address;
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
@@ -226,6 +230,8 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
     getParamName(function, &paramName);
     asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
 			__PRETTY_FUNCTION__, function, paramName);
+    // Some registers have more than 1 "channel"
+    getAddress(pasynUser, &address);
 
     if (function == p_RunStop) {
 printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
@@ -238,11 +244,12 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     	if (status == asynSuccess) // Yes, this function is a register write
     	{
     		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: found function=%d, name=%s, at address %d\n",
-  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
+                "%s: found function=%d, name=%s, at address %d + %d\n",
+  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, address);
     		regSendBuf[1].data = (uint32_t) value;
-        	htonFpgaRegArray(regSendBuf, 2);
-        	sendRegRequest(regSendBuf, 2);
+    		regSendBuf[1].addr += (uint32_t) address;
+        	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+        	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     	}
     	else
     	{
@@ -275,7 +282,8 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[2];
+    FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
+    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
 
     epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
@@ -292,13 +300,13 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     			"%s: found function=%d, name=%s, at address %d\n",
 				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
     	regSendBuf[1].data = (uint32_t) *value;
-    	htonFpgaRegArray(regSendBuf, 2);
-    	sendRegRequest(regSendBuf, 2);
+    	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+    	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     }
     else
     {
     	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-    			"%s: function=%d, name=%s not a register, skip network request\n",
+    			"%s: function=%d, name=%s not a register read address, skip network request\n",
 				__PRETTY_FUNCTION__, function, paramName);
         status=asynPortDriver::readInt32(pasynUser, value);
     }
@@ -322,7 +330,6 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 	uint32_t uRegAddr;
     const char *paramName;
 
-    printf("%s: %d elements\n", __PRETTY_FUNCTION__, (int) nElements);
 	//getIntegerParam(P_ArrayLength, &nCopy);
 	//if ((int) nElements < nCopy)
 	//	nCopy = (int) nElements;

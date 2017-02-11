@@ -118,6 +118,8 @@ public:
 	virtual asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
 	virtual asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
+//	virtual asynStatus readInt32Array(asynUser *pasynUser, epicsInt32 *value,
+//			size_t nElements, size_t *nIn);
 	virtual asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
 
 	/* Define a polling mechanism.

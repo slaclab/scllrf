@@ -29,6 +29,7 @@
 #include "scllrfPRC.h"
 #include <epicsMessageQueue.h>
 
+static const unsigned maxChannel = 16; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
 // Waveform data is packed as 2D arrays, not one after the other
 // in the network data. See cmoc code "submodules/common_hdl/circle.txt" for more details.
@@ -39,21 +40,21 @@
 	//   1 * npt  16-bit I and Q
 	//   2 * npt  22-bit I
 	//   3 * npt  22-bit Q
-static const uint32_t wavesStart = 0x170000; // From FPGA design, base address
-static const uint32_t wavesEnd = 0x170fff; // max possible
-static const unsigned waveBufferRegCount = wavesEnd - wavesStart + 1;
-static const unsigned maxWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
-static const unsigned waveBuffSize = waveBufferRegCount/4 + waveBufferRegCount/(maxMsgSize-sizeof(FpgaReg)); // divide by number of buffers
+static const uint32_t traceIQWavesStart = 0x140000; // From FPGA design, base address
+static const uint32_t traceIQWavesEnd = 0x14ffff; // max possible
+static const unsigned traceIQWaveRegCount = traceIQWavesEnd - traceIQWavesStart + 1;
+static const unsigned maxTraceIQWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
+static const unsigned traceIQWaveBuffSize = traceIQWaveRegCount/4 + traceIQWaveRegCount/(maxMsgSize-sizeof(FpgaReg)); // divide by number of buffers
 /**< Waveform buffer is read in waveSegmentCount segments due to network packet size limits.
  *  1+ is an approximation of "round upwards". -sizeof(FpgaReg) makes space for the nonce */
-static const unsigned waveSegmentCount = 1 + (sizeof(FpgaReg) * waveBuffSize)
+static const unsigned traceIQWaveSegmentCount = 1 + (sizeof(FpgaReg) * traceIQWaveBuffSize)
 				/ (maxMsgSize - sizeof(FpgaReg));
 
 /**< Size of each segment, in number of registers */
-static const unsigned waveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
+static const unsigned traceIQWaveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
 //		+ (waveBuffSize + waveSegmentCount) / waveSegmentCount;
 
-// Waveform data at 0x170000, "circle buffer"
+// Waveform data at 0x170000 to 0x170fff, "circle buffer"
 // CircleBufFlip register: write 1 to bit 0 or bit 1 to flip between the buffer
 // with ready data and the buffer that is filling, for cavities 0 or 1 respectively.
 // LlrfCircleReady register: bits 0 or 1 indicate that the active buffer is full
@@ -106,11 +107,9 @@ public:
 	scllrfPRCextra(const char *drvPortName, const char *netPortName);
 	virtual ~scllrfPRCextra();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
-	virtual asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
-			size_t nElements);
 
-	enum WavBitWidth { read22bit, read16bit };
-	void waveformRequester(); // When signaled that waveforms are waiting, request them.
+	enum traceIQWavBitWidth { read22bit, read16bit };
+	void traceIQWaveformRequester(); // When signaled that waveforms are waiting, request them.
 	void singleMessageQueuer(); // When signaled that waveforms are waiting, request them.
 
 protected:
@@ -123,27 +122,27 @@ protected:
 	epicsMessageQueueId _singleMsgQId;
 
 
-	virtual asynStatus startWaveformRequester(); // For system startup
-	WavBitWidth wavBitWidth_;
-	FpgaReg pReqIQ16bAMsg_[waveSegmentCount][waveSegmentSize]; // Canned message to request 16 bit I/Q data, first npt_ points
-	FpgaReg pReqIQ16bBMsg_[waveSegmentCount][waveSegmentSize]; // Canned message to request 16 bit I/Q data, last npt_ points
-	FpgaReg pReqI22bMsg_[waveSegmentCount][waveSegmentSize]; // Canned message to request 22 bit I data
-	FpgaReg pReqQ22bMsg_[waveSegmentCount][waveSegmentSize]; // Canned message to request 22 bit Q data
+	virtual asynStatus startTraceIQWaveformRequester(); // For system startup
+	traceIQWavBitWidth wavBitWidth_;
+	FpgaReg pReqIQ16bAMsg_[traceIQWaveSegmentCount][traceIQWaveSegmentSize]; // Canned message to request 16 bit I/Q data, first npt_ points
+	FpgaReg pReqIQ16bBMsg_[traceIQWaveSegmentCount][traceIQWaveSegmentSize]; // Canned message to request 16 bit I/Q data, last npt_ points
+	FpgaReg pReqI22bMsg_[traceIQWaveSegmentCount][traceIQWaveSegmentSize]; // Canned message to request 22 bit I data
+	FpgaReg pReqQ22bMsg_[traceIQWaveSegmentCount][traceIQWaveSegmentSize]; // Canned message to request 22 bit Q data
 	size_t npt_; /**< Number of points in each waveform buffer */
 	unsigned int nchan_;
-	void fillWavReqMsg();
-	void reqOneWaveform(FpgaReg (*readWaveformsMsg)[waveSegmentSize]);
+	void fillTraceIQWavReqMsg();
+	void reqTraceIQWWaveform(FpgaReg (*readTraceIQWaveformsMsg)[traceIQWaveSegmentSize]);
 	//	std::ostringstream strGitSHA1;
-	epicsInt16 pWave16bitI_[maxWavesCount][waveBuffSize *2];
-	epicsInt16 pWave16bitQ_[maxWavesCount][waveBuffSize *2];
-	epicsInt16 pWave16bitA_[maxWavesCount][waveBuffSize *2];
-	epicsInt16 pWave16bitP_[maxWavesCount][waveBuffSize *2];
-	epicsInt32 pWave22bitI_[maxWavesCount][waveBuffSize];
-	epicsInt32 pWave22bitQ_[maxWavesCount][waveBuffSize];
-	epicsInt32 pWave22bitA_[maxWavesCount][waveBuffSize];
-	epicsInt32 pWave22bitP_[maxWavesCount][waveBuffSize];
+	epicsInt16 pWave16bitI_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];
+	epicsInt16 pWave16bitQ_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];
+	epicsInt16 pWave16bitA_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];
+	epicsInt16 pWave16bitP_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];
+	epicsInt32 pWave22bitI_[maxTraceIQWavesCount][traceIQWaveBuffSize];
+	epicsInt32 pWave22bitQ_[maxTraceIQWavesCount][traceIQWaveBuffSize];
+	epicsInt32 pWave22bitA_[maxTraceIQWavesCount][traceIQWaveBuffSize];
+	epicsInt32 pWave22bitP_[maxTraceIQWavesCount][traceIQWaveBuffSize];
 
-	virtual asynStatus processWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
+	virtual asynStatus processTraceIQWaveReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
 //	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
 
 

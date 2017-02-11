@@ -1,4 +1,4 @@
-record(longin, "$(P)GET_HELL_R")
+record(ai, "$(P)GET_HELL_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -6,10 +6,11 @@ record(longin, "$(P)GET_HELL_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_O_WO_R")
+record(ai, "$(P)GET_O_WO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -17,10 +18,11 @@ record(longin, "$(P)GET_O_WO_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_RLD__R")
+record(ai, "$(P)GET_RLD__R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -28,21 +30,23 @@ record(longin, "$(P)GET_RLD__R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_H0D0A0D0A_R")
+record(ai, "$(P)GET_D0A0D0A_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) H0D0A0D0A_R")
+    field( INP,  "@asyn($(PORT),0) D0A0D0A_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_LLSPI_STATUS_R")
+record(ai, "$(P)GET_LLSPI_STATUS_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -50,10 +54,11 @@ record(longin, "$(P)GET_LLSPI_STATUS_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_LLSPI_RESULT_R")
+record(ai, "$(P)GET_LLSPI_RESULT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -61,10 +66,23 @@ record(longin, "$(P)GET_LLSPI_RESULT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FFFFFFFF_R")
+record(ai, "$(P)GET_CLK_STATUS_OUT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CLK_STATUS_OUT_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000003")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_FFFFFFFF_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -72,208 +90,227 @@ record(longin, "$(P)GET_FFFFFFFF_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FQUENCY_ADC_R")
+record(ai, "$(P)GET_FREQUENCY_ADC_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) FQUENCY_ADC_R")
+    field( INP,  "@asyn($(PORT),0) FREQUENCY_ADC_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FQUENCY_4XOUT_R")
+record(ai, "$(P)GET_FREQUENCY_4XOUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) FQUENCY_4XOUT_R")
+    field( INP,  "@asyn($(PORT),0) FREQUENCY_4XOUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FQUENCY_CLKOUT3_R")
+record(ai, "$(P)GET_FREQUENCY_CLKOUT3_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) FQUENCY_CLKOUT3_R")
+    field( INP,  "@asyn($(PORT),0) FREQUENCY_CLKOUT3_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FQUENCY_DCO_R")
+record(ai, "$(P)GET_FREQUENCY_DCO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) FQUENCY_DCO_R")
+    field( INP,  "@asyn($(PORT),0) FREQUENCY_DCO_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U2DOUTBITS31TO0_R")
+record(ai, "$(P)GET_U2DOUT_BITS31TO0_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) U2DOUTBITS31TO0_R")
+    field( INP,  "@asyn($(PORT),0) U2DOUT_BITS31TO0_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U2DOUTBITS63TO32_R")
+record(ai, "$(P)GET_U2DOUT_BITS63TO32_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) U2DOUTBITS63TO32_R")
+    field( INP,  "@asyn($(PORT),0) U2DOUT_BITS63TO32_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_IDELAY_VALUE_OUT_U2BITS19TO0_R")
+record(ai, "$(P)GET_IDELAY_VALUE_OUT_U2_BITS19TO0_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U2BITS19TO0_R")
+    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U2_BITS19TO0_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_IDELAY_VALUE_OUT_U2BITS39TO20_R")
+record(ai, "$(P)GET_IDELAY_VALUE_OUT_U2_BITS39TO20_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U2BITS39TO20_R")
+    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U2_BITS39TO20_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U3DOUTBITS31TO0_R")
+record(ai, "$(P)GET_U3DOUT_BITS31TO0_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) U3DOUTBITS31TO0_R")
+    field( INP,  "@asyn($(PORT),0) U3DOUT_BITS31TO0_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U3DOUTBITS63TO32_R")
+record(ai, "$(P)GET_U3DOUT_BITS63TO32_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) U3DOUTBITS63TO32_R")
+    field( INP,  "@asyn($(PORT),0) U3DOUT_BITS63TO32_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_IDELAY_VALUE_OUT_U3BITS19TO0_R")
+record(ai, "$(P)GET_IDELAY_VALUE_OUT_U3_BITS19TO0_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U3BITS19TO0_R")
+    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U3_BITS19TO0_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_IDELAY_VALUE_OUT_U3BITS39TO20_R")
+record(ai, "$(P)GET_IDELAY_VALUE_OUT_U3_BITS39TO20_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U3BITS39TO20_R")
+    field( INP,  "@asyn($(PORT),0) IDELAY_VALUE_OUT_U3_BITS39TO20_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_WV0_OUT_R")
+record(ai, "$(P)GET_WAVE0_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) WV0_OUT_R")
+    field( INP,  "@asyn($(PORT),0) WAVE0_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_WV1_OUT_R")
+record(ai, "$(P)GET_WAVE1_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) WV1_OUT_R")
+    field( INP,  "@asyn($(PORT),0) WAVE1_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_ADC_TEST_WV1_OUT_R")
+record(ai, "$(P)GET_ADC_TEST_WAVE1_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) ADC_TEST_WV1_OUT_R")
+    field( INP,  "@asyn($(PORT),0) ADC_TEST_WAVE1_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_ADC_TEST_WV2_OUT_R")
+record(ai, "$(P)GET_ADC_TEST_WAVE2_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) ADC_TEST_WV2_OUT_R")
+    field( INP,  "@asyn($(PORT),0) ADC_TEST_WAVE2_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_ADC_TEST_WV3_OUT_R")
+record(ai, "$(P)GET_ADC_TEST_WAVE3_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) ADC_TEST_WV3_OUT_R")
+    field( INP,  "@asyn($(PORT),0) ADC_TEST_WAVE3_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_ADC_TEST_WV4_OUT_R")
+record(ai, "$(P)GET_ADC_TEST_WAVE4_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) ADC_TEST_WV4_OUT_R")
+    field( INP,  "@asyn($(PORT),0) ADC_TEST_WAVE4_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_CTRACE_RUNNING_R")
+record(ai, "$(P)GET_CTRACE_RUNNING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -281,32 +318,35 @@ record(longin, "$(P)GET_CTRACE_RUNNING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00003FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FQUENCY_GTX_TX_R")
+record(ai, "$(P)GET_FREQUENCY_GTX_TX_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) FQUENCY_GTX_TX_R")
+    field( INP,  "@asyn($(PORT),0) FREQUENCY_GTX_TX_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_FQUENCY_GTX_RX_R")
+record(ai, "$(P)GET_FREQUENCY_GTX_RX_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) FQUENCY_GTX_RX_R")
+    field( INP,  "@asyn($(PORT),0) FREQUENCY_GTX_RX_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_HIST_STATUS_R")
+record(ai, "$(P)GET_HIST_STATUS_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -314,43 +354,47 @@ record(longin, "$(P)GET_HIST_STATUS_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_PHX_STATUS_R")
+record(ai, "$(P)GET_PHASEX_STATUS_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) PHX_STATUS_R")
+    field( INP,  "@asyn($(PORT),0) PHASEX_STATUS_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_CLK_PH_DIFF_OUT_U2_R")
+record(ai, "$(P)GET_CLK_PHASE_DIFF_OUT_U2_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) CLK_PH_DIFF_OUT_U2_R")
+    field( INP,  "@asyn($(PORT),0) CLK_PHASE_DIFF_OUT_U2_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00001FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_CLK_PH_DIFF_OUT_U3_R")
+record(ai, "$(P)GET_CLK_PHASE_DIFF_OUT_U3_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) CLK_PH_DIFF_OUT_U3_R")
+    field( INP,  "@asyn($(PORT),0) CLK_PHASE_DIFF_OUT_U3_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00001FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_CRC_ERRORS_R")
+record(ai, "$(P)GET_CRC_ERRORS_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -358,10 +402,11 @@ record(longin, "$(P)GET_CRC_ERRORS_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET__U15_SPI_RDBK_R")
+record(ai, "$(P)GET__U15_SPI_RDBK_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -369,10 +414,11 @@ record(longin, "$(P)GET__U15_SPI_RDBK_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U15_SDO_ADDR_R")
+record(ai, "$(P)GET_U15_SDO_ADDR_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -380,10 +426,11 @@ record(longin, "$(P)GET_U15_SDO_ADDR_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U15_SPI_READY_R")
+record(ai, "$(P)GET_U15_SPI_READY_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -391,10 +438,11 @@ record(longin, "$(P)GET_U15_SPI_READY_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U15_SDIO_AS_SDO_R")
+record(ai, "$(P)GET_U15_SDIO_AS_SDO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -402,10 +450,11 @@ record(longin, "$(P)GET_U15_SDIO_AS_SDO_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U18_SDO_ADDR_R")
+record(ai, "$(P)GET_U18_SDO_ADDR_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -413,10 +462,11 @@ record(longin, "$(P)GET_U18_SDO_ADDR_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET__U18_SPI_RDBK_R")
+record(ai, "$(P)GET__U18_SPI_RDBK_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -424,10 +474,11 @@ record(longin, "$(P)GET__U18_SPI_RDBK_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U18_SDIO_AS_SDO_R")
+record(ai, "$(P)GET_U18_SDIO_AS_SDO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -435,10 +486,11 @@ record(longin, "$(P)GET_U18_SDIO_AS_SDO_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_U18_SPI_READY_R")
+record(ai, "$(P)GET_U18_SPI_READY_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -446,10 +498,11 @@ record(longin, "$(P)GET_U18_SPI_READY_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_ADC_TEST_TRIG_CNT_R")
+record(ai, "$(P)GET_ADC_TEST_TRIG_CNT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -457,21 +510,23 @@ record(longin, "$(P)GET_ADC_TEST_TRIG_CNT_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_WVFORMS_AVAILABLE_R")
+record(ai, "$(P)GET_WAVEFORMS_AVAILABLE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) WVFORMS_AVAILABLE_R")
+    field( INP,  "@asyn($(PORT),0) WAVEFORMS_AVAILABLE_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_BANYAN_STATUS_R")
+record(ai, "$(P)GET_BANYAN_STATUS_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -479,10 +534,11 @@ record(longin, "$(P)GET_BANYAN_STATUS_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_SLOW_CHAIN_OUT_R")
+record(ai, "$(P)GET_SLOW_CHAIN_OUT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -490,10 +546,11 @@ record(longin, "$(P)GET_SLOW_CHAIN_OUT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_TRACE_STATUS1_R")
+record(ai, "$(P)GET_TRACE_STATUS1_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -501,10 +558,11 @@ record(longin, "$(P)GET_TRACE_STATUS1_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_TRACE_STATUS2_R")
+record(ai, "$(P)GET_TRACE_STATUS2_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -512,483 +570,23 @@ record(longin, "$(P)GET_TRACE_STATUS2_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_IDELAY_BASE_R")
+record(ai, "$(P)GET_LLRF_CIRCLE_READY_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) IDELAY_BASE_R")
+    field( INP,  "@asyn($(PORT),0) LLRF_CIRCLE_READY_R")
     field( SCAN, "Passive")
-    field( HOPR, "0x0000007F")
+    field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_HIST_DOUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) HIST_DOUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0000FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_PHX_DOUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) PHX_DOUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0000FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_BANYAN_BUF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) BANYAN_BUF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_SCANNER_RESULT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) SCANNER_RESULT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x000000FF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_TRACE_IQ_BUF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TRACE_IQ_BUF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_TRACE_I_BUF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TRACE_I_BUF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_TRACE_Q_BUF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TRACE_Q_BUF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_QSFP_BUF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) QSFP_BUF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x000000FF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C4_MECH_NOISE_CPL_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C4_MECH_NOISE_CPL_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C4_MECH_RESNR_PROP_CONST_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C4_MECH_RESNR_PROP_CONST_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x001FFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_DOT_0_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_DOT_0_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_DOT_1_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_DOT_1_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_DOT_2_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_DOT_2_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_OUTER_PROD_0_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_OUTER_PROD_0_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_OUTER_PROD_1_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_OUTER_PROD_1_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_OUTER_PROD_2_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_OUTER_PROD_2_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_PIEZO_CPL_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_PIEZO_CPL_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_DOT_0_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_DOT_0_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_DOT_1_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_DOT_1_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_DOT_2_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_DOT_2_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_OUTER_PROD_0_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_OUTER_PROD_0_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_OUTER_PROD_1_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_OUTER_PROD_1_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_OUTER_PROD_2_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_OUTER_PROD_2_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_PIEZO_CPL_K_OUT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_PIEZO_CPL_K_OUT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_COEFF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_COEFF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_LIM_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_LIM_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_SETMP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_SETMP_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_COEFF_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_COEFF_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_LIM_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_LIM_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_SETMP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_SETMP_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EDCO_CPL_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EDCO_CPL_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EDCO_PH_OFFSET_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EDCO_PH_OFFSET_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0007FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EDCO_CPL_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EDCO_CPL_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EDCO_PH_OFFSET_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EDCO_PH_OFFSET_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0007FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1A_KX_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1A_KX_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1A_KY_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1A_KY_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1B_KX_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1B_KX_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1B_KY_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_LP_NOTCH_LP1B_KY_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1A_KX_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1A_KX_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1A_KY_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1A_KY_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1B_KX_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1B_KX_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1B_KY_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_LP_NOTCH_LP1B_KY_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_ADC_MMCM_R")
+record(ai, "$(P)GET_ADC_MMCM_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -996,252 +594,287 @@ record(longin, "$(P)GET_ADC_MMCM_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U15_SPI_DATA_ADDR_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U15_SPI_DATA_ADDR_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U15_SPI_DATA_ADDR_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U15_SPI_DATA_ADDR_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U15_SPI_READ_AND_START_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U15_SPI_READ_AND_START_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U15_SPI_READ_AND_START_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U15_SPI_READ_AND_START_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U18_SPI_DATA_ADDR_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U18_SPI_DATA_ADDR_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U18_SPI_DATA_ADDR_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U18_SPI_DATA_ADDR_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U18_SPI_READ_AND_START_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U18_SPI_READ_AND_START_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U18_SPI_READ_AND_START_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U18_SPI_READ_AND_START_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U2_CLK_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U2_CLK_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U2_CLK_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U2_CLK_RESET_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U2_ISERDES_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U2_ISERDES_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U2_ISERDES_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U2_ISERDES_RESET_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U3_CLK_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U3_CLK_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U3_CLK_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U3_CLK_RESET_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U3_ISERDES_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U3_ISERDES_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U3_ISERDES_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U3_ISERDES_RESET_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_U4_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_U4_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_U4_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_U4_RESET_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_BANYAN_MASK_R")
+record(ai, "$(P)GET_DIG_CONFIG_BANYAN_MASK_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_BANYAN_MASK_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_BANYAN_MASK_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_BITSLIP_R")
+record(ai, "$(P)GET_DIG_CONFIG_BITSLIP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_BITSLIP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_BITSLIP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_IDELAYCTRL_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_CLK_STATUS_WE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_IDELAYCTRL_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_CLK_STATUS_WE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_LLSPI_WE_R")
+record(ai, "$(P)GET_DIG_CONFIG_IDELAYCTRL_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_LLSPI_WE_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_IDELAYCTRL_RESET_R_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_MMCM_RESET_R_R")
+record(ai, "$(P)GET_DIG_CONFIG_LLSPI_WE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_MMCM_RESET_R_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_LLSPI_WE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_PERIPH_CONFIG_R")
+record(ai, "$(P)GET_DIG_CONFIG_MMCM_RESET_R_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_PERIPH_CONFIG_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_MMCM_RESET_R_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000001")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_CONFIG_PERIPH_CONFIG_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_PERIPH_CONFIG_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_PHX_TRIG_R")
+record(ai, "$(P)GET_DIG_CONFIG_PHASEX_TRIG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_PHX_TRIG_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_PHASEX_TRIG_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_RAWADC_TRIG_R")
+record(ai, "$(P)GET_DIG_CONFIG_RAWADC_TRIG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_RAWADC_TRIG_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_RAWADC_TRIG_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_SCAN_TRIGGER_WE_R")
+record(ai, "$(P)GET_DIG_CONFIG_SCAN_TRIGGER_WE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_SCAN_TRIGGER_WE_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_SCAN_TRIGGER_WE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_SCANNER_DEBUG_R")
+record(ai, "$(P)GET_DIG_CONFIG_SCANNER_DEBUG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_SCANNER_DEBUG_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_SCANNER_DEBUG_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000001F")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_SYNC_AD7794_CSET_R")
+record(ai, "$(P)GET_DIG_CONFIG_SYNC_AD7794_CSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_SYNC_AD7794_CSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_SYNC_AD7794_CSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_CFG_SYNC_TPS62210_CSET_R")
+record(ai, "$(P)GET_DIG_CONFIG_SYNC_TPS62210_CSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_CFG_SYNC_TPS62210_CSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_CONFIG_SYNC_TPS62210_CSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000003F")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_ADC_TEST_MD_R")
+record(ai, "$(P)GET_DIG_DSP_ADC_TEST_MODE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_ADC_TEST_MD_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_ADC_TEST_MODE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000007")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_ADC_TEST_RESET_R")
+record(ai, "$(P)GET_DIG_DSP_ADC_TEST_RESET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1249,10 +882,11 @@ record(longin, "$(P)GET_DIG_DSP_ADC_TEST_RESET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_AMPLITUDE_R")
+record(ai, "$(P)GET_DIG_DSP_AMPLITUDE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1260,10 +894,11 @@ record(longin, "$(P)GET_DIG_DSP_AMPLITUDE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_AVERAGE_LEN_R")
+record(ai, "$(P)GET_DIG_DSP_AVERAGE_LEN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1271,10 +906,11 @@ record(longin, "$(P)GET_DIG_DSP_AVERAGE_LEN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x3FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_BUF_TRIG_R")
+record(ai, "$(P)GET_DIG_DSP_BUF_TRIG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1282,10 +918,11 @@ record(longin, "$(P)GET_DIG_DSP_BUF_TRIG_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_CIC_PERIOD_R")
+record(ai, "$(P)GET_DIG_DSP_CIC_PERIOD_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1293,10 +930,11 @@ record(longin, "$(P)GET_DIG_DSP_CIC_PERIOD_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00003FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_CIC_SHIFT_R")
+record(ai, "$(P)GET_DIG_DSP_CIC_SHIFT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1304,10 +942,11 @@ record(longin, "$(P)GET_DIG_DSP_CIC_SHIFT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000000F")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_CIRCLE_BUF_FLIP_R")
+record(ai, "$(P)GET_DIG_DSP_CIRCLE_BUF_FLIP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1315,10 +954,11 @@ record(longin, "$(P)GET_DIG_DSP_CIRCLE_BUF_FLIP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_DAC_DDS_RESET_R")
+record(ai, "$(P)GET_DIG_DSP_DAC_DDS_RESET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1326,31 +966,35 @@ record(longin, "$(P)GET_DIG_DSP_DAC_DDS_RESET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_DAC_MD_R")
+record(ai, "$(P)GET_DIG_DSP_DAC_MODE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_DAC_MD_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_DAC_MODE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000000F")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_DDSA_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_DDSA_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_MOD_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_MODULO_R")
     field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_DDSA_PHSTEP_H_R")
+record(ai, "$(P)GET_DIG_DSP_DDSA_PHSTEP_H_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1358,10 +1002,11 @@ record(longin, "$(P)GET_DIG_DSP_DDSA_PHSTEP_H_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_DDSA_PHSTEP_L_R")
+record(ai, "$(P)GET_DIG_DSP_DDSA_PHSTEP_L_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1369,10 +1014,11 @@ record(longin, "$(P)GET_DIG_DSP_DDSA_PHSTEP_L_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_HIST_COUNT_W_STROBE_R")
+record(ai, "$(P)GET_DIG_DSP_HIST_COUNT_W_STROBE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1380,10 +1026,11 @@ record(longin, "$(P)GET_DIG_DSP_HIST_COUNT_W_STROBE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_LLRF_DSP_DAC_EN_R")
+record(ai, "$(P)GET_DIG_DSP_LLRF_DSP_DAC_EN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1391,10 +1038,11 @@ record(longin, "$(P)GET_DIG_DSP_LLRF_DSP_DAC_EN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_LO_AMP_R")
+record(ai, "$(P)GET_DIG_DSP_LO_AMP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1402,53 +1050,59 @@ record(longin, "$(P)GET_DIG_DSP_LO_AMP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_MOD_R")
-    field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_PH_STEP_H_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_PH_STEP_H_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x000FFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_PH_STEP_L_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_PH_STEP_L_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MODULO_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_PRC_DSP_CSEL_R")
+record(ai, "$(P)GET_DIG_DSP_PHASE_STEP_H_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_PRC_DSP_CSEL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_PHASE_STEP_H_R")
     field( SCAN, "Passive")
-    field( HOPR, "0x00000003")
+    field( HOPR, "0x000FFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_PRC_DSP_PRL_CFG_R")
+record(ai, "$(P)GET_DIG_DSP_PHASE_STEP_L_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_PHASE_STEP_L_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_PRC_DSP_CAV_SEL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_PRC_DSP_CAV_SEL_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000003")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_PRC_DSP_PRL_CFG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1456,10 +1110,11 @@ record(longin, "$(P)GET_DIG_DSP_PRC_DSP_PRL_CFG_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000001FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_PRC_DSP_PRL_GAIN_R")
+record(ai, "$(P)GET_DIG_DSP_PRC_DSP_PRL_GAIN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -1467,862 +1122,947 @@ record(longin, "$(P)GET_DIG_DSP_PRC_DSP_PRL_GAIN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_RSM_BEAM_0_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_BEAM_0_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_BEAM_0_MOD_R")
-    field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_BEAM_0_PH_INIT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_BEAM_0_PH_INIT_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_BEAM_0_MODULO_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_BEAM_0_PH_STEP_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_BEAM_0_PHASE_INIT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_BEAM_0_PH_STEP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_BEAM_0_PHASE_INIT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_RSM_BEAM_1_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_BEAM_0_PHASE_STEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_BEAM_1_MOD_R")
-    field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_BEAM_1_PH_INIT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_BEAM_1_PH_INIT_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_BEAM_0_PHASE_STEP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_BEAM_1_PH_STEP_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_BEAM_1_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_BEAM_1_PH_STEP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_BEAM_1_MODULO_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C4_MECH_PRNG_IVA_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_BEAM_1_PHASE_INIT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C4_MECH_PRNG_IVA_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_BEAM_1_PHASE_INIT_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_BEAM_1_PHASE_STEP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_BEAM_1_PHASE_STEP_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_CAV4_MECH_PRNG_IVA_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_CAV4_MECH_PRNG_IVA_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C4_MECH_PRNG_IVB_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_CAV4_MECH_PRNG_IVB_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C4_MECH_PRNG_IVB_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_CAV4_MECH_PRNG_IVB_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C4_MECH_PRNG_RND_RUN_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_CAV4_MECH_PRNG_RANDOM_RUN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C4_MECH_PRNG_RND_RUN_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_CAV4_MECH_PRNG_RANDOM_RUN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_A_COFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_A_CAV_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_A_COFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_A_CAV_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_A_FOR_OFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_A_FOR_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_A_FOR_OFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_A_FOR_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_A_RFL_OFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_A_RFL_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_A_RFL_OFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_A_RFL_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_AMP_LP_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_AMP_LP_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_AMP_LP_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_AMP_LP_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EFRQ_0_CRS_FQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_FREQ_0_COARSE_FREQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EFRQ_0_CRS_FQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_FREQ_0_COARSE_FREQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EFRQ_1_CRS_FQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_FREQ_1_COARSE_FREQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EFRQ_1_CRS_FQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_FREQ_1_COARSE_FREQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EFRQ_2_CRS_FQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_FREQ_2_COARSE_FREQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EFRQ_2_CRS_FQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_FREQ_2_COARSE_FREQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_0_BEAM_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M0_BEAM_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_0_BEAM_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M0_BEAM_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_0_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M0_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_0_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M0_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_0_DRV_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M0_DRIVE_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_0_DRV_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M0_DRIVE_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_1_BEAM_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M1_BEAM_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_1_BEAM_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M1_BEAM_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_1_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M1_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_1_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M1_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_1_DRV_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M1_DRIVE_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_1_DRV_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M1_DRIVE_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_2_BEAM_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M2_BEAM_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_2_BEAM_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M2_BEAM_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_2_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M2_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_2_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M2_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_EMODE_2_DRV_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_M2_DRIVE_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_EMODE_2_DRV_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_M2_DRIVE_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_MOD_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_MODULO_R")
     field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_C4_ELEC_PH_STEP_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_ELEC_PHASE_STEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_C4_ELEC_PH_STEP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_ELEC_PHASE_STEP_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_COMPR_SAT_CTL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_COMPR_SAT_CTL_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_COMPR_SAT_CTL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_COMPR_SAT_CTL_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_PRNG_IVA_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_PRNG_IVA_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_PRNG_IVA_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_PRNG_IVA_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_PRNG_IVB_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_PRNG_IVB_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_PRNG_IVB_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_PRNG_IVB_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C0_PRNG_RND_RUN_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C0_PRNG_RANDOM_RUN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C0_PRNG_RND_RUN_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C0_PRNG_RANDOM_RUN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_A_COFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_A_CAV_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_A_COFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_A_CAV_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_A_FOR_OFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_A_FOR_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_A_FOR_OFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_A_FOR_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_A_RFL_OFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_A_RFL_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_A_RFL_OFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_A_RFL_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_AMP_LP_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_AMP_LP_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_AMP_LP_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_AMP_LP_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EFRQ_0_CRS_FQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_FREQ_0_COARSE_FREQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EFRQ_0_CRS_FQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_FREQ_0_COARSE_FREQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EFRQ_1_CRS_FQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_FREQ_1_COARSE_FREQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EFRQ_1_CRS_FQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_FREQ_1_COARSE_FREQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EFRQ_2_CRS_FQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_FREQ_2_COARSE_FREQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EFRQ_2_CRS_FQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_FREQ_2_COARSE_FREQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0FFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_0_BEAM_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M0_BEAM_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_0_BEAM_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M0_BEAM_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_0_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M0_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_0_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M0_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_0_DRV_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M0_DRIVE_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_0_DRV_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M0_DRIVE_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_1_BEAM_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M1_BEAM_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_1_BEAM_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M1_BEAM_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_1_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M1_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_1_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M1_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_1_DRV_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M1_DRIVE_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_1_DRV_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M1_DRIVE_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_2_BEAM_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M2_BEAM_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_2_BEAM_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M2_BEAM_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_2_BW_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M2_BW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_2_BW_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M2_BW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_EMODE_2_DRV_CPL_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_M2_DRIVE_COUPLING_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_EMODE_2_DRV_CPL_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_M2_DRIVE_COUPLING_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_MOD_R")
-    field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_C4_ELEC_PH_STEP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_C4_ELEC_PH_STEP_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_COMPR_SAT_CTL_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_COMPR_SAT_CTL_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0000FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_PRNG_IVA_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_PRNG_IVA_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_PRNG_IVB_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_PRNG_IVB_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_C1_PRNG_RND_RUN_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_C1_PRNG_RND_RUN_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_DAC_IQ_PH_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_DAC_IQ_PH_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_CHAN_KEEP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_CHAN_KEEP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_MODULO_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_CRS_SCALE_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_ELEC_PHASE_STEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_CRS_SCALE_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_ELEC_PHASE_STEP_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_COMPR_SAT_CTL_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_COMPR_SAT_CTL_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x0000FFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_PRNG_IVA_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_PRNG_IVA_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_PRNG_IVB_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_PRNG_IVB_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_C1_PRNG_RANDOM_RUN_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_C1_PRNG_RANDOM_RUN_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000001")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_DAC_IQ_PHASE_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_DAC_IQ_PHASE_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000001")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_FDBK_CORE_COARSE_SCALE_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_FDBK_CORE_COARSE_SCALE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_PH_OFFSET_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_FDBK_CORE_MP_PROC_PH_OFFSET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_PH_OFFSET_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_FDBK_CORE_MP_PROC_PH_OFFSET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_SEL_EN_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_FDBK_CORE_MP_PROC_SEL_EN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_SEL_EN_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_FDBK_CORE_MP_PROC_SEL_EN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_SEL_THRESH_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_FDBK_CORE_MP_PROC_SEL_THRESH_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_FDBK_MP_PROC_SEL_THRESH_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_FDBK_CORE_MP_PROC_SEL_THRESH_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0003FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(mbbi, "$(P)GET_DIG_DSP_RSM_SH0_DSP_MOD_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_MODULO_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_MOD_R")
-    field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_PH_STEP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_PH_STEP_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_PIEZO_PIEZO_DC_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_PIEZO_PIEZO_DC_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0000FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_TAG_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_TAG_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x000000FF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_USE_FIBER_IQ_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_USE_FIBER_IQ_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_WV_SAMP_PER_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_WV_SAMP_PER_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0000007F")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH0_DSP_WV_SHIFT_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH0_DSP_WV_SHIFT_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000007")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_CHAN_KEEP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_CHAN_KEEP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_MODULO_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000FFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_CRS_SCALE_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_PHASE_STEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_CRS_SCALE_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000003")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_PH_OFFSET_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_PH_OFFSET_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_SEL_EN_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_SEL_EN_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_SEL_THRESH_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_FDBK_MP_PROC_SEL_THRESH_R")
-    field( SCAN, "Passive")
-    field( HOPR, "0x0003FFFF")
-    field( LOPR, 0)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(mbbi, "$(P)GET_DIG_DSP_RSM_SH1_DSP_MOD_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_MOD_R")
-    field( SCAN, "Passive")
-    field( MASK, "0x00000FFF")
-    info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_PH_STEP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_PH_STEP_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_PHASE_STEP_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_PIEZO_PIEZO_DC_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_PIEZO_PIEZO_DC_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_PIEZO_PIEZO_DC_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_PIEZO_PIEZO_DC_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_TAG_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_TAG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_TAG_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_TAG_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_USE_FIBER_IQ_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_USE_FIBER_IQ_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_USE_FIBER_IQ_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_USE_FIBER_IQ_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_WV_SAMP_PER_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_WAVE_SAMP_PER_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_WV_SAMP_PER_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_WAVE_SAMP_PER_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000007F")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_RSM_SH1_DSP_WV_SHIFT_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_0_DSP_WAVE_SHIFT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_RSM_SH1_DSP_WV_SHIFT_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_0_DSP_WAVE_SHIFT_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000007")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_REWIND_R")
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_FDBK_CORE_COARSE_SCALE_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_FDBK_CORE_COARSE_SCALE_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000003")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_FDBK_CORE_MP_PROC_PH_OFFSET_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_FDBK_CORE_MP_PROC_PH_OFFSET_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x0003FFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_FDBK_CORE_MP_PROC_SEL_EN_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_FDBK_CORE_MP_PROC_SEL_EN_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000001")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_FDBK_CORE_MP_PROC_SEL_THRESH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_FDBK_CORE_MP_PROC_SEL_THRESH_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x0003FFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_MODULO_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_MODULO_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000FFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_PHASE_STEP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_PHASE_STEP_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_PIEZO_PIEZO_DC_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_PIEZO_PIEZO_DC_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x0000FFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_TAG_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_TAG_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x000000FF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_USE_FIBER_IQ_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_USE_FIBER_IQ_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000001")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_WAVE_SAMP_PER_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_WAVE_SAMP_PER_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x0000007F")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_MUX_SHELL_1_DSP_WAVE_SHIFT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_MUX_SHELL_1_DSP_WAVE_SHIFT_R")
+    field( SCAN, "Passive")
+    field( HOPR, "0x00000007")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)GET_DIG_DSP_REWIND_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2330,10 +2070,11 @@ record(longin, "$(P)GET_DIG_DSP_REWIND_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_SSA_STIM_AMPSTEP_R")
+record(ai, "$(P)GET_DIG_DSP_SSA_STIM_AMPSTEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2341,10 +2082,11 @@ record(longin, "$(P)GET_DIG_DSP_SSA_STIM_AMPSTEP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_SSA_STIM_EN_R")
+record(ai, "$(P)GET_DIG_DSP_SSA_STIM_EN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2352,10 +2094,11 @@ record(longin, "$(P)GET_DIG_DSP_SSA_STIM_EN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_SSA_STIM_G_PERIOD_R")
+record(ai, "$(P)GET_DIG_DSP_SSA_STIM_G_PERIOD_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2363,10 +2106,11 @@ record(longin, "$(P)GET_DIG_DSP_SSA_STIM_G_PERIOD_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000003FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_SSA_STIM_PERTSTEP_R")
+record(ai, "$(P)GET_DIG_DSP_SSA_STIM_PERTSTEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2374,10 +2118,11 @@ record(longin, "$(P)GET_DIG_DSP_SSA_STIM_PERTSTEP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_TRACE_KEEP_R")
+record(ai, "$(P)GET_DIG_DSP_TRACE_KEEP_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2385,10 +2130,11 @@ record(longin, "$(P)GET_DIG_DSP_TRACE_KEEP_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_TRACE_RESET_WE_R")
+record(ai, "$(P)GET_DIG_DSP_TRACE_RESET_WE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2396,10 +2142,11 @@ record(longin, "$(P)GET_DIG_DSP_TRACE_RESET_WE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_TRIG_INTERNAL_R")
+record(ai, "$(P)GET_DIG_DSP_TRIG_INTERNAL_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2407,43 +2154,47 @@ record(longin, "$(P)GET_DIG_DSP_TRIG_INTERNAL_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000001")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_TRIG_MD_R")
+record(ai, "$(P)GET_DIG_DSP_TRIG_MODE_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_TRIG_MD_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_TRIG_MODE_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_WV0_SRC_R")
+record(ai, "$(P)GET_DIG_DSP_WAVE0_SRC_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_WV0_SRC_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_WAVE0_SRC_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000007")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DIG_DSP_WV1_SRC_R")
+record(ai, "$(P)GET_DIG_DSP_WAVE1_SRC_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_WV1_SRC_R")
+    field( INP,  "@asyn($(PORT),0) DIG_DSP_WAVE1_SRC_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000007")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_DOMAIN_JUMP_REALIGN_R")
+record(ai, "$(P)GET_DOMAIN_JUMP_REALIGN_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2451,10 +2202,11 @@ record(longin, "$(P)GET_DOMAIN_JUMP_REALIGN_R")
     field( SCAN, "Passive")
     field( HOPR, "0x00000003")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_ICC_CFG_R")
+record(ai, "$(P)GET_ICC_CFG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2462,10 +2214,11 @@ record(longin, "$(P)GET_ICC_CFG_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_QSFP_I2C_REG_R")
+record(ai, "$(P)GET_QSFP_I2C_REG_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2473,10 +2226,11 @@ record(longin, "$(P)GET_QSFP_I2C_REG_R")
     field( SCAN, "Passive")
     field( HOPR, "0xFFFFFFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_SFP_ADDRESS_SET_R")
+record(ai, "$(P)GET_SFP_ADDRESS_SET_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2484,10 +2238,11 @@ record(longin, "$(P)GET_SFP_ADDRESS_SET_R")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(longin, "$(P)GET_TAG_NOW_R")
+record(ai, "$(P)GET_TAG_NOW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
@@ -2495,7 +2250,6 @@ record(longin, "$(P)GET_TAG_NOW_R")
     field( SCAN, "Passive")
     field( HOPR, "0x000000FF")
     field( LOPR, 0)
+	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
-
-

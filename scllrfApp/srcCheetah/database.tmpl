@@ -1,6 +1,8 @@
+# Analog I/O
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: if access is specified it's 'read', and that this isn't a waveform.
-  #if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelms') and $p.nelms>1))
+  #if (not($p.has_key('access')) or ('r' in $p.access )) and not($p.has_key('nelm') and $p.nelm>1)
+    #if not $p.has_key('bits')
 record(ai, "\$(P)${p.name.upper()}_R")
 {
 	#if $p.has_key('desc')
@@ -37,15 +39,61 @@ record(ai, "\$(P)${p.name.upper()}_R")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
+    #end if
   #end if
 #end for
 
-
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: this has write access, and isn't a waveofrm
-  #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
-  #if not $p.has_key('bits')
+  #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelm') and $p.nelm>1)
+    #if not $p.has_key('bits')
 record(ao, "\$(P)${p.name.upper()}_W")
+{
+	  #if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	  #end if
+	  #if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	  #end if
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
+    field( SCAN, "Passive")
+      #if $p.has_key('range_top')
+    field( HOPR, "${p.range_top}")
+      #else if $p.has_key('bit_width')
+    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+      #end if
+	  #if $p.has_key('range_bottom')
+	field( LOPR, "${p.range_bottom}")
+      #else if $p.has_key('bit_width')
+    field( LOPR, 0)
+	  #end if
+	  #if $p.has_key('ASLO')
+	field( ASLO, "${p.ASLO}")
+	  #end if
+	  #if $p.has_key('AOFF')
+	field( AOFF, "${p.AOFF}")
+	  #end if
+	  #if $p.has_key('PREC')
+	field(PREC, "${p.PREC}")
+	  #else
+	field(PREC, 3)
+	  #end if
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+    #end if
+  #end if
+#end for
+
+# multi-element analog I/O, arrays of 8 or fewer
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: if access is specified it's 'read', and that this isn't a waveform.
+  #if (not($p.has_key('access')) or ('r' in $p.access )) and $p.has_key('nelm') and $p.nelm<=16 and $p.nelm > 1
+    #for $i in range(0, $p.nelm)
+record(ai, "\$(P)${p.name.upper()}_R${i}")
 {
 	#if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")
@@ -53,19 +101,19 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
-    field( SCAN, "Passive")
-    #if $p.has_key('range_top')
-    field( HOPR, "${p.range_top}")
-    #else if $p.has_key('bit_width')
-    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
-    #end if
+	field( PINI, "NO")
+	field( DTYP, "asynInt32")
+	field( INP,  "@asyn(\$(PORT),${i}) ${p.name.upper()}_R")
+	field( SCAN, "I/O Intr")
+	#if $p.has_key('range_top')
+	field( HOPR, "${p.range_top}")
+	#else if $p.has_key('bit_width')
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-    #else if $p.has_key('bit_width')
-    field( LOPR, 0)
+	#else if $p.has_key('bit_width')
+	field( LOPR, 0)
 	#end if
 	#if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -78,49 +126,111 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	#else
 	field(PREC, 3)
 	#end if
-    info( asyn:READBACK, "1")
-    info( autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+  info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
+    #end for
   #end if
+#end for
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this has write access, and isn't a waveofrm
+  #if $p.has_key('access') and ( 'w' in $p.access ) and $p.has_key('nelm') and $p.nelm<=16 and $p.nelm > 1
+    #for $i in range(0, $p.nelm)
+record(ao, "\$(P)${p.name.upper()}_W${i}")
+{
+	  #if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	  #end if
+	  #if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	  #end if
+  field( PINI, "NO")
+  field( DTYP, "asynInt32")
+  field( OUT,  "@asyn(\$(PORT),${i}) ${p.name.upper()}_W")
+  field( SCAN, "Passive")
+    #if $p.has_key('range_top')
+  field( HOPR, "${p.range_top}")
+    #else if $p.has_key('bit_width')
+  field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+    #end if
+	  #if $p.has_key('range_bottom')
+	field( LOPR, "${p.range_bottom}")
+    #else if $p.has_key('bit_width')
+  field( LOPR, 0)
+	  #end if
+	  #if $p.has_key('ASLO')
+	field( ASLO, "${p.ASLO}")
+	  #end if
+	  #if $p.has_key('AOFF')
+	field( AOFF, "${p.AOFF}")
+	  #end if
+	  #if $p.has_key('PREC')
+	field(PREC, "${p.PREC}")
+	  #else
+	field(PREC, 3)
+	  #end if
+  info( asyn:READBACK, "1")
+  info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+    #end for
   #end if
 #end for
 
 
+# MBBI/MBBO
 #for $p in sorted($registers, key=lambda k: k['address'])
-  ## Check that: this has write access, and isn't a waveofrm
-  #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelms') and $p.nelms>1)
   #if $p.has_key('bits')
+    ## Check that: if access is specified it's 'read', and that this isn't a waveform.
+    #if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelm') and $p.nelm>1))
+record(mbbiDirect, "\$(P)${p.name.upper()}_R")
+{
+	  #if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	  #end if
+	  #if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	  #end if
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( INP,  "@asyn(\$(PORT),0, 0xFFFFFFFF) ${p.name.upper()}_R")
+    field( SCAN, "I/O Intr")
+}
+
+    #end if
+  #end if
+#end for
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  #if $p.has_key('bits')
+    ## Check that: this has write access, and isn't a waveofrm
+    #if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelm') and $p.nelm>1)
 record(mbboDirect, "\$(P)${p.name.upper()}_W")
 {
-	#if $p.has_key('desc')
+	  #if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")
-	#end if
-	#if $p.has_key('egu')
+	  #end if
+	  #if $p.has_key('egu')
 	field( EGU, "${p.egu}")
-	#end if
+	  #end if
     field( PINI, "NO")
     field( DTYP, "asynUInt32Digital")
     field( OUT,  "@asyn(\$(PORT),0, 0xFFFFFFFF) ${p.name.upper()}_W")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
-    info( autosaveFields, "VAL DESC")
+    info( autosaveFields, "DESC")
 }
 
-  #end if
+    #end if
   #end if
 #end for
 
-
-## For now we aren't supporting read/write arrays. So far, no need.
+# Waveforms
 #for $p in sorted($registers, key=lambda k: k['address'])
-  ## Check that: this is a waveform/array
-  #if $p.has_key('nelms') and $p.nelms>1
-    #if not($p.has_key('access')) or ($p.access == 'r')
+  ## Check that: if access is specified it's 'read', and that this is a waveform.
+  #if (not($p.has_key('access')) or ('r' in $p.access )) and ($p.has_key('nelm') and $p.nelm>16)
 record(waveform, "\$(P)${p.name.upper()}_R")
-    #else
-record(waveform, "\$(P)${p.name.upper()}_W")
-    #end if
 {
 	#if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")
@@ -129,33 +239,19 @@ record(waveform, "\$(P)${p.name.upper()}_W")
 	field( EGU, "${p.egu}")
 	#end if
     field( PINI, "NO")
-    #if not($p.has_key('access')) or ($p.access == 'r')
-      #if $p.has_key('dtype')
-        #if $p.dtype == "string"
+    #if $p.has_key('dtype') and ($p.dtype == "string")
     field( DTYP, "asynOctetRead")
     field( FTVL, "CHAR")
-        #end if
-      #else
-    field( DTYP, "asynInt32ArrayIn")
-    field( FTVL, "ULONG")
-      #end if
     #else
-      #if $p.has_key('dtype')
-        #if $p.dtype == "string"
-    field( DTYP, "asynOctetWrite")
-    field( FTVL, "CHAR")
-        #end if
-      #else
-    field( DTYP, "asynInt32ArrayOut")
+    field( DTYP, "asynInt32ArrayIn")
+      #if $p.has_key('signed') and ($p.signed == 'unsigned')
     field( FTVL, "ULONG")
+      #else
+    field( FTVL, "LONG")
       #end if
     #end if
-    field( NELM, "${p.nelms}")
-    #if not($p.has_key('access')) or ($p.access == 'r')
+    field( NELM, "${p.nelm}")
     field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
-	#else
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
-    #end if
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
@@ -166,7 +262,48 @@ record(waveform, "\$(P)${p.name.upper()}_W")
     #else if $p.has_key('bit_width')
     field( LOPR, 0)
 	#end if
-    info( autosaveFields, "VAL DESC EGU HOPR LOPR PREC")
+    info( autosaveFields, "DESC EGU HOPR LOPR PREC")
+}
+
+  #end if
+#end for
+
+#for $p in sorted($registers, key=lambda k: k['address'])
+  ## Check that: this has write access, and is a waveofrm
+  #if $p.has_key('access') and ( 'w' in $p.access ) and ($p.has_key('nelm') and $p.nelm>16)
+record(waveform, "\$(P)${p.name.upper()}_W")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+    field( PINI, "NO")
+    #if $p.has_key('dtype') and ($p.dtype == "string")
+    field( DTYP, "asynOctetRead")
+    field( FTVL, "CHAR")
+    #else
+    field( DTYP, "asynInt32ArrayOut")
+      #if $p.has_key('signed') and ($p.signed == 'unsigned')
+    field( FTVL, "ULONG")
+      #else
+    field( FTVL, "LONG")
+      #end if
+    #end if
+    field( NELM, "${p.nelm}")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
+    #if $p.has_key('range_top')
+    field( HOPR, "${p.range_top}")
+    #else if $p.has_key('bit_width')
+    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+    #end if
+	#if $p.has_key('range_bottom')
+	field( LOPR, "${p.range_bottom}")
+    #else if $p.has_key('bit_width')
+    field( LOPR, 0)
+	#end if
+    info( autosaveFields, "DESC EGU HOPR LOPR PREC")
 }
 
   #end if
