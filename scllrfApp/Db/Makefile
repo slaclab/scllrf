@@ -20,6 +20,7 @@ DB += RESextra.db
 # Install databases from iocAdmin package
 # These databases support IOC Health and Monitoring
 # ========================================================
+ifneq ($(IOCADMIN),)
 # HardIOC using RTEMS
 #DB_INSTALLS += $(IOCADMIN)/db/iocAdminRTEMS.db
 # SoftIOC
@@ -29,9 +30,12 @@ DB_INSTALLS += $(IOCADMIN)/db/iocAdminScanMon.db
 DB_INSTALLS += $(IOCADMIN)/db/iocScanMonSum.db
 DB_INSTALLS += $(IOCADMIN)/db/iocScanMon.db
 IOCRELEASE_DB += iocRelease.db
+endif
 
 # Install Database to support reading the status of the autosave package:
+ifneq ($(AUTOSAVE),)
 DB_INSTALLS += $(AUTOSAVE)/db/save_restoreStatus.db
+endif
 
 # =======================================================================
 # Install to deployment dir (eg. PROD)

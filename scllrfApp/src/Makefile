@@ -20,9 +20,16 @@ DBD += scllrf.dbd
 
 # scllrf.dbd will be made up from these files:
 scllrf_DBD += base.dbd
+
+ifneq ($(IOCADMIN),)
 scllrf_DBD += devIocStats.dbd
+endif
+ifneq ($(AUTOSAVE),)
 scllrf_DBD += autosaveSupport.dbd
+endif
+ifneq ($(CAPUTLOG),)
 scllrf_DBD += caPutLog.dbd
+endif
 scllrf_DBD += $(CEXP_DBDS)
 
 # ================================================================================
@@ -68,13 +75,19 @@ scllrf_SRCS_vxWorks += -nil-
 # Link in the code from other libraries
 # =====================================================
 # Needed to link in iocAdmin support
+ifneq ($(IOCADMIN),)
 scllrf_LIBS += devIocStats
+endif
 
 # Needed to link in autosave support
+ifneq ($(AUTOSAVE),)
 scllrf_LIBS += autosave
+endif
 
 # Needed to link caPutLog support
+ifneq ($(CAPUTLOG),)
 scllrf_LIBS += caPutLog
+endif
 
 # Needed to link cexpsh() support
 scllrf_LIBS += $(CEXP_LIBS)
