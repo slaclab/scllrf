@@ -1475,7 +1475,22 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 12,
 		"nelm"      : 1,
 		"access"      : "rw",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits" :
+		{
+			"Ch0": 0x1,
+			"Ch1": 0x2,
+			"Ch2": 0x4,
+			"Ch3": 0x10,
+			"Ch4": 0x20,
+			"Ch5": 0x40,
+			"Ch6": 0x100,
+			"Ch7": 0x200,
+			"Ch8": 0x400,
+			"Ch9": 0x1000,
+			"Ch10": 0x2000,
+			"Ch11": 0x4000,
+			}
 	},
 	{	"name" :"dig_dsp_mux_shell_0_fdbk_core_coarse_scale",
 		"address"     : 8407228,
@@ -1559,7 +1574,22 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 12,
 		"nelm"      : 1,
 		"access"      : "rw",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits" :
+		{
+			"Ch0": 0x1,
+			"Ch1": 0x2,
+			"Ch2": 0x4,
+			"Ch3": 0x10,
+			"Ch4": 0x20,
+			"Ch5": 0x40,
+			"Ch6": 0x100,
+			"Ch7": 0x200,
+			"Ch8": 0x400,
+			"Ch9": 0x1000,
+			"Ch10": 0x2000,
+			"Ch11": 0x4000,
+			}
 	},
 	{	"name" :"dig_dsp_mux_shell_1_fdbk_core_coarse_scale",
 		"address"     : 8407240,
@@ -1678,7 +1708,18 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 8,
 		"nelm"      : 1,
 		"access"      : "rw",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits" :
+		{
+			"Ch0": 0x1,
+			"Ch1": 0x2,
+			"Ch2": 0x4,
+			"Ch3": 0x10,
+			"Ch4": 0x20,
+			"Ch5": 0x40,
+			"Ch6": 0x100,
+			"Ch7": 0x200
+			}
 	},
 	{	"name" :"dig_dsp_trace_reset_we",
 		"address"     : 8407257,

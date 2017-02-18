@@ -33,49 +33,50 @@ using namespace std;
 
 /** Constructor for the ${name} class.
  * Calls constructor for the asynPortDriver base class.
- * \param[in] portName The name of the asyn port driver to be created.
- * \param[in] path The path to the peripherial as built by the builder api
- * \param[in] nelms The number of elements of this device (max addr)
- * \paarm[in] nEntries The number of asyn params to be created for each device
+ * \param[in] drvPortName The name of the asyn port driver to be created.
+ * \param[in] netPortName The name of the asyn port driver to use for the network connection
+ * \param[in] maxAddr The number of channels for the paramater with the most channels
+ * \paarm[in] paramTableSize The number of asyn params to be created for each device
  *
  * */
-${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
-: scllrfAsynPortDriver(drvPortName, netPortName,
-		8, /* maxAddr, i.e. number of channels */
-		NUM_${name.upper()}_PARAMS)
-{
-	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
-	// which the compiler has problems with..
-	${name}Driver(drvPortName, netPortName, 8, NUM_${name.upper()}_PARAMS);
-};
+//${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName)
+//: scllrfAsynPortDriver(drvPortName, netPortName,
+//		8, /* maxAddr, i.e. number of channels */
+//		NUM_${name.upper()}_PARAMS)
+//{
+//	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
+//	// which the compiler has problems with..
+//	${name}Driver(drvPortName, netPortName, 8, NUM_${name.upper()}_PARAMS);
+//};
 
 ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds)
 : scllrfAsynPortDriver(drvPortName, netPortName,
 		maxAddr, /* maxAddr, i.e. number of channels */
 		paramTableAdds + NUM_${name.upper()}_PARAMS)
 {
-	asynStatus status = asynSuccess;
-
     epicsThreadSleep(defaultPollPeriod);
 
 #for $p in sorted($registers, key=lambda k: k['name'])
-#if $p.has_key('nelms')
-    createParam(${p.name.title().replace("_", "")}String, asynParamInt32Array, &p_${p.name.title().replace("_", "")});
+#if $p.has_key('nelm') and $p.nelm>16
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+    createParam(${p.name.title().replace("_", "")}RString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}R);
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}W);
+  #end if
 #else
   #if (not $p.has_key('access')) or ('r' in $p.access)
+    #if ($p.has_key('bits'))
+    createParam(${p.name.title().replace("_", "")}RString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}R);
+    #else
     createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
-    #if $p.has_key("bits")
-      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-	createParam(${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R);
-      #end for
     #end if
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
+    #if ($p.has_key('bits'))
+    createParam(${p.name.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}W);
+    #else
     createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
-    #if $p.has_key("bits")
-      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-    createParam(${p.name.title().replace("_", "")}${field.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}W);
-      #end for
     #end if
   #end if
 #end if
@@ -177,7 +178,7 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
     {
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-#if ($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))
+#if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and not ($p.has_key('nelm') and $p.nelm > 1)
   #unless ($prevAdr == $p.address)
 	break;
 
@@ -186,44 +187,75 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 	// shared address with ${p.name.title().replace("_", "")}RAdr  $prevAdr == $p.address
   #end unless
   #set $prevAdr = $p.address
+
+  #if ($p.has_key('bits'))
+    #set $paramType = 'UIntDigital'
+    #set $maskParam =  ", " + $p.name.title().replace("_", "") + "Mask"
+  #else
+    #set $paramType = 'Integer'
+    #set $maskParam = ''
+  #end if
   #if $p.has_key("bit_width")
     #if $p.has_key("signed") and $p.signed == "signed"
 		signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
-		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
-				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
+		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
+				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits $maskParam);
     #else
-		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
-				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
+		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
+				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) $maskParam);
     #end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString,
 				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
   #else
-		status = (asynStatus) setIntegerParam(p_${p.name.title().replace("_", "")}R,
-				pFromFpga->data);
+		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
+				pFromFpga->data $maskParam);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
-  #end if
-  #if $p.has_key("bits")
-    #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-
-		status = (asynStatus) setUIntDigitalParam(p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R,
-				pFromFpga->data, ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString,
-				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask);
-    #end for
   #end if
 #end if
 #end for
 		break;
 
 	default:
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, ++errorCount);
+		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+#for $p in sorted($registers, key=lambda k: k['address'])
+  #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 16
+		if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + $p.nelm)))
+		{
+    #if $p.has_key("bit_width")
+      #if $p.has_key("signed") and $p.signed == "signed"
+		signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask)),
+				p_${p.name.title().replace("_", "")}R,
+				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
+      #else
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask)),
+				p_${p.name.title().replace("_", "")}R,
+				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
+      #end if
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}RString,
+				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+    #else
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask)),
+				p_${p.name.title().replace("_", "")}R, pFromFpga->data);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
+    #end if
+		}
+		else
+  #end if
+#end for
+		{
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
 
 		status = asynError;
 		break;
@@ -246,6 +278,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+	epicsUInt32 uValueSet[maxMsgSize/sizeof(FpgaReg)];
 	epicsInt32 errorCount;
 //  variables that may be useful for checking array data
 //	asynUser *pAsynArrayUser;
@@ -257,19 +290,27 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
   #if $p.has_key("bit_width")
-  #set $maskStr = "& " + $p.name.title().replace("_", "") + "Mask"
+    #set $maskStr = "& " + $p.name.title().replace("_", "") + "Mask"
   #else
-  #set $maskStr = ""
+    #set $maskStr = ""
   #end if
-  #if $p.has_key('access')
-    #if ( "w" in $p.access ) and (($p.has_key('nelms') and $p.nelms == 1) or not($p.has_key('nelms')))
-      #unless ($prevAdr == $p.address)
+  #if $p.has_key('access') and ( "w" in $p.access ) and (($p.has_key('nelm') and $p.nelm == 1) or not($p.has_key('nelm')))
+    #unless ($prevAdr == $p.address)
     case ${p.name.title().replace("_", "")}WAdr:
-      #else
+    #else
 	// shared address with ${p.name.title().replace("_", "")}WAdr
-      #end unless
-      #set $prevAdr = $p.address
-		status = (asynStatus) getIntegerParam(p_${p.name.title().replace("_", "")}W, valueSet);
+    #end unless
+    #set $prevAdr = $p.address
+    #if ($p.has_key('bits'))
+      #set $paramType = 'UIntDigital'
+      #set $maskParam = ", " + $p.name.title().replace("_", "") + "Mask"
+      #set $retVal = 'uValueSet'
+    #else
+      #set $paramType = 'Integer'
+      #set $maskParam = ''
+      #set $retVal = 'valueSet'
+    #end if
+		status = (asynStatus) get${paramType}Param(p_${p.name.title().replace("_", "")}W, $retVal $maskParam);
 		if( (valueSet[0] $maskStr) == (pFromFpga->data $maskStr))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -286,12 +327,41 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		}
 
 		break;
-    #end if
   #end if
 #end for
 	default:
+		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+#for $p in sorted($registers, key=lambda k: k['address'])
+  #if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 16
+		if ((pFromFpga->addr >= ${p.name.title().replace("_", "")}WAdr) &&
+				(pFromFpga->addr < (${p.name.title().replace("_", "")}WAdr + $p.nelm)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr),
+					p_${p.name.title().replace("_", "")}W, valueSet);
+			if( (valueSet[0] $maskStr) == (pFromFpga->data $maskStr))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					${p.name.title().replace("_", "")}WString, valueSet[0] $maskStr, (unsigned ) pFromFpga->data $maskStr);
+				status = asynError;
+				setParamStatus(p_${p.name.title().replace("_", "")}W, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+  #end if
+#end for
+		{
 		getIntegerParam(p_CommErrorCount, &errorCount);
 		setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
 
 		status = asynError;
 		break;
@@ -313,7 +383,8 @@ extern "C" {
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
 int ${name}Configure(const char *drvPortName, const char *netPortName)
 {
-	new ${name}Driver(drvPortName, netPortName);
+	//new ${name}Driver(drvPortName, netPortName);
+	new ${name}Driver(drvPortName, netPortName, 8, 0);
 	return asynSuccess;
 }
 

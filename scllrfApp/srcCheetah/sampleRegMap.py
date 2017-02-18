@@ -56,7 +56,7 @@ d = { "name" : "example",
 	# The bit position of the least significant bit. So far not used.
 		"lsBit"       : 0,
 	# For an array, this is the number of elements in the array. Sequential addresses are assumed.
-		"nelms"       : 1,
+		"nelm"       : 1,
 	# egu is the human-readable string showing the units ("Hz", "V", "degrees", etc). 16 char. max.
 		"egu"         : "My Units",
 	# use "signed" or "unsigned" data. Defaults to signed if not specified.
@@ -90,7 +90,7 @@ d = { "name" : "example",
 	# The bit position of the least significant bit. So far not used.
 		"lsBit"       : 0,
 	# For an array, this is the number of elements in the array. Sequential addresses are assumed.
-		"nelms"       : 128,
+		"nelm"       : 128,
 	# egu is the human-readable string showing the units ("Hz", "V", "degrees", etc). 16 char. max.
 		"egu"         : "My Units",
 	# use "signed" or "unsigned" data. Defaults to signed if not specified.
@@ -124,7 +124,7 @@ d = { "name" : "example",
 	# The bit position of the least significant bit. So far not used.
 		"lsBit"       : 0,
 	# For an array, this is the number of elements in the array. Sequential addresses are assumed.
-		"nelms"       : 128,
+		"nelm"       : 128,
 	# egu is the human-readable string showing the units ("Hz", "V", "degrees", etc). 16 char. max.
 		"egu"         : "My Units",
 	# use "signed" or "unsigned" data. Defaults to signed if not specified.

@@ -43,22 +43,12 @@ static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()
     #else
 // shared address $p.address for $p.name
     #end if
-    #if $p.has_key("bits")
-      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-static const char *${p.name.title().replace("_", "")}${field.title().replace("_", "")}RString = "${p.name.upper()}_${field.upper()}_R";
-      #end for
-    #end if
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
 static const char *${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
     #if $p.address not in $prevWAdrs
       #set $writeRegCount +=1
       #silent $prevWAdrs.append($p.address)
-    #end if
-    #if $p.has_key("bits")
-      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-static const char *${p.name.title().replace("_", "")}${field.title().replace("_", "")}WString = "${p.name.upper()}_${field.upper()}_W";
-      #end for
     #end if
   #end if
 #end for
@@ -77,7 +67,7 @@ const unsigned int ${name}WriteRegCount = $writeRegCount;
  /* This class implements the AxiVersion driver. */
 class ${name}Driver : public scllrfAsynPortDriver {
 public:
-    ${name}Driver(const char *drvPortName, const char *netPortName);
+//    ${name}Driver(const char *drvPortName, const char *netPortName);
     ${name}Driver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
     virtual ~${name}Driver();
 
@@ -102,12 +92,6 @@ protected:
     \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}R
     #set $first = False
     #end if
-    #if $p.has_key("bits")
-      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-    int p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}R;
-    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + $field.title().replace("_", "") + "R"
-      #end for
-    #end if
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
     int p_${p.name.title().replace("_", "")}W;
@@ -115,12 +99,6 @@ protected:
     #if $first == True
     \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}W
     #set $first = False
-    #end if
-    #if $p.has_key("bits")
-      #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-    int p_${p.name.title().replace("_", "")}${field.title().replace("_", "")}W;
-    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + $field.title().replace("_", "") +"W"
-      #end for
     #end if
   #end if
 #end for
@@ -170,11 +148,6 @@ protected:
 #for $p in sorted($registers, key=lambda k: k['address'])
   #if $p.has_key('bit_width')
     	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
-  #end if
-  #if $p.has_key("bits")
-    #for $field in sorted($p.bits, key=lambda k: k.__getitem__)
-		${p.name.title().replace("_", "")}${field.title().replace("_", "")}Mask = 0x${format($p.bits[$field], '08X')},
-    #end for
   #end if
 #end for
 

@@ -194,7 +194,12 @@ record(mbbiDirect, "\$(P)${p.name.upper()}_R")
 	  #end if
     field( PINI, "NO")
     field( DTYP, "asynUInt32Digital")
-    field( INP,  "@asyn(\$(PORT),0, 0xFFFFFFFF) ${p.name.upper()}_R")
+      #if $p.has_key('bit_width')
+    field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
+    field( NOBT, "$p.bit_width")
+      #else
+    field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
+      #end if
     field( SCAN, "I/O Intr")
 }
 
@@ -216,7 +221,12 @@ record(mbboDirect, "\$(P)${p.name.upper()}_W")
 	  #end if
     field( PINI, "NO")
     field( DTYP, "asynUInt32Digital")
-    field( OUT,  "@asyn(\$(PORT),0, 0xFFFFFFFF) ${p.name.upper()}_W")
+#if $p.has_key('bit_width')
+    field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
+    field( NOBT, "$p.bit_width")
+#else
+    field( OUT,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_W")
+#end if
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "DESC")
