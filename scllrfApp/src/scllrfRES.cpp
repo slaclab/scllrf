@@ -2,7 +2,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : templateScllrfDriver.h
+ * File       : scllrfRESDriver.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -33,16 +33,26 @@ using namespace std;
 
 /** Constructor for the scllrfRES class.
  * Calls constructor for the asynPortDriver base class.
- * \param[in] portName The name of the asyn port driver to be created.
- * \param[in] path The path to the peripherial as built by the builder api
- * \param[in] nelms The number of elements of this device (max addr)
- * \paarm[in] nEntries The number of asyn params to be created for each device
+ * \param[in] drvPortName The name of the asyn port driver to be created.
+ * \param[in] netPortName The name of the asyn port driver to use for the network connection
+ * \param[in] maxAddr The number of channels for the paramater with the most channels
+ * \paarm[in] paramTableSize The number of asyn params to be created for each device
  *
  * */
-scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortName)
+//scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortName)
+//: scllrfAsynPortDriver(drvPortName, netPortName,
+//		8, /* maxAddr, i.e. number of channels */
+//		NUM_SCLLRFRES_PARAMS)
+//{
+//	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
+//	// which the compiler has problems with..
+//	scllrfRESDriver(drvPortName, netPortName, 8, NUM_SCLLRFRES_PARAMS);
+//};
+
+scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds)
 : scllrfAsynPortDriver(drvPortName, netPortName,
-		1, /* maxAddr, i.e. number of channels */
-		NUM_SCLLRFRES_PARAMS)
+		maxAddr, /* maxAddr, i.e. number of channels */
+		paramTableAdds + NUM_SCLLRFRES_PARAMS)
 {
 	asynStatus status = asynSuccess;
 
@@ -57,11 +67,7 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor1AccWString, asynParamInt32, &p_Motor1AccW);
     createParam(Motor1BrdTmpRString, asynParamInt32, &p_Motor1BrdTmpR);
     createParam(Motor1CntlRString, asynParamInt32, &p_Motor1CntlR);
-	createParam(Motor1CntlBit1RString, asynParamUInt32Digital, &p_Motor1CntlBit1R);
-	createParam(Motor1CntlBit2RString, asynParamUInt32Digital, &p_Motor1CntlBit2R);
     createParam(Motor1CntlWString, asynParamInt32, &p_Motor1CntlW);
-    createParam(Motor1CntlBit1WString, asynParamUInt32Digital, &p_Motor1CntlBit1W);
-    createParam(Motor1CntlBit2WString, asynParamUInt32Digital, &p_Motor1CntlBit2W);
     createParam(Motor1DrviRString, asynParamInt32, &p_Motor1DrviR);
     createParam(Motor1DrviWString, asynParamInt32, &p_Motor1DrviW);
     createParam(Motor1LaccRString, asynParamInt32, &p_Motor1LaccR);
@@ -69,8 +75,6 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor1LvlctyRString, asynParamInt32, &p_Motor1LvlctyR);
     createParam(Motor1SgnStepsRString, asynParamInt32, &p_Motor1SgnStepsR);
     createParam(Motor1StatRString, asynParamInt32, &p_Motor1StatR);
-	createParam(Motor1StatBit1RString, asynParamUInt32Digital, &p_Motor1StatBit1R);
-	createParam(Motor1StatBit2RString, asynParamUInt32Digital, &p_Motor1StatBit2R);
     createParam(Motor1StepsRString, asynParamInt32, &p_Motor1StepsR);
     createParam(Motor1StepsWString, asynParamInt32, &p_Motor1StepsW);
     createParam(Motor1VlctyRString, asynParamInt32, &p_Motor1VlctyR);
@@ -80,11 +84,7 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor2AccWString, asynParamInt32, &p_Motor2AccW);
     createParam(Motor2BrdTmpRString, asynParamInt32, &p_Motor2BrdTmpR);
     createParam(Motor2CntlRString, asynParamInt32, &p_Motor2CntlR);
-	createParam(Motor2CntlBit1RString, asynParamUInt32Digital, &p_Motor2CntlBit1R);
-	createParam(Motor2CntlBit2RString, asynParamUInt32Digital, &p_Motor2CntlBit2R);
     createParam(Motor2CntlWString, asynParamInt32, &p_Motor2CntlW);
-    createParam(Motor2CntlBit1WString, asynParamUInt32Digital, &p_Motor2CntlBit1W);
-    createParam(Motor2CntlBit2WString, asynParamUInt32Digital, &p_Motor2CntlBit2W);
     createParam(Motor2DrviRString, asynParamInt32, &p_Motor2DrviR);
     createParam(Motor2DrviWString, asynParamInt32, &p_Motor2DrviW);
     createParam(Motor2LaccRString, asynParamInt32, &p_Motor2LaccR);
@@ -92,8 +92,6 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor2LvlctyRString, asynParamInt32, &p_Motor2LvlctyR);
     createParam(Motor2SgnStepsRString, asynParamInt32, &p_Motor2SgnStepsR);
     createParam(Motor2StatRString, asynParamInt32, &p_Motor2StatR);
-	createParam(Motor2StatBit1RString, asynParamUInt32Digital, &p_Motor2StatBit1R);
-	createParam(Motor2StatBit2RString, asynParamUInt32Digital, &p_Motor2StatBit2R);
     createParam(Motor2StepsRString, asynParamInt32, &p_Motor2StepsR);
     createParam(Motor2StepsWString, asynParamInt32, &p_Motor2StepsW);
     createParam(Motor2VlctyRString, asynParamInt32, &p_Motor2VlctyR);
@@ -103,11 +101,7 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor3AccWString, asynParamInt32, &p_Motor3AccW);
     createParam(Motor3BrdTmpRString, asynParamInt32, &p_Motor3BrdTmpR);
     createParam(Motor3CntlRString, asynParamInt32, &p_Motor3CntlR);
-	createParam(Motor3CntlBit1RString, asynParamUInt32Digital, &p_Motor3CntlBit1R);
-	createParam(Motor3CntlBit2RString, asynParamUInt32Digital, &p_Motor3CntlBit2R);
     createParam(Motor3CntlWString, asynParamInt32, &p_Motor3CntlW);
-    createParam(Motor3CntlBit1WString, asynParamUInt32Digital, &p_Motor3CntlBit1W);
-    createParam(Motor3CntlBit2WString, asynParamUInt32Digital, &p_Motor3CntlBit2W);
     createParam(Motor3DrviRString, asynParamInt32, &p_Motor3DrviR);
     createParam(Motor3DrviWString, asynParamInt32, &p_Motor3DrviW);
     createParam(Motor3LaccRString, asynParamInt32, &p_Motor3LaccR);
@@ -115,8 +109,6 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor3LvlctyRString, asynParamInt32, &p_Motor3LvlctyR);
     createParam(Motor3SgnStepsRString, asynParamInt32, &p_Motor3SgnStepsR);
     createParam(Motor3StatRString, asynParamInt32, &p_Motor3StatR);
-	createParam(Motor3StatBit1RString, asynParamUInt32Digital, &p_Motor3StatBit1R);
-	createParam(Motor3StatBit2RString, asynParamUInt32Digital, &p_Motor3StatBit2R);
     createParam(Motor3StepsRString, asynParamInt32, &p_Motor3StepsR);
     createParam(Motor3StepsWString, asynParamInt32, &p_Motor3StepsW);
     createParam(Motor3VlctyRString, asynParamInt32, &p_Motor3VlctyR);
@@ -126,11 +118,7 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor4AccWString, asynParamInt32, &p_Motor4AccW);
     createParam(Motor4BrdTmpRString, asynParamInt32, &p_Motor4BrdTmpR);
     createParam(Motor4CntlRString, asynParamInt32, &p_Motor4CntlR);
-	createParam(Motor4CntlBit1RString, asynParamUInt32Digital, &p_Motor4CntlBit1R);
-	createParam(Motor4CntlBit2RString, asynParamUInt32Digital, &p_Motor4CntlBit2R);
     createParam(Motor4CntlWString, asynParamInt32, &p_Motor4CntlW);
-    createParam(Motor4CntlBit1WString, asynParamUInt32Digital, &p_Motor4CntlBit1W);
-    createParam(Motor4CntlBit2WString, asynParamUInt32Digital, &p_Motor4CntlBit2W);
     createParam(Motor4DrviRString, asynParamInt32, &p_Motor4DrviR);
     createParam(Motor4DrviWString, asynParamInt32, &p_Motor4DrviW);
     createParam(Motor4LaccRString, asynParamInt32, &p_Motor4LaccR);
@@ -138,8 +126,6 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Motor4LvlctyRString, asynParamInt32, &p_Motor4LvlctyR);
     createParam(Motor4SgnStepsRString, asynParamInt32, &p_Motor4SgnStepsR);
     createParam(Motor4StatRString, asynParamInt32, &p_Motor4StatR);
-	createParam(Motor4StatBit1RString, asynParamUInt32Digital, &p_Motor4StatBit1R);
-	createParam(Motor4StatBit2RString, asynParamUInt32Digital, &p_Motor4StatBit2R);
     createParam(Motor4StepsRString, asynParamInt32, &p_Motor4StepsR);
     createParam(Motor4StepsWString, asynParamInt32, &p_Motor4StepsW);
     createParam(Motor4VlctyRString, asynParamInt32, &p_Motor4VlctyR);
@@ -149,11 +135,7 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Piezo1BrdSernumRString, asynParamInt32, &p_Piezo1BrdSernumR);
     createParam(Piezo1BrdTmpRString, asynParamInt32, &p_Piezo1BrdTmpR);
     createParam(Piezo1CntlRString, asynParamInt32, &p_Piezo1CntlR);
-	createParam(Piezo1CntlBit1RString, asynParamUInt32Digital, &p_Piezo1CntlBit1R);
-	createParam(Piezo1CntlBit2RString, asynParamUInt32Digital, &p_Piezo1CntlBit2R);
     createParam(Piezo1CntlWString, asynParamInt32, &p_Piezo1CntlW);
-    createParam(Piezo1CntlBit1WString, asynParamUInt32Digital, &p_Piezo1CntlBit1W);
-    createParam(Piezo1CntlBit2WString, asynParamUInt32Digital, &p_Piezo1CntlBit2W);
     createParam(Piezo1Dac1RString, asynParamInt32, &p_Piezo1Dac1R);
     createParam(Piezo1Dac1WString, asynParamInt32, &p_Piezo1Dac1W);
     createParam(Piezo1Dac2RString, asynParamInt32, &p_Piezo1Dac2R);
@@ -165,18 +147,12 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Piezo1LowWindowRString, asynParamInt32, &p_Piezo1LowWindowR);
     createParam(Piezo1LowWindowWString, asynParamInt32, &p_Piezo1LowWindowW);
     createParam(Piezo1StatRString, asynParamInt32, &p_Piezo1StatR);
-	createParam(Piezo1StatBit1RString, asynParamUInt32Digital, &p_Piezo1StatBit1R);
-	createParam(Piezo1StatBit2RString, asynParamUInt32Digital, &p_Piezo1StatBit2R);
     createParam(Piezo2Adc1RString, asynParamInt32, &p_Piezo2Adc1R);
     createParam(Piezo2Adc2RString, asynParamInt32, &p_Piezo2Adc2R);
     createParam(Piezo2BrdSernumRString, asynParamInt32, &p_Piezo2BrdSernumR);
     createParam(Piezo2BrdTmpRString, asynParamInt32, &p_Piezo2BrdTmpR);
     createParam(Piezo2CntlRString, asynParamInt32, &p_Piezo2CntlR);
-	createParam(Piezo2CntlBit1RString, asynParamUInt32Digital, &p_Piezo2CntlBit1R);
-	createParam(Piezo2CntlBit2RString, asynParamUInt32Digital, &p_Piezo2CntlBit2R);
     createParam(Piezo2CntlWString, asynParamInt32, &p_Piezo2CntlW);
-    createParam(Piezo2CntlBit1WString, asynParamUInt32Digital, &p_Piezo2CntlBit1W);
-    createParam(Piezo2CntlBit2WString, asynParamUInt32Digital, &p_Piezo2CntlBit2W);
     createParam(Piezo2Dac1RString, asynParamInt32, &p_Piezo2Dac1R);
     createParam(Piezo2Dac1WString, asynParamInt32, &p_Piezo2Dac1W);
     createParam(Piezo2Dac2RString, asynParamInt32, &p_Piezo2Dac2R);
@@ -188,18 +164,12 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Piezo2LowWindowRString, asynParamInt32, &p_Piezo2LowWindowR);
     createParam(Piezo2LowWindowWString, asynParamInt32, &p_Piezo2LowWindowW);
     createParam(Piezo2StatRString, asynParamInt32, &p_Piezo2StatR);
-	createParam(Piezo2StatBit1RString, asynParamUInt32Digital, &p_Piezo2StatBit1R);
-	createParam(Piezo2StatBit2RString, asynParamUInt32Digital, &p_Piezo2StatBit2R);
     createParam(Piezo3Adc1RString, asynParamInt32, &p_Piezo3Adc1R);
     createParam(Piezo3Adc2RString, asynParamInt32, &p_Piezo3Adc2R);
     createParam(Piezo3BrdSernumRString, asynParamInt32, &p_Piezo3BrdSernumR);
     createParam(Piezo3BrdTmpRString, asynParamInt32, &p_Piezo3BrdTmpR);
     createParam(Piezo3CntlRString, asynParamInt32, &p_Piezo3CntlR);
-	createParam(Piezo3CntlBit1RString, asynParamUInt32Digital, &p_Piezo3CntlBit1R);
-	createParam(Piezo3CntlBit2RString, asynParamUInt32Digital, &p_Piezo3CntlBit2R);
     createParam(Piezo3CntlWString, asynParamInt32, &p_Piezo3CntlW);
-    createParam(Piezo3CntlBit1WString, asynParamUInt32Digital, &p_Piezo3CntlBit1W);
-    createParam(Piezo3CntlBit2WString, asynParamUInt32Digital, &p_Piezo3CntlBit2W);
     createParam(Piezo3Dac1RString, asynParamInt32, &p_Piezo3Dac1R);
     createParam(Piezo3Dac1WString, asynParamInt32, &p_Piezo3Dac1W);
     createParam(Piezo3Dac2RString, asynParamInt32, &p_Piezo3Dac2R);
@@ -211,18 +181,12 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Piezo3LowWindowRString, asynParamInt32, &p_Piezo3LowWindowR);
     createParam(Piezo3LowWindowWString, asynParamInt32, &p_Piezo3LowWindowW);
     createParam(Piezo3StatRString, asynParamInt32, &p_Piezo3StatR);
-	createParam(Piezo3StatBit1RString, asynParamUInt32Digital, &p_Piezo3StatBit1R);
-	createParam(Piezo3StatBit2RString, asynParamUInt32Digital, &p_Piezo3StatBit2R);
     createParam(Piezo4Adc1RString, asynParamInt32, &p_Piezo4Adc1R);
     createParam(Piezo4Adc2RString, asynParamInt32, &p_Piezo4Adc2R);
     createParam(Piezo4BrdSernumRString, asynParamInt32, &p_Piezo4BrdSernumR);
     createParam(Piezo4BrdTmpRString, asynParamInt32, &p_Piezo4BrdTmpR);
     createParam(Piezo4CntlRString, asynParamInt32, &p_Piezo4CntlR);
-	createParam(Piezo4CntlBit1RString, asynParamUInt32Digital, &p_Piezo4CntlBit1R);
-	createParam(Piezo4CntlBit2RString, asynParamUInt32Digital, &p_Piezo4CntlBit2R);
     createParam(Piezo4CntlWString, asynParamInt32, &p_Piezo4CntlW);
-    createParam(Piezo4CntlBit1WString, asynParamUInt32Digital, &p_Piezo4CntlBit1W);
-    createParam(Piezo4CntlBit2WString, asynParamUInt32Digital, &p_Piezo4CntlBit2W);
     createParam(Piezo4Dac1RString, asynParamInt32, &p_Piezo4Dac1R);
     createParam(Piezo4Dac1WString, asynParamInt32, &p_Piezo4Dac1W);
     createParam(Piezo4Dac2RString, asynParamInt32, &p_Piezo4Dac2R);
@@ -234,116 +198,115 @@ scllrfRESDriver::scllrfRESDriver(const char *drvPortName, const char *netPortNam
     createParam(Piezo4LowWindowRString, asynParamInt32, &p_Piezo4LowWindowR);
     createParam(Piezo4LowWindowWString, asynParamInt32, &p_Piezo4LowWindowW);
     createParam(Piezo4StatRString, asynParamInt32, &p_Piezo4StatR);
-	createParam(Piezo4StatBit1RString, asynParamUInt32Digital, &p_Piezo4StatBit1R);
-	createParam(Piezo4StatBit2RString, asynParamUInt32Digital, &p_Piezo4StatBit2R);
 
+    // Message size is the number of read registers, plus 1 nonce for every 175 read registers
+    PolledRegMsgSize_ = scllrfRESReadRegCount + (scllrfRESReadRegCount / 175) + 1;
 	// A canned request to read all registers
-    pPolledRegMsg_ = new FpgaReg[readRegCount + 1]
+    pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
-			{ 0, 0 },
-			{ flagReadMask | Motor1AccRAdr, blankData },
-			{ flagReadMask | Motor1VlctyRAdr, blankData },
-			{ flagReadMask | Motor1StepsRAdr, blankData },
-			{ flagReadMask | Motor1SgnStepsRAdr, blankData },
-			{ flagReadMask | Motor1AbsStepsRAdr, blankData },
-			{ flagReadMask | Motor1LaccRAdr, blankData },
-			{ flagReadMask | Motor1LvlctyRAdr, blankData },
-			{ flagReadMask | Motor1LstepsRAdr, blankData },
-			{ flagReadMask | Motor1DrviRAdr, blankData },
-			{ flagReadMask | Motor1BrdTmpRAdr, blankData },
-			{ flagReadMask | Motor1CntlRAdr, blankData },
-			{ flagReadMask | Motor1StatRAdr, blankData },
-			{ flagReadMask | Piezo1Dac1RAdr, blankData },
-			{ flagReadMask | Piezo1Dac2RAdr, blankData },
-			{ flagReadMask | Piezo1Adc1RAdr, blankData },
-			{ flagReadMask | Piezo1Adc2RAdr, blankData },
-			{ flagReadMask | Piezo1HighWindowRAdr, blankData },
-			{ flagReadMask | Piezo1LowWindowRAdr, blankData },
-			{ flagReadMask | Piezo1CntlRAdr, blankData },
-			{ flagReadMask | Piezo1StatRAdr, blankData },
-			{ flagReadMask | Piezo1BrdTmpRAdr, blankData },
-			{ flagReadMask | Piezo1BrdSernumRAdr, blankData },
-			{ flagReadMask | Piezo1IgainRAdr, blankData },
-			{ flagReadMask | Cavity1DetuneErrRAdr, blankData },
-			{ flagReadMask | Motor2AccRAdr, blankData },
-			{ flagReadMask | Motor2VlctyRAdr, blankData },
-			{ flagReadMask | Motor2StepsRAdr, blankData },
-			{ flagReadMask | Motor2SgnStepsRAdr, blankData },
-			{ flagReadMask | Motor2AbsStepsRAdr, blankData },
-			{ flagReadMask | Motor2LaccRAdr, blankData },
-			{ flagReadMask | Motor2LvlctyRAdr, blankData },
-			{ flagReadMask | Motor2LstepsRAdr, blankData },
-			{ flagReadMask | Motor2DrviRAdr, blankData },
-			{ flagReadMask | Motor2BrdTmpRAdr, blankData },
-			{ flagReadMask | Motor2CntlRAdr, blankData },
-			{ flagReadMask | Motor2StatRAdr, blankData },
-			{ flagReadMask | Piezo2Dac1RAdr, blankData },
-			{ flagReadMask | Piezo2Dac2RAdr, blankData },
-			{ flagReadMask | Piezo2Adc1RAdr, blankData },
-			{ flagReadMask | Piezo2Adc2RAdr, blankData },
-			{ flagReadMask | Piezo2HighWindowRAdr, blankData },
-			{ flagReadMask | Piezo2LowWindowRAdr, blankData },
-			{ flagReadMask | Piezo2CntlRAdr, blankData },
-			{ flagReadMask | Piezo2StatRAdr, blankData },
-			{ flagReadMask | Piezo2BrdTmpRAdr, blankData },
-			{ flagReadMask | Piezo2BrdSernumRAdr, blankData },
-			{ flagReadMask | Piezo2IgainRAdr, blankData },
-			{ flagReadMask | Cavity2DetuneErrRAdr, blankData },
-			{ flagReadMask | Motor3AccRAdr, blankData },
-			{ flagReadMask | Motor3VlctyRAdr, blankData },
-			{ flagReadMask | Motor3StepsRAdr, blankData },
-			{ flagReadMask | Motor3SgnStepsRAdr, blankData },
-			{ flagReadMask | Motor3AbsStepsRAdr, blankData },
-			{ flagReadMask | Motor3LaccRAdr, blankData },
-			{ flagReadMask | Motor3LvlctyRAdr, blankData },
-			{ flagReadMask | Motor3LstepsRAdr, blankData },
-			{ flagReadMask | Motor3DrviRAdr, blankData },
-			{ flagReadMask | Motor3BrdTmpRAdr, blankData },
-			{ flagReadMask | Motor3CntlRAdr, blankData },
-			{ flagReadMask | Motor3StatRAdr, blankData },
-			{ flagReadMask | Piezo3Dac1RAdr, blankData },
-			{ flagReadMask | Piezo3Dac2RAdr, blankData },
-			{ flagReadMask | Piezo3Adc1RAdr, blankData },
-			{ flagReadMask | Piezo3Adc2RAdr, blankData },
-			{ flagReadMask | Piezo3HighWindowRAdr, blankData },
-			{ flagReadMask | Piezo3LowWindowRAdr, blankData },
-			{ flagReadMask | Piezo3CntlRAdr, blankData },
-			{ flagReadMask | Piezo3StatRAdr, blankData },
-			{ flagReadMask | Piezo3BrdTmpRAdr, blankData },
-			{ flagReadMask | Piezo3BrdSernumRAdr, blankData },
-			{ flagReadMask | Piezo3IgainRAdr, blankData },
-			{ flagReadMask | Cavity3DetuneErrRAdr, blankData },
-			{ flagReadMask | Motor4AccRAdr, blankData },
-			{ flagReadMask | Motor4VlctyRAdr, blankData },
-			{ flagReadMask | Motor4StepsRAdr, blankData },
-			{ flagReadMask | Motor4SgnStepsRAdr, blankData },
-			{ flagReadMask | Motor4AbsStepsRAdr, blankData },
-			{ flagReadMask | Motor4LaccRAdr, blankData },
-			{ flagReadMask | Motor4LvlctyRAdr, blankData },
-			{ flagReadMask | Motor4LstepsRAdr, blankData },
-			{ flagReadMask | Motor4DrviRAdr, blankData },
-			{ flagReadMask | Motor4BrdTmpRAdr, blankData },
-			{ flagReadMask | Motor4CntlRAdr, blankData },
-			{ flagReadMask | Motor4StatRAdr, blankData },
-			{ flagReadMask | Piezo4Dac1RAdr, blankData },
-			{ flagReadMask | Piezo4Dac2RAdr, blankData },
-			{ flagReadMask | Piezo4Adc1RAdr, blankData },
-			{ flagReadMask | Piezo4Adc2RAdr, blankData },
-			{ flagReadMask | Piezo4HighWindowRAdr, blankData },
-			{ flagReadMask | Piezo4LowWindowRAdr, blankData },
-			{ flagReadMask | Piezo4CntlRAdr, blankData },
-			{ flagReadMask | Piezo4StatRAdr, blankData },
-			{ flagReadMask | Piezo4BrdTmpRAdr, blankData },
-			{ flagReadMask | Piezo4BrdSernumRAdr, blankData },
-			{ flagReadMask | Piezo4IgainRAdr, blankData },
-			{ flagReadMask | Cavity4DetuneErrRAdr, blankData },
+		{ 0, 0 },
+		{ flagReadMask | Motor1AccRAdr, blankData },
+		{ flagReadMask | Motor1VlctyRAdr, blankData },
+		{ flagReadMask | Motor1StepsRAdr, blankData },
+		{ flagReadMask | Motor1SgnStepsRAdr, blankData },
+		{ flagReadMask | Motor1AbsStepsRAdr, blankData },
+		{ flagReadMask | Motor1LaccRAdr, blankData },
+		{ flagReadMask | Motor1LvlctyRAdr, blankData },
+		{ flagReadMask | Motor1LstepsRAdr, blankData },
+		{ flagReadMask | Motor1DrviRAdr, blankData },
+		{ flagReadMask | Motor1BrdTmpRAdr, blankData },
+		{ flagReadMask | Motor1CntlRAdr, blankData },
+		{ flagReadMask | Motor1StatRAdr, blankData },
+		{ flagReadMask | Piezo1Dac1RAdr, blankData },
+		{ flagReadMask | Piezo1Dac2RAdr, blankData },
+		{ flagReadMask | Piezo1Adc1RAdr, blankData },
+		{ flagReadMask | Piezo1Adc2RAdr, blankData },
+		{ flagReadMask | Piezo1HighWindowRAdr, blankData },
+		{ flagReadMask | Piezo1LowWindowRAdr, blankData },
+		{ flagReadMask | Piezo1CntlRAdr, blankData },
+		{ flagReadMask | Piezo1StatRAdr, blankData },
+		{ flagReadMask | Piezo1BrdTmpRAdr, blankData },
+		{ flagReadMask | Piezo1BrdSernumRAdr, blankData },
+		{ flagReadMask | Piezo1IgainRAdr, blankData },
+		{ flagReadMask | Cavity1DetuneErrRAdr, blankData },
+		{ flagReadMask | Motor2AccRAdr, blankData },
+		{ flagReadMask | Motor2VlctyRAdr, blankData },
+		{ flagReadMask | Motor2StepsRAdr, blankData },
+		{ flagReadMask | Motor2SgnStepsRAdr, blankData },
+		{ flagReadMask | Motor2AbsStepsRAdr, blankData },
+		{ flagReadMask | Motor2LaccRAdr, blankData },
+		{ flagReadMask | Motor2LvlctyRAdr, blankData },
+		{ flagReadMask | Motor2LstepsRAdr, blankData },
+		{ flagReadMask | Motor2DrviRAdr, blankData },
+		{ flagReadMask | Motor2BrdTmpRAdr, blankData },
+		{ flagReadMask | Motor2CntlRAdr, blankData },
+		{ flagReadMask | Motor2StatRAdr, blankData },
+		{ flagReadMask | Piezo2Dac1RAdr, blankData },
+		{ flagReadMask | Piezo2Dac2RAdr, blankData },
+		{ flagReadMask | Piezo2Adc1RAdr, blankData },
+		{ flagReadMask | Piezo2Adc2RAdr, blankData },
+		{ flagReadMask | Piezo2HighWindowRAdr, blankData },
+		{ flagReadMask | Piezo2LowWindowRAdr, blankData },
+		{ flagReadMask | Piezo2CntlRAdr, blankData },
+		{ flagReadMask | Piezo2StatRAdr, blankData },
+		{ flagReadMask | Piezo2BrdTmpRAdr, blankData },
+		{ flagReadMask | Piezo2BrdSernumRAdr, blankData },
+		{ flagReadMask | Piezo2IgainRAdr, blankData },
+		{ flagReadMask | Cavity2DetuneErrRAdr, blankData },
+		{ flagReadMask | Motor3AccRAdr, blankData },
+		{ flagReadMask | Motor3VlctyRAdr, blankData },
+		{ flagReadMask | Motor3StepsRAdr, blankData },
+		{ flagReadMask | Motor3SgnStepsRAdr, blankData },
+		{ flagReadMask | Motor3AbsStepsRAdr, blankData },
+		{ flagReadMask | Motor3LaccRAdr, blankData },
+		{ flagReadMask | Motor3LvlctyRAdr, blankData },
+		{ flagReadMask | Motor3LstepsRAdr, blankData },
+		{ flagReadMask | Motor3DrviRAdr, blankData },
+		{ flagReadMask | Motor3BrdTmpRAdr, blankData },
+		{ flagReadMask | Motor3CntlRAdr, blankData },
+		{ flagReadMask | Motor3StatRAdr, blankData },
+		{ flagReadMask | Piezo3Dac1RAdr, blankData },
+		{ flagReadMask | Piezo3Dac2RAdr, blankData },
+		{ flagReadMask | Piezo3Adc1RAdr, blankData },
+		{ flagReadMask | Piezo3Adc2RAdr, blankData },
+		{ flagReadMask | Piezo3HighWindowRAdr, blankData },
+		{ flagReadMask | Piezo3LowWindowRAdr, blankData },
+		{ flagReadMask | Piezo3CntlRAdr, blankData },
+		{ flagReadMask | Piezo3StatRAdr, blankData },
+		{ flagReadMask | Piezo3BrdTmpRAdr, blankData },
+		{ flagReadMask | Piezo3BrdSernumRAdr, blankData },
+		{ flagReadMask | Piezo3IgainRAdr, blankData },
+		{ flagReadMask | Cavity3DetuneErrRAdr, blankData },
+		{ flagReadMask | Motor4AccRAdr, blankData },
+		{ flagReadMask | Motor4VlctyRAdr, blankData },
+		{ flagReadMask | Motor4StepsRAdr, blankData },
+		{ flagReadMask | Motor4SgnStepsRAdr, blankData },
+		{ flagReadMask | Motor4AbsStepsRAdr, blankData },
+		{ flagReadMask | Motor4LaccRAdr, blankData },
+		{ flagReadMask | Motor4LvlctyRAdr, blankData },
+		{ flagReadMask | Motor4LstepsRAdr, blankData },
+		{ flagReadMask | Motor4DrviRAdr, blankData },
+		{ flagReadMask | Motor4BrdTmpRAdr, blankData },
+		{ flagReadMask | Motor4CntlRAdr, blankData },
+		{ flagReadMask | Motor4StatRAdr, blankData },
+		{ flagReadMask | Piezo4Dac1RAdr, blankData },
+		{ flagReadMask | Piezo4Dac2RAdr, blankData },
+		{ flagReadMask | Piezo4Adc1RAdr, blankData },
+		{ flagReadMask | Piezo4Adc2RAdr, blankData },
+		{ flagReadMask | Piezo4HighWindowRAdr, blankData },
+		{ flagReadMask | Piezo4LowWindowRAdr, blankData },
+		{ flagReadMask | Piezo4CntlRAdr, blankData },
+		{ flagReadMask | Piezo4StatRAdr, blankData },
+		{ flagReadMask | Piezo4BrdTmpRAdr, blankData },
+		{ flagReadMask | Piezo4BrdSernumRAdr, blankData },
+		{ flagReadMask | Piezo4IgainRAdr, blankData },
+		{ flagReadMask | Cavity4DetuneErrRAdr, blankData },
 	};
 
-	htonFpgaRegArray(pPolledRegMsg_, readRegCount + 1);
-    PolledRegMsgSize_ = readRegCount + 1;
+	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
 
     epicsThreadSleep(defaultPollPeriod);
-    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_SCLLRFRES_PARAMS);
+    printf("%s created %ld of %ld parameters.\n",__PRETTY_FUNCTION__,NUM_SCLLRFRES_PARAMS, paramTableAdds+NUM_SCLLRFRES_PARAMS);
 
     wakeupPoller();
     wakeupReader();
@@ -1099,6 +1062,8 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
+	break;
+
     case Motor1AccRAdr|flagReadMask:
 		status = (asynStatus) setIntegerParam(p_Motor1AccR,
 				pFromFpga->data);
@@ -1185,20 +1150,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor1CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor1CntlBit1R,
-				pFromFpga->data, Motor1CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor1CntlBit1RString,
-				(unsigned ) pFromFpga->data & Motor1CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor1CntlBit2R,
-				pFromFpga->data, Motor1CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor1CntlBit2RString,
-				(unsigned ) pFromFpga->data & Motor1CntlBit2Mask);
 	break;
 
     case Motor1StatRAdr|flagReadMask:
@@ -1207,20 +1158,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor1StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor1StatBit1R,
-				pFromFpga->data, Motor1StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor1StatBit1RString,
-				(unsigned ) pFromFpga->data & Motor1StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor1StatBit2R,
-				pFromFpga->data, Motor1StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor1StatBit2RString,
-				(unsigned ) pFromFpga->data & Motor1StatBit2Mask);
 	break;
 
     case Piezo1Dac1RAdr|flagReadMask:
@@ -1277,20 +1214,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo1CntlBit1R,
-				pFromFpga->data, Piezo1CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo1CntlBit1RString,
-				(unsigned ) pFromFpga->data & Piezo1CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo1CntlBit2R,
-				pFromFpga->data, Piezo1CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo1CntlBit2RString,
-				(unsigned ) pFromFpga->data & Piezo1CntlBit2Mask);
 	break;
 
     case Piezo1StatRAdr|flagReadMask:
@@ -1299,20 +1222,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo1StatBit1R,
-				pFromFpga->data, Piezo1StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo1StatBit1RString,
-				(unsigned ) pFromFpga->data & Piezo1StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo1StatBit2R,
-				pFromFpga->data, Piezo1StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo1StatBit2RString,
-				(unsigned ) pFromFpga->data & Piezo1StatBit2Mask);
 	break;
 
     case Piezo1BrdTmpRAdr|flagReadMask:
@@ -1433,20 +1342,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor2CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor2CntlBit1R,
-				pFromFpga->data, Motor2CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor2CntlBit1RString,
-				(unsigned ) pFromFpga->data & Motor2CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor2CntlBit2R,
-				pFromFpga->data, Motor2CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor2CntlBit2RString,
-				(unsigned ) pFromFpga->data & Motor2CntlBit2Mask);
 	break;
 
     case Motor2StatRAdr|flagReadMask:
@@ -1455,20 +1350,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor2StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor2StatBit1R,
-				pFromFpga->data, Motor2StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor2StatBit1RString,
-				(unsigned ) pFromFpga->data & Motor2StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor2StatBit2R,
-				pFromFpga->data, Motor2StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor2StatBit2RString,
-				(unsigned ) pFromFpga->data & Motor2StatBit2Mask);
 	break;
 
     case Piezo2Dac1RAdr|flagReadMask:
@@ -1525,20 +1406,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo2CntlBit1R,
-				pFromFpga->data, Piezo2CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo2CntlBit1RString,
-				(unsigned ) pFromFpga->data & Piezo2CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo2CntlBit2R,
-				pFromFpga->data, Piezo2CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo2CntlBit2RString,
-				(unsigned ) pFromFpga->data & Piezo2CntlBit2Mask);
 	break;
 
     case Piezo2StatRAdr|flagReadMask:
@@ -1547,20 +1414,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo2StatBit1R,
-				pFromFpga->data, Piezo2StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo2StatBit1RString,
-				(unsigned ) pFromFpga->data & Piezo2StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo2StatBit2R,
-				pFromFpga->data, Piezo2StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo2StatBit2RString,
-				(unsigned ) pFromFpga->data & Piezo2StatBit2Mask);
 	break;
 
     case Piezo2BrdTmpRAdr|flagReadMask:
@@ -1681,20 +1534,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor3CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor3CntlBit1R,
-				pFromFpga->data, Motor3CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor3CntlBit1RString,
-				(unsigned ) pFromFpga->data & Motor3CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor3CntlBit2R,
-				pFromFpga->data, Motor3CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor3CntlBit2RString,
-				(unsigned ) pFromFpga->data & Motor3CntlBit2Mask);
 	break;
 
     case Motor3StatRAdr|flagReadMask:
@@ -1703,20 +1542,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor3StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor3StatBit1R,
-				pFromFpga->data, Motor3StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor3StatBit1RString,
-				(unsigned ) pFromFpga->data & Motor3StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor3StatBit2R,
-				pFromFpga->data, Motor3StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor3StatBit2RString,
-				(unsigned ) pFromFpga->data & Motor3StatBit2Mask);
 	break;
 
     case Piezo3Dac1RAdr|flagReadMask:
@@ -1773,20 +1598,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo3CntlBit1R,
-				pFromFpga->data, Piezo3CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo3CntlBit1RString,
-				(unsigned ) pFromFpga->data & Piezo3CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo3CntlBit2R,
-				pFromFpga->data, Piezo3CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo3CntlBit2RString,
-				(unsigned ) pFromFpga->data & Piezo3CntlBit2Mask);
 	break;
 
     case Piezo3StatRAdr|flagReadMask:
@@ -1795,20 +1606,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo3StatBit1R,
-				pFromFpga->data, Piezo3StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo3StatBit1RString,
-				(unsigned ) pFromFpga->data & Piezo3StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo3StatBit2R,
-				pFromFpga->data, Piezo3StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo3StatBit2RString,
-				(unsigned ) pFromFpga->data & Piezo3StatBit2Mask);
 	break;
 
     case Piezo3BrdTmpRAdr|flagReadMask:
@@ -1929,20 +1726,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor4CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor4CntlBit1R,
-				pFromFpga->data, Motor4CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor4CntlBit1RString,
-				(unsigned ) pFromFpga->data & Motor4CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor4CntlBit2R,
-				pFromFpga->data, Motor4CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor4CntlBit2RString,
-				(unsigned ) pFromFpga->data & Motor4CntlBit2Mask);
 	break;
 
     case Motor4StatRAdr|flagReadMask:
@@ -1951,20 +1734,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Motor4StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor4StatBit1R,
-				pFromFpga->data, Motor4StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor4StatBit1RString,
-				(unsigned ) pFromFpga->data & Motor4StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Motor4StatBit2R,
-				pFromFpga->data, Motor4StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Motor4StatBit2RString,
-				(unsigned ) pFromFpga->data & Motor4StatBit2Mask);
 	break;
 
     case Piezo4Dac1RAdr|flagReadMask:
@@ -2021,20 +1790,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4CntlRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo4CntlBit1R,
-				pFromFpga->data, Piezo4CntlBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo4CntlBit1RString,
-				(unsigned ) pFromFpga->data & Piezo4CntlBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo4CntlBit2R,
-				pFromFpga->data, Piezo4CntlBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo4CntlBit2RString,
-				(unsigned ) pFromFpga->data & Piezo4CntlBit2Mask);
 	break;
 
     case Piezo4StatRAdr|flagReadMask:
@@ -2043,20 +1798,6 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4StatRString, (unsigned ) pFromFpga->data);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo4StatBit1R,
-				pFromFpga->data, Piezo4StatBit1Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo4StatBit1RString,
-				(unsigned ) pFromFpga->data & Piezo4StatBit1Mask);
-
-		status = (asynStatus) setUIntDigitalParam(p_Piezo4StatBit2R,
-				pFromFpga->data, Piezo4StatBit2Mask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Piezo4StatBit2RString,
-				(unsigned ) pFromFpga->data & Piezo4StatBit2Mask);
 	break;
 
     case Piezo4BrdTmpRAdr|flagReadMask:
@@ -2089,7 +1830,7 @@ asynStatus scllrfRESDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity4DetuneErrRString, (unsigned ) pFromFpga->data);
-	break;
+		break;
 
 	default:
 		getIntegerParam(p_CommErrorCount, &errorCount);
@@ -2940,7 +2681,8 @@ extern "C" {
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
 int scllrfRESConfigure(const char *drvPortName, const char *netPortName)
 {
-	new scllrfRESDriver(drvPortName, netPortName);
+	//new scllrfRESDriver(drvPortName, netPortName);
+	new scllrfRESDriver(drvPortName, netPortName, 8, 0);
 	return asynSuccess;
 }
 

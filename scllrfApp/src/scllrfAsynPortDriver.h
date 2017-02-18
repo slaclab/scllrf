@@ -90,6 +90,7 @@ static const uint32_t addrMask = 0x00FFFFFF;
 static const int32_t blankData = 0xDEADBEEF;
 
 static const unsigned maxMsgSize = 1400; // Estimated MTU minus fudge factor, in bytes
+static const unsigned maxRegPerMsg = maxMsgSize/sizeof(FpgaReg)-1; // Number of register requests minus the nonce
 
 // Communication tuning parameters
 static const double readTimeout = 1.0; // seconds

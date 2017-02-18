@@ -5,7 +5,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : templateScllrfDriver.h
+ * File       : scllrfRESDriver.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -37,22 +37,18 @@ static const char *Cavity3DetuneErrRString = "CAVITY3_DETUNE_ERR_R";
 static const char *Cavity4DetuneErrRString = "CAVITY4_DETUNE_ERR_R";
 // absolute steps Hz
 static const char *Motor1AbsStepsRString = "MOTOR1_ABS_STEPS_R";
-// acceleration Hz/\(Sec^2\)
+// acceleration Hz/(Sec^2)
 static const char *Motor1AccRString = "MOTOR1_ACC_R";
 static const char *Motor1AccWString = "MOTOR1_ACC_W";
 // board temp deg C
 static const char *Motor1BrdTmpRString = "MOTOR1_BRD_TMP_R";
 // control bits
 static const char *Motor1CntlRString = "MOTOR1_CNTL_R";
-static const char *Motor1CntlBit1RString = "MOTOR1_CNTL_BIT1_R";
-static const char *Motor1CntlBit2RString = "MOTOR1_CNTL_BIT2_R";
 static const char *Motor1CntlWString = "MOTOR1_CNTL_W";
-static const char *Motor1CntlBit1WString = "MOTOR1_CNTL_BIT1_W";
-static const char *Motor1CntlBit2WString = "MOTOR1_CNTL_BIT2_W";
 // drive current Amps
 static const char *Motor1DrviRString = "MOTOR1_DRVI_R";
 static const char *Motor1DrviWString = "MOTOR1_DRVI_W";
-// last acceleration Hz/\(Sec^2\)
+// last acceleration Hz/(Sec^2)
 static const char *Motor1LaccRString = "MOTOR1_LACC_R";
 // last steps Hz
 static const char *Motor1LstepsRString = "MOTOR1_LSTEPS_R";
@@ -62,8 +58,6 @@ static const char *Motor1LvlctyRString = "MOTOR1_LVLCTY_R";
 static const char *Motor1SgnStepsRString = "MOTOR1_SGN_STEPS_R";
 // status bits
 static const char *Motor1StatRString = "MOTOR1_STAT_R";
-static const char *Motor1StatBit1RString = "MOTOR1_STAT_BIT1_R";
-static const char *Motor1StatBit2RString = "MOTOR1_STAT_BIT2_R";
 // steps Hz
 static const char *Motor1StepsRString = "MOTOR1_STEPS_R";
 static const char *Motor1StepsWString = "MOTOR1_STEPS_W";
@@ -72,22 +66,18 @@ static const char *Motor1VlctyRString = "MOTOR1_VLCTY_R";
 static const char *Motor1VlctyWString = "MOTOR1_VLCTY_W";
 // absolute steps Hz
 static const char *Motor2AbsStepsRString = "MOTOR2_ABS_STEPS_R";
-// acceleration Hz/\(Sec^2\)
+// acceleration Hz/(Sec^2)
 static const char *Motor2AccRString = "MOTOR2_ACC_R";
 static const char *Motor2AccWString = "MOTOR2_ACC_W";
 // board temp deg C
 static const char *Motor2BrdTmpRString = "MOTOR2_BRD_TMP_R";
 // control bits
 static const char *Motor2CntlRString = "MOTOR2_CNTL_R";
-static const char *Motor2CntlBit1RString = "MOTOR2_CNTL_BIT1_R";
-static const char *Motor2CntlBit2RString = "MOTOR2_CNTL_BIT2_R";
 static const char *Motor2CntlWString = "MOTOR2_CNTL_W";
-static const char *Motor2CntlBit1WString = "MOTOR2_CNTL_BIT1_W";
-static const char *Motor2CntlBit2WString = "MOTOR2_CNTL_BIT2_W";
 // motor drive current Amps
 static const char *Motor2DrviRString = "MOTOR2_DRVI_R";
 static const char *Motor2DrviWString = "MOTOR2_DRVI_W";
-// last acceleration Hz/\(Sec^2\)
+// last acceleration Hz/(Sec^2)
 static const char *Motor2LaccRString = "MOTOR2_LACC_R";
 // last steps Hz
 static const char *Motor2LstepsRString = "MOTOR2_LSTEPS_R";
@@ -97,8 +87,6 @@ static const char *Motor2LvlctyRString = "MOTOR2_LVLCTY_R";
 static const char *Motor2SgnStepsRString = "MOTOR2_SGN_STEPS_R";
 // status bits
 static const char *Motor2StatRString = "MOTOR2_STAT_R";
-static const char *Motor2StatBit1RString = "MOTOR2_STAT_BIT1_R";
-static const char *Motor2StatBit2RString = "MOTOR2_STAT_BIT2_R";
 // steps Hz
 static const char *Motor2StepsRString = "MOTOR2_STEPS_R";
 static const char *Motor2StepsWString = "MOTOR2_STEPS_W";
@@ -107,22 +95,18 @@ static const char *Motor2VlctyRString = "MOTOR2_VLCTY_R";
 static const char *Motor2VlctyWString = "MOTOR2_VLCTY_W";
 // absolute steps Hz
 static const char *Motor3AbsStepsRString = "MOTOR3_ABS_STEPS_R";
-// acceleration Hz/\(Sec^2\)
+// acceleration Hz/(Sec^2)
 static const char *Motor3AccRString = "MOTOR3_ACC_R";
 static const char *Motor3AccWString = "MOTOR3_ACC_W";
 // board temp deg C
 static const char *Motor3BrdTmpRString = "MOTOR3_BRD_TMP_R";
 // control bits
 static const char *Motor3CntlRString = "MOTOR3_CNTL_R";
-static const char *Motor3CntlBit1RString = "MOTOR3_CNTL_BIT1_R";
-static const char *Motor3CntlBit2RString = "MOTOR3_CNTL_BIT2_R";
 static const char *Motor3CntlWString = "MOTOR3_CNTL_W";
-static const char *Motor3CntlBit1WString = "MOTOR3_CNTL_BIT1_W";
-static const char *Motor3CntlBit2WString = "MOTOR3_CNTL_BIT2_W";
 // drive current Amps
 static const char *Motor3DrviRString = "MOTOR3_DRVI_R";
 static const char *Motor3DrviWString = "MOTOR3_DRVI_W";
-// last acceleration Hz/\(Sec^2\)
+// last acceleration Hz/(Sec^2)
 static const char *Motor3LaccRString = "MOTOR3_LACC_R";
 // last steps Hz
 static const char *Motor3LstepsRString = "MOTOR3_LSTEPS_R";
@@ -132,8 +116,6 @@ static const char *Motor3LvlctyRString = "MOTOR3_LVLCTY_R";
 static const char *Motor3SgnStepsRString = "MOTOR3_SGN_STEPS_R";
 // status bits
 static const char *Motor3StatRString = "MOTOR3_STAT_R";
-static const char *Motor3StatBit1RString = "MOTOR3_STAT_BIT1_R";
-static const char *Motor3StatBit2RString = "MOTOR3_STAT_BIT2_R";
 // steps Hz
 static const char *Motor3StepsRString = "MOTOR3_STEPS_R";
 static const char *Motor3StepsWString = "MOTOR3_STEPS_W";
@@ -142,22 +124,18 @@ static const char *Motor3VlctyRString = "MOTOR3_VLCTY_R";
 static const char *Motor3VlctyWString = "MOTOR3_VLCTY_W";
 // absolute steps Hz
 static const char *Motor4AbsStepsRString = "MOTOR4_ABS_STEPS_R";
-// acceleration Hz/\(Sec^2\)
+// acceleration Hz/(Sec^2)
 static const char *Motor4AccRString = "MOTOR4_ACC_R";
 static const char *Motor4AccWString = "MOTOR4_ACC_W";
 // board temp deg C
 static const char *Motor4BrdTmpRString = "MOTOR4_BRD_TMP_R";
 // control bits
 static const char *Motor4CntlRString = "MOTOR4_CNTL_R";
-static const char *Motor4CntlBit1RString = "MOTOR4_CNTL_BIT1_R";
-static const char *Motor4CntlBit2RString = "MOTOR4_CNTL_BIT2_R";
 static const char *Motor4CntlWString = "MOTOR4_CNTL_W";
-static const char *Motor4CntlBit1WString = "MOTOR4_CNTL_BIT1_W";
-static const char *Motor4CntlBit2WString = "MOTOR4_CNTL_BIT2_W";
 // drive current Amps
 static const char *Motor4DrviRString = "MOTOR4_DRVI_R";
 static const char *Motor4DrviWString = "MOTOR4_DRVI_W";
-// last acceleration Hz/\(Sec^2\)
+// last acceleration Hz/(Sec^2)
 static const char *Motor4LaccRString = "MOTOR4_LACC_R";
 // last steps Hz
 static const char *Motor4LstepsRString = "MOTOR4_LSTEPS_R";
@@ -167,8 +145,6 @@ static const char *Motor4LvlctyRString = "MOTOR4_LVLCTY_R";
 static const char *Motor4SgnStepsRString = "MOTOR4_SGN_STEPS_R";
 // status bits
 static const char *Motor4StatRString = "MOTOR4_STAT_R";
-static const char *Motor4StatBit1RString = "MOTOR4_STAT_BIT1_R";
-static const char *Motor4StatBit2RString = "MOTOR4_STAT_BIT2_R";
 // steps Hz
 static const char *Motor4StepsRString = "MOTOR4_STEPS_R";
 static const char *Motor4StepsWString = "MOTOR4_STEPS_W";
@@ -185,11 +161,7 @@ static const char *Piezo1BrdSernumRString = "PIEZO1_BRD_SERNUM_R";
 static const char *Piezo1BrdTmpRString = "PIEZO1_BRD_TMP_R";
 // control bits
 static const char *Piezo1CntlRString = "PIEZO1_CNTL_R";
-static const char *Piezo1CntlBit1RString = "PIEZO1_CNTL_BIT1_R";
-static const char *Piezo1CntlBit2RString = "PIEZO1_CNTL_BIT2_R";
 static const char *Piezo1CntlWString = "PIEZO1_CNTL_W";
-static const char *Piezo1CntlBit1WString = "PIEZO1_CNTL_BIT1_W";
-static const char *Piezo1CntlBit2WString = "PIEZO1_CNTL_BIT2_W";
 // drive dac1 set point Volts
 static const char *Piezo1Dac1RString = "PIEZO1_DAC1_R";
 static const char *Piezo1Dac1WString = "PIEZO1_DAC1_W";
@@ -207,8 +179,6 @@ static const char *Piezo1LowWindowRString = "PIEZO1_LOW_WINDOW_R";
 static const char *Piezo1LowWindowWString = "PIEZO1_LOW_WINDOW_W";
 // status bits
 static const char *Piezo1StatRString = "PIEZO1_STAT_R";
-static const char *Piezo1StatBit1RString = "PIEZO1_STAT_BIT1_R";
-static const char *Piezo1StatBit2RString = "PIEZO1_STAT_BIT2_R";
 // position readback adc1 Volts
 static const char *Piezo2Adc1RString = "PIEZO2_ADC1_R";
 // position readback adc2 Volts
@@ -219,11 +189,7 @@ static const char *Piezo2BrdSernumRString = "PIEZO2_BRD_SERNUM_R";
 static const char *Piezo2BrdTmpRString = "PIEZO2_BRD_TMP_R";
 // control bits
 static const char *Piezo2CntlRString = "PIEZO2_CNTL_R";
-static const char *Piezo2CntlBit1RString = "PIEZO2_CNTL_BIT1_R";
-static const char *Piezo2CntlBit2RString = "PIEZO2_CNTL_BIT2_R";
 static const char *Piezo2CntlWString = "PIEZO2_CNTL_W";
-static const char *Piezo2CntlBit1WString = "PIEZO2_CNTL_BIT1_W";
-static const char *Piezo2CntlBit2WString = "PIEZO2_CNTL_BIT2_W";
 // drive dac1 set point Volts
 static const char *Piezo2Dac1RString = "PIEZO2_DAC1_R";
 static const char *Piezo2Dac1WString = "PIEZO2_DAC1_W";
@@ -241,8 +207,6 @@ static const char *Piezo2LowWindowRString = "PIEZO2_LOW_WINDOW_R";
 static const char *Piezo2LowWindowWString = "PIEZO2_LOW_WINDOW_W";
 // status bits
 static const char *Piezo2StatRString = "PIEZO2_STAT_R";
-static const char *Piezo2StatBit1RString = "PIEZO2_STAT_BIT1_R";
-static const char *Piezo2StatBit2RString = "PIEZO2_STAT_BIT2_R";
 // position readback adc1 Volts
 static const char *Piezo3Adc1RString = "PIEZO3_ADC1_R";
 // position readback adc2 Volts
@@ -253,11 +217,7 @@ static const char *Piezo3BrdSernumRString = "PIEZO3_BRD_SERNUM_R";
 static const char *Piezo3BrdTmpRString = "PIEZO3_BRD_TMP_R";
 // control bits
 static const char *Piezo3CntlRString = "PIEZO3_CNTL_R";
-static const char *Piezo3CntlBit1RString = "PIEZO3_CNTL_BIT1_R";
-static const char *Piezo3CntlBit2RString = "PIEZO3_CNTL_BIT2_R";
 static const char *Piezo3CntlWString = "PIEZO3_CNTL_W";
-static const char *Piezo3CntlBit1WString = "PIEZO3_CNTL_BIT1_W";
-static const char *Piezo3CntlBit2WString = "PIEZO3_CNTL_BIT2_W";
 // drive dac1 set point Volts
 static const char *Piezo3Dac1RString = "PIEZO3_DAC1_R";
 static const char *Piezo3Dac1WString = "PIEZO3_DAC1_W";
@@ -275,8 +235,6 @@ static const char *Piezo3LowWindowRString = "PIEZO3_LOW_WINDOW_R";
 static const char *Piezo3LowWindowWString = "PIEZO3_LOW_WINDOW_W";
 // status bits
 static const char *Piezo3StatRString = "PIEZO3_STAT_R";
-static const char *Piezo3StatBit1RString = "PIEZO3_STAT_BIT1_R";
-static const char *Piezo3StatBit2RString = "PIEZO3_STAT_BIT2_R";
 // position readback adc1 Volts
 static const char *Piezo4Adc1RString = "PIEZO4_ADC1_R";
 // position readback adc2 Volts
@@ -287,11 +245,7 @@ static const char *Piezo4BrdSernumRString = "PIEZO4_BRD_SERNUM_R";
 static const char *Piezo4BrdTmpRString = "PIEZO4_BRD_TMP_R";
 // control bits
 static const char *Piezo4CntlRString = "PIEZO4_CNTL_R";
-static const char *Piezo4CntlBit1RString = "PIEZO4_CNTL_BIT1_R";
-static const char *Piezo4CntlBit2RString = "PIEZO4_CNTL_BIT2_R";
 static const char *Piezo4CntlWString = "PIEZO4_CNTL_W";
-static const char *Piezo4CntlBit1WString = "PIEZO4_CNTL_BIT1_W";
-static const char *Piezo4CntlBit2WString = "PIEZO4_CNTL_BIT2_W";
 // drive dac1 set point Volts
 static const char *Piezo4Dac1RString = "PIEZO4_DAC1_R";
 static const char *Piezo4Dac1WString = "PIEZO4_DAC1_W";
@@ -309,18 +263,17 @@ static const char *Piezo4LowWindowRString = "PIEZO4_LOW_WINDOW_R";
 static const char *Piezo4LowWindowWString = "PIEZO4_LOW_WINDOW_W";
 // status bits
 static const char *Piezo4StatRString = "PIEZO4_STAT_R";
-static const char *Piezo4StatBit1RString = "PIEZO4_STAT_BIT1_R";
-static const char *Piezo4StatBit2RString = "PIEZO4_STAT_BIT2_R";
 
-const unsigned int readRegCount = 96;
-const unsigned int writeRegCount = 44;
+const unsigned int scllrfRESReadRegCount = 96;
+const unsigned int scllrfRESWriteRegCount = 44;
 
 
 
  /* This class implements the AxiVersion driver. */
 class scllrfRESDriver : public scllrfAsynPortDriver {
 public:
-    scllrfRESDriver(const char *drvPortName, const char *netPortName);
+//    scllrfRESDriver(const char *drvPortName, const char *netPortName);
+    scllrfRESDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
     virtual ~scllrfRESDriver();
 
 
@@ -342,11 +295,7 @@ protected:
     int p_Motor1AccW;
     int p_Motor1BrdTmpR;
     int p_Motor1CntlR;
-    int p_Motor1CntlBit1R;
-    int p_Motor1CntlBit2R;
     int p_Motor1CntlW;
-    int p_Motor1CntlBit1W;
-    int p_Motor1CntlBit2W;
     int p_Motor1DrviR;
     int p_Motor1DrviW;
     int p_Motor1LaccR;
@@ -354,8 +303,6 @@ protected:
     int p_Motor1LvlctyR;
     int p_Motor1SgnStepsR;
     int p_Motor1StatR;
-    int p_Motor1StatBit1R;
-    int p_Motor1StatBit2R;
     int p_Motor1StepsR;
     int p_Motor1StepsW;
     int p_Motor1VlctyR;
@@ -365,11 +312,7 @@ protected:
     int p_Motor2AccW;
     int p_Motor2BrdTmpR;
     int p_Motor2CntlR;
-    int p_Motor2CntlBit1R;
-    int p_Motor2CntlBit2R;
     int p_Motor2CntlW;
-    int p_Motor2CntlBit1W;
-    int p_Motor2CntlBit2W;
     int p_Motor2DrviR;
     int p_Motor2DrviW;
     int p_Motor2LaccR;
@@ -377,8 +320,6 @@ protected:
     int p_Motor2LvlctyR;
     int p_Motor2SgnStepsR;
     int p_Motor2StatR;
-    int p_Motor2StatBit1R;
-    int p_Motor2StatBit2R;
     int p_Motor2StepsR;
     int p_Motor2StepsW;
     int p_Motor2VlctyR;
@@ -388,11 +329,7 @@ protected:
     int p_Motor3AccW;
     int p_Motor3BrdTmpR;
     int p_Motor3CntlR;
-    int p_Motor3CntlBit1R;
-    int p_Motor3CntlBit2R;
     int p_Motor3CntlW;
-    int p_Motor3CntlBit1W;
-    int p_Motor3CntlBit2W;
     int p_Motor3DrviR;
     int p_Motor3DrviW;
     int p_Motor3LaccR;
@@ -400,8 +337,6 @@ protected:
     int p_Motor3LvlctyR;
     int p_Motor3SgnStepsR;
     int p_Motor3StatR;
-    int p_Motor3StatBit1R;
-    int p_Motor3StatBit2R;
     int p_Motor3StepsR;
     int p_Motor3StepsW;
     int p_Motor3VlctyR;
@@ -411,11 +346,7 @@ protected:
     int p_Motor4AccW;
     int p_Motor4BrdTmpR;
     int p_Motor4CntlR;
-    int p_Motor4CntlBit1R;
-    int p_Motor4CntlBit2R;
     int p_Motor4CntlW;
-    int p_Motor4CntlBit1W;
-    int p_Motor4CntlBit2W;
     int p_Motor4DrviR;
     int p_Motor4DrviW;
     int p_Motor4LaccR;
@@ -423,8 +354,6 @@ protected:
     int p_Motor4LvlctyR;
     int p_Motor4SgnStepsR;
     int p_Motor4StatR;
-    int p_Motor4StatBit1R;
-    int p_Motor4StatBit2R;
     int p_Motor4StepsR;
     int p_Motor4StepsW;
     int p_Motor4VlctyR;
@@ -434,11 +363,7 @@ protected:
     int p_Piezo1BrdSernumR;
     int p_Piezo1BrdTmpR;
     int p_Piezo1CntlR;
-    int p_Piezo1CntlBit1R;
-    int p_Piezo1CntlBit2R;
     int p_Piezo1CntlW;
-    int p_Piezo1CntlBit1W;
-    int p_Piezo1CntlBit2W;
     int p_Piezo1Dac1R;
     int p_Piezo1Dac1W;
     int p_Piezo1Dac2R;
@@ -450,18 +375,12 @@ protected:
     int p_Piezo1LowWindowR;
     int p_Piezo1LowWindowW;
     int p_Piezo1StatR;
-    int p_Piezo1StatBit1R;
-    int p_Piezo1StatBit2R;
     int p_Piezo2Adc1R;
     int p_Piezo2Adc2R;
     int p_Piezo2BrdSernumR;
     int p_Piezo2BrdTmpR;
     int p_Piezo2CntlR;
-    int p_Piezo2CntlBit1R;
-    int p_Piezo2CntlBit2R;
     int p_Piezo2CntlW;
-    int p_Piezo2CntlBit1W;
-    int p_Piezo2CntlBit2W;
     int p_Piezo2Dac1R;
     int p_Piezo2Dac1W;
     int p_Piezo2Dac2R;
@@ -473,18 +392,12 @@ protected:
     int p_Piezo2LowWindowR;
     int p_Piezo2LowWindowW;
     int p_Piezo2StatR;
-    int p_Piezo2StatBit1R;
-    int p_Piezo2StatBit2R;
     int p_Piezo3Adc1R;
     int p_Piezo3Adc2R;
     int p_Piezo3BrdSernumR;
     int p_Piezo3BrdTmpR;
     int p_Piezo3CntlR;
-    int p_Piezo3CntlBit1R;
-    int p_Piezo3CntlBit2R;
     int p_Piezo3CntlW;
-    int p_Piezo3CntlBit1W;
-    int p_Piezo3CntlBit2W;
     int p_Piezo3Dac1R;
     int p_Piezo3Dac1W;
     int p_Piezo3Dac2R;
@@ -496,18 +409,12 @@ protected:
     int p_Piezo3LowWindowR;
     int p_Piezo3LowWindowW;
     int p_Piezo3StatR;
-    int p_Piezo3StatBit1R;
-    int p_Piezo3StatBit2R;
     int p_Piezo4Adc1R;
     int p_Piezo4Adc2R;
     int p_Piezo4BrdSernumR;
     int p_Piezo4BrdTmpR;
     int p_Piezo4CntlR;
-    int p_Piezo4CntlBit1R;
-    int p_Piezo4CntlBit2R;
     int p_Piezo4CntlW;
-    int p_Piezo4CntlBit1W;
-    int p_Piezo4CntlBit2W;
     int p_Piezo4Dac1R;
     int p_Piezo4Dac1W;
     int p_Piezo4Dac2R;
@@ -519,13 +426,10 @@ protected:
     int p_Piezo4LowWindowR;
     int p_Piezo4LowWindowW;
     int p_Piezo4StatR;
-    int p_Piezo4StatBit1R;
-    int p_Piezo4StatBit2R;
-    #define LAST_SCLLRFRES_PARAM p_Piezo4StatBit2R
+    #define LAST_SCLLRFRES_PARAM p_Piezo4StatR
 
 #define NUM_SCLLRFRES_PARAMS (&LAST_SCLLRFRES_PARAM - &FIRST_SCLLRFRES_PARAM + NUM_SCLLRF_PARAMS + 1)
 
-private:
 
     // mapping of register names to addresses
     enum ReadRegAddrs
@@ -680,38 +584,6 @@ private:
     // masks applied to returned register data
     enum RegMasks
     {
-		Motor1CntlBit1Mask = 0x00000001,
-		Motor1CntlBit2Mask = 0x00000010,
-		Motor1StatBit1Mask = 0x00000001,
-		Motor1StatBit2Mask = 0x00000010,
-		Piezo1CntlBit1Mask = 0x00000001,
-		Piezo1CntlBit2Mask = 0x00000010,
-		Piezo1StatBit1Mask = 0x00000001,
-		Piezo1StatBit2Mask = 0x00000010,
-		Motor2CntlBit1Mask = 0x00000001,
-		Motor2CntlBit2Mask = 0x00000010,
-		Motor2StatBit1Mask = 0x00000001,
-		Motor2StatBit2Mask = 0x00000010,
-		Piezo2CntlBit1Mask = 0x00000001,
-		Piezo2CntlBit2Mask = 0x00000010,
-		Piezo2StatBit1Mask = 0x00000001,
-		Piezo2StatBit2Mask = 0x00000010,
-		Motor3CntlBit1Mask = 0x00000001,
-		Motor3CntlBit2Mask = 0x00000010,
-		Motor3StatBit1Mask = 0x00000001,
-		Motor3StatBit2Mask = 0x00000010,
-		Piezo3CntlBit1Mask = 0x00000001,
-		Piezo3CntlBit2Mask = 0x00000010,
-		Piezo3StatBit1Mask = 0x00000001,
-		Piezo3StatBit2Mask = 0x00000010,
-		Motor4CntlBit1Mask = 0x00000001,
-		Motor4CntlBit2Mask = 0x00000010,
-		Motor4StatBit1Mask = 0x00000001,
-		Motor4StatBit2Mask = 0x00000010,
-		Piezo4CntlBit1Mask = 0x00000001,
-		Piezo4CntlBit2Mask = 0x00000010,
-		Piezo4StatBit1Mask = 0x00000001,
-		Piezo4StatBit2Mask = 0x00000010,
 
     };
 };

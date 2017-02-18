@@ -2,7 +2,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : templateScllrfDriver.h
+ * File       : scllrfINTDriver.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -33,268 +33,276 @@ using namespace std;
 
 /** Constructor for the scllrfINT class.
  * Calls constructor for the asynPortDriver base class.
- * \param[in] portName The name of the asyn port driver to be created.
- * \param[in] path The path to the peripherial as built by the builder api
- * \param[in] nelms The number of elements of this device (max addr)
- * \paarm[in] nEntries The number of asyn params to be created for each device
+ * \param[in] drvPortName The name of the asyn port driver to be created.
+ * \param[in] netPortName The name of the asyn port driver to use for the network connection
+ * \param[in] maxAddr The number of channels for the paramater with the most channels
+ * \paarm[in] paramTableSize The number of asyn params to be created for each device
  *
  * */
-scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortName)
-: scllrfAsynPortDriver(drvPortName, netPortName,
-		1, /* maxAddr, i.e. number of channels */
-		NUM_SCLLRFINT_PARAMS)
-{
-	asynStatus status = asynSuccess;
+//scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortName)
+//: scllrfAsynPortDriver(drvPortName, netPortName,
+//		8, /* maxAddr, i.e. number of channels */
+//		NUM_SCLLRFINT_PARAMS)
+//{
+//	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
+//	// which the compiler has problems with..
+//	scllrfINTDriver(drvPortName, netPortName, 8, NUM_SCLLRFINT_PARAMS);
+//};
 
+scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds)
+: scllrfAsynPortDriver(drvPortName, netPortName,
+		maxAddr, /* maxAddr, i.e. number of channels */
+		paramTableAdds + NUM_SCLLRFINT_PARAMS)
+{
     epicsThreadSleep(defaultPollPeriod);
 
-    createParam(R1Cplfep1IRString, asynParamInt32, &p_R1Cplfep1IR);
-    createParam(R1Cplfep1IlhRString, asynParamInt32, &p_R1Cplfep1IlhR);
-    createParam(R1Cplfep1IlhWString, asynParamInt32, &p_R1Cplfep1IlhW);
-    createParam(R1Cplfep1IllRString, asynParamInt32, &p_R1Cplfep1IllR);
-    createParam(R1Cplfep1IllWString, asynParamInt32, &p_R1Cplfep1IllW);
-    createParam(R1Cplfep1PerdRString, asynParamInt32, &p_R1Cplfep1PerdR);
-    createParam(R1Cplfep1PerdWString, asynParamInt32, &p_R1Cplfep1PerdW);
-    createParam(R1Cplfep2IRString, asynParamInt32, &p_R1Cplfep2IR);
-    createParam(R1Cplfep2IlhRString, asynParamInt32, &p_R1Cplfep2IlhR);
-    createParam(R1Cplfep2IlhWString, asynParamInt32, &p_R1Cplfep2IlhW);
-    createParam(R1Cplfep2IllRString, asynParamInt32, &p_R1Cplfep2IllR);
-    createParam(R1Cplfep2IllWString, asynParamInt32, &p_R1Cplfep2IllW);
-    createParam(R1Cplfep2PerdRString, asynParamInt32, &p_R1Cplfep2PerdR);
-    createParam(R1Cplfep2PerdWString, asynParamInt32, &p_R1Cplfep2PerdW);
-    createParam(R1Cplfep3IRString, asynParamInt32, &p_R1Cplfep3IR);
-    createParam(R1Cplfep3IlhRString, asynParamInt32, &p_R1Cplfep3IlhR);
-    createParam(R1Cplfep3IlhWString, asynParamInt32, &p_R1Cplfep3IlhW);
-    createParam(R1Cplfep3IllRString, asynParamInt32, &p_R1Cplfep3IllR);
-    createParam(R1Cplfep3IllWString, asynParamInt32, &p_R1Cplfep3IllW);
-    createParam(R1Cplfep3PerdRString, asynParamInt32, &p_R1Cplfep3PerdR);
-    createParam(R1Cplfep3PerdWString, asynParamInt32, &p_R1Cplfep3PerdW);
-    createParam(R1Cpltmp1IRString, asynParamInt32, &p_R1Cpltmp1IR);
-    createParam(R1Cpltmp1IWString, asynParamInt32, &p_R1Cpltmp1IW);
-    createParam(R1Cpltmp1VRString, asynParamInt32, &p_R1Cpltmp1VR);
-    createParam(R1Cpltmp1VlRString, asynParamInt32, &p_R1Cpltmp1VlR);
-    createParam(R1Cpltmp1VlWString, asynParamInt32, &p_R1Cpltmp1VlW);
-    createParam(R1Cpltmp2IRString, asynParamInt32, &p_R1Cpltmp2IR);
-    createParam(R1Cpltmp2IWString, asynParamInt32, &p_R1Cpltmp2IW);
-    createParam(R1Cpltmp2VRString, asynParamInt32, &p_R1Cpltmp2VR);
-    createParam(R1Cpltmp2VlRString, asynParamInt32, &p_R1Cpltmp2VlR);
-    createParam(R1Cpltmp2VlWString, asynParamInt32, &p_R1Cpltmp2VlW);
-    createParam(R1CwalRString, asynParamInt32, &p_R1CwalR);
-    createParam(R1CwalWString, asynParamInt32, &p_R1CwalW);
-    createParam(R1CwapRString, asynParamInt32, &p_R1CwapR);
-    createParam(R1CwapWString, asynParamInt32, &p_R1CwapW);
-    createParam(R1CwapsRString, asynParamInt32, &p_R1CwapsR);
-    createParam(R1CwapsWString, asynParamInt32, &p_R1CwapsW);
-    createParam(R1CwavRString, asynParamInt32, &p_R1CwavR);
-    createParam(R1CwwlRString, asynParamInt32, &p_R1CwwlR);
-    createParam(R1CwwlWString, asynParamInt32, &p_R1CwwlW);
-    createParam(R1CwwtRString, asynParamInt32, &p_R1CwwtR);
-    createParam(R1StmpiRString, asynParamInt32, &p_R1StmpiR);
-    createParam(R1StmpiWString, asynParamInt32, &p_R1StmpiW);
-    createParam(R1StmpvRString, asynParamInt32, &p_R1StmpvR);
-    createParam(R1StmpvlRString, asynParamInt32, &p_R1StmpvlR);
-    createParam(R1StmpvlWString, asynParamInt32, &p_R1StmpvlW);
-    createParam(R2Cplfep1IRString, asynParamInt32, &p_R2Cplfep1IR);
-    createParam(R2Cplfep1IlhRString, asynParamInt32, &p_R2Cplfep1IlhR);
-    createParam(R2Cplfep1IlhWString, asynParamInt32, &p_R2Cplfep1IlhW);
-    createParam(R2Cplfep1IllRString, asynParamInt32, &p_R2Cplfep1IllR);
-    createParam(R2Cplfep1IllWString, asynParamInt32, &p_R2Cplfep1IllW);
-    createParam(R2Cplfep1PerdRString, asynParamInt32, &p_R2Cplfep1PerdR);
-    createParam(R2Cplfep1PerdWString, asynParamInt32, &p_R2Cplfep1PerdW);
-    createParam(R2Cplfep2IRString, asynParamInt32, &p_R2Cplfep2IR);
-    createParam(R2Cplfep2IlhRString, asynParamInt32, &p_R2Cplfep2IlhR);
-    createParam(R2Cplfep2IlhWString, asynParamInt32, &p_R2Cplfep2IlhW);
-    createParam(R2Cplfep2IllRString, asynParamInt32, &p_R2Cplfep2IllR);
-    createParam(R2Cplfep2IllWString, asynParamInt32, &p_R2Cplfep2IllW);
-    createParam(R2Cplfep2PerdRString, asynParamInt32, &p_R2Cplfep2PerdR);
-    createParam(R2Cplfep2PerdWString, asynParamInt32, &p_R2Cplfep2PerdW);
-    createParam(R2Cplfep3IRString, asynParamInt32, &p_R2Cplfep3IR);
-    createParam(R2Cplfep3IlhRString, asynParamInt32, &p_R2Cplfep3IlhR);
-    createParam(R2Cplfep3IlhWString, asynParamInt32, &p_R2Cplfep3IlhW);
-    createParam(R2Cplfep3IllRString, asynParamInt32, &p_R2Cplfep3IllR);
-    createParam(R2Cplfep3IllWString, asynParamInt32, &p_R2Cplfep3IllW);
-    createParam(R2Cplfep3PerdRString, asynParamInt32, &p_R2Cplfep3PerdR);
-    createParam(R2Cplfep3PerdWString, asynParamInt32, &p_R2Cplfep3PerdW);
-    createParam(R2Cpltmp1IRString, asynParamInt32, &p_R2Cpltmp1IR);
-    createParam(R2Cpltmp1IWString, asynParamInt32, &p_R2Cpltmp1IW);
-    createParam(R2Cpltmp1VRString, asynParamInt32, &p_R2Cpltmp1VR);
-    createParam(R2Cpltmp1VlRString, asynParamInt32, &p_R2Cpltmp1VlR);
-    createParam(R2Cpltmp1VlWString, asynParamInt32, &p_R2Cpltmp1VlW);
-    createParam(R2Cpltmp2IRString, asynParamInt32, &p_R2Cpltmp2IR);
-    createParam(R2Cpltmp2IWString, asynParamInt32, &p_R2Cpltmp2IW);
-    createParam(R2Cpltmp2VRString, asynParamInt32, &p_R2Cpltmp2VR);
-    createParam(R2Cpltmp2VlRString, asynParamInt32, &p_R2Cpltmp2VlR);
-    createParam(R2Cpltmp2VlWString, asynParamInt32, &p_R2Cpltmp2VlW);
-    createParam(R2CwalRString, asynParamInt32, &p_R2CwalR);
-    createParam(R2CwalWString, asynParamInt32, &p_R2CwalW);
-    createParam(R2CwapRString, asynParamInt32, &p_R2CwapR);
-    createParam(R2CwapWString, asynParamInt32, &p_R2CwapW);
-    createParam(R2CwapsRString, asynParamInt32, &p_R2CwapsR);
-    createParam(R2CwapsWString, asynParamInt32, &p_R2CwapsW);
-    createParam(R2CwavRString, asynParamInt32, &p_R2CwavR);
-    createParam(R2CwwlRString, asynParamInt32, &p_R2CwwlR);
-    createParam(R2CwwlWString, asynParamInt32, &p_R2CwwlW);
-    createParam(R2CwwtRString, asynParamInt32, &p_R2CwwtR);
-    createParam(R2StmpiRString, asynParamInt32, &p_R2StmpiR);
-    createParam(R2StmpiWString, asynParamInt32, &p_R2StmpiW);
-    createParam(R2StmpvRString, asynParamInt32, &p_R2StmpvR);
-    createParam(R2StmpvlRString, asynParamInt32, &p_R2StmpvlR);
-    createParam(R2StmpvlWString, asynParamInt32, &p_R2StmpvlW);
-    createParam(R3Cplfep1IRString, asynParamInt32, &p_R3Cplfep1IR);
-    createParam(R3Cplfep1IlhRString, asynParamInt32, &p_R3Cplfep1IlhR);
-    createParam(R3Cplfep1IlhWString, asynParamInt32, &p_R3Cplfep1IlhW);
-    createParam(R3Cplfep1IllRString, asynParamInt32, &p_R3Cplfep1IllR);
-    createParam(R3Cplfep1IllWString, asynParamInt32, &p_R3Cplfep1IllW);
-    createParam(R3Cplfep1PerdRString, asynParamInt32, &p_R3Cplfep1PerdR);
-    createParam(R3Cplfep1PerdWString, asynParamInt32, &p_R3Cplfep1PerdW);
-    createParam(R3Cplfep2IRString, asynParamInt32, &p_R3Cplfep2IR);
-    createParam(R3Cplfep2IlhRString, asynParamInt32, &p_R3Cplfep2IlhR);
-    createParam(R3Cplfep2IlhWString, asynParamInt32, &p_R3Cplfep2IlhW);
-    createParam(R3Cplfep2IllRString, asynParamInt32, &p_R3Cplfep2IllR);
-    createParam(R3Cplfep2IllWString, asynParamInt32, &p_R3Cplfep2IllW);
-    createParam(R3Cplfep2PerdRString, asynParamInt32, &p_R3Cplfep2PerdR);
-    createParam(R3Cplfep2PerdWString, asynParamInt32, &p_R3Cplfep2PerdW);
-    createParam(R3Cplfep3IRString, asynParamInt32, &p_R3Cplfep3IR);
-    createParam(R3Cplfep3IlhRString, asynParamInt32, &p_R3Cplfep3IlhR);
-    createParam(R3Cplfep3IlhWString, asynParamInt32, &p_R3Cplfep3IlhW);
-    createParam(R3Cplfep3IllRString, asynParamInt32, &p_R3Cplfep3IllR);
-    createParam(R3Cplfep3IllWString, asynParamInt32, &p_R3Cplfep3IllW);
-    createParam(R3Cplfep3PerdRString, asynParamInt32, &p_R3Cplfep3PerdR);
-    createParam(R3Cplfep3PerdWString, asynParamInt32, &p_R3Cplfep3PerdW);
-    createParam(R3Cpltmp1IRString, asynParamInt32, &p_R3Cpltmp1IR);
-    createParam(R3Cpltmp1IWString, asynParamInt32, &p_R3Cpltmp1IW);
-    createParam(R3Cpltmp1VRString, asynParamInt32, &p_R3Cpltmp1VR);
-    createParam(R3Cpltmp1VlRString, asynParamInt32, &p_R3Cpltmp1VlR);
-    createParam(R3Cpltmp1VlWString, asynParamInt32, &p_R3Cpltmp1VlW);
-    createParam(R3Cpltmp2IRString, asynParamInt32, &p_R3Cpltmp2IR);
-    createParam(R3Cpltmp2IWString, asynParamInt32, &p_R3Cpltmp2IW);
-    createParam(R3Cpltmp2VRString, asynParamInt32, &p_R3Cpltmp2VR);
-    createParam(R3Cpltmp2VlRString, asynParamInt32, &p_R3Cpltmp2VlR);
-    createParam(R3Cpltmp2VlWString, asynParamInt32, &p_R3Cpltmp2VlW);
-    createParam(R3CwalRString, asynParamInt32, &p_R3CwalR);
-    createParam(R3CwalWString, asynParamInt32, &p_R3CwalW);
-    createParam(R3CwapRString, asynParamInt32, &p_R3CwapR);
-    createParam(R3CwapWString, asynParamInt32, &p_R3CwapW);
-    createParam(R3CwapsRString, asynParamInt32, &p_R3CwapsR);
-    createParam(R3CwapsWString, asynParamInt32, &p_R3CwapsW);
-    createParam(R3CwavRString, asynParamInt32, &p_R3CwavR);
-    createParam(R3CwwlRString, asynParamInt32, &p_R3CwwlR);
-    createParam(R3CwwlWString, asynParamInt32, &p_R3CwwlW);
-    createParam(R3CwwtRString, asynParamInt32, &p_R3CwwtR);
-    createParam(R3StmpiRString, asynParamInt32, &p_R3StmpiR);
-    createParam(R3StmpiWString, asynParamInt32, &p_R3StmpiW);
-    createParam(R3StmpvRString, asynParamInt32, &p_R3StmpvR);
-    createParam(R3StmpvlRString, asynParamInt32, &p_R3StmpvlR);
-    createParam(R3StmpvlWString, asynParamInt32, &p_R3StmpvlW);
-    createParam(R4Cplfep1IRString, asynParamInt32, &p_R4Cplfep1IR);
-    createParam(R4Cplfep1IlhRString, asynParamInt32, &p_R4Cplfep1IlhR);
-    createParam(R4Cplfep1IlhWString, asynParamInt32, &p_R4Cplfep1IlhW);
-    createParam(R4Cplfep1IllRString, asynParamInt32, &p_R4Cplfep1IllR);
-    createParam(R4Cplfep1IllWString, asynParamInt32, &p_R4Cplfep1IllW);
-    createParam(R4Cplfep1PerdRString, asynParamInt32, &p_R4Cplfep1PerdR);
-    createParam(R4Cplfep1PerdWString, asynParamInt32, &p_R4Cplfep1PerdW);
-    createParam(R4Cplfep2IRString, asynParamInt32, &p_R4Cplfep2IR);
-    createParam(R4Cplfep2IlhRString, asynParamInt32, &p_R4Cplfep2IlhR);
-    createParam(R4Cplfep2IlhWString, asynParamInt32, &p_R4Cplfep2IlhW);
-    createParam(R4Cplfep2IllRString, asynParamInt32, &p_R4Cplfep2IllR);
-    createParam(R4Cplfep2IllWString, asynParamInt32, &p_R4Cplfep2IllW);
-    createParam(R4Cplfep2PerdRString, asynParamInt32, &p_R4Cplfep2PerdR);
-    createParam(R4Cplfep2PerdWString, asynParamInt32, &p_R4Cplfep2PerdW);
-    createParam(R4Cplfep3IRString, asynParamInt32, &p_R4Cplfep3IR);
-    createParam(R4Cplfep3IlhRString, asynParamInt32, &p_R4Cplfep3IlhR);
-    createParam(R4Cplfep3IlhWString, asynParamInt32, &p_R4Cplfep3IlhW);
-    createParam(R4Cplfep3IllRString, asynParamInt32, &p_R4Cplfep3IllR);
-    createParam(R4Cplfep3IllWString, asynParamInt32, &p_R4Cplfep3IllW);
-    createParam(R4Cplfep3PerdRString, asynParamInt32, &p_R4Cplfep3PerdR);
-    createParam(R4Cplfep3PerdWString, asynParamInt32, &p_R4Cplfep3PerdW);
-    createParam(R4Cpltmp1IRString, asynParamInt32, &p_R4Cpltmp1IR);
-    createParam(R4Cpltmp1IWString, asynParamInt32, &p_R4Cpltmp1IW);
-    createParam(R4Cpltmp1VRString, asynParamInt32, &p_R4Cpltmp1VR);
-    createParam(R4Cpltmp1VlRString, asynParamInt32, &p_R4Cpltmp1VlR);
-    createParam(R4Cpltmp1VlWString, asynParamInt32, &p_R4Cpltmp1VlW);
-    createParam(R4Cpltmp2IRString, asynParamInt32, &p_R4Cpltmp2IR);
-    createParam(R4Cpltmp2IWString, asynParamInt32, &p_R4Cpltmp2IW);
-    createParam(R4Cpltmp2VRString, asynParamInt32, &p_R4Cpltmp2VR);
-    createParam(R4Cpltmp2VlRString, asynParamInt32, &p_R4Cpltmp2VlR);
-    createParam(R4Cpltmp2VlWString, asynParamInt32, &p_R4Cpltmp2VlW);
-    createParam(R4CwalRString, asynParamInt32, &p_R4CwalR);
-    createParam(R4CwalWString, asynParamInt32, &p_R4CwalW);
-    createParam(R4CwapRString, asynParamInt32, &p_R4CwapR);
-    createParam(R4CwapWString, asynParamInt32, &p_R4CwapW);
-    createParam(R4CwapsRString, asynParamInt32, &p_R4CwapsR);
-    createParam(R4CwapsWString, asynParamInt32, &p_R4CwapsW);
-    createParam(R4CwavRString, asynParamInt32, &p_R4CwavR);
-    createParam(R4CwwlRString, asynParamInt32, &p_R4CwwlR);
-    createParam(R4CwwlWString, asynParamInt32, &p_R4CwwlW);
-    createParam(R4CwwtRString, asynParamInt32, &p_R4CwwtR);
-    createParam(R4StmpiRString, asynParamInt32, &p_R4StmpiR);
-    createParam(R4StmpiWString, asynParamInt32, &p_R4StmpiW);
-    createParam(R4StmpvRString, asynParamInt32, &p_R4StmpvR);
-    createParam(R4StmpvlRString, asynParamInt32, &p_R4StmpvlR);
-    createParam(R4StmpvlWString, asynParamInt32, &p_R4StmpvlW);
-    createParam(R5StmpiRString, asynParamInt32, &p_R5StmpiR);
-    createParam(R5StmpiWString, asynParamInt32, &p_R5StmpiW);
-    createParam(R5StmpvRString, asynParamInt32, &p_R5StmpvR);
-    createParam(R6StmpiRString, asynParamInt32, &p_R6StmpiR);
-    createParam(R6StmpiWString, asynParamInt32, &p_R6StmpiW);
-    createParam(R6StmpvRString, asynParamInt32, &p_R6StmpvR);
-    createParam(R7StmpiRString, asynParamInt32, &p_R7StmpiR);
-    createParam(R7StmpiWString, asynParamInt32, &p_R7StmpiW);
-    createParam(R7StmpvRString, asynParamInt32, &p_R7StmpvR);
-    createParam(R8StmpiRString, asynParamInt32, &p_R8StmpiR);
-    createParam(R8StmpiWString, asynParamInt32, &p_R8StmpiW);
-    createParam(R8StmpvRString, asynParamInt32, &p_R8StmpvR);
-    createParam(RxatfltRString, asynParamInt32, &p_RxatfltR);
-    createParam(RxatfltWString, asynParamInt32, &p_RxatfltW);
-    createParam(RxcienRString, asynParamInt32, &p_RxcienR);
-    createParam(RxciencRString, asynParamInt32, &p_RxciencR);
-    createParam(RxciencWString, asynParamInt32, &p_RxciencW);
-    createParam(RxcienmRString, asynParamInt32, &p_RxcienmR);
-    createParam(RxcienmWString, asynParamInt32, &p_RxcienmW);
-    createParam(RxcplfepfcRString, asynParamInt32, &p_RxcplfepfcR);
-    createParam(RxcplfepfcWString, asynParamInt32, &p_RxcplfepfcW);
-    createParam(RxcplfepfsRString, asynParamInt32, &p_RxcplfepfsR);
-    createParam(RxcplfeplsRString, asynParamInt32, &p_RxcplfeplsR);
-    createParam(RxcplfepmRString, asynParamInt32, &p_RxcplfepmR);
-    createParam(RxcplfepmWString, asynParamInt32, &p_RxcplfepmW);
-    createParam(RxcpltmpfcRString, asynParamInt32, &p_RxcpltmpfcR);
-    createParam(RxcpltmpfcWString, asynParamInt32, &p_RxcpltmpfcW);
-    createParam(RxcpltmplsRString, asynParamInt32, &p_RxcpltmplsR);
-    createParam(RxcpltmpmRString, asynParamInt32, &p_RxcpltmpmR);
-    createParam(RxcpltmpmWString, asynParamInt32, &p_RxcpltmpmW);
-    createParam(RxcvfRString, asynParamInt32, &p_RxcvfR);
-    createParam(RxcvfcRString, asynParamInt32, &p_RxcvfcR);
-    createParam(RxcvfcWString, asynParamInt32, &p_RxcvfcW);
-    createParam(RxcvfmRString, asynParamInt32, &p_RxcvfmR);
-    createParam(RxcvfmWString, asynParamInt32, &p_RxcvfmW);
-    createParam(RxcwadRString, asynParamInt32, &p_RxcwadR);
-    createParam(RxcwafcRString, asynParamInt32, &p_RxcwafcR);
-    createParam(RxcwafcWString, asynParamInt32, &p_RxcwafcW);
-    createParam(RxcwamRString, asynParamInt32, &p_RxcwamR);
-    createParam(RxcwamWString, asynParamInt32, &p_RxcwamW);
-    createParam(RxcwatRString, asynParamInt32, &p_RxcwatR);
-    createParam(RxcwatWString, asynParamInt32, &p_RxcwatW);
-    createParam(RxcwwdRString, asynParamInt32, &p_RxcwwdR);
-    createParam(RxcwwfcRString, asynParamInt32, &p_RxcwwfcR);
-    createParam(RxcwwfcWString, asynParamInt32, &p_RxcwwfcW);
-    createParam(RxcwwmRString, asynParamInt32, &p_RxcwwmR);
-    createParam(RxcwwmWString, asynParamInt32, &p_RxcwwmW);
-    createParam(RxcwwtsRString, asynParamInt32, &p_RxcwwtsR);
-    createParam(RxcwwtsWString, asynParamInt32, &p_RxcwwtsW);
-    createParam(RxffsdRString, asynParamInt32, &p_RxffsdR);
-    createParam(RxffsdcRString, asynParamInt32, &p_RxffsdcR);
-    createParam(RxffsdcWString, asynParamInt32, &p_RxffsdcW);
-    createParam(RxffsdmRString, asynParamInt32, &p_RxffsdmR);
-    createParam(RxffsdmWString, asynParamInt32, &p_RxffsdmW);
-    createParam(RxictlRString, asynParamInt32, &p_RxictlR);
-    createParam(RxictlWString, asynParamInt32, &p_RxictlW);
-    createParam(RxistatRString, asynParamInt32, &p_RxistatR);
-    createParam(RxiverRString, asynParamInt32, &p_RxiverR);
-    createParam(RxstmpfcRString, asynParamInt32, &p_RxstmpfcR);
-    createParam(RxstmpfcWString, asynParamInt32, &p_RxstmpfcW);
-    createParam(RxstmplsRString, asynParamInt32, &p_RxstmplsR);
-    createParam(RxstmpmRString, asynParamInt32, &p_RxstmpmR);
-    createParam(RxstmpmWString, asynParamInt32, &p_RxstmpmW);
+    createParam(R1Cplfep1IRString, asynParamUInt32Digital, &p_R1Cplfep1IR);
+    createParam(R1Cplfep1IlhRString, asynParamUInt32Digital, &p_R1Cplfep1IlhR);
+    createParam(R1Cplfep1IlhWString, asynParamUInt32Digital, &p_R1Cplfep1IlhW);
+    createParam(R1Cplfep1IllRString, asynParamUInt32Digital, &p_R1Cplfep1IllR);
+    createParam(R1Cplfep1IllWString, asynParamUInt32Digital, &p_R1Cplfep1IllW);
+    createParam(R1Cplfep1PerdRString, asynParamUInt32Digital, &p_R1Cplfep1PerdR);
+    createParam(R1Cplfep1PerdWString, asynParamUInt32Digital, &p_R1Cplfep1PerdW);
+    createParam(R1Cplfep2IRString, asynParamUInt32Digital, &p_R1Cplfep2IR);
+    createParam(R1Cplfep2IlhRString, asynParamUInt32Digital, &p_R1Cplfep2IlhR);
+    createParam(R1Cplfep2IlhWString, asynParamUInt32Digital, &p_R1Cplfep2IlhW);
+    createParam(R1Cplfep2IllRString, asynParamUInt32Digital, &p_R1Cplfep2IllR);
+    createParam(R1Cplfep2IllWString, asynParamUInt32Digital, &p_R1Cplfep2IllW);
+    createParam(R1Cplfep2PerdRString, asynParamUInt32Digital, &p_R1Cplfep2PerdR);
+    createParam(R1Cplfep2PerdWString, asynParamUInt32Digital, &p_R1Cplfep2PerdW);
+    createParam(R1Cplfep3IRString, asynParamUInt32Digital, &p_R1Cplfep3IR);
+    createParam(R1Cplfep3IlhRString, asynParamUInt32Digital, &p_R1Cplfep3IlhR);
+    createParam(R1Cplfep3IlhWString, asynParamUInt32Digital, &p_R1Cplfep3IlhW);
+    createParam(R1Cplfep3IllRString, asynParamUInt32Digital, &p_R1Cplfep3IllR);
+    createParam(R1Cplfep3IllWString, asynParamUInt32Digital, &p_R1Cplfep3IllW);
+    createParam(R1Cplfep3PerdRString, asynParamUInt32Digital, &p_R1Cplfep3PerdR);
+    createParam(R1Cplfep3PerdWString, asynParamUInt32Digital, &p_R1Cplfep3PerdW);
+    createParam(R1Cpltmp1IRString, asynParamUInt32Digital, &p_R1Cpltmp1IR);
+    createParam(R1Cpltmp1IWString, asynParamUInt32Digital, &p_R1Cpltmp1IW);
+    createParam(R1Cpltmp1VRString, asynParamUInt32Digital, &p_R1Cpltmp1VR);
+    createParam(R1Cpltmp1VlRString, asynParamUInt32Digital, &p_R1Cpltmp1VlR);
+    createParam(R1Cpltmp1VlWString, asynParamUInt32Digital, &p_R1Cpltmp1VlW);
+    createParam(R1Cpltmp2IRString, asynParamUInt32Digital, &p_R1Cpltmp2IR);
+    createParam(R1Cpltmp2IWString, asynParamUInt32Digital, &p_R1Cpltmp2IW);
+    createParam(R1Cpltmp2VRString, asynParamUInt32Digital, &p_R1Cpltmp2VR);
+    createParam(R1Cpltmp2VlRString, asynParamUInt32Digital, &p_R1Cpltmp2VlR);
+    createParam(R1Cpltmp2VlWString, asynParamUInt32Digital, &p_R1Cpltmp2VlW);
+    createParam(R1CwalRString, asynParamUInt32Digital, &p_R1CwalR);
+    createParam(R1CwalWString, asynParamUInt32Digital, &p_R1CwalW);
+    createParam(R1CwapRString, asynParamUInt32Digital, &p_R1CwapR);
+    createParam(R1CwapWString, asynParamUInt32Digital, &p_R1CwapW);
+    createParam(R1CwapsRString, asynParamUInt32Digital, &p_R1CwapsR);
+    createParam(R1CwapsWString, asynParamUInt32Digital, &p_R1CwapsW);
+    createParam(R1CwavRString, asynParamUInt32Digital, &p_R1CwavR);
+    createParam(R1CwwlRString, asynParamUInt32Digital, &p_R1CwwlR);
+    createParam(R1CwwlWString, asynParamUInt32Digital, &p_R1CwwlW);
+    createParam(R1CwwtRString, asynParamUInt32Digital, &p_R1CwwtR);
+    createParam(R1StmpiRString, asynParamUInt32Digital, &p_R1StmpiR);
+    createParam(R1StmpiWString, asynParamUInt32Digital, &p_R1StmpiW);
+    createParam(R1StmpvRString, asynParamUInt32Digital, &p_R1StmpvR);
+    createParam(R1StmpvlRString, asynParamUInt32Digital, &p_R1StmpvlR);
+    createParam(R1StmpvlWString, asynParamUInt32Digital, &p_R1StmpvlW);
+    createParam(R2Cplfep1IRString, asynParamUInt32Digital, &p_R2Cplfep1IR);
+    createParam(R2Cplfep1IlhRString, asynParamUInt32Digital, &p_R2Cplfep1IlhR);
+    createParam(R2Cplfep1IlhWString, asynParamUInt32Digital, &p_R2Cplfep1IlhW);
+    createParam(R2Cplfep1IllRString, asynParamUInt32Digital, &p_R2Cplfep1IllR);
+    createParam(R2Cplfep1IllWString, asynParamUInt32Digital, &p_R2Cplfep1IllW);
+    createParam(R2Cplfep1PerdRString, asynParamUInt32Digital, &p_R2Cplfep1PerdR);
+    createParam(R2Cplfep1PerdWString, asynParamUInt32Digital, &p_R2Cplfep1PerdW);
+    createParam(R2Cplfep2IRString, asynParamUInt32Digital, &p_R2Cplfep2IR);
+    createParam(R2Cplfep2IlhRString, asynParamUInt32Digital, &p_R2Cplfep2IlhR);
+    createParam(R2Cplfep2IlhWString, asynParamUInt32Digital, &p_R2Cplfep2IlhW);
+    createParam(R2Cplfep2IllRString, asynParamUInt32Digital, &p_R2Cplfep2IllR);
+    createParam(R2Cplfep2IllWString, asynParamUInt32Digital, &p_R2Cplfep2IllW);
+    createParam(R2Cplfep2PerdRString, asynParamUInt32Digital, &p_R2Cplfep2PerdR);
+    createParam(R2Cplfep2PerdWString, asynParamUInt32Digital, &p_R2Cplfep2PerdW);
+    createParam(R2Cplfep3IRString, asynParamUInt32Digital, &p_R2Cplfep3IR);
+    createParam(R2Cplfep3IlhRString, asynParamUInt32Digital, &p_R2Cplfep3IlhR);
+    createParam(R2Cplfep3IlhWString, asynParamUInt32Digital, &p_R2Cplfep3IlhW);
+    createParam(R2Cplfep3IllRString, asynParamUInt32Digital, &p_R2Cplfep3IllR);
+    createParam(R2Cplfep3IllWString, asynParamUInt32Digital, &p_R2Cplfep3IllW);
+    createParam(R2Cplfep3PerdRString, asynParamUInt32Digital, &p_R2Cplfep3PerdR);
+    createParam(R2Cplfep3PerdWString, asynParamUInt32Digital, &p_R2Cplfep3PerdW);
+    createParam(R2Cpltmp1IRString, asynParamUInt32Digital, &p_R2Cpltmp1IR);
+    createParam(R2Cpltmp1IWString, asynParamUInt32Digital, &p_R2Cpltmp1IW);
+    createParam(R2Cpltmp1VRString, asynParamUInt32Digital, &p_R2Cpltmp1VR);
+    createParam(R2Cpltmp1VlRString, asynParamUInt32Digital, &p_R2Cpltmp1VlR);
+    createParam(R2Cpltmp1VlWString, asynParamUInt32Digital, &p_R2Cpltmp1VlW);
+    createParam(R2Cpltmp2IRString, asynParamUInt32Digital, &p_R2Cpltmp2IR);
+    createParam(R2Cpltmp2IWString, asynParamUInt32Digital, &p_R2Cpltmp2IW);
+    createParam(R2Cpltmp2VRString, asynParamUInt32Digital, &p_R2Cpltmp2VR);
+    createParam(R2Cpltmp2VlRString, asynParamUInt32Digital, &p_R2Cpltmp2VlR);
+    createParam(R2Cpltmp2VlWString, asynParamUInt32Digital, &p_R2Cpltmp2VlW);
+    createParam(R2CwalRString, asynParamUInt32Digital, &p_R2CwalR);
+    createParam(R2CwalWString, asynParamUInt32Digital, &p_R2CwalW);
+    createParam(R2CwapRString, asynParamUInt32Digital, &p_R2CwapR);
+    createParam(R2CwapWString, asynParamUInt32Digital, &p_R2CwapW);
+    createParam(R2CwapsRString, asynParamUInt32Digital, &p_R2CwapsR);
+    createParam(R2CwapsWString, asynParamUInt32Digital, &p_R2CwapsW);
+    createParam(R2CwavRString, asynParamUInt32Digital, &p_R2CwavR);
+    createParam(R2CwwlRString, asynParamUInt32Digital, &p_R2CwwlR);
+    createParam(R2CwwlWString, asynParamUInt32Digital, &p_R2CwwlW);
+    createParam(R2CwwtRString, asynParamUInt32Digital, &p_R2CwwtR);
+    createParam(R2StmpiRString, asynParamUInt32Digital, &p_R2StmpiR);
+    createParam(R2StmpiWString, asynParamUInt32Digital, &p_R2StmpiW);
+    createParam(R2StmpvRString, asynParamUInt32Digital, &p_R2StmpvR);
+    createParam(R2StmpvlRString, asynParamUInt32Digital, &p_R2StmpvlR);
+    createParam(R2StmpvlWString, asynParamUInt32Digital, &p_R2StmpvlW);
+    createParam(R3Cplfep1IRString, asynParamUInt32Digital, &p_R3Cplfep1IR);
+    createParam(R3Cplfep1IlhRString, asynParamUInt32Digital, &p_R3Cplfep1IlhR);
+    createParam(R3Cplfep1IlhWString, asynParamUInt32Digital, &p_R3Cplfep1IlhW);
+    createParam(R3Cplfep1IllRString, asynParamUInt32Digital, &p_R3Cplfep1IllR);
+    createParam(R3Cplfep1IllWString, asynParamUInt32Digital, &p_R3Cplfep1IllW);
+    createParam(R3Cplfep1PerdRString, asynParamUInt32Digital, &p_R3Cplfep1PerdR);
+    createParam(R3Cplfep1PerdWString, asynParamUInt32Digital, &p_R3Cplfep1PerdW);
+    createParam(R3Cplfep2IRString, asynParamUInt32Digital, &p_R3Cplfep2IR);
+    createParam(R3Cplfep2IlhRString, asynParamUInt32Digital, &p_R3Cplfep2IlhR);
+    createParam(R3Cplfep2IlhWString, asynParamUInt32Digital, &p_R3Cplfep2IlhW);
+    createParam(R3Cplfep2IllRString, asynParamUInt32Digital, &p_R3Cplfep2IllR);
+    createParam(R3Cplfep2IllWString, asynParamUInt32Digital, &p_R3Cplfep2IllW);
+    createParam(R3Cplfep2PerdRString, asynParamUInt32Digital, &p_R3Cplfep2PerdR);
+    createParam(R3Cplfep2PerdWString, asynParamUInt32Digital, &p_R3Cplfep2PerdW);
+    createParam(R3Cplfep3IRString, asynParamUInt32Digital, &p_R3Cplfep3IR);
+    createParam(R3Cplfep3IlhRString, asynParamUInt32Digital, &p_R3Cplfep3IlhR);
+    createParam(R3Cplfep3IlhWString, asynParamUInt32Digital, &p_R3Cplfep3IlhW);
+    createParam(R3Cplfep3IllRString, asynParamUInt32Digital, &p_R3Cplfep3IllR);
+    createParam(R3Cplfep3IllWString, asynParamUInt32Digital, &p_R3Cplfep3IllW);
+    createParam(R3Cplfep3PerdRString, asynParamUInt32Digital, &p_R3Cplfep3PerdR);
+    createParam(R3Cplfep3PerdWString, asynParamUInt32Digital, &p_R3Cplfep3PerdW);
+    createParam(R3Cpltmp1IRString, asynParamUInt32Digital, &p_R3Cpltmp1IR);
+    createParam(R3Cpltmp1IWString, asynParamUInt32Digital, &p_R3Cpltmp1IW);
+    createParam(R3Cpltmp1VRString, asynParamUInt32Digital, &p_R3Cpltmp1VR);
+    createParam(R3Cpltmp1VlRString, asynParamUInt32Digital, &p_R3Cpltmp1VlR);
+    createParam(R3Cpltmp1VlWString, asynParamUInt32Digital, &p_R3Cpltmp1VlW);
+    createParam(R3Cpltmp2IRString, asynParamUInt32Digital, &p_R3Cpltmp2IR);
+    createParam(R3Cpltmp2IWString, asynParamUInt32Digital, &p_R3Cpltmp2IW);
+    createParam(R3Cpltmp2VRString, asynParamUInt32Digital, &p_R3Cpltmp2VR);
+    createParam(R3Cpltmp2VlRString, asynParamUInt32Digital, &p_R3Cpltmp2VlR);
+    createParam(R3Cpltmp2VlWString, asynParamUInt32Digital, &p_R3Cpltmp2VlW);
+    createParam(R3CwalRString, asynParamUInt32Digital, &p_R3CwalR);
+    createParam(R3CwalWString, asynParamUInt32Digital, &p_R3CwalW);
+    createParam(R3CwapRString, asynParamUInt32Digital, &p_R3CwapR);
+    createParam(R3CwapWString, asynParamUInt32Digital, &p_R3CwapW);
+    createParam(R3CwapsRString, asynParamUInt32Digital, &p_R3CwapsR);
+    createParam(R3CwapsWString, asynParamUInt32Digital, &p_R3CwapsW);
+    createParam(R3CwavRString, asynParamUInt32Digital, &p_R3CwavR);
+    createParam(R3CwwlRString, asynParamUInt32Digital, &p_R3CwwlR);
+    createParam(R3CwwlWString, asynParamUInt32Digital, &p_R3CwwlW);
+    createParam(R3CwwtRString, asynParamUInt32Digital, &p_R3CwwtR);
+    createParam(R3StmpiRString, asynParamUInt32Digital, &p_R3StmpiR);
+    createParam(R3StmpiWString, asynParamUInt32Digital, &p_R3StmpiW);
+    createParam(R3StmpvRString, asynParamUInt32Digital, &p_R3StmpvR);
+    createParam(R3StmpvlRString, asynParamUInt32Digital, &p_R3StmpvlR);
+    createParam(R3StmpvlWString, asynParamUInt32Digital, &p_R3StmpvlW);
+    createParam(R4Cplfep1IRString, asynParamUInt32Digital, &p_R4Cplfep1IR);
+    createParam(R4Cplfep1IlhRString, asynParamUInt32Digital, &p_R4Cplfep1IlhR);
+    createParam(R4Cplfep1IlhWString, asynParamUInt32Digital, &p_R4Cplfep1IlhW);
+    createParam(R4Cplfep1IllRString, asynParamUInt32Digital, &p_R4Cplfep1IllR);
+    createParam(R4Cplfep1IllWString, asynParamUInt32Digital, &p_R4Cplfep1IllW);
+    createParam(R4Cplfep1PerdRString, asynParamUInt32Digital, &p_R4Cplfep1PerdR);
+    createParam(R4Cplfep1PerdWString, asynParamUInt32Digital, &p_R4Cplfep1PerdW);
+    createParam(R4Cplfep2IRString, asynParamUInt32Digital, &p_R4Cplfep2IR);
+    createParam(R4Cplfep2IlhRString, asynParamUInt32Digital, &p_R4Cplfep2IlhR);
+    createParam(R4Cplfep2IlhWString, asynParamUInt32Digital, &p_R4Cplfep2IlhW);
+    createParam(R4Cplfep2IllRString, asynParamUInt32Digital, &p_R4Cplfep2IllR);
+    createParam(R4Cplfep2IllWString, asynParamUInt32Digital, &p_R4Cplfep2IllW);
+    createParam(R4Cplfep2PerdRString, asynParamUInt32Digital, &p_R4Cplfep2PerdR);
+    createParam(R4Cplfep2PerdWString, asynParamUInt32Digital, &p_R4Cplfep2PerdW);
+    createParam(R4Cplfep3IRString, asynParamUInt32Digital, &p_R4Cplfep3IR);
+    createParam(R4Cplfep3IlhRString, asynParamUInt32Digital, &p_R4Cplfep3IlhR);
+    createParam(R4Cplfep3IlhWString, asynParamUInt32Digital, &p_R4Cplfep3IlhW);
+    createParam(R4Cplfep3IllRString, asynParamUInt32Digital, &p_R4Cplfep3IllR);
+    createParam(R4Cplfep3IllWString, asynParamUInt32Digital, &p_R4Cplfep3IllW);
+    createParam(R4Cplfep3PerdRString, asynParamUInt32Digital, &p_R4Cplfep3PerdR);
+    createParam(R4Cplfep3PerdWString, asynParamUInt32Digital, &p_R4Cplfep3PerdW);
+    createParam(R4Cpltmp1IRString, asynParamUInt32Digital, &p_R4Cpltmp1IR);
+    createParam(R4Cpltmp1IWString, asynParamUInt32Digital, &p_R4Cpltmp1IW);
+    createParam(R4Cpltmp1VRString, asynParamUInt32Digital, &p_R4Cpltmp1VR);
+    createParam(R4Cpltmp1VlRString, asynParamUInt32Digital, &p_R4Cpltmp1VlR);
+    createParam(R4Cpltmp1VlWString, asynParamUInt32Digital, &p_R4Cpltmp1VlW);
+    createParam(R4Cpltmp2IRString, asynParamUInt32Digital, &p_R4Cpltmp2IR);
+    createParam(R4Cpltmp2IWString, asynParamUInt32Digital, &p_R4Cpltmp2IW);
+    createParam(R4Cpltmp2VRString, asynParamUInt32Digital, &p_R4Cpltmp2VR);
+    createParam(R4Cpltmp2VlRString, asynParamUInt32Digital, &p_R4Cpltmp2VlR);
+    createParam(R4Cpltmp2VlWString, asynParamUInt32Digital, &p_R4Cpltmp2VlW);
+    createParam(R4CwalRString, asynParamUInt32Digital, &p_R4CwalR);
+    createParam(R4CwalWString, asynParamUInt32Digital, &p_R4CwalW);
+    createParam(R4CwapRString, asynParamUInt32Digital, &p_R4CwapR);
+    createParam(R4CwapWString, asynParamUInt32Digital, &p_R4CwapW);
+    createParam(R4CwapsRString, asynParamUInt32Digital, &p_R4CwapsR);
+    createParam(R4CwapsWString, asynParamUInt32Digital, &p_R4CwapsW);
+    createParam(R4CwavRString, asynParamUInt32Digital, &p_R4CwavR);
+    createParam(R4CwwlRString, asynParamUInt32Digital, &p_R4CwwlR);
+    createParam(R4CwwlWString, asynParamUInt32Digital, &p_R4CwwlW);
+    createParam(R4CwwtRString, asynParamUInt32Digital, &p_R4CwwtR);
+    createParam(R4StmpiRString, asynParamUInt32Digital, &p_R4StmpiR);
+    createParam(R4StmpiWString, asynParamUInt32Digital, &p_R4StmpiW);
+    createParam(R4StmpvRString, asynParamUInt32Digital, &p_R4StmpvR);
+    createParam(R4StmpvlRString, asynParamUInt32Digital, &p_R4StmpvlR);
+    createParam(R4StmpvlWString, asynParamUInt32Digital, &p_R4StmpvlW);
+    createParam(R5StmpiRString, asynParamUInt32Digital, &p_R5StmpiR);
+    createParam(R5StmpiWString, asynParamUInt32Digital, &p_R5StmpiW);
+    createParam(R5StmpvRString, asynParamUInt32Digital, &p_R5StmpvR);
+    createParam(R6StmpiRString, asynParamUInt32Digital, &p_R6StmpiR);
+    createParam(R6StmpiWString, asynParamUInt32Digital, &p_R6StmpiW);
+    createParam(R6StmpvRString, asynParamUInt32Digital, &p_R6StmpvR);
+    createParam(R7StmpiRString, asynParamUInt32Digital, &p_R7StmpiR);
+    createParam(R7StmpiWString, asynParamUInt32Digital, &p_R7StmpiW);
+    createParam(R7StmpvRString, asynParamUInt32Digital, &p_R7StmpvR);
+    createParam(R8StmpiRString, asynParamUInt32Digital, &p_R8StmpiR);
+    createParam(R8StmpiWString, asynParamUInt32Digital, &p_R8StmpiW);
+    createParam(R8StmpvRString, asynParamUInt32Digital, &p_R8StmpvR);
+    createParam(RxatfltRString, asynParamUInt32Digital, &p_RxatfltR);
+    createParam(RxatfltWString, asynParamUInt32Digital, &p_RxatfltW);
+    createParam(RxcienRString, asynParamUInt32Digital, &p_RxcienR);
+    createParam(RxciencRString, asynParamUInt32Digital, &p_RxciencR);
+    createParam(RxciencWString, asynParamUInt32Digital, &p_RxciencW);
+    createParam(RxcienmRString, asynParamUInt32Digital, &p_RxcienmR);
+    createParam(RxcienmWString, asynParamUInt32Digital, &p_RxcienmW);
+    createParam(RxcplfepfcRString, asynParamUInt32Digital, &p_RxcplfepfcR);
+    createParam(RxcplfepfcWString, asynParamUInt32Digital, &p_RxcplfepfcW);
+    createParam(RxcplfepfsRString, asynParamUInt32Digital, &p_RxcplfepfsR);
+    createParam(RxcplfeplsRString, asynParamUInt32Digital, &p_RxcplfeplsR);
+    createParam(RxcplfepmRString, asynParamUInt32Digital, &p_RxcplfepmR);
+    createParam(RxcplfepmWString, asynParamUInt32Digital, &p_RxcplfepmW);
+    createParam(RxcpltmpfcRString, asynParamUInt32Digital, &p_RxcpltmpfcR);
+    createParam(RxcpltmpfcWString, asynParamUInt32Digital, &p_RxcpltmpfcW);
+    createParam(RxcpltmplsRString, asynParamUInt32Digital, &p_RxcpltmplsR);
+    createParam(RxcpltmpmRString, asynParamUInt32Digital, &p_RxcpltmpmR);
+    createParam(RxcpltmpmWString, asynParamUInt32Digital, &p_RxcpltmpmW);
+    createParam(RxcvfRString, asynParamUInt32Digital, &p_RxcvfR);
+    createParam(RxcvfcRString, asynParamUInt32Digital, &p_RxcvfcR);
+    createParam(RxcvfcWString, asynParamUInt32Digital, &p_RxcvfcW);
+    createParam(RxcvfmRString, asynParamUInt32Digital, &p_RxcvfmR);
+    createParam(RxcvfmWString, asynParamUInt32Digital, &p_RxcvfmW);
+    createParam(RxcwadRString, asynParamUInt32Digital, &p_RxcwadR);
+    createParam(RxcwafcRString, asynParamUInt32Digital, &p_RxcwafcR);
+    createParam(RxcwafcWString, asynParamUInt32Digital, &p_RxcwafcW);
+    createParam(RxcwamRString, asynParamUInt32Digital, &p_RxcwamR);
+    createParam(RxcwamWString, asynParamUInt32Digital, &p_RxcwamW);
+    createParam(RxcwatRString, asynParamUInt32Digital, &p_RxcwatR);
+    createParam(RxcwatWString, asynParamUInt32Digital, &p_RxcwatW);
+    createParam(RxcwwdRString, asynParamUInt32Digital, &p_RxcwwdR);
+    createParam(RxcwwfcRString, asynParamUInt32Digital, &p_RxcwwfcR);
+    createParam(RxcwwfcWString, asynParamUInt32Digital, &p_RxcwwfcW);
+    createParam(RxcwwmRString, asynParamUInt32Digital, &p_RxcwwmR);
+    createParam(RxcwwmWString, asynParamUInt32Digital, &p_RxcwwmW);
+    createParam(RxcwwtsRString, asynParamUInt32Digital, &p_RxcwwtsR);
+    createParam(RxcwwtsWString, asynParamUInt32Digital, &p_RxcwwtsW);
+    createParam(RxffsdRString, asynParamUInt32Digital, &p_RxffsdR);
+    createParam(RxffsdcRString, asynParamUInt32Digital, &p_RxffsdcR);
+    createParam(RxffsdcWString, asynParamUInt32Digital, &p_RxffsdcW);
+    createParam(RxffsdmRString, asynParamUInt32Digital, &p_RxffsdmR);
+    createParam(RxffsdmWString, asynParamUInt32Digital, &p_RxffsdmW);
+    createParam(RxictlRString, asynParamUInt32Digital, &p_RxictlR);
+    createParam(RxictlWString, asynParamUInt32Digital, &p_RxictlW);
+    createParam(RxistatRString, asynParamUInt32Digital, &p_RxistatR);
+    createParam(RxiverRString, asynParamUInt32Digital, &p_RxiverR);
+    createParam(RxstmpfcRString, asynParamUInt32Digital, &p_RxstmpfcR);
+    createParam(RxstmpfcWString, asynParamUInt32Digital, &p_RxstmpfcW);
+    createParam(RxstmplsRString, asynParamUInt32Digital, &p_RxstmplsR);
+    createParam(RxstmpmRString, asynParamUInt32Digital, &p_RxstmpmR);
+    createParam(RxstmpmWString, asynParamUInt32Digital, &p_RxstmpmW);
 
     // Message size is the number of read registers, plus 1 nonce for every 175 read registers
     PolledRegMsgSize_ = scllrfINTReadRegCount + (scllrfINTReadRegCount / 175) + 1;
@@ -454,7 +462,7 @@ scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortNam
 	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
 
     epicsThreadSleep(defaultPollPeriod);
-    printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_SCLLRFINT_PARAMS);
+    printf("%s created %ld of %ld parameters.\n",__PRETTY_FUNCTION__,NUM_SCLLRFINT_PARAMS, paramTableAdds+NUM_SCLLRFINT_PARAMS);
 
     wakeupPoller();
     wakeupReader();
@@ -2924,8 +2932,11 @@ asynStatus scllrfINTDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		break;
 
 	default:
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, ++errorCount);
+		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+		{
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
 
 		status = asynError;
 		break;
@@ -4757,8 +4768,11 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
 	default:
+		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+		{
 		getIntegerParam(p_CommErrorCount, &errorCount);
 		setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
 
 		status = asynError;
 		break;
@@ -4780,7 +4794,8 @@ extern "C" {
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
 int scllrfINTConfigure(const char *drvPortName, const char *netPortName)
 {
-	new scllrfINTDriver(drvPortName, netPortName);
+	//new scllrfINTDriver(drvPortName, netPortName);
+	new scllrfINTDriver(drvPortName, netPortName, 8, 0);
 	return asynSuccess;
 }
 

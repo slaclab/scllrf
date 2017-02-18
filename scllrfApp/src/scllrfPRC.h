@@ -479,7 +479,7 @@ const unsigned int scllrfPRCWriteRegCount = 189;
  /* This class implements the AxiVersion driver. */
 class scllrfPRCDriver : public scllrfAsynPortDriver {
 public:
-    scllrfPRCDriver(const char *drvPortName, const char *netPortName);
+//    scllrfPRCDriver(const char *drvPortName, const char *netPortName);
     scllrfPRCDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
     virtual ~scllrfPRCDriver();
 

@@ -35,18 +35,18 @@ using namespace std;
 
 /** Constructor for the scllrfAsynPortDriver class.
  * Calls constructor for the asynPortDriver base class.
- * \param[in] portName The name of the asyn port driver to be created.
- * \param[in] path The path to the peripherial as built by the builder api
- * \param[in] nelms The number of elements of this device (max addr)
- * \paarm[in] nEntries The number of asyn params to be created for each device
+ * \param[in] drvPortName The name of the asyn port driver to be created.
+ * \param[in] netPortName The name of the asyn port driver to use for the network connection
+ * \param[in] maxAddr The number of channels for the paramater with the most channels
+ * \paarm[in] paramTableSize The number of asyn params to be created for each device
  *
  * */
 scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableSize)
 : asynPortDriver(drvPortName,
 		maxAddr, /* maxAddr */
 		paramTableSize,
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
+		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
 		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
@@ -223,15 +223,15 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
+    // Some registers have more than 1 "channel"
+    getAddress(pasynUser, &address);
     /* Set the parameter in the parameter library. */
-    status = (asynStatus) setIntegerParam(function, value);
+    status = (asynStatus) setIntegerParam(address, function, value);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
     asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
 			__PRETTY_FUNCTION__, function, paramName);
-    // Some registers have more than 1 "channel"
-    getAddress(pasynUser, &address);
 
     if (function == p_RunStop) {
 printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
@@ -284,8 +284,12 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     const char *paramName;
     FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
     std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
+    int address;
 
     epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
+
+    // Some registers have more than 1 "channel"
+    getAddress(pasynUser, &address);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
@@ -300,6 +304,7 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     			"%s: found function=%d, name=%s, at address %d\n",
 				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
     	regSendBuf[1].data = (uint32_t) *value;
+		regSendBuf[1].addr += (uint32_t) address;
     	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     }

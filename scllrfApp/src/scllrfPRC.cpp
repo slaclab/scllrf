@@ -33,29 +33,27 @@ using namespace std;
 
 /** Constructor for the scllrfPRC class.
  * Calls constructor for the asynPortDriver base class.
- * \param[in] portName The name of the asyn port driver to be created.
- * \param[in] path The path to the peripherial as built by the builder api
- * \param[in] nelms The number of elements of this device (max addr)
- * \paarm[in] nEntries The number of asyn params to be created for each device
+ * \param[in] drvPortName The name of the asyn port driver to be created.
+ * \param[in] netPortName The name of the asyn port driver to use for the network connection
+ * \param[in] maxAddr The number of channels for the paramater with the most channels
+ * \paarm[in] paramTableSize The number of asyn params to be created for each device
  *
  * */
-scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortName)
-: scllrfAsynPortDriver(drvPortName, netPortName,
-		8, /* maxAddr, i.e. number of channels */
-		NUM_SCLLRFPRC_PARAMS)
-{
-	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
-	// which the compiler has problems with..
-	scllrfPRCDriver(drvPortName, netPortName, 8, NUM_SCLLRFPRC_PARAMS);
-};
+//scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortName)
+//: scllrfAsynPortDriver(drvPortName, netPortName,
+//		8, /* maxAddr, i.e. number of channels */
+//		NUM_SCLLRFPRC_PARAMS)
+//{
+//	// NUM_SCLLRFPRC_PARAMS is a macro using protected member variables,
+//	// which the compiler has problems with..
+//	scllrfPRCDriver(drvPortName, netPortName, 8, NUM_SCLLRFPRC_PARAMS);
+//};
 
 scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds)
 : scllrfAsynPortDriver(drvPortName, netPortName,
 		maxAddr, /* maxAddr, i.e. number of channels */
 		paramTableAdds + NUM_SCLLRFPRC_PARAMS)
 {
-	asynStatus status = asynSuccess;
-
     epicsThreadSleep(defaultPollPeriod);
 
     createParam(HellRString, asynParamInt32, &p_HellR);
@@ -78,7 +76,7 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(AdcTestWave2OutRString, asynParamInt32, &p_AdcTestWave2OutR);
     createParam(AdcTestWave3OutRString, asynParamInt32, &p_AdcTestWave3OutR);
     createParam(AdcTestWave4OutRString, asynParamInt32, &p_AdcTestWave4OutR);
-    createParam(BanyanBufRString, asynParamInt32, &p_BanyanBufR);
+    createParam(BanyanBufRString, asynParamInt32Array, &p_BanyanBufR);
     createParam(BanyanStatusRString, asynParamInt32, &p_BanyanStatusR);
     createParam(ClkPhaseDiffOutU2RString, asynParamInt32, &p_ClkPhaseDiffOutU2R);
     createParam(ClkPhaseDiffOutU3RString, asynParamInt32, &p_ClkPhaseDiffOutU3R);
@@ -186,12 +184,12 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(DigDspMuxC0AmpLpBwWString, asynParamInt32, &p_DigDspMuxC0AmpLpBwW);
     createParam(DigDspMuxC0ComprSatCtlRString, asynParamInt32, &p_DigDspMuxC0ComprSatCtlR);
     createParam(DigDspMuxC0ComprSatCtlWString, asynParamInt32, &p_DigDspMuxC0ComprSatCtlW);
-    createParam(DigDspMuxC0ElecDot0KOutRString, asynParamInt32, &p_DigDspMuxC0ElecDot0KOutR);
-    createParam(DigDspMuxC0ElecDot0KOutWString, asynParamInt32, &p_DigDspMuxC0ElecDot0KOutW);
-    createParam(DigDspMuxC0ElecDot1KOutRString, asynParamInt32, &p_DigDspMuxC0ElecDot1KOutR);
-    createParam(DigDspMuxC0ElecDot1KOutWString, asynParamInt32, &p_DigDspMuxC0ElecDot1KOutW);
-    createParam(DigDspMuxC0ElecDot2KOutRString, asynParamInt32, &p_DigDspMuxC0ElecDot2KOutR);
-    createParam(DigDspMuxC0ElecDot2KOutWString, asynParamInt32, &p_DigDspMuxC0ElecDot2KOutW);
+    createParam(DigDspMuxC0ElecDot0KOutRString, asynParamInt32Array, &p_DigDspMuxC0ElecDot0KOutR);
+    createParam(DigDspMuxC0ElecDot0KOutWString, asynParamInt32Array, &p_DigDspMuxC0ElecDot0KOutW);
+    createParam(DigDspMuxC0ElecDot1KOutRString, asynParamInt32Array, &p_DigDspMuxC0ElecDot1KOutR);
+    createParam(DigDspMuxC0ElecDot1KOutWString, asynParamInt32Array, &p_DigDspMuxC0ElecDot1KOutW);
+    createParam(DigDspMuxC0ElecDot2KOutRString, asynParamInt32Array, &p_DigDspMuxC0ElecDot2KOutR);
+    createParam(DigDspMuxC0ElecDot2KOutWString, asynParamInt32Array, &p_DigDspMuxC0ElecDot2KOutW);
     createParam(DigDspMuxC0ElecDriveCplOutCouplingRString, asynParamInt32, &p_DigDspMuxC0ElecDriveCplOutCouplingR);
     createParam(DigDspMuxC0ElecDriveCplOutCouplingWString, asynParamInt32, &p_DigDspMuxC0ElecDriveCplOutCouplingW);
     createParam(DigDspMuxC0ElecDriveCplOutPhaseOffsetRString, asynParamInt32, &p_DigDspMuxC0ElecDriveCplOutPhaseOffsetR);
@@ -234,16 +232,16 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(DigDspMuxC0ElecM2OutCplOutPhaseOffsetWString, asynParamInt32, &p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetW);
     createParam(DigDspMuxC0ElecModuloRString, asynParamInt32, &p_DigDspMuxC0ElecModuloR);
     createParam(DigDspMuxC0ElecModuloWString, asynParamInt32, &p_DigDspMuxC0ElecModuloW);
-    createParam(DigDspMuxC0ElecOuterProd0KOutRString, asynParamInt32, &p_DigDspMuxC0ElecOuterProd0KOutR);
-    createParam(DigDspMuxC0ElecOuterProd0KOutWString, asynParamInt32, &p_DigDspMuxC0ElecOuterProd0KOutW);
-    createParam(DigDspMuxC0ElecOuterProd1KOutRString, asynParamInt32, &p_DigDspMuxC0ElecOuterProd1KOutR);
-    createParam(DigDspMuxC0ElecOuterProd1KOutWString, asynParamInt32, &p_DigDspMuxC0ElecOuterProd1KOutW);
-    createParam(DigDspMuxC0ElecOuterProd2KOutRString, asynParamInt32, &p_DigDspMuxC0ElecOuterProd2KOutR);
-    createParam(DigDspMuxC0ElecOuterProd2KOutWString, asynParamInt32, &p_DigDspMuxC0ElecOuterProd2KOutW);
+    createParam(DigDspMuxC0ElecOuterProd0KOutRString, asynParamInt32Array, &p_DigDspMuxC0ElecOuterProd0KOutR);
+    createParam(DigDspMuxC0ElecOuterProd0KOutWString, asynParamInt32Array, &p_DigDspMuxC0ElecOuterProd0KOutW);
+    createParam(DigDspMuxC0ElecOuterProd1KOutRString, asynParamInt32Array, &p_DigDspMuxC0ElecOuterProd1KOutR);
+    createParam(DigDspMuxC0ElecOuterProd1KOutWString, asynParamInt32Array, &p_DigDspMuxC0ElecOuterProd1KOutW);
+    createParam(DigDspMuxC0ElecOuterProd2KOutRString, asynParamInt32Array, &p_DigDspMuxC0ElecOuterProd2KOutR);
+    createParam(DigDspMuxC0ElecOuterProd2KOutWString, asynParamInt32Array, &p_DigDspMuxC0ElecOuterProd2KOutW);
     createParam(DigDspMuxC0ElecPhaseStepRString, asynParamInt32, &p_DigDspMuxC0ElecPhaseStepR);
     createParam(DigDspMuxC0ElecPhaseStepWString, asynParamInt32, &p_DigDspMuxC0ElecPhaseStepW);
-    createParam(DigDspMuxC0PiezoCoupleKOutRString, asynParamInt32, &p_DigDspMuxC0PiezoCoupleKOutR);
-    createParam(DigDspMuxC0PiezoCoupleKOutWString, asynParamInt32, &p_DigDspMuxC0PiezoCoupleKOutW);
+    createParam(DigDspMuxC0PiezoCoupleKOutRString, asynParamInt32Array, &p_DigDspMuxC0PiezoCoupleKOutR);
+    createParam(DigDspMuxC0PiezoCoupleKOutWString, asynParamInt32Array, &p_DigDspMuxC0PiezoCoupleKOutW);
     createParam(DigDspMuxC0PrngIvaRString, asynParamInt32, &p_DigDspMuxC0PrngIvaR);
     createParam(DigDspMuxC0PrngIvaWString, asynParamInt32, &p_DigDspMuxC0PrngIvaW);
     createParam(DigDspMuxC0PrngIvbRString, asynParamInt32, &p_DigDspMuxC0PrngIvbR);
@@ -260,12 +258,12 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(DigDspMuxC1AmpLpBwWString, asynParamInt32, &p_DigDspMuxC1AmpLpBwW);
     createParam(DigDspMuxC1ComprSatCtlRString, asynParamInt32, &p_DigDspMuxC1ComprSatCtlR);
     createParam(DigDspMuxC1ComprSatCtlWString, asynParamInt32, &p_DigDspMuxC1ComprSatCtlW);
-    createParam(DigDspMuxC1ElecDot0KOutRString, asynParamInt32, &p_DigDspMuxC1ElecDot0KOutR);
-    createParam(DigDspMuxC1ElecDot0KOutWString, asynParamInt32, &p_DigDspMuxC1ElecDot0KOutW);
-    createParam(DigDspMuxC1ElecDot1KOutRString, asynParamInt32, &p_DigDspMuxC1ElecDot1KOutR);
-    createParam(DigDspMuxC1ElecDot1KOutWString, asynParamInt32, &p_DigDspMuxC1ElecDot1KOutW);
-    createParam(DigDspMuxC1ElecDot2KOutRString, asynParamInt32, &p_DigDspMuxC1ElecDot2KOutR);
-    createParam(DigDspMuxC1ElecDot2KOutWString, asynParamInt32, &p_DigDspMuxC1ElecDot2KOutW);
+    createParam(DigDspMuxC1ElecDot0KOutRString, asynParamInt32Array, &p_DigDspMuxC1ElecDot0KOutR);
+    createParam(DigDspMuxC1ElecDot0KOutWString, asynParamInt32Array, &p_DigDspMuxC1ElecDot0KOutW);
+    createParam(DigDspMuxC1ElecDot1KOutRString, asynParamInt32Array, &p_DigDspMuxC1ElecDot1KOutR);
+    createParam(DigDspMuxC1ElecDot1KOutWString, asynParamInt32Array, &p_DigDspMuxC1ElecDot1KOutW);
+    createParam(DigDspMuxC1ElecDot2KOutRString, asynParamInt32Array, &p_DigDspMuxC1ElecDot2KOutR);
+    createParam(DigDspMuxC1ElecDot2KOutWString, asynParamInt32Array, &p_DigDspMuxC1ElecDot2KOutW);
     createParam(DigDspMuxC1ElecDriveCplOutCouplingRString, asynParamInt32, &p_DigDspMuxC1ElecDriveCplOutCouplingR);
     createParam(DigDspMuxC1ElecDriveCplOutCouplingWString, asynParamInt32, &p_DigDspMuxC1ElecDriveCplOutCouplingW);
     createParam(DigDspMuxC1ElecDriveCplOutPhaseOffsetRString, asynParamInt32, &p_DigDspMuxC1ElecDriveCplOutPhaseOffsetR);
@@ -308,36 +306,36 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(DigDspMuxC1ElecM2OutCplOutPhaseOffsetWString, asynParamInt32, &p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetW);
     createParam(DigDspMuxC1ElecModuloRString, asynParamInt32, &p_DigDspMuxC1ElecModuloR);
     createParam(DigDspMuxC1ElecModuloWString, asynParamInt32, &p_DigDspMuxC1ElecModuloW);
-    createParam(DigDspMuxC1ElecOuterProd0KOutRString, asynParamInt32, &p_DigDspMuxC1ElecOuterProd0KOutR);
-    createParam(DigDspMuxC1ElecOuterProd0KOutWString, asynParamInt32, &p_DigDspMuxC1ElecOuterProd0KOutW);
-    createParam(DigDspMuxC1ElecOuterProd1KOutRString, asynParamInt32, &p_DigDspMuxC1ElecOuterProd1KOutR);
-    createParam(DigDspMuxC1ElecOuterProd1KOutWString, asynParamInt32, &p_DigDspMuxC1ElecOuterProd1KOutW);
-    createParam(DigDspMuxC1ElecOuterProd2KOutRString, asynParamInt32, &p_DigDspMuxC1ElecOuterProd2KOutR);
-    createParam(DigDspMuxC1ElecOuterProd2KOutWString, asynParamInt32, &p_DigDspMuxC1ElecOuterProd2KOutW);
+    createParam(DigDspMuxC1ElecOuterProd0KOutRString, asynParamInt32Array, &p_DigDspMuxC1ElecOuterProd0KOutR);
+    createParam(DigDspMuxC1ElecOuterProd0KOutWString, asynParamInt32Array, &p_DigDspMuxC1ElecOuterProd0KOutW);
+    createParam(DigDspMuxC1ElecOuterProd1KOutRString, asynParamInt32Array, &p_DigDspMuxC1ElecOuterProd1KOutR);
+    createParam(DigDspMuxC1ElecOuterProd1KOutWString, asynParamInt32Array, &p_DigDspMuxC1ElecOuterProd1KOutW);
+    createParam(DigDspMuxC1ElecOuterProd2KOutRString, asynParamInt32Array, &p_DigDspMuxC1ElecOuterProd2KOutR);
+    createParam(DigDspMuxC1ElecOuterProd2KOutWString, asynParamInt32Array, &p_DigDspMuxC1ElecOuterProd2KOutW);
     createParam(DigDspMuxC1ElecPhaseStepRString, asynParamInt32, &p_DigDspMuxC1ElecPhaseStepR);
     createParam(DigDspMuxC1ElecPhaseStepWString, asynParamInt32, &p_DigDspMuxC1ElecPhaseStepW);
-    createParam(DigDspMuxC1PiezoCoupleKOutRString, asynParamInt32, &p_DigDspMuxC1PiezoCoupleKOutR);
-    createParam(DigDspMuxC1PiezoCoupleKOutWString, asynParamInt32, &p_DigDspMuxC1PiezoCoupleKOutW);
+    createParam(DigDspMuxC1PiezoCoupleKOutRString, asynParamInt32Array, &p_DigDspMuxC1PiezoCoupleKOutR);
+    createParam(DigDspMuxC1PiezoCoupleKOutWString, asynParamInt32Array, &p_DigDspMuxC1PiezoCoupleKOutW);
     createParam(DigDspMuxC1PrngIvaRString, asynParamInt32, &p_DigDspMuxC1PrngIvaR);
     createParam(DigDspMuxC1PrngIvaWString, asynParamInt32, &p_DigDspMuxC1PrngIvaW);
     createParam(DigDspMuxC1PrngIvbRString, asynParamInt32, &p_DigDspMuxC1PrngIvbR);
     createParam(DigDspMuxC1PrngIvbWString, asynParamInt32, &p_DigDspMuxC1PrngIvbW);
     createParam(DigDspMuxC1PrngRandomRunRString, asynParamInt32, &p_DigDspMuxC1PrngRandomRunR);
     createParam(DigDspMuxC1PrngRandomRunWString, asynParamInt32, &p_DigDspMuxC1PrngRandomRunW);
-    createParam(DigDspMuxCav4MechNoiseCoupleKOutRString, asynParamInt32, &p_DigDspMuxCav4MechNoiseCoupleKOutR);
-    createParam(DigDspMuxCav4MechNoiseCoupleKOutWString, asynParamInt32, &p_DigDspMuxCav4MechNoiseCoupleKOutW);
+    createParam(DigDspMuxCav4MechNoiseCoupleKOutRString, asynParamInt32Array, &p_DigDspMuxCav4MechNoiseCoupleKOutR);
+    createParam(DigDspMuxCav4MechNoiseCoupleKOutWString, asynParamInt32Array, &p_DigDspMuxCav4MechNoiseCoupleKOutW);
     createParam(DigDspMuxCav4MechPrngIvaRString, asynParamInt32, &p_DigDspMuxCav4MechPrngIvaR);
     createParam(DigDspMuxCav4MechPrngIvaWString, asynParamInt32, &p_DigDspMuxCav4MechPrngIvaW);
     createParam(DigDspMuxCav4MechPrngIvbRString, asynParamInt32, &p_DigDspMuxCav4MechPrngIvbR);
     createParam(DigDspMuxCav4MechPrngIvbWString, asynParamInt32, &p_DigDspMuxCav4MechPrngIvbW);
     createParam(DigDspMuxCav4MechPrngRandomRunRString, asynParamInt32, &p_DigDspMuxCav4MechPrngRandomRunR);
     createParam(DigDspMuxCav4MechPrngRandomRunWString, asynParamInt32, &p_DigDspMuxCav4MechPrngRandomRunW);
-    createParam(DigDspMuxCav4MechResonatorPropConstRString, asynParamInt32, &p_DigDspMuxCav4MechResonatorPropConstR);
-    createParam(DigDspMuxCav4MechResonatorPropConstWString, asynParamInt32, &p_DigDspMuxCav4MechResonatorPropConstW);
+    createParam(DigDspMuxCav4MechResonatorPropConstRString, asynParamInt32Array, &p_DigDspMuxCav4MechResonatorPropConstR);
+    createParam(DigDspMuxCav4MechResonatorPropConstWString, asynParamInt32Array, &p_DigDspMuxCav4MechResonatorPropConstW);
     createParam(DigDspMuxDacIqPhaseRString, asynParamInt32, &p_DigDspMuxDacIqPhaseR);
     createParam(DigDspMuxDacIqPhaseWString, asynParamInt32, &p_DigDspMuxDacIqPhaseW);
-    createParam(DigDspMuxShell0DspChanKeepRString, asynParamInt32, &p_DigDspMuxShell0DspChanKeepR);
-    createParam(DigDspMuxShell0DspChanKeepWString, asynParamInt32, &p_DigDspMuxShell0DspChanKeepW);
+    createParam(DigDspMuxShell0DspChanKeepRString, asynParamUInt32Digital, &p_DigDspMuxShell0DspChanKeepR);
+    createParam(DigDspMuxShell0DspChanKeepWString, asynParamUInt32Digital, &p_DigDspMuxShell0DspChanKeepW);
     createParam(DigDspMuxShell0DspLpNotchLp1AKxRString, asynParamInt32, &p_DigDspMuxShell0DspLpNotchLp1AKxR);
     createParam(DigDspMuxShell0DspLpNotchLp1AKxWString, asynParamInt32, &p_DigDspMuxShell0DspLpNotchLp1AKxW);
     createParam(DigDspMuxShell0DspLpNotchLp1AKyRString, asynParamInt32, &p_DigDspMuxShell0DspLpNotchLp1AKyR);
@@ -376,8 +374,8 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(DigDspMuxShell0FdbkCoreMpProcSelThreshWString, asynParamInt32, &p_DigDspMuxShell0FdbkCoreMpProcSelThreshW);
     createParam(DigDspMuxShell0FdbkCoreMpProcSetmpRString, asynParamInt32, &p_DigDspMuxShell0FdbkCoreMpProcSetmpR);
     createParam(DigDspMuxShell0FdbkCoreMpProcSetmpWString, asynParamInt32, &p_DigDspMuxShell0FdbkCoreMpProcSetmpW);
-    createParam(DigDspMuxShell1DspChanKeepRString, asynParamInt32, &p_DigDspMuxShell1DspChanKeepR);
-    createParam(DigDspMuxShell1DspChanKeepWString, asynParamInt32, &p_DigDspMuxShell1DspChanKeepW);
+    createParam(DigDspMuxShell1DspChanKeepRString, asynParamUInt32Digital, &p_DigDspMuxShell1DspChanKeepR);
+    createParam(DigDspMuxShell1DspChanKeepWString, asynParamUInt32Digital, &p_DigDspMuxShell1DspChanKeepW);
     createParam(DigDspMuxShell1DspLpNotchLp1AKxRString, asynParamInt32, &p_DigDspMuxShell1DspLpNotchLp1AKxR);
     createParam(DigDspMuxShell1DspLpNotchLp1AKxWString, asynParamInt32, &p_DigDspMuxShell1DspLpNotchLp1AKxW);
     createParam(DigDspMuxShell1DspLpNotchLp1AKyRString, asynParamInt32, &p_DigDspMuxShell1DspLpNotchLp1AKyR);
@@ -436,8 +434,8 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(DigDspSsaStimGPeriodWString, asynParamInt32, &p_DigDspSsaStimGPeriodW);
     createParam(DigDspSsaStimPertstepRString, asynParamInt32, &p_DigDspSsaStimPertstepR);
     createParam(DigDspSsaStimPertstepWString, asynParamInt32, &p_DigDspSsaStimPertstepW);
-    createParam(DigDspTraceKeepRString, asynParamInt32, &p_DigDspTraceKeepR);
-    createParam(DigDspTraceKeepWString, asynParamInt32, &p_DigDspTraceKeepW);
+    createParam(DigDspTraceKeepRString, asynParamUInt32Digital, &p_DigDspTraceKeepR);
+    createParam(DigDspTraceKeepWString, asynParamUInt32Digital, &p_DigDspTraceKeepW);
     createParam(DigDspTraceResetWeRString, asynParamInt32, &p_DigDspTraceResetWeR);
     createParam(DigDspTraceResetWeWString, asynParamInt32, &p_DigDspTraceResetWeW);
     createParam(DigDspTrigInternalRString, asynParamInt32, &p_DigDspTrigInternalR);
@@ -457,7 +455,7 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(FrequencyDcoRString, asynParamInt32, &p_FrequencyDcoR);
     createParam(FrequencyGtxRxRString, asynParamInt32, &p_FrequencyGtxRxR);
     createParam(FrequencyGtxTxRString, asynParamInt32, &p_FrequencyGtxTxR);
-    createParam(HistDoutRString, asynParamInt32, &p_HistDoutR);
+    createParam(HistDoutRString, asynParamInt32Array, &p_HistDoutR);
     createParam(HistStatusRString, asynParamInt32, &p_HistStatusR);
     createParam(IccCfgRString, asynParamInt32, &p_IccCfgR);
     createParam(IccCfgWString, asynParamInt32, &p_IccCfgW);
@@ -466,32 +464,32 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
     createParam(IdelayValueOutU2Bits39To20RString, asynParamInt32, &p_IdelayValueOutU2Bits39To20R);
     createParam(IdelayValueOutU3Bits19To0RString, asynParamInt32, &p_IdelayValueOutU3Bits19To0R);
     createParam(IdelayValueOutU3Bits39To20RString, asynParamInt32, &p_IdelayValueOutU3Bits39To20R);
-    createParam(LlrfCircleDataRString, asynParamInt32, &p_LlrfCircleDataR);
+    createParam(LlrfCircleDataRString, asynParamInt32Array, &p_LlrfCircleDataR);
     createParam(LlrfCircleReadyRString, asynParamInt32, &p_LlrfCircleReadyR);
     createParam(LlspiResultRString, asynParamInt32, &p_LlspiResultR);
     createParam(LlspiStatusRString, asynParamInt32, &p_LlspiStatusR);
     createParam(OWoRString, asynParamInt32, &p_OWoR);
-    createParam(PhasexDoutRString, asynParamInt32, &p_PhasexDoutR);
+    createParam(PhasexDoutRString, asynParamInt32Array, &p_PhasexDoutR);
     createParam(PhasexStatusRString, asynParamInt32, &p_PhasexStatusR);
-    createParam(QsfpBufRString, asynParamInt32, &p_QsfpBufR);
+    createParam(QsfpBufRString, asynParamInt32Array, &p_QsfpBufR);
     createParam(QsfpI2CRegRString, asynParamInt32, &p_QsfpI2CRegR);
     createParam(QsfpI2CRegWString, asynParamInt32, &p_QsfpI2CRegW);
     createParam(RldRString, asynParamInt32, &p_RldR);
-    createParam(ScannerResultRString, asynParamInt32, &p_ScannerResultR);
+    createParam(ScannerResultRString, asynParamInt32Array, &p_ScannerResultR);
     createParam(SfpAddressSetRString, asynParamInt32, &p_SfpAddressSetR);
     createParam(SfpAddressSetWString, asynParamInt32, &p_SfpAddressSetW);
-    createParam(Shell0SlowDataRString, asynParamInt32, &p_Shell0SlowDataR);
-    createParam(Shell1SlowDataRString, asynParamInt32, &p_Shell1SlowDataR);
+    createParam(Shell0SlowDataRString, asynParamInt32Array, &p_Shell0SlowDataR);
+    createParam(Shell1SlowDataRString, asynParamInt32Array, &p_Shell1SlowDataR);
     createParam(SlowChainOutRString, asynParamInt32, &p_SlowChainOutR);
     createParam(TagNowRString, asynParamInt32, &p_TagNowR);
     createParam(TagNowWString, asynParamInt32, &p_TagNowW);
-    createParam(Tgen0DelayPcXxxRString, asynParamInt32, &p_Tgen0DelayPcXxxR);
-    createParam(Tgen0DelayPcXxxWString, asynParamInt32, &p_Tgen0DelayPcXxxW);
-    createParam(Tgen1DelayPcXxxRString, asynParamInt32, &p_Tgen1DelayPcXxxR);
-    createParam(Tgen1DelayPcXxxWString, asynParamInt32, &p_Tgen1DelayPcXxxW);
-    createParam(TraceIBufRString, asynParamInt32, &p_TraceIBufR);
-    createParam(TraceIqBufRString, asynParamInt32, &p_TraceIqBufR);
-    createParam(TraceQBufRString, asynParamInt32, &p_TraceQBufR);
+    createParam(Tgen0DelayPcXxxRString, asynParamInt32Array, &p_Tgen0DelayPcXxxR);
+    createParam(Tgen0DelayPcXxxWString, asynParamInt32Array, &p_Tgen0DelayPcXxxW);
+    createParam(Tgen1DelayPcXxxRString, asynParamInt32Array, &p_Tgen1DelayPcXxxR);
+    createParam(Tgen1DelayPcXxxWString, asynParamInt32Array, &p_Tgen1DelayPcXxxW);
+    createParam(TraceIBufRString, asynParamInt32Array, &p_TraceIBufR);
+    createParam(TraceIqBufRString, asynParamInt32Array, &p_TraceIqBufR);
+    createParam(TraceQBufRString, asynParamInt32Array, &p_TraceQBufR);
     createParam(TraceStatus1RString, asynParamInt32, &p_TraceStatus1R);
     createParam(TraceStatus2RString, asynParamInt32, &p_TraceStatus2R);
     createParam(Wave0OutRString, asynParamInt32, &p_Wave0OutR);
@@ -508,22 +506,22 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
 		{ flagReadMask | OWoRAdr, blankData },
 		{ flagReadMask | RldRAdr, blankData },
 		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
+		{ flagReadMask | LlspiStatusRAdr, blankData },
+		{ flagReadMask | LlspiResultRAdr, blankData },
 		{ flagReadMask | ClkStatusOutRAdr, blankData },
 		{ flagReadMask | FfffffffRAdr, blankData },
 		{ flagReadMask | FrequencyAdcRAdr, blankData },
 		{ flagReadMask | Frequency4XoutRAdr, blankData },
 		{ flagReadMask | FrequencyClkout3RAdr, blankData },
 		{ flagReadMask | FrequencyDcoRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
+		{ flagReadMask | U2DoutBits31To0RAdr, blankData },
+		{ flagReadMask | U2DoutBits63To32RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU2Bits19To0RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU2Bits39To20RAdr, blankData },
+		{ flagReadMask | U3DoutBits31To0RAdr, blankData },
+		{ flagReadMask | U3DoutBits63To32RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU3Bits19To0RAdr, blankData },
+		{ flagReadMask | IdelayValueOutU3Bits39To20RAdr, blankData },
 		{ flagReadMask | Wave0OutRAdr, blankData },
 		{ flagReadMask | Wave1OutRAdr, blankData },
 		{ flagReadMask | AdcTestWave1OutRAdr, blankData },
@@ -535,13 +533,13 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
 		{ flagReadMask | FrequencyGtxRxRAdr, blankData },
 		{ flagReadMask | HistStatusRAdr, blankData },
 		{ flagReadMask | PhasexStatusRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
+		{ flagReadMask | ClkPhaseDiffOutU2RAdr, blankData },
+		{ flagReadMask | ClkPhaseDiffOutU3RAdr, blankData },
 		{ flagReadMask | CrcErrorsRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
+		{ flagReadMask | U15SpiRdbkRAdr, blankData },
+		{ flagReadMask | U15SpiReadyRAdr, blankData },
+		{ flagReadMask | U18SdoAddrRAdr, blankData },
+		{ flagReadMask | U18SdioAsSdoRAdr, blankData },
 		{ flagReadMask | AdcTestTrigCntRAdr, blankData },
 		{ flagReadMask | WaveformsAvailableRAdr, blankData },
 		{ flagReadMask | BanyanStatusRAdr, blankData },
@@ -612,20 +610,20 @@ scllrfPRCDriver::scllrfPRCDriver(const char *drvPortName, const char *netPortNam
 		{ flagReadMask | DigDspMuxShell1DspLpNotchLp1BKxRAdr, blankData },
 		{ flagReadMask | DigDspMuxShell1DspLpNotchLp1BKyRAdr, blankData },
 		{ flagReadMask | AdcMmcmRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
+		{ flagReadMask | DigConfigU15SpiDataAddrRRAdr, blankData },
+		{ flagReadMask | DigConfigU15SpiReadAndStartRRAdr, blankData },
+		{ flagReadMask | DigConfigU18SpiDataAddrRRAdr, blankData },
+		{ flagReadMask | DigConfigU18SpiReadAndStartRRAdr, blankData },
+		{ flagReadMask | DigConfigU2ClkResetRRAdr, blankData },
+		{ flagReadMask | DigConfigU2IserdesResetRRAdr, blankData },
+		{ flagReadMask | DigConfigU3ClkResetRRAdr, blankData },
+		{ flagReadMask | DigConfigU3IserdesResetRRAdr, blankData },
+		{ flagReadMask | DigConfigU4ResetRRAdr, blankData },
 		{ flagReadMask | DigConfigBanyanMaskRAdr, blankData },
 		{ flagReadMask | DigConfigBitslipRAdr, blankData },
 		{ flagReadMask | DigConfigClkStatusWeRAdr, blankData },
 		{ flagReadMask | DigConfigIdelayctrlResetRRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
+		{ flagReadMask | DigConfigLlspiWeRAdr, blankData },
 		{ flagReadMask | DigConfigMmcmResetRRAdr, blankData },
 		{ flagReadMask | DigConfigPeriphConfigRAdr, blankData },
 		{ flagReadMask | DigConfigPhasexTrigRAdr, blankData },
@@ -3010,8 +3008,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case HellRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_HellR,
-				(pFromFpga->data & HellMask));
+				(pFromFpga->data & HellMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				HellRString,
@@ -3019,8 +3018,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case OWoRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_OWoR,
-				(pFromFpga->data & OWoMask));
+				(pFromFpga->data & OWoMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				OWoRString,
@@ -3028,8 +3028,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case RldRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_RldR,
-				(pFromFpga->data & RldMask));
+				(pFromFpga->data & RldMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RldRString,
@@ -3037,8 +3038,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case D0A0D0ARAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_D0A0D0AR,
-				(pFromFpga->data & D0A0D0AMask));
+				(pFromFpga->data & D0A0D0AMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				D0A0D0ARString,
@@ -3046,8 +3048,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case LlspiStatusRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_LlspiStatusR,
-				(pFromFpga->data & LlspiStatusMask));
+				(pFromFpga->data & LlspiStatusMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				LlspiStatusRString,
@@ -3055,8 +3058,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case LlspiResultRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_LlspiResultR,
-				(pFromFpga->data & LlspiResultMask));
+				(pFromFpga->data & LlspiResultMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				LlspiResultRString,
@@ -3064,8 +3068,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case ClkStatusOutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_ClkStatusOutR,
-				(pFromFpga->data & ClkStatusOutMask));
+				(pFromFpga->data & ClkStatusOutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ClkStatusOutRString,
@@ -3073,8 +3078,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case FfffffffRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_FfffffffR,
-				(pFromFpga->data & FfffffffMask));
+				(pFromFpga->data & FfffffffMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				FfffffffRString,
@@ -3082,8 +3088,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case FrequencyAdcRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_FrequencyAdcR,
-				(pFromFpga->data & FrequencyAdcMask));
+				(pFromFpga->data & FrequencyAdcMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				FrequencyAdcRString,
@@ -3091,8 +3098,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case Frequency4XoutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_Frequency4XoutR,
-				(pFromFpga->data & Frequency4XoutMask));
+				(pFromFpga->data & Frequency4XoutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Frequency4XoutRString,
@@ -3100,8 +3108,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case FrequencyClkout3RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_FrequencyClkout3R,
-				(pFromFpga->data & FrequencyClkout3Mask));
+				(pFromFpga->data & FrequencyClkout3Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				FrequencyClkout3RString,
@@ -3109,8 +3118,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case FrequencyDcoRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_FrequencyDcoR,
-				(pFromFpga->data & FrequencyDcoMask));
+				(pFromFpga->data & FrequencyDcoMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				FrequencyDcoRString,
@@ -3118,8 +3128,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U2DoutBits31To0RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U2DoutBits31To0R,
-				(pFromFpga->data & U2DoutBits31To0Mask));
+				(pFromFpga->data & U2DoutBits31To0Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U2DoutBits31To0RString,
@@ -3127,8 +3138,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U2DoutBits63To32RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U2DoutBits63To32R,
-				(pFromFpga->data & U2DoutBits63To32Mask));
+				(pFromFpga->data & U2DoutBits63To32Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U2DoutBits63To32RString,
@@ -3136,8 +3148,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case IdelayValueOutU2Bits19To0RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_IdelayValueOutU2Bits19To0R,
-				(pFromFpga->data & IdelayValueOutU2Bits19To0Mask));
+				(pFromFpga->data & IdelayValueOutU2Bits19To0Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				IdelayValueOutU2Bits19To0RString,
@@ -3145,8 +3158,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case IdelayValueOutU2Bits39To20RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_IdelayValueOutU2Bits39To20R,
-				(pFromFpga->data & IdelayValueOutU2Bits39To20Mask));
+				(pFromFpga->data & IdelayValueOutU2Bits39To20Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				IdelayValueOutU2Bits39To20RString,
@@ -3154,8 +3168,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U3DoutBits31To0RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U3DoutBits31To0R,
-				(pFromFpga->data & U3DoutBits31To0Mask));
+				(pFromFpga->data & U3DoutBits31To0Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U3DoutBits31To0RString,
@@ -3163,8 +3178,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U3DoutBits63To32RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U3DoutBits63To32R,
-				(pFromFpga->data & U3DoutBits63To32Mask));
+				(pFromFpga->data & U3DoutBits63To32Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U3DoutBits63To32RString,
@@ -3172,8 +3188,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case IdelayValueOutU3Bits19To0RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_IdelayValueOutU3Bits19To0R,
-				(pFromFpga->data & IdelayValueOutU3Bits19To0Mask));
+				(pFromFpga->data & IdelayValueOutU3Bits19To0Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				IdelayValueOutU3Bits19To0RString,
@@ -3181,8 +3198,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case IdelayValueOutU3Bits39To20RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_IdelayValueOutU3Bits39To20R,
-				(pFromFpga->data & IdelayValueOutU3Bits39To20Mask));
+				(pFromFpga->data & IdelayValueOutU3Bits39To20Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				IdelayValueOutU3Bits39To20RString,
@@ -3190,8 +3208,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case Wave0OutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_Wave0OutR,
-				(pFromFpga->data & Wave0OutMask));
+				(pFromFpga->data & Wave0OutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Wave0OutRString,
@@ -3199,8 +3218,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case Wave1OutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_Wave1OutR,
-				(pFromFpga->data & Wave1OutMask));
+				(pFromFpga->data & Wave1OutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Wave1OutRString,
@@ -3208,8 +3228,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case AdcTestWave1OutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_AdcTestWave1OutR,
-				(pFromFpga->data & AdcTestWave1OutMask));
+				(pFromFpga->data & AdcTestWave1OutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestWave1OutRString,
@@ -3217,8 +3238,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case AdcTestWave2OutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_AdcTestWave2OutR,
-				(pFromFpga->data & AdcTestWave2OutMask));
+				(pFromFpga->data & AdcTestWave2OutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestWave2OutRString,
@@ -3226,8 +3248,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case AdcTestWave3OutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_AdcTestWave3OutR,
-				(pFromFpga->data & AdcTestWave3OutMask));
+				(pFromFpga->data & AdcTestWave3OutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestWave3OutRString,
@@ -3235,8 +3258,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case AdcTestWave4OutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_AdcTestWave4OutR,
-				(pFromFpga->data & AdcTestWave4OutMask));
+				(pFromFpga->data & AdcTestWave4OutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestWave4OutRString,
@@ -3244,8 +3268,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case CtraceRunningRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_CtraceRunningR,
-				(pFromFpga->data & CtraceRunningMask));
+				(pFromFpga->data & CtraceRunningMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CtraceRunningRString,
@@ -3253,8 +3278,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case FrequencyGtxTxRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_FrequencyGtxTxR,
-				(pFromFpga->data & FrequencyGtxTxMask));
+				(pFromFpga->data & FrequencyGtxTxMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				FrequencyGtxTxRString,
@@ -3262,8 +3288,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case FrequencyGtxRxRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_FrequencyGtxRxR,
-				(pFromFpga->data & FrequencyGtxRxMask));
+				(pFromFpga->data & FrequencyGtxRxMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				FrequencyGtxRxRString,
@@ -3271,8 +3298,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case HistStatusRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_HistStatusR,
-				(pFromFpga->data & HistStatusMask));
+				(pFromFpga->data & HistStatusMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				HistStatusRString,
@@ -3280,8 +3308,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case PhasexStatusRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_PhasexStatusR,
-				(pFromFpga->data & PhasexStatusMask));
+				(pFromFpga->data & PhasexStatusMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PhasexStatusRString,
@@ -3289,8 +3318,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case ClkPhaseDiffOutU2RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_ClkPhaseDiffOutU2R,
-				(pFromFpga->data & ClkPhaseDiffOutU2Mask));
+				(pFromFpga->data & ClkPhaseDiffOutU2Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ClkPhaseDiffOutU2RString,
@@ -3298,8 +3328,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case ClkPhaseDiffOutU3RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_ClkPhaseDiffOutU3R,
-				(pFromFpga->data & ClkPhaseDiffOutU3Mask));
+				(pFromFpga->data & ClkPhaseDiffOutU3Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ClkPhaseDiffOutU3RString,
@@ -3307,8 +3338,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case CrcErrorsRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_CrcErrorsR,
-				(pFromFpga->data & CrcErrorsMask));
+				(pFromFpga->data & CrcErrorsMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CrcErrorsRString,
@@ -3316,15 +3348,17 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U15SpiRdbkRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U15SpiRdbkR,
-				(pFromFpga->data & U15SpiRdbkMask));
+				(pFromFpga->data & U15SpiRdbkMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U15SpiRdbkRString,
 				(unsigned ) pFromFpga->data & U15SpiRdbkMask);
 	// shared address with U15SdoAddrRAdr  56 == 56
+
 		status = (asynStatus) setIntegerParam(p_U15SdoAddrR,
-				(pFromFpga->data & U15SdoAddrMask));
+				(pFromFpga->data & U15SdoAddrMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U15SdoAddrRString,
@@ -3332,15 +3366,17 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U15SpiReadyRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U15SpiReadyR,
-				(pFromFpga->data & U15SpiReadyMask));
+				(pFromFpga->data & U15SpiReadyMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U15SpiReadyRString,
 				(unsigned ) pFromFpga->data & U15SpiReadyMask);
 	// shared address with U15SdioAsSdoRAdr  57 == 57
+
 		status = (asynStatus) setIntegerParam(p_U15SdioAsSdoR,
-				(pFromFpga->data & U15SdioAsSdoMask));
+				(pFromFpga->data & U15SdioAsSdoMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U15SdioAsSdoRString,
@@ -3348,15 +3384,17 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U18SdoAddrRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U18SdoAddrR,
-				(pFromFpga->data & U18SdoAddrMask));
+				(pFromFpga->data & U18SdoAddrMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U18SdoAddrRString,
 				(unsigned ) pFromFpga->data & U18SdoAddrMask);
 	// shared address with U18SpiRdbkRAdr  60 == 60
+
 		status = (asynStatus) setIntegerParam(p_U18SpiRdbkR,
-				(pFromFpga->data & U18SpiRdbkMask));
+				(pFromFpga->data & U18SpiRdbkMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U18SpiRdbkRString,
@@ -3364,15 +3402,17 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case U18SdioAsSdoRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_U18SdioAsSdoR,
-				(pFromFpga->data & U18SdioAsSdoMask));
+				(pFromFpga->data & U18SdioAsSdoMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U18SdioAsSdoRString,
 				(unsigned ) pFromFpga->data & U18SdioAsSdoMask);
 	// shared address with U18SpiReadyRAdr  61 == 61
+
 		status = (asynStatus) setIntegerParam(p_U18SpiReadyR,
-				(pFromFpga->data & U18SpiReadyMask));
+				(pFromFpga->data & U18SpiReadyMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				U18SpiReadyRString,
@@ -3380,8 +3420,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case AdcTestTrigCntRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_AdcTestTrigCntR,
-				(pFromFpga->data & AdcTestTrigCntMask));
+				(pFromFpga->data & AdcTestTrigCntMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestTrigCntRString,
@@ -3389,8 +3430,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case WaveformsAvailableRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_WaveformsAvailableR,
-				(pFromFpga->data & WaveformsAvailableMask));
+				(pFromFpga->data & WaveformsAvailableMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				WaveformsAvailableRString,
@@ -3398,8 +3440,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case BanyanStatusRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_BanyanStatusR,
-				(pFromFpga->data & BanyanStatusMask));
+				(pFromFpga->data & BanyanStatusMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				BanyanStatusRString,
@@ -3407,8 +3450,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case SlowChainOutRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_SlowChainOutR,
-				(pFromFpga->data & SlowChainOutMask));
+				(pFromFpga->data & SlowChainOutMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SlowChainOutRString,
@@ -3416,8 +3460,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case TraceStatus1RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_TraceStatus1R,
-				(pFromFpga->data & TraceStatus1Mask));
+				(pFromFpga->data & TraceStatus1Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceStatus1RString,
@@ -3425,8 +3470,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case TraceStatus2RAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_TraceStatus2R,
-				(pFromFpga->data & TraceStatus2Mask));
+				(pFromFpga->data & TraceStatus2Mask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceStatus2RString,
@@ -3434,624 +3480,19 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case LlrfCircleReadyRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_LlrfCircleReadyR,
-				(pFromFpga->data & LlrfCircleReadyMask));
+				(pFromFpga->data & LlrfCircleReadyMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				LlrfCircleReadyRString,
 				(unsigned ) pFromFpga->data & LlrfCircleReadyMask);
 	break;
 
-    case IdelayBaseRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_IdelayBaseR,
-				(pFromFpga->data & IdelayBaseMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				IdelayBaseRString,
-				(unsigned ) pFromFpga->data & IdelayBaseMask);
-	break;
-
-    case HistDoutRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_HistDoutR,
-				(pFromFpga->data & HistDoutMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				HistDoutRString,
-				(unsigned ) pFromFpga->data & HistDoutMask);
-	break;
-
-    case PhasexDoutRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_PhasexDoutR,
-				(pFromFpga->data & PhasexDoutMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				PhasexDoutRString,
-				(unsigned ) pFromFpga->data & PhasexDoutMask);
-	break;
-
-    case BanyanBufRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_BanyanBufR,
-				(pFromFpga->data & BanyanBufMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BanyanBufRString,
-				(unsigned ) pFromFpga->data & BanyanBufMask);
-	break;
-
-    case ScannerResultRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_ScannerResultR,
-				(pFromFpga->data & ScannerResultMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				ScannerResultRString,
-				(unsigned ) pFromFpga->data & ScannerResultMask);
-	break;
-
-    case TraceIqBufRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((TraceIqBufMask + 1 ) >> 1))? ~TraceIqBufMask : 0;
-		status = (asynStatus) setIntegerParam(p_TraceIqBufR,
-				(pFromFpga->data & TraceIqBufMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceIqBufRString,
-				(unsigned ) pFromFpga->data & TraceIqBufMask);
-	break;
-
-    case TraceIBufRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((TraceIBufMask + 1 ) >> 1))? ~TraceIBufMask : 0;
-		status = (asynStatus) setIntegerParam(p_TraceIBufR,
-				(pFromFpga->data & TraceIBufMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceIBufRString,
-				(unsigned ) pFromFpga->data & TraceIBufMask);
-	break;
-
-    case TraceQBufRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((TraceQBufMask + 1 ) >> 1))? ~TraceQBufMask : 0;
-		status = (asynStatus) setIntegerParam(p_TraceQBufR,
-				(pFromFpga->data & TraceQBufMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				TraceQBufRString,
-				(unsigned ) pFromFpga->data & TraceQBufMask);
-	break;
-
-    case QsfpBufRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_QsfpBufR,
-				(pFromFpga->data & QsfpBufMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				QsfpBufRString,
-				(unsigned ) pFromFpga->data & QsfpBufMask);
-	break;
-
-    case LlrfCircleDataRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((LlrfCircleDataMask + 1 ) >> 1))? ~LlrfCircleDataMask : 0;
-		status = (asynStatus) setIntegerParam(p_LlrfCircleDataR,
-				(pFromFpga->data & LlrfCircleDataMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				LlrfCircleDataRString,
-				(unsigned ) pFromFpga->data & LlrfCircleDataMask);
-	break;
-
-    case Shell0SlowDataRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_Shell0SlowDataR,
-				(pFromFpga->data & Shell0SlowDataMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Shell0SlowDataRString,
-				(unsigned ) pFromFpga->data & Shell0SlowDataMask);
-	break;
-
-    case Shell1SlowDataRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_Shell1SlowDataR,
-				(pFromFpga->data & Shell1SlowDataMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Shell1SlowDataRString,
-				(unsigned ) pFromFpga->data & Shell1SlowDataMask);
-	break;
-
-    case DigDspMuxCav4MechNoiseCoupleKOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxCav4MechNoiseCoupleKOutMask + 1 ) >> 1))? ~DigDspMuxCav4MechNoiseCoupleKOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxCav4MechNoiseCoupleKOutR,
-				(pFromFpga->data & DigDspMuxCav4MechNoiseCoupleKOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxCav4MechNoiseCoupleKOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxCav4MechNoiseCoupleKOutMask);
-	break;
-
-    case DigDspMuxCav4MechResonatorPropConstRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_DigDspMuxCav4MechResonatorPropConstR,
-				(pFromFpga->data & DigDspMuxCav4MechResonatorPropConstMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxCav4MechResonatorPropConstRString,
-				(unsigned ) pFromFpga->data & DigDspMuxCav4MechResonatorPropConstMask);
-	break;
-
-    case DigDspMuxC0ElecDot0KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDot0KOutMask + 1 ) >> 1))? ~DigDspMuxC0ElecDot0KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecDot0KOutR,
-				(pFromFpga->data & DigDspMuxC0ElecDot0KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot0KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDot0KOutMask);
-	break;
-
-    case DigDspMuxC0ElecDot1KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDot1KOutMask + 1 ) >> 1))? ~DigDspMuxC0ElecDot1KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecDot1KOutR,
-				(pFromFpga->data & DigDspMuxC0ElecDot1KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot1KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDot1KOutMask);
-	break;
-
-    case DigDspMuxC0ElecDot2KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDot2KOutMask + 1 ) >> 1))? ~DigDspMuxC0ElecDot2KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecDot2KOutR,
-				(pFromFpga->data & DigDspMuxC0ElecDot2KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot2KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDot2KOutMask);
-	break;
-
-    case DigDspMuxC0ElecOuterProd0KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecOuterProd0KOutMask + 1 ) >> 1))? ~DigDspMuxC0ElecOuterProd0KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecOuterProd0KOutR,
-				(pFromFpga->data & DigDspMuxC0ElecOuterProd0KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd0KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd0KOutMask);
-	break;
-
-    case DigDspMuxC0ElecOuterProd1KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecOuterProd1KOutMask + 1 ) >> 1))? ~DigDspMuxC0ElecOuterProd1KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecOuterProd1KOutR,
-				(pFromFpga->data & DigDspMuxC0ElecOuterProd1KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd1KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd1KOutMask);
-	break;
-
-    case DigDspMuxC0ElecOuterProd2KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecOuterProd2KOutMask + 1 ) >> 1))? ~DigDspMuxC0ElecOuterProd2KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecOuterProd2KOutR,
-				(pFromFpga->data & DigDspMuxC0ElecOuterProd2KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd2KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd2KOutMask);
-	break;
-
-    case DigDspMuxC0PiezoCoupleKOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0PiezoCoupleKOutMask + 1 ) >> 1))? ~DigDspMuxC0PiezoCoupleKOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0PiezoCoupleKOutR,
-				(pFromFpga->data & DigDspMuxC0PiezoCoupleKOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0PiezoCoupleKOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0PiezoCoupleKOutMask);
-	break;
-
-    case DigDspMuxC1ElecDot0KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDot0KOutMask + 1 ) >> 1))? ~DigDspMuxC1ElecDot0KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecDot0KOutR,
-				(pFromFpga->data & DigDspMuxC1ElecDot0KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot0KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDot0KOutMask);
-	break;
-
-    case DigDspMuxC1ElecDot1KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDot1KOutMask + 1 ) >> 1))? ~DigDspMuxC1ElecDot1KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecDot1KOutR,
-				(pFromFpga->data & DigDspMuxC1ElecDot1KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot1KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDot1KOutMask);
-	break;
-
-    case DigDspMuxC1ElecDot2KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDot2KOutMask + 1 ) >> 1))? ~DigDspMuxC1ElecDot2KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecDot2KOutR,
-				(pFromFpga->data & DigDspMuxC1ElecDot2KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot2KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDot2KOutMask);
-	break;
-
-    case DigDspMuxC1ElecOuterProd0KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecOuterProd0KOutMask + 1 ) >> 1))? ~DigDspMuxC1ElecOuterProd0KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecOuterProd0KOutR,
-				(pFromFpga->data & DigDspMuxC1ElecOuterProd0KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd0KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd0KOutMask);
-	break;
-
-    case DigDspMuxC1ElecOuterProd1KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecOuterProd1KOutMask + 1 ) >> 1))? ~DigDspMuxC1ElecOuterProd1KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecOuterProd1KOutR,
-				(pFromFpga->data & DigDspMuxC1ElecOuterProd1KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd1KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd1KOutMask);
-	break;
-
-    case DigDspMuxC1ElecOuterProd2KOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecOuterProd2KOutMask + 1 ) >> 1))? ~DigDspMuxC1ElecOuterProd2KOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecOuterProd2KOutR,
-				(pFromFpga->data & DigDspMuxC1ElecOuterProd2KOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd2KOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd2KOutMask);
-	break;
-
-    case DigDspMuxC1PiezoCoupleKOutRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1PiezoCoupleKOutMask + 1 ) >> 1))? ~DigDspMuxC1PiezoCoupleKOutMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1PiezoCoupleKOutR,
-				(pFromFpga->data & DigDspMuxC1PiezoCoupleKOutMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1PiezoCoupleKOutRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1PiezoCoupleKOutMask);
-	break;
-
-    case Tgen0DelayPcXxxRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_Tgen0DelayPcXxxR,
-				(pFromFpga->data & Tgen0DelayPcXxxMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Tgen0DelayPcXxxRString,
-				(unsigned ) pFromFpga->data & Tgen0DelayPcXxxMask);
-	break;
-
-    case Tgen1DelayPcXxxRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_Tgen1DelayPcXxxR,
-				(pFromFpga->data & Tgen1DelayPcXxxMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Tgen1DelayPcXxxRString,
-				(unsigned ) pFromFpga->data & Tgen1DelayPcXxxMask);
-	break;
-
-    case DigDspMuxShell0DspPiezoSfConstsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspPiezoSfConstsR,
-				(pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspPiezoSfConstsRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask);
-	break;
-
-    case DigDspMuxShell1DspPiezoSfConstsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspPiezoSfConstsR,
-				(pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask));
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspPiezoSfConstsRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask);
-	break;
-
-    case DigDspMuxShell0FdbkCoreMpProcCoeffRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcCoeffMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcCoeffMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcCoeffR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcCoeffRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask);
-	break;
-
-    case DigDspMuxShell0FdbkCoreMpProcLimRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcLimMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcLimMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcLimR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcLimRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask);
-	break;
-
-    case DigDspMuxShell0FdbkCoreMpProcSetmpRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcSetmpMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcSetmpMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSetmpR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcSetmpRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask);
-	break;
-
-    case DigDspMuxShell1FdbkCoreMpProcCoeffRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcCoeffMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcCoeffMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcCoeffR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcCoeffRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask);
-	break;
-
-    case DigDspMuxShell1FdbkCoreMpProcLimRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcLimMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcLimMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcLimR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcLimRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask);
-	break;
-
-    case DigDspMuxShell1FdbkCoreMpProcSetmpRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcSetmpMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcSetmpMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSetmpR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcSetmpRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask);
-	break;
-
-    case DigDspMuxC0ElecDriveCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDriveCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecDriveCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecDriveCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDriveCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC0ElecDriveCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDriveCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecDriveCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecDriveCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDriveCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC0ElecM0OutCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0OutCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM0OutCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM0OutCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC0ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM0OutCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM0OutCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC0ElecM1OutCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1OutCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM1OutCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM1OutCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC0ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM1OutCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM1OutCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC0ElecM2OutCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2OutCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM2OutCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM2OutCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC0ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM2OutCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC1ElecDriveCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDriveCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecDriveCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecDriveCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDriveCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC1ElecDriveCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDriveCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecDriveCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecDriveCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDriveCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC1ElecM0OutCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0OutCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM0OutCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM0OutCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC1ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM0OutCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM0OutCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC1ElecM1OutCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1OutCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM1OutCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM1OutCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC1ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM1OutCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM1OutCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxC1ElecM2OutCplOutCouplingRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2OutCplOutCouplingMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM2OutCplOutCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM2OutCplOutCouplingRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask);
-	break;
-
-    case DigDspMuxC1ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetR,
-				(pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM2OutCplOutPhaseOffsetRString,
-				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask);
-	break;
-
-    case DigDspMuxShell0DspLpNotchLp1AKxRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1AKxMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1AKxMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspLpNotchLp1AKxR,
-				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1AKxRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask);
-	break;
-
-    case DigDspMuxShell0DspLpNotchLp1AKyRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1AKyMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1AKyMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspLpNotchLp1AKyR,
-				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1AKyRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask);
-	break;
-
-    case DigDspMuxShell0DspLpNotchLp1BKxRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1BKxMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1BKxMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspLpNotchLp1BKxR,
-				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1BKxRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask);
-	break;
-
-    case DigDspMuxShell0DspLpNotchLp1BKyRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1BKyMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1BKyMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspLpNotchLp1BKyR,
-				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1BKyRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask);
-	break;
-
-    case DigDspMuxShell1DspLpNotchLp1AKxRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1AKxMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1AKxMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspLpNotchLp1AKxR,
-				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1AKxRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask);
-	break;
-
-    case DigDspMuxShell1DspLpNotchLp1AKyRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1AKyMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1AKyMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspLpNotchLp1AKyR,
-				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1AKyRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask);
-	break;
-
-    case DigDspMuxShell1DspLpNotchLp1BKxRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1BKxMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1BKxMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspLpNotchLp1BKxR,
-				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1BKxRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask);
-	break;
-
-    case DigDspMuxShell1DspLpNotchLp1BKyRAdr|flagReadMask:
-		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1BKyMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1BKyMask : 0;
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspLpNotchLp1BKyR,
-				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask) | signExtBits);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1BKyRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask);
-	break;
-
     case AdcMmcmRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_AdcMmcmR,
-				(pFromFpga->data & AdcMmcmMask));
+				(pFromFpga->data & AdcMmcmMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcMmcmRString,
@@ -4059,8 +3500,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU15SpiDataAddrRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU15SpiDataAddrRR,
-				(pFromFpga->data & DigConfigU15SpiDataAddrRMask));
+				(pFromFpga->data & DigConfigU15SpiDataAddrRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU15SpiDataAddrRRString,
@@ -4068,8 +3510,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU15SpiReadAndStartRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU15SpiReadAndStartRR,
-				(pFromFpga->data & DigConfigU15SpiReadAndStartRMask));
+				(pFromFpga->data & DigConfigU15SpiReadAndStartRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU15SpiReadAndStartRRString,
@@ -4077,8 +3520,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU18SpiDataAddrRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU18SpiDataAddrRR,
-				(pFromFpga->data & DigConfigU18SpiDataAddrRMask));
+				(pFromFpga->data & DigConfigU18SpiDataAddrRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU18SpiDataAddrRRString,
@@ -4086,8 +3530,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU18SpiReadAndStartRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU18SpiReadAndStartRR,
-				(pFromFpga->data & DigConfigU18SpiReadAndStartRMask));
+				(pFromFpga->data & DigConfigU18SpiReadAndStartRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU18SpiReadAndStartRRString,
@@ -4095,8 +3540,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU2ClkResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU2ClkResetRR,
-				(pFromFpga->data & DigConfigU2ClkResetRMask));
+				(pFromFpga->data & DigConfigU2ClkResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU2ClkResetRRString,
@@ -4104,8 +3550,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU2IserdesResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU2IserdesResetRR,
-				(pFromFpga->data & DigConfigU2IserdesResetRMask));
+				(pFromFpga->data & DigConfigU2IserdesResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU2IserdesResetRRString,
@@ -4113,8 +3560,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU3ClkResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU3ClkResetRR,
-				(pFromFpga->data & DigConfigU3ClkResetRMask));
+				(pFromFpga->data & DigConfigU3ClkResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU3ClkResetRRString,
@@ -4122,8 +3570,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU3IserdesResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU3IserdesResetRR,
-				(pFromFpga->data & DigConfigU3IserdesResetRMask));
+				(pFromFpga->data & DigConfigU3IserdesResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU3IserdesResetRRString,
@@ -4131,8 +3580,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigU4ResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigU4ResetRR,
-				(pFromFpga->data & DigConfigU4ResetRMask));
+				(pFromFpga->data & DigConfigU4ResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigU4ResetRRString,
@@ -4140,8 +3590,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigBanyanMaskRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigBanyanMaskR,
-				(pFromFpga->data & DigConfigBanyanMaskMask));
+				(pFromFpga->data & DigConfigBanyanMaskMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigBanyanMaskRString,
@@ -4149,8 +3600,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigBitslipRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigBitslipR,
-				(pFromFpga->data & DigConfigBitslipMask));
+				(pFromFpga->data & DigConfigBitslipMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigBitslipRString,
@@ -4158,8 +3610,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigClkStatusWeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigClkStatusWeR,
-				(pFromFpga->data & DigConfigClkStatusWeMask));
+				(pFromFpga->data & DigConfigClkStatusWeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigClkStatusWeRString,
@@ -4167,8 +3620,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigIdelayctrlResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigIdelayctrlResetRR,
-				(pFromFpga->data & DigConfigIdelayctrlResetRMask));
+				(pFromFpga->data & DigConfigIdelayctrlResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigIdelayctrlResetRRString,
@@ -4176,8 +3630,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigLlspiWeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigLlspiWeR,
-				(pFromFpga->data & DigConfigLlspiWeMask));
+				(pFromFpga->data & DigConfigLlspiWeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigLlspiWeRString,
@@ -4185,8 +3640,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigMmcmResetRRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigMmcmResetRR,
-				(pFromFpga->data & DigConfigMmcmResetRMask));
+				(pFromFpga->data & DigConfigMmcmResetRMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigMmcmResetRRString,
@@ -4194,8 +3650,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigPeriphConfigRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigPeriphConfigR,
-				(pFromFpga->data & DigConfigPeriphConfigMask));
+				(pFromFpga->data & DigConfigPeriphConfigMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigPeriphConfigRString,
@@ -4203,8 +3660,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigPhasexTrigRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigPhasexTrigR,
-				(pFromFpga->data & DigConfigPhasexTrigMask));
+				(pFromFpga->data & DigConfigPhasexTrigMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigPhasexTrigRString,
@@ -4212,8 +3670,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigRawadcTrigRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigRawadcTrigR,
-				(pFromFpga->data & DigConfigRawadcTrigMask));
+				(pFromFpga->data & DigConfigRawadcTrigMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigRawadcTrigRString,
@@ -4221,8 +3680,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigScanTriggerWeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigScanTriggerWeR,
-				(pFromFpga->data & DigConfigScanTriggerWeMask));
+				(pFromFpga->data & DigConfigScanTriggerWeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigScanTriggerWeRString,
@@ -4230,8 +3690,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigScannerDebugRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigScannerDebugR,
-				(pFromFpga->data & DigConfigScannerDebugMask));
+				(pFromFpga->data & DigConfigScannerDebugMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigScannerDebugRString,
@@ -4239,8 +3700,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigSyncAd7794CsetRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigSyncAd7794CsetR,
-				(pFromFpga->data & DigConfigSyncAd7794CsetMask));
+				(pFromFpga->data & DigConfigSyncAd7794CsetMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigSyncAd7794CsetRString,
@@ -4248,8 +3710,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigConfigSyncTps62210CsetRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigConfigSyncTps62210CsetR,
-				(pFromFpga->data & DigConfigSyncTps62210CsetMask));
+				(pFromFpga->data & DigConfigSyncTps62210CsetMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigConfigSyncTps62210CsetRString,
@@ -4257,8 +3720,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspAdcTestModeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspAdcTestModeR,
-				(pFromFpga->data & DigDspAdcTestModeMask));
+				(pFromFpga->data & DigDspAdcTestModeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspAdcTestModeRString,
@@ -4266,8 +3730,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspAdcTestResetRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspAdcTestResetR,
-				(pFromFpga->data & DigDspAdcTestResetMask));
+				(pFromFpga->data & DigDspAdcTestResetMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspAdcTestResetRString,
@@ -4275,8 +3740,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspAmplitudeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspAmplitudeR,
-				(pFromFpga->data & DigDspAmplitudeMask));
+				(pFromFpga->data & DigDspAmplitudeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspAmplitudeRString,
@@ -4284,8 +3750,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspAverageLenRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspAverageLenR,
-				(pFromFpga->data & DigDspAverageLenMask));
+				(pFromFpga->data & DigDspAverageLenMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspAverageLenRString,
@@ -4293,8 +3760,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspBufTrigRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspBufTrigR,
-				(pFromFpga->data & DigDspBufTrigMask));
+				(pFromFpga->data & DigDspBufTrigMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspBufTrigRString,
@@ -4302,8 +3770,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspCicPeriodRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspCicPeriodR,
-				(pFromFpga->data & DigDspCicPeriodMask));
+				(pFromFpga->data & DigDspCicPeriodMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspCicPeriodRString,
@@ -4311,8 +3780,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspCicShiftRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspCicShiftR,
-				(pFromFpga->data & DigDspCicShiftMask));
+				(pFromFpga->data & DigDspCicShiftMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspCicShiftRString,
@@ -4320,8 +3790,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspCircleBufFlipRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspCircleBufFlipR,
-				(pFromFpga->data & DigDspCircleBufFlipMask));
+				(pFromFpga->data & DigDspCircleBufFlipMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspCircleBufFlipRString,
@@ -4329,8 +3800,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspDacDdsResetRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspDacDdsResetR,
-				(pFromFpga->data & DigDspDacDdsResetMask));
+				(pFromFpga->data & DigDspDacDdsResetMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspDacDdsResetRString,
@@ -4338,8 +3810,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspDacModeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspDacModeR,
-				(pFromFpga->data & DigDspDacModeMask));
+				(pFromFpga->data & DigDspDacModeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspDacModeRString,
@@ -4347,8 +3820,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspDdsaModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspDdsaModuloR,
-				(pFromFpga->data & DigDspDdsaModuloMask));
+				(pFromFpga->data & DigDspDdsaModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspDdsaModuloRString,
@@ -4356,8 +3830,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspDdsaPhstepHRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspDdsaPhstepHR,
-				(pFromFpga->data & DigDspDdsaPhstepHMask));
+				(pFromFpga->data & DigDspDdsaPhstepHMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspDdsaPhstepHRString,
@@ -4365,8 +3840,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspDdsaPhstepLRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspDdsaPhstepLR,
-				(pFromFpga->data & DigDspDdsaPhstepLMask));
+				(pFromFpga->data & DigDspDdsaPhstepLMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspDdsaPhstepLRString,
@@ -4374,8 +3850,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspHistCountWStrobeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspHistCountWStrobeR,
-				(pFromFpga->data & DigDspHistCountWStrobeMask));
+				(pFromFpga->data & DigDspHistCountWStrobeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspHistCountWStrobeRString,
@@ -4383,8 +3860,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspLlrfDspDacEnRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspLlrfDspDacEnR,
-				(pFromFpga->data & DigDspLlrfDspDacEnMask));
+				(pFromFpga->data & DigDspLlrfDspDacEnMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspLlrfDspDacEnRString,
@@ -4392,8 +3870,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspLoAmpRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspLoAmpR,
-				(pFromFpga->data & DigDspLoAmpMask));
+				(pFromFpga->data & DigDspLoAmpMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspLoAmpRString,
@@ -4401,8 +3880,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspModuloR,
-				(pFromFpga->data & DigDspModuloMask));
+				(pFromFpga->data & DigDspModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspModuloRString,
@@ -4410,8 +3890,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspPhaseStepHRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspPhaseStepHR,
-				(pFromFpga->data & DigDspPhaseStepHMask));
+				(pFromFpga->data & DigDspPhaseStepHMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspPhaseStepHRString,
@@ -4419,8 +3900,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspPhaseStepLRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspPhaseStepLR,
-				(pFromFpga->data & DigDspPhaseStepLMask));
+				(pFromFpga->data & DigDspPhaseStepLMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspPhaseStepLRString,
@@ -4428,8 +3910,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspPrcDspCavSelRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspPrcDspCavSelR,
-				(pFromFpga->data & DigDspPrcDspCavSelMask));
+				(pFromFpga->data & DigDspPrcDspCavSelMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspPrcDspCavSelRString,
@@ -4437,8 +3920,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspPrcDspPrlCfgRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspPrcDspPrlCfgR,
-				(pFromFpga->data & DigDspPrcDspPrlCfgMask));
+				(pFromFpga->data & DigDspPrcDspPrlCfgMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspPrcDspPrlCfgRString,
@@ -4446,9 +3930,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspPrcDspPrlGainRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspPrcDspPrlGainMask + 1 ) >> 1))? ~DigDspPrcDspPrlGainMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspPrcDspPrlGainR,
-				(pFromFpga->data & DigDspPrcDspPrlGainMask) | signExtBits);
+				(pFromFpga->data & DigDspPrcDspPrlGainMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspPrcDspPrlGainRString,
@@ -4456,8 +3941,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxBeam0ModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxBeam0ModuloR,
-				(pFromFpga->data & DigDspMuxBeam0ModuloMask));
+				(pFromFpga->data & DigDspMuxBeam0ModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxBeam0ModuloRString,
@@ -4465,8 +3951,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxBeam0PhaseInitRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxBeam0PhaseInitR,
-				(pFromFpga->data & DigDspMuxBeam0PhaseInitMask));
+				(pFromFpga->data & DigDspMuxBeam0PhaseInitMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxBeam0PhaseInitRString,
@@ -4474,8 +3961,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxBeam0PhaseStepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxBeam0PhaseStepR,
-				(pFromFpga->data & DigDspMuxBeam0PhaseStepMask));
+				(pFromFpga->data & DigDspMuxBeam0PhaseStepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxBeam0PhaseStepRString,
@@ -4483,8 +3971,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxBeam1ModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxBeam1ModuloR,
-				(pFromFpga->data & DigDspMuxBeam1ModuloMask));
+				(pFromFpga->data & DigDspMuxBeam1ModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxBeam1ModuloRString,
@@ -4492,8 +3981,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxBeam1PhaseInitRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxBeam1PhaseInitR,
-				(pFromFpga->data & DigDspMuxBeam1PhaseInitMask));
+				(pFromFpga->data & DigDspMuxBeam1PhaseInitMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxBeam1PhaseInitRString,
@@ -4501,8 +3991,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxBeam1PhaseStepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxBeam1PhaseStepR,
-				(pFromFpga->data & DigDspMuxBeam1PhaseStepMask));
+				(pFromFpga->data & DigDspMuxBeam1PhaseStepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxBeam1PhaseStepRString,
@@ -4510,8 +4001,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxCav4MechPrngIvaRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxCav4MechPrngIvaR,
-				(pFromFpga->data & DigDspMuxCav4MechPrngIvaMask));
+				(pFromFpga->data & DigDspMuxCav4MechPrngIvaMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxCav4MechPrngIvaRString,
@@ -4519,8 +4011,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxCav4MechPrngIvbRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxCav4MechPrngIvbR,
-				(pFromFpga->data & DigDspMuxCav4MechPrngIvbMask));
+				(pFromFpga->data & DigDspMuxCav4MechPrngIvbMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxCav4MechPrngIvbRString,
@@ -4528,8 +4021,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxCav4MechPrngRandomRunRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxCav4MechPrngRandomRunR,
-				(pFromFpga->data & DigDspMuxCav4MechPrngRandomRunMask));
+				(pFromFpga->data & DigDspMuxCav4MechPrngRandomRunMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxCav4MechPrngRandomRunRString,
@@ -4537,9 +4031,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ACavOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ACavOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ACavOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ACavOffsetR,
-				(pFromFpga->data & DigDspMuxC0ACavOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ACavOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ACavOffsetRString,
@@ -4547,9 +4042,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0AForOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0AForOffsetMask + 1 ) >> 1))? ~DigDspMuxC0AForOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0AForOffsetR,
-				(pFromFpga->data & DigDspMuxC0AForOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0AForOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0AForOffsetRString,
@@ -4557,9 +4053,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ARflOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ARflOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ARflOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ARflOffsetR,
-				(pFromFpga->data & DigDspMuxC0ARflOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ARflOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ARflOffsetRString,
@@ -4567,9 +4064,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0AmpLpBwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0AmpLpBwMask + 1 ) >> 1))? ~DigDspMuxC0AmpLpBwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0AmpLpBwR,
-				(pFromFpga->data & DigDspMuxC0AmpLpBwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0AmpLpBwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0AmpLpBwRString,
@@ -4577,9 +4075,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecFreq0CoarseFreqRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecFreq0CoarseFreqMask + 1 ) >> 1))? ~DigDspMuxC0ElecFreq0CoarseFreqMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecFreq0CoarseFreqR,
-				(pFromFpga->data & DigDspMuxC0ElecFreq0CoarseFreqMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecFreq0CoarseFreqMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecFreq0CoarseFreqRString,
@@ -4587,9 +4086,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecFreq1CoarseFreqRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecFreq1CoarseFreqMask + 1 ) >> 1))? ~DigDspMuxC0ElecFreq1CoarseFreqMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecFreq1CoarseFreqR,
-				(pFromFpga->data & DigDspMuxC0ElecFreq1CoarseFreqMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecFreq1CoarseFreqMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecFreq1CoarseFreqRString,
@@ -4597,9 +4097,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecFreq2CoarseFreqRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecFreq2CoarseFreqMask + 1 ) >> 1))? ~DigDspMuxC0ElecFreq2CoarseFreqMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecFreq2CoarseFreqR,
-				(pFromFpga->data & DigDspMuxC0ElecFreq2CoarseFreqMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecFreq2CoarseFreqMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecFreq2CoarseFreqRString,
@@ -4607,9 +4108,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM0BeamCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0BeamCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0BeamCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM0BeamCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM0BeamCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM0BeamCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM0BeamCouplingRString,
@@ -4617,9 +4119,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM0BwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0BwMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0BwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM0BwR,
-				(pFromFpga->data & DigDspMuxC0ElecM0BwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM0BwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM0BwRString,
@@ -4627,9 +4130,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM0DriveCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0DriveCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0DriveCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM0DriveCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM0DriveCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM0DriveCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM0DriveCouplingRString,
@@ -4637,9 +4141,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM1BeamCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1BeamCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1BeamCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM1BeamCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM1BeamCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM1BeamCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM1BeamCouplingRString,
@@ -4647,9 +4152,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM1BwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1BwMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1BwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM1BwR,
-				(pFromFpga->data & DigDspMuxC0ElecM1BwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM1BwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM1BwRString,
@@ -4657,9 +4163,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM1DriveCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1DriveCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1DriveCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM1DriveCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM1DriveCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM1DriveCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM1DriveCouplingRString,
@@ -4667,9 +4174,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM2BeamCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2BeamCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2BeamCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM2BeamCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM2BeamCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM2BeamCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM2BeamCouplingRString,
@@ -4677,9 +4185,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM2BwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2BwMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2BwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM2BwR,
-				(pFromFpga->data & DigDspMuxC0ElecM2BwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM2BwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM2BwRString,
@@ -4687,9 +4196,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecM2DriveCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2DriveCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2DriveCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecM2DriveCouplingR,
-				(pFromFpga->data & DigDspMuxC0ElecM2DriveCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC0ElecM2DriveCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecM2DriveCouplingRString,
@@ -4697,8 +4207,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecModuloR,
-				(pFromFpga->data & DigDspMuxC0ElecModuloMask));
+				(pFromFpga->data & DigDspMuxC0ElecModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecModuloRString,
@@ -4706,8 +4217,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ElecPhaseStepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ElecPhaseStepR,
-				(pFromFpga->data & DigDspMuxC0ElecPhaseStepMask));
+				(pFromFpga->data & DigDspMuxC0ElecPhaseStepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ElecPhaseStepRString,
@@ -4715,8 +4227,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0ComprSatCtlRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0ComprSatCtlR,
-				(pFromFpga->data & DigDspMuxC0ComprSatCtlMask));
+				(pFromFpga->data & DigDspMuxC0ComprSatCtlMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0ComprSatCtlRString,
@@ -4724,8 +4237,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0PrngIvaRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0PrngIvaR,
-				(pFromFpga->data & DigDspMuxC0PrngIvaMask));
+				(pFromFpga->data & DigDspMuxC0PrngIvaMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0PrngIvaRString,
@@ -4733,8 +4247,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0PrngIvbRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0PrngIvbR,
-				(pFromFpga->data & DigDspMuxC0PrngIvbMask));
+				(pFromFpga->data & DigDspMuxC0PrngIvbMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0PrngIvbRString,
@@ -4742,8 +4257,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC0PrngRandomRunRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC0PrngRandomRunR,
-				(pFromFpga->data & DigDspMuxC0PrngRandomRunMask));
+				(pFromFpga->data & DigDspMuxC0PrngRandomRunMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC0PrngRandomRunRString,
@@ -4751,9 +4267,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ACavOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ACavOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ACavOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ACavOffsetR,
-				(pFromFpga->data & DigDspMuxC1ACavOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ACavOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ACavOffsetRString,
@@ -4761,9 +4278,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1AForOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1AForOffsetMask + 1 ) >> 1))? ~DigDspMuxC1AForOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1AForOffsetR,
-				(pFromFpga->data & DigDspMuxC1AForOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1AForOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1AForOffsetRString,
@@ -4771,9 +4289,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ARflOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ARflOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ARflOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ARflOffsetR,
-				(pFromFpga->data & DigDspMuxC1ARflOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ARflOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ARflOffsetRString,
@@ -4781,9 +4300,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1AmpLpBwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1AmpLpBwMask + 1 ) >> 1))? ~DigDspMuxC1AmpLpBwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1AmpLpBwR,
-				(pFromFpga->data & DigDspMuxC1AmpLpBwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1AmpLpBwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1AmpLpBwRString,
@@ -4791,9 +4311,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecFreq0CoarseFreqRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecFreq0CoarseFreqMask + 1 ) >> 1))? ~DigDspMuxC1ElecFreq0CoarseFreqMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecFreq0CoarseFreqR,
-				(pFromFpga->data & DigDspMuxC1ElecFreq0CoarseFreqMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecFreq0CoarseFreqMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecFreq0CoarseFreqRString,
@@ -4801,9 +4322,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecFreq1CoarseFreqRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecFreq1CoarseFreqMask + 1 ) >> 1))? ~DigDspMuxC1ElecFreq1CoarseFreqMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecFreq1CoarseFreqR,
-				(pFromFpga->data & DigDspMuxC1ElecFreq1CoarseFreqMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecFreq1CoarseFreqMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecFreq1CoarseFreqRString,
@@ -4811,9 +4333,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecFreq2CoarseFreqRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecFreq2CoarseFreqMask + 1 ) >> 1))? ~DigDspMuxC1ElecFreq2CoarseFreqMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecFreq2CoarseFreqR,
-				(pFromFpga->data & DigDspMuxC1ElecFreq2CoarseFreqMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecFreq2CoarseFreqMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecFreq2CoarseFreqRString,
@@ -4821,9 +4344,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM0BeamCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0BeamCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0BeamCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM0BeamCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM0BeamCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM0BeamCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM0BeamCouplingRString,
@@ -4831,9 +4355,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM0BwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0BwMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0BwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM0BwR,
-				(pFromFpga->data & DigDspMuxC1ElecM0BwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM0BwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM0BwRString,
@@ -4841,9 +4366,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM0DriveCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0DriveCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0DriveCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM0DriveCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM0DriveCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM0DriveCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM0DriveCouplingRString,
@@ -4851,9 +4377,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM1BeamCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1BeamCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1BeamCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM1BeamCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM1BeamCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM1BeamCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM1BeamCouplingRString,
@@ -4861,9 +4388,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM1BwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1BwMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1BwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM1BwR,
-				(pFromFpga->data & DigDspMuxC1ElecM1BwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM1BwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM1BwRString,
@@ -4871,9 +4399,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM1DriveCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1DriveCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1DriveCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM1DriveCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM1DriveCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM1DriveCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM1DriveCouplingRString,
@@ -4881,9 +4410,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM2BeamCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2BeamCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2BeamCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM2BeamCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM2BeamCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM2BeamCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM2BeamCouplingRString,
@@ -4891,9 +4421,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM2BwRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2BwMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2BwMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM2BwR,
-				(pFromFpga->data & DigDspMuxC1ElecM2BwMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM2BwMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM2BwRString,
@@ -4901,9 +4432,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecM2DriveCouplingRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2DriveCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2DriveCouplingMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecM2DriveCouplingR,
-				(pFromFpga->data & DigDspMuxC1ElecM2DriveCouplingMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxC1ElecM2DriveCouplingMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecM2DriveCouplingRString,
@@ -4911,8 +4443,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecModuloR,
-				(pFromFpga->data & DigDspMuxC1ElecModuloMask));
+				(pFromFpga->data & DigDspMuxC1ElecModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecModuloRString,
@@ -4920,8 +4453,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ElecPhaseStepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ElecPhaseStepR,
-				(pFromFpga->data & DigDspMuxC1ElecPhaseStepMask));
+				(pFromFpga->data & DigDspMuxC1ElecPhaseStepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ElecPhaseStepRString,
@@ -4929,8 +4463,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1ComprSatCtlRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1ComprSatCtlR,
-				(pFromFpga->data & DigDspMuxC1ComprSatCtlMask));
+				(pFromFpga->data & DigDspMuxC1ComprSatCtlMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1ComprSatCtlRString,
@@ -4938,8 +4473,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1PrngIvaRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1PrngIvaR,
-				(pFromFpga->data & DigDspMuxC1PrngIvaMask));
+				(pFromFpga->data & DigDspMuxC1PrngIvaMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1PrngIvaRString,
@@ -4947,8 +4483,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1PrngIvbRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1PrngIvbR,
-				(pFromFpga->data & DigDspMuxC1PrngIvbMask));
+				(pFromFpga->data & DigDspMuxC1PrngIvbMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1PrngIvbRString,
@@ -4956,8 +4493,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxC1PrngRandomRunRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxC1PrngRandomRunR,
-				(pFromFpga->data & DigDspMuxC1PrngRandomRunMask));
+				(pFromFpga->data & DigDspMuxC1PrngRandomRunMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxC1PrngRandomRunRString,
@@ -4965,8 +4503,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxDacIqPhaseRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxDacIqPhaseR,
-				(pFromFpga->data & DigDspMuxDacIqPhaseMask));
+				(pFromFpga->data & DigDspMuxDacIqPhaseMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxDacIqPhaseRString,
@@ -4974,8 +4513,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspChanKeepRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspChanKeepR,
-				(pFromFpga->data & DigDspMuxShell0DspChanKeepMask));
+
+		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell0DspChanKeepR,
+				(pFromFpga->data & DigDspMuxShell0DspChanKeepMask) , DigDspMuxShell0DspChanKeepMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspChanKeepRString,
@@ -4983,8 +4523,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0FdbkCoreCoarseScaleRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreCoarseScaleR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreCoarseScaleMask));
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreCoarseScaleMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0FdbkCoreCoarseScaleRString,
@@ -4992,9 +4533,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0FdbkCoreMpProcPhOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcPhOffsetMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcPhOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcPhOffsetR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcPhOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcPhOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0FdbkCoreMpProcPhOffsetRString,
@@ -5002,8 +4544,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0FdbkCoreMpProcSelEnRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSelEnR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSelEnMask));
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSelEnMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0FdbkCoreMpProcSelEnRString,
@@ -5011,9 +4554,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0FdbkCoreMpProcSelThreshRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcSelThreshMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcSelThreshMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSelThreshR,
-				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSelThreshMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSelThreshMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0FdbkCoreMpProcSelThreshRString,
@@ -5021,8 +4565,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspModuloR,
-				(pFromFpga->data & DigDspMuxShell0DspModuloMask));
+				(pFromFpga->data & DigDspMuxShell0DspModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspModuloRString,
@@ -5030,8 +4575,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspPhaseStepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspPhaseStepR,
-				(pFromFpga->data & DigDspMuxShell0DspPhaseStepMask));
+				(pFromFpga->data & DigDspMuxShell0DspPhaseStepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspPhaseStepRString,
@@ -5039,8 +4585,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspPiezoPiezoDcRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspPiezoPiezoDcR,
-				(pFromFpga->data & DigDspMuxShell0DspPiezoPiezoDcMask));
+				(pFromFpga->data & DigDspMuxShell0DspPiezoPiezoDcMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspPiezoPiezoDcRString,
@@ -5048,8 +4595,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspTagRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspTagR,
-				(pFromFpga->data & DigDspMuxShell0DspTagMask));
+				(pFromFpga->data & DigDspMuxShell0DspTagMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspTagRString,
@@ -5057,8 +4605,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspUseFiberIqRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspUseFiberIqR,
-				(pFromFpga->data & DigDspMuxShell0DspUseFiberIqMask));
+				(pFromFpga->data & DigDspMuxShell0DspUseFiberIqMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspUseFiberIqRString,
@@ -5066,8 +4615,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspWaveSampPerRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspWaveSampPerR,
-				(pFromFpga->data & DigDspMuxShell0DspWaveSampPerMask));
+				(pFromFpga->data & DigDspMuxShell0DspWaveSampPerMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspWaveSampPerRString,
@@ -5075,8 +4625,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell0DspWaveShiftRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell0DspWaveShiftR,
-				(pFromFpga->data & DigDspMuxShell0DspWaveShiftMask));
+				(pFromFpga->data & DigDspMuxShell0DspWaveShiftMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell0DspWaveShiftRString,
@@ -5084,8 +4635,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspChanKeepRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspChanKeepR,
-				(pFromFpga->data & DigDspMuxShell1DspChanKeepMask));
+
+		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell1DspChanKeepR,
+				(pFromFpga->data & DigDspMuxShell1DspChanKeepMask) , DigDspMuxShell1DspChanKeepMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspChanKeepRString,
@@ -5093,8 +4645,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1FdbkCoreCoarseScaleRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreCoarseScaleR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreCoarseScaleMask));
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreCoarseScaleMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1FdbkCoreCoarseScaleRString,
@@ -5102,9 +4655,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1FdbkCoreMpProcPhOffsetRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcPhOffsetMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcPhOffsetMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcPhOffsetR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcPhOffsetMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcPhOffsetMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1FdbkCoreMpProcPhOffsetRString,
@@ -5112,8 +4666,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1FdbkCoreMpProcSelEnRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSelEnR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSelEnMask));
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSelEnMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1FdbkCoreMpProcSelEnRString,
@@ -5121,9 +4676,10 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1FdbkCoreMpProcSelThreshRAdr|flagReadMask:
+
 		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcSelThreshMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcSelThreshMask : 0;
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSelThreshR,
-				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSelThreshMask) | signExtBits);
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSelThreshMask) | signExtBits );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1FdbkCoreMpProcSelThreshRString,
@@ -5131,8 +4687,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspModuloRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspModuloR,
-				(pFromFpga->data & DigDspMuxShell1DspModuloMask));
+				(pFromFpga->data & DigDspMuxShell1DspModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspModuloRString,
@@ -5140,8 +4697,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspPhaseStepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspPhaseStepR,
-				(pFromFpga->data & DigDspMuxShell1DspPhaseStepMask));
+				(pFromFpga->data & DigDspMuxShell1DspPhaseStepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspPhaseStepRString,
@@ -5149,8 +4707,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspPiezoPiezoDcRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspPiezoPiezoDcR,
-				(pFromFpga->data & DigDspMuxShell1DspPiezoPiezoDcMask));
+				(pFromFpga->data & DigDspMuxShell1DspPiezoPiezoDcMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspPiezoPiezoDcRString,
@@ -5158,8 +4717,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspTagRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspTagR,
-				(pFromFpga->data & DigDspMuxShell1DspTagMask));
+				(pFromFpga->data & DigDspMuxShell1DspTagMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspTagRString,
@@ -5167,8 +4727,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspUseFiberIqRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspUseFiberIqR,
-				(pFromFpga->data & DigDspMuxShell1DspUseFiberIqMask));
+				(pFromFpga->data & DigDspMuxShell1DspUseFiberIqMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspUseFiberIqRString,
@@ -5176,8 +4737,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspWaveSampPerRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspWaveSampPerR,
-				(pFromFpga->data & DigDspMuxShell1DspWaveSampPerMask));
+				(pFromFpga->data & DigDspMuxShell1DspWaveSampPerMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspWaveSampPerRString,
@@ -5185,8 +4747,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspMuxShell1DspWaveShiftRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspMuxShell1DspWaveShiftR,
-				(pFromFpga->data & DigDspMuxShell1DspWaveShiftMask));
+				(pFromFpga->data & DigDspMuxShell1DspWaveShiftMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspMuxShell1DspWaveShiftRString,
@@ -5194,8 +4757,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspRewindRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspRewindR,
-				(pFromFpga->data & DigDspRewindMask));
+				(pFromFpga->data & DigDspRewindMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspRewindRString,
@@ -5203,8 +4767,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspSsaStimAmpstepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspSsaStimAmpstepR,
-				(pFromFpga->data & DigDspSsaStimAmpstepMask));
+				(pFromFpga->data & DigDspSsaStimAmpstepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspSsaStimAmpstepRString,
@@ -5212,8 +4777,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspSsaStimEnRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspSsaStimEnR,
-				(pFromFpga->data & DigDspSsaStimEnMask));
+				(pFromFpga->data & DigDspSsaStimEnMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspSsaStimEnRString,
@@ -5221,8 +4787,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspSsaStimGPeriodRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspSsaStimGPeriodR,
-				(pFromFpga->data & DigDspSsaStimGPeriodMask));
+				(pFromFpga->data & DigDspSsaStimGPeriodMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspSsaStimGPeriodRString,
@@ -5230,8 +4797,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspSsaStimPertstepRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspSsaStimPertstepR,
-				(pFromFpga->data & DigDspSsaStimPertstepMask));
+				(pFromFpga->data & DigDspSsaStimPertstepMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspSsaStimPertstepRString,
@@ -5239,8 +4807,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspTraceKeepRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_DigDspTraceKeepR,
-				(pFromFpga->data & DigDspTraceKeepMask));
+
+		status = (asynStatus) setUIntDigitalParam(p_DigDspTraceKeepR,
+				(pFromFpga->data & DigDspTraceKeepMask) , DigDspTraceKeepMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspTraceKeepRString,
@@ -5248,8 +4817,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspTraceResetWeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspTraceResetWeR,
-				(pFromFpga->data & DigDspTraceResetWeMask));
+				(pFromFpga->data & DigDspTraceResetWeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspTraceResetWeRString,
@@ -5257,8 +4827,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspTrigInternalRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspTrigInternalR,
-				(pFromFpga->data & DigDspTrigInternalMask));
+				(pFromFpga->data & DigDspTrigInternalMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspTrigInternalRString,
@@ -5266,8 +4837,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspTrigModeRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspTrigModeR,
-				(pFromFpga->data & DigDspTrigModeMask));
+				(pFromFpga->data & DigDspTrigModeMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspTrigModeRString,
@@ -5275,8 +4847,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspWave0SrcRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspWave0SrcR,
-				(pFromFpga->data & DigDspWave0SrcMask));
+				(pFromFpga->data & DigDspWave0SrcMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspWave0SrcRString,
@@ -5284,8 +4857,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DigDspWave1SrcRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DigDspWave1SrcR,
-				(pFromFpga->data & DigDspWave1SrcMask));
+				(pFromFpga->data & DigDspWave1SrcMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DigDspWave1SrcRString,
@@ -5293,8 +4867,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case DomainJumpRealignRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_DomainJumpRealignR,
-				(pFromFpga->data & DomainJumpRealignMask));
+				(pFromFpga->data & DomainJumpRealignMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DomainJumpRealignRString,
@@ -5302,8 +4877,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case IccCfgRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_IccCfgR,
-				(pFromFpga->data & IccCfgMask));
+				(pFromFpga->data & IccCfgMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				IccCfgRString,
@@ -5311,8 +4887,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case QsfpI2CRegRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_QsfpI2CRegR,
-				(pFromFpga->data & QsfpI2CRegMask));
+				(pFromFpga->data & QsfpI2CRegMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				QsfpI2CRegRString,
@@ -5320,8 +4897,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case SfpAddressSetRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_SfpAddressSetR,
-				(pFromFpga->data & SfpAddressSetMask));
+				(pFromFpga->data & SfpAddressSetMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SfpAddressSetRString,
@@ -5329,8 +4907,9 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case TagNowRAdr|flagReadMask:
+
 		status = (asynStatus) setIntegerParam(p_TagNowR,
-				(pFromFpga->data & TagNowMask));
+				(pFromFpga->data & TagNowMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TagNowRString,
@@ -5338,8 +4917,437 @@ asynStatus scllrfPRCDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 		break;
 
 	default:
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, ++errorCount);
+		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+		if ((pFromFpga->addr >= (IdelayBaseRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((IdelayBaseRAdr|flagReadMask) + 16)))
+		{
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (IdelayBaseRAdr|flagReadMask)),
+				p_IdelayBaseR,
+				(pFromFpga->data & IdelayBaseMask));
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				IdelayBaseRString,
+				(unsigned ) pFromFpga->data & IdelayBaseMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0DspPiezoSfConstsRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0DspPiezoSfConstsRAdr|flagReadMask) + 8)))
+		{
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0DspPiezoSfConstsRAdr|flagReadMask)),
+				p_DigDspMuxShell0DspPiezoSfConstsR,
+				(pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask));
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspPiezoSfConstsRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1DspPiezoSfConstsRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1DspPiezoSfConstsRAdr|flagReadMask) + 8)))
+		{
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1DspPiezoSfConstsRAdr|flagReadMask)),
+				p_DigDspMuxShell1DspPiezoSfConstsR,
+				(pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask));
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspPiezoSfConstsRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0FdbkCoreMpProcCoeffRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0FdbkCoreMpProcCoeffRAdr|flagReadMask) + 4)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcCoeffMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcCoeffMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0FdbkCoreMpProcCoeffRAdr|flagReadMask)),
+				p_DigDspMuxShell0FdbkCoreMpProcCoeffR,
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0FdbkCoreMpProcCoeffRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0FdbkCoreMpProcLimRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0FdbkCoreMpProcLimRAdr|flagReadMask) + 4)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcLimMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcLimMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0FdbkCoreMpProcLimRAdr|flagReadMask)),
+				p_DigDspMuxShell0FdbkCoreMpProcLimR,
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0FdbkCoreMpProcLimRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0FdbkCoreMpProcSetmpRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0FdbkCoreMpProcSetmpRAdr|flagReadMask) + 4)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0FdbkCoreMpProcSetmpMask + 1 ) >> 1))? ~DigDspMuxShell0FdbkCoreMpProcSetmpMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0FdbkCoreMpProcSetmpRAdr|flagReadMask)),
+				p_DigDspMuxShell0FdbkCoreMpProcSetmpR,
+				(pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0FdbkCoreMpProcSetmpRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1FdbkCoreMpProcCoeffRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1FdbkCoreMpProcCoeffRAdr|flagReadMask) + 4)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcCoeffMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcCoeffMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1FdbkCoreMpProcCoeffRAdr|flagReadMask)),
+				p_DigDspMuxShell1FdbkCoreMpProcCoeffR,
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1FdbkCoreMpProcCoeffRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1FdbkCoreMpProcLimRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1FdbkCoreMpProcLimRAdr|flagReadMask) + 4)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcLimMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcLimMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1FdbkCoreMpProcLimRAdr|flagReadMask)),
+				p_DigDspMuxShell1FdbkCoreMpProcLimR,
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1FdbkCoreMpProcLimRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1FdbkCoreMpProcSetmpRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1FdbkCoreMpProcSetmpRAdr|flagReadMask) + 4)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1FdbkCoreMpProcSetmpMask + 1 ) >> 1))? ~DigDspMuxShell1FdbkCoreMpProcSetmpMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1FdbkCoreMpProcSetmpRAdr|flagReadMask)),
+				p_DigDspMuxShell1FdbkCoreMpProcSetmpR,
+				(pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1FdbkCoreMpProcSetmpRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecDriveCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecDriveCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDriveCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecDriveCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecDriveCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecDriveCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecDriveCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecDriveCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecDriveCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecDriveCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecDriveCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecDriveCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecDriveCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecDriveCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecM0OutCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecM0OutCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0OutCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecM0OutCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecM0OutCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecM0OutCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecM0OutCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecM0OutCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecM1OutCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecM1OutCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1OutCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecM1OutCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecM1OutCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecM1OutCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecM1OutCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecM1OutCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecM2OutCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecM2OutCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2OutCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecM2OutCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecM2OutCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecM2OutCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC0ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC0ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC0ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC0ElecM2OutCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecDriveCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecDriveCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDriveCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecDriveCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecDriveCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecDriveCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecDriveCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecDriveCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecDriveCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecDriveCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecDriveCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecDriveCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecDriveCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecDriveCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecM0OutCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecM0OutCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0OutCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecM0OutCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecM0OutCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecM0OutCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecM0OutCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecM0OutCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecM0OutCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecM1OutCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecM1OutCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1OutCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecM1OutCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecM1OutCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecM1OutCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecM1OutCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecM1OutCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecM1OutCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecM2OutCplOutCouplingRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecM2OutCplOutCouplingRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2OutCplOutCouplingMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2OutCplOutCouplingMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecM2OutCplOutCouplingRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecM2OutCplOutCouplingR,
+				(pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecM2OutCplOutCouplingRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxC1ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxC1ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask + 1 ) >> 1))? ~DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxC1ElecM2OutCplOutPhaseOffsetRAdr|flagReadMask)),
+				p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetR,
+				(pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxC1ElecM2OutCplOutPhaseOffsetRString,
+				(unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0DspLpNotchLp1AKxRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0DspLpNotchLp1AKxRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1AKxMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1AKxMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0DspLpNotchLp1AKxRAdr|flagReadMask)),
+				p_DigDspMuxShell0DspLpNotchLp1AKxR,
+				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspLpNotchLp1AKxRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0DspLpNotchLp1AKyRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0DspLpNotchLp1AKyRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1AKyMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1AKyMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0DspLpNotchLp1AKyRAdr|flagReadMask)),
+				p_DigDspMuxShell0DspLpNotchLp1AKyR,
+				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspLpNotchLp1AKyRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0DspLpNotchLp1BKxRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0DspLpNotchLp1BKxRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1BKxMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1BKxMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0DspLpNotchLp1BKxRAdr|flagReadMask)),
+				p_DigDspMuxShell0DspLpNotchLp1BKxR,
+				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspLpNotchLp1BKxRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell0DspLpNotchLp1BKyRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell0DspLpNotchLp1BKyRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell0DspLpNotchLp1BKyMask + 1 ) >> 1))? ~DigDspMuxShell0DspLpNotchLp1BKyMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell0DspLpNotchLp1BKyRAdr|flagReadMask)),
+				p_DigDspMuxShell0DspLpNotchLp1BKyR,
+				(pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspLpNotchLp1BKyRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1DspLpNotchLp1AKxRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1DspLpNotchLp1AKxRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1AKxMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1AKxMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1DspLpNotchLp1AKxRAdr|flagReadMask)),
+				p_DigDspMuxShell1DspLpNotchLp1AKxR,
+				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspLpNotchLp1AKxRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1DspLpNotchLp1AKyRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1DspLpNotchLp1AKyRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1AKyMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1AKyMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1DspLpNotchLp1AKyRAdr|flagReadMask)),
+				p_DigDspMuxShell1DspLpNotchLp1AKyR,
+				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspLpNotchLp1AKyRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1DspLpNotchLp1BKxRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1DspLpNotchLp1BKxRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1BKxMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1BKxMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1DspLpNotchLp1BKxRAdr|flagReadMask)),
+				p_DigDspMuxShell1DspLpNotchLp1BKxR,
+				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspLpNotchLp1BKxRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask);
+		}
+		else
+		if ((pFromFpga->addr >= (DigDspMuxShell1DspLpNotchLp1BKyRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((DigDspMuxShell1DspLpNotchLp1BKyRAdr|flagReadMask) + 2)))
+		{
+		signExtBits = (pFromFpga->data & ((DigDspMuxShell1DspLpNotchLp1BKyMask + 1 ) >> 1))? ~DigDspMuxShell1DspLpNotchLp1BKyMask : 0;
+		status = (asynStatus) setIntegerParam((pFromFpga->addr - (DigDspMuxShell1DspLpNotchLp1BKyRAdr|flagReadMask)),
+				p_DigDspMuxShell1DspLpNotchLp1BKyR,
+				(pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask) | signExtBits);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspLpNotchLp1BKyRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask);
+		}
+		else
+		{
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
 
 		status = asynError;
 		break;
@@ -5362,6 +5370,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+	epicsUInt32 uValueSet[maxMsgSize/sizeof(FpgaReg)];
 	epicsInt32 errorCount;
 //  variables that may be useful for checking array data
 //	asynUser *pAsynArrayUser;
@@ -5370,908 +5379,8 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
-    case DigDspMuxCav4MechNoiseCoupleKOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechNoiseCoupleKOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxCav4MechNoiseCoupleKOutMask) == (pFromFpga->data & DigDspMuxCav4MechNoiseCoupleKOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxCav4MechNoiseCoupleKOutWString, (unsigned ) pFromFpga->data & DigDspMuxCav4MechNoiseCoupleKOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxCav4MechNoiseCoupleKOutWString, valueSet[0] & DigDspMuxCav4MechNoiseCoupleKOutMask, (unsigned ) pFromFpga->data & DigDspMuxCav4MechNoiseCoupleKOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxCav4MechNoiseCoupleKOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxCav4MechResonatorPropConstWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechResonatorPropConstW, valueSet);
-		if( (valueSet[0] & DigDspMuxCav4MechResonatorPropConstMask) == (pFromFpga->data & DigDspMuxCav4MechResonatorPropConstMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxCav4MechResonatorPropConstWString, (unsigned ) pFromFpga->data & DigDspMuxCav4MechResonatorPropConstMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxCav4MechResonatorPropConstWString, valueSet[0] & DigDspMuxCav4MechResonatorPropConstMask, (unsigned ) pFromFpga->data & DigDspMuxCav4MechResonatorPropConstMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxCav4MechResonatorPropConstW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecDot0KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecDot0KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecDot0KOutMask) == (pFromFpga->data & DigDspMuxC0ElecDot0KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot0KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDot0KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot0KOutWString, valueSet[0] & DigDspMuxC0ElecDot0KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDot0KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecDot0KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecDot1KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecDot1KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecDot1KOutMask) == (pFromFpga->data & DigDspMuxC0ElecDot1KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot1KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDot1KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot1KOutWString, valueSet[0] & DigDspMuxC0ElecDot1KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDot1KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecDot1KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecDot2KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecDot2KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecDot2KOutMask) == (pFromFpga->data & DigDspMuxC0ElecDot2KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot2KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDot2KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDot2KOutWString, valueSet[0] & DigDspMuxC0ElecDot2KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDot2KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecDot2KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecOuterProd0KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecOuterProd0KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecOuterProd0KOutMask) == (pFromFpga->data & DigDspMuxC0ElecOuterProd0KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd0KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd0KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd0KOutWString, valueSet[0] & DigDspMuxC0ElecOuterProd0KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd0KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecOuterProd0KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecOuterProd1KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecOuterProd1KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecOuterProd1KOutMask) == (pFromFpga->data & DigDspMuxC0ElecOuterProd1KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd1KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd1KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd1KOutWString, valueSet[0] & DigDspMuxC0ElecOuterProd1KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd1KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecOuterProd1KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecOuterProd2KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecOuterProd2KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecOuterProd2KOutMask) == (pFromFpga->data & DigDspMuxC0ElecOuterProd2KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd2KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd2KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecOuterProd2KOutWString, valueSet[0] & DigDspMuxC0ElecOuterProd2KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecOuterProd2KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecOuterProd2KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0PiezoCoupleKOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PiezoCoupleKOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0PiezoCoupleKOutMask) == (pFromFpga->data & DigDspMuxC0PiezoCoupleKOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0PiezoCoupleKOutWString, (unsigned ) pFromFpga->data & DigDspMuxC0PiezoCoupleKOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0PiezoCoupleKOutWString, valueSet[0] & DigDspMuxC0PiezoCoupleKOutMask, (unsigned ) pFromFpga->data & DigDspMuxC0PiezoCoupleKOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0PiezoCoupleKOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecDot0KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecDot0KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecDot0KOutMask) == (pFromFpga->data & DigDspMuxC1ElecDot0KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot0KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDot0KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot0KOutWString, valueSet[0] & DigDspMuxC1ElecDot0KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDot0KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecDot0KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecDot1KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecDot1KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecDot1KOutMask) == (pFromFpga->data & DigDspMuxC1ElecDot1KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot1KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDot1KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot1KOutWString, valueSet[0] & DigDspMuxC1ElecDot1KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDot1KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecDot1KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecDot2KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecDot2KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecDot2KOutMask) == (pFromFpga->data & DigDspMuxC1ElecDot2KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot2KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDot2KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDot2KOutWString, valueSet[0] & DigDspMuxC1ElecDot2KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDot2KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecDot2KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecOuterProd0KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecOuterProd0KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecOuterProd0KOutMask) == (pFromFpga->data & DigDspMuxC1ElecOuterProd0KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd0KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd0KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd0KOutWString, valueSet[0] & DigDspMuxC1ElecOuterProd0KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd0KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecOuterProd0KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecOuterProd1KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecOuterProd1KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecOuterProd1KOutMask) == (pFromFpga->data & DigDspMuxC1ElecOuterProd1KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd1KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd1KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd1KOutWString, valueSet[0] & DigDspMuxC1ElecOuterProd1KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd1KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecOuterProd1KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecOuterProd2KOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecOuterProd2KOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecOuterProd2KOutMask) == (pFromFpga->data & DigDspMuxC1ElecOuterProd2KOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd2KOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd2KOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecOuterProd2KOutWString, valueSet[0] & DigDspMuxC1ElecOuterProd2KOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecOuterProd2KOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecOuterProd2KOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1PiezoCoupleKOutWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PiezoCoupleKOutW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1PiezoCoupleKOutMask) == (pFromFpga->data & DigDspMuxC1PiezoCoupleKOutMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1PiezoCoupleKOutWString, (unsigned ) pFromFpga->data & DigDspMuxC1PiezoCoupleKOutMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1PiezoCoupleKOutWString, valueSet[0] & DigDspMuxC1PiezoCoupleKOutMask, (unsigned ) pFromFpga->data & DigDspMuxC1PiezoCoupleKOutMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1PiezoCoupleKOutW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case Tgen0DelayPcXxxWAdr:
-		status = (asynStatus) getIntegerParam(p_Tgen0DelayPcXxxW, valueSet);
-		if( (valueSet[0] & Tgen0DelayPcXxxMask) == (pFromFpga->data & Tgen0DelayPcXxxMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Tgen0DelayPcXxxWString, (unsigned ) pFromFpga->data & Tgen0DelayPcXxxMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				Tgen0DelayPcXxxWString, valueSet[0] & Tgen0DelayPcXxxMask, (unsigned ) pFromFpga->data & Tgen0DelayPcXxxMask);
-			status = asynError;
-			setParamStatus(p_Tgen0DelayPcXxxW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case Tgen1DelayPcXxxWAdr:
-		status = (asynStatus) getIntegerParam(p_Tgen1DelayPcXxxW, valueSet);
-		if( (valueSet[0] & Tgen1DelayPcXxxMask) == (pFromFpga->data & Tgen1DelayPcXxxMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Tgen1DelayPcXxxWString, (unsigned ) pFromFpga->data & Tgen1DelayPcXxxMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				Tgen1DelayPcXxxWString, valueSet[0] & Tgen1DelayPcXxxMask, (unsigned ) pFromFpga->data & Tgen1DelayPcXxxMask);
-			status = asynError;
-			setParamStatus(p_Tgen1DelayPcXxxW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0DspPiezoSfConstsWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspPiezoSfConstsW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0DspPiezoSfConstsMask) == (pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspPiezoSfConstsWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspPiezoSfConstsWString, valueSet[0] & DigDspMuxShell0DspPiezoSfConstsMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspPiezoSfConstsMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0DspPiezoSfConstsW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1DspPiezoSfConstsWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspPiezoSfConstsW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1DspPiezoSfConstsMask) == (pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspPiezoSfConstsWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspPiezoSfConstsWString, valueSet[0] & DigDspMuxShell1DspPiezoSfConstsMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspPiezoSfConstsMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1DspPiezoSfConstsW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0FdbkCoreMpProcCoeffWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcCoeffW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0FdbkCoreMpProcCoeffMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcCoeffWString, (unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcCoeffWString, valueSet[0] & DigDspMuxShell0FdbkCoreMpProcCoeffMask, (unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcCoeffMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0FdbkCoreMpProcCoeffW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0FdbkCoreMpProcLimWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcLimW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0FdbkCoreMpProcLimMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcLimWString, (unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcLimWString, valueSet[0] & DigDspMuxShell0FdbkCoreMpProcLimMask, (unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcLimMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0FdbkCoreMpProcLimW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0FdbkCoreMpProcSetmpWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSetmpW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0FdbkCoreMpProcSetmpMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcSetmpWString, (unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0FdbkCoreMpProcSetmpWString, valueSet[0] & DigDspMuxShell0FdbkCoreMpProcSetmpMask, (unsigned ) pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSetmpMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0FdbkCoreMpProcSetmpW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1FdbkCoreMpProcCoeffWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcCoeffW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1FdbkCoreMpProcCoeffMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcCoeffWString, (unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcCoeffWString, valueSet[0] & DigDspMuxShell1FdbkCoreMpProcCoeffMask, (unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcCoeffMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1FdbkCoreMpProcCoeffW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1FdbkCoreMpProcLimWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcLimW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1FdbkCoreMpProcLimMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcLimWString, (unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcLimWString, valueSet[0] & DigDspMuxShell1FdbkCoreMpProcLimMask, (unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcLimMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1FdbkCoreMpProcLimW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1FdbkCoreMpProcSetmpWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSetmpW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1FdbkCoreMpProcSetmpMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcSetmpWString, (unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1FdbkCoreMpProcSetmpWString, valueSet[0] & DigDspMuxShell1FdbkCoreMpProcSetmpMask, (unsigned ) pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSetmpMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1FdbkCoreMpProcSetmpW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecDriveCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecDriveCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecDriveCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDriveCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDriveCplOutCouplingWString, valueSet[0] & DigDspMuxC0ElecDriveCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecDriveCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecDriveCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecDriveCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDriveCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecDriveCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecDriveCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecDriveCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecM0OutCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0OutCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecM0OutCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM0OutCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM0OutCplOutCouplingWString, valueSet[0] & DigDspMuxC0ElecM0OutCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecM0OutCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecM0OutCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0OutCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM0OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM0OutCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM0OutCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecM0OutCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecM1OutCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1OutCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecM1OutCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM1OutCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM1OutCplOutCouplingWString, valueSet[0] & DigDspMuxC0ElecM1OutCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecM1OutCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecM1OutCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1OutCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM1OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM1OutCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM1OutCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecM1OutCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecM2OutCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2OutCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecM2OutCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM2OutCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM2OutCplOutCouplingWString, valueSet[0] & DigDspMuxC0ElecM2OutCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecM2OutCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC0ElecM2OutCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM2OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC0ElecM2OutCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC0ElecM2OutCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecDriveCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecDriveCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecDriveCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDriveCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDriveCplOutCouplingWString, valueSet[0] & DigDspMuxC1ElecDriveCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecDriveCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecDriveCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecDriveCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDriveCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecDriveCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecDriveCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecDriveCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecM0OutCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0OutCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecM0OutCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM0OutCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM0OutCplOutCouplingWString, valueSet[0] & DigDspMuxC1ElecM0OutCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecM0OutCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecM0OutCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0OutCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM0OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM0OutCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM0OutCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecM0OutCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecM1OutCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1OutCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecM1OutCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM1OutCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM1OutCplOutCouplingWString, valueSet[0] & DigDspMuxC1ElecM1OutCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecM1OutCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecM1OutCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1OutCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM1OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM1OutCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM1OutCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecM1OutCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecM2OutCplOutCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2OutCplOutCouplingW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecM2OutCplOutCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM2OutCplOutCouplingWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM2OutCplOutCouplingWString, valueSet[0] & DigDspMuxC1ElecM2OutCplOutCouplingMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutCouplingMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecM2OutCplOutCouplingW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxC1ElecM2OutCplOutPhaseOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetW, valueSet);
-		if( (valueSet[0] & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask) == (pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM2OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxC1ElecM2OutCplOutPhaseOffsetWString, valueSet[0] & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask, (unsigned ) pFromFpga->data & DigDspMuxC1ElecM2OutCplOutPhaseOffsetMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0DspLpNotchLp1AKxWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspLpNotchLp1AKxW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0DspLpNotchLp1AKxMask) == (pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1AKxWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1AKxWString, valueSet[0] & DigDspMuxShell0DspLpNotchLp1AKxMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKxMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0DspLpNotchLp1AKxW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0DspLpNotchLp1AKyWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspLpNotchLp1AKyW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0DspLpNotchLp1AKyMask) == (pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1AKyWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1AKyWString, valueSet[0] & DigDspMuxShell0DspLpNotchLp1AKyMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1AKyMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0DspLpNotchLp1AKyW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0DspLpNotchLp1BKxWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspLpNotchLp1BKxW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0DspLpNotchLp1BKxMask) == (pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1BKxWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1BKxWString, valueSet[0] & DigDspMuxShell0DspLpNotchLp1BKxMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKxMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0DspLpNotchLp1BKxW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell0DspLpNotchLp1BKyWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspLpNotchLp1BKyW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell0DspLpNotchLp1BKyMask) == (pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1BKyWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspLpNotchLp1BKyWString, valueSet[0] & DigDspMuxShell0DspLpNotchLp1BKyMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspLpNotchLp1BKyMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell0DspLpNotchLp1BKyW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1DspLpNotchLp1AKxWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspLpNotchLp1AKxW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1DspLpNotchLp1AKxMask) == (pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1AKxWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1AKxWString, valueSet[0] & DigDspMuxShell1DspLpNotchLp1AKxMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKxMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1DspLpNotchLp1AKxW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1DspLpNotchLp1AKyWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspLpNotchLp1AKyW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1DspLpNotchLp1AKyMask) == (pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1AKyWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1AKyWString, valueSet[0] & DigDspMuxShell1DspLpNotchLp1AKyMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1AKyMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1DspLpNotchLp1AKyW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1DspLpNotchLp1BKxWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspLpNotchLp1BKxW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1DspLpNotchLp1BKxMask) == (pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1BKxWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1BKxWString, valueSet[0] & DigDspMuxShell1DspLpNotchLp1BKxMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKxMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1DspLpNotchLp1BKxW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
-    case DigDspMuxShell1DspLpNotchLp1BKyWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspLpNotchLp1BKyW, valueSet);
-		if( (valueSet[0] & DigDspMuxShell1DspLpNotchLp1BKyMask) == (pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1BKyWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspLpNotchLp1BKyWString, valueSet[0] & DigDspMuxShell1DspLpNotchLp1BKyMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspLpNotchLp1BKyMask);
-			status = asynError;
-			setParamStatus(p_DigDspMuxShell1DspLpNotchLp1BKyW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
-
-		break;
     case AdcMmcmWAdr:
-		status = (asynStatus) getIntegerParam(p_AdcMmcmW, valueSet);
+		status = (asynStatus) getIntegerParam(p_AdcMmcmW, valueSet );
 		if( (valueSet[0] & AdcMmcmMask) == (pFromFpga->data & AdcMmcmMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6289,7 +5398,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU15SpiDataAddrRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU15SpiDataAddrRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU15SpiDataAddrRW, valueSet );
 		if( (valueSet[0] & DigConfigU15SpiDataAddrRMask) == (pFromFpga->data & DigConfigU15SpiDataAddrRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6307,7 +5416,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU15SpiReadAndStartRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU15SpiReadAndStartRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU15SpiReadAndStartRW, valueSet );
 		if( (valueSet[0] & DigConfigU15SpiReadAndStartRMask) == (pFromFpga->data & DigConfigU15SpiReadAndStartRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6325,7 +5434,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU18SpiDataAddrRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU18SpiDataAddrRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU18SpiDataAddrRW, valueSet );
 		if( (valueSet[0] & DigConfigU18SpiDataAddrRMask) == (pFromFpga->data & DigConfigU18SpiDataAddrRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6343,7 +5452,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU18SpiReadAndStartRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU18SpiReadAndStartRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU18SpiReadAndStartRW, valueSet );
 		if( (valueSet[0] & DigConfigU18SpiReadAndStartRMask) == (pFromFpga->data & DigConfigU18SpiReadAndStartRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6361,7 +5470,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU2ClkResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU2ClkResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU2ClkResetRW, valueSet );
 		if( (valueSet[0] & DigConfigU2ClkResetRMask) == (pFromFpga->data & DigConfigU2ClkResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6379,7 +5488,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU2IserdesResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU2IserdesResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU2IserdesResetRW, valueSet );
 		if( (valueSet[0] & DigConfigU2IserdesResetRMask) == (pFromFpga->data & DigConfigU2IserdesResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6397,7 +5506,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU3ClkResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU3ClkResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU3ClkResetRW, valueSet );
 		if( (valueSet[0] & DigConfigU3ClkResetRMask) == (pFromFpga->data & DigConfigU3ClkResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6415,7 +5524,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU3IserdesResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU3IserdesResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU3IserdesResetRW, valueSet );
 		if( (valueSet[0] & DigConfigU3IserdesResetRMask) == (pFromFpga->data & DigConfigU3IserdesResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6433,7 +5542,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigU4ResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigU4ResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigU4ResetRW, valueSet );
 		if( (valueSet[0] & DigConfigU4ResetRMask) == (pFromFpga->data & DigConfigU4ResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6451,7 +5560,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigBanyanMaskWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigBanyanMaskW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigBanyanMaskW, valueSet );
 		if( (valueSet[0] & DigConfigBanyanMaskMask) == (pFromFpga->data & DigConfigBanyanMaskMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6469,7 +5578,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigBitslipWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigBitslipW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigBitslipW, valueSet );
 		if( (valueSet[0] & DigConfigBitslipMask) == (pFromFpga->data & DigConfigBitslipMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6487,7 +5596,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigClkStatusWeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigClkStatusWeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigClkStatusWeW, valueSet );
 		if( (valueSet[0] & DigConfigClkStatusWeMask) == (pFromFpga->data & DigConfigClkStatusWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6505,7 +5614,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigIdelayctrlResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigIdelayctrlResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigIdelayctrlResetRW, valueSet );
 		if( (valueSet[0] & DigConfigIdelayctrlResetRMask) == (pFromFpga->data & DigConfigIdelayctrlResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6523,7 +5632,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigLlspiWeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigLlspiWeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigLlspiWeW, valueSet );
 		if( (valueSet[0] & DigConfigLlspiWeMask) == (pFromFpga->data & DigConfigLlspiWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6541,7 +5650,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigMmcmResetRWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigMmcmResetRW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigMmcmResetRW, valueSet );
 		if( (valueSet[0] & DigConfigMmcmResetRMask) == (pFromFpga->data & DigConfigMmcmResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6559,7 +5668,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigPeriphConfigWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigPeriphConfigW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigPeriphConfigW, valueSet );
 		if( (valueSet[0] & DigConfigPeriphConfigMask) == (pFromFpga->data & DigConfigPeriphConfigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6577,7 +5686,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigPhasexTrigWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigPhasexTrigW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigPhasexTrigW, valueSet );
 		if( (valueSet[0] & DigConfigPhasexTrigMask) == (pFromFpga->data & DigConfigPhasexTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6595,7 +5704,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigRawadcTrigWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigRawadcTrigW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigRawadcTrigW, valueSet );
 		if( (valueSet[0] & DigConfigRawadcTrigMask) == (pFromFpga->data & DigConfigRawadcTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6613,7 +5722,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigScanTriggerWeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigScanTriggerWeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigScanTriggerWeW, valueSet );
 		if( (valueSet[0] & DigConfigScanTriggerWeMask) == (pFromFpga->data & DigConfigScanTriggerWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6631,7 +5740,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigScannerDebugWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigScannerDebugW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigScannerDebugW, valueSet );
 		if( (valueSet[0] & DigConfigScannerDebugMask) == (pFromFpga->data & DigConfigScannerDebugMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6649,7 +5758,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigSyncAd7794CsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigSyncAd7794CsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigSyncAd7794CsetW, valueSet );
 		if( (valueSet[0] & DigConfigSyncAd7794CsetMask) == (pFromFpga->data & DigConfigSyncAd7794CsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6667,7 +5776,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigConfigSyncTps62210CsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigConfigSyncTps62210CsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigConfigSyncTps62210CsetW, valueSet );
 		if( (valueSet[0] & DigConfigSyncTps62210CsetMask) == (pFromFpga->data & DigConfigSyncTps62210CsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6685,7 +5794,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspAdcTestModeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspAdcTestModeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspAdcTestModeW, valueSet );
 		if( (valueSet[0] & DigDspAdcTestModeMask) == (pFromFpga->data & DigDspAdcTestModeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6703,7 +5812,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspAdcTestResetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspAdcTestResetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspAdcTestResetW, valueSet );
 		if( (valueSet[0] & DigDspAdcTestResetMask) == (pFromFpga->data & DigDspAdcTestResetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6721,7 +5830,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspAmplitudeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspAmplitudeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspAmplitudeW, valueSet );
 		if( (valueSet[0] & DigDspAmplitudeMask) == (pFromFpga->data & DigDspAmplitudeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6739,7 +5848,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspAverageLenWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspAverageLenW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspAverageLenW, valueSet );
 		if( (valueSet[0] & DigDspAverageLenMask) == (pFromFpga->data & DigDspAverageLenMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6757,7 +5866,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspBufTrigWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspBufTrigW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspBufTrigW, valueSet );
 		if( (valueSet[0] & DigDspBufTrigMask) == (pFromFpga->data & DigDspBufTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6775,7 +5884,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspCicPeriodWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspCicPeriodW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspCicPeriodW, valueSet );
 		if( (valueSet[0] & DigDspCicPeriodMask) == (pFromFpga->data & DigDspCicPeriodMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6793,7 +5902,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspCicShiftWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspCicShiftW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspCicShiftW, valueSet );
 		if( (valueSet[0] & DigDspCicShiftMask) == (pFromFpga->data & DigDspCicShiftMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6811,7 +5920,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspCircleBufFlipWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspCircleBufFlipW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspCircleBufFlipW, valueSet );
 		if( (valueSet[0] & DigDspCircleBufFlipMask) == (pFromFpga->data & DigDspCircleBufFlipMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6829,7 +5938,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspDacDdsResetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspDacDdsResetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspDacDdsResetW, valueSet );
 		if( (valueSet[0] & DigDspDacDdsResetMask) == (pFromFpga->data & DigDspDacDdsResetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6847,7 +5956,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspDacModeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspDacModeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspDacModeW, valueSet );
 		if( (valueSet[0] & DigDspDacModeMask) == (pFromFpga->data & DigDspDacModeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6865,7 +5974,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspDdsaModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspDdsaModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspDdsaModuloW, valueSet );
 		if( (valueSet[0] & DigDspDdsaModuloMask) == (pFromFpga->data & DigDspDdsaModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6883,7 +5992,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspDdsaPhstepHWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspDdsaPhstepHW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspDdsaPhstepHW, valueSet );
 		if( (valueSet[0] & DigDspDdsaPhstepHMask) == (pFromFpga->data & DigDspDdsaPhstepHMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6901,7 +6010,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspDdsaPhstepLWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspDdsaPhstepLW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspDdsaPhstepLW, valueSet );
 		if( (valueSet[0] & DigDspDdsaPhstepLMask) == (pFromFpga->data & DigDspDdsaPhstepLMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6919,7 +6028,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspHistCountWStrobeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspHistCountWStrobeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspHistCountWStrobeW, valueSet );
 		if( (valueSet[0] & DigDspHistCountWStrobeMask) == (pFromFpga->data & DigDspHistCountWStrobeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6937,7 +6046,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspLlrfDspDacEnWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspLlrfDspDacEnW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspLlrfDspDacEnW, valueSet );
 		if( (valueSet[0] & DigDspLlrfDspDacEnMask) == (pFromFpga->data & DigDspLlrfDspDacEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6955,7 +6064,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspLoAmpWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspLoAmpW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspLoAmpW, valueSet );
 		if( (valueSet[0] & DigDspLoAmpMask) == (pFromFpga->data & DigDspLoAmpMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6973,7 +6082,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspModuloW, valueSet );
 		if( (valueSet[0] & DigDspModuloMask) == (pFromFpga->data & DigDspModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -6991,7 +6100,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspPhaseStepHWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepHW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepHW, valueSet );
 		if( (valueSet[0] & DigDspPhaseStepHMask) == (pFromFpga->data & DigDspPhaseStepHMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7009,7 +6118,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspPhaseStepLWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepLW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepLW, valueSet );
 		if( (valueSet[0] & DigDspPhaseStepLMask) == (pFromFpga->data & DigDspPhaseStepLMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7027,7 +6136,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspPrcDspCavSelWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPrcDspCavSelW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspPrcDspCavSelW, valueSet );
 		if( (valueSet[0] & DigDspPrcDspCavSelMask) == (pFromFpga->data & DigDspPrcDspCavSelMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7045,7 +6154,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspPrcDspPrlCfgWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPrcDspPrlCfgW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspPrcDspPrlCfgW, valueSet );
 		if( (valueSet[0] & DigDspPrcDspPrlCfgMask) == (pFromFpga->data & DigDspPrcDspPrlCfgMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7063,7 +6172,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspPrcDspPrlGainWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPrcDspPrlGainW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspPrcDspPrlGainW, valueSet );
 		if( (valueSet[0] & DigDspPrcDspPrlGainMask) == (pFromFpga->data & DigDspPrcDspPrlGainMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7081,7 +6190,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxBeam0ModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam0ModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam0ModuloW, valueSet );
 		if( (valueSet[0] & DigDspMuxBeam0ModuloMask) == (pFromFpga->data & DigDspMuxBeam0ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7099,7 +6208,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxBeam0PhaseInitWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam0PhaseInitW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam0PhaseInitW, valueSet );
 		if( (valueSet[0] & DigDspMuxBeam0PhaseInitMask) == (pFromFpga->data & DigDspMuxBeam0PhaseInitMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7117,7 +6226,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxBeam0PhaseStepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam0PhaseStepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam0PhaseStepW, valueSet );
 		if( (valueSet[0] & DigDspMuxBeam0PhaseStepMask) == (pFromFpga->data & DigDspMuxBeam0PhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7135,7 +6244,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxBeam1ModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam1ModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam1ModuloW, valueSet );
 		if( (valueSet[0] & DigDspMuxBeam1ModuloMask) == (pFromFpga->data & DigDspMuxBeam1ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7153,7 +6262,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxBeam1PhaseInitWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam1PhaseInitW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam1PhaseInitW, valueSet );
 		if( (valueSet[0] & DigDspMuxBeam1PhaseInitMask) == (pFromFpga->data & DigDspMuxBeam1PhaseInitMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7171,7 +6280,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxBeam1PhaseStepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam1PhaseStepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxBeam1PhaseStepW, valueSet );
 		if( (valueSet[0] & DigDspMuxBeam1PhaseStepMask) == (pFromFpga->data & DigDspMuxBeam1PhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7189,7 +6298,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxCav4MechPrngIvaWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechPrngIvaW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechPrngIvaW, valueSet );
 		if( (valueSet[0] & DigDspMuxCav4MechPrngIvaMask) == (pFromFpga->data & DigDspMuxCav4MechPrngIvaMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7207,7 +6316,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxCav4MechPrngIvbWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechPrngIvbW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechPrngIvbW, valueSet );
 		if( (valueSet[0] & DigDspMuxCav4MechPrngIvbMask) == (pFromFpga->data & DigDspMuxCav4MechPrngIvbMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7225,7 +6334,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxCav4MechPrngRandomRunWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechPrngRandomRunW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxCav4MechPrngRandomRunW, valueSet );
 		if( (valueSet[0] & DigDspMuxCav4MechPrngRandomRunMask) == (pFromFpga->data & DigDspMuxCav4MechPrngRandomRunMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7243,7 +6352,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ACavOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ACavOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ACavOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ACavOffsetMask) == (pFromFpga->data & DigDspMuxC0ACavOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7261,7 +6370,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0AForOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0AForOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0AForOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0AForOffsetMask) == (pFromFpga->data & DigDspMuxC0AForOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7279,7 +6388,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ARflOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ARflOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ARflOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ARflOffsetMask) == (pFromFpga->data & DigDspMuxC0ARflOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7297,7 +6406,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0AmpLpBwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0AmpLpBwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0AmpLpBwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0AmpLpBwMask) == (pFromFpga->data & DigDspMuxC0AmpLpBwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7315,7 +6424,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecFreq0CoarseFreqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecFreq0CoarseFreqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecFreq0CoarseFreqW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecFreq0CoarseFreqMask) == (pFromFpga->data & DigDspMuxC0ElecFreq0CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7333,7 +6442,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecFreq1CoarseFreqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecFreq1CoarseFreqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecFreq1CoarseFreqW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecFreq1CoarseFreqMask) == (pFromFpga->data & DigDspMuxC0ElecFreq1CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7351,7 +6460,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecFreq2CoarseFreqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecFreq2CoarseFreqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecFreq2CoarseFreqW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecFreq2CoarseFreqMask) == (pFromFpga->data & DigDspMuxC0ElecFreq2CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7369,7 +6478,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM0BeamCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0BeamCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0BeamCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM0BeamCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM0BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7387,7 +6496,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM0BwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0BwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0BwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM0BwMask) == (pFromFpga->data & DigDspMuxC0ElecM0BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7405,7 +6514,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM0DriveCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0DriveCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM0DriveCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM0DriveCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM0DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7423,7 +6532,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM1BeamCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1BeamCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1BeamCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM1BeamCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM1BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7441,7 +6550,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM1BwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1BwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1BwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM1BwMask) == (pFromFpga->data & DigDspMuxC0ElecM1BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7459,7 +6568,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM1DriveCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1DriveCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM1DriveCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM1DriveCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM1DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7477,7 +6586,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM2BeamCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2BeamCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2BeamCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM2BeamCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM2BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7495,7 +6604,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM2BwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2BwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2BwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM2BwMask) == (pFromFpga->data & DigDspMuxC0ElecM2BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7513,7 +6622,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecM2DriveCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2DriveCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecM2DriveCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecM2DriveCouplingMask) == (pFromFpga->data & DigDspMuxC0ElecM2DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7531,7 +6640,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecModuloW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecModuloMask) == (pFromFpga->data & DigDspMuxC0ElecModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7549,7 +6658,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ElecPhaseStepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecPhaseStepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ElecPhaseStepW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ElecPhaseStepMask) == (pFromFpga->data & DigDspMuxC0ElecPhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7567,7 +6676,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0ComprSatCtlWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ComprSatCtlW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0ComprSatCtlW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0ComprSatCtlMask) == (pFromFpga->data & DigDspMuxC0ComprSatCtlMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7585,7 +6694,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0PrngIvaWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PrngIvaW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PrngIvaW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0PrngIvaMask) == (pFromFpga->data & DigDspMuxC0PrngIvaMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7603,7 +6712,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0PrngIvbWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PrngIvbW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PrngIvbW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0PrngIvbMask) == (pFromFpga->data & DigDspMuxC0PrngIvbMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7621,7 +6730,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC0PrngRandomRunWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PrngRandomRunW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC0PrngRandomRunW, valueSet );
 		if( (valueSet[0] & DigDspMuxC0PrngRandomRunMask) == (pFromFpga->data & DigDspMuxC0PrngRandomRunMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7639,7 +6748,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ACavOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ACavOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ACavOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ACavOffsetMask) == (pFromFpga->data & DigDspMuxC1ACavOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7657,7 +6766,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1AForOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1AForOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1AForOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1AForOffsetMask) == (pFromFpga->data & DigDspMuxC1AForOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7675,7 +6784,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ARflOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ARflOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ARflOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ARflOffsetMask) == (pFromFpga->data & DigDspMuxC1ARflOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7693,7 +6802,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1AmpLpBwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1AmpLpBwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1AmpLpBwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1AmpLpBwMask) == (pFromFpga->data & DigDspMuxC1AmpLpBwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7711,7 +6820,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecFreq0CoarseFreqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecFreq0CoarseFreqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecFreq0CoarseFreqW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecFreq0CoarseFreqMask) == (pFromFpga->data & DigDspMuxC1ElecFreq0CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7729,7 +6838,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecFreq1CoarseFreqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecFreq1CoarseFreqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecFreq1CoarseFreqW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecFreq1CoarseFreqMask) == (pFromFpga->data & DigDspMuxC1ElecFreq1CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7747,7 +6856,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecFreq2CoarseFreqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecFreq2CoarseFreqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecFreq2CoarseFreqW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecFreq2CoarseFreqMask) == (pFromFpga->data & DigDspMuxC1ElecFreq2CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7765,7 +6874,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM0BeamCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0BeamCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0BeamCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM0BeamCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM0BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7783,7 +6892,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM0BwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0BwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0BwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM0BwMask) == (pFromFpga->data & DigDspMuxC1ElecM0BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7801,7 +6910,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM0DriveCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0DriveCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM0DriveCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM0DriveCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM0DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7819,7 +6928,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM1BeamCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1BeamCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1BeamCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM1BeamCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM1BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7837,7 +6946,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM1BwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1BwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1BwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM1BwMask) == (pFromFpga->data & DigDspMuxC1ElecM1BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7855,7 +6964,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM1DriveCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1DriveCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM1DriveCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM1DriveCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM1DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7873,7 +6982,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM2BeamCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2BeamCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2BeamCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM2BeamCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM2BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7891,7 +7000,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM2BwWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2BwW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2BwW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM2BwMask) == (pFromFpga->data & DigDspMuxC1ElecM2BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7909,7 +7018,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecM2DriveCouplingWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2DriveCouplingW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecM2DriveCouplingW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecM2DriveCouplingMask) == (pFromFpga->data & DigDspMuxC1ElecM2DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7927,7 +7036,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecModuloW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecModuloMask) == (pFromFpga->data & DigDspMuxC1ElecModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7945,7 +7054,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ElecPhaseStepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecPhaseStepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ElecPhaseStepW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ElecPhaseStepMask) == (pFromFpga->data & DigDspMuxC1ElecPhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7963,7 +7072,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1ComprSatCtlWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ComprSatCtlW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1ComprSatCtlW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1ComprSatCtlMask) == (pFromFpga->data & DigDspMuxC1ComprSatCtlMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7981,7 +7090,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1PrngIvaWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PrngIvaW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PrngIvaW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1PrngIvaMask) == (pFromFpga->data & DigDspMuxC1PrngIvaMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -7999,7 +7108,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1PrngIvbWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PrngIvbW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PrngIvbW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1PrngIvbMask) == (pFromFpga->data & DigDspMuxC1PrngIvbMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8017,7 +7126,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxC1PrngRandomRunWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PrngRandomRunW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxC1PrngRandomRunW, valueSet );
 		if( (valueSet[0] & DigDspMuxC1PrngRandomRunMask) == (pFromFpga->data & DigDspMuxC1PrngRandomRunMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8035,7 +7144,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxDacIqPhaseWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxDacIqPhaseW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxDacIqPhaseW, valueSet );
 		if( (valueSet[0] & DigDspMuxDacIqPhaseMask) == (pFromFpga->data & DigDspMuxDacIqPhaseMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8053,7 +7162,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspChanKeepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspChanKeepW, valueSet);
+		status = (asynStatus) getUIntDigitalParam(p_DigDspMuxShell0DspChanKeepW, uValueSet , DigDspMuxShell0DspChanKeepMask);
 		if( (valueSet[0] & DigDspMuxShell0DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell0DspChanKeepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8071,7 +7180,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0FdbkCoreCoarseScaleWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreCoarseScaleW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreCoarseScaleW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0FdbkCoreCoarseScaleMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreCoarseScaleMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8089,7 +7198,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0FdbkCoreMpProcPhOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcPhOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcPhOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0FdbkCoreMpProcPhOffsetMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcPhOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8107,7 +7216,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0FdbkCoreMpProcSelEnWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSelEnW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSelEnW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0FdbkCoreMpProcSelEnMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSelEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8125,7 +7234,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0FdbkCoreMpProcSelThreshWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSelThreshW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0FdbkCoreMpProcSelThreshW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0FdbkCoreMpProcSelThreshMask) == (pFromFpga->data & DigDspMuxShell0FdbkCoreMpProcSelThreshMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8143,7 +7252,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspModuloW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspModuloMask) == (pFromFpga->data & DigDspMuxShell0DspModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8161,7 +7270,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspPhaseStepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspPhaseStepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspPhaseStepW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspPhaseStepMask) == (pFromFpga->data & DigDspMuxShell0DspPhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8179,7 +7288,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspPiezoPiezoDcWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspPiezoPiezoDcW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspPiezoPiezoDcW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspPiezoPiezoDcMask) == (pFromFpga->data & DigDspMuxShell0DspPiezoPiezoDcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8197,7 +7306,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspTagWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspTagW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspTagW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspTagMask) == (pFromFpga->data & DigDspMuxShell0DspTagMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8215,7 +7324,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspUseFiberIqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspUseFiberIqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspUseFiberIqW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspUseFiberIqMask) == (pFromFpga->data & DigDspMuxShell0DspUseFiberIqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8233,7 +7342,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspWaveSampPerWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspWaveSampPerW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspWaveSampPerW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspWaveSampPerMask) == (pFromFpga->data & DigDspMuxShell0DspWaveSampPerMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8251,7 +7360,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell0DspWaveShiftWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspWaveShiftW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspWaveShiftW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell0DspWaveShiftMask) == (pFromFpga->data & DigDspMuxShell0DspWaveShiftMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8269,7 +7378,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspChanKeepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspChanKeepW, valueSet);
+		status = (asynStatus) getUIntDigitalParam(p_DigDspMuxShell1DspChanKeepW, uValueSet , DigDspMuxShell1DspChanKeepMask);
 		if( (valueSet[0] & DigDspMuxShell1DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell1DspChanKeepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8287,7 +7396,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1FdbkCoreCoarseScaleWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreCoarseScaleW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreCoarseScaleW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1FdbkCoreCoarseScaleMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreCoarseScaleMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8305,7 +7414,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1FdbkCoreMpProcPhOffsetWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcPhOffsetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcPhOffsetW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1FdbkCoreMpProcPhOffsetMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcPhOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8323,7 +7432,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1FdbkCoreMpProcSelEnWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSelEnW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSelEnW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1FdbkCoreMpProcSelEnMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSelEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8341,7 +7450,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1FdbkCoreMpProcSelThreshWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSelThreshW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1FdbkCoreMpProcSelThreshW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1FdbkCoreMpProcSelThreshMask) == (pFromFpga->data & DigDspMuxShell1FdbkCoreMpProcSelThreshMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8359,7 +7468,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspModuloW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspModuloW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspModuloMask) == (pFromFpga->data & DigDspMuxShell1DspModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8377,7 +7486,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspPhaseStepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspPhaseStepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspPhaseStepW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspPhaseStepMask) == (pFromFpga->data & DigDspMuxShell1DspPhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8395,7 +7504,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspPiezoPiezoDcWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspPiezoPiezoDcW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspPiezoPiezoDcW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspPiezoPiezoDcMask) == (pFromFpga->data & DigDspMuxShell1DspPiezoPiezoDcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8413,7 +7522,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspTagWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspTagW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspTagW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspTagMask) == (pFromFpga->data & DigDspMuxShell1DspTagMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8431,7 +7540,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspUseFiberIqWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspUseFiberIqW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspUseFiberIqW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspUseFiberIqMask) == (pFromFpga->data & DigDspMuxShell1DspUseFiberIqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8449,7 +7558,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspWaveSampPerWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspWaveSampPerW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspWaveSampPerW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspWaveSampPerMask) == (pFromFpga->data & DigDspMuxShell1DspWaveSampPerMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8467,7 +7576,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspMuxShell1DspWaveShiftWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspWaveShiftW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspWaveShiftW, valueSet );
 		if( (valueSet[0] & DigDspMuxShell1DspWaveShiftMask) == (pFromFpga->data & DigDspMuxShell1DspWaveShiftMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8485,7 +7594,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspRewindWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspRewindW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspRewindW, valueSet );
 		if( (valueSet[0] & DigDspRewindMask) == (pFromFpga->data & DigDspRewindMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8503,7 +7612,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspSsaStimAmpstepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspSsaStimAmpstepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspSsaStimAmpstepW, valueSet );
 		if( (valueSet[0] & DigDspSsaStimAmpstepMask) == (pFromFpga->data & DigDspSsaStimAmpstepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8521,7 +7630,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspSsaStimEnWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspSsaStimEnW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspSsaStimEnW, valueSet );
 		if( (valueSet[0] & DigDspSsaStimEnMask) == (pFromFpga->data & DigDspSsaStimEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8539,7 +7648,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspSsaStimGPeriodWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspSsaStimGPeriodW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspSsaStimGPeriodW, valueSet );
 		if( (valueSet[0] & DigDspSsaStimGPeriodMask) == (pFromFpga->data & DigDspSsaStimGPeriodMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8557,7 +7666,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspSsaStimPertstepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspSsaStimPertstepW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspSsaStimPertstepW, valueSet );
 		if( (valueSet[0] & DigDspSsaStimPertstepMask) == (pFromFpga->data & DigDspSsaStimPertstepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8575,7 +7684,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspTraceKeepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTraceKeepW, valueSet);
+		status = (asynStatus) getUIntDigitalParam(p_DigDspTraceKeepW, uValueSet , DigDspTraceKeepMask);
 		if( (valueSet[0] & DigDspTraceKeepMask) == (pFromFpga->data & DigDspTraceKeepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8593,7 +7702,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspTraceResetWeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTraceResetWeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspTraceResetWeW, valueSet );
 		if( (valueSet[0] & DigDspTraceResetWeMask) == (pFromFpga->data & DigDspTraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8611,7 +7720,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspTrigInternalWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTrigInternalW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspTrigInternalW, valueSet );
 		if( (valueSet[0] & DigDspTrigInternalMask) == (pFromFpga->data & DigDspTrigInternalMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8629,7 +7738,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspTrigModeWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTrigModeW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspTrigModeW, valueSet );
 		if( (valueSet[0] & DigDspTrigModeMask) == (pFromFpga->data & DigDspTrigModeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8647,7 +7756,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspWave0SrcWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspWave0SrcW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspWave0SrcW, valueSet );
 		if( (valueSet[0] & DigDspWave0SrcMask) == (pFromFpga->data & DigDspWave0SrcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8665,7 +7774,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DigDspWave1SrcWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspWave1SrcW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DigDspWave1SrcW, valueSet );
 		if( (valueSet[0] & DigDspWave1SrcMask) == (pFromFpga->data & DigDspWave1SrcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8683,7 +7792,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case DomainJumpRealignWAdr:
-		status = (asynStatus) getIntegerParam(p_DomainJumpRealignW, valueSet);
+		status = (asynStatus) getIntegerParam(p_DomainJumpRealignW, valueSet );
 		if( (valueSet[0] & DomainJumpRealignMask) == (pFromFpga->data & DomainJumpRealignMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8701,7 +7810,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case IccCfgWAdr:
-		status = (asynStatus) getIntegerParam(p_IccCfgW, valueSet);
+		status = (asynStatus) getIntegerParam(p_IccCfgW, valueSet );
 		if( (valueSet[0] & IccCfgMask) == (pFromFpga->data & IccCfgMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8719,7 +7828,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case QsfpI2CRegWAdr:
-		status = (asynStatus) getIntegerParam(p_QsfpI2CRegW, valueSet);
+		status = (asynStatus) getIntegerParam(p_QsfpI2CRegW, valueSet );
 		if( (valueSet[0] & QsfpI2CRegMask) == (pFromFpga->data & QsfpI2CRegMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8737,7 +7846,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case SfpAddressSetWAdr:
-		status = (asynStatus) getIntegerParam(p_SfpAddressSetW, valueSet);
+		status = (asynStatus) getIntegerParam(p_SfpAddressSetW, valueSet );
 		if( (valueSet[0] & SfpAddressSetMask) == (pFromFpga->data & SfpAddressSetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8755,7 +7864,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case TagNowWAdr:
-		status = (asynStatus) getIntegerParam(p_TagNowW, valueSet);
+		status = (asynStatus) getIntegerParam(p_TagNowW, valueSet );
 		if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -8773,8 +7882,747 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
 	default:
+		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+		if ((pFromFpga->addr >= DigDspMuxShell0DspPiezoSfConstsWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0DspPiezoSfConstsWAdr + 8)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0DspPiezoSfConstsWAdr),
+					p_DigDspMuxShell0DspPiezoSfConstsW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspPiezoSfConstsWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspPiezoSfConstsWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0DspPiezoSfConstsW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1DspPiezoSfConstsWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1DspPiezoSfConstsWAdr + 8)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1DspPiezoSfConstsWAdr),
+					p_DigDspMuxShell1DspPiezoSfConstsW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspPiezoSfConstsWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspPiezoSfConstsWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1DspPiezoSfConstsW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0FdbkCoreMpProcCoeffWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0FdbkCoreMpProcCoeffWAdr + 4)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0FdbkCoreMpProcCoeffWAdr),
+					p_DigDspMuxShell0FdbkCoreMpProcCoeffW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0FdbkCoreMpProcCoeffWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0FdbkCoreMpProcCoeffWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0FdbkCoreMpProcCoeffW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0FdbkCoreMpProcLimWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0FdbkCoreMpProcLimWAdr + 4)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0FdbkCoreMpProcLimWAdr),
+					p_DigDspMuxShell0FdbkCoreMpProcLimW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0FdbkCoreMpProcLimWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0FdbkCoreMpProcLimWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0FdbkCoreMpProcLimW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0FdbkCoreMpProcSetmpWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0FdbkCoreMpProcSetmpWAdr + 4)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0FdbkCoreMpProcSetmpWAdr),
+					p_DigDspMuxShell0FdbkCoreMpProcSetmpW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0FdbkCoreMpProcSetmpWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0FdbkCoreMpProcSetmpWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0FdbkCoreMpProcSetmpW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1FdbkCoreMpProcCoeffWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1FdbkCoreMpProcCoeffWAdr + 4)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1FdbkCoreMpProcCoeffWAdr),
+					p_DigDspMuxShell1FdbkCoreMpProcCoeffW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1FdbkCoreMpProcCoeffWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1FdbkCoreMpProcCoeffWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1FdbkCoreMpProcCoeffW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1FdbkCoreMpProcLimWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1FdbkCoreMpProcLimWAdr + 4)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1FdbkCoreMpProcLimWAdr),
+					p_DigDspMuxShell1FdbkCoreMpProcLimW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1FdbkCoreMpProcLimWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1FdbkCoreMpProcLimWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1FdbkCoreMpProcLimW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1FdbkCoreMpProcSetmpWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1FdbkCoreMpProcSetmpWAdr + 4)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1FdbkCoreMpProcSetmpWAdr),
+					p_DigDspMuxShell1FdbkCoreMpProcSetmpW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1FdbkCoreMpProcSetmpWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1FdbkCoreMpProcSetmpWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1FdbkCoreMpProcSetmpW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecDriveCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecDriveCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecDriveCplOutCouplingWAdr),
+					p_DigDspMuxC0ElecDriveCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecDriveCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecDriveCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecDriveCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecDriveCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecDriveCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecDriveCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC0ElecDriveCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecDriveCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecDriveCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecDriveCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecM0OutCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecM0OutCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecM0OutCplOutCouplingWAdr),
+					p_DigDspMuxC0ElecM0OutCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM0OutCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM0OutCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecM0OutCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecM0OutCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecM0OutCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecM0OutCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC0ElecM0OutCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM0OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM0OutCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecM0OutCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecM1OutCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecM1OutCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecM1OutCplOutCouplingWAdr),
+					p_DigDspMuxC0ElecM1OutCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM1OutCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM1OutCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecM1OutCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecM1OutCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecM1OutCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecM1OutCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC0ElecM1OutCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM1OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM1OutCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecM1OutCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecM2OutCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecM2OutCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecM2OutCplOutCouplingWAdr),
+					p_DigDspMuxC0ElecM2OutCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM2OutCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM2OutCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecM2OutCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC0ElecM2OutCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC0ElecM2OutCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC0ElecM2OutCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM2OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC0ElecM2OutCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC0ElecM2OutCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecDriveCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecDriveCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecDriveCplOutCouplingWAdr),
+					p_DigDspMuxC1ElecDriveCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecDriveCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecDriveCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecDriveCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecDriveCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecDriveCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecDriveCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC1ElecDriveCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecDriveCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecDriveCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecDriveCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecM0OutCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecM0OutCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecM0OutCplOutCouplingWAdr),
+					p_DigDspMuxC1ElecM0OutCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM0OutCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM0OutCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecM0OutCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecM0OutCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecM0OutCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecM0OutCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC1ElecM0OutCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM0OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM0OutCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecM0OutCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecM1OutCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecM1OutCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecM1OutCplOutCouplingWAdr),
+					p_DigDspMuxC1ElecM1OutCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM1OutCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM1OutCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecM1OutCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecM1OutCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecM1OutCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecM1OutCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC1ElecM1OutCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM1OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM1OutCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecM1OutCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecM2OutCplOutCouplingWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecM2OutCplOutCouplingWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecM2OutCplOutCouplingWAdr),
+					p_DigDspMuxC1ElecM2OutCplOutCouplingW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM2OutCplOutCouplingWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM2OutCplOutCouplingWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecM2OutCplOutCouplingW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxC1ElecM2OutCplOutPhaseOffsetWAdr) &&
+				(pFromFpga->addr < (DigDspMuxC1ElecM2OutCplOutPhaseOffsetWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxC1ElecM2OutCplOutPhaseOffsetWAdr),
+					p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM2OutCplOutPhaseOffsetWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxC1ElecM2OutCplOutPhaseOffsetWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxC1ElecM2OutCplOutPhaseOffsetW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0DspLpNotchLp1AKxWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0DspLpNotchLp1AKxWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0DspLpNotchLp1AKxWAdr),
+					p_DigDspMuxShell0DspLpNotchLp1AKxW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1AKxWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1AKxWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0DspLpNotchLp1AKxW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0DspLpNotchLp1AKyWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0DspLpNotchLp1AKyWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0DspLpNotchLp1AKyWAdr),
+					p_DigDspMuxShell0DspLpNotchLp1AKyW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1AKyWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1AKyWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0DspLpNotchLp1AKyW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0DspLpNotchLp1BKxWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0DspLpNotchLp1BKxWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0DspLpNotchLp1BKxWAdr),
+					p_DigDspMuxShell0DspLpNotchLp1BKxW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1BKxWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1BKxWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0DspLpNotchLp1BKxW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell0DspLpNotchLp1BKyWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell0DspLpNotchLp1BKyWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell0DspLpNotchLp1BKyWAdr),
+					p_DigDspMuxShell0DspLpNotchLp1BKyW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1BKyWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell0DspLpNotchLp1BKyWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell0DspLpNotchLp1BKyW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1DspLpNotchLp1AKxWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1DspLpNotchLp1AKxWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1DspLpNotchLp1AKxWAdr),
+					p_DigDspMuxShell1DspLpNotchLp1AKxW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1AKxWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1AKxWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1DspLpNotchLp1AKxW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1DspLpNotchLp1AKyWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1DspLpNotchLp1AKyWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1DspLpNotchLp1AKyWAdr),
+					p_DigDspMuxShell1DspLpNotchLp1AKyW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1AKyWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1AKyWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1DspLpNotchLp1AKyW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1DspLpNotchLp1BKxWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1DspLpNotchLp1BKxWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1DspLpNotchLp1BKxWAdr),
+					p_DigDspMuxShell1DspLpNotchLp1BKxW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1BKxWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1BKxWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1DspLpNotchLp1BKxW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		if ((pFromFpga->addr >= DigDspMuxShell1DspLpNotchLp1BKyWAdr) &&
+				(pFromFpga->addr < (DigDspMuxShell1DspLpNotchLp1BKyWAdr + 2)))
+		{
+			status = (asynStatus) getIntegerParam((pFromFpga->addr - DigDspMuxShell1DspLpNotchLp1BKyWAdr),
+					p_DigDspMuxShell1DspLpNotchLp1BKyW, valueSet);
+			if( (valueSet[0] & TagNowMask) == (pFromFpga->data & TagNowMask))
+				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1BKyWString, (unsigned ) pFromFpga->data & TagNowMask);
+			else
+			{
+				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					DigDspMuxShell1DspLpNotchLp1BKyWString, valueSet[0] & TagNowMask, (unsigned ) pFromFpga->data & TagNowMask);
+				status = asynError;
+				setParamStatus(p_DigDspMuxShell1DspLpNotchLp1BKyW, status);
+				getIntegerParam(p_CommErrorCount, &errorCount);
+				setIntegerParam(p_CommErrorCount, ++errorCount);
+			}
+
+
+		}
+		else
+		{
 		getIntegerParam(p_CommErrorCount, &errorCount);
 		setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
 
 		status = asynError;
 		break;
@@ -8796,7 +8644,8 @@ extern "C" {
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
 int scllrfPRCConfigure(const char *drvPortName, const char *netPortName)
 {
-	new scllrfPRCDriver(drvPortName, netPortName);
+	//new scllrfPRCDriver(drvPortName, netPortName);
+	new scllrfPRCDriver(drvPortName, netPortName, 8, 0);
 	return asynSuccess;
 }
 

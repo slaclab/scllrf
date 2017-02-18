@@ -5,7 +5,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : templateScllrfDriver.h
+ * File       : scllrfINTDriver.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -430,7 +430,8 @@ const unsigned int scllrfINTWriteRegCount = 100;
  /* This class implements the AxiVersion driver. */
 class scllrfINTDriver : public scllrfAsynPortDriver {
 public:
-    scllrfINTDriver(const char *drvPortName, const char *netPortName);
+//    scllrfINTDriver(const char *drvPortName, const char *netPortName);
+    scllrfINTDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
     virtual ~scllrfINTDriver();
 
 
@@ -694,7 +695,6 @@ protected:
 
 #define NUM_SCLLRFINT_PARAMS (&LAST_SCLLRFINT_PARAM - &FIRST_SCLLRFINT_PARAM + NUM_SCLLRF_PARAMS + 1)
 
-private:
 
     // mapping of register names to addresses
     enum ReadRegAddrs

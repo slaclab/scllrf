@@ -1171,19 +1171,19 @@ void scllrfCMOC::waveformRequester()
 
 	// A canned request to read all waveforms
 	// Split up because the packet would be too big for UDP otherwise
-	static FpgaReg cmocReadWaveformsMsg[waveSegmentCount][waveSegmentSize];
+	static FpgaReg cmocReadWaveformsMsg[traceIQWaveSegmentCount][traceIQWaveSegmentSize];
 
-	for (i=0; i<waveSegmentCount; ++i)
+	for (i=0; i<traceIQWaveSegmentCount; ++i)
 	{
 		cmocReadWaveformsMsg[i][0] = (FpgaReg) {0, 0}; // space for the nonce
 	}
 
-	for (waveSegmentNumber=0; waveSegmentNumber < waveSegmentCount; ++waveSegmentNumber)
+	for (waveSegmentNumber=0; waveSegmentNumber < traceIQWaveSegmentCount; ++waveSegmentNumber)
 	{
-		for (waveSegmentOffset = 0; waveSegmentOffset < waveSegmentSize-1; ++waveSegmentOffset)
+		for (waveSegmentOffset = 0; waveSegmentOffset < traceIQWaveSegmentSize-1; ++waveSegmentOffset)
 		{
-			regAddress = wavesStart + waveSegmentNumber*(waveSegmentSize-1) + waveSegmentOffset;
-			if (regAddress > wavesEnd)
+			regAddress = traceIQWavesStart + waveSegmentNumber*(traceIQWaveSegmentSize-1) + waveSegmentOffset;
+			if (regAddress > traceIQWavesEnd)
 			{
 				lastPointIndex = waveSegmentOffset+1;
 				break;
@@ -1213,12 +1213,12 @@ void scllrfCMOC::waveformRequester()
 		{
 			/* We got an event, rather than a timeout.
 			 **/
-			for (i=0; i<waveSegmentCount - 1; ++i)
+			for (i=0; i<traceIQWaveSegmentCount - 1; ++i)
 			{
 				sendRegRequest(cmocReadWaveformsMsg[i], sizeof(cmocReadWaveformsMsg[0])/sizeof(FpgaReg));
 			}
 			// The last segment probably has a different number of points in it
-			sendRegRequest(cmocReadWaveformsMsg[waveSegmentCount-1], lastPointIndex);
+			sendRegRequest(cmocReadWaveformsMsg[traceIQWaveSegmentCount-1], lastPointIndex);
 
 			newWaveRead_ = newWaveAvailable_; // Indicate that we got the signal
 
@@ -1492,7 +1492,7 @@ asynStatus scllrfCMOC::processReadbackBuffer(FpgaReg *pRegReadback, unsigned int
 // parse register data, write to array PV
 asynStatus scllrfCMOC::processWaveReadback(const FpgaReg *pFromFpga)
 {
-	unsigned int bufferOffset = (pFromFpga->addr & addrMask) - wavesStart;
+	unsigned int bufferOffset = (pFromFpga->addr & addrMask) - traceIQWavesStart;
 	unsigned int waveNumber = bufferOffset % wavesCount;
 	unsigned int waveIndex = bufferOffset / wavesCount;
 
@@ -1832,13 +1832,13 @@ asynStatus scllrfCMOC::processRegReadback(const FpgaReg *pFromFpga, bool &waveIs
 		if (pFromFpga->data & wavesReadyMask)
 			waveIsReady = true;
 		break;
-	case wavesEnd|flagReadMask:
+	case traceIQWavesEnd|flagReadMask:
 		processWaveReadback(pFromFpga);
 		// Do we need to verify that all points of all waveforms have been received, not missing
 		// packets or some such?
 		// Basic approach: when we read in the last point of the last waveform, publish them all
 		for (i=0; i<wavesCount; ++i)
-			status = doCallbacksInt32Array(pWaveform_[i], waveBufferRegCount/wavesCount, p_Waveform, i);
+			status = doCallbacksInt32Array(pWaveform_[i], traceIQWaveRegCount/wavesCount, p_Waveform, i);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
 		break;
@@ -1886,7 +1886,7 @@ asynStatus scllrfCMOC::processRegReadback(const FpgaReg *pFromFpga, bool &waveIs
 		break;
 	default:
 
-		if( wavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) < wavesEnd )
+		if( traceIQWavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) < traceIQWavesEnd )
 		{
 			processWaveReadback(pFromFpga);
 		}

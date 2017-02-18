@@ -27,6 +27,30 @@ record(waveform, "$(P)WF_Q16_$(N)") {
   field(SDIS, "$(P)WF_$(N)_DISA")
 }
 
+record(waveform, "$(P)WF_A16_$(N)") {
+  field(DESC, "Ch $(N) amplitude Waveform, 16 bit data")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynFloat32ArrayIn")
+  field(INP, "@asyn($(PORT),$(N),1)WAVEFORM_A_16_BIT")
+  field(PREC, "1")
+  field(EGU, "$(EGU)")
+  field(NELM, "32768")
+  field(FTVL, "FLOAT")
+  field(SDIS, "$(P)WF_$(N)_DISA")
+}
+
+record(waveform, "$(P)WF_P16_$(N)") {
+  field(DESC, "Ch $(N) phase Waveform, 16 bit data")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynFloat32ArrayIn")
+  field(INP, "@asyn($(PORT),$(N),1)WAVEFORM_P_16_BIT")
+  field(PREC, "1")
+  field(EGU, "$(EGU)")
+  field(NELM, "32768")
+  field(FTVL, "FLOAT")
+  field(SDIS, "$(P)WF_$(N)_DISA")
+}
+
 record(waveform, "$(P)WF_I22_$(N)") {
   field(DESC, "Ch $(N) I Waveform, 22 bit data")
   field(SCAN, "I/O Intr")
@@ -48,6 +72,30 @@ record(waveform, "$(P)WF_Q22_$(N)") {
   field(EGU, "$(EGU)")
   field(NELM, "16384")
   field(FTVL, "LONG")
+  field(SDIS, "$(P)WF_$(N)_DISA")
+}
+
+record(waveform, "$(P)WF_A22_$(N)") {
+  field(DESC, "Ch $(N) amplitude Waveform, 22 bit data")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynFloat32ArrayIn")
+  field(INP, "@asyn($(PORT),$(N),1)WAVEFORM_A_22_BIT")
+  field(PREC, "1")
+  field(EGU, "$(EGU)")
+  field(NELM, "16384")
+  field(FTVL, "FLOAT")
+  field(SDIS, "$(P)WF_$(N)_DISA")
+}
+
+record(waveform, "$(P)WF_P22_$(N)") {
+  field(DESC, "Ch $(N) phase Waveform, 22 bit data")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynFloat32ArrayIn")
+  field(INP, "@asyn($(PORT),$(N),1)WAVEFORM_P_22_BIT")
+  field(PREC, "1")
+  field(EGU, "$(EGU)")
+  field(NELM, "16384")
+  field(FTVL, "FLOAT")
   field(SDIS, "$(P)WF_$(N)_DISA")
 }
 

@@ -43,21 +43,40 @@ using namespace std;
  *
  * */
 scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
-: scllrfPRCDriver(drvPortName, netPortName, maxChannel, NUM_SCLLRFPRCEXTRA_PARAMS)
+: scllrfPRCDriver(drvPortName, netPortName, maxChannel, NUM_SCLLRFPRCEXTRA_PARAMS),
+	newCircIQBufAvailable_(0), newCircIQBufRead_ (0)
 {
-	unsigned int i;
-
     createParam(WaveformI16BitString, asynParamInt16Array, &p_WaveformI16Bit);
     createParam(WaveformQ16BitString, asynParamInt16Array, &p_WaveformQ16Bit);
     createParam(WaveformI22BitString, asynParamInt32Array, &p_WaveformI22Bit);
     createParam(WaveformQ22BitString, asynParamInt32Array, &p_WaveformQ22Bit);
+
+    createParam(WaveformA16BitString, asynParamInt16Array, &p_WaveformA16Bit);
+    createParam(WaveformP16BitString, asynParamInt16Array, &p_WaveformP16Bit);
+    createParam(WaveformA22BitString, asynParamInt32Array, &p_WaveformA22Bit);
+    createParam(WaveformP22BitString, asynParamInt32Array, &p_WaveformP22Bit);
+
     createParam(IQNActiveString, asynParamInt32, &p_IQNActive);
     createParam(IQBitWidthString, asynParamInt32, &p_IQBitWidth);
     createParam(IQ16BitNELMString, asynParamInt32, &p_IQ16BitNELM);
     createParam(IQ22BitNELMString, asynParamInt32, &p_IQ22BitNELM);
 
-// Is this next line wrong, or is the generated one wrong?
-    PolledRegMsgSize_ = scllrfPRCReadRegCount + (scllrfPRCReadRegCount / 175) + 1;
+    // Circle Buffer waveforms
+
+    createParam(Circ0NActiveString, asynParamInt32, &p_Circ0NActive);
+    createParam(Circ1NActiveString, asynParamInt32, &p_Circ1NActive);
+    createParam(CircIQBuf0IString, asynParamInt32Array, &p_CircIQBuf0I);
+    createParam(CircIQBuf0QString, asynParamInt32Array, &p_CircIQBuf0Q);
+    createParam(CircIQBuf0AString, asynParamInt32Array, &p_CircIQBuf0A);
+    createParam(CircIQBuf0PString, asynParamInt32Array, &p_CircIQBuf0P);
+    createParam(CircIQBuf1IString, asynParamInt32Array, &p_CircIQBuf1I);
+    createParam(CircIQBuf1QString, asynParamInt32Array, &p_CircIQBuf1Q);
+    createParam(CircIQBuf1AString, asynParamInt32Array, &p_CircIQBuf1A);
+    createParam(CircIQBuf1PString, asynParamInt32Array, &p_CircIQBuf1P);
+
+    // Is there a way to avoid hand calculation? Last line of array - line before first = 288
+    PolledRegMsgSize_ = 288;
+
     if (pPolledRegMsg_ != NULL)
     {
     	printf("%s rejects the base class's message and replaces it with its own.\n",__PRETTY_FUNCTION__);
@@ -65,8 +84,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     }
 
     // A canned request to read all registers
-    // NOTE: To avoid side effects, any registers with U or spi in their name have been
-    // manually replaced with D0A0D0ARAdr
     pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 		{ 0, 0 },
@@ -74,22 +91,12 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ flagReadMask | OWoRAdr, blankData },
 		{ flagReadMask | RldRAdr, blankData },
 		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
 		{ flagReadMask | ClkStatusOutRAdr, blankData },
 		{ flagReadMask | FfffffffRAdr, blankData },
 		{ flagReadMask | FrequencyAdcRAdr, blankData },
 		{ flagReadMask | Frequency4XoutRAdr, blankData },
 		{ flagReadMask | FrequencyClkout3RAdr, blankData },
 		{ flagReadMask | FrequencyDcoRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
 		{ flagReadMask | Wave0OutRAdr, blankData },
 		{ flagReadMask | Wave1OutRAdr, blankData },
 		{ flagReadMask | AdcTestWave1OutRAdr, blankData },
@@ -101,13 +108,7 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ flagReadMask | FrequencyGtxRxRAdr, blankData },
 		{ flagReadMask | HistStatusRAdr, blankData },
 		{ flagReadMask | PhasexStatusRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
 		{ flagReadMask | CrcErrorsRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
 		{ flagReadMask | AdcTestTrigCntRAdr, blankData },
 		{ flagReadMask | WaveformsAvailableRAdr, blankData },
 		{ flagReadMask | BanyanStatusRAdr, blankData },
@@ -178,20 +179,10 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ flagReadMask | DigDspMuxShell1DspLpNotchLp1BKxRAdr, blankData },
 		{ flagReadMask | DigDspMuxShell1DspLpNotchLp1BKyRAdr, blankData },
 		{ flagReadMask | AdcMmcmRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
 		{ flagReadMask | DigConfigBanyanMaskRAdr, blankData },
 		{ flagReadMask | DigConfigBitslipRAdr, blankData },
 		{ flagReadMask | DigConfigClkStatusWeRAdr, blankData },
 		{ flagReadMask | DigConfigIdelayctrlResetRRAdr, blankData },
-		{ flagReadMask | D0A0D0ARAdr, blankData },
 		{ flagReadMask | DigConfigMmcmResetRRAdr, blankData },
 		{ flagReadMask | DigConfigPeriphConfigRAdr, blankData },
 		{ flagReadMask | DigConfigPhasexTrigRAdr, blankData },
@@ -244,7 +235,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ flagReadMask | DigDspMuxC0ElecM1BeamCouplingRAdr, blankData },
 		{ flagReadMask | DigDspMuxC0ElecM1BwRAdr, blankData },
 		{ flagReadMask | DigDspMuxC0ElecM1DriveCouplingRAdr, blankData },
-		{ 0, 0 }, // This should stay on line 247, 175 registers from the start of this structure
 		{ flagReadMask | DigDspMuxC0ElecM2BeamCouplingRAdr, blankData },
 		{ flagReadMask | DigDspMuxC0ElecM2BwRAdr, blankData },
 		{ flagReadMask | DigDspMuxC0ElecM2DriveCouplingRAdr, blankData },
@@ -271,6 +261,7 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ flagReadMask | DigDspMuxC1ElecM2BwRAdr, blankData },
 		{ flagReadMask | DigDspMuxC1ElecM2DriveCouplingRAdr, blankData },
 		{ flagReadMask | DigDspMuxC1ElecModuloRAdr, blankData },
+		{ 0, 0 }, // This should stay on line 264, 175 registers from the start of this structure on line 89
 		{ flagReadMask | DigDspMuxC1ElecPhaseStepRAdr, blankData },
 		{ flagReadMask | DigDspMuxC1ComprSatCtlRAdr, blankData },
 		{ flagReadMask | DigDspMuxC1PrngIvaRAdr, blankData },
@@ -327,6 +318,9 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 
 	reqWaveEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startTraceIQWaveformRequester();
+
+	reqCircIQBufEventId_ = epicsEventMustCreate(epicsEventEmpty);
+	startCircIQBufRequester();
 
 	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startSingleMessageQueuer();
@@ -585,13 +579,6 @@ void scllrfPRCextra::traceIQWaveformRequester()
 	//	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
-template <typename T, unsigned B>
-inline T signextend(const T x)
-{
-  struct {T x:B;} s;
-  return s.x = x;
-}
-
 // parse register data, write to array PV
 asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 {
@@ -629,27 +616,40 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
 		// Amplitude = sqrt(I^2+Q^2)
-		//pWave16bitA_[waveNumber][waveIndex] = (epicsInt16) sqrt(pWave16bitI_[waveNumber][waveIndex]^2+pWave16bitQ_[waveNumber][waveIndex]^2);
+		pWave16bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt((pWave16bitI_[waveNumber][waveIndex]^2)+(pWave16bitQ_[waveNumber][waveIndex]^2));
 		// phase = arctan(Q/I)
+		pWave16bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave16bitQ_[waveNumber][waveIndex] / pWave16bitI_[waveNumber][waveIndex]);
 		break;
 
 	case 1:
 		waveIndex += npt_; // continued from addresses in "case 0"
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
+		// Amplitude = sqrt(I^2+Q^2)
+		pWave16bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt((pWave16bitI_[waveNumber][waveIndex]^2)+(pWave16bitQ_[waveNumber][waveIndex]^2));
+		// phase = arctan(Q/I)
+		pWave16bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave16bitQ_[waveNumber][waveIndex] / pWave16bitI_[waveNumber][waveIndex]);
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
 		{
 			setIntegerParam(p_IQ16BitNELM, npt_ * 2/nchan_);
-			for (i=0; i<8; ++i)
+			for (i=0; i<maxTraceIQWavesCount; ++i)
 			{
 				if(i<nchan_)
 				{
 					doCallbacksInt16Array(pWave16bitI_[i], 2*npt_/nchan_, p_WaveformI16Bit, i);
 					doCallbacksInt16Array(pWave16bitQ_[i], 2*npt_/nchan_, p_WaveformQ16Bit, i);
+					doCallbacksFloat32Array(pWave16bitA_[i], 2*npt_/nchan_, p_WaveformA16Bit, i);
+					doCallbacksFloat32Array(pWave16bitP_[i], 2*npt_/nchan_, p_WaveformP16Bit, i);
 				} else { // clear inactive channels
 					doCallbacksInt16Array(pWave16bitI_[i], 0, p_WaveformI16Bit, i);
 					doCallbacksInt16Array(pWave16bitQ_[i], 0, p_WaveformQ16Bit, i);
+					doCallbacksFloat32Array(pWave16bitA_[i], 0, p_WaveformA16Bit, i);
+					doCallbacksFloat32Array(pWave16bitP_[i], 0, p_WaveformP16Bit, i);
 				}
+				std::fill( pWave16bitI_[i], pWave16bitI_[i] + sizeof( pWave16bitI_[i] )/sizeof( *pWave16bitI_[i]), 0 );
+				std::fill( pWave16bitQ_[i], pWave16bitQ_[i] + sizeof( pWave16bitQ_[i] )/sizeof( *pWave16bitQ_[i]), 0 );
+				std::fill( pWave16bitA_[i], pWave16bitA_[i] + sizeof( pWave16bitA_[i] )/sizeof( *pWave16bitA_[i]), 0 );
+				std::fill( pWave16bitP_[i], pWave16bitP_[i] + sizeof( pWave16bitP_[i] )/sizeof( *pWave16bitP_[i]), 0 );
 			}
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
@@ -659,40 +659,35 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	case 2:
 		pWave22bitI_[waveNumber][waveIndex] =
                      ((epicsInt32) pFromFpga->data) >> 10;
-        //             (epicsInt32) signextend<signed int,22>(pFromFpga->data);
-
-		if (waveOffset +1 == npt_) // if this is the last point of the waveform
-		{
-			setIntegerParam(p_IQ22BitNELM, npt_/nchan_);
-			for (i=0; i<8; ++i)
-			{
-				if(i<nchan_)
-				{
-					doCallbacksInt32Array(pWave22bitI_[i], npt_/nchan_, p_WaveformI22Bit, i);
-				} else { // clear inactive channels
-					doCallbacksInt32Array(pWave22bitI_[i], 0, p_WaveformI22Bit, i);
-				}
-			}
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
-		}
-		break;
 
 	case 3:
 		pWave22bitQ_[waveNumber][waveIndex] =
                      ((epicsInt32) pFromFpga->data) >> 10;
-        //             (epicsInt32) signextend<signed int,22>(pFromFpga->data);
+		// Amplitude = sqrt(I^2+Q^2)
+		pWave22bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt((pWave22bitI_[waveNumber][waveIndex]^2)+(pWave22bitQ_[waveNumber][waveIndex]^2));
+		// phase = arctan(Q/I)
+		pWave22bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave22bitQ_[waveNumber][waveIndex] / pWave22bitI_[waveNumber][waveIndex]);
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
 		{
 			setIntegerParam(p_IQ22BitNELM, npt_/nchan_);
-			for (i=0; i<8; ++i)
+			for (i=0; i<maxTraceIQWavesCount; ++i)
 			{
-				if(i<nchan_)
+				if(i<nchan_) // update both I and Q here, so they stay in sync
 				{
+					doCallbacksInt32Array(pWave22bitI_[i], npt_/nchan_, p_WaveformI22Bit, i);
 					doCallbacksInt32Array(pWave22bitQ_[i], npt_/nchan_, p_WaveformQ22Bit, i);
+					doCallbacksFloat32Array(pWave22bitA_[i], npt_/nchan_, p_WaveformA22Bit, i);
+					doCallbacksFloat32Array(pWave22bitP_[i], npt_/nchan_, p_WaveformP22Bit, i);
 				} else { // clear inactive channels
+					doCallbacksInt32Array(pWave22bitI_[i], 0, p_WaveformI22Bit, i);
 					doCallbacksInt32Array(pWave22bitQ_[i], 0, p_WaveformQ22Bit, i);
+					doCallbacksFloat32Array(pWave22bitA_[i], 0, p_WaveformA22Bit, i);
+					doCallbacksFloat32Array(pWave22bitP_[i], 0, p_WaveformP22Bit, i);
 				}
+				std::fill( pWave22bitI_[i], pWave22bitI_[i] + sizeof( pWave22bitI_[i] )/sizeof( *pWave22bitI_[i]), 0 );
+				std::fill( pWave22bitQ_[i], pWave22bitQ_[i] + sizeof( pWave22bitQ_[i] )/sizeof( *pWave22bitQ_[i]), 0 );
+				std::fill( pWave22bitA_[i], pWave22bitA_[i] + sizeof( pWave22bitA_[i] )/sizeof( *pWave22bitA_[i]), 0 );
+				std::fill( pWave22bitP_[i], pWave22bitP_[i] + sizeof( pWave22bitP_[i] )/sizeof( *pWave22bitP_[i]), 0 );
 			}
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
@@ -704,6 +699,218 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 //	printf("<-- %s\n", __PRETTY_FUNCTION__);
 	return asynSuccess;
 }
+static void circIQBufRequesterC(void *drvPvt)
+{
+	printf("%s: starting\n", __PRETTY_FUNCTION__);
+	scllrfPRCextra *pscllrfDriver = (scllrfPRCextra*)drvPvt;
+	pscllrfDriver->circIQBufRequester();
+	printf("%s: exiting\n", __PRETTY_FUNCTION__);
+}
+
+/** Starts the poller thread.
+ ** Derived classes will typically call this at near the end of their constructor.
+ ** Derived classes can typically use the base class implementation of the poller thread,
+ ** but are free to re-implement it if necessary.
+ ** \param[in] pollPeriod The time between polls. */
+asynStatus scllrfPRCextra::startCircIQBufRequester()
+{
+	epicsThreadCreate("waveformRequester",
+			epicsThreadPriorityMedium,
+			epicsThreadGetStackSize(epicsThreadStackMedium),
+			(EPICSTHREADFUNC)circIQBufRequesterC, (void *)this);
+	return asynSuccess;
+}
+
+// run this to compose new waveform request message for circle buffer.
+void scllrfPRCextra::fillCircIQBufReqMsg()
+{
+	unsigned int regAddr, msgOffset;
+
+	regAddr = circIQBufStart;
+
+	for(msgOffset=0; msgOffset < circIQBufReqMsgSize; regAddr++, msgOffset++)
+	{
+		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
+		{
+			printf("%s inserting a blank nonce at index %u", __PRETTY_FUNCTION__, msgOffset);
+			pReqCircIQBufMsg_[msgOffset] = {0,blankData};
+			msgOffset++;
+		}
+
+		pReqCircIQBufMsg_[msgOffset].addr = regAddr;
+		pReqCircIQBufMsg_[msgOffset].data = blankData;
+		printf("%s put addr 0x%x at index %u\n", __PRETTY_FUNCTION__, regAddr, msgOffset);
+	}
+
+		htonFpgaRegArray(pReqCircIQBufMsg_, circIQBufReqMsgSize);
+
+}
+
+
+void scllrfPRCextra::reqCircIQBuf()
+{
+	int regsLeftToSend = circIQBufWaveRegCount;
+	uint i;
+
+	printf(" --> %s\n", __PRETTY_FUNCTION__);
+
+	for (i=0; i<circIQBufSegmentCount; ++i)
+	{
+		if(regsLeftToSend > (int) (maxRegPerMsg + nonceSize))
+		{
+			sendRegRequest(&pReqCircIQBufMsg_[i * (maxRegPerMsg + nonceSize)], maxRegPerMsg + nonceSize);
+			regsLeftToSend -= maxRegPerMsg;
+			printf("%s sent segment %u, regsLeftToSend = %d\n", __PRETTY_FUNCTION__, i, regsLeftToSend);
+		}
+		else
+		{
+			sendRegRequest(&pReqCircIQBufMsg_[i * (maxRegPerMsg + nonceSize)], regsLeftToSend + nonceSize);
+			printf("%s sent segment %u, last %d registers\n", __PRETTY_FUNCTION__, i, regsLeftToSend);
+			break;
+		}
+	}
+	printf(" <-- %s\n", __PRETTY_FUNCTION__);
+}
+
+void scllrfPRCextra::circIQBufRequester()
+{
+	epicsEventWaitStatus status;
+
+	FpgaReg circAck[] =
+	{
+			{0,0},
+			{DigDspCircleBufFlipWAdr,1},
+			{DigDspCircleBufFlipWAdr,2},
+			{DigDspCircleBufFlipRAdr | flagReadMask,blankData},
+			{DigDspCircleBufFlipRAdr | flagReadMask,blankData},
+			{LlrfCircleReadyRAdr | flagReadMask,blankData},
+	};
+	//printf("\n%s calling htonFpgaRegArray for %u registers of circAck\n", __PRETTY_FUNCTION__, 5 );
+    htonFpgaRegArray(circAck, sizeof(circAck)/sizeof(FpgaReg));
+
+	// Main polling loop
+	while (1)
+	{
+		status = epicsEventWait(reqCircIQBufEventId_);
+		printf("%s: got data ready flag\n", __PRETTY_FUNCTION__);
+
+		if (isShuttingDown_)
+		{
+			break;
+		}
+
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: signaled by reqWaveEventId_\n", __PRETTY_FUNCTION__);
+
+		// avoid divide by 0 errors when waveforms are inactive
+		if (nCirc0Chan_ <=0 || npt_ <=0)
+		{
+			epicsThreadSleep(pollPeriod_);
+		}
+		else
+		{
+			/* We got an event, rather than a timeout.
+			 **/
+			reqCircIQBuf();
+
+			newCircIQBufRead_ = newCircIQBufAvailable_; // Indicate that we got the signal
+			sendRegRequest(circAck, sizeof(circAck)/sizeof(FpgaReg));
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: done sending waveform request\n", __PRETTY_FUNCTION__);
+		}
+	}
+		printf("%s: exiting\n", __PRETTY_FUNCTION__);
+}
+
+
+// parse register data, write to array PV
+asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
+{
+	// avoid divide by 0 errors when waveforms are inactive
+	if ((nCirc0Chan_ <=0) && (nCirc1Chan_ <=0))
+	{
+		printf("%s can't process waveform data with 0 active channels\n", __PRETTY_FUNCTION__);
+		return asynError;
+	}
+
+	printf("--> %s\n", __PRETTY_FUNCTION__);
+	unsigned int regOffset = (pFromFpga->addr & addrMask) - circIQBufStart;
+	unsigned int bufOffset = regOffset/2; // Data is packed with I at one address, Q at the next, so 2 addresses per I/Q pair
+	unsigned int buf0Number = nCirc0Chan_>0? bufOffset % nCirc0Chan_ : 0;
+	unsigned int buf0Index = nCirc0Chan_>0? bufOffset / nCirc0Chan_ : 0;
+	unsigned int buf1Number = nCirc1Chan_>0? bufOffset % nCirc1Chan_ : 0;
+	unsigned int buf1Index = nCirc1Chan_>0? bufOffset / nCirc1Chan_ : 0;
+	unsigned int i;
+	printf("%s bufferOffset = %u, buf0Number = %u buf0Index =%u\n", __PRETTY_FUNCTION__, bufOffset, buf0Number, buf0Index);
+
+	// Even number addresses are I, odd are Q
+	switch(regOffset & 1)
+	{
+	case 0: // even numbered address
+		pCircIQBuf0I_[buf0Number][buf0Index] = (epicsInt16) pFromFpga->data;
+		pCircIQBuf1I_[buf1Number][buf1Index] = (epicsInt16) (pFromFpga->data >> 16);
+		break;
+
+	case 1: // odd numbered address
+		pCircIQBuf0Q_[buf0Number][buf0Index] = (epicsInt16) pFromFpga->data;
+		// Amplitude = sqrt(I^2+Q^2)
+		pCircIQBuf0A_[buf0Number][buf0Index] = (epicsFloat32) sqrt((pCircIQBuf0I_[buf0Number][buf0Index]^2)+(pCircIQBuf0Q_[buf0Number][buf0Index]^2));
+		// phase = arctan(Q/I)
+		pCircIQBuf0P_[buf0Number][buf0Index] = (epicsFloat32) atan(pCircIQBuf0Q_[buf0Number][buf0Index] / pCircIQBuf0I_[buf0Number][buf0Index]);
+
+		pCircIQBuf1Q_[buf1Number][buf1Index] = (epicsInt16) (pFromFpga->data >> 16);
+		// Amplitude = sqrt(I^2+Q^2)
+		pCircIQBuf1A_[buf1Number][buf1Index] = (epicsFloat32) sqrt((pCircIQBuf1I_[buf1Number][buf1Index]^2)+(pCircIQBuf1Q_[buf1Number][buf1Index]^2));
+		// phase = arctan(Q/I)
+		pCircIQBuf1P_[buf1Number][buf1Index] = (epicsFloat32) atan(pCircIQBuf1Q_[buf1Number][buf1Index] / pCircIQBuf1I_[buf1Number][buf1Index]);
+
+		if ((pFromFpga->addr & addrMask) == circIQBufEnd) // if this is the last point of the buffer
+		{
+			for (i=0; i<maxCircIQBufWavesCount; ++i)
+			{
+				if(i<nCirc0Chan_)
+				{
+					doCallbacksInt16Array(pCircIQBuf0I_[i], circIQBufWavePoints/nCirc0Chan_, p_CircIQBuf0I, i);
+					doCallbacksInt16Array(pCircIQBuf0Q_[i], circIQBufWavePoints/nCirc0Chan_, p_CircIQBuf0Q, i);
+					doCallbacksFloat32Array(pCircIQBuf0A_[i], circIQBufWavePoints/nCirc0Chan_, p_CircIQBuf0A, i);
+					doCallbacksFloat32Array(pCircIQBuf0P_[i], circIQBufWavePoints/nCirc0Chan_, p_CircIQBuf0P, i);
+				} else { // clear inactive channels
+					doCallbacksInt16Array(pCircIQBuf0I_[i], 0, p_CircIQBuf0I, i);
+					doCallbacksInt16Array(pCircIQBuf0Q_[i], 0, p_CircIQBuf0Q, i);
+					doCallbacksFloat32Array(pCircIQBuf0A_[i], 0, p_CircIQBuf0A, i);
+					doCallbacksFloat32Array(pCircIQBuf0P_[i], 0, p_CircIQBuf0P, i);
+				}
+				std::fill( pCircIQBuf0I_[i], pCircIQBuf0I_[i] + sizeof( pCircIQBuf0I_[i] )/sizeof( *pCircIQBuf0I_[i]), 0 );
+				std::fill( pCircIQBuf0Q_[i], pCircIQBuf0Q_[i] + sizeof( pCircIQBuf0Q_[i] )/sizeof( *pCircIQBuf0Q_[i]), 0 );
+				std::fill( pCircIQBuf0A_[i], pCircIQBuf0A_[i] + sizeof( pCircIQBuf0A_[i] )/sizeof( *pCircIQBuf0A_[i]), 0 );
+				std::fill( pCircIQBuf0P_[i], pCircIQBuf0P_[i] + sizeof( pCircIQBuf0P_[i] )/sizeof( *pCircIQBuf0P_[i]), 0 );
+
+				if(i<nCirc1Chan_)
+				{
+					doCallbacksInt16Array(pCircIQBuf1I_[i], circIQBufWavePoints/nCirc1Chan_, p_CircIQBuf1I, i);
+					doCallbacksInt16Array(pCircIQBuf1Q_[i], circIQBufWavePoints/nCirc1Chan_, p_CircIQBuf1Q, i);
+					doCallbacksFloat32Array(pCircIQBuf1A_[i], circIQBufWavePoints/nCirc1Chan_, p_CircIQBuf1A, i);
+					doCallbacksFloat32Array(pCircIQBuf1P_[i], circIQBufWavePoints/nCirc1Chan_, p_CircIQBuf1P, i);
+				} else { // clear inactive channels
+					doCallbacksInt16Array(pCircIQBuf1I_[i], 0, p_CircIQBuf1I, i);
+					doCallbacksInt16Array(pCircIQBuf1Q_[i], 0, p_CircIQBuf1Q, i);
+					doCallbacksFloat32Array(pCircIQBuf1A_[i], 0, p_CircIQBuf1A, i);
+					doCallbacksFloat32Array(pCircIQBuf1P_[i], 0, p_CircIQBuf1P, i);
+				}
+				std::fill( pCircIQBuf1I_[i], pCircIQBuf1I_[i] + sizeof( pCircIQBuf1I_[i] )/sizeof( *pCircIQBuf1I_[i]), 1 );
+				std::fill( pCircIQBuf1Q_[i], pCircIQBuf1Q_[i] + sizeof( pCircIQBuf1Q_[i] )/sizeof( *pCircIQBuf1Q_[i]), 1 );
+				std::fill( pCircIQBuf1A_[i], pCircIQBuf1A_[i] + sizeof( pCircIQBuf1A_[i] )/sizeof( *pCircIQBuf1A_[i]), 1 );
+				std::fill( pCircIQBuf1P_[i], pCircIQBuf1P_[i] + sizeof( pCircIQBuf1P_[i] )/sizeof( *pCircIQBuf1P_[i]), 1 );
+			}
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
+		}
+	}
+
+	printf("<-- %s\n", __PRETTY_FUNCTION__);
+	return asynSuccess;
+}
+
 
 //asynStatus scllrfPRC::catGitSHA1()
 //{
@@ -823,7 +1030,6 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 //	unsigned int i;
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
-	epicsInt32 errorCount;
 	epicsInt32 tmpData;
 	int32_t signExtBits = 0;
 
@@ -842,8 +1048,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		if(npt_ != (size_t) (1 << ((pFromFpga->data & nptMask)>> 24)))
 		{
 			npt_ = 1 << ((pFromFpga->data & nptMask)>> 24);
-			//XXXX Testing by making the waveform short
-			//npt_ = 4095;
+
 			if(npt_ > traceIQWaveSegmentCount * (traceIQWaveSegmentSize - 1)) // protect against register saying more points than buffer space
 			{
 				npt_ = traceIQWaveSegmentCount * (traceIQWaveSegmentSize - 1);
@@ -857,10 +1062,10 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	break;
 
     case DigDspTraceKeepRAdr|flagReadMask:
-	tmpData = pFromFpga->data & DigDspTraceKeepMask;
+		tmpData = pFromFpga->data & DigDspTraceKeepMask;
 //    printf("%s got data 0x%x for DigDspTraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
-		status = (asynStatus) setIntegerParam(p_DigDspTraceKeepR,
-				(pFromFpga->data & DigDspTraceKeepMask));
+		status = (asynStatus) setUIntDigitalParam(p_DigDspTraceKeepR,
+				(pFromFpga->data & DigDspTraceKeepMask) , DigDspTraceKeepMask);
 		// Count the number of bits set
 		for (nchan_ = 0; tmpData; nchan_++)
 		{
@@ -886,9 +1091,17 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
     case LlrfCircleReadyRAdr|flagReadMask:
 		status = (asynStatus) setIntegerParam(p_LlrfCircleReadyR,
 				(pFromFpga->data & LlrfCircleReadyMask));
-		if ((pFromFpga->data & 0x1) || (pFromFpga->data & 0x2))
+		// if flags are set for any active channels,
+		if (((nCirc0Chan_=0)||(pFromFpga->data & 0x1)) && ((nCirc1Chan_=0)||(pFromFpga->data & 0x2)) &&
+					// and there isn't a pending waveform read, and there is at least one active channel
+					(newCircIQBufAvailable_ == newCircIQBufRead_) && (nCirc0Chan_+nCirc1Chan_ > 0))
 		{
-			waveIsReady = true;
+			// Set the message counter with a "new waveform" notification
+			// to the message counter value for the message we just received
+			newCircIQBufAvailable_ = lastResponseCount_;
+			epicsEventSignal(reqCircIQBufEventId_);
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
+					__PRETTY_FUNCTION__);
 		}
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -896,11 +1109,49 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 				(unsigned ) pFromFpga->data & LlrfCircleReadyMask);
 	break;
 
+    case DigDspMuxShell0DspChanKeepRAdr|flagReadMask:
+		tmpData = pFromFpga->data & DigDspMuxShell0DspChanKeepMask;
+		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell0DspChanKeepR,
+				(pFromFpga->data & DigDspMuxShell0DspChanKeepMask) , DigDspMuxShell0DspChanKeepMask);
+		// Count the number of bits set
+		for (nCirc0Chan_ = 0; tmpData; nCirc0Chan_++)
+		{
+		  tmpData &= tmpData - 1; // clear the least significant bit set
+		}
+		setIntegerParam(p_Circ0NActive, nCirc0Chan_);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspChanKeepRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+	break;
+
+    case DigDspMuxShell1DspChanKeepRAdr|flagReadMask:
+		tmpData = pFromFpga->data & DigDspMuxShell1DspChanKeepMask;
+		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell1DspChanKeepR,
+				(pFromFpga->data & DigDspMuxShell1DspChanKeepMask), DigDspMuxShell1DspChanKeepMask);
+		// Count the number of bits set
+		for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
+		{
+		  tmpData &= tmpData - 1; // clear the least significant bit set
+		}
+		setIntegerParam(p_Circ1NActive, nCirc1Chan_);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspChanKeepRString,
+				(unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+	break;
+
 	default:
 		if( traceIQWavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= traceIQWavesEnd )
 		{
 			//printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
 			processTraceIQWaveReadback(pFromFpga);
+		}
+		else
+		if( circIQBufStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= circIQBufEnd )
+		{
+			//printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
+			processCircIQBufReadback(pFromFpga);
 		}
 		else
 		{
@@ -1002,6 +1253,65 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		}
 
 		break;
+
+    case DigDspMuxShell0DspChanKeepWAdr:
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell0DspChanKeepW, valueSet);
+		if( (valueSet[0] & DigDspMuxShell0DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell0DspChanKeepMask))
+		{
+			// Count the number of bits set
+			tmpData = (pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+			for (nchan_ = 0; tmpData; nchan_++)
+			{
+			  tmpData &= tmpData - 1; // clear the least significant bit set
+			}
+			setIntegerParam(p_Circ0NActive, nCirc0Chan_);
+			printf("%s DigDspMuxShell0DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc0Chan_);
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspChanKeepWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+		}
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell0DspChanKeepWString, valueSet[0] & DigDspMuxShell0DspChanKeepMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+			status = asynError;
+			setParamStatus(p_DigDspMuxShell0DspChanKeepW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+
+    case DigDspMuxShell1DspChanKeepWAdr:
+		status = (asynStatus) getIntegerParam(p_DigDspMuxShell1DspChanKeepW, valueSet);
+		if( (valueSet[0] & DigDspMuxShell1DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell1DspChanKeepMask))
+		{
+			// Count the number of bits set
+			tmpData = (pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+			for (nchan_ = 0; tmpData; nchan_++)
+			{
+			  tmpData &= tmpData - 1; // clear the least significant bit set
+			}
+			setIntegerParam(p_Circ1NActive, nCirc1Chan_);
+			printf("%s DigDspMuxShell1DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc1Chan_);
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspChanKeepWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+		}
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspMuxShell1DspChanKeepWString, valueSet[0] & DigDspMuxShell1DspChanKeepMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+			status = asynError;
+			setParamStatus(p_DigDspMuxShell1DspChanKeepW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+
 	default:
 // TODO: Add checking for arrays. Until then, we'll hit "default" for array values, so not really an error. GWB 8-23-2016
 //		getIntegerParam(p_CommErrorCount, &errorCount);
