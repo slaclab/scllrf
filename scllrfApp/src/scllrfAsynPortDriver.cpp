@@ -80,7 +80,7 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
     setIntegerParam(p_CommErrorCount, 0);
     setDoubleParam(p_PollPeriod, defaultPollPeriod);
 
-    pPolledRegMsg_ = new FpgaReg[1] {{0,0}};
+    pPolledRegMsg_ = new FpgaReg[1] { {flagReadMask,blankData}};
     PolledRegMsgSize_ = 1;
 
     epicsThreadSleep(defaultPollPeriod);
@@ -157,7 +157,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 	asynStatus status = asynSuccess;
     const char *paramName;
     FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
-    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
+    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {flagReadMask,blankData} );
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
@@ -218,7 +218,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 	asynStatus status = asynSuccess;
     const char *paramName;
     FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
-    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
+    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
     int address;
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
@@ -283,7 +283,7 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 	asynStatus status = asynSuccess;
     const char *paramName;
     FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
-    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {0,0} );
+    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
     int address;
 
     epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
