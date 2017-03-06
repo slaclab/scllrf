@@ -1,24 +1,22 @@
-#!../../bin/linux-x86_64/scllrf
+#!../../bin/rhel-6-ia32/scllrf
 # Later will run as:
-#!../../bin/linuxRT-x86_64/scllrf
+#!../../bin/rhel-6-ia32/scllrf
 ## You may have to change scllrf to something else
 ## everywhere it appears in this file
 
 < envPaths
 
-epicsEnvSet(PATH,"/usr/csite/certified/bin/")
-
 #PV=SRFCMTFLLRETURN, iocsoftsrfcmtfcm, srfbat0 (srfl00), 129.57.200.99
 #epicsEnvSet("EPICS_ADDR_LIST","129.57.231.255 129.57.200.99")
 
-# Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","INT")
 # System Location:
 epicsEnvSet("LOCA","CMTF")
+# Hardware type [PRC, RES, INT]
+epicsEnvSet("TYPE","INT")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P","$(TYPE)$(N):")
+# PV prefix name
+epicsEnvSet("P","INT1:")
 # IP address of hardware
 #................................epicsEnvSet( FPGA_IP, "SET IP ADDRESS HERE")
 epicsEnvSet( FPGA_IP, "129.57.231.89")
@@ -52,6 +50,47 @@ asynSetTraceIOMask("myReg",-1,4)
 ##############################################################################
 #< iocBoot/common/iocAdmin.cmd
 #< iocBoot/common/autoSaveConf.cmd
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+# System database:
+#...<startup.system.db
+dbLoadRecords("/usr/srfsite/op/prod_R3.14.12.3.J0/system/6-4/db/systemsoftrfslacint1.db")
+#...<startup.iocAdminLib.db
+dbLoadRecords("/usr/srfsite/op/prod_R3.14.12.3.J0/iocAdminLib/1-1/db/iocAdminLibsoftrfslacint1.db")
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
 
 # =====================================================================
 #Load Additional databases:
@@ -121,4 +160,11 @@ dbpf $(TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)
+
+
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
+< /usr/devuser/lahti/RF_SLAC.2/scllrf/iocBoot/sioc-cmtf-int1/aslo.init
+< /usr/devuser/lahti/RF_SLAC.2/scllrf/iocBoot/sioc-cmtf-int1/prec.init
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
+
 
