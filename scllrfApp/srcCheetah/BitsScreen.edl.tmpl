@@ -16,12 +16,12 @@ y 0
   #end if
  #end if
 #end for
-#if $regcount < 8
-w 716
-h ${150+$regcount*22}
+#if $regcount < 5
+w ${236*$regcount}
+h 485
 #else
-w ${8+716*($regcount//38)}
-h 930
+w 1180
+h ${185 + $regcount*355/5}
 #end if
 font "helvetica-medium-r-12.0"
 ctlFont "helvetica-bold-r-14.0"
@@ -37,7 +37,7 @@ ctlBgColor1 index 0
 ctlBgColor2 index 14
 topShadowColor index 0
 botShadowColor index 14
-title "All ${name} Registers"
+title "All ${name} Bit Fields"
 showGrid
 snapToGrid
 gridSize 4
@@ -51,7 +51,11 @@ minor 1
 release 1
 x 0
 y 0
-w ${724+716*($regcount//38-1)}
+#if $regcount < 5
+w ${236*$regcount}
+#else
+w 1180
+#end if
 h 40
 font "helvetica-bold-r-14.0"
 fontAlign "center"
@@ -68,7 +72,11 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${656+716*($regcount//38-1)}
+#if $regcount < 5
+x ${136+236*$regcount/5}
+#else
+x 1024
+#end if
 y 4
 w 52
 h 28
@@ -83,18 +91,17 @@ endObjectProperties
 
 #set $xoffset = 0
 #set $yoffset = 0
-
 #for $p in sorted($registers, key=lambda k: k['name'])
  #if $p.has_key('bits')
   #if $p.has_key('access') and ('w' in $p.access)
-  \# (Group)
+\# (Group)
 object activeGroupClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 51
-y 63
+x ${xoffset + 51}
+y ${yoffset + 63}
 w 216
 h 335
 
@@ -106,8 +113,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 135
-y 375
+x ${xoffset + 135}
+y ${yoffset + 375}
 w 48
 h 16
 font "helvetica-medium-r-14.0"
@@ -126,8 +133,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 202
-y 75
+x ${xoffset + 202}
+y ${yoffset + 75}
 w 15
 h 288
 controlPv "\$(P)${p.name.upper()}_W"
@@ -136,30 +143,14 @@ onColor index 55
 offColor index 47
 endObjectProperties
 
-\# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 185
-y 75
-w 15
-h 288
-controlPv "\$(P)${p.name.upper()}b"
-lineColor index 14
-onColor index 55
-offColor index 47
-endObjectProperties
-
 \# (Message Button)
 object activeMessageButtonClass
 beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 348
+x ${xoffset + 151}
+y ${yoffset + 348}
 w 15
 h 16
 fgColor index 14
@@ -167,7 +158,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B0"
+controlPv "\$(P)${p.name.upper()}_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -182,8 +173,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 348
+x ${xoffset + 167}
+y ${yoffset + 348}
 w 15
 h 16
 fgColor index 14
@@ -191,7 +182,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B0"
+controlPv "\$(P)${p.name.upper()}_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -206,8 +197,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 329
+x ${xoffset + 151}
+y ${yoffset + 329}
 w 15
 h 16
 fgColor index 14
@@ -215,7 +206,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B1"
+controlPv "\$(P)${p.name.upper()}_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -230,8 +221,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 329
+x ${xoffset + 167}
+y ${yoffset + 329}
 w 15
 h 16
 fgColor index 14
@@ -239,7 +230,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B1"
+controlPv "\$(P)${p.name.upper()}_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -254,8 +245,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 310
+x ${xoffset + 151}
+y ${yoffset + 310}
 w 15
 h 16
 fgColor index 14
@@ -263,7 +254,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B2"
+controlPv "\$(P)${p.name.upper()}_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -278,8 +269,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 310
+x ${xoffset + 167}
+y ${yoffset + 310}
 w 15
 h 16
 fgColor index 14
@@ -287,7 +278,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B2"
+controlPv "\$(P)${p.name.upper()}_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -302,8 +293,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 291
+x ${xoffset + 151}
+y ${yoffset + 291}
 w 15
 h 16
 fgColor index 14
@@ -311,7 +302,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B3"
+controlPv "\$(P)${p.name.upper()}_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -326,8 +317,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 291
+x ${xoffset + 167}
+y ${yoffset + 291}
 w 15
 h 16
 fgColor index 14
@@ -335,7 +326,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B3"
+controlPv "\$(P)${p.name.upper()}_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -350,8 +341,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 273
+x ${xoffset + 151}
+y ${yoffset + 273}
 w 15
 h 16
 fgColor index 14
@@ -359,7 +350,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B4"
+controlPv "\$(P)${p.name.upper()}_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -374,8 +365,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 273
+x ${xoffset + 167}
+y ${yoffset + 273}
 w 15
 h 16
 fgColor index 14
@@ -383,7 +374,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B4"
+controlPv "\$(P)${p.name.upper()}_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -398,8 +389,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 219
-y 75
+x ${xoffset + 219}
+y ${yoffset + 75}
 w 15
 h 288
 controlPv "\$(P)${p.name.upper()}_R"
@@ -414,8 +405,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 256
+x ${xoffset + 151}
+y ${yoffset + 256}
 w 15
 h 16
 fgColor index 14
@@ -423,7 +414,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B5"
+controlPv "\$(P)${p.name.upper()}_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -438,8 +429,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 256
+x ${xoffset + 167}
+y ${yoffset + 256}
 w 15
 h 16
 fgColor index 14
@@ -447,7 +438,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B5"
+controlPv "\$(P)${p.name.upper()}_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -462,8 +453,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 237
+x ${xoffset + 151}
+y ${yoffset + 237}
 w 15
 h 16
 fgColor index 14
@@ -471,7 +462,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B6"
+controlPv "\$(P)${p.name.upper()}_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -486,8 +477,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 237
+x ${xoffset + 167}
+y ${yoffset + 237}
 w 15
 h 16
 fgColor index 14
@@ -495,7 +486,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B6"
+controlPv "\$(P)${p.name.upper()}_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -510,8 +501,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 219
+x ${xoffset + 151}
+y ${yoffset + 219}
 w 15
 h 16
 fgColor index 14
@@ -519,7 +510,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B7"
+controlPv "\$(P)${p.name.upper()}_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -534,8 +525,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 219
+x ${xoffset + 167}
+y ${yoffset + 219}
 w 15
 h 16
 fgColor index 14
@@ -543,7 +534,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B7"
+controlPv "\$(P)${p.name.upper()}_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -558,8 +549,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 201
+x ${xoffset + 151}
+y ${yoffset + 201}
 w 15
 h 16
 fgColor index 14
@@ -567,7 +558,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B8"
+controlPv "\$(P)${p.name.upper()}_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -582,8 +573,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 201
+x ${xoffset + 167}
+y ${yoffset + 201}
 w 15
 h 16
 fgColor index 14
@@ -591,7 +582,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B8"
+controlPv "\$(P)${p.name.upper()}_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -606,8 +597,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 183
+x ${xoffset + 151}
+y ${yoffset + 183}
 w 15
 h 16
 fgColor index 14
@@ -615,7 +606,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B9"
+controlPv "\$(P)${p.name.upper()}_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -630,8 +621,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 183
+x ${xoffset + 167}
+y ${yoffset + 183}
 w 15
 h 16
 fgColor index 14
@@ -639,7 +630,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.B9"
+controlPv "\$(P)${p.name.upper()}_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -654,8 +645,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 165
+x ${xoffset + 151}
+y ${yoffset + 165}
 w 15
 h 16
 fgColor index 14
@@ -663,7 +654,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BA"
+controlPv "\$(P)${p.name.upper()}_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -678,8 +669,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 165
+x ${xoffset + 167}
+y ${yoffset + 165}
 w 15
 h 16
 fgColor index 14
@@ -687,7 +678,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BA"
+controlPv "\$(P)${p.name.upper()}_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -702,8 +693,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 147
+x ${xoffset + 151}
+y ${yoffset + 147}
 w 15
 h 16
 fgColor index 14
@@ -711,7 +702,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BB"
+controlPv "\$(P)${p.name.upper()}_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -726,8 +717,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 147
+x ${xoffset + 167}
+y ${yoffset + 147}
 w 15
 h 16
 fgColor index 14
@@ -735,7 +726,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BB"
+controlPv "\$(P)${p.name.upper()}_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -750,8 +741,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 129
+x ${xoffset + 151}
+y ${yoffset + 129}
 w 15
 h 16
 fgColor index 14
@@ -759,7 +750,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BC"
+controlPv "\$(P)${p.name.upper()}_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -774,8 +765,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 129
+x ${xoffset + 167}
+y ${yoffset + 129}
 w 15
 h 16
 fgColor index 14
@@ -783,7 +774,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BC"
+controlPv "\$(P)${p.name.upper()}_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -798,8 +789,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 112
+x ${xoffset + 151}
+y ${yoffset + 112}
 w 15
 h 16
 fgColor index 14
@@ -807,7 +798,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BD"
+controlPv "\$(P)${p.name.upper()}_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -822,8 +813,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 112
+x ${xoffset + 167}
+y ${yoffset + 112}
 w 15
 h 16
 fgColor index 14
@@ -831,7 +822,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BD"
+controlPv "\$(P)${p.name.upper()}_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -846,8 +837,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 94
+x ${xoffset + 151}
+y ${yoffset + 94}
 w 15
 h 16
 fgColor index 14
@@ -855,7 +846,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BE"
+controlPv "\$(P)${p.name.upper()}_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -870,8 +861,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 94
+x ${xoffset + 167}
+y ${yoffset + 94}
 w 15
 h 16
 fgColor index 14
@@ -879,7 +870,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BE"
+controlPv "\$(P)${p.name.upper()}_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -894,8 +885,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 151
-y 76
+x ${xoffset + 151}
+y ${yoffset + 76}
 w 15
 h 16
 fgColor index 14
@@ -903,7 +894,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BF"
+controlPv "\$(P)${p.name.upper()}_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -918,8 +909,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 167
-y 76
+x ${xoffset + 167}
+y ${yoffset + 76}
 w 15
 h 16
 fgColor index 14
@@ -927,7 +918,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}b.BF"
+controlPv "\$(P)${p.name.upper()}_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -942,8 +933,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 349
+x ${xoffset + 60}
+y ${yoffset + 349}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -951,7 +942,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**0
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 0"
+#end if
 }
 autoSize
 endObjectProperties
@@ -962,8 +963,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 330
+x ${xoffset + 60}
+y ${yoffset + 330}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -972,7 +973,17 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-  "Bit 1"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**1
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 1"
+#end if
 }
 autoSize
 endObjectProperties
@@ -983,8 +994,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 347
+x ${xoffset + 237}
+y ${yoffset + 347}
 w 11
 h 14
 font "helvetica-bold-r-12.0"
@@ -1003,8 +1014,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 77
+x ${xoffset + 237}
+y ${yoffset + 77}
 w 14
 h 14
 font "helvetica-bold-r-12.0"
@@ -1023,8 +1034,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 311
+x ${xoffset + 60}
+y ${yoffset + 311}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1032,7 +1043,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**2
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 2"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1043,8 +1064,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 292
+x ${xoffset + 60}
+y ${yoffset + 292}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1052,7 +1073,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**3
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 3"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1063,8 +1094,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 274
+x ${xoffset + 60}
+y ${yoffset + 274}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1072,7 +1103,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**4
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 4"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1083,8 +1124,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 257
+x ${xoffset + 60}
+y ${yoffset + 257}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1092,7 +1133,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**5
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 5"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1103,8 +1154,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 238
+x ${xoffset + 60}
+y ${yoffset + 238}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1112,7 +1163,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**6
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 6"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1123,15 +1184,25 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 220
+x ${xoffset + 60}
+y ${yoffset + 220}
 w 43
 h 14
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-  "Dif Wait"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**7
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 7"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1142,8 +1213,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 221
+x ${xoffset + 237}
+y ${yoffset + 221}
 w 15
 h 14
 font "helvetica-bold-r-12.0"
@@ -1162,8 +1233,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 203
+x ${xoffset + 237}
+y ${yoffset + 203}
 w 11
 h 14
 font "helvetica-bold-r-12.0"
@@ -1182,8 +1253,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 202
+x ${xoffset + 60}
+y ${yoffset + 202}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1191,7 +1262,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**8
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+       "bit 8"
+#end if 
 }
 autoSize
 endObjectProperties
@@ -1202,8 +1283,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 185
+x ${xoffset + 60}
+y ${yoffset + 185}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1211,7 +1292,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**9
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+       "bit 9"
+#end if 
 }
 autoSize
 endObjectProperties
@@ -1222,8 +1313,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 89
-y 167
+x ${xoffset + 60}
+y ${yoffset + 167}
 w 57
 h 14
 font "helvetica-medium-r-12.0"
@@ -1231,7 +1322,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Zone SEL"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**10
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+       "bit 10"
+#end if 
 }
 autoSize
 endObjectProperties
@@ -1242,8 +1343,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 82
-y 148
+x ${xoffset + 60}
+y ${yoffset + 148}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1251,7 +1352,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Lock Mag"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**11
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+       "bit 11"
+#end if 
 }
 autoSize
 endObjectProperties
@@ -1262,8 +1373,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 82
-y 130
+x ${xoffset + 60}
+y ${yoffset + 130}
 w 66
 h 14
 font "helvetica-medium-r-12.0"
@@ -1271,7 +1382,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Lock Phase"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**12
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+       "bit 12"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1282,8 +1403,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 69
-y 113
+x ${xoffset + 60}
+y ${yoffset + 113}
 w 72
 h 14
 font "helvetica-medium-r-12.0"
@@ -1291,7 +1412,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DETAflt Auto"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**13
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+       "bit 13"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1302,8 +1433,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 72
-y 95
+x ${xoffset + 60}
+y ${yoffset + 95}
 w 72
 h 14
 font "helvetica-medium-r-12.0"
@@ -1311,7 +1442,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Lorentz Lock"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**14
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+    "bit 14"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1322,8 +1463,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 92
-y 77
+x ${xoffset + 60}
+y ${yoffset + 77}
 w 54
 h 14
 font "helvetica-medium-r-12.0"
@@ -1331,7 +1472,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Mag Mod"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**15
+  "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 15"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1342,8 +1493,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 51
-y 63
+x ${xoffset + 51}
+y ${yoffset + 63}
 w 216
 h 335
 lineColor index 14
@@ -1362,8 +1513,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 51
-y 63
+x ${xoffset + 51}
+y ${yoffset + 63}
 w 216
 h 335
 
@@ -1375,8 +1526,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 135
-y 375
+x ${xoffset + 135}
+y ${yoffset + 375}
 w 48
 h 16
 font "helvetica-medium-r-14.0"
@@ -1395,8 +1546,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 219
-y 75
+x ${xoffset + 219}
+y ${yoffset + 75}
 w 15
 h 288
 controlPv "\$(P)${p.name.upper()}_R"
@@ -1411,8 +1562,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 349
+x ${xoffset + 60}
+y ${yoffset + 349}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1420,7 +1571,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**0
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 0"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1431,8 +1592,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 330
+x ${xoffset + 60}
+y ${yoffset + 330}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1441,7 +1602,17 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-  "M Loop[0]"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**1
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 1"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1452,8 +1623,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 347
+x ${xoffset + 237}
+y ${yoffset + 347}
 w 11
 h 14
 font "helvetica-bold-r-12.0"
@@ -1472,8 +1643,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 77
+x ${xoffset + 237}
+y ${yoffset + 77}
 w 14
 h 14
 font "helvetica-bold-r-12.0"
@@ -1492,8 +1663,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 311
+x ${xoffset + 60}
+y ${yoffset + 311}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1501,7 +1672,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**2
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 2"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1512,8 +1693,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 292
+x ${xoffset + 60}
+y ${yoffset + 292}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1521,7 +1702,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**3
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 3"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1532,8 +1723,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 274
+x ${xoffset + 60}
+y ${yoffset + 274}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1541,7 +1732,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**4
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 4"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1552,8 +1753,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 257
+x ${xoffset + 60}
+y ${yoffset + 257}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1561,7 +1762,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**5
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 5"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1572,8 +1783,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 238
+x ${xoffset + 60}
+y ${yoffset + 238}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1581,7 +1792,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**6
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 6"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1592,15 +1813,25 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 220
+x ${xoffset + 60}
+y ${yoffset + 220}
 w 43
 h 14
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-  "Dif Wait"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**7
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 7"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1611,8 +1842,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 221
+x ${xoffset + 237}
+y ${yoffset + 221}
 w 15
 h 14
 font "helvetica-bold-r-12.0"
@@ -1631,8 +1862,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 237
-y 203
+x ${xoffset + 237}
+y ${yoffset + 203}
 w 11
 h 14
 font "helvetica-bold-r-12.0"
@@ -1651,8 +1882,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 202
+x ${xoffset + 60}
+y ${yoffset + 202}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1660,7 +1891,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**8
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 8"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1671,8 +1912,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 88
-y 185
+x ${xoffset + 60}
+y ${yoffset + 185}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1680,7 +1921,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Bit N"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**9
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 9"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1691,8 +1942,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 89
-y 167
+x ${xoffset + 60}
+y ${yoffset + 167}
 w 57
 h 14
 font "helvetica-medium-r-12.0"
@@ -1700,7 +1951,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Zone SEL"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**10
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 10"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1711,8 +1972,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 82
-y 148
+x ${xoffset + 60}
+y ${yoffset + 148}
 w 56
 h 14
 font "helvetica-medium-r-12.0"
@@ -1720,7 +1981,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Lock Mag"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**11
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 11"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1731,8 +2002,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 82
-y 130
+x ${xoffset + 60}
+y ${yoffset + 130}
 w 66
 h 14
 font "helvetica-medium-r-12.0"
@@ -1740,7 +2011,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Lock Phase"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**12
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 12"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1751,8 +2032,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 69
-y 113
+x ${xoffset + 60}
+y ${yoffset + 113}
 w 72
 h 14
 font "helvetica-medium-r-12.0"
@@ -1760,7 +2041,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DETAflt Auto"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**13
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 13"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1771,8 +2062,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 72
-y 95
+x ${xoffset + 60}
+y ${yoffset + 95}
 w 72
 h 14
 font "helvetica-medium-r-12.0"
@@ -1780,7 +2071,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Lorentz Lock"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**14
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 14"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1791,8 +2092,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 92
-y 77
+x ${xoffset + 60}
+y ${yoffset + 77}
 w 54
 h 14
 font "helvetica-medium-r-12.0"
@@ -1800,7 +2101,17 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Mag Mod"
+#set $bitsDict = $p.bits
+#set $bitFound = 0
+#for $thisBit in $bitsDict
+  #if  $bitsDict[thisBit] == 2**15
+    "$thisBit"
+    #set $bitFound = 1
+  #end if
+#end for
+#if $bitFound == 0
+  "bit 15"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1811,8 +2122,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 51
-y 63
+x ${xoffset + 51}
+y ${yoffset + 63}
 w 216
 h 335
 lineColor index 14
@@ -1824,12 +2135,10 @@ endGroup
 endObjectProperties
 
   #end if  
-  #set $yoffset = $yoffset + 22
+  #set $xoffset = $xoffset + 236
  #end if
-
- #if $yoffset > 820
-  #set $yoffset = 0
-  #set $xoffset = $xoffset + 716
- #end if
- 
+ #if $xoffset > 1180
+  #set $xoffset = 0
+  #set $yoffset = $yoffset + 355
+ #end if 
 #end for
