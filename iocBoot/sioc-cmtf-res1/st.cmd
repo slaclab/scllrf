@@ -1,21 +1,20 @@
-#!../../bin/linux-x86_64/scllrf
+#!../../bin/rhel-6-ia32/scllrf
+#.................................#!../../bin/linux-x86_64/scllrf
 # Later will run as:
-#!../../bin/linuxRT-x86_64/scllrf
+#.................................#!../../bin/linuxRT-x86_64/scllrf
 ## You may have to change scllrf to something else
 ## everywhere it appears in this file
 
 < envPaths
 
-epicsEnvSet(PATH,"/usr/csite/certified/bin/")
-
-# Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","RES")
 # System Location:
 epicsEnvSet("LOCA","CMTF")
+# Hardware type [PRC, RES, INT]
+epicsEnvSet("TYPE","RES")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P","$(TYPE)$(N):")
+# PV name prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
+epicsEnvSet("P", "$(TYPE)$(N):")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "129.57.231.90")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
@@ -99,8 +98,8 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpf $(P)RUN_STOP.HIGH 0
-dbpf $(P)RUN_STOP 1
+dbpf $(TYPE)$(N):RUN_STOP.HIGH 0
+dbpf $(TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)
