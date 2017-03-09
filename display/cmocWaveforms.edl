@@ -236,7 +236,6 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 motifWidget
-limitsFromDb
 nullColor index 0
 smartRefresh
 fastUpdate

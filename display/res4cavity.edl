@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1939
-y 137
+x 1943
+y 158
 w 923
 h 906
 font "helvetica-medium-r-12.0"
@@ -69,7 +69,8 @@ controlPv "$(P):SI:NAME"
 font "helvetica-bold-r-14.0"
 fgColor index 13
 bgColor index 63
-limitsFromDb
+topShadowColor index 162771688
+botShadowColor index 0
 nullColor index 47
 useHexPrefix
 newPos
@@ -147,7 +148,8 @@ format "hex"
 font "helvetica-bold-r-14.0"
 fgColor index 13
 bgColor index 63
-limitsFromDb
+topShadowColor index 162661624
+botShadowColor index 0
 nullColor index 40
 newPos
 objType "monitors"
@@ -167,8 +169,9 @@ controlPv "LOC\\$(!W)name"
 font "helvetica-medium-r-12.0"
 fgColor index 13
 bgColor index 60
+topShadowColor index 162375548
+botShadowColor index 162375548
 autoHeight
-limitsFromDb
 nullColor index 40
 useHexPrefix
 newPos
@@ -210,8 +213,9 @@ font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 13
 bgColor index 4
+topShadowColor index 162776968
+botShadowColor index 0
 useDisplayBg
-limitsFromDb
 nullColor index 40
 useHexPrefix
 newPos
@@ -232,9 +236,10 @@ controlPv "$(P):SI:MESSAGE"
 font "helvetica-medium-r-12.0"
 fgColor index 13
 bgColor index 4
+topShadowColor index 162782344
+botShadowColor index 0
 useDisplayBg
 autoHeight
-limitsFromDb
 nullColor index 40
 useHexPrefix
 newPos
@@ -285,10 +290,10 @@ center
 sizeOfs 5
 numDsps 4
 displayFileName {
-  0 "scllrfRES1cavityRegisters"
-  1 "scllrfRES1cavityRegisters"
-  2 "scllrfRES1cavityRegisters"
-  3 "scllrfRES1cavityRegisters"
+  0 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
+  1 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
+  2 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
+  3 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
 }
 menuLabel {
   0 "Cavity 1"
@@ -313,8 +318,8 @@ minor 1
 release 1
 x 20
 y 112
-w 120
-h 16
+w 77
+h 14
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 0
@@ -325,7 +330,7 @@ value {
 autoSize
 endObjectProperties
 
-# (Text Entry)
+# (Textentry)
 object TextentryClass
 beginObjectProperties
 major 10
@@ -352,8 +357,8 @@ minor 1
 release 1
 x 20
 y 200
-w 120
-h 16
+w 112
+h 14
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 0
@@ -364,7 +369,7 @@ value {
 autoSize
 endObjectProperties
 
-# (Text Entry)
+# (Textentry)
 object TextentryClass
 beginObjectProperties
 major 10
@@ -391,8 +396,8 @@ minor 1
 release 1
 x 20
 y 400
-w 120
-h 16
+w 70
+h 14
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 0
@@ -411,7 +416,7 @@ minor 1
 release 1
 x 20
 y 292
-w 120
+w 82
 h 28
 font "helvetica-medium-r-12.0"
 fgColor index 14
@@ -424,7 +429,7 @@ value {
 autoSize
 endObjectProperties
 
-# (Text Entry)
+# (Textentry)
 object TextentryClass
 beginObjectProperties
 major 10
@@ -458,9 +463,10 @@ font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
 bgColor index 0
+topShadowColor index 162787720
+botShadowColor index 0
 useDisplayBg
 motifWidget
-limitsFromDb
 nullColor index 0
 smartRefresh
 fastUpdate

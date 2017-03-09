@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1147
-y 81
+x 539
+y 58
 w 740
 h 812
 font "helvetica-medium-r-12.0"
@@ -61,9 +61,10 @@ controlPv "$(P):CAVITY$(N)_DETUNE_ERR_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 795698277
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -115,7 +116,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 166057144
+botShadowColor index -649068543
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -158,9 +160,10 @@ controlPv "$(P):MOTOR$(N)_ABS_STEPS_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 67793
+botShadowColor index 148215496
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -212,7 +215,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 1
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -255,9 +259,10 @@ controlPv "$(P):MOTOR$(N)_ACC_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -306,15 +311,15 @@ controlPv "$(P):MOTOR$(N)_ACC_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -332,9 +337,10 @@ controlPv "$(P):MOTOR$(N)_ACC_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -386,7 +392,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -429,9 +436,10 @@ controlPv "$(P):MOTOR$(N)_BRD_TMP_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -483,7 +491,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -526,9 +535,10 @@ controlPv "$(P):MOTOR$(N)_CNTL_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -577,15 +587,15 @@ controlPv "$(P):MOTOR$(N)_CNTL_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -603,9 +613,10 @@ controlPv "$(P):MOTOR$(N)_CNTL_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -657,7 +668,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -700,9 +712,10 @@ controlPv "$(P):MOTOR$(N)_DRVI_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -751,15 +764,15 @@ controlPv "$(P):MOTOR$(N)_DRVI_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 1936
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -777,9 +790,10 @@ controlPv "$(P):MOTOR$(N)_DRVI_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -831,7 +845,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -874,9 +889,10 @@ controlPv "$(P):MOTOR$(N)_LACC_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -928,7 +944,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -971,9 +988,10 @@ controlPv "$(P):MOTOR$(N)_LSTEPS_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1025,7 +1043,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1068,9 +1087,10 @@ controlPv "$(P):MOTOR$(N)_LVLCTY_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1122,7 +1142,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1165,9 +1186,10 @@ controlPv "$(P):MOTOR$(N)_SGN_STEPS_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1219,7 +1241,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 149081752
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1262,9 +1285,10 @@ controlPv "$(P):MOTOR$(N)_STAT_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1316,7 +1340,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1359,9 +1384,10 @@ controlPv "$(P):MOTOR$(N)_STEPS_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 673468986
+botShadowColor index 693518659
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1410,15 +1436,15 @@ controlPv "$(P):MOTOR$(N)_STEPS_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 673468986
+botShadowColor index 693518659
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -1436,9 +1462,10 @@ controlPv "$(P):MOTOR$(N)_STEPS_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1490,7 +1517,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1533,9 +1561,10 @@ controlPv "$(P):MOTOR$(N)_VLCTY_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1584,15 +1613,15 @@ controlPv "$(P):MOTOR$(N)_VLCTY_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -1610,9 +1639,10 @@ controlPv "$(P):MOTOR$(N)_VLCTY_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1664,7 +1694,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1707,9 +1738,10 @@ controlPv "$(P):PIEZO$(N)_ADC1_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1761,7 +1793,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1804,9 +1837,10 @@ controlPv "$(P):PIEZO$(N)_ADC2_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1858,7 +1892,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1901,9 +1936,10 @@ controlPv "$(P):PIEZO$(N)_BRD_SERNUM_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1955,7 +1991,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -1998,9 +2035,10 @@ controlPv "$(P):PIEZO$(N)_BRD_TMP_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2052,7 +2090,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -2095,9 +2134,10 @@ controlPv "$(P):PIEZO$(N)_CNTL_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2146,15 +2186,15 @@ controlPv "$(P):PIEZO$(N)_CNTL_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -2172,9 +2212,10 @@ controlPv "$(P):PIEZO$(N)_CNTL_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index -60293119
+botShadowColor index 68388
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2226,7 +2267,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -2269,9 +2311,10 @@ controlPv "$(P):PIEZO$(N)_DAC1_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 16097584
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2320,15 +2363,15 @@ controlPv "$(P):PIEZO$(N)_DAC1_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -2346,9 +2389,10 @@ controlPv "$(P):PIEZO$(N)_DAC1_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2400,7 +2444,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -2443,9 +2488,10 @@ controlPv "$(P):PIEZO$(N)_DAC2_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2494,15 +2540,15 @@ controlPv "$(P):PIEZO$(N)_DAC2_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 149797656
+botShadowColor index 16
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -2520,9 +2566,10 @@ controlPv "$(P):PIEZO$(N)_DAC2_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2574,7 +2621,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -2617,9 +2665,10 @@ controlPv "$(P):PIEZO$(N)_HIGH_WINDOW_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2668,15 +2717,15 @@ controlPv "$(P):PIEZO$(N)_HIGH_WINDOW_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 18
+botShadowColor index 14
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -2694,9 +2743,10 @@ controlPv "$(P):PIEZO$(N)_HIGH_WINDOW_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 1953
+botShadowColor index 146858224
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2748,7 +2798,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 306
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -2791,9 +2842,10 @@ controlPv "$(P):PIEZO$(N)_IGAIN_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 149858768
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2842,15 +2894,15 @@ controlPv "$(P):PIEZO$(N)_IGAIN_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -2868,9 +2920,10 @@ controlPv "$(P):PIEZO$(N)_IGAIN_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -2922,7 +2975,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 149891664
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -2965,9 +3019,10 @@ controlPv "$(P):PIEZO$(N)_LOW_WINDOW_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 24
+botShadowColor index 149893072
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -3016,15 +3071,15 @@ controlPv "$(P):PIEZO$(N)_LOW_WINDOW_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
 newPos
 objType "controls"
-clipToDspLimits
 noExecuteClipMask
 endObjectProperties
 
@@ -3042,9 +3097,10 @@ controlPv "$(P):PIEZO$(N)_LOW_WINDOW_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -3096,7 +3152,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 0
+botShadowColor index 0
 nullColor index 0
 smartRefresh
 useHexPrefix
@@ -3139,9 +3196,10 @@ controlPv "$(P):PIEZO$(N)_STAT_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
+topShadowColor index 0
+botShadowColor index 0
 editable
 motifWidget
-limitsFromDb
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -3193,7 +3251,8 @@ fontAlign "center"
 fgColor index 15
 fgAlarm
 bgColor index 12
-limitsFromDb
+topShadowColor index 16
+botShadowColor index 149946112
 nullColor index 0
 smartRefresh
 useHexPrefix
