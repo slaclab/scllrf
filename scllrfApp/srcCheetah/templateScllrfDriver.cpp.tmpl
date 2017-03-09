@@ -90,10 +90,10 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 #set $msgRegCount = 0
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if msgRegCount % 174 == 0
-		{ 0, 0 },
-  #end if
   #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
+    #if msgRegCount % 174 == 0
+		{ 0, 0 },
+    #end if
 		{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
   #set $prevAdr = $p.address
   #set $msgRegCount += 1

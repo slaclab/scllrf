@@ -82,6 +82,11 @@ protected:
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 
+#if $p.has_key('nelm') and $p.nelm>16
+	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+#end if
+
+
 #set $first = True
 /* Registers */
 #for $p in sorted($registers, key=lambda k: k['name'])

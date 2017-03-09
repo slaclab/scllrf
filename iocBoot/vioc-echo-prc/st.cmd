@@ -51,7 +51,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.template","P=ICC,PORT=myReg")
+dbLoadRecords("db/$(TYPE)extra.db","P=ICC,PORT=myReg")
 dbLoadRecords("db/scllrfPRCRegisterAsync.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases

@@ -7,3 +7,4 @@ iocBoot/*/envPaths
 /.settings/
 /data/
 *.pyc
+O.*

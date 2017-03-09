@@ -2,7 +2,7 @@ file testAsynPortDriverIn.template
 {
     pattern { NAME , driver}
 #for $p in $registers
-#if $p.has_key('nelms')
+#if $p.has_key('nelm')
 
 #else
 #if $p.has_key('dtype')
@@ -23,7 +23,7 @@ file testAsynPortDriverOut.template
 {
     pattern { NAME , driver}
 #for $p in $registers
-#if $p.has_key('nelms')
+#if $p.has_key('nelm')
 
 #else
 #if $p.has_key('dtype')
@@ -53,16 +53,16 @@ file testAsynPortWaveform.template
 #if $p.has_key('dtype')
   #if $p.dtype == "string"
     #if $p.access == 'r'
-           { ${p.name} , ${name}, asynOctetRead, CHAR, ${p.nelms} }
+           { ${p.name} , ${name}, asynOctetRead, CHAR, ${p.nelm} }
     #end if
   #else
-           { ${p.name} , ${name}, asynInt32ArrayIn, ULONG, ${p.nelms} }
+           { ${p.name} , ${name}, asynInt32ArrayIn, ULONG, ${p.nelm} }
   #end if
-#else if $p.has_key('nelms')
+#else if $p.has_key('nelm')
   #if $p.access == 'r'
-           { ${p.name} , ${name}, asynInt32ArrayIn, ULONG, ${p.nelms} }
+           { ${p.name} , ${name}, asynInt32ArrayIn, ULONG, ${p.nelm} }
   #else
-           { ${p.name} , ${name}, asynInt32ArrayOut, ULONG, ${p.nelms} }
+           { ${p.name} , ${name}, asynInt32ArrayOut, ULONG, ${p.nelm} }
   #end if
 #end if
 #end for

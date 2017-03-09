@@ -35,3 +35,53 @@ record(longin, "$(P)I_Q_22BIT_NELM")
     field( INP,  "@asyn($(PORT),0) I_Q_22BIT_NELM")
     field( SCAN, "I/O Intr")
 }
+record(ai, "$(P)IFACT")
+{
+    field( PINI, "NO")
+}
+
+record(ao, "$(P)IFDES")
+{
+    field( PINI, "NO")
+}
+
+#record(calc, "$(P)IFDES2MODULO")
+#{
+#	field(INPA, "$(P)IFDES")
+#	field(CALC, "
+#
+#record(ai, "$(P)DIG_DSP_DDSA_MODULO_R")
+#{
+#    field( PINI, "NO")
+#    field( DTYP, "asynInt32")
+#    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_MODULO_R")
+#    field( SCAN, "I/O Intr")
+#    field( HOPR, "0x00000FFF")
+#    field( LOPR, 0)
+#	field(PREC, 3)
+#    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#
+#record(ai, "$(P)DIG_DSP_DDSA_PHSTEP_H_R")
+#{
+#    field( PINI, "NO")
+#    field( DTYP, "asynInt32")
+#    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_PHSTEP_H_R")
+#    field( SCAN, "I/O Intr")
+#    field( HOPR, "0x000FFFFF")
+#    field( LOPR, 0)
+#	field(PREC, 3)
+#    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#
+#record(ai, "$(P)DIG_DSP_DDSA_PHSTEP_L_R")
+#{
+#    field( PINI, "NO")
+#    field( DTYP, "asynInt32")
+#    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_PHSTEP_L_R")
+#    field( SCAN, "I/O Intr")
+#    field( HOPR, "0x00000FFF")
+#    field( LOPR, 0)
+#	field(PREC, 3)
+#    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
