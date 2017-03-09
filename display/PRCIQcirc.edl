@@ -1,0 +1,1462 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 715
+y 107
+w 985
+h 647
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 18
+y 15
+w 640
+h 480
+# Appearance
+border
+graphTitle "I Waveforms"
+xLabel "Point"
+yLabel "Count"
+fgColor index 14
+bgColor index 0
+gridColor index 14
+font "helvetica-medium-r-18.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+# Y2 axis properties
+showY2Axis
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 8
+xPv {
+  0 "$(P):CIRC_IQ_BUF_$(SH)_I_0"
+  1 "$(P):CIRC_IQ_BUF_$(SH)_I_1"
+  2 "$(P):CIRC_IQ_BUF_$(SH)_I_2"
+  3 "$(P):CIRC_IQ_BUF_$(SH)_I_3"
+  4 "$(P):CIRC_IQ_BUF_$(SH)_I_4"
+  5 "$(P):CIRC_IQ_BUF_$(SH)_I_5"
+  6 "$(P):CIRC_IQ_BUF_$(SH)_I_6"
+  7 "$(P):CIRC_IQ_BUF_$(SH)_I_7"
+}
+yPv {
+  0 "$(P):CIRC_IQ_BUF_$(SH)_Q_0"
+  1 "$(P):CIRC_IQ_BUF_$(SH)_Q_1"
+  2 "$(P):CIRC_IQ_BUF_$(SH)_Q_2"
+  3 "$(P):CIRC_IQ_BUF_$(SH)_Q_3"
+  4 "$(P):CIRC_IQ_BUF_$(SH)_Q_4"
+  5 "$(P):CIRC_IQ_BUF_$(SH)_Q_5"
+  6 "$(P):CIRC_IQ_BUF_$(SH)_Q_6"
+  7 "$(P):CIRC_IQ_BUF_$(SH)_Q_7"
+}
+ySigned {
+  0 1
+  1 1
+  2 1
+  3 1
+  4 1
+  5 1
+  6 1
+  7 1
+}
+plotColor {
+  0 index 21
+  1 index 26
+  2 index 31
+  3 index 36
+  4 index 41
+  5 index 45
+  6 index 58
+  7 index 63
+}
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 700
+y 20
+w 160
+h 40
+fgColor index 14
+bgColor index 3
+selectColor index 30
+inconsistentColor index 14
+topShadowColor index 7
+botShadowColor index 12
+controlPv "$(P):RUN_STOP"
+font "helvetica-medium-r-18.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 360
+y 570
+w 160
+h 20
+controlPv "$(P):DIG_DSP_TRACE_KEEP_R"
+lineColor index 14
+onColor index 15
+offColor index 0
+numBits 12
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 360
+y 540
+w 160
+h 18
+controlPv "$(P):CIRC_$(N)_N_ACTIVE"
+format "exponential"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 0
+smartRefresh
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 120
+y 550
+w 140
+h 30
+controlPv "$(P):DIG_DSP_TRACE_KEEP_W"
+format "hex"
+font "helvetica-medium-r-14.0"
+fgColor index 26
+bgColor index 5
+editable
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 350
+y 510
+w 180
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Active Channel Count"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 360
+y 600
+w 49
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch 11"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 480
+y 600
+w 39
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 110
+y 510
+w 172
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Active Channel Mask"
+}
+autoSize
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 690
+y 490
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BB"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 710
+y 490
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BB"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 690
+y 570
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BC"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 710
+y 570
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BC"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 690
+y 550
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BD"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 710
+y 550
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BD"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 690
+y 530
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BE"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 710
+y 530
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BE"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 690
+y 510
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BF"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 710
+y 510
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BF"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 660
+y 350
+w 321
+h 16
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP"
+}
+autoSize
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 100
+w 210
+h 240
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 714
+y 100
+w 210
+h 240
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 837
+y 110
+w 20
+h 210
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+numBits 12
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 817
+y 110
+w 20
+h 210
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+numBits 12
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 304
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 304
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 284
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 284
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 265
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 265
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 245
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 245
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 226
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 226
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 857
+y 110
+w 20
+h 210
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_R"
+lineColor index 14
+onColor index 55
+offColor index 47
+numBits 12
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 207
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 207
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 187
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 187
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 168
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 168
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 148
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B8"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 148
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B8"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 129
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B9"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 129
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.B9"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 777
+y 110
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BA"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 797
+y 110
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W.BA"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 899
+y 310
+w 7
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 892
+y 114
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "11"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 110
+w 37
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 11"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 127
+w 37
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 10"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 145
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 9"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 163
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+value {
+  "Ch. 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 899
+y 210
+w 7
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "5"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 899
+y 190
+w 7
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "6"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 181
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 7"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 199
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 6"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 216
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 5"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 234
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 4"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 252
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 3"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 270
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 2"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 288
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 1"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 727
+y 306
+w 30
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch. 0"
+}
+autoSize
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
