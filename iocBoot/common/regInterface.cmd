@@ -14,7 +14,7 @@ epicsEnvSet("EPICS\_IOC\_LOG_CLIENT_INET","${IOC}")
 # initial startup.cmd: another job for hookIOC.py :)
 # Not needed caRepeater is started up by laci for all IOCs at
 # CPU boot up.
-epicsEnvSet(PATH,"${EPICS_BASE}/bin/rhel-6-ia32")
+epicsEnvSet(PATH,"${EPICS_BASE}/bin/$(ARCH)")
 
 # ========================================================
 # Support Large Arrays/Waveforms; Number in Bytes
@@ -50,12 +50,12 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 
 # Set up communication with FPGA
 drvAsynIPPortConfigure("myIP","$(FPGA_IP):$(PORT) UDP")
-dbLoadRecords("db/asynRecord.db","P=$(TYPE)$(N),R=ASYN_IP,PORT=myIP,ADDR=0,IMAX=0,OMAX=0")
+dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=myIP,ADDR=0,IMAX=0,OMAX=0")
 
 
 #epicsThreadSleep(1.0)
 scllrf$(TYPE)Configure( "myReg","myIP")
-dbLoadRecords("db/asynRecord.db","P=$(TYPE)$(N),R=ASYN_REG,PORT=myReg,ADDR=0,IMAX=0,OMAX=0")
+dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=myReg,ADDR=0,IMAX=0,OMAX=0")
 
 epicsThreadSleep(0.2)
 
