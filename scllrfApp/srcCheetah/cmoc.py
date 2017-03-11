@@ -1,4 +1,4 @@
-{ "name" : "cmoc",
+d={ "name" : "cmoc",
      'registers': [ 
     {
     "name" : "Magic", 

@@ -575,18 +575,6 @@ record(ai, "$(P)TRACE_STATUS2_R")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ai, "$(P)LLRF_CIRCLE_READY_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) LLRF_CIRCLE_READY_R")
-    field( SCAN, "I/O Intr")
-    field( HOPR, "0x00000003")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
 record(ai, "$(P)ADC_MMCM_R")
 {
     field( PINI, "NO")
@@ -911,18 +899,6 @@ record(ai, "$(P)DIG_DSP_AVERAGE_LEN_R")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ai, "$(P)DIG_DSP_BUF_TRIG_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_BUF_TRIG_R")
-    field( SCAN, "I/O Intr")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
 record(ai, "$(P)DIG_DSP_CIC_PERIOD_R")
 {
     field( PINI, "NO")
@@ -942,18 +918,6 @@ record(ai, "$(P)DIG_DSP_CIC_SHIFT_R")
     field( INP,  "@asyn($(PORT),0) DIG_DSP_CIC_SHIFT_R")
     field( SCAN, "I/O Intr")
     field( HOPR, "0x0000000F")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(ai, "$(P)DIG_DSP_CIRCLE_BUF_FLIP_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_CIRCLE_BUF_FLIP_R")
-    field( SCAN, "I/O Intr")
-    field( HOPR, "0x00000003")
     field( LOPR, 0)
 	field(PREC, 3)
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
@@ -2099,18 +2063,6 @@ record(ai, "$(P)DIG_DSP_SSA_STIM_PERTSTEP_R")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ai, "$(P)DIG_DSP_TRACE_RESET_WE_R")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) DIG_DSP_TRACE_RESET_WE_R")
-    field( SCAN, "I/O Intr")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
 record(ai, "$(P)DIG_DSP_TRIG_INTERNAL_R")
 {
     field( PINI, "NO")
@@ -2571,19 +2523,6 @@ record(ao, "$(P)DIG_DSP_AVERAGE_LEN_W")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ao, "$(P)DIG_DSP_BUF_TRIG_W")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) DIG_DSP_BUF_TRIG_W")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000001")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( asyn:READBACK, "1")
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
 record(ao, "$(P)DIG_DSP_CIC_PERIOD_W")
 {
     field( PINI, "NO")
@@ -2604,19 +2543,6 @@ record(ao, "$(P)DIG_DSP_CIC_SHIFT_W")
     field( OUT,  "@asyn($(PORT),0) DIG_DSP_CIC_SHIFT_W")
     field( SCAN, "Passive")
     field( HOPR, "0x0000000F")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( asyn:READBACK, "1")
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(ao, "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) DIG_DSP_CIRCLE_BUF_FLIP_W")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000003")
     field( LOPR, 0)
 	field(PREC, 3)
     info( asyn:READBACK, "1")
@@ -3852,19 +3778,6 @@ record(ao, "$(P)DIG_DSP_SSA_STIM_PERTSTEP_W")
     field( OUT,  "@asyn($(PORT),0) DIG_DSP_SSA_STIM_PERTSTEP_W")
     field( SCAN, "Passive")
     field( HOPR, "0x0000FFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( asyn:READBACK, "1")
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-
-record(ao, "$(P)DIG_DSP_TRACE_RESET_WE_W")
-{
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0) DIG_DSP_TRACE_RESET_WE_W")
-    field( SCAN, "Passive")
-    field( HOPR, "0x00000001")
     field( LOPR, 0)
 	field(PREC, 3)
     info( asyn:READBACK, "1")
@@ -6386,6 +6299,33 @@ record(ao, "$(P)DIG_DSP_MUX_SHELL_1_DSP_LP_NOTCH_LP1B_KY_W1")
 
 
 # MBBI/MBBO
+record(mbbiDirect, "$(P)LLRF_CIRCLE_READY_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( INP,  "@asynMask($(PORT),0, 0x00000003, 0.1) LLRF_CIRCLE_READY_R")
+    field( NOBT, "2")
+    field( SCAN, "I/O Intr")
+}
+
+record(mbbiDirect, "$(P)DIG_DSP_BUF_TRIG_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( INP,  "@asynMask($(PORT),0, 0x00000001, 0.1) DIG_DSP_BUF_TRIG_R")
+    field( NOBT, "1")
+    field( SCAN, "I/O Intr")
+}
+
+record(mbbiDirect, "$(P)DIG_DSP_CIRCLE_BUF_FLIP_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( INP,  "@asynMask($(PORT),0, 0x00000003, 0.1) DIG_DSP_CIRCLE_BUF_FLIP_R")
+    field( NOBT, "2")
+    field( SCAN, "I/O Intr")
+}
+
 record(mbbiDirect, "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_R")
 {
     field( PINI, "NO")
@@ -6413,6 +6353,37 @@ record(mbbiDirect, "$(P)DIG_DSP_TRACE_KEEP_R")
     field( SCAN, "I/O Intr")
 }
 
+record(mbbiDirect, "$(P)DIG_DSP_TRACE_RESET_WE_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( INP,  "@asynMask($(PORT),0, 0x00000001, 0.1) DIG_DSP_TRACE_RESET_WE_R")
+    field( NOBT, "1")
+    field( SCAN, "I/O Intr")
+}
+
+
+record(mbboDirect, "$(P)DIG_DSP_BUF_TRIG_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( OUT,  "@asynMask($(PORT),0, 0x00000001, 0.1) DIG_DSP_BUF_TRIG_W")
+    field( NOBT, "1")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "DESC")
+}
+
+record(mbboDirect, "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( OUT,  "@asynMask($(PORT),0, 0x00000003, 0.1) DIG_DSP_CIRCLE_BUF_FLIP_W")
+    field( NOBT, "2")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "DESC")
+}
 
 record(mbboDirect, "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W")
 {
@@ -6442,6 +6413,17 @@ record(mbboDirect, "$(P)DIG_DSP_TRACE_KEEP_W")
     field( DTYP, "asynUInt32Digital")
     field( OUT,  "@asynMask($(PORT),0, 0x000000FF, 0.1) DIG_DSP_TRACE_KEEP_W")
     field( NOBT, "8")
+    field( SCAN, "Passive")
+    info( asyn:READBACK, "1")
+    info( autosaveFields, "DESC")
+}
+
+record(mbboDirect, "$(P)DIG_DSP_TRACE_RESET_WE_W")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( OUT,  "@asynMask($(PORT),0, 0x00000001, 0.1) DIG_DSP_TRACE_RESET_WE_W")
+    field( NOBT, "1")
     field( SCAN, "Passive")
     info( asyn:READBACK, "1")
     info( autosaveFields, "DESC")

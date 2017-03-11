@@ -341,7 +341,12 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 2,
 		"nelm"      : 1,
 		"access"      : "r",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits"        :
+		{
+			"c0_ready": 1,
+			"c1_ready": 2
+		}
 	},
 	{	"name" :"idelay_base",
 		"address"     : 112,
@@ -971,7 +976,8 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 1,
 		"nelm"      : 1,
 		"access"      : "rw",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits"        : {}
 	},
 	{	"name" :"dig_dsp_cic_period",
 		"address"     : 8407156,
@@ -992,7 +998,12 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 2,
 		"nelm"      : 1,
 		"access"      : "rw",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits"        :
+		{
+			"flip_c0_buf": 1,
+			"flip_c1_buf": 2
+		}
 	},
 	{	"name" :"dig_dsp_dac_dds_reset",
 		"address"     : 8407159,
@@ -1726,7 +1737,8 @@ d = { "name" : "scllrfPRC",
 		"bit_width"      : 1,
 		"nelm"      : 1,
 		"access"      : "rw",
-		"signed"      : "unsigned"
+		"signed"      : "unsigned",
+		"bits"        : {}
 	},
 	{	"name" :"dig_dsp_trig_internal",
 		"address"     : 8407258,

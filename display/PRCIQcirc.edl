@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 715
-y 107
+x 2
+y 51
 w 985
 h 647
 font "helvetica-medium-r-18.0"
@@ -37,8 +37,8 @@ h 480
 # Appearance
 border
 graphTitle "I Waveforms"
-xLabel "Point"
-yLabel "Count"
+xLabel "I"
+yLabel "Q"
 fgColor index 14
 bgColor index 0
 gridColor index 14
@@ -60,24 +60,24 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P):CIRC_IQ_BUF_$(SH)_I_0"
-  1 "$(P):CIRC_IQ_BUF_$(SH)_I_1"
-  2 "$(P):CIRC_IQ_BUF_$(SH)_I_2"
-  3 "$(P):CIRC_IQ_BUF_$(SH)_I_3"
-  4 "$(P):CIRC_IQ_BUF_$(SH)_I_4"
-  5 "$(P):CIRC_IQ_BUF_$(SH)_I_5"
-  6 "$(P):CIRC_IQ_BUF_$(SH)_I_6"
-  7 "$(P):CIRC_IQ_BUF_$(SH)_I_7"
+  0 "$(P)CIRC_IQ_BUF_$(N)_I_0"
+  1 "$(P)CIRC_IQ_BUF_$(N)_I_1"
+  2 "$(P)CIRC_IQ_BUF_$(N)_I_2"
+  3 "$(P)CIRC_IQ_BUF_$(N)_I_3"
+  4 "$(P)CIRC_IQ_BUF_$(N)_I_4"
+  5 "$(P)CIRC_IQ_BUF_$(N)_I_5"
+  6 "$(P)CIRC_IQ_BUF_$(N)_I_6"
+  7 "$(P)CIRC_IQ_BUF_$(N)_I_7"
 }
 yPv {
-  0 "$(P):CIRC_IQ_BUF_$(SH)_Q_0"
-  1 "$(P):CIRC_IQ_BUF_$(SH)_Q_1"
-  2 "$(P):CIRC_IQ_BUF_$(SH)_Q_2"
-  3 "$(P):CIRC_IQ_BUF_$(SH)_Q_3"
-  4 "$(P):CIRC_IQ_BUF_$(SH)_Q_4"
-  5 "$(P):CIRC_IQ_BUF_$(SH)_Q_5"
-  6 "$(P):CIRC_IQ_BUF_$(SH)_Q_6"
-  7 "$(P):CIRC_IQ_BUF_$(SH)_Q_7"
+  0 "$(P)CIRC_IQ_BUF_$(N)_Q_0"
+  1 "$(P)CIRC_IQ_BUF_$(N)_Q_1"
+  2 "$(P)CIRC_IQ_BUF_$(N)_Q_2"
+  3 "$(P)CIRC_IQ_BUF_$(N)_Q_3"
+  4 "$(P)CIRC_IQ_BUF_$(N)_Q_4"
+  5 "$(P)CIRC_IQ_BUF_$(N)_Q_5"
+  6 "$(P)CIRC_IQ_BUF_$(N)_Q_6"
+  7 "$(P)CIRC_IQ_BUF_$(N)_Q_7"
 }
 ySigned {
   0 1
@@ -117,7 +117,7 @@ selectColor index 30
 inconsistentColor index 14
 topShadowColor index 7
 botShadowColor index 12
-controlPv "$(P):RUN_STOP"
+controlPv "$(P)RUN_STOP"
 font "helvetica-medium-r-18.0"
 orientation "horizontal"
 endObjectProperties
@@ -132,7 +132,7 @@ x 360
 y 570
 w 160
 h 20
-controlPv "$(P):DIG_DSP_TRACE_KEEP_R"
+controlPv "$(P)CIRC_$(N)_ACTIVE"
 lineColor index 14
 onColor index 15
 offColor index 0
@@ -149,7 +149,7 @@ x 360
 y 540
 w 160
 h 18
-controlPv "$(P):CIRC_$(N)_N_ACTIVE"
+controlPv "$(P)CIRC_$(N)_N_ACTIVE"
 format "exponential"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -174,7 +174,7 @@ x 120
 y 550
 w 140
 h 30
-controlPv "$(P):DIG_DSP_TRACE_KEEP_W"
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W"
 format "hex"
 font "helvetica-medium-r-14.0"
 fgColor index 26

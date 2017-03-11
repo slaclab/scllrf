@@ -35,6 +35,23 @@ record(longin, "$(P)I_Q_22BIT_NELM")
     field( INP,  "@asyn($(PORT),0) I_Q_22BIT_NELM")
     field( SCAN, "I/O Intr")
 }
+
+record(longin, "$(P)CIRC_0_N_ACTIVE")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CIRC_0_N_ACTIVE")
+    field( SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)CIRC_1_N_ACTIVE")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CIRC_1_N_ACTIVE")
+    field( SCAN, "I/O Intr")
+}
+
 record(ai, "$(P)IFACT")
 {
     field( PINI, "NO")

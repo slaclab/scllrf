@@ -65,7 +65,7 @@ static const unsigned traceIQWaveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
 // digDspMuxShell0DspChanKeep, digDspMuxShell1DspChanKeep: status data that correlates with the
 // waveforms, should be read at the same time.
 //
-// The sequence would be to wait for a bit in the LlrfCircleReady register to be set,
+// The sequence would be to wait for the bits in the LlrfCircleReady register to be set,
 // read the corresponding buffer, read digDspMuxShell*DspChanKeep, then write a 1 to the
 // bit in digDspCircleBufFlip to indicate that you're done reading that buffer
 // and ready for data from the next

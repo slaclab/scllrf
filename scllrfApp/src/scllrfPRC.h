@@ -491,6 +491,8 @@ protected:
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 
+
+
 /* Registers */
     int p_HellR;
     #define FIRST_SCLLRFPRC_PARAM p_HellR
