@@ -781,7 +781,7 @@ void scllrfPRCextra::fillCircIQBufReqMsg()
 	{
 		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
 		{
-			printf("%s inserting a blank nonce at index %u\n", __PRETTY_FUNCTION__, msgOffset);
+//			printf("%s inserting a blank nonce at index %u\n", __PRETTY_FUNCTION__, msgOffset);
 			pReqCircIQBufMsg_[msgOffset] = {0,blankData};
 			msgOffset++;
 		}
