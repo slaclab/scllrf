@@ -27,7 +27,7 @@
 \#include "scllrfAsynPortDriver.h"
 
 /* Registers */
-#set $readRegCount = 0
+#set $polledRegCount = 0
 #set $writeRegCount = 0
 #set $prevWAdrs = []
 #set $prevRAdrs =[]
@@ -38,7 +38,12 @@
   #if (not $p.has_key('access')) or ('r' in $p.access)
 static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
     #if $p.address not in $prevRAdrs
-      #set $readRegCount +=1
+      #if $p.has_key('nelm') and $p.nelm<=16
+        #set $count_inc = $p.nelm
+      #else if not $p.has_key('nelm') ## exclude arrays with > 16 elements from polling
+        #set $count_inc = 1
+      #end if
+      #set $polledRegCount += $count_inc
       #silent $prevRAdrs.append($p.address)
     #else
 // shared address $p.address for $p.name
@@ -47,14 +52,19 @@ static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()
   #if $p.has_key('access') and ('w' in $p.access)
 static const char *${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
     #if $p.address not in $prevWAdrs
-      #set $writeRegCount +=1
+      #if $p.has_key('nelm') and $p.nelm<=16
+        #set $count_inc = $p.nelm
+      #else
+        #set $count_inc = 1
+      #end if
+      #set $writeRegCount += $count_inc
       #silent $prevWAdrs.append($p.address)
     #end if
   #end if
 #end for
 
-const unsigned int ${name}ReadRegCount = $readRegCount;
-const unsigned int ${name}WriteRegCount = $writeRegCount;
+const unsigned int ${name}PolledRegCount = $polledRegCount;
+##const unsigned int ${name}WriteRegCount = $writeRegCount;
 
 #if $varExists('commands')
 /* Commands */
@@ -153,6 +163,9 @@ protected:
 #for $p in sorted($registers, key=lambda k: k['address'])
   #if $p.has_key('bit_width')
     	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
+  #elif $p.has_key('bits')
+  ## Uint32Digital functions always need a mask
+    	${p.name.title().replace("_", "")}Mask =  0xFFFFFFFF, // bit fields
   #end if
 #end for
 

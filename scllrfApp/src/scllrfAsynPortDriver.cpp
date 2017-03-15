@@ -158,11 +158,15 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
     const char *paramName;
     FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
     std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {flagReadMask,blankData} );
+    int chan;
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
+    // Some registers have more than 1 "channel"
+    getAddress(pasynUser, &chan);
+
     /* Set the parameter in the parameter library. */
-    status = (asynStatus) setUIntDigitalParam(function, value, mask);
+    status = (asynStatus) setUIntDigitalParam(chan, function, value, mask);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
@@ -180,9 +184,11 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     	if (status == asynSuccess) // Yes, this function is a register write
     	{
     		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: found function=%d, name=%s, at address %d\n",
-  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
+                "%s: found function=%d, name=%s, at chan %d + %d\n",
+  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
     		regSendBuf[1].data = (uint32_t) value;
+    		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
+    		regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
         	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
         	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     	}
@@ -195,7 +201,7 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     }
 
 	/* Do callbacks so higher layers see any changes */
-	status = (asynStatus) callParamCallbacks();
+	status = (asynStatus) callParamCallbacks(chan, chan);
 
     if (status)
         epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
@@ -219,19 +225,19 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
     const char *paramName;
     FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
     std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
-    int address;
+    int chan;
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
     // Some registers have more than 1 "channel"
-    getAddress(pasynUser, &address);
+    getAddress(pasynUser, &chan);
     /* Set the parameter in the parameter library. */
-    status = (asynStatus) setIntegerParam(address, function, value);
+    status = (asynStatus) setIntegerParam(chan, function, value);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
-			__PRETTY_FUNCTION__, function, paramName);
+    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s channel %d\n",
+			__PRETTY_FUNCTION__, function, paramName, chan);
 
     if (function == p_RunStop) {
 printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
@@ -244,10 +250,11 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     	if (status == asynSuccess) // Yes, this function is a register write
     	{
     		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: found function=%d, name=%s, at address %d + %d\n",
-  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, address);
-    		regSendBuf[1].data = (uint32_t) value;
-    		regSendBuf[1].addr += (uint32_t) address;
+                "%s: found function=%d, name=%s, at chan %d + %d\n",
+  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
+    		regSendBuf[1].data = (int32_t) value;
+    		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
+    		regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
         	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
         	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     	}
@@ -260,7 +267,7 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     }
 
 	/* Do callbacks so higher layers see any changes */
-	status = (asynStatus) callParamCallbacks();
+	status = (asynStatus) callParamCallbacks(chan, chan);
 
     if (status)
         epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
@@ -268,8 +275,8 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
 				  __PRETTY_FUNCTION__, status, function, paramName, value);
     else
         asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-              "<-- %s: function=%d, name=%s, value=%d\n",
-			  __PRETTY_FUNCTION__, function, paramName, value);
+              "<-- %s: function=%d, name=%s, channel=%d, value=%d\n",
+			  __PRETTY_FUNCTION__, function, paramName, chan, value);
     return status;
 }
 
@@ -303,7 +310,7 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
     			"%s: found function=%d, name=%s, at address %d\n",
 				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
-    	regSendBuf[1].data = (uint32_t) *value;
+    	regSendBuf[1].data = (int32_t) *value;
 		regSendBuf[1].addr += (uint32_t) address;
     	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
     	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));

@@ -223,8 +223,7 @@ static const char *Reserved3WString = "RESERVED3_W";
 static const char *Reserved4RString = "RESERVED4_R";
 static const char *Reserved4WString = "RESERVED4_W";
 
-const unsigned int scllrfRESReadRegCount = 142;
-const unsigned int scllrfRESWriteRegCount = 53;
+const unsigned int scllrfRESPolledRegCount = 142;
 
 
 
@@ -242,6 +241,8 @@ protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
+
+
 
 /* Registers */
     int p_Cavity1DetuneErrR;
@@ -653,148 +654,22 @@ protected:
     // masks applied to returned register data
     enum RegMasks
     {
-        Motor1AccMask =  0xFFFFFFFF,
-        Motor1VlctyMask =  0xFFFFFFFF,
-        Motor1StepsMask =  0xFFFFFFFF,
-        Motor1SgnStepsMask =  0xFFFFFFFF,
-        Motor1AbsStepsMask =  0xFFFFFFFF,
-        Motor1LaccMask =  0xFFFFFFFF,
-        Motor1LvlctyMask =  0xFFFFFFFF,
-        Motor1LstepsMask =  0xFFFFFFFF,
-        Motor1DrviMask =  0xFFFFFFFF,
-        Motor1BrdTmpMask =  0xFFFFFFFF,
-        Motor1CntlMask =  0xFFFFFFFF,
-        Motor1StatMask =  0xFFFFFFFF,
-        Piezo1Dac1Mask =  0xFFFFFFFF,
-        Piezo1Dac2Mask =  0xFFFFFFFF,
-        Piezo1Adc1Mask =  0xFFFFFFFF,
-        Piezo1Adc2Mask =  0xFFFFFFFF,
-        Piezo1HighWindowMask =  0xFFFFFFFF,
-        Piezo1LowWindowMask =  0xFFFFFFFF,
-        Piezo1CntlMask =  0xFFFFFFFF,
-        Piezo1StatMask =  0xFFFFFFFF,
-        Piezo1BrdTmpMask =  0xFFFFFFFF,
-        Piezo1BrdSernumMask =  0xFFFFFFFF,
-        Piezo1IgainMask =  0xFFFFFFFF,
-        Cavity1DetuneErrMask =  0xFFFFFFFF,
-        Motor2AccMask =  0xFFFFFFFF,
-        Motor2VlctyMask =  0xFFFFFFFF,
-        Motor2StepsMask =  0xFFFFFFFF,
-        Motor2SgnStepsMask =  0xFFFFFFFF,
-        Motor2AbsStepsMask =  0xFFFFFFFF,
-        Motor2LaccMask =  0xFFFFFFFF,
-        Motor2LvlctyMask =  0xFFFFFFFF,
-        Motor2LstepsMask =  0xFFFFFFFF,
-        Motor2DrviMask =  0xFFFFFFFF,
-        Motor2BrdTmpMask =  0xFFFFFFFF,
-        Motor2CntlMask =  0xFFFFFFFF,
-        Motor2StatMask =  0xFFFFFFFF,
-        Piezo2Dac1Mask =  0xFFFFFFFF,
-        Piezo2Dac2Mask =  0xFFFFFFFF,
-        Piezo2Adc1Mask =  0xFFFFFFFF,
-        Piezo2Adc2Mask =  0xFFFFFFFF,
-        Piezo2HighWindowMask =  0xFFFFFFFF,
-        Piezo2LowWindowMask =  0xFFFFFFFF,
-        Piezo2CntlMask =  0xFFFFFFFF,
-        Piezo2StatMask =  0xFFFFFFFF,
-        Piezo2BrdTmpMask =  0xFFFFFFFF,
-        Piezo2BrdSernumMask =  0xFFFFFFFF,
-        Piezo2IgainMask =  0xFFFFFFFF,
-        Cavity2DetuneErrMask =  0xFFFFFFFF,
-        Motor3AccMask =  0xFFFFFFFF,
-        Motor3VlctyMask =  0xFFFFFFFF,
-        Motor3StepsMask =  0xFFFFFFFF,
-        Motor3SgnStepsMask =  0xFFFFFFFF,
-        Motor3AbsStepsMask =  0xFFFFFFFF,
-        Motor3LaccMask =  0xFFFFFFFF,
-        Motor3LvlctyMask =  0xFFFFFFFF,
-        Motor3LstepsMask =  0xFFFFFFFF,
-        Motor3DrviMask =  0xFFFFFFFF,
-        Motor3BrdTmpMask =  0xFFFFFFFF,
-        Motor3CntlMask =  0xFFFFFFFF,
-        Motor3StatMask =  0xFFFFFFFF,
-        Piezo3Dac1Mask =  0xFFFFFFFF,
-        Piezo3Dac2Mask =  0xFFFFFFFF,
-        Piezo3Adc1Mask =  0xFFFFFFFF,
-        Piezo3Adc2Mask =  0xFFFFFFFF,
-        Piezo3HighWindowMask =  0xFFFFFFFF,
-        Piezo3LowWindowMask =  0xFFFFFFFF,
-        Piezo3CntlMask =  0xFFFFFFFF,
-        Piezo3StatMask =  0xFFFFFFFF,
-        Piezo3BrdTmpMask =  0xFFFFFFFF,
-        Piezo3BrdSernumMask =  0xFFFFFFFF,
-        Piezo3IgainMask =  0xFFFFFFFF,
-        Cavity3DetuneErrMask =  0xFFFFFFFF,
-        Motor4AccMask =  0xFFFFFFFF,
-        Motor4VlctyMask =  0xFFFFFFFF,
-        Motor4StepsMask =  0xFFFFFFFF,
-        Motor4SgnStepsMask =  0xFFFFFFFF,
-        Motor4AbsStepsMask =  0xFFFFFFFF,
-        Motor4LaccMask =  0xFFFFFFFF,
-        Motor4LvlctyMask =  0xFFFFFFFF,
-        Motor4LstepsMask =  0xFFFFFFFF,
-        Motor4DrviMask =  0xFFFFFFFF,
-        Motor4BrdTmpMask =  0xFFFFFFFF,
-        Motor4CntlMask =  0xFFFFFFFF,
-        Motor4StatMask =  0xFFFFFFFF,
-        Piezo4Dac1Mask =  0xFFFFFFFF,
-        Piezo4Dac2Mask =  0xFFFFFFFF,
-        Piezo4Adc1Mask =  0xFFFFFFFF,
-        Piezo4Adc2Mask =  0xFFFFFFFF,
-        Piezo4HighWindowMask =  0xFFFFFFFF,
-        Piezo4LowWindowMask =  0xFFFFFFFF,
-        Piezo4CntlMask =  0xFFFFFFFF,
-        Piezo4StatMask =  0xFFFFFFFF,
-        Piezo4BrdTmpMask =  0xFFFFFFFF,
-        Piezo4BrdSernumMask =  0xFFFFFFFF,
-        Piezo4IgainMask =  0xFFFFFFFF,
-        Cavity4DetuneErrMask =  0xFFFFFFFF,
-        Motor1SubStpMask =  0xFFFFFFFF,
-        Motor2SubStpMask =  0xFFFFFFFF,
-        Motor3SubStpMask =  0xFFFFFFFF,
-        Motor4SubStpMask =  0xFFFFFFFF,
-        Reserved0Mask =  0xFFFFFFFF,
-        Reserved1Mask =  0xFFFFFFFF,
-        Reserved2Mask =  0xFFFFFFFF,
-        Reserved3Mask =  0xFFFFFFFF,
-        Reserved4Mask =  0xFFFFFFFF,
-        Motor1StepsActualMask =  0xFFFFFFFF,
-        Motor2StepsActualMask =  0xFFFFFFFF,
-        Motor3StepsActualMask =  0xFFFFFFFF,
-        Motor4StepsActualMask =  0xFFFFFFFF,
-        PztWaveAvailMask =  0xFFFFFFFF,
-        Piezo1C1InMask =  0xFFFFFFFF,
-        Piezo1C1IpMask =  0xFFFFFFFF,
-        Piezo1C1OutVMask =  0xFFFFFFFF,
-        Piezo1C1DriveVMask =  0xFFFFFFFF,
-        Piezo1C2InMask =  0xFFFFFFFF,
-        Piezo1C2IpMask =  0xFFFFFFFF,
-        Piezo1C2OutVMask =  0xFFFFFFFF,
-        Piezo1C2DriveVMask =  0xFFFFFFFF,
-        Piezo2C1InMask =  0xFFFFFFFF,
-        Piezo2C1IpMask =  0xFFFFFFFF,
-        Piezo2C1OutVMask =  0xFFFFFFFF,
-        Piezo2C1DriveVMask =  0xFFFFFFFF,
-        Piezo2C2InMask =  0xFFFFFFFF,
-        Piezo2C2IpMask =  0xFFFFFFFF,
-        Piezo2C2OutVMask =  0xFFFFFFFF,
-        Piezo2C2DriveVMask =  0xFFFFFFFF,
-        Piezo3C1InMask =  0xFFFFFFFF,
-        Piezo3C1IpMask =  0xFFFFFFFF,
-        Piezo3C1OutVMask =  0xFFFFFFFF,
-        Piezo3C1DriveVMask =  0xFFFFFFFF,
-        Piezo3C2InMask =  0xFFFFFFFF,
-        Piezo3C2IpMask =  0xFFFFFFFF,
-        Piezo3C2OutVMask =  0xFFFFFFFF,
-        Piezo3C2DriveVMask =  0xFFFFFFFF,
-        Piezo4C1InMask =  0xFFFFFFFF,
-        Piezo4C1IpMask =  0xFFFFFFFF,
-        Piezo4C1OutVMask =  0xFFFFFFFF,
-        Piezo4C1DriveVMask =  0xFFFFFFFF,
-        Piezo4C2InMask =  0xFFFFFFFF,
-        Piezo4C2IpMask =  0xFFFFFFFF,
-        Piezo4C2OutVMask =  0xFFFFFFFF,
-        Piezo4C2DriveVMask =  0xFFFFFFFF,
+    	Motor1CntlMask =  0xFFFFFFFF, // bit fields
+    	Motor1StatMask =  0xFFFFFFFF, // bit fields
+    	Piezo1CntlMask =  0xFFFFFFFF, // bit fields
+    	Piezo1StatMask =  0xFFFFFFFF, // bit fields
+    	Motor2CntlMask =  0xFFFFFFFF, // bit fields
+    	Motor2StatMask =  0xFFFFFFFF, // bit fields
+    	Piezo2CntlMask =  0xFFFFFFFF, // bit fields
+    	Piezo2StatMask =  0xFFFFFFFF, // bit fields
+    	Motor3CntlMask =  0xFFFFFFFF, // bit fields
+    	Motor3StatMask =  0xFFFFFFFF, // bit fields
+    	Piezo3CntlMask =  0xFFFFFFFF, // bit fields
+    	Piezo3StatMask =  0xFFFFFFFF, // bit fields
+    	Motor4CntlMask =  0xFFFFFFFF, // bit fields
+    	Motor4StatMask =  0xFFFFFFFF, // bit fields
+    	Piezo4CntlMask =  0xFFFFFFFF, // bit fields
+    	Piezo4StatMask =  0xFFFFFFFF, // bit fields
 
     };
 };

@@ -19,16 +19,29 @@ clean:
 		fi ; \
 	done  ; \
 
-install:
+copy:
+	cp */src/*.h ../src/;
+	cp */src/*.cpp ../src/;
+	cp */ui/* ../../display/.;
+	cp */Db/*.template ../Db/.;
+	
 all_install: $(DIRS)
 	for i in $^ ; do \
 		${ii}_install; \
 	done  ; \
 
+#We don't want this to run every time we build the generated code etc., so make a dummy install target
+install:
+
 
 %_install: %
-#	cp -rf $^/$^Src ../../../cpswAsynPortDriverApp/deviceDriversSrc/.
-	cp -f $^/ui/$^.ui ../../ui/.
+	for i in $(wildcard */) ; do \
+		if [  -d $$i  ]; then \
+	cp -rf $^/src/*.h ../src/.
+	cp -rf $^/src/*.cpp ../src/.
+	cp -f $^/ui/* ../../display/.
 #	cp -f $^/Db/$^.template ../../../cpswAsynPortDriverApp/deviceDriversSrc/Db/.
-#	cp -f $^/Db/$^.template ../../../cpswAsynPortDriverApp/Db/.
+	cp -f $^/Db/$^.template ../Db/.
 #	cp -f $^/deviceLibrary/$^.* ../../../cpswAsynPortDriverApp/deviceLibrarySrc/.
+		fi ; \
+	done  ; \

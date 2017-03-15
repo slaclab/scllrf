@@ -305,158 +305,158 @@ scllrfINTDriver::scllrfINTDriver(const char *drvPortName, const char *netPortNam
     createParam(RxstmpmWString, asynParamUInt32Digital, &p_RxstmpmW);
 
     // Message size is the number of read registers, plus 1 nonce for every 175 read registers
-    PolledRegMsgSize_ = scllrfINTReadRegCount + (scllrfINTReadRegCount / 175) + 1;
+    PolledRegMsgSize_ = scllrfINTPolledRegCount + (scllrfINTPolledRegCount / 175) + 1;
 	// A canned request to read all registers
     pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 		{ 0, 0 },
-		{ flagReadMask | R1CwavRAdr, blankData },
-		{ flagReadMask | R2CwavRAdr, blankData },
-		{ flagReadMask | R3CwavRAdr, blankData },
-		{ flagReadMask | R4CwavRAdr, blankData },
-		{ flagReadMask | R1CwapsRAdr, blankData },
-		{ flagReadMask | R2CwapsRAdr, blankData },
-		{ flagReadMask | R3CwapsRAdr, blankData },
-		{ flagReadMask | R4CwapsRAdr, blankData },
-		{ flagReadMask | R1CwalRAdr, blankData },
-		{ flagReadMask | R2CwalRAdr, blankData },
-		{ flagReadMask | R3CwalRAdr, blankData },
-		{ flagReadMask | R4CwalRAdr, blankData },
-		{ flagReadMask | R1CwapRAdr, blankData },
-		{ flagReadMask | R2CwapRAdr, blankData },
-		{ flagReadMask | R3CwapRAdr, blankData },
-		{ flagReadMask | R4CwapRAdr, blankData },
-		{ flagReadMask | RxcwadRAdr, blankData },
-		{ flagReadMask | RxcwamRAdr, blankData },
-		{ flagReadMask | RxcwatRAdr, blankData },
-		{ flagReadMask | RxatfltRAdr, blankData },
-		{ flagReadMask | RxcwafcRAdr, blankData },
-		{ flagReadMask | R1CwwtRAdr, blankData },
-		{ flagReadMask | R2CwwtRAdr, blankData },
-		{ flagReadMask | R3CwwtRAdr, blankData },
-		{ flagReadMask | R4CwwtRAdr, blankData },
-		{ flagReadMask | R1CwwlRAdr, blankData },
-		{ flagReadMask | R2CwwlRAdr, blankData },
-		{ flagReadMask | R3CwwlRAdr, blankData },
-		{ flagReadMask | R4CwwlRAdr, blankData },
-		{ flagReadMask | RxcwwdRAdr, blankData },
-		{ flagReadMask | RxcwwtsRAdr, blankData },
-		{ flagReadMask | RxcwwmRAdr, blankData },
-		{ flagReadMask | RxcwwfcRAdr, blankData },
-		{ flagReadMask | R1StmpiRAdr, blankData },
-		{ flagReadMask | R2StmpiRAdr, blankData },
-		{ flagReadMask | R3StmpiRAdr, blankData },
-		{ flagReadMask | R4StmpiRAdr, blankData },
-		{ flagReadMask | R1StmpvRAdr, blankData },
-		{ flagReadMask | R2StmpvRAdr, blankData },
-		{ flagReadMask | R3StmpvRAdr, blankData },
-		{ flagReadMask | R4StmpvRAdr, blankData },
-		{ flagReadMask | R1StmpvlRAdr, blankData },
-		{ flagReadMask | R2StmpvlRAdr, blankData },
-		{ flagReadMask | R3StmpvlRAdr, blankData },
-		{ flagReadMask | R4StmpvlRAdr, blankData },
-		{ flagReadMask | RxstmplsRAdr, blankData },
-		{ flagReadMask | RxstmpmRAdr, blankData },
-		{ flagReadMask | RxstmpfcRAdr, blankData },
-		{ flagReadMask | R1Cpltmp1IRAdr, blankData },
-		{ flagReadMask | R1Cpltmp2IRAdr, blankData },
-		{ flagReadMask | R2Cpltmp1IRAdr, blankData },
-		{ flagReadMask | R2Cpltmp2IRAdr, blankData },
-		{ flagReadMask | R3Cpltmp1IRAdr, blankData },
-		{ flagReadMask | R3Cpltmp2IRAdr, blankData },
-		{ flagReadMask | R4Cpltmp1IRAdr, blankData },
-		{ flagReadMask | R4Cpltmp2IRAdr, blankData },
-		{ flagReadMask | R1Cpltmp1VRAdr, blankData },
-		{ flagReadMask | R1Cpltmp2VRAdr, blankData },
-		{ flagReadMask | R2Cpltmp1VRAdr, blankData },
-		{ flagReadMask | R2Cpltmp2VRAdr, blankData },
-		{ flagReadMask | R3Cpltmp1VRAdr, blankData },
-		{ flagReadMask | R3Cpltmp2VRAdr, blankData },
-		{ flagReadMask | R4Cpltmp1VRAdr, blankData },
-		{ flagReadMask | R4Cpltmp2VRAdr, blankData },
-		{ flagReadMask | R1Cpltmp1VlRAdr, blankData },
-		{ flagReadMask | R1Cpltmp2VlRAdr, blankData },
-		{ flagReadMask | R2Cpltmp1VlRAdr, blankData },
-		{ flagReadMask | R2Cpltmp2VlRAdr, blankData },
-		{ flagReadMask | R3Cpltmp1VlRAdr, blankData },
-		{ flagReadMask | R3Cpltmp2VlRAdr, blankData },
-		{ flagReadMask | R4Cpltmp1VlRAdr, blankData },
-		{ flagReadMask | R4Cpltmp2VlRAdr, blankData },
-		{ flagReadMask | RxcpltmplsRAdr, blankData },
-		{ flagReadMask | RxcpltmpmRAdr, blankData },
-		{ flagReadMask | RxcpltmpfcRAdr, blankData },
-		{ flagReadMask | R1Cplfep1IRAdr, blankData },
-		{ flagReadMask | R1Cplfep2IRAdr, blankData },
-		{ flagReadMask | R1Cplfep3IRAdr, blankData },
-		{ flagReadMask | R2Cplfep1IRAdr, blankData },
-		{ flagReadMask | R2Cplfep2IRAdr, blankData },
-		{ flagReadMask | R2Cplfep3IRAdr, blankData },
-		{ flagReadMask | R3Cplfep1IRAdr, blankData },
-		{ flagReadMask | R3Cplfep2IRAdr, blankData },
-		{ flagReadMask | R3Cplfep3IRAdr, blankData },
-		{ flagReadMask | R4Cplfep1IRAdr, blankData },
-		{ flagReadMask | R4Cplfep2IRAdr, blankData },
-		{ flagReadMask | R4Cplfep3IRAdr, blankData },
-		{ flagReadMask | R1Cplfep1IlhRAdr, blankData },
-		{ flagReadMask | R1Cplfep2IlhRAdr, blankData },
-		{ flagReadMask | R1Cplfep3IlhRAdr, blankData },
-		{ flagReadMask | R2Cplfep1IlhRAdr, blankData },
-		{ flagReadMask | R2Cplfep2IlhRAdr, blankData },
-		{ flagReadMask | R2Cplfep3IlhRAdr, blankData },
-		{ flagReadMask | R3Cplfep1IlhRAdr, blankData },
-		{ flagReadMask | R3Cplfep2IlhRAdr, blankData },
-		{ flagReadMask | R3Cplfep3IlhRAdr, blankData },
-		{ flagReadMask | R4Cplfep1IlhRAdr, blankData },
-		{ flagReadMask | R4Cplfep2IlhRAdr, blankData },
-		{ flagReadMask | R4Cplfep3IlhRAdr, blankData },
-		{ flagReadMask | R1Cplfep1IllRAdr, blankData },
-		{ flagReadMask | R1Cplfep2IllRAdr, blankData },
-		{ flagReadMask | R1Cplfep3IllRAdr, blankData },
-		{ flagReadMask | R2Cplfep1IllRAdr, blankData },
-		{ flagReadMask | R2Cplfep2IllRAdr, blankData },
-		{ flagReadMask | R2Cplfep3IllRAdr, blankData },
-		{ flagReadMask | R3Cplfep1IllRAdr, blankData },
-		{ flagReadMask | R3Cplfep2IllRAdr, blankData },
-		{ flagReadMask | R3Cplfep3IllRAdr, blankData },
-		{ flagReadMask | R4Cplfep1IllRAdr, blankData },
-		{ flagReadMask | R4Cplfep2IllRAdr, blankData },
-		{ flagReadMask | R4Cplfep3IllRAdr, blankData },
-		{ flagReadMask | RxcplfepmRAdr, blankData },
-		{ flagReadMask | RxcplfeplsRAdr, blankData },
-		{ flagReadMask | RxcplfepfsRAdr, blankData },
-		{ flagReadMask | RxcplfepfcRAdr, blankData },
-		{ flagReadMask | RxcvfRAdr, blankData },
-		{ flagReadMask | RxcvfmRAdr, blankData },
-		{ flagReadMask | RxcvfcRAdr, blankData },
-		{ flagReadMask | RxcienRAdr, blankData },
-		{ flagReadMask | RxcienmRAdr, blankData },
-		{ flagReadMask | RxciencRAdr, blankData },
-		{ flagReadMask | RxffsdRAdr, blankData },
-		{ flagReadMask | RxffsdmRAdr, blankData },
-		{ flagReadMask | RxffsdcRAdr, blankData },
-		{ flagReadMask | RxistatRAdr, blankData },
-		{ flagReadMask | RxictlRAdr, blankData },
-		{ flagReadMask | RxiverRAdr, blankData },
-		{ flagReadMask | R1Cplfep1PerdRAdr, blankData },
-		{ flagReadMask | R1Cplfep2PerdRAdr, blankData },
-		{ flagReadMask | R1Cplfep3PerdRAdr, blankData },
-		{ flagReadMask | R2Cplfep1PerdRAdr, blankData },
-		{ flagReadMask | R2Cplfep2PerdRAdr, blankData },
-		{ flagReadMask | R2Cplfep3PerdRAdr, blankData },
-		{ flagReadMask | R3Cplfep1PerdRAdr, blankData },
-		{ flagReadMask | R3Cplfep2PerdRAdr, blankData },
-		{ flagReadMask | R3Cplfep3PerdRAdr, blankData },
-		{ flagReadMask | R4Cplfep1PerdRAdr, blankData },
-		{ flagReadMask | R4Cplfep2PerdRAdr, blankData },
-		{ flagReadMask | R4Cplfep3PerdRAdr, blankData },
-		{ flagReadMask | R5StmpiRAdr, blankData },
-		{ flagReadMask | R6StmpiRAdr, blankData },
-		{ flagReadMask | R7StmpiRAdr, blankData },
-		{ flagReadMask | R8StmpiRAdr, blankData },
-		{ flagReadMask | R5StmpvRAdr, blankData },
-		{ flagReadMask | R6StmpvRAdr, blankData },
-		{ flagReadMask | R7StmpvRAdr, blankData },
-		{ flagReadMask | R8StmpvRAdr, blankData },
+		{ (flagReadMask | R1CwavRAdr), blankData },
+		{ (flagReadMask | R2CwavRAdr), blankData },
+		{ (flagReadMask | R3CwavRAdr), blankData },
+		{ (flagReadMask | R4CwavRAdr), blankData },
+		{ (flagReadMask | R1CwapsRAdr), blankData },
+		{ (flagReadMask | R2CwapsRAdr), blankData },
+		{ (flagReadMask | R3CwapsRAdr), blankData },
+		{ (flagReadMask | R4CwapsRAdr), blankData },
+		{ (flagReadMask | R1CwalRAdr), blankData },
+		{ (flagReadMask | R2CwalRAdr), blankData },
+		{ (flagReadMask | R3CwalRAdr), blankData },
+		{ (flagReadMask | R4CwalRAdr), blankData },
+		{ (flagReadMask | R1CwapRAdr), blankData },
+		{ (flagReadMask | R2CwapRAdr), blankData },
+		{ (flagReadMask | R3CwapRAdr), blankData },
+		{ (flagReadMask | R4CwapRAdr), blankData },
+		{ (flagReadMask | RxcwadRAdr), blankData },
+		{ (flagReadMask | RxcwamRAdr), blankData },
+		{ (flagReadMask | RxcwatRAdr), blankData },
+		{ (flagReadMask | RxatfltRAdr), blankData },
+		{ (flagReadMask | RxcwafcRAdr), blankData },
+		{ (flagReadMask | R1CwwtRAdr), blankData },
+		{ (flagReadMask | R2CwwtRAdr), blankData },
+		{ (flagReadMask | R3CwwtRAdr), blankData },
+		{ (flagReadMask | R4CwwtRAdr), blankData },
+		{ (flagReadMask | R1CwwlRAdr), blankData },
+		{ (flagReadMask | R2CwwlRAdr), blankData },
+		{ (flagReadMask | R3CwwlRAdr), blankData },
+		{ (flagReadMask | R4CwwlRAdr), blankData },
+		{ (flagReadMask | RxcwwdRAdr), blankData },
+		{ (flagReadMask | RxcwwtsRAdr), blankData },
+		{ (flagReadMask | RxcwwmRAdr), blankData },
+		{ (flagReadMask | RxcwwfcRAdr), blankData },
+		{ (flagReadMask | R1StmpiRAdr), blankData },
+		{ (flagReadMask | R2StmpiRAdr), blankData },
+		{ (flagReadMask | R3StmpiRAdr), blankData },
+		{ (flagReadMask | R4StmpiRAdr), blankData },
+		{ (flagReadMask | R1StmpvRAdr), blankData },
+		{ (flagReadMask | R2StmpvRAdr), blankData },
+		{ (flagReadMask | R3StmpvRAdr), blankData },
+		{ (flagReadMask | R4StmpvRAdr), blankData },
+		{ (flagReadMask | R1StmpvlRAdr), blankData },
+		{ (flagReadMask | R2StmpvlRAdr), blankData },
+		{ (flagReadMask | R3StmpvlRAdr), blankData },
+		{ (flagReadMask | R4StmpvlRAdr), blankData },
+		{ (flagReadMask | RxstmplsRAdr), blankData },
+		{ (flagReadMask | RxstmpmRAdr), blankData },
+		{ (flagReadMask | RxstmpfcRAdr), blankData },
+		{ (flagReadMask | R1Cpltmp1IRAdr), blankData },
+		{ (flagReadMask | R1Cpltmp2IRAdr), blankData },
+		{ (flagReadMask | R2Cpltmp1IRAdr), blankData },
+		{ (flagReadMask | R2Cpltmp2IRAdr), blankData },
+		{ (flagReadMask | R3Cpltmp1IRAdr), blankData },
+		{ (flagReadMask | R3Cpltmp2IRAdr), blankData },
+		{ (flagReadMask | R4Cpltmp1IRAdr), blankData },
+		{ (flagReadMask | R4Cpltmp2IRAdr), blankData },
+		{ (flagReadMask | R1Cpltmp1VRAdr), blankData },
+		{ (flagReadMask | R1Cpltmp2VRAdr), blankData },
+		{ (flagReadMask | R2Cpltmp1VRAdr), blankData },
+		{ (flagReadMask | R2Cpltmp2VRAdr), blankData },
+		{ (flagReadMask | R3Cpltmp1VRAdr), blankData },
+		{ (flagReadMask | R3Cpltmp2VRAdr), blankData },
+		{ (flagReadMask | R4Cpltmp1VRAdr), blankData },
+		{ (flagReadMask | R4Cpltmp2VRAdr), blankData },
+		{ (flagReadMask | R1Cpltmp1VlRAdr), blankData },
+		{ (flagReadMask | R1Cpltmp2VlRAdr), blankData },
+		{ (flagReadMask | R2Cpltmp1VlRAdr), blankData },
+		{ (flagReadMask | R2Cpltmp2VlRAdr), blankData },
+		{ (flagReadMask | R3Cpltmp1VlRAdr), blankData },
+		{ (flagReadMask | R3Cpltmp2VlRAdr), blankData },
+		{ (flagReadMask | R4Cpltmp1VlRAdr), blankData },
+		{ (flagReadMask | R4Cpltmp2VlRAdr), blankData },
+		{ (flagReadMask | RxcpltmplsRAdr), blankData },
+		{ (flagReadMask | RxcpltmpmRAdr), blankData },
+		{ (flagReadMask | RxcpltmpfcRAdr), blankData },
+		{ (flagReadMask | R1Cplfep1IRAdr), blankData },
+		{ (flagReadMask | R1Cplfep2IRAdr), blankData },
+		{ (flagReadMask | R1Cplfep3IRAdr), blankData },
+		{ (flagReadMask | R2Cplfep1IRAdr), blankData },
+		{ (flagReadMask | R2Cplfep2IRAdr), blankData },
+		{ (flagReadMask | R2Cplfep3IRAdr), blankData },
+		{ (flagReadMask | R3Cplfep1IRAdr), blankData },
+		{ (flagReadMask | R3Cplfep2IRAdr), blankData },
+		{ (flagReadMask | R3Cplfep3IRAdr), blankData },
+		{ (flagReadMask | R4Cplfep1IRAdr), blankData },
+		{ (flagReadMask | R4Cplfep2IRAdr), blankData },
+		{ (flagReadMask | R4Cplfep3IRAdr), blankData },
+		{ (flagReadMask | R1Cplfep1IlhRAdr), blankData },
+		{ (flagReadMask | R1Cplfep2IlhRAdr), blankData },
+		{ (flagReadMask | R1Cplfep3IlhRAdr), blankData },
+		{ (flagReadMask | R2Cplfep1IlhRAdr), blankData },
+		{ (flagReadMask | R2Cplfep2IlhRAdr), blankData },
+		{ (flagReadMask | R2Cplfep3IlhRAdr), blankData },
+		{ (flagReadMask | R3Cplfep1IlhRAdr), blankData },
+		{ (flagReadMask | R3Cplfep2IlhRAdr), blankData },
+		{ (flagReadMask | R3Cplfep3IlhRAdr), blankData },
+		{ (flagReadMask | R4Cplfep1IlhRAdr), blankData },
+		{ (flagReadMask | R4Cplfep2IlhRAdr), blankData },
+		{ (flagReadMask | R4Cplfep3IlhRAdr), blankData },
+		{ (flagReadMask | R1Cplfep1IllRAdr), blankData },
+		{ (flagReadMask | R1Cplfep2IllRAdr), blankData },
+		{ (flagReadMask | R1Cplfep3IllRAdr), blankData },
+		{ (flagReadMask | R2Cplfep1IllRAdr), blankData },
+		{ (flagReadMask | R2Cplfep2IllRAdr), blankData },
+		{ (flagReadMask | R2Cplfep3IllRAdr), blankData },
+		{ (flagReadMask | R3Cplfep1IllRAdr), blankData },
+		{ (flagReadMask | R3Cplfep2IllRAdr), blankData },
+		{ (flagReadMask | R3Cplfep3IllRAdr), blankData },
+		{ (flagReadMask | R4Cplfep1IllRAdr), blankData },
+		{ (flagReadMask | R4Cplfep2IllRAdr), blankData },
+		{ (flagReadMask | R4Cplfep3IllRAdr), blankData },
+		{ (flagReadMask | RxcplfepmRAdr), blankData },
+		{ (flagReadMask | RxcplfeplsRAdr), blankData },
+		{ (flagReadMask | RxcplfepfsRAdr), blankData },
+		{ (flagReadMask | RxcplfepfcRAdr), blankData },
+		{ (flagReadMask | RxcvfRAdr), blankData },
+		{ (flagReadMask | RxcvfmRAdr), blankData },
+		{ (flagReadMask | RxcvfcRAdr), blankData },
+		{ (flagReadMask | RxcienRAdr), blankData },
+		{ (flagReadMask | RxcienmRAdr), blankData },
+		{ (flagReadMask | RxciencRAdr), blankData },
+		{ (flagReadMask | RxffsdRAdr), blankData },
+		{ (flagReadMask | RxffsdmRAdr), blankData },
+		{ (flagReadMask | RxffsdcRAdr), blankData },
+		{ (flagReadMask | RxistatRAdr), blankData },
+		{ (flagReadMask | RxictlRAdr), blankData },
+		{ (flagReadMask | RxiverRAdr), blankData },
+		{ (flagReadMask | R1Cplfep1PerdRAdr), blankData },
+		{ (flagReadMask | R1Cplfep2PerdRAdr), blankData },
+		{ (flagReadMask | R1Cplfep3PerdRAdr), blankData },
+		{ (flagReadMask | R2Cplfep1PerdRAdr), blankData },
+		{ (flagReadMask | R2Cplfep2PerdRAdr), blankData },
+		{ (flagReadMask | R2Cplfep3PerdRAdr), blankData },
+		{ (flagReadMask | R3Cplfep1PerdRAdr), blankData },
+		{ (flagReadMask | R3Cplfep2PerdRAdr), blankData },
+		{ (flagReadMask | R3Cplfep3PerdRAdr), blankData },
+		{ (flagReadMask | R4Cplfep1PerdRAdr), blankData },
+		{ (flagReadMask | R4Cplfep2PerdRAdr), blankData },
+		{ (flagReadMask | R4Cplfep3PerdRAdr), blankData },
+		{ (flagReadMask | R5StmpiRAdr), blankData },
+		{ (flagReadMask | R6StmpiRAdr), blankData },
+		{ (flagReadMask | R7StmpiRAdr), blankData },
+		{ (flagReadMask | R8StmpiRAdr), blankData },
+		{ (flagReadMask | R5StmpvRAdr), blankData },
+		{ (flagReadMask | R6StmpvRAdr), blankData },
+		{ (flagReadMask | R7StmpvRAdr), blankData },
+		{ (flagReadMask | R8StmpvRAdr), blankData },
 	};
 
 	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
@@ -1744,11 +1744,11 @@ asynStatus scllrfINTDriver::functionToRegister(const int function, FpgaReg *pToF
 */
 asynStatus scllrfINTDriver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
-	unsigned int i;
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 	epicsInt32 errorCount;
 	int32_t signExtBits = 0;
+	int chan;
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
@@ -1756,1176 +1756,1323 @@ asynStatus scllrfINTDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	break;
 
     case R1CwavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1CwavR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1CwavR,
+				pFromFpga->data , R1CwavMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2CwavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2CwavR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2CwavR,
+				pFromFpga->data , R2CwavMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3CwavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3CwavR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3CwavR,
+				pFromFpga->data , R3CwavMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4CwavRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4CwavR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4CwavR,
+				pFromFpga->data , R4CwavMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwavRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1CwapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1CwapsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1CwapsR,
+				pFromFpga->data , R1CwapsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2CwapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2CwapsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2CwapsR,
+				pFromFpga->data , R2CwapsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3CwapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3CwapsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3CwapsR,
+				pFromFpga->data , R3CwapsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4CwapsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4CwapsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4CwapsR,
+				pFromFpga->data , R4CwapsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwapsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1CwalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1CwalR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1CwalR,
+				pFromFpga->data , R1CwalMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2CwalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2CwalR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2CwalR,
+				pFromFpga->data , R2CwalMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3CwalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3CwalR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3CwalR,
+				pFromFpga->data , R3CwalMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4CwalRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4CwalR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4CwalR,
+				pFromFpga->data , R4CwalMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwalRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1CwapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1CwapR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1CwapR,
+				pFromFpga->data , R1CwapMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2CwapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2CwapR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2CwapR,
+				pFromFpga->data , R2CwapMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3CwapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3CwapR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3CwapR,
+				pFromFpga->data , R3CwapMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4CwapRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4CwapR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4CwapR,
+				pFromFpga->data , R4CwapMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwapRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwadRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwadR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwadR,
+				pFromFpga->data , RxcwadMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwadRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwamRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwamR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwamR,
+				pFromFpga->data , RxcwamMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwamRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwatRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwatR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwatR,
+				pFromFpga->data , RxcwatMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwatRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxatfltRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxatfltR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxatfltR,
+				pFromFpga->data , RxatfltMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxatfltRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwafcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwafcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwafcR,
+				pFromFpga->data , RxcwafcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwafcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1CwwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1CwwtR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1CwwtR,
+				pFromFpga->data , R1CwwtMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwwtRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2CwwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2CwwtR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2CwwtR,
+				pFromFpga->data , R2CwwtMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwwtRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3CwwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3CwwtR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3CwwtR,
+				pFromFpga->data , R3CwwtMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwwtRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4CwwtRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4CwwtR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4CwwtR,
+				pFromFpga->data , R4CwwtMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwwtRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1CwwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1CwwlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1CwwlR,
+				pFromFpga->data , R1CwwlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2CwwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2CwwlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2CwwlR,
+				pFromFpga->data , R2CwwlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3CwwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3CwwlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3CwwlR,
+				pFromFpga->data , R3CwwlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4CwwlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4CwwlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4CwwlR,
+				pFromFpga->data , R4CwwlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwwlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwwdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwwdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwwdR,
+				pFromFpga->data , RxcwwdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwwtsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwwtsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwwtsR,
+				pFromFpga->data , RxcwwtsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwtsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwwmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwwmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwwmR,
+				pFromFpga->data , RxcwwmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcwwfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcwwfcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcwwfcR,
+				pFromFpga->data , RxcwwfcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwfcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1StmpiR,
+				pFromFpga->data , R1StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2StmpiR,
+				pFromFpga->data , R2StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3StmpiR,
+				pFromFpga->data , R3StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4StmpiR,
+				pFromFpga->data , R4StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1StmpvR,
+				pFromFpga->data , R1StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2StmpvR,
+				pFromFpga->data , R2StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3StmpvR,
+				pFromFpga->data , R3StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4StmpvR,
+				pFromFpga->data , R4StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1StmpvlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1StmpvlR,
+				pFromFpga->data , R1StmpvlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2StmpvlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2StmpvlR,
+				pFromFpga->data , R2StmpvlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3StmpvlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3StmpvlR,
+				pFromFpga->data , R3StmpvlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4StmpvlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4StmpvlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4StmpvlR,
+				pFromFpga->data , R4StmpvlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4StmpvlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxstmplsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxstmplsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxstmplsR,
+				pFromFpga->data , RxstmplsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxstmplsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxstmpmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxstmpmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxstmpmR,
+				pFromFpga->data , RxstmpmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxstmpmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxstmpfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxstmpfcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxstmpfcR,
+				pFromFpga->data , RxstmpfcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxstmpfcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cpltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cpltmp1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cpltmp1IR,
+				pFromFpga->data , R1Cpltmp1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cpltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cpltmp2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cpltmp2IR,
+				pFromFpga->data , R1Cpltmp2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cpltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cpltmp1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cpltmp1IR,
+				pFromFpga->data , R2Cpltmp1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cpltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cpltmp2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cpltmp2IR,
+				pFromFpga->data , R2Cpltmp2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cpltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cpltmp1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cpltmp1IR,
+				pFromFpga->data , R3Cpltmp1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cpltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cpltmp2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cpltmp2IR,
+				pFromFpga->data , R3Cpltmp2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cpltmp1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cpltmp1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cpltmp1IR,
+				pFromFpga->data , R4Cpltmp1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cpltmp2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cpltmp2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cpltmp2IR,
+				pFromFpga->data , R4Cpltmp2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cpltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cpltmp1VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cpltmp1VR,
+				pFromFpga->data , R1Cpltmp1VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cpltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cpltmp2VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cpltmp2VR,
+				pFromFpga->data , R1Cpltmp2VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cpltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cpltmp1VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cpltmp1VR,
+				pFromFpga->data , R2Cpltmp1VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cpltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cpltmp2VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cpltmp2VR,
+				pFromFpga->data , R2Cpltmp2VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cpltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cpltmp1VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cpltmp1VR,
+				pFromFpga->data , R3Cpltmp1VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cpltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cpltmp2VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cpltmp2VR,
+				pFromFpga->data , R3Cpltmp2VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cpltmp1VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cpltmp1VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cpltmp1VR,
+				pFromFpga->data , R4Cpltmp1VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp1VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cpltmp2VRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cpltmp2VR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cpltmp2VR,
+				pFromFpga->data , R4Cpltmp2VMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp2VRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cpltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cpltmp1VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cpltmp1VlR,
+				pFromFpga->data , R1Cpltmp1VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cpltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cpltmp2VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cpltmp2VlR,
+				pFromFpga->data , R1Cpltmp2VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cpltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cpltmp1VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cpltmp1VlR,
+				pFromFpga->data , R2Cpltmp1VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cpltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cpltmp2VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cpltmp2VlR,
+				pFromFpga->data , R2Cpltmp2VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cpltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cpltmp1VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cpltmp1VlR,
+				pFromFpga->data , R3Cpltmp1VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cpltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cpltmp2VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cpltmp2VlR,
+				pFromFpga->data , R3Cpltmp2VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cpltmp1VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cpltmp1VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cpltmp1VlR,
+				pFromFpga->data , R4Cpltmp1VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp1VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cpltmp2VlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cpltmp2VlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cpltmp2VlR,
+				pFromFpga->data , R4Cpltmp2VlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp2VlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcpltmplsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcpltmplsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcpltmplsR,
+				pFromFpga->data , RxcpltmplsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcpltmplsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcpltmpmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcpltmpmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcpltmpmR,
+				pFromFpga->data , RxcpltmpmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcpltmpmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcpltmpfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcpltmpfcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcpltmpfcR,
+				pFromFpga->data , RxcpltmpfcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcpltmpfcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep1IR,
+				pFromFpga->data , R1Cplfep1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep2IR,
+				pFromFpga->data , R1Cplfep2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep3IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep3IR,
+				pFromFpga->data , R1Cplfep3IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep1IR,
+				pFromFpga->data , R2Cplfep1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep2IR,
+				pFromFpga->data , R2Cplfep2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep3IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep3IR,
+				pFromFpga->data , R2Cplfep3IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep1IR,
+				pFromFpga->data , R3Cplfep1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep2IR,
+				pFromFpga->data , R3Cplfep2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep3IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep3IR,
+				pFromFpga->data , R3Cplfep3IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep1IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep1IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep1IR,
+				pFromFpga->data , R4Cplfep1IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep2IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep2IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep2IR,
+				pFromFpga->data , R4Cplfep2IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep3IRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep3IR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep3IR,
+				pFromFpga->data , R4Cplfep3IMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3IRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep1IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep1IlhR,
+				pFromFpga->data , R1Cplfep1IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep2IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep2IlhR,
+				pFromFpga->data , R1Cplfep2IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep3IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep3IlhR,
+				pFromFpga->data , R1Cplfep3IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep1IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep1IlhR,
+				pFromFpga->data , R2Cplfep1IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep2IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep2IlhR,
+				pFromFpga->data , R2Cplfep2IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep3IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep3IlhR,
+				pFromFpga->data , R2Cplfep3IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep1IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep1IlhR,
+				pFromFpga->data , R3Cplfep1IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep2IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep2IlhR,
+				pFromFpga->data , R3Cplfep2IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep3IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep3IlhR,
+				pFromFpga->data , R3Cplfep3IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep1IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep1IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep1IlhR,
+				pFromFpga->data , R4Cplfep1IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep2IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep2IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep2IlhR,
+				pFromFpga->data , R4Cplfep2IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep3IlhRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep3IlhR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep3IlhR,
+				pFromFpga->data , R4Cplfep3IlhMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3IlhRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep1IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep1IllR,
+				pFromFpga->data , R1Cplfep1IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep2IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep2IllR,
+				pFromFpga->data , R1Cplfep2IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep3IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep3IllR,
+				pFromFpga->data , R1Cplfep3IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep1IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep1IllR,
+				pFromFpga->data , R2Cplfep1IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep2IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep2IllR,
+				pFromFpga->data , R2Cplfep2IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep3IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep3IllR,
+				pFromFpga->data , R2Cplfep3IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep1IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep1IllR,
+				pFromFpga->data , R3Cplfep1IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep2IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep2IllR,
+				pFromFpga->data , R3Cplfep2IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep3IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep3IllR,
+				pFromFpga->data , R3Cplfep3IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep1IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep1IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep1IllR,
+				pFromFpga->data , R4Cplfep1IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep2IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep2IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep2IllR,
+				pFromFpga->data , R4Cplfep2IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep3IllRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep3IllR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep3IllR,
+				pFromFpga->data , R4Cplfep3IllMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3IllRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcplfepmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcplfepmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcplfepmR,
+				pFromFpga->data , RxcplfepmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcplfepmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcplfeplsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcplfeplsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcplfeplsR,
+				pFromFpga->data , RxcplfeplsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcplfeplsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcplfepfsRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcplfepfsR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcplfepfsR,
+				pFromFpga->data , RxcplfepfsMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcplfepfsRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcplfepfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcplfepfcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcplfepfcR,
+				pFromFpga->data , RxcplfepfcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcplfepfcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcvfRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcvfR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcvfR,
+				pFromFpga->data , RxcvfMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcvfRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcvfmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcvfmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcvfmR,
+				pFromFpga->data , RxcvfmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcvfmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcvfcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcvfcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcvfcR,
+				pFromFpga->data , RxcvfcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcvfcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcienRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcienR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcienR,
+				pFromFpga->data , RxcienMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcienRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxcienmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxcienmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxcienmR,
+				pFromFpga->data , RxcienmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcienmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxciencRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxciencR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxciencR,
+				pFromFpga->data , RxciencMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxciencRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxffsdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxffsdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxffsdR,
+				pFromFpga->data , RxffsdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxffsdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxffsdmRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxffsdmR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxffsdmR,
+				pFromFpga->data , RxffsdmMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxffsdmRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxffsdcRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxffsdcR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxffsdcR,
+				pFromFpga->data , RxffsdcMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxffsdcRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxistatRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxistatR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxistatR,
+				pFromFpga->data , RxistatMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxistatRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxictlRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxictlR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxictlR,
+				pFromFpga->data , RxictlMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxictlRString, (unsigned ) pFromFpga->data);
 	break;
 
     case RxiverRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_RxiverR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_RxiverR,
+				pFromFpga->data , RxiverMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxiverRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep1PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep1PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep1PerdR,
+				pFromFpga->data , R1Cplfep1PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep2PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep2PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep2PerdR,
+				pFromFpga->data , R1Cplfep2PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R1Cplfep3PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R1Cplfep3PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R1Cplfep3PerdR,
+				pFromFpga->data , R1Cplfep3PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep1PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep1PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep1PerdR,
+				pFromFpga->data , R2Cplfep1PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep2PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep2PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep2PerdR,
+				pFromFpga->data , R2Cplfep2PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R2Cplfep3PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R2Cplfep3PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R2Cplfep3PerdR,
+				pFromFpga->data , R2Cplfep3PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep1PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep1PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep1PerdR,
+				pFromFpga->data , R3Cplfep1PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep2PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep2PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep2PerdR,
+				pFromFpga->data , R3Cplfep2PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R3Cplfep3PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R3Cplfep3PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R3Cplfep3PerdR,
+				pFromFpga->data , R3Cplfep3PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep1PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep1PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep1PerdR,
+				pFromFpga->data , R4Cplfep1PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep2PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep2PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep2PerdR,
+				pFromFpga->data , R4Cplfep2PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R4Cplfep3PerdRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R4Cplfep3PerdR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R4Cplfep3PerdR,
+				pFromFpga->data , R4Cplfep3PerdMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3PerdRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R5StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R5StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R5StmpiR,
+				pFromFpga->data , R5StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R5StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R6StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R6StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R6StmpiR,
+				pFromFpga->data , R6StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R6StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R7StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R7StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R7StmpiR,
+				pFromFpga->data , R7StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R7StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R8StmpiRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R8StmpiR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R8StmpiR,
+				pFromFpga->data , R8StmpiMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R8StmpiRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R5StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R5StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R5StmpvR,
+				pFromFpga->data , R5StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R5StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R6StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R6StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R6StmpvR,
+				pFromFpga->data , R6StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R6StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R7StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R7StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R7StmpvR,
+				pFromFpga->data , R7StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R7StmpvRString, (unsigned ) pFromFpga->data);
 	break;
 
     case R8StmpvRAdr|flagReadMask:
-		status = (asynStatus) setIntegerParam(p_R8StmpvR,
-				pFromFpga->data);
+
+		status = (asynStatus) setUIntDigitalParam(p_R8StmpvR,
+				pFromFpga->data , R8StmpvMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R8StmpvRString, (unsigned ) pFromFpga->data);
@@ -2934,11 +3081,14 @@ asynStatus scllrfINTDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 	default:
 		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
 		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value read from unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+				pFromFpga->addr, (unsigned ) pFromFpga->data);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
+			status = asynError;
 		}
 
-		status = asynError;
 		break;
     }
 
@@ -2958,7 +3108,8 @@ asynStatus scllrfINTDriver::processRegReadback(const FpgaReg *pFromFpga, bool &w
 asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
-	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
+	epicsInt32 valueSet; // Put the value sent to the FPGA here for comparison
+	epicsUInt32 uValueSet;
 	epicsInt32 errorCount;
 //  variables that may be useful for checking array data
 //	asynUser *pAsynArrayUser;
@@ -2968,8 +3119,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 	switch (pFromFpga->addr)
     {
     case R1CwapsWAdr:
-		status = (asynStatus) getIntegerParam(p_R1CwapsW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1CwapsW, &uValueSet , R1CwapsMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwapsWString, (unsigned ) pFromFpga->data );
@@ -2977,7 +3128,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwapsWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -2986,8 +3137,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2CwapsWAdr:
-		status = (asynStatus) getIntegerParam(p_R2CwapsW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2CwapsW, &uValueSet , R2CwapsMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwapsWString, (unsigned ) pFromFpga->data );
@@ -2995,7 +3146,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwapsWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3004,8 +3155,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3CwapsWAdr:
-		status = (asynStatus) getIntegerParam(p_R3CwapsW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3CwapsW, &uValueSet , R3CwapsMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwapsWString, (unsigned ) pFromFpga->data );
@@ -3013,7 +3164,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwapsWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3022,8 +3173,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4CwapsWAdr:
-		status = (asynStatus) getIntegerParam(p_R4CwapsW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4CwapsW, &uValueSet , R4CwapsMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwapsWString, (unsigned ) pFromFpga->data );
@@ -3031,7 +3182,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4CwapsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwapsWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4CwapsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3040,8 +3191,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1CwalWAdr:
-		status = (asynStatus) getIntegerParam(p_R1CwalW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1CwalW, &uValueSet , R1CwalMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwalWString, (unsigned ) pFromFpga->data );
@@ -3049,7 +3200,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwalWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3058,8 +3209,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2CwalWAdr:
-		status = (asynStatus) getIntegerParam(p_R2CwalW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2CwalW, &uValueSet , R2CwalMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwalWString, (unsigned ) pFromFpga->data );
@@ -3067,7 +3218,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwalWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3076,8 +3227,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3CwalWAdr:
-		status = (asynStatus) getIntegerParam(p_R3CwalW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3CwalW, &uValueSet , R3CwalMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwalWString, (unsigned ) pFromFpga->data );
@@ -3085,7 +3236,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwalWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3094,8 +3245,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4CwalWAdr:
-		status = (asynStatus) getIntegerParam(p_R4CwalW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4CwalW, &uValueSet , R4CwalMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwalWString, (unsigned ) pFromFpga->data );
@@ -3103,7 +3254,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4CwalWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwalWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4CwalW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3112,8 +3263,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1CwapWAdr:
-		status = (asynStatus) getIntegerParam(p_R1CwapW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1CwapW, &uValueSet , R1CwapMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwapWString, (unsigned ) pFromFpga->data );
@@ -3121,7 +3272,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwapWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3130,8 +3281,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2CwapWAdr:
-		status = (asynStatus) getIntegerParam(p_R2CwapW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2CwapW, &uValueSet , R2CwapMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwapWString, (unsigned ) pFromFpga->data );
@@ -3139,7 +3290,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwapWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3148,8 +3299,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3CwapWAdr:
-		status = (asynStatus) getIntegerParam(p_R3CwapW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3CwapW, &uValueSet , R3CwapMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwapWString, (unsigned ) pFromFpga->data );
@@ -3157,7 +3308,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwapWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3166,8 +3317,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4CwapWAdr:
-		status = (asynStatus) getIntegerParam(p_R4CwapW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4CwapW, &uValueSet , R4CwapMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwapWString, (unsigned ) pFromFpga->data );
@@ -3175,7 +3326,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4CwapWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwapWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4CwapW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3184,8 +3335,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcwamWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcwamW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcwamW, &uValueSet , RxcwamMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwamWString, (unsigned ) pFromFpga->data );
@@ -3193,7 +3344,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcwamWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwamWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcwamW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3202,8 +3353,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcwatWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcwatW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcwatW, &uValueSet , RxcwatMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwatWString, (unsigned ) pFromFpga->data );
@@ -3211,7 +3362,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcwatWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwatWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcwatW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3220,8 +3371,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxatfltWAdr:
-		status = (asynStatus) getIntegerParam(p_RxatfltW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxatfltW, &uValueSet , RxatfltMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxatfltWString, (unsigned ) pFromFpga->data );
@@ -3229,7 +3380,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxatfltWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxatfltWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxatfltW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3238,8 +3389,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcwafcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcwafcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcwafcW, &uValueSet , RxcwafcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwafcWString, (unsigned ) pFromFpga->data );
@@ -3247,7 +3398,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcwafcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwafcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcwafcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3256,8 +3407,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1CwwlWAdr:
-		status = (asynStatus) getIntegerParam(p_R1CwwlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1CwwlW, &uValueSet , R1CwwlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1CwwlWString, (unsigned ) pFromFpga->data );
@@ -3265,7 +3416,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1CwwlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3274,8 +3425,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2CwwlWAdr:
-		status = (asynStatus) getIntegerParam(p_R2CwwlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2CwwlW, &uValueSet , R2CwwlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2CwwlWString, (unsigned ) pFromFpga->data );
@@ -3283,7 +3434,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2CwwlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3292,8 +3443,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3CwwlWAdr:
-		status = (asynStatus) getIntegerParam(p_R3CwwlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3CwwlW, &uValueSet , R3CwwlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3CwwlWString, (unsigned ) pFromFpga->data );
@@ -3301,7 +3452,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3CwwlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3310,8 +3461,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4CwwlWAdr:
-		status = (asynStatus) getIntegerParam(p_R4CwwlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4CwwlW, &uValueSet , R4CwwlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4CwwlWString, (unsigned ) pFromFpga->data );
@@ -3319,7 +3470,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4CwwlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4CwwlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4CwwlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3328,8 +3479,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcwwtsWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcwwtsW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcwwtsW, &uValueSet , RxcwwtsMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwtsWString, (unsigned ) pFromFpga->data );
@@ -3337,7 +3488,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcwwtsWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwwtsWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcwwtsW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3346,8 +3497,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcwwmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcwwmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcwwmW, &uValueSet , RxcwwmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwmWString, (unsigned ) pFromFpga->data );
@@ -3355,7 +3506,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcwwmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwwmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcwwmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3364,8 +3515,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcwwfcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcwwfcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcwwfcW, &uValueSet , RxcwwfcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcwwfcWString, (unsigned ) pFromFpga->data );
@@ -3373,7 +3524,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcwwfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcwwfcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcwwfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3382,8 +3533,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R1StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1StmpiW, &uValueSet , R1StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1StmpiWString, (unsigned ) pFromFpga->data );
@@ -3391,7 +3542,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3400,8 +3551,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R2StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2StmpiW, &uValueSet , R2StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2StmpiWString, (unsigned ) pFromFpga->data );
@@ -3409,7 +3560,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3418,8 +3569,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R3StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3StmpiW, &uValueSet , R3StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3StmpiWString, (unsigned ) pFromFpga->data );
@@ -3427,7 +3578,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3436,8 +3587,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R4StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4StmpiW, &uValueSet , R4StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4StmpiWString, (unsigned ) pFromFpga->data );
@@ -3445,7 +3596,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3454,8 +3605,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_R1StmpvlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1StmpvlW, &uValueSet , R1StmpvlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1StmpvlWString, (unsigned ) pFromFpga->data );
@@ -3463,7 +3614,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1StmpvlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3472,8 +3623,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_R2StmpvlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2StmpvlW, &uValueSet , R2StmpvlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2StmpvlWString, (unsigned ) pFromFpga->data );
@@ -3481,7 +3632,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2StmpvlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3490,8 +3641,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_R3StmpvlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3StmpvlW, &uValueSet , R3StmpvlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3StmpvlWString, (unsigned ) pFromFpga->data );
@@ -3499,7 +3650,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3StmpvlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3508,8 +3659,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4StmpvlWAdr:
-		status = (asynStatus) getIntegerParam(p_R4StmpvlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4StmpvlW, &uValueSet , R4StmpvlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4StmpvlWString, (unsigned ) pFromFpga->data );
@@ -3517,7 +3668,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4StmpvlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4StmpvlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4StmpvlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3526,8 +3677,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxstmpmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxstmpmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxstmpmW, &uValueSet , RxstmpmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxstmpmWString, (unsigned ) pFromFpga->data );
@@ -3535,7 +3686,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxstmpmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxstmpmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxstmpmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3544,8 +3695,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxstmpfcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxstmpfcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxstmpfcW, &uValueSet , RxstmpfcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxstmpfcWString, (unsigned ) pFromFpga->data );
@@ -3553,7 +3704,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxstmpfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxstmpfcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxstmpfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3562,8 +3713,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cpltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cpltmp1IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cpltmp1IW, &uValueSet , R1Cpltmp1IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp1IWString, (unsigned ) pFromFpga->data );
@@ -3571,7 +3722,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp1IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3580,8 +3731,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cpltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cpltmp2IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cpltmp2IW, &uValueSet , R1Cpltmp2IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp2IWString, (unsigned ) pFromFpga->data );
@@ -3589,7 +3740,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp2IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3598,8 +3749,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cpltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cpltmp1IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cpltmp1IW, &uValueSet , R2Cpltmp1IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp1IWString, (unsigned ) pFromFpga->data );
@@ -3607,7 +3758,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp1IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3616,8 +3767,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cpltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cpltmp2IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cpltmp2IW, &uValueSet , R2Cpltmp2IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp2IWString, (unsigned ) pFromFpga->data );
@@ -3625,7 +3776,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp2IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3634,8 +3785,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cpltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cpltmp1IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cpltmp1IW, &uValueSet , R3Cpltmp1IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp1IWString, (unsigned ) pFromFpga->data );
@@ -3643,7 +3794,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp1IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3652,8 +3803,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cpltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cpltmp2IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cpltmp2IW, &uValueSet , R3Cpltmp2IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp2IWString, (unsigned ) pFromFpga->data );
@@ -3661,7 +3812,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp2IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3670,8 +3821,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cpltmp1IWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cpltmp1IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cpltmp1IW, &uValueSet , R4Cpltmp1IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp1IWString, (unsigned ) pFromFpga->data );
@@ -3679,7 +3830,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cpltmp1IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp1IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cpltmp1IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3688,8 +3839,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cpltmp2IWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cpltmp2IW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cpltmp2IW, &uValueSet , R4Cpltmp2IMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp2IWString, (unsigned ) pFromFpga->data );
@@ -3697,7 +3848,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cpltmp2IWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp2IWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cpltmp2IW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3706,8 +3857,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cpltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cpltmp1VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cpltmp1VlW, &uValueSet , R1Cpltmp1VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp1VlWString, (unsigned ) pFromFpga->data );
@@ -3715,7 +3866,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp1VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3724,8 +3875,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cpltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cpltmp2VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cpltmp2VlW, &uValueSet , R1Cpltmp2VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cpltmp2VlWString, (unsigned ) pFromFpga->data );
@@ -3733,7 +3884,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cpltmp2VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3742,8 +3893,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cpltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cpltmp1VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cpltmp1VlW, &uValueSet , R2Cpltmp1VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp1VlWString, (unsigned ) pFromFpga->data );
@@ -3751,7 +3902,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp1VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3760,8 +3911,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cpltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cpltmp2VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cpltmp2VlW, &uValueSet , R2Cpltmp2VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cpltmp2VlWString, (unsigned ) pFromFpga->data );
@@ -3769,7 +3920,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cpltmp2VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3778,8 +3929,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cpltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cpltmp1VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cpltmp1VlW, &uValueSet , R3Cpltmp1VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp1VlWString, (unsigned ) pFromFpga->data );
@@ -3787,7 +3938,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp1VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3796,8 +3947,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cpltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cpltmp2VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cpltmp2VlW, &uValueSet , R3Cpltmp2VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cpltmp2VlWString, (unsigned ) pFromFpga->data );
@@ -3805,7 +3956,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cpltmp2VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3814,8 +3965,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cpltmp1VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cpltmp1VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cpltmp1VlW, &uValueSet , R4Cpltmp1VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp1VlWString, (unsigned ) pFromFpga->data );
@@ -3823,7 +3974,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cpltmp1VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp1VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cpltmp1VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3832,8 +3983,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cpltmp2VlWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cpltmp2VlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cpltmp2VlW, &uValueSet , R4Cpltmp2VlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cpltmp2VlWString, (unsigned ) pFromFpga->data );
@@ -3841,7 +3992,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cpltmp2VlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cpltmp2VlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cpltmp2VlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3850,8 +4001,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcpltmpmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcpltmpmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcpltmpmW, &uValueSet , RxcpltmpmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcpltmpmWString, (unsigned ) pFromFpga->data );
@@ -3859,7 +4010,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcpltmpmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcpltmpmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcpltmpmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3868,8 +4019,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcpltmpfcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcpltmpfcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcpltmpfcW, &uValueSet , RxcpltmpfcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcpltmpfcWString, (unsigned ) pFromFpga->data );
@@ -3877,7 +4028,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcpltmpfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcpltmpfcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcpltmpfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3886,8 +4037,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep1IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep1IlhW, &uValueSet , R1Cplfep1IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1IlhWString, (unsigned ) pFromFpga->data );
@@ -3895,7 +4046,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep1IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3904,8 +4055,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep2IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep2IlhW, &uValueSet , R1Cplfep2IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2IlhWString, (unsigned ) pFromFpga->data );
@@ -3913,7 +4064,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep2IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3922,8 +4073,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep3IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep3IlhW, &uValueSet , R1Cplfep3IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3IlhWString, (unsigned ) pFromFpga->data );
@@ -3931,7 +4082,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep3IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3940,8 +4091,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep1IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep1IlhW, &uValueSet , R2Cplfep1IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1IlhWString, (unsigned ) pFromFpga->data );
@@ -3949,7 +4100,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep1IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3958,8 +4109,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep2IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep2IlhW, &uValueSet , R2Cplfep2IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2IlhWString, (unsigned ) pFromFpga->data );
@@ -3967,7 +4118,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep2IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3976,8 +4127,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep3IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep3IlhW, &uValueSet , R2Cplfep3IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3IlhWString, (unsigned ) pFromFpga->data );
@@ -3985,7 +4136,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep3IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -3994,8 +4145,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep1IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep1IlhW, &uValueSet , R3Cplfep1IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1IlhWString, (unsigned ) pFromFpga->data );
@@ -4003,7 +4154,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep1IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4012,8 +4163,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep2IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep2IlhW, &uValueSet , R3Cplfep2IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2IlhWString, (unsigned ) pFromFpga->data );
@@ -4021,7 +4172,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep2IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4030,8 +4181,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep3IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep3IlhW, &uValueSet , R3Cplfep3IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3IlhWString, (unsigned ) pFromFpga->data );
@@ -4039,7 +4190,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep3IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4048,8 +4199,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep1IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep1IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep1IlhW, &uValueSet , R4Cplfep1IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1IlhWString, (unsigned ) pFromFpga->data );
@@ -4057,7 +4208,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep1IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep1IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep1IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4066,8 +4217,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep2IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep2IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep2IlhW, &uValueSet , R4Cplfep2IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2IlhWString, (unsigned ) pFromFpga->data );
@@ -4075,7 +4226,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep2IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep2IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep2IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4084,8 +4235,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep3IlhWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep3IlhW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep3IlhW, &uValueSet , R4Cplfep3IlhMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3IlhWString, (unsigned ) pFromFpga->data );
@@ -4093,7 +4244,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep3IlhWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep3IlhWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep3IlhW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4102,8 +4253,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep1IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep1IllW, &uValueSet , R1Cplfep1IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1IllWString, (unsigned ) pFromFpga->data );
@@ -4111,7 +4262,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep1IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4120,8 +4271,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep2IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep2IllW, &uValueSet , R1Cplfep2IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2IllWString, (unsigned ) pFromFpga->data );
@@ -4129,7 +4280,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep2IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4138,8 +4289,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep3IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep3IllW, &uValueSet , R1Cplfep3IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3IllWString, (unsigned ) pFromFpga->data );
@@ -4147,7 +4298,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep3IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4156,8 +4307,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep1IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep1IllW, &uValueSet , R2Cplfep1IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1IllWString, (unsigned ) pFromFpga->data );
@@ -4165,7 +4316,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep1IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4174,8 +4325,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep2IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep2IllW, &uValueSet , R2Cplfep2IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2IllWString, (unsigned ) pFromFpga->data );
@@ -4183,7 +4334,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep2IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4192,8 +4343,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep3IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep3IllW, &uValueSet , R2Cplfep3IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3IllWString, (unsigned ) pFromFpga->data );
@@ -4201,7 +4352,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep3IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4210,8 +4361,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep1IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep1IllW, &uValueSet , R3Cplfep1IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1IllWString, (unsigned ) pFromFpga->data );
@@ -4219,7 +4370,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep1IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4228,8 +4379,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep2IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep2IllW, &uValueSet , R3Cplfep2IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2IllWString, (unsigned ) pFromFpga->data );
@@ -4237,7 +4388,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep2IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4246,8 +4397,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep3IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep3IllW, &uValueSet , R3Cplfep3IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3IllWString, (unsigned ) pFromFpga->data );
@@ -4255,7 +4406,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep3IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4264,8 +4415,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep1IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep1IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep1IllW, &uValueSet , R4Cplfep1IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1IllWString, (unsigned ) pFromFpga->data );
@@ -4273,7 +4424,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep1IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep1IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep1IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4282,8 +4433,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep2IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep2IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep2IllW, &uValueSet , R4Cplfep2IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2IllWString, (unsigned ) pFromFpga->data );
@@ -4291,7 +4442,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep2IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep2IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep2IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4300,8 +4451,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep3IllWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep3IllW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep3IllW, &uValueSet , R4Cplfep3IllMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3IllWString, (unsigned ) pFromFpga->data );
@@ -4309,7 +4460,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep3IllWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep3IllWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep3IllW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4318,8 +4469,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcplfepmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcplfepmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcplfepmW, &uValueSet , RxcplfepmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcplfepmWString, (unsigned ) pFromFpga->data );
@@ -4327,7 +4478,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcplfepmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcplfepmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcplfepmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4336,8 +4487,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcplfepfcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcplfepfcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcplfepfcW, &uValueSet , RxcplfepfcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcplfepfcWString, (unsigned ) pFromFpga->data );
@@ -4345,7 +4496,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcplfepfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcplfepfcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcplfepfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4354,8 +4505,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcvfmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcvfmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcvfmW, &uValueSet , RxcvfmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcvfmWString, (unsigned ) pFromFpga->data );
@@ -4363,7 +4514,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcvfmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcvfmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcvfmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4372,8 +4523,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcvfcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcvfcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcvfcW, &uValueSet , RxcvfcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcvfcWString, (unsigned ) pFromFpga->data );
@@ -4381,7 +4532,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcvfcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcvfcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcvfcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4390,8 +4541,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxcienmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxcienmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxcienmW, &uValueSet , RxcienmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxcienmWString, (unsigned ) pFromFpga->data );
@@ -4399,7 +4550,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxcienmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxcienmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxcienmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4408,8 +4559,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxciencWAdr:
-		status = (asynStatus) getIntegerParam(p_RxciencW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxciencW, &uValueSet , RxciencMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxciencWString, (unsigned ) pFromFpga->data );
@@ -4417,7 +4568,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxciencWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxciencWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxciencW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4426,8 +4577,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxffsdmWAdr:
-		status = (asynStatus) getIntegerParam(p_RxffsdmW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxffsdmW, &uValueSet , RxffsdmMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxffsdmWString, (unsigned ) pFromFpga->data );
@@ -4435,7 +4586,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxffsdmWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxffsdmWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxffsdmW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4444,8 +4595,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxffsdcWAdr:
-		status = (asynStatus) getIntegerParam(p_RxffsdcW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxffsdcW, &uValueSet , RxffsdcMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxffsdcWString, (unsigned ) pFromFpga->data );
@@ -4453,7 +4604,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxffsdcWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxffsdcWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxffsdcW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4462,8 +4613,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case RxictlWAdr:
-		status = (asynStatus) getIntegerParam(p_RxictlW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_RxictlW, &uValueSet , RxictlMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RxictlWString, (unsigned ) pFromFpga->data );
@@ -4471,7 +4622,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				RxictlWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				RxictlWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_RxictlW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4480,8 +4631,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep1PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep1PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep1PerdW, &uValueSet , R1Cplfep1PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep1PerdWString, (unsigned ) pFromFpga->data );
@@ -4489,7 +4640,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep1PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep1PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4498,8 +4649,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep2PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep2PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep2PerdW, &uValueSet , R1Cplfep2PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep2PerdWString, (unsigned ) pFromFpga->data );
@@ -4507,7 +4658,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep2PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep2PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4516,8 +4667,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R1Cplfep3PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R1Cplfep3PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R1Cplfep3PerdW, &uValueSet , R1Cplfep3PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R1Cplfep3PerdWString, (unsigned ) pFromFpga->data );
@@ -4525,7 +4676,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R1Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R1Cplfep3PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R1Cplfep3PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4534,8 +4685,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep1PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep1PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep1PerdW, &uValueSet , R2Cplfep1PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep1PerdWString, (unsigned ) pFromFpga->data );
@@ -4543,7 +4694,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep1PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep1PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4552,8 +4703,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep2PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep2PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep2PerdW, &uValueSet , R2Cplfep2PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep2PerdWString, (unsigned ) pFromFpga->data );
@@ -4561,7 +4712,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep2PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep2PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4570,8 +4721,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R2Cplfep3PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R2Cplfep3PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R2Cplfep3PerdW, &uValueSet , R2Cplfep3PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R2Cplfep3PerdWString, (unsigned ) pFromFpga->data );
@@ -4579,7 +4730,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R2Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R2Cplfep3PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R2Cplfep3PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4588,8 +4739,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep1PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep1PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep1PerdW, &uValueSet , R3Cplfep1PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep1PerdWString, (unsigned ) pFromFpga->data );
@@ -4597,7 +4748,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep1PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep1PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4606,8 +4757,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep2PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep2PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep2PerdW, &uValueSet , R3Cplfep2PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep2PerdWString, (unsigned ) pFromFpga->data );
@@ -4615,7 +4766,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep2PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep2PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4624,8 +4775,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R3Cplfep3PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R3Cplfep3PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R3Cplfep3PerdW, &uValueSet , R3Cplfep3PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R3Cplfep3PerdWString, (unsigned ) pFromFpga->data );
@@ -4633,7 +4784,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R3Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R3Cplfep3PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R3Cplfep3PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4642,8 +4793,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep1PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep1PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep1PerdW, &uValueSet , R4Cplfep1PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep1PerdWString, (unsigned ) pFromFpga->data );
@@ -4651,7 +4802,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep1PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep1PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep1PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4660,8 +4811,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep2PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep2PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep2PerdW, &uValueSet , R4Cplfep2PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep2PerdWString, (unsigned ) pFromFpga->data );
@@ -4669,7 +4820,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep2PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep2PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep2PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4678,8 +4829,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R4Cplfep3PerdWAdr:
-		status = (asynStatus) getIntegerParam(p_R4Cplfep3PerdW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R4Cplfep3PerdW, &uValueSet , R4Cplfep3PerdMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R4Cplfep3PerdWString, (unsigned ) pFromFpga->data );
@@ -4687,7 +4838,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R4Cplfep3PerdWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R4Cplfep3PerdWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R4Cplfep3PerdW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4696,8 +4847,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R5StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R5StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R5StmpiW, &uValueSet , R5StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R5StmpiWString, (unsigned ) pFromFpga->data );
@@ -4705,7 +4856,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R5StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R5StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R5StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4714,8 +4865,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R6StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R6StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R6StmpiW, &uValueSet , R6StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R6StmpiWString, (unsigned ) pFromFpga->data );
@@ -4723,7 +4874,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R6StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R6StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R6StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4732,8 +4883,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R7StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R7StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R7StmpiW, &uValueSet , R7StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R7StmpiWString, (unsigned ) pFromFpga->data );
@@ -4741,7 +4892,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R7StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R7StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R7StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4750,8 +4901,8 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case R8StmpiWAdr:
-		status = (asynStatus) getIntegerParam(p_R8StmpiW, valueSet);
-		if( (valueSet[0] ) == (pFromFpga->data ))
+		status = (asynStatus) getUIntDigitalParam(p_R8StmpiW, &uValueSet , R8StmpiMask);
+		if( (int32_t)(uValueSet ) == (pFromFpga->data ))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				R8StmpiWString, (unsigned ) pFromFpga->data );
@@ -4759,7 +4910,7 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				R8StmpiWString, valueSet[0] , (unsigned ) pFromFpga->data );
+				R8StmpiWString, uValueSet , (unsigned ) pFromFpga->data );
 			status = asynError;
 			setParamStatus(p_R8StmpiW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -4770,11 +4921,14 @@ asynStatus scllrfINTDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 	default:
 		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
 		{
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, ++errorCount);
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: write response from FPGA for unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+				pFromFpga->addr, (unsigned ) pFromFpga->data);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+			status = asynError;
 		}
 
-		status = asynError;
 		break;
     }
 

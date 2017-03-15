@@ -422,8 +422,7 @@ static const char *RxstmplsRString = "RXSTMPLS_R";
 static const char *RxstmpmRString = "RXSTMPM_R";
 static const char *RxstmpmWString = "RXSTMPM_W";
 
-const unsigned int scllrfINTReadRegCount = 147;
-const unsigned int scllrfINTWriteRegCount = 100;
+const unsigned int scllrfINTPolledRegCount = 147;
 
 
 
@@ -441,6 +440,8 @@ protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
+
+
 
 /* Registers */
     int p_R1Cplfep1IR;
@@ -956,6 +957,153 @@ protected:
     // masks applied to returned register data
     enum RegMasks
     {
+    	R1CwavMask =  0xFFFFFFFF, // bit fields
+    	R2CwavMask =  0xFFFFFFFF, // bit fields
+    	R3CwavMask =  0xFFFFFFFF, // bit fields
+    	R4CwavMask =  0xFFFFFFFF, // bit fields
+    	R1CwapsMask =  0xFFFFFFFF, // bit fields
+    	R2CwapsMask =  0xFFFFFFFF, // bit fields
+    	R3CwapsMask =  0xFFFFFFFF, // bit fields
+    	R4CwapsMask =  0xFFFFFFFF, // bit fields
+    	R1CwalMask =  0xFFFFFFFF, // bit fields
+    	R2CwalMask =  0xFFFFFFFF, // bit fields
+    	R3CwalMask =  0xFFFFFFFF, // bit fields
+    	R4CwalMask =  0xFFFFFFFF, // bit fields
+    	R1CwapMask =  0xFFFFFFFF, // bit fields
+    	R2CwapMask =  0xFFFFFFFF, // bit fields
+    	R3CwapMask =  0xFFFFFFFF, // bit fields
+    	R4CwapMask =  0xFFFFFFFF, // bit fields
+    	RxcwadMask =  0xFFFFFFFF, // bit fields
+    	RxcwamMask =  0xFFFFFFFF, // bit fields
+    	RxcwatMask =  0xFFFFFFFF, // bit fields
+    	RxatfltMask =  0xFFFFFFFF, // bit fields
+    	RxcwafcMask =  0xFFFFFFFF, // bit fields
+    	R1CwwtMask =  0xFFFFFFFF, // bit fields
+    	R2CwwtMask =  0xFFFFFFFF, // bit fields
+    	R3CwwtMask =  0xFFFFFFFF, // bit fields
+    	R4CwwtMask =  0xFFFFFFFF, // bit fields
+    	R1CwwlMask =  0xFFFFFFFF, // bit fields
+    	R2CwwlMask =  0xFFFFFFFF, // bit fields
+    	R3CwwlMask =  0xFFFFFFFF, // bit fields
+    	R4CwwlMask =  0xFFFFFFFF, // bit fields
+    	RxcwwdMask =  0xFFFFFFFF, // bit fields
+    	RxcwwtsMask =  0xFFFFFFFF, // bit fields
+    	RxcwwmMask =  0xFFFFFFFF, // bit fields
+    	RxcwwfcMask =  0xFFFFFFFF, // bit fields
+    	R1StmpiMask =  0xFFFFFFFF, // bit fields
+    	R2StmpiMask =  0xFFFFFFFF, // bit fields
+    	R3StmpiMask =  0xFFFFFFFF, // bit fields
+    	R4StmpiMask =  0xFFFFFFFF, // bit fields
+    	R1StmpvMask =  0xFFFFFFFF, // bit fields
+    	R2StmpvMask =  0xFFFFFFFF, // bit fields
+    	R3StmpvMask =  0xFFFFFFFF, // bit fields
+    	R4StmpvMask =  0xFFFFFFFF, // bit fields
+    	R1StmpvlMask =  0xFFFFFFFF, // bit fields
+    	R2StmpvlMask =  0xFFFFFFFF, // bit fields
+    	R3StmpvlMask =  0xFFFFFFFF, // bit fields
+    	R4StmpvlMask =  0xFFFFFFFF, // bit fields
+    	RxstmplsMask =  0xFFFFFFFF, // bit fields
+    	RxstmpmMask =  0xFFFFFFFF, // bit fields
+    	RxstmpfcMask =  0xFFFFFFFF, // bit fields
+    	R1Cpltmp1IMask =  0xFFFFFFFF, // bit fields
+    	R1Cpltmp2IMask =  0xFFFFFFFF, // bit fields
+    	R2Cpltmp1IMask =  0xFFFFFFFF, // bit fields
+    	R2Cpltmp2IMask =  0xFFFFFFFF, // bit fields
+    	R3Cpltmp1IMask =  0xFFFFFFFF, // bit fields
+    	R3Cpltmp2IMask =  0xFFFFFFFF, // bit fields
+    	R4Cpltmp1IMask =  0xFFFFFFFF, // bit fields
+    	R4Cpltmp2IMask =  0xFFFFFFFF, // bit fields
+    	R1Cpltmp1VMask =  0xFFFFFFFF, // bit fields
+    	R1Cpltmp2VMask =  0xFFFFFFFF, // bit fields
+    	R2Cpltmp1VMask =  0xFFFFFFFF, // bit fields
+    	R2Cpltmp2VMask =  0xFFFFFFFF, // bit fields
+    	R3Cpltmp1VMask =  0xFFFFFFFF, // bit fields
+    	R3Cpltmp2VMask =  0xFFFFFFFF, // bit fields
+    	R4Cpltmp1VMask =  0xFFFFFFFF, // bit fields
+    	R4Cpltmp2VMask =  0xFFFFFFFF, // bit fields
+    	R1Cpltmp1VlMask =  0xFFFFFFFF, // bit fields
+    	R1Cpltmp2VlMask =  0xFFFFFFFF, // bit fields
+    	R2Cpltmp1VlMask =  0xFFFFFFFF, // bit fields
+    	R2Cpltmp2VlMask =  0xFFFFFFFF, // bit fields
+    	R3Cpltmp1VlMask =  0xFFFFFFFF, // bit fields
+    	R3Cpltmp2VlMask =  0xFFFFFFFF, // bit fields
+    	R4Cpltmp1VlMask =  0xFFFFFFFF, // bit fields
+    	R4Cpltmp2VlMask =  0xFFFFFFFF, // bit fields
+    	RxcpltmplsMask =  0xFFFFFFFF, // bit fields
+    	RxcpltmpmMask =  0xFFFFFFFF, // bit fields
+    	RxcpltmpfcMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep1IMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep2IMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep3IMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep1IMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep2IMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep3IMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep1IMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep2IMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep3IMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep1IMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep2IMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep3IMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep1IlhMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep2IlhMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep3IlhMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep1IlhMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep2IlhMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep3IlhMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep1IlhMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep2IlhMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep3IlhMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep1IlhMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep2IlhMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep3IlhMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep1IllMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep2IllMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep3IllMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep1IllMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep2IllMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep3IllMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep1IllMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep2IllMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep3IllMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep1IllMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep2IllMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep3IllMask =  0xFFFFFFFF, // bit fields
+    	RxcplfepmMask =  0xFFFFFFFF, // bit fields
+    	RxcplfeplsMask =  0xFFFFFFFF, // bit fields
+    	RxcplfepfsMask =  0xFFFFFFFF, // bit fields
+    	RxcplfepfcMask =  0xFFFFFFFF, // bit fields
+    	RxcvfMask =  0xFFFFFFFF, // bit fields
+    	RxcvfmMask =  0xFFFFFFFF, // bit fields
+    	RxcvfcMask =  0xFFFFFFFF, // bit fields
+    	RxcienMask =  0xFFFFFFFF, // bit fields
+    	RxcienmMask =  0xFFFFFFFF, // bit fields
+    	RxciencMask =  0xFFFFFFFF, // bit fields
+    	RxffsdMask =  0xFFFFFFFF, // bit fields
+    	RxffsdmMask =  0xFFFFFFFF, // bit fields
+    	RxffsdcMask =  0xFFFFFFFF, // bit fields
+    	RxistatMask =  0xFFFFFFFF, // bit fields
+    	RxictlMask =  0xFFFFFFFF, // bit fields
+    	RxiverMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep1PerdMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep2PerdMask =  0xFFFFFFFF, // bit fields
+    	R1Cplfep3PerdMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep1PerdMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep2PerdMask =  0xFFFFFFFF, // bit fields
+    	R2Cplfep3PerdMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep1PerdMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep2PerdMask =  0xFFFFFFFF, // bit fields
+    	R3Cplfep3PerdMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep1PerdMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep2PerdMask =  0xFFFFFFFF, // bit fields
+    	R4Cplfep3PerdMask =  0xFFFFFFFF, // bit fields
+    	R5StmpiMask =  0xFFFFFFFF, // bit fields
+    	R6StmpiMask =  0xFFFFFFFF, // bit fields
+    	R7StmpiMask =  0xFFFFFFFF, // bit fields
+    	R8StmpiMask =  0xFFFFFFFF, // bit fields
+    	R5StmpvMask =  0xFFFFFFFF, // bit fields
+    	R6StmpvMask =  0xFFFFFFFF, // bit fields
+    	R7StmpvMask =  0xFFFFFFFF, // bit fields
+    	R8StmpvMask =  0xFFFFFFFF, // bit fields
 
     };
 };

@@ -83,20 +83,31 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 #end for
 
     // Message size is the number of read registers, plus 1 nonce for every 175 read registers
-    PolledRegMsgSize_ = ${name}ReadRegCount + (${name}ReadRegCount / 175) + 1;
+    PolledRegMsgSize_ = ${name}PolledRegCount + (${name}PolledRegCount / 175) + 1;
 	// A canned request to read all registers
     pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 #set $msgRegCount = 0
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address)
-    #if msgRegCount % 174 == 0
+  #if $p.has_key('nelm') and $p.nelm<=16
+    #set $chan_count = $p.nelm
+  #else
+    #set $chan_count = 1
+  #end if
+  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>16)
+    #for $chan_num in range(0, $chan_count )
+      #if msgRegCount % 174 == 0
 		{ 0, 0 },
-    #end if
-		{ flagReadMask | ${p.name.title().replace("_", "")}RAdr, blankData },
-  #set $prevAdr = $p.address
-  #set $msgRegCount += 1
+      #end if
+        #if $chan_num == 0
+		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr), blankData },
+        #else
+		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr) + $chan_num, blankData },
+        #end if
+    #end for
+    #set $prevAdr = $p.address
+    #set $msgRegCount += 1
   #end unless
 #end for
 	};
@@ -167,11 +178,11 @@ asynStatus ${name}Driver::functionToRegister(const int function, FpgaReg *pToFpg
 */
 asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
-	unsigned int i;
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 	epicsInt32 errorCount;
 	int32_t signExtBits = 0;
+	int chan;
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
@@ -226,38 +237,43 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 		if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
 				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + $p.nelm)))
 		{
+			chan = (pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask));
     #if $p.has_key("bit_width")
       #if $p.has_key("signed") and $p.signed == "signed"
-		signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
-		status = (asynStatus) setIntegerParam((pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask)),
+			signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
+			status = (asynStatus) setIntegerParam(chan,
 				p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
       #else
-		status = (asynStatus) setIntegerParam((pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask)),
+			status = (asynStatus) setIntegerParam(chan,
 				p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
       #end if
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}RString,
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}RString,chan,
 				(unsigned ) pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
     #else
-		status = (asynStatus) setIntegerParam((pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask)),
+			status = (asynStatus) setIntegerParam(chan,
 				p_${p.name.title().replace("_", "")}R, pFromFpga->data);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}RString, chan, (unsigned ) pFromFpga->data);
     #end if
+			callParamCallbacks(chan, chan);
 		}
 		else
   #end if
 #end for
 		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value read from unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+				pFromFpga->addr, (unsigned ) pFromFpga->data);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
+			status = asynError;
 		}
 
-		status = asynError;
 		break;
     }
 
@@ -311,7 +327,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
       #set $retVal = 'valueSet'
     #end if
 		status = (asynStatus) get${paramType}Param(p_${p.name.title().replace("_", "")}W, &$retVal $maskParam);
-		if( ($retVal $maskStr) == (pFromFpga->data $maskStr))
+		if( (int32_t)($retVal $maskStr) == (pFromFpga->data $maskStr))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
@@ -340,13 +356,13 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 					p_${p.name.title().replace("_", "")}W, &valueSet);##We're assuming here no arrays of bit fields, otherwise handle valueSet as above'
 			if( (valueSet $maskStr) == (pFromFpga->data $maskStr))
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-					"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-					${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
+					"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+					${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), (unsigned ) pFromFpga->data $maskStr);
 			else
 			{
 				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-					${p.name.title().replace("_", "")}WString, valueSet $maskStr, (unsigned ) pFromFpga->data $maskStr);
+					"%s: value sent to %s, channel %u, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+					${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), valueSet $maskStr, (unsigned ) pFromFpga->data $maskStr);
 				status = asynError;
 				setParamStatus(p_${p.name.title().replace("_", "")}W, status);
 				getIntegerParam(p_CommErrorCount, &errorCount);
@@ -359,11 +375,14 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
   #end if
 #end for
 		{
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, ++errorCount);
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: write response from FPGA for unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+				pFromFpga->addr, (unsigned ) pFromFpga->data);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+			status = asynError;
 		}
 
-		status = asynError;
 		break;
     }
 
