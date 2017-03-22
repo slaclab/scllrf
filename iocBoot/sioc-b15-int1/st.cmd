@@ -15,11 +15,12 @@ epicsEnvSet("N","1")
 # PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
 epicsEnvSet("P", "$(TYPE)$(N):$(LOCA):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.67")
+epicsEnvSet( FPGA_IP, "192.168.165.73")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 
 < ../common/regInterface.cmd
+# regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
 # ======================================================================
@@ -38,8 +39,7 @@ asynSetTraceIOMask("myIP",-1,4)
 asynSetTraceMask("myReg",-1,0xB)
 #asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myReg",-1,4)
-#
-# regInterface.cmd leaves us in $(TOP) directory
+####XXXX End Turn on heavy logging for development
 
 ##############################################################################
 # BEGIN: Load the record databases
@@ -51,6 +51,11 @@ asynSetTraceIOMask("myReg",-1,4)
 #Load Additional databases:
 # =====================================================================
 dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/ZZZextra.template","P=$(P)")
+dbLoadRecords("db/STMPextra.template","P=$(P)")
+dbLoadRecords("db/ARCTextra.template","P=$(P)")
+dbLoadRecords("db/CPLTextra.template","P=$(P)")
+dbLoadRecords("db/HELLextra.template","P=$(P)")
 #
 # END: Loading the record databases
 ########################################################################
@@ -80,6 +85,11 @@ iocInit()
 
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
+#seq &INTmbboCopy,"PREFC=INT1"
+seq &INTarcTest,"PREFC=INT1"
+seq &INTheLevel,"PREFC=INT1"
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
 
 #< iocBoot/common/autoSaveStart.cmd
 
