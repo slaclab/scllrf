@@ -9,7 +9,7 @@
 # System Location:
 epicsEnvSet("LOCA","B15")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("TYPE","INT")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
 # PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):

@@ -91,19 +91,19 @@ buttonLabel "INTERLOCKS #2"
 numPvs 4
 numDsps 13
 displayFileName {
-  0 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTRegisters.edl"
-  1 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/res4cavity.edl"
-  2 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/INTarcTest.edl"
-  3 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/INTheLev.edl"
-  4 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/INTtemps.edl"
-  5 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/z_mbbo_macro.edl"
-  6 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/z_mbbo_xx.edl"
-  7 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/asynRecord.edl"
-  8 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/asynRecord.edl"
-  9 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/z_mbbo_xx.edl"
-  10 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTBits.edl"
-  11 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTBitsR.edl"
-  12 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTBitsRW.edl"
+  0 "scllrfINTRegisters.edl"
+  1 "res4cavity.edl"
+  2 "INTarcTest.edl"
+  3 "INTheLev.edl"
+  4 "INTtemps.edl"
+  5 "z_mbbo_macro.edl"
+  6 "z_mbbo_xx.edl"
+  7 "asynRecord.edl"
+  8 "asynRecord.edl"
+  9 "z_mbbo_xx.edl"
+  10 "scllrfINTBits.edl"
+  11 "scllrfINTBitsR.edl"
+  12 "scllrfINTBitsRW.edl"
 }
 menuLabel {
   0 "Interlocks #2"
@@ -271,10 +271,10 @@ numPvs 4
 numDsps 5
 displayFileName {
   0 "_____________"
-  1 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT2_MainExp.edl"
-  2 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT2_MainExp.edl"
-  3 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT2_MainExp.edl"
-  4 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT2_MainExp.edl"
+  1 "scllrfINT2_MainExp.edl"
+  2 "scllrfINT2_MainExp.edl"
+  3 "scllrfINT2_MainExp.edl"
+  4 "scllrfINT2_MainExp.edl"
 }
 menuLabel {
   0 "_____________"

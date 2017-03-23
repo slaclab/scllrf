@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 639
-y 367
+x 641
+y 393
 w 600
 h 400
 font "helvetica-medium-r-18.0"
@@ -91,19 +91,19 @@ buttonLabel "INTERLOCKS #1"
 numPvs 4
 numDsps 13
 displayFileName {
-  0 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTRegisters.edl"
-  1 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/res4cavity.edl"
-  2 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/INTarcTest.edl"
-  3 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/INTheLev.edl"
-  4 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/INTtemps.edl"
-  5 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/z_mbbo_macro.edl"
-  6 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/z_mbbo_xx.edl"
-  7 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/asynRecord.edl"
-  8 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/asynRecord.edl"
-  9 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/z_mbbo_xx.edl"
-  10 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTBits.edl"
-  11 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTBitsR.edl"
-  12 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINTBitsRW.edl"
+  0 "scllrfINTRegisters.edl"
+  1 "res4cavity.edl"
+  2 "INTarcTest.edl"
+  3 "INTheLev.edl"
+  4 "INTtemps.edl"
+  5 "z_mbbo_macro.edl"
+  6 "z_mbbo_xx.edl"
+  7 "asynRecord.edl"
+  8 "asynRecord.edl"
+  9 "z_mbbo_xx.edl"
+  10 "scllrfINTBits.edl"
+  11 "scllrfINTBitsR.edl"
+  12 "scllrfINTBitsRW.edl"
 }
 menuLabel {
   0 "Interlocks #1"
@@ -121,19 +121,19 @@ menuLabel {
   12 "BITS read/write"
 }
 symbols {
-  0 "P=INT1"
-  1 "P=INT1"
-  2 "P=INT1:"
-  3 "P=INT1:"
-  4 "P=INT1:"
-  5 "AAA=INT1:,BBB=INT1,NNN=TRGS2"
-  6 "AAA=INT1:,NNN=XCWAM"
-  7 "P=INT1,R=ASYN_IP,PORT=myIP"
-  8 "P=INT1,R=ASYN_IP,PORT=myReg"
-  9 "AAA=INT1:,NNN=XCWAT"
-  10 "P=INT1:"
-  11 "P=INT1:"
-  12 "P=INT1:"
+  0 "P=INT1:B15:"
+  1 "P=INT1:B15:"
+  2 "P=INT1:B15:"
+  3 "P=INT1:B15:"
+  4 "P=INT1:B15:"
+  5 "AAA=INT1:B15:,BBB=INT1,NNN=TRGS2"
+  6 "AAA=INT1:B15:,NNN=XCWAM"
+  7 "P=INT1:B15:,R=ASYN_IP,PORT=myIP"
+  8 "P=INT1:B15:,R=ASYN_IP,PORT=myReg"
+  9 "AAA=INT1:B15:,NNN=XCWAT"
+  10 "P=INT1:B15:"
+  11 "P=INT1:B15:"
+  12 "P=INT1:B15:"
 }
 replaceSymbols {
   2 1
@@ -219,14 +219,14 @@ minor 1
 release 1
 x 44
 y 353
-w 229
+w 260
 h 16
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "FPGA IP Address = 129.57.231.89"
+  "FPGA IP Address = [look up asyn PV]"
 }
 autoSize
 endObjectProperties
@@ -271,10 +271,10 @@ numPvs 4
 numDsps 5
 displayFileName {
   0 "_____________"
-  1 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT1_MainExp.edl"
-  2 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT1_MainExp.edl"
-  3 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT1_MainExp.edl"
-  4 "/a/devuser/lahti/RF_SLAC.2/scllrf/display/scllrfINT1_MainExp.edl"
+  1 "scllrfINT1_MainExp.edl"
+  2 "scllrfINT1_MainExp.edl"
+  3 "scllrfINT1_MainExp.edl"
+  4 "scllrfINT1_MainExp.edl"
 }
 menuLabel {
   0 "_____________"
@@ -284,11 +284,11 @@ menuLabel {
   4 "Cavity 4"
 }
 symbols {
-  0 "P=INT1"
-  1 "P=INT1, CAV=1"
-  2 "P=INT1,CAV=2"
-  3 "P=INT1, CAV=3"
-  4 "P=INT1, CAV=4"
+  0 "P=INT1:B15:"
+  1 "P=INT1:B15:, CAV=1"
+  2 "P=INT1:B15:,CAV=2"
+  3 "P=INT1:B15:, CAV=3"
+  4 "P=INT1:B15:, CAV=4"
 }
 replaceSymbols {
   2 1
