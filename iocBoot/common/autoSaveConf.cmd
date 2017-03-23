@@ -38,7 +38,9 @@ set_savefile_path("data/${IOC}/autosave")
 # records
 # ============================================================
 save_restoreSet_UseStatusPVs(1)
-save_restoreSet_status_prefix("${IOC}:")
+# Set IOC_PV as a prefix for autosave and iocAdmin PVs
+epicsEnvSet("IOC_PV", "SIOC:$(LOCA):$(TYPE)$(N)")
+save_restoreSet_status_prefix("${IOC_PV}:")
 
 ## Restore datasets
 set_pass0_restoreFile("info_settings.sav")
