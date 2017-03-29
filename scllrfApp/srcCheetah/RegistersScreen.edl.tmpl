@@ -99,7 +99,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "\$(P):${p.name.upper()}"
+  "\$(P)${p.name.upper()}"
 }
 endObjectProperties
 
@@ -114,7 +114,7 @@ x ${xoffset + 292}
 y ${yoffset + 50}
 w 280
 h 18
-controlPv "\$(P):${p.name.upper()}_W.DESC"
+controlPv "\$(P)${p.name.upper()}_W.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
@@ -154,7 +154,7 @@ displayFileName {
   #end if
 }
 symbols {
-  0 "PV=\$(P):${p.name.upper()}_W"
+  0 "PV=\$(P)${p.name.upper()}_W"
 }
 endObjectProperties
   
@@ -168,7 +168,7 @@ x ${xoffset + 576}
 y ${yoffset + 50}
 w 136
 h 18
-controlPv "\$(P):${p.name.upper()}_W"
+controlPv "\$(P)${p.name.upper()}_W"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
@@ -195,7 +195,7 @@ x ${xoffset + 292}
 y ${yoffset + 50}
 w 280
 h 18
-controlPv "\$(P):${p.name.upper()}_R.DESC"
+controlPv "\$(P)${p.name.upper()}_R.DESC"
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
@@ -235,7 +235,7 @@ displayFileName {
   #end if
 }
 symbols {
-  0 "PV=\$(P):${p.name.upper()}_R"
+  0 "PV=\$(P)${p.name.upper()}_R"
 }
 endObjectProperties
   
@@ -249,7 +249,7 @@ x ${xoffset + 576}
 y ${yoffset + 50}
 w 136
 h 18
-controlPv "\$(P):${p.name.upper()}_R.VAL"
+controlPv "\$(P)${p.name.upper()}_R.VAL"
 format "exponential"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
