@@ -206,7 +206,7 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
     #set $paramType = 'Integer'
     #set $maskParam = ''
   #end if
-  #if $p.has_key("bit_width")
+  #if $p.has_key("bit_width") or $p.has_key("data_width")
     #if $p.has_key("signed") and $p.signed == "signed"
 		signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
@@ -238,7 +238,7 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + $p.nelm)))
 		{
 			chan = (pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask));
-    #if $p.has_key("bit_width")
+    #if $p.has_key("bit_width") or $p.has_key("data_width")
       #if $p.has_key("signed") and $p.signed == "signed"
 			signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 			status = (asynStatus) setIntegerParam(chan,
@@ -305,7 +305,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
     {
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key("bit_width")
+  #if $p.has_key("bit_width") or $p.has_key("data_width")
     #set $maskStr = "& " + $p.name.title().replace("_", "") + "Mask"
   #else
     #set $maskStr = ""

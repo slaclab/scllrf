@@ -40,7 +40,8 @@ static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()
     #if $p.address not in $prevRAdrs
       #if $p.has_key('nelm') and $p.nelm<=16
         #set $count_inc = $p.nelm
-      #else if not $p.has_key('nelm') ## exclude arrays with > 16 elements from polling
+## exclude arrays with > 16 elements from polling
+      #else if not $p.has_key('nelm')
         #set $count_inc = 1
       #end if
       #set $polledRegCount += $count_inc
@@ -163,6 +164,8 @@ protected:
 #for $p in sorted($registers, key=lambda k: k['address'])
   #if $p.has_key('bit_width')
     	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
+  #elif $p.has_key('data_width')
+    	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.data_width - 1, '08X')},
   #elif $p.has_key('bits')
   ## Uint32Digital functions always need a mask
     	${p.name.title().replace("_", "")}Mask =  0xFFFFFFFF, // bit fields
