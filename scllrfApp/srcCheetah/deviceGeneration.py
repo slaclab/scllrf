@@ -6,7 +6,8 @@ import argparse
 import json
 from Cheetah.Template import Template
 import re
-import time,struct,json,getopt
+import time,struct,getopt
+from string import replace
 
 def mkdir_p(path):
     try:
@@ -81,6 +82,20 @@ def fix_prc_names(reg_name):
         
     # get rid of any characters from keys that aren't allowed in C++ variable names
     reg_name = re.sub(r'\W', r'_', reg_name)
+
+    reg_name = replace(reg_name, 'application_top_', '')
+    reg_name = replace(reg_name, 'digitizer', 'dig')
+    reg_name = replace(reg_name, 'real_sim_mux', 'mux') 
+    reg_name = replace(reg_name, 'cav4_elec', 'elec') 
+    reg_name = replace(reg_name, 'cavity_', 'c') 
+    reg_name = replace(reg_name, 'mode_', 'm') 
+    reg_name = replace(reg_name, 'dsp_fdbk', 'fdbk') 
+    reg_name = replace(reg_name, 'drive_couple', 'drive_cpl') 
+    reg_name = replace(reg_name, 'out_couple', 'out_cpl') 
+    reg_name = replace(reg_name, '0d0a0d0a', 'd0a0d0a')
+    
+    if len(reg_name) > 48:
+        print("Long name ", reg_name, " didn't make the 48 character cut")
     
     if not (old_name == reg_name):
         print("fixed name ", old_name, " -> ", reg_name)
