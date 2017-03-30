@@ -78,7 +78,7 @@ def fix_prc_names(reg_name):
         reg_name = split_names.group(1) + split_names.group(2)
         
     if ':' in reg_name:
-        reg_name = re.sub(r'(.*)_([0-9]*):([0-9]*)_', r'\1_Bits\2to\3', reg_name)
+        reg_name = re.sub(r'(.*)\[([0-9]*):([0-9]*)\]', r'\1_Bits\2to\3', reg_name)
         
     # get rid of any characters from keys that aren't allowed in C++ variable names
     reg_name = re.sub(r'\W', r'_', reg_name)
@@ -133,7 +133,7 @@ if __name__ == "__main__":
                     v['nelm'] = 2**v['addr_width']
                     regmap_dict['registers'].append(v)
                 
-        makeDirectory(regmap_dict)
-        makeAsynDriver(regmap_dict)
-        makeDatabase(regmap_dict)
-        makeGui(regmap_dict)
+    makeDirectory(regmap_dict)
+    makeAsynDriver(regmap_dict)
+    makeDatabase(regmap_dict)
+    makeGui(regmap_dict)
