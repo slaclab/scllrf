@@ -74,6 +74,24 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(CircIQBuf1AString, asynParamInt32Array, &p_CircIQBuf1A);
     createParam(CircIQBuf1PString, asynParamInt32Array, &p_CircIQBuf1P);
 
+    createParam(Shell0CircleCountRString, asynParamInt32, &p_Shell0CircleCountR);
+    createParam(Shell0CircleStatRString, asynParamInt32, &p_Shell0CircleStatR);
+    createParam(Shell0MmRString, asynParamInt32, &p_Shell0MmR);
+    createParam(Shell0TagNowRString, asynParamInt32, &p_Shell0TagNowR);
+    createParam(Shell0TagOldRString, asynParamInt32, &p_Shell0TagOldR);
+    createParam(Shell0TimeStampHighRString, asynParamInt32, &p_Shell0TimeStampHighR);
+    createParam(Shell0TimeStampLowRString, asynParamInt32, &p_Shell0TimeStampLowR);
+    createParam(Shell0SlowDataBufferRString, asynParamInt8Array, &p_Shell0SlowDataBufferR);
+
+    createParam(Shell1CircleCountRString, asynParamInt32, &p_Shell1CircleCountR);
+    createParam(Shell1CircleStatRString, asynParamInt32, &p_Shell1CircleStatR);
+    createParam(Shell1MmRString, asynParamInt32, &p_Shell1MmR);
+    createParam(Shell1TagNowRString, asynParamInt32, &p_Shell1TagNowR);
+    createParam(Shell1TagOldRString, asynParamInt32, &p_Shell1TagOldR);
+    createParam(Shell1TimeStampHighRString, asynParamInt32, &p_Shell1TimeStampHighR);
+    createParam(Shell1TimeStampLowRString, asynParamInt32, &p_Shell1TimeStampLowR);
+    createParam(Shell1SlowDataBufferRString, asynParamInt8Array, &p_Shell1SlowDataBufferR);
+
     // A canned request to read all registers
     static const FpgaReg pCustomPolledRegMsg[] =
 	{
@@ -773,25 +791,11 @@ asynStatus scllrfPRCextra::startCircIQBufRequester()
 // run this to compose new waveform request message for circle buffer.
 void scllrfPRCextra::fillCircIQBufReqMsg()
 {
-	unsigned int regAddr, msgOffset;
+	fillWaveRequestMsg(pReqCircIQBufMsg_, sizeof(pReqCircIQBufMsg_)/sizeof(*pReqCircIQBufMsg_), circIQBufStart);
 
-	regAddr = circIQBufStart;
-
-	for(msgOffset=0; msgOffset < circIQBufReqMsgSize; regAddr++, msgOffset++)
-	{
-		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
-		{
-//			printf("%s inserting a blank nonce at index %u\n", __PRETTY_FUNCTION__, msgOffset);
-			pReqCircIQBufMsg_[msgOffset] = {0,blankData};
-			msgOffset++;
-		}
-
-		pReqCircIQBufMsg_[msgOffset].addr = regAddr | flagReadMask;
-		pReqCircIQBufMsg_[msgOffset].data = blankData;
-		printf("%s put addr 0x%x at index %u\n", __PRETTY_FUNCTION__, regAddr | flagReadMask, msgOffset);
-	}
-
-		htonFpgaRegArray(pReqCircIQBufMsg_, circIQBufReqMsgSize);
+	// Also get "slow data registers" every time
+	fillWaveRequestMsg(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_), Shell0SlowDataRAdr);
+	fillWaveRequestMsg(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_), Shell1SlowDataRAdr);
 
 }
 
@@ -802,6 +806,10 @@ void scllrfPRCextra::reqCircIQBuf()
 	uint i;
 
 	printf(" --> %s\n", __PRETTY_FUNCTION__);
+
+	// Slow buffer request is packed into one UDP packet, so this is safe.
+	sendRegRequest(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_));
+	sendRegRequest(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_));
 
 	for (i=0; i<circIQBufSegmentCount; ++i)
 	{
@@ -1089,15 +1097,52 @@ void scllrfPRCextra::singleMessageQueuer()
 */
 asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
-//	unsigned int i;
+	unsigned int i;
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 	epicsInt32 tmpData;
 	int32_t signExtBits = 0;
+	char slowDataFromFpga[slowDataBuffRegCount];
+	uint64_t timeStamp = 0;
+	int16_t minMax[6];
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
+    case DigDspModuloRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_DigDspModuloR,
+				(pFromFpga->data & DigDspModuloMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspModuloRString,
+				(unsigned ) pFromFpga->data & DigDspModuloMask);
+		iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
+
+	break;
+
+    case DigDspPhaseStepHRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_DigDspPhaseStepHR,
+				(pFromFpga->data & DigDspPhaseStepHMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspPhaseStepHRString,
+				(unsigned ) pFromFpga->data & DigDspPhaseStepHMask);
+		iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
+	break;
+
+    case DigDspPhaseStepLRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_DigDspPhaseStepLR,
+				(pFromFpga->data & DigDspPhaseStepLMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspPhaseStepLRString,
+				(unsigned ) pFromFpga->data & DigDspPhaseStepLMask);
+		iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
+	break;
+
     case TraceStatus1RAdr|flagReadMask:
 		status = (asynStatus) setIntegerParam(p_TraceStatus1R,
 				(pFromFpga->data & TraceStatus1Mask));
@@ -1154,11 +1199,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	status = (asynStatus) setUIntDigitalParam(p_LlrfCircleReadyR,
 			(pFromFpga->data & LlrfCircleReadyMask) , LlrfCircleReadyMask);
 		// if flags are set for any active channels,
-		////XXXX
-		printf("%s ((nCirc0Chan=%d_==0)||(pFromFpga->data=%d & 0x1)) && ((nCirc1Chan_=%d==0)||(pFromFpga->data=%d & 0x2)) && (newCircIQBufAvailable_=%d == newCircIQBufRead_=%d) && (nCirc0Chan_=%d+nCirc1Chan_=%d > 0)\n",
-					__PRETTY_FUNCTION__, nCirc0Chan_, pFromFpga->data, nCirc1Chan_, pFromFpga->data,
-					newCircIQBufAvailable_, newCircIQBufRead_, nCirc0Chan_, nCirc1Chan_);
-		////XXXX
+
 		if (((nCirc0Chan_==0)||(pFromFpga->data & 0x1)) && ((nCirc1Chan_==0)||(pFromFpga->data & 0x2)) &&
 					// and there isn't a pending waveform read, and there is at least one active channel
 					(newCircIQBufAvailable_ == newCircIQBufRead_) && (nCirc0Chan_+nCirc1Chan_ > 0))
@@ -1185,11 +1226,6 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		tmpData = pFromFpga->data & DigDspMuxShell0DspChanKeepMask;
 		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell0DspChanKeepR,
 				(pFromFpga->data & DigDspMuxShell0DspChanKeepMask) , DigDspMuxShell0DspChanKeepMask);
-		////xxxx
-		printf("%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspChanKeepRString,
-				(unsigned ) pFromFpga->data);
-		////xxxx
 		// Count the number of bits set
 		for (nCirc0Chan_ = 0; tmpData; nCirc0Chan_++)
 		{
@@ -1203,19 +1239,116 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	break;
 
     case DigDspMuxShell1DspChanKeepRAdr|flagReadMask:
-		tmpData = pFromFpga->data & DigDspMuxShell1DspChanKeepMask;
-		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell1DspChanKeepR,
-				(pFromFpga->data & DigDspMuxShell1DspChanKeepMask), DigDspMuxShell1DspChanKeepMask);
-		// Count the number of bits set
-		for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
+	tmpData = pFromFpga->data & DigDspMuxShell1DspChanKeepMask;
+	status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell1DspChanKeepR,
+			(pFromFpga->data & DigDspMuxShell1DspChanKeepMask), DigDspMuxShell1DspChanKeepMask);
+	// Count the number of bits set
+	for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
+	{
+		tmpData &= tmpData - 1; // clear the least significant bit set
+	}
+	setIntegerParam(p_Circ1NActive, nCirc1Chan_);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			DigDspMuxShell1DspChanKeepRString,
+			(unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+	break;
+
+    case Shell0SlowDataRAdr |flagReadMask:
+	////XXXX A few variables for testing, can be removed along with code that uses them once we know this stuff works
+	int lastCount, newCount, tagNow, tagOld;
+	////XXXX
+
+		// Slow buffer request is packed into one UDP packet, so this is safe.
+		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-		  tmpData &= tmpData - 1; // clear the least significant bit set
+			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowDataMask;
 		}
-		setIntegerParam(p_Circ1NActive, nCirc1Chan_);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspChanKeepRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataBufferR, 0);
+		getIntegerParam(p_Shell0CircleCountR, &lastCount);
+		setIntegerParam(p_Shell0CircleCountR, (slowDataFromFpga[0]<<8)+ slowDataFromFpga[1]);
+		getIntegerParam(p_Shell0CircleCountR, &newCount);
+		if(newCount == lastCount +1)
+		{
+			printf("Last shell0 waveform #%d, new one #%d, we're keeping up\n", lastCount, newCount);
+		}
+		else
+		{
+			printf("Not keeping up with shell0 waveform, had #%d, new one #%d\n", lastCount, newCount);
+		}
+		setIntegerParam(p_Shell0CircleStatR, (slowDataFromFpga[2]<<8)+ slowDataFromFpga[3]);
+		setIntegerParam(p_Shell0TagNowR, slowDataFromFpga[16]);
+		setIntegerParam(p_Shell0TagOldR, slowDataFromFpga[17]);
+
+		getIntegerParam(p_Shell0TagNowR, &tagNow);
+		getIntegerParam(p_Shell0TagOldR, &tagOld);
+		if(tagNow != tagOld)
+		{
+			printf("Parameters changed mid-data, skip this waveform. Old tag = %d, new = %d\n", tagOld, tagNow);
+		}
+
+		for(i=4; i<16; i+=2)
+		{
+			minMax[i-4] = static_cast<int16_t>(slowDataFromFpga[i])<<8 | static_cast<int16_t>(slowDataFromFpga[i+1]);
+			printf("Scale %d is %d\n", i, minMax[i-4]);
+		}
+
+		for(i=0; i<8; i++)
+		{
+			timeStamp = (timeStamp << 8) | static_cast<uint64_t>(slowDataFromFpga[i]);
+		}
+		timeStamp >>= 5;
+
+		setIntegerParam(p_Shell0TimeStampHighR, (int) (timeStamp>>32));
+		setIntegerParam(p_Shell0TimeStampLowR, (int) timeStamp & ((2^32) - 1));
+
+	break;
+
+    case Shell1SlowDataRAdr |flagReadMask:
+
+		// Slow buffer request is packed into one UDP packet, so this is safe.
+		for(i=0; i<slowDataBuffRegCount;i++)
+		{
+			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowDataMask;
+		}
+		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataBufferR, 0);
+		getIntegerParam(p_Shell1CircleCountR, &lastCount);
+		setIntegerParam(p_Shell1CircleCountR, (slowDataFromFpga[0]<<8)+ slowDataFromFpga[1]);
+		getIntegerParam(p_Shell1CircleCountR, &newCount);
+		if(newCount == lastCount +1)
+		{
+			printf("Last shell0 waveform #%d, new one #%d, we're keeping up\n", lastCount, newCount);
+		}
+		else
+		{
+			printf("Not keeping up with shell0 waveform, had #%d, new one #%d\n", lastCount, newCount);
+		}
+		setIntegerParam(p_Shell1CircleStatR, (slowDataFromFpga[2]<<8)+ slowDataFromFpga[3]);
+		setIntegerParam(p_Shell1TagNowR, slowDataFromFpga[16]);
+		setIntegerParam(p_Shell1TagOldR, slowDataFromFpga[17]);
+
+		getIntegerParam(p_Shell1TagNowR, &tagNow);
+		getIntegerParam(p_Shell1TagOldR, &tagOld);
+		if(tagNow != tagOld)
+		{
+			printf("Parameters changed mid-data, skip this waveform. Old tag = %d, new = %d\n", tagOld, tagNow);
+		}
+
+		for(i=4; i<16; i+=2)
+		{
+			minMax[i-4] = static_cast<int16_t>(slowDataFromFpga[i])<<8 | static_cast<int16_t>(slowDataFromFpga[i+1]);
+			printf("Scale %d is %d\n", i, minMax[i-4]);
+		}
+
+		for(i=0; i<8; i++)
+		{
+			timeStamp = (timeStamp << 8) | static_cast<uint64_t>(slowDataFromFpga[i]);
+		}
+		timeStamp >>= 5;
+
+		setIntegerParam(p_Shell1TimeStampHighR, (int) (timeStamp>>32));
+		setIntegerParam(p_Shell1TimeStampLowR, (int) timeStamp & ((2^32) - 1));
+
 	break;
 
 	default:
@@ -1227,7 +1360,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		else
 		if( circIQBufStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= circIQBufEnd )
 		{
-			printf("%s waveform address 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
+			//printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
 			processCircIQBufReadback(pFromFpga);
 		}
 		else
@@ -1267,6 +1400,69 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
+    case DigDspModuloWAdr:
+		status = (asynStatus) getIntegerParam(p_DigDspModuloW, valueSet );
+		if( (int32_t)(valueSet[0] & DigDspModuloMask) == (pFromFpga->data & DigDspModuloMask))
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspModuloWString, (unsigned ) pFromFpga->data & DigDspModuloMask);
+			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
+		}
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspModuloWString, valueSet[0] & DigDspModuloMask, (unsigned ) pFromFpga->data & DigDspModuloMask);
+			status = asynError;
+			setParamStatus(p_DigDspModuloW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case DigDspPhaseStepHWAdr:
+		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepHW, valueSet );
+		if( (int32_t)(valueSet[0] & DigDspPhaseStepHMask) == (pFromFpga->data & DigDspPhaseStepHMask))
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspPhaseStepHWString, (unsigned ) pFromFpga->data & DigDspPhaseStepHMask);
+			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
+		}
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspPhaseStepHWString, valueSet[0] & DigDspPhaseStepHMask, (unsigned ) pFromFpga->data & DigDspPhaseStepHMask);
+			status = asynError;
+			setParamStatus(p_DigDspPhaseStepHW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
+    case DigDspPhaseStepLWAdr:
+		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepLW, valueSet );
+		if( (int32_t)(valueSet[0] & DigDspPhaseStepLMask) == (pFromFpga->data & DigDspPhaseStepLMask))
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspPhaseStepLWString, (unsigned ) pFromFpga->data & DigDspPhaseStepLMask);
+			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
+		}
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
+				DigDspPhaseStepLWString, valueSet[0] & DigDspPhaseStepLMask, (unsigned ) pFromFpga->data & DigDspPhaseStepLMask);
+			status = asynError;
+			setParamStatus(p_DigDspPhaseStepLW, status);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+		}
+
+		break;
     case DigDspBufTrigWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_DigDspBufTrigW, uValueSet , DigDspBufTrigMask);
 		if( (valueSet[0] & DigDspBufTrigMask) == (pFromFpga->data & DigDspBufTrigMask))
@@ -1335,8 +1531,8 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
     case DigDspMuxShell0DspChanKeepWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_DigDspMuxShell0DspChanKeepW, uValueSet , DigDspMuxShell0DspChanKeepMask);
 		////XXXXX Trigger a read whenever we change a bit, whether data is ready or not.
-		newCircIQBufAvailable_ = lastResponseCount_;
-		epicsEventSignal(reqCircIQBufEventId_);
+		//newCircIQBufAvailable_ = lastResponseCount_;
+		//epicsEventSignal(reqCircIQBufEventId_);
 		////XXXX
 
 		if( (valueSet[0] & DigDspMuxShell0DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell0DspChanKeepMask))

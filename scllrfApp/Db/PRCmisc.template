@@ -62,6 +62,75 @@ record(ao, "$(P)IFDES")
     field( PINI, "NO")
 }
 
+#### Adapted from ApexCalcs.db
+#
+#record(calc,"$(P)$(R):theta")
+#{
+#	field(PREC, 4)
+#	field(INPA,"$(P)$(R):ddsa_phstep_h_ao CA")
+#	field(INPB,1048576)
+#	field(CALC,"A/B*2*PI")
+#	
+#}
+#
+#record(ao,"$(P)$(R):ph2_4_static")
+#{
+#
+#}
+#
+#record(calcout,"$(P)$(R):ph2_4_mean_degree")
+#{
+#	field(INPA,"$(P)$(R):ph2_4_mean")
+#	field(INPB,"8.38190317153931e-08")      #360/2^32
+#	field(CALC,"A*B")
+#}
+#
+#record(bo,"$(P)$(R):bt_do_freq_correction")
+#{
+#	field(FLNK,"$(P)$(R):do_freq_correction")
+#	field(ZNAM,"Off")
+#	field(ONAM,"On")
+#}
+#
+#record(seq,"$(P)$(R):do_freq_correction")
+#{
+#	field(SELL,"$(P)$(R):ready_to_tune")
+#	field(SELM,"All")
+#
+#    field(DOL1,"$(P)$(R):calc_new_phstep_h PP")
+#    field(LNK1,"$(P)$(R):ddsa_phstep_h_ao PP")
+#
+#    field(DOL2,"$(P)$(R):ph2_4_mean_degree PP")
+#    field(LNK2,"$(P)$(R):ph2_4_static PP")
+#    field(DLY2,"1")
+#}
+#
+#record(calcout,"$(P)$(R):phase_diff")
+#{
+#	field(INPA,"$(P)$(R):ph2_4_mean") # ai, has no INP
+#	field(INPB,"$(P)$(R):ph2_4_static PP")
+#	field(INPC,"8.38190317153931e-08")
+#	field(INPD,"360000")
+## 360/2^32
+#	field(CALC,"((((A*C-B+540)*1000)%D)/1000-180)")
+#	field(SCAN,".2 second")
+#}
+#
+#record(calcout,"$(P)$(R):freq_shift")
+#{
+#	field(INPA,"$(P)$(R):ddsa_phstep_h_ao")
+#	field(INPB,"$(P)$(R):phase_diff")
+#	field(INPC,"$(P)$(R):rf_master") # Master RF enable
+#	field(INPD,"$(P)$(R):freq_loop_close PP") # Also a binary enable
+#        field(INPE,"$(P)$(R):freq_loop_gain PP") # ao, but no indication of OUT 
+#        field(CALC,"(A+(ABS(B)<40?B:0)*E*C*D)")
+#	field(SCAN,".2 second")
+##	field(TPRO,1)
+#	field(OUT,"$(P)$(R):ddsa_phstep_h_ao PP")
+#}
+#
+##### End Adapted from ApexCalcs.db
+
 #record(calc, "$(P)IFDES2MODULO")
 #{
 #	field(INPA, "$(P)IFDES")
@@ -102,3 +171,112 @@ record(ao, "$(P)IFDES")
 #	field(PREC, 3)
 #    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 #}
+
+# Circle buffer "slow data"
+record(longin, "$(P)CIRCLE_COUNT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CIRCLE_COUNT_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(ai, "$(P)CIRCLE_STAT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) CIRCLE_STAT_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)TAG_NOW_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) TAG_NOW_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)TAG_OLD_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) TAG_OLD_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)MM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) MM_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)TIME_STAMP_HIGH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) TIME_STAMP_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(longin, "$(P)TIME_STAMP_LOW_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) TIME_STAMP_R")
+    field( SCAN, "I/O Intr")
+    field( HOPR, "0xFFFFFFFF")
+    field( LOPR, 0)
+	field(PREC, 3)
+    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
+record(waveform, "$(P)SHELL_0_SLOW_DATA_BUFFER_R") {
+  field(DESC, "Slow data for shell 0 circle buff")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynInt8ArrayIn")
+  field(INP, "@asyn($(PORT),0,1)SHELL_0_SLOW_DATA_BUFFER_R")
+  field(PREC, "1")
+  field(EGU, "byte")
+  field(NELM, "128")
+  field(FTVL, "UCHAR")
+}
+
+record(waveform, "$(P)SHELL_1_SLOW_DATA_BUFFER_R") {
+  field(DESC, "Slow data for shell 1 circle buff")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynInt8ArrayIn")
+  field(INP, "@asyn($(PORT),0,1)SHELL_1_SLOW_DATA_BUFFER_R")
+  field(PREC, "1")
+  field(EGU, "byte")
+  field(NELM, "128")
+  field(FTVL, "UCHAR")
+}
+
+

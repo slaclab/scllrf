@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 2
-y 51
+x 864
+y 174
 w 985
-h 647
+h 690
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -33,7 +33,7 @@ release 0
 x 18
 y 15
 w 640
-h 480
+h 640
 # Appearance
 border
 graphTitle "I Waveforms"
@@ -101,35 +101,14 @@ plotColor {
 }
 endObjectProperties
 
-# (Choice Button)
-object activeChoiceButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 700
-y 20
-w 160
-h 40
-fgColor index 14
-bgColor index 3
-selectColor index 30
-inconsistentColor index 14
-topShadowColor index 7
-botShadowColor index 12
-controlPv "$(P)RUN_STOP"
-font "helvetica-medium-r-18.0"
-orientation "horizontal"
-endObjectProperties
-
 # (Byte)
 object ByteClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 360
-y 570
+x 700
+y 430
 w 160
 h 20
 controlPv "$(P)CIRC_$(N)_ACTIVE"
@@ -145,8 +124,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 360
-y 540
+x 700
+y 400
 w 160
 h 18
 controlPv "$(P)CIRC_$(N)_N_ACTIVE"
@@ -170,11 +149,11 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 120
-y 550
+x 710
+y 310
 w 140
 h 30
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W"
+controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W"
 format "hex"
 font "helvetica-medium-r-14.0"
 fgColor index 26
@@ -196,8 +175,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 350
-y 510
+x 690
+y 370
 w 180
 h 21
 font "helvetica-medium-r-18.0"
@@ -216,8 +195,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 360
-y 600
+x 700
+y 460
 w 49
 h 21
 font "helvetica-medium-r-18.0"
@@ -236,8 +215,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 480
-y 600
+x 820
+y 460
 w 39
 h 21
 font "helvetica-medium-r-18.0"
@@ -256,8 +235,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 110
-y 510
+x 700
+y 40
 w 172
 h 21
 font "helvetica-medium-r-18.0"
@@ -276,8 +255,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 690
-y 490
+x 950
+y 550
 w 15
 h 16
 fgColor index 14
@@ -300,8 +279,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 710
-y 490
+x 970
+y 550
 w 15
 h 16
 fgColor index 14
@@ -324,8 +303,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 690
-y 570
+x 950
+y 630
 w 15
 h 16
 fgColor index 14
@@ -348,8 +327,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 710
-y 570
+x 970
+y 630
 w 15
 h 16
 fgColor index 14
@@ -372,8 +351,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 690
-y 550
+x 950
+y 610
 w 15
 h 16
 fgColor index 14
@@ -396,8 +375,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 710
-y 550
+x 970
+y 610
 w 15
 h 16
 fgColor index 14
@@ -420,8 +399,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 690
-y 530
+x 950
+y 590
 w 15
 h 16
 fgColor index 14
@@ -444,8 +423,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 710
-y 530
+x 970
+y 590
 w 15
 h 16
 fgColor index 14
@@ -468,8 +447,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 690
-y 510
+x 950
+y 570
 w 15
 h 16
 fgColor index 14
@@ -492,8 +471,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 710
-y 510
+x 970
+y 570
 w 15
 h 16
 fgColor index 14
@@ -509,40 +488,6 @@ offLabel "1"
 useEnumNumeric
 font "helvetica-medium-r-8.0"
 endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 660
-y 350
-w 321
-h 16
-font "helvetica-medium-r-14.0"
-fontAlign "center"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP"
-}
-autoSize
-endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 710
-y 100
-w 210
-h 240
-
-beginGroup
 
 # (Rectangle)
 object activeRectangleClass
@@ -550,10 +495,10 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 714
-y 100
+x 680
+y 20
 w 210
-h 240
+h 330
 lineColor index 14
 fillColor index 34
 endObjectProperties
@@ -564,25 +509,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 837
-y 110
-w 20
-h 210
-controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W"
-lineColor index 14
-onColor index 55
-offColor index 47
-numBits 12
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 817
-y 110
+x 810
+y 80
 w 20
 h 210
 controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_W"
@@ -598,8 +526,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 304
+x 750
+y 270
 w 15
 h 16
 fgColor index 14
@@ -622,8 +550,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 304
+x 770
+y 270
 w 15
 h 16
 fgColor index 14
@@ -646,8 +574,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 284
+x 750
+y 251
 w 15
 h 16
 fgColor index 14
@@ -670,8 +598,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 284
+x 770
+y 251
 w 15
 h 16
 fgColor index 14
@@ -694,8 +622,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 265
+x 750
+y 232
 w 15
 h 16
 fgColor index 14
@@ -718,8 +646,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 265
+x 770
+y 232
 w 15
 h 16
 fgColor index 14
@@ -742,8 +670,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 245
+x 750
+y 213
 w 15
 h 16
 fgColor index 14
@@ -766,8 +694,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 245
+x 770
+y 213
 w 15
 h 16
 fgColor index 14
@@ -790,8 +718,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 226
+x 750
+y 194
 w 15
 h 16
 fgColor index 14
@@ -814,8 +742,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 226
+x 770
+y 194
 w 15
 h 16
 fgColor index 14
@@ -838,8 +766,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 857
-y 110
+x 830
+y 80
 w 20
 h 210
 controlPv "$(P)DIG_DSP_MUX_SHELL_$(N)_DSP_CHAN_KEEP_R"
@@ -855,8 +783,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 207
+x 750
+y 175
 w 15
 h 16
 fgColor index 14
@@ -879,8 +807,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 207
+x 770
+y 175
 w 15
 h 16
 fgColor index 14
@@ -903,8 +831,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 187
+x 750
+y 156
 w 15
 h 16
 fgColor index 14
@@ -927,8 +855,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 187
+x 770
+y 156
 w 15
 h 16
 fgColor index 14
@@ -951,8 +879,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 168
+x 750
+y 137
 w 15
 h 16
 fgColor index 14
@@ -975,8 +903,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 168
+x 770
+y 137
 w 15
 h 16
 fgColor index 14
@@ -999,8 +927,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 148
+x 750
+y 118
 w 15
 h 16
 fgColor index 14
@@ -1023,8 +951,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 148
+x 770
+y 118
 w 15
 h 16
 fgColor index 14
@@ -1047,8 +975,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 129
+x 750
+y 99
 w 15
 h 16
 fgColor index 14
@@ -1071,8 +999,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 129
+x 770
+y 99
 w 15
 h 16
 fgColor index 14
@@ -1095,8 +1023,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 777
-y 110
+x 750
+y 80
 w 15
 h 16
 fgColor index 14
@@ -1119,8 +1047,8 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 797
-y 110
+x 770
+y 80
 w 15
 h 16
 fgColor index 14
@@ -1143,8 +1071,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 899
-y 310
+x 870
+y 280
 w 7
 h 14
 font "helvetica-bold-r-12.0"
@@ -1163,8 +1091,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 892
-y 114
+x 860
+y 80
 w 14
 h 14
 font "helvetica-bold-r-12.0"
@@ -1183,8 +1111,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 110
+x 700
+y 80
 w 37
 h 14
 font "helvetica-medium-r-12.0"
@@ -1203,8 +1131,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 127
+x 700
+y 98
 w 37
 h 14
 font "helvetica-medium-r-12.0"
@@ -1223,8 +1151,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 145
+x 700
+y 116
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1243,8 +1171,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 163
+x 700
+y 134
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1262,8 +1190,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 899
-y 210
+x 870
+y 180
 w 7
 h 14
 font "helvetica-bold-r-12.0"
@@ -1282,8 +1210,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 899
-y 190
+x 870
+y 160
 w 7
 h 14
 font "helvetica-bold-r-12.0"
@@ -1302,8 +1230,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 181
+x 700
+y 152
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1322,8 +1250,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 199
+x 700
+y 170
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1342,8 +1270,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 216
+x 700
+y 189
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1362,8 +1290,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 234
+x 700
+y 207
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1382,8 +1310,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 252
+x 700
+y 225
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1402,8 +1330,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 270
+x 700
+y 243
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1422,8 +1350,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 288
+x 700
+y 261
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1442,8 +1370,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 727
-y 306
+x 700
+y 280
 w 30
 h 14
 font "helvetica-medium-r-12.0"
@@ -1456,7 +1384,27 @@ value {
 autoSize
 endObjectProperties
 
-endGroup
-
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 700
+y 520
+w 160
+h 40
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-18.0"
+buttonLabel "Polling Control"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "scllrfPollingControl.edl"
+}
+colorPv "$(P)RUN_STOP"
 endObjectProperties
 

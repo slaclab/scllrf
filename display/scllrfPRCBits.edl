@@ -3518,7 +3518,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 3"
+    "Ch3"
 }
 autoSize
 endObjectProperties
@@ -3538,7 +3538,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch3"
+    "Ch4"
 }
 autoSize
 endObjectProperties
@@ -3558,7 +3558,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch4"
+    "Ch5"
 }
 autoSize
 endObjectProperties
@@ -3578,7 +3578,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch5"
+    "Ch6"
 }
 autoSize
 endObjectProperties
@@ -3597,7 +3597,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-  "bit 7"
+    "Ch7"
 }
 autoSize
 endObjectProperties
@@ -3657,7 +3657,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch6"
+    "Ch8"
 }
 autoSize
 endObjectProperties
@@ -3677,7 +3677,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch7"
+    "Ch9"
 }
 autoSize
 endObjectProperties
@@ -3697,7 +3697,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch8"
+    "Ch10"
 }
 autoSize
 endObjectProperties
@@ -3717,7 +3717,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 11"
+    "Ch11"
 }
 autoSize
 endObjectProperties
@@ -3737,7 +3737,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch9"
+       "bit 12"
 }
 autoSize
 endObjectProperties
@@ -3757,7 +3757,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch10"
+       "bit 13"
 }
 autoSize
 endObjectProperties
@@ -3777,7 +3777,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch11"
+    "bit 14"
 }
 autoSize
 endObjectProperties
@@ -4770,7 +4770,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 3"
+    "Ch3"
 }
 autoSize
 endObjectProperties
@@ -4790,7 +4790,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch3"
+    "Ch4"
 }
 autoSize
 endObjectProperties
@@ -4810,7 +4810,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch4"
+    "Ch5"
 }
 autoSize
 endObjectProperties
@@ -4830,7 +4830,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch5"
+    "Ch6"
 }
 autoSize
 endObjectProperties
@@ -4849,7 +4849,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-  "bit 7"
+    "Ch7"
 }
 autoSize
 endObjectProperties
@@ -4909,7 +4909,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch6"
+    "Ch8"
 }
 autoSize
 endObjectProperties
@@ -4929,7 +4929,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch7"
+    "Ch9"
 }
 autoSize
 endObjectProperties
@@ -4949,7 +4949,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch8"
+    "Ch10"
 }
 autoSize
 endObjectProperties
@@ -4969,7 +4969,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 11"
+    "Ch11"
 }
 autoSize
 endObjectProperties
@@ -4989,7 +4989,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch9"
+       "bit 12"
 }
 autoSize
 endObjectProperties
@@ -5009,7 +5009,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch10"
+       "bit 13"
 }
 autoSize
 endObjectProperties
@@ -5029,7 +5029,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch11"
+    "bit 14"
 }
 autoSize
 endObjectProperties
@@ -6022,7 +6022,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 3"
+    "Ch3"
 }
 autoSize
 endObjectProperties
@@ -6042,7 +6042,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch3"
+    "Ch4"
 }
 autoSize
 endObjectProperties
@@ -6062,7 +6062,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch4"
+    "Ch5"
 }
 autoSize
 endObjectProperties
@@ -6082,7 +6082,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch5"
+    "Ch6"
 }
 autoSize
 endObjectProperties
@@ -6101,7 +6101,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-  "bit 7"
+    "Ch7"
 }
 autoSize
 endObjectProperties
@@ -6161,7 +6161,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch6"
+       "bit 8"
 }
 autoSize
 endObjectProperties
@@ -6181,7 +6181,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch7"
+       "bit 9"
 }
 autoSize
 endObjectProperties

@@ -154,6 +154,8 @@ protected:
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
+	void fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t buffSize, const unsigned int iStartAddr); /**< For requesting a waveform, fill canned message request with sequential addresses */
+
 	epicsEventId pollEventId_; /**< Event ID to wake up poller */
 	double pollPeriod_; /**< The time between polls */
 	epicsEventId readEventId_; /**< Event ID to wake up network message response reader */

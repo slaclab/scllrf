@@ -65,7 +65,7 @@ x 156
 y 8
 w 84
 h 20
-controlPv "$(P):SI:NAME"
+controlPv "$(P)SI:NAME"
 font "helvetica-bold-r-14.0"
 fgColor index 13
 bgColor index 63
@@ -111,7 +111,7 @@ font "helvetica-bold-r-14.0"
 fgColor index 13
 bgColor index 63
 value {
-  "$(P):"
+  "$(P)"
 }
 endObjectProperties
 
@@ -143,7 +143,7 @@ x 296
 y 8
 w 92
 h 20
-controlPv "$(P):CALC:MID"
+controlPv "$(P)CALC:MID"
 format "hex"
 font "helvetica-bold-r-14.0"
 fgColor index 13
@@ -208,7 +208,7 @@ x 424
 y 36
 w 76
 h 24
-controlPv "$(P):BO:TRIG:TYPE.DESC"
+controlPv "$(P)BO:TRIG:TYPE.DESC"
 font "helvetica-medium-r-12.0"
 fontAlign "right"
 fgColor index 13
@@ -232,7 +232,7 @@ x 232
 y 44
 w 228
 h 14
-controlPv "$(P):SI:MESSAGE"
+controlPv "$(P)SI:MESSAGE"
 font "helvetica-medium-r-12.0"
 fgColor index 13
 bgColor index 4
@@ -290,10 +290,10 @@ center
 sizeOfs 5
 numDsps 4
 displayFileName {
-  0 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
-  1 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
-  2 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
-  3 "/cs/it/llapp_R3.14/SLAC_scllrf/1-0/scllrf/display/scllrfRES1cavityRegisters.edl"
+  0 "scllrfRES1cavityRegisters.edl"
+  1 "scllrfRES1cavityRegisters.edl"
+  2 "scllrfRES1cavityRegisters.edl"
+  3 "scllrfRES1cavityRegisters.edl"
 }
 menuLabel {
   0 "Cavity 1"
@@ -340,7 +340,7 @@ x 20
 y 140
 w 120
 h 40
-controlPv "$(P):POLL_PERIOD"
+controlPv "$(P)POLL_PERIOD"
 fgColor index 14
 fgAlarm
 bgColor index 0
@@ -379,7 +379,7 @@ x 20
 y 232
 w 120
 h 40
-controlPv "$(P):MAX_PARALLEL_REQUESTS"
+controlPv "$(P)MAX_PARALLEL_REQUESTS"
 fgColor index 14
 fgAlarm
 bgColor index 0
@@ -439,7 +439,7 @@ x 20
 y 340
 w 120
 h 40
-controlPv "$(P):RUN_STOP.HIGH"
+controlPv "$(P)RUN_STOP.HIGH"
 fgColor index 14
 fgAlarm
 bgColor index 0
@@ -458,7 +458,7 @@ x 20
 y 432
 w 120
 h 40
-controlPv "$(P):COMM_ERROR_COUNT"
+controlPv "$(P)COMM_ERROR_COUNT"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -491,7 +491,7 @@ selectColor index 30
 inconsistentColor index 14
 topShadowColor index 7
 botShadowColor index 12
-controlPv "$(P):RUN_STOP"
+controlPv "$(P)RUN_STOP"
 font "helvetica-medium-r-12.0"
 orientation "horizontal"
 endObjectProperties

@@ -148,6 +148,32 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
 	return asynError;
 }
 
+/** For requesting a waveform, fill canned message request with sequential addresses
+  * \param[in/out] pMsgBuff An array of the right size to contain a request
+  * message for the waveform. The canned message includes the nonce per packet,
+  * so for an n element array, size should be N + N/maxRegPerMsg + 1.
+  * \param[in] iStartAddr Address of the start of the array.
+ */
+void scllrfAsynPortDriver::fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t buffSize, const unsigned int iStartAddr)
+{
+	unsigned int regAddr, msgOffset;
+
+	for(msgOffset=0, regAddr= iStartAddr; msgOffset < buffSize; regAddr++, msgOffset++)
+	{
+		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
+		{
+			printf("%s inserting a blank nonce at index %u\n", __PRETTY_FUNCTION__, msgOffset);
+			pMsgBuff[msgOffset] = {0,blankData};
+			msgOffset++;
+		}
+
+		pMsgBuff[msgOffset].addr = regAddr | flagReadMask;
+		pMsgBuff[msgOffset].data = blankData;
+		printf("%s put addr 0x%x at index %u\n", __PRETTY_FUNCTION__, regAddr | flagReadMask, msgOffset);
+	}
+	htonFpgaRegArray(pMsgBuff, sizeof( pMsgBuff )/sizeof( *pMsgBuff));
+}
+
 
 asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
