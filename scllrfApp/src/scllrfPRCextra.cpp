@@ -95,11 +95,10 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     // A canned request to read all registers
     static const FpgaReg pCustomPolledRegMsg[] =
 	{
-		{ 0, 0 },
-		{ (flagReadMask | HellRAdr), blankData },
-		{ (flagReadMask | OWoRAdr), blankData },
-		{ (flagReadMask | RldRAdr), blankData },
-		{ (flagReadMask | D0A0D0ARAdr), blankData },
+		{ 0, 0 },		{ (flagReadMask | Hello0RAdr), blankData },
+		{ (flagReadMask | Hello1RAdr), blankData },
+		{ (flagReadMask | Hello2RAdr), blankData },
+		{ (flagReadMask | Hello3RAdr), blankData },
 		{ (flagReadMask | ClkStatusOutRAdr), blankData },
 		{ (flagReadMask | FfffffffRAdr), blankData },
 		{ (flagReadMask | FrequencyAdcRAdr), blankData },
@@ -118,6 +117,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ (flagReadMask | HistStatusRAdr), blankData },
 		{ (flagReadMask | PhasexStatusRAdr), blankData },
 		{ (flagReadMask | CrcErrorsRAdr), blankData },
+		{ (flagReadMask | Cavity0DetuneRAdr), blankData },
+		{ (flagReadMask | Cavity1DetuneRAdr), blankData },
 		{ (flagReadMask | AdcTestTrigCntRAdr), blankData },
 		{ (flagReadMask | WaveformsAvailableRAdr), blankData },
 		{ (flagReadMask | BanyanStatusRAdr), blankData },
@@ -125,235 +126,483 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 		{ (flagReadMask | TraceStatus1RAdr), blankData },
 		{ (flagReadMask | TraceStatus2RAdr), blankData },
 		{ (flagReadMask | LlrfCircleReadyRAdr), blankData },
-		{ (flagReadMask | IdelayBaseRAdr), blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 1, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 2, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 3, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 4, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 5, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 6, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 7, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 8, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 9, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 10, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 11, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 12, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 13, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 14, blankData },
-		{ (flagReadMask | IdelayBaseRAdr) + 15, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 4, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 5, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 6, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoSfConstsRAdr) + 7, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 4, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 5, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 6, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoSfConstsRAdr) + 7, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcCoeffRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcCoeffRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcCoeffRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcCoeffRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcLimRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcLimRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcLimRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcLimRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcSetmpRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcSetmpRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcSetmpRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcSetmpRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcCoeffRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcCoeffRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcCoeffRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcCoeffRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcLimRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcLimRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcLimRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcLimRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcSetmpRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcSetmpRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcSetmpRAdr) + 2, blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcSetmpRAdr) + 3, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecDriveCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecDriveCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecDriveCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecDriveCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0OutCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0OutCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0OutCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0OutCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1OutCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1OutCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1OutCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1OutCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2OutCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2OutCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2OutCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2OutCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecDriveCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecDriveCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecDriveCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecDriveCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0OutCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0OutCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0OutCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0OutCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1OutCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1OutCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1OutCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1OutCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2OutCplOutCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2OutCplOutCouplingRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2OutCplOutPhaseOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2OutCplOutPhaseOffsetRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1AKxRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1AKxRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1AKyRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1AKyRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1BKxRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1BKxRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1BKyRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspLpNotchLp1BKyRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1AKxRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1AKxRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1AKyRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1AKyRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1BKxRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1BKxRAdr) + 1, blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1BKyRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspLpNotchLp1BKyRAdr) + 1, blankData },
-		{ (flagReadMask | AdcMmcmRAdr), blankData },
-		{ (flagReadMask | DigConfigBanyanMaskRAdr), blankData },
-		{ (flagReadMask | DigConfigBitslipRAdr), blankData },
-		{ (flagReadMask | DigConfigClkStatusWeRAdr), blankData },
-		{ (flagReadMask | DigConfigIdelayctrlResetRRAdr), blankData },
-		{ (flagReadMask | DigConfigMmcmResetRRAdr), blankData },
-		{ (flagReadMask | DigConfigPeriphConfigRAdr), blankData },
-		{ (flagReadMask | DigConfigPhasexTrigRAdr), blankData },
-		{ (flagReadMask | DigConfigRawadcTrigRAdr), blankData },
-		{ (flagReadMask | DigConfigScanTriggerWeRAdr), blankData },
-		{ (flagReadMask | DigConfigScannerDebugRAdr), blankData },
-		{ (flagReadMask | DigConfigSyncAd7794CsetRAdr), blankData },
-		{ (flagReadMask | DigConfigSyncTps62210CsetRAdr), blankData },
-		{ (flagReadMask | DigDspAdcTestModeRAdr), blankData },
-		{ (flagReadMask | DigDspAdcTestResetRAdr), blankData },
-		{ (flagReadMask | DigDspAmplitudeRAdr), blankData },
-		{ (flagReadMask | DigDspAverageLenRAdr), blankData },
-		{ (flagReadMask | DigDspBufTrigRAdr), blankData },
-		{ (flagReadMask | DigDspCicPeriodRAdr), blankData },
-		{ (flagReadMask | DigDspCicShiftRAdr), blankData },
-		{ (flagReadMask | DigDspCircleBufFlipRAdr), blankData },
-		{ (flagReadMask | DigDspDacDdsResetRAdr), blankData },
-		{ (flagReadMask | DigDspDacModeRAdr), blankData },
-		{ (flagReadMask | DigDspDdsaModuloRAdr), blankData },
-		{ (flagReadMask | DigDspDdsaPhstepHRAdr), blankData },
-		{ (flagReadMask | DigDspDdsaPhstepLRAdr), blankData },
-		{ (flagReadMask | DigDspHistCountWStrobeRAdr), blankData },
-		{ (flagReadMask | DigDspLlrfDspDacEnRAdr), blankData },
-		{ (flagReadMask | DigDspLoAmpRAdr), blankData },
-		{ (flagReadMask | DigDspModuloRAdr), blankData },
-		{ (flagReadMask | DigDspPhaseStepHRAdr), blankData },
-		{ (flagReadMask | DigDspPhaseStepLRAdr), blankData },
-		{ (flagReadMask | DigDspPrcDspCavSelRAdr), blankData },
-		{ (flagReadMask | DigDspPrcDspPrlCfgRAdr), blankData },
-		{ (flagReadMask | DigDspPrcDspPrlGainRAdr), blankData },
-		{ (flagReadMask | DigDspMuxBeam0ModuloRAdr), blankData },
-		{ (flagReadMask | DigDspMuxBeam0PhaseInitRAdr), blankData },
-		{ (flagReadMask | DigDspMuxBeam0PhaseStepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxBeam1ModuloRAdr), blankData },
-		{ (flagReadMask | DigDspMuxBeam1PhaseInitRAdr), blankData },
-		{ (flagReadMask | DigDspMuxBeam1PhaseStepRAdr), blankData },
-		{ 0, 0 }, // This should stay on line 255, 175 registers from the start of this structure on line 80
-		{ (flagReadMask | DigDspMuxCav4MechPrngIvaRAdr), blankData },
-		{ (flagReadMask | DigDspMuxCav4MechPrngIvbRAdr), blankData },
-		{ (flagReadMask | DigDspMuxCav4MechPrngRandomRunRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ACavOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0AForOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ARflOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0AmpLpBwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecFreq0CoarseFreqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecFreq1CoarseFreqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecFreq2CoarseFreqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0BeamCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0BwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM0DriveCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1BeamCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1BwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM1DriveCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2BeamCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2BwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecM2DriveCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecModuloRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ElecPhaseStepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0ComprSatCtlRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0PrngIvaRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0PrngIvbRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC0PrngRandomRunRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ACavOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1AForOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ARflOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1AmpLpBwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecFreq0CoarseFreqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecFreq1CoarseFreqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecFreq2CoarseFreqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0BeamCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0BwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM0DriveCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1BeamCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1BwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM1DriveCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2BeamCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2BwRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecM2DriveCouplingRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecModuloRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ElecPhaseStepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1ComprSatCtlRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1PrngIvaRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1PrngIvbRAdr), blankData },
-		{ (flagReadMask | DigDspMuxC1PrngRandomRunRAdr), blankData },
-		{ (flagReadMask | DigDspMuxDacIqPhaseRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspChanKeepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreCoarseScaleRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcPhOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcSelEnRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0FdbkCoreMpProcSelThreshRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspModuloRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPhaseStepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspPiezoPiezoDcRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspTagRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspUseFiberIqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspWaveSampPerRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell0DspWaveShiftRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspChanKeepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreCoarseScaleRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcPhOffsetRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcSelEnRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1FdbkCoreMpProcSelThreshRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspModuloRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPhaseStepRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspPiezoPiezoDcRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspTagRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspUseFiberIqRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspWaveSampPerRAdr), blankData },
-		{ (flagReadMask | DigDspMuxShell1DspWaveShiftRAdr), blankData },
-		{ (flagReadMask | DigDspRewindRAdr), blankData },
-		{ (flagReadMask | DigDspSsaStimAmpstepRAdr), blankData },
-		{ (flagReadMask | DigDspSsaStimEnRAdr), blankData },
-		{ (flagReadMask | DigDspSsaStimGPeriodRAdr), blankData },
-		{ (flagReadMask | DigDspSsaStimPertstepRAdr), blankData },
-		{ (flagReadMask | DigDspTraceKeepRAdr), blankData },
-		{ (flagReadMask | DigDspTraceResetWeRAdr), blankData },
-		{ (flagReadMask | DigDspTrigInternalRAdr), blankData },
-		{ (flagReadMask | DigDspTrigModeRAdr), blankData },
-		{ (flagReadMask | DigDspWave0SrcRAdr), blankData },
-		{ (flagReadMask | DigDspWave1SrcRAdr), blankData },
+		{ (flagReadMask | IdelayBase0RAdr), blankData },
+		{ (flagReadMask | IdelayBase1RAdr), blankData },
+		{ (flagReadMask | IdelayBase2RAdr), blankData },
+		{ (flagReadMask | IdelayBase3RAdr), blankData },
+		{ (flagReadMask | IdelayBase4RAdr), blankData },
+		{ (flagReadMask | IdelayBase5RAdr), blankData },
+		{ (flagReadMask | IdelayBase6RAdr), blankData },
+		{ (flagReadMask | IdelayBase7RAdr), blankData },
+		{ (flagReadMask | IdelayBase8RAdr), blankData },
+		{ (flagReadMask | IdelayBase9RAdr), blankData },
+		{ (flagReadMask | IdelayBase10RAdr), blankData },
+		{ (flagReadMask | IdelayBase11RAdr), blankData },
+		{ (flagReadMask | IdelayBase12RAdr), blankData },
+		{ (flagReadMask | IdelayBase13RAdr), blankData },
+		{ (flagReadMask | IdelayBase14RAdr), blankData },
+		{ (flagReadMask | IdelayBase15RAdr), blankData },
+		{ (flagReadMask | IdelayBase16RAdr), blankData },
+		{ (flagReadMask | IdelayBase17RAdr), blankData },
+		{ (flagReadMask | IdelayBase18RAdr), blankData },
+		{ (flagReadMask | IdelayBase19RAdr), blankData },
+		{ (flagReadMask | IdelayBase20RAdr), blankData },
+		{ (flagReadMask | IdelayBase21RAdr), blankData },
+		{ (flagReadMask | IdelayBase22RAdr), blankData },
+		{ (flagReadMask | IdelayBase23RAdr), blankData },
+		{ (flagReadMask | IdelayBase24RAdr), blankData },
+		{ (flagReadMask | IdelayBase25RAdr), blankData },
+		{ (flagReadMask | IdelayBase26RAdr), blankData },
+		{ (flagReadMask | IdelayBase27RAdr), blankData },
+		{ (flagReadMask | IdelayBase28RAdr), blankData },
+		{ (flagReadMask | IdelayBase29RAdr), blankData },
+		{ (flagReadMask | IdelayBase30RAdr), blankData },
+		{ (flagReadMask | IdelayBase31RAdr), blankData },
+		{ (flagReadMask | IdelayBase32RAdr), blankData },
+		{ (flagReadMask | IdelayBase33RAdr), blankData },
+		{ (flagReadMask | IdelayBase34RAdr), blankData },
+		{ (flagReadMask | IdelayBase35RAdr), blankData },
+		{ (flagReadMask | IdelayBase36RAdr), blankData },
+		{ (flagReadMask | IdelayBase37RAdr), blankData },
+		{ (flagReadMask | IdelayBase38RAdr), blankData },
+		{ (flagReadMask | IdelayBase39RAdr), blankData },
+		{ (flagReadMask | IdelayBase40RAdr), blankData },
+		{ (flagReadMask | IdelayBase41RAdr), blankData },
+		{ (flagReadMask | IdelayBase42RAdr), blankData },
+		{ (flagReadMask | IdelayBase43RAdr), blankData },
+		{ (flagReadMask | IdelayBase44RAdr), blankData },
+		{ (flagReadMask | IdelayBase45RAdr), blankData },
+		{ (flagReadMask | IdelayBase46RAdr), blankData },
+		{ (flagReadMask | IdelayBase47RAdr), blankData },
+		{ (flagReadMask | IdelayBase48RAdr), blankData },
+		{ (flagReadMask | IdelayBase49RAdr), blankData },
+		{ (flagReadMask | DspConfigRomRAdr), blankData },
+		{ (flagReadMask | PhasexDout0RAdr), blankData },
+		{ (flagReadMask | PhasexDout1RAdr), blankData },
+		{ (flagReadMask | PhasexDout2RAdr), blankData },
+		{ (flagReadMask | PhasexDout3RAdr), blankData },
+		{ (flagReadMask | PhasexDout4RAdr), blankData },
+		{ (flagReadMask | PhasexDout5RAdr), blankData },
+		{ (flagReadMask | PhasexDout6RAdr), blankData },
+		{ (flagReadMask | PhasexDout7RAdr), blankData },
+		{ (flagReadMask | PhasexDout8RAdr), blankData },
+		{ (flagReadMask | PhasexDout9RAdr), blankData },
+		{ (flagReadMask | PhasexDout10RAdr), blankData },
+		{ (flagReadMask | PhasexDout11RAdr), blankData },
+		{ (flagReadMask | PhasexDout12RAdr), blankData },
+		{ (flagReadMask | PhasexDout13RAdr), blankData },
+		{ (flagReadMask | PhasexDout14RAdr), blankData },
+		{ (flagReadMask | PhasexDout15RAdr), blankData },
+		{ (flagReadMask | PhasexDout16RAdr), blankData },
+		{ (flagReadMask | PhasexDout17RAdr), blankData },
+		{ (flagReadMask | PhasexDout18RAdr), blankData },
+		{ (flagReadMask | PhasexDout19RAdr), blankData },
+		{ (flagReadMask | PhasexDout20RAdr), blankData },
+		{ (flagReadMask | PhasexDout21RAdr), blankData },
+		{ (flagReadMask | PhasexDout22RAdr), blankData },
+		{ (flagReadMask | PhasexDout23RAdr), blankData },
+		{ (flagReadMask | PhasexDout24RAdr), blankData },
+		{ (flagReadMask | PhasexDout25RAdr), blankData },
+		{ (flagReadMask | PhasexDout26RAdr), blankData },
+		{ (flagReadMask | PhasexDout27RAdr), blankData },
+		{ (flagReadMask | PhasexDout28RAdr), blankData },
+		{ (flagReadMask | PhasexDout29RAdr), blankData },
+		{ (flagReadMask | PhasexDout30RAdr), blankData },
+		{ (flagReadMask | PhasexDout31RAdr), blankData },
+		{ (flagReadMask | PhasexDout32RAdr), blankData },
+		{ (flagReadMask | PhasexDout33RAdr), blankData },
+		{ (flagReadMask | PhasexDout34RAdr), blankData },
+		{ (flagReadMask | PhasexDout35RAdr), blankData },
+		{ (flagReadMask | PhasexDout36RAdr), blankData },
+		{ (flagReadMask | PhasexDout37RAdr), blankData },
+		{ (flagReadMask | PhasexDout38RAdr), blankData },
+		{ (flagReadMask | PhasexDout39RAdr), blankData },
+		{ (flagReadMask | PhasexDout40RAdr), blankData },
+		{ (flagReadMask | PhasexDout41RAdr), blankData },
+		{ (flagReadMask | PhasexDout42RAdr), blankData },
+		{ (flagReadMask | PhasexDout43RAdr), blankData },
+		{ (flagReadMask | PhasexDout44RAdr), blankData },
+		{ (flagReadMask | PhasexDout45RAdr), blankData },
+		{ (flagReadMask | PhasexDout46RAdr), blankData },
+		{ (flagReadMask | PhasexDout47RAdr), blankData },
+		{ (flagReadMask | PhasexDout48RAdr), blankData },
+		{ (flagReadMask | PhasexDout49RAdr), blankData },
+		{ (flagReadMask | QsfpBuf0RAdr), blankData },
+		{ (flagReadMask | QsfpBuf1RAdr), blankData },
+		{ (flagReadMask | QsfpBuf2RAdr), blankData },
+		{ (flagReadMask | QsfpBuf3RAdr), blankData },
+		{ (flagReadMask | QsfpBuf4RAdr), blankData },
+		{ (flagReadMask | QsfpBuf5RAdr), blankData },
+		{ (flagReadMask | QsfpBuf6RAdr), blankData },
+		{ (flagReadMask | QsfpBuf7RAdr), blankData },
+		{ (flagReadMask | QsfpBuf8RAdr), blankData },
+		{ (flagReadMask | QsfpBuf9RAdr), blankData },
+		{ (flagReadMask | QsfpBuf10RAdr), blankData },
+		{ (flagReadMask | QsfpBuf11RAdr), blankData },
+		{ (flagReadMask | QsfpBuf12RAdr), blankData },
+		{ (flagReadMask | QsfpBuf13RAdr), blankData },
+		{ (flagReadMask | QsfpBuf14RAdr), blankData },
+		{ (flagReadMask | QsfpBuf15RAdr), blankData },
+		{ (flagReadMask | QsfpBuf16RAdr), blankData },
+		{ (flagReadMask | QsfpBuf17RAdr), blankData },
+		{ (flagReadMask | QsfpBuf18RAdr), blankData },
+		{ (flagReadMask | QsfpBuf19RAdr), blankData },
+		{ (flagReadMask | QsfpBuf20RAdr), blankData },
+		{ (flagReadMask | QsfpBuf21RAdr), blankData },
+		{ (flagReadMask | QsfpBuf22RAdr), blankData },
+		{ (flagReadMask | QsfpBuf23RAdr), blankData },
+		{ (flagReadMask | QsfpBuf24RAdr), blankData },
+		{ (flagReadMask | QsfpBuf25RAdr), blankData },
+		{ (flagReadMask | QsfpBuf26RAdr), blankData },
+		{ (flagReadMask | QsfpBuf27RAdr), blankData },
+		{ (flagReadMask | QsfpBuf28RAdr), blankData },
+		{ (flagReadMask | QsfpBuf29RAdr), blankData },
+		{ (flagReadMask | QsfpBuf30RAdr), blankData },
+		{ (flagReadMask | QsfpBuf31RAdr), blankData },
+		{ (flagReadMask | QsfpBuf32RAdr), blankData },
+		{ (flagReadMask | QsfpBuf33RAdr), blankData },
+		{ (flagReadMask | QsfpBuf34RAdr), blankData },
+		{ (flagReadMask | QsfpBuf35RAdr), blankData },
+		{ (flagReadMask | QsfpBuf36RAdr), blankData },
+		{ (flagReadMask | QsfpBuf37RAdr), blankData },
+		{ (flagReadMask | QsfpBuf38RAdr), blankData },
+		{ (flagReadMask | QsfpBuf39RAdr), blankData },
+		{ (flagReadMask | QsfpBuf40RAdr), blankData },
+		{ (flagReadMask | QsfpBuf41RAdr), blankData },
+		{ (flagReadMask | QsfpBuf42RAdr), blankData },
+		{ (flagReadMask | QsfpBuf43RAdr), blankData },
+		{ (flagReadMask | QsfpBuf44RAdr), blankData },
+		{ (flagReadMask | QsfpBuf45RAdr), blankData },
+		{ (flagReadMask | QsfpBuf46RAdr), blankData },
+		{ (flagReadMask | QsfpBuf47RAdr), blankData },
+		{ (flagReadMask | QsfpBuf48RAdr), blankData },
+		{ (flagReadMask | QsfpBuf49RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData0RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData1RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData2RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData3RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData4RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData5RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData6RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData7RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData8RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData9RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData10RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData11RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData12RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData13RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData14RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData15RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData16RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData17RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData18RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData19RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData20RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData21RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData22RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData23RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData24RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData25RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData26RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData27RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData28RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData29RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData30RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData31RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData32RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData33RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData34RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData35RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData36RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData37RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData38RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData39RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData40RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData41RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData42RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData43RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData44RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData45RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData46RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData47RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData48RAdr), blankData },
+		{ (flagReadMask | Shell0SlowData49RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData0RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData1RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData2RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData3RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData4RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData5RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData6RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData7RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData8RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData9RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData10RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData11RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData12RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData13RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData14RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData15RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData16RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData17RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData18RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData19RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData20RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData21RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData22RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData23RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData24RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData25RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData26RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData27RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData28RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData29RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData30RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData31RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData32RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData33RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData34RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData35RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData36RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData37RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData38RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData39RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData40RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData41RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData42RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData43RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData44RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData45RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData46RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData47RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData48RAdr), blankData },
+		{ (flagReadMask | Shell1SlowData49RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts0RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts1RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts2RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts3RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts4RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts5RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts6RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts7RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts8RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts9RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts10RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts11RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts12RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts13RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts14RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts15RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts16RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts17RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts18RAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoSfConsts19RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim0RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim1RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim2RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim3RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim4RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim5RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim6RAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcLim7RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff0RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff1RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff2RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff3RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff4RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff5RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff6RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff7RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff8RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff9RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff10RAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeff11RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling0RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling1RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling2RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling3RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling4RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling5RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling6RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling7RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling8RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling9RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling10RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling11RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling12RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling13RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling14RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling15RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling16RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling17RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling18RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling19RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling20RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling21RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling22RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling23RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling24RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling25RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling26RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling27RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling28RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling29RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling30RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling31RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling32RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling33RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling34RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling35RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling36RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling37RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling38RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling39RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling40RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling41RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling42RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling43RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling44RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling45RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling46RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling47RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling48RAdr), blankData },
+		{ (flagReadMask | Cavity0DriveCoupleOutCoupling49RAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffset44RAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffset45RAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffset46RAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffset47RAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffset48RAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffset49RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset30RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset31RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset32RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset33RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset34RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset35RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset36RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset37RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset38RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset39RAdr), blankData },
+		{ (flagReadMask | ConfigLlspiWeRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset41RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset42RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset43RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset44RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset45RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset46RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset47RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset48RAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffset49RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx40RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx41RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx42RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx43RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx44RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx45RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx46RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx47RAdr), blankData },
+		{ (flagReadMask | Shell0DspLpNotchLp1BKx48RAdr), blankData },
+		{ (flagReadMask | DdsaModuloRAdr), blankData },
+		{ (flagReadMask | DdsaPhstepHRAdr), blankData },
+		{ (flagReadMask | DdsaPhstepLRAdr), blankData },
+		{ (flagReadMask | HistCountWStrobeRAdr), blankData },
+		{ (flagReadMask | Shell1DspLpNotchLp1BKx45RAdr), blankData },
+		{ (flagReadMask | LoAmpRAdr), blankData },
+		{ (flagReadMask | Shell1DspLpNotchLp1BKx47RAdr), blankData },
+		{ (flagReadMask | Shell1DspLpNotchLp1BKx48RAdr), blankData },
+		{ (flagReadMask | Shell1DspLpNotchLp1BKx49RAdr), blankData },
+		{ (flagReadMask | Shell1DspLpNotchLp1BKy48RAdr), blankData },
+		{ (flagReadMask | PrcDspPrlCfgRAdr), blankData },
+		{ (flagReadMask | PrcDspPrlGainRAdr), blankData },
+		{ (flagReadMask | Beam0ModuloRAdr), blankData },
+		{ (flagReadMask | Beam0PhaseInitRAdr), blankData },
+		{ (flagReadMask | Beam0PhaseStepRAdr), blankData },
+		{ (flagReadMask | Beam1ModuloRAdr), blankData },
+		{ (flagReadMask | Beam1PhaseInitRAdr), blankData },
+		{ (flagReadMask | Beam1PhaseStepRAdr), blankData },
+		{ (flagReadMask | Cav4MechPrngIvaRAdr), blankData },
+		{ (flagReadMask | Cav4MechPrngIvbRAdr), blankData },
+		{ (flagReadMask | Cav4MechPrngRandomRunRAdr), blankData },
+		{ (flagReadMask | Cavity0ACavOffsetRAdr), blankData },
+		{ (flagReadMask | Cavity0AForOffsetRAdr), blankData },
+		{ (flagReadMask | Cavity0ARflOffsetRAdr), blankData },
+		{ (flagReadMask | Cavity0AmpLpBwRAdr), blankData },
+		{ (flagReadMask | Cavity0Freq0CoarseFreqRAdr), blankData },
+		{ (flagReadMask | Cavity0Freq1CoarseFreqRAdr), blankData },
+		{ (flagReadMask | Cavity0Freq2CoarseFreqRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0BeamCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0BwRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode0DriveCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode1BeamCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode1BwRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode1DriveCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode2BeamCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode2BwRAdr), blankData },
+		{ (flagReadMask | Cavity0Mode2DriveCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity0ModuloRAdr), blankData },
+		{ (flagReadMask | Cavity0PhaseStepRAdr), blankData },
+		{ (flagReadMask | Cavity0ComprSatCtlRAdr), blankData },
+		{ (flagReadMask | Cavity0PrngIvaRAdr), blankData },
+		{ (flagReadMask | Cavity0PrngIvbRAdr), blankData },
+		{ (flagReadMask | Cavity0PrngRandomRunRAdr), blankData },
+		{ (flagReadMask | Cavity1ACavOffsetRAdr), blankData },
+		{ (flagReadMask | Cavity1AForOffsetRAdr), blankData },
+		{ (flagReadMask | Cavity1ARflOffsetRAdr), blankData },
+		{ (flagReadMask | Cavity1AmpLpBwRAdr), blankData },
+		{ (flagReadMask | Cavity1Freq0CoarseFreqRAdr), blankData },
+		{ (flagReadMask | Cavity1Freq1CoarseFreqRAdr), blankData },
+		{ (flagReadMask | Cavity1Freq2CoarseFreqRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode0BeamCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode0BwRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode0DriveCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1BeamCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1BwRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode1DriveCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode2BeamCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode2BwRAdr), blankData },
+		{ (flagReadMask | Cavity1Mode2DriveCouplingRAdr), blankData },
+		{ (flagReadMask | Cavity1ModuloRAdr), blankData },
+		{ (flagReadMask | Cavity1PhaseStepRAdr), blankData },
+		{ (flagReadMask | Cavity1ComprSatCtlRAdr), blankData },
+		{ (flagReadMask | Cavity1PrngIvaRAdr), blankData },
+		{ (flagReadMask | Cavity1PrngIvbRAdr), blankData },
+		{ (flagReadMask | Cavity1PrngRandomRunRAdr), blankData },
+		{ (flagReadMask | DacIqPhaseRAdr), blankData },
+		{ (flagReadMask | Shell0DspChanKeepRAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreCoarseScaleRAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcPhOffsetRAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcSelEnRAdr), blankData },
+		{ (flagReadMask | Shell0DspFdbkCoreMpProcSelThreshRAdr), blankData },
+		{ (flagReadMask | Shell0DspModuloRAdr), blankData },
+		{ (flagReadMask | Shell0DspPhaseStepRAdr), blankData },
+		{ (flagReadMask | Shell0DspPiezoPiezoDcRAdr), blankData },
+		{ (flagReadMask | Shell0DspTagRAdr), blankData },
+		{ (flagReadMask | Shell0DspUseFiberIqRAdr), blankData },
+		{ (flagReadMask | Shell0DspWaveSampPerRAdr), blankData },
+		{ (flagReadMask | Shell0DspWaveShiftRAdr), blankData },
+		{ (flagReadMask | Shell1DspChanKeepRAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreCoarseScaleRAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcPhOffsetRAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcSelEnRAdr), blankData },
+		{ (flagReadMask | Shell1DspFdbkCoreMpProcSelThreshRAdr), blankData },
+		{ (flagReadMask | Shell1DspModuloRAdr), blankData },
+		{ (flagReadMask | Shell1DspPhaseStepRAdr), blankData },
+		{ (flagReadMask | Shell1DspPiezoPiezoDcRAdr), blankData },
+		{ (flagReadMask | Shell1DspTagRAdr), blankData },
+		{ (flagReadMask | Shell1DspUseFiberIqRAdr), blankData },
+		{ (flagReadMask | Shell1DspWaveSampPerRAdr), blankData },
+		{ (flagReadMask | Shell1DspWaveShiftRAdr), blankData },
+		{ (flagReadMask | RewindRAdr), blankData },
+		{ (flagReadMask | SsaStimAmpstepRAdr), blankData },
+		{ (flagReadMask | SsaStimEnRAdr), blankData },
+		{ (flagReadMask | SsaStimGPeriodRAdr), blankData },
+		{ (flagReadMask | SsaStimPertstepRAdr), blankData },
+		{ (flagReadMask | TraceKeepRAdr), blankData },
+		{ (flagReadMask | TraceResetWeRAdr), blankData },
+		{ (flagReadMask | TrigInternalRAdr), blankData },
+		{ (flagReadMask | TrigModeRAdr), blankData },
+		{ (flagReadMask | Wave0SrcRAdr), blankData },
+		{ (flagReadMask | Wave1SrcRAdr), blankData },
 		{ (flagReadMask | DomainJumpRealignRAdr), blankData },
 		{ (flagReadMask | IccCfgRAdr), blankData },
 		{ (flagReadMask | QsfpI2CRegRAdr), blankData },
@@ -582,19 +831,19 @@ void scllrfPRCextra::traceIQWaveformRequester()
 	FpgaReg traceAck[5] =
 	{
 			{0,0},
-			{DigDspTraceResetWeWAdr,1},
-			{DigDspBufTrigWAdr,0},
-			{DigDspBufTrigWAdr,1},
-			{DigDspBufTrigWAdr,0}
+			{TraceResetWeWAdr,1},
+			{BufTrigWAdr,0},
+			{BufTrigWAdr,1},
+			{BufTrigWAdr,0}
 	};
 
 //	FpgaReg traceAck[5] =
 //	{
 //			{0,0},
-//			{DigDspCircleBufFlipWAdr,1},
-//			{DigDspCircleBufFlipWAdr,2},
-//			{DigDspCircleBufFlipRAdr | flagReadMask,1},
-//			{DigDspCircleBufFlipRAdr | flagReadMask,2},
+//			{CircleBufFlipWAdr,1},
+//			{CircleBufFlipWAdr,2},
+//			{CircleBufFlipRAdr | flagReadMask,1},
+//			{CircleBufFlipRAdr | flagReadMask,2},
 //	};
 	//printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
     htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
@@ -794,8 +1043,8 @@ void scllrfPRCextra::fillCircIQBufReqMsg()
 	fillWaveRequestMsg(pReqCircIQBufMsg_, sizeof(pReqCircIQBufMsg_)/sizeof(*pReqCircIQBufMsg_), circIQBufStart);
 
 	// Also get "slow data registers" every time
-	fillWaveRequestMsg(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_), Shell0SlowDataRAdr);
-	fillWaveRequestMsg(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_), Shell1SlowDataRAdr);
+	fillWaveRequestMsg(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_), Shell0SlowData0RAdr);
+	fillWaveRequestMsg(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_), Shell1SlowData0RAdr);
 
 }
 
@@ -836,11 +1085,11 @@ void scllrfPRCextra::circIQBufRequester()
 	FpgaReg circAck[] =
 	{
 			{0,0},
-			{DigDspCircleBufFlipWAdr,1},
-			{DigDspCircleBufFlipWAdr,2},
-			{DigDspCircleBufFlipWAdr,0},
-			{DigDspCircleBufFlipRAdr | flagReadMask,blankData},
-			{DigDspCircleBufFlipRAdr | flagReadMask,blankData},
+			{CircleBufFlipWAdr,1},
+			{CircleBufFlipWAdr,2},
+			{CircleBufFlipWAdr,0},
+			{CircleBufFlipRAdr | flagReadMask,blankData},
+			{CircleBufFlipRAdr | flagReadMask,blankData},
 			{LlrfCircleReadyRAdr | flagReadMask,blankData},
 	};
 	//printf("\n%s calling htonFpgaRegArray for %u registers of circAck\n", __PRETTY_FUNCTION__, 5 );
@@ -1109,37 +1358,37 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
-    case DigDspModuloRAdr|flagReadMask:
+    case ModuloRAdr|flagReadMask:
 
-		status = (asynStatus) setIntegerParam(p_DigDspModuloR,
-				(pFromFpga->data & DigDspModuloMask) );
+		status = (asynStatus) setIntegerParam(p_ModuloR,
+				(pFromFpga->data & ModuloMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspModuloRString,
-				(unsigned ) pFromFpga->data & DigDspModuloMask);
+				ModuloRString,
+				(unsigned ) pFromFpga->data & ModuloMask);
 		iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 
 	break;
 
-    case DigDspPhaseStepHRAdr|flagReadMask:
+    case PhaseStepHRAdr|flagReadMask:
 
-		status = (asynStatus) setIntegerParam(p_DigDspPhaseStepHR,
-				(pFromFpga->data & DigDspPhaseStepHMask) );
+		status = (asynStatus) setIntegerParam(p_PhaseStepHR,
+				(pFromFpga->data & PhaseStepHMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspPhaseStepHRString,
-				(unsigned ) pFromFpga->data & DigDspPhaseStepHMask);
+				PhaseStepHRString,
+				(unsigned ) pFromFpga->data & PhaseStepHMask);
 		iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 	break;
 
-    case DigDspPhaseStepLRAdr|flagReadMask:
+    case PhaseStepLRAdr|flagReadMask:
 
-		status = (asynStatus) setIntegerParam(p_DigDspPhaseStepLR,
-				(pFromFpga->data & DigDspPhaseStepLMask) );
+		status = (asynStatus) setIntegerParam(p_PhaseStepLR,
+				(pFromFpga->data & PhaseStepLMask) );
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspPhaseStepLRString,
-				(unsigned ) pFromFpga->data & DigDspPhaseStepLMask);
+				PhaseStepLRString,
+				(unsigned ) pFromFpga->data & PhaseStepLMask);
 		iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 	break;
 
@@ -1168,31 +1417,31 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 				(unsigned ) pFromFpga->data & TraceStatus1Mask);
 	break;
 
-    case DigDspTraceKeepRAdr|flagReadMask:
-		tmpData = pFromFpga->data & DigDspTraceKeepMask;
-//    printf("%s got data 0x%x for DigDspTraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
-		status = (asynStatus) setUIntDigitalParam(p_DigDspTraceKeepR,
-				(pFromFpga->data & DigDspTraceKeepMask) , DigDspTraceKeepMask);
+    case TraceKeepRAdr|flagReadMask:
+		tmpData = pFromFpga->data & TraceKeepMask;
+//    printf("%s got data 0x%x for TraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
+		status = (asynStatus) setUIntDigitalParam(p_TraceKeepR,
+				(pFromFpga->data & TraceKeepMask) , TraceKeepMask);
 		// Count the number of bits set
 		for (nchan_ = 0; tmpData; nchan_++)
 		{
 		  tmpData &= tmpData - 1; // clear the least significant bit set
 		}
 		setIntegerParam(p_IQNActive, nchan_);
-//	    printf("%s DigDspTraceKeepRAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
+//	    printf("%s TraceKeepRAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceKeepRString,
-				(unsigned ) pFromFpga->data & DigDspTraceKeepMask);
+				TraceKeepRString,
+				(unsigned ) pFromFpga->data & TraceKeepMask);
 	break;
 
-    case DigDspCircleBufFlipRAdr|flagReadMask:
-	status = (asynStatus) setUIntDigitalParam(p_DigDspCircleBufFlipR,
-			(pFromFpga->data & DigDspCircleBufFlipMask) , DigDspCircleBufFlipMask);
+    case CircleBufFlipRAdr|flagReadMask:
+	status = (asynStatus) setUIntDigitalParam(p_CircleBufFlipR,
+			(pFromFpga->data & CircleBufFlipMask) , CircleBufFlipMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspCircleBufFlipRString,
-				(unsigned ) pFromFpga->data & DigDspCircleBufFlipMask);
+				CircleBufFlipRString,
+				(unsigned ) pFromFpga->data & CircleBufFlipMask);
 	break;
 
     case LlrfCircleReadyRAdr|flagReadMask:
@@ -1222,10 +1471,10 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 				(unsigned ) pFromFpga->data & LlrfCircleReadyMask);
 	break;
 
-    case DigDspMuxShell0DspChanKeepRAdr|flagReadMask:
-		tmpData = pFromFpga->data & DigDspMuxShell0DspChanKeepMask;
-		status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell0DspChanKeepR,
-				(pFromFpga->data & DigDspMuxShell0DspChanKeepMask) , DigDspMuxShell0DspChanKeepMask);
+    case Shell0DspChanKeepRAdr|flagReadMask:
+		tmpData = pFromFpga->data & Shell0DspChanKeepMask;
+		status = (asynStatus) setUIntDigitalParam(p_Shell0DspChanKeepR,
+				(pFromFpga->data & Shell0DspChanKeepMask) , Shell0DspChanKeepMask);
 		// Count the number of bits set
 		for (nCirc0Chan_ = 0; tmpData; nCirc0Chan_++)
 		{
@@ -1234,14 +1483,14 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		setIntegerParam(p_Circ0NActive, nCirc0Chan_);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspChanKeepRString,
-				(unsigned ) pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+				Shell0DspChanKeepRString,
+				(unsigned ) pFromFpga->data & Shell0DspChanKeepMask);
 	break;
 
-    case DigDspMuxShell1DspChanKeepRAdr|flagReadMask:
-	tmpData = pFromFpga->data & DigDspMuxShell1DspChanKeepMask;
-	status = (asynStatus) setUIntDigitalParam(p_DigDspMuxShell1DspChanKeepR,
-			(pFromFpga->data & DigDspMuxShell1DspChanKeepMask), DigDspMuxShell1DspChanKeepMask);
+    case Shell1DspChanKeepRAdr|flagReadMask:
+	tmpData = pFromFpga->data & Shell1DspChanKeepMask;
+	status = (asynStatus) setUIntDigitalParam(p_Shell1DspChanKeepR,
+			(pFromFpga->data & Shell1DspChanKeepMask), Shell1DspChanKeepMask);
 	// Count the number of bits set
 	for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
 	{
@@ -1250,11 +1499,11 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	setIntegerParam(p_Circ1NActive, nCirc1Chan_);
 	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-			DigDspMuxShell1DspChanKeepRString,
-			(unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+			Shell1DspChanKeepRString,
+			(unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
 	break;
 
-    case Shell0SlowDataRAdr |flagReadMask:
+    case Shell0SlowData0RAdr |flagReadMask:
 	////XXXX A few variables for testing, can be removed along with code that uses them once we know this stuff works
 	int lastCount, newCount, tagNow, tagOld;
 	////XXXX
@@ -1262,7 +1511,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowDataMask;
+			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowData0Mask;
 		}
 		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataBufferR, 0);
 		getIntegerParam(p_Shell0CircleCountR, &lastCount);
@@ -1304,12 +1553,12 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 
 	break;
 
-    case Shell1SlowDataRAdr |flagReadMask:
+    case Shell1SlowData0RAdr |flagReadMask:
 
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowDataMask;
+			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowData0Mask;
 		}
 		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataBufferR, 0);
 		getIntegerParam(p_Shell1CircleCountR, &lastCount);
@@ -1400,127 +1649,127 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
     {
-    case DigDspModuloWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspModuloW, valueSet );
-		if( (int32_t)(valueSet[0] & DigDspModuloMask) == (pFromFpga->data & DigDspModuloMask))
+    case ModuloWAdr:
+		status = (asynStatus) getIntegerParam(p_ModuloW, valueSet );
+		if( (int32_t)(valueSet[0] & ModuloMask) == (pFromFpga->data & ModuloMask))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspModuloWString, (unsigned ) pFromFpga->data & DigDspModuloMask);
+				ModuloWString, (unsigned ) pFromFpga->data & ModuloMask);
 			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspModuloWString, valueSet[0] & DigDspModuloMask, (unsigned ) pFromFpga->data & DigDspModuloMask);
+				ModuloWString, valueSet[0] & ModuloMask, (unsigned ) pFromFpga->data & ModuloMask);
 			status = asynError;
-			setParamStatus(p_DigDspModuloW, status);
+			setParamStatus(p_ModuloW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case DigDspPhaseStepHWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepHW, valueSet );
-		if( (int32_t)(valueSet[0] & DigDspPhaseStepHMask) == (pFromFpga->data & DigDspPhaseStepHMask))
+    case PhaseStepHWAdr:
+		status = (asynStatus) getIntegerParam(p_PhaseStepHW, valueSet );
+		if( (int32_t)(valueSet[0] & PhaseStepHMask) == (pFromFpga->data & PhaseStepHMask))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspPhaseStepHWString, (unsigned ) pFromFpga->data & DigDspPhaseStepHMask);
+				PhaseStepHWString, (unsigned ) pFromFpga->data & PhaseStepHMask);
 			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspPhaseStepHWString, valueSet[0] & DigDspPhaseStepHMask, (unsigned ) pFromFpga->data & DigDspPhaseStepHMask);
+				PhaseStepHWString, valueSet[0] & PhaseStepHMask, (unsigned ) pFromFpga->data & PhaseStepHMask);
 			status = asynError;
-			setParamStatus(p_DigDspPhaseStepHW, status);
+			setParamStatus(p_PhaseStepHW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case DigDspPhaseStepLWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspPhaseStepLW, valueSet );
-		if( (int32_t)(valueSet[0] & DigDspPhaseStepLMask) == (pFromFpga->data & DigDspPhaseStepLMask))
+    case PhaseStepLWAdr:
+		status = (asynStatus) getIntegerParam(p_PhaseStepLW, valueSet );
+		if( (int32_t)(valueSet[0] & PhaseStepLMask) == (pFromFpga->data & PhaseStepLMask))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspPhaseStepLWString, (unsigned ) pFromFpga->data & DigDspPhaseStepLMask);
+				PhaseStepLWString, (unsigned ) pFromFpga->data & PhaseStepLMask);
 			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspPhaseStepLWString, valueSet[0] & DigDspPhaseStepLMask, (unsigned ) pFromFpga->data & DigDspPhaseStepLMask);
+				PhaseStepLWString, valueSet[0] & PhaseStepLMask, (unsigned ) pFromFpga->data & PhaseStepLMask);
 			status = asynError;
-			setParamStatus(p_DigDspPhaseStepLW, status);
+			setParamStatus(p_PhaseStepLW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case DigDspBufTrigWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_DigDspBufTrigW, uValueSet , DigDspBufTrigMask);
-		if( (valueSet[0] & DigDspBufTrigMask) == (pFromFpga->data & DigDspBufTrigMask))
+    case BufTrigWAdr:
+		status = (asynStatus) getUIntDigitalParam(p_BufTrigW, uValueSet , BufTrigMask);
+		if( (valueSet[0] & BufTrigMask) == (pFromFpga->data & BufTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspBufTrigWString, (unsigned ) pFromFpga->data & DigDspBufTrigMask);
+				BufTrigWString, (unsigned ) pFromFpga->data & BufTrigMask);
 		else
 		{
 			// We don't care, since this is typically part of a canned sequence of writes
 		}
 
 		break;
-    case DigDspTraceKeepWAdr:
-		status = (asynStatus) getIntegerParam(p_DigDspTraceKeepW, valueSet);
-		if( (valueSet[0] & DigDspTraceKeepMask) == (pFromFpga->data & DigDspTraceKeepMask))
+    case TraceKeepWAdr:
+		status = (asynStatus) getIntegerParam(p_TraceKeepW, valueSet);
+		if( (valueSet[0] & TraceKeepMask) == (pFromFpga->data & TraceKeepMask))
 		{		// Count the number of bits set
-			tmpData = (pFromFpga->data & DigDspTraceKeepMask);
+			tmpData = (pFromFpga->data & TraceKeepMask);
 			for (nchan_ = 0; tmpData; nchan_++)
 			{
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_IQNActive, nchan_);
-		    printf("%s DigDspTraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
+		    printf("%s TraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceKeepWString, (unsigned ) pFromFpga->data & DigDspTraceKeepMask);
+				TraceKeepWString, (unsigned ) pFromFpga->data & TraceKeepMask);
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceKeepWString, valueSet[0] & DigDspTraceKeepMask, (unsigned ) pFromFpga->data & DigDspTraceKeepMask);
+				TraceKeepWString, valueSet[0] & TraceKeepMask, (unsigned ) pFromFpga->data & TraceKeepMask);
 			status = asynError;
-			setParamStatus(p_DigDspTraceKeepW, status);
+			setParamStatus(p_TraceKeepW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
-    case DigDspTraceResetWeWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_DigDspTraceKeepW, uValueSet , DigDspTraceKeepMask);
-		if( (valueSet[0] & DigDspTraceResetWeMask) == (pFromFpga->data & DigDspTraceResetWeMask))
+    case TraceResetWeWAdr:
+		status = (asynStatus) getUIntDigitalParam(p_TraceKeepW, uValueSet , TraceKeepMask);
+		if( (valueSet[0] & TraceResetWeMask) == (pFromFpga->data & TraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspTraceResetWeWString, (unsigned ) pFromFpga->data & DigDspTraceResetWeMask);
+				TraceResetWeWString, (unsigned ) pFromFpga->data & TraceResetWeMask);
 		else
 		{
 			// We don't care, since there are typically several writes to this per message: 0, 1, 0
 		}
 
 		break;
-    case DigDspCircleBufFlipWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_DigDspCircleBufFlipW, uValueSet , DigDspCircleBufFlipMask);
-		if( (valueSet[0] & DigDspCircleBufFlipMask) == (pFromFpga->data & DigDspCircleBufFlipMask))
+    case CircleBufFlipWAdr:
+		status = (asynStatus) getUIntDigitalParam(p_CircleBufFlipW, uValueSet , CircleBufFlipMask);
+		if( (valueSet[0] & CircleBufFlipMask) == (pFromFpga->data & CircleBufFlipMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspCircleBufFlipWString, (unsigned ) pFromFpga->data & DigDspCircleBufFlipMask);
+				CircleBufFlipWString, (unsigned ) pFromFpga->data & CircleBufFlipMask);
 		else
 		{
 			// That's normal for this register
@@ -1528,63 +1777,63 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
 
-    case DigDspMuxShell0DspChanKeepWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_DigDspMuxShell0DspChanKeepW, uValueSet , DigDspMuxShell0DspChanKeepMask);
+    case Shell0DspChanKeepWAdr:
+		status = (asynStatus) getUIntDigitalParam(p_Shell0DspChanKeepW, uValueSet , Shell0DspChanKeepMask);
 		////XXXXX Trigger a read whenever we change a bit, whether data is ready or not.
 		//newCircIQBufAvailable_ = lastResponseCount_;
 		//epicsEventSignal(reqCircIQBufEventId_);
 		////XXXX
 
-		if( (valueSet[0] & DigDspMuxShell0DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell0DspChanKeepMask))
+		if( (valueSet[0] & Shell0DspChanKeepMask) == (pFromFpga->data & Shell0DspChanKeepMask))
 		{
 			// Count the number of bits set
-			tmpData = (pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+			tmpData = (pFromFpga->data & Shell0DspChanKeepMask);
 			for (nchan_ = 0; tmpData; nchan_++)
 			{
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_Circ0NActive, nCirc0Chan_);
-			printf("%s DigDspMuxShell0DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc0Chan_);
+			printf("%s Shell0DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc0Chan_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspChanKeepWString, (unsigned ) pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+				Shell0DspChanKeepWString, (unsigned ) pFromFpga->data & Shell0DspChanKeepMask);
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell0DspChanKeepWString, valueSet[0] & DigDspMuxShell0DspChanKeepMask, (unsigned ) pFromFpga->data & DigDspMuxShell0DspChanKeepMask);
+				Shell0DspChanKeepWString, valueSet[0] & Shell0DspChanKeepMask, (unsigned ) pFromFpga->data & Shell0DspChanKeepMask);
 			status = asynError;
-			setParamStatus(p_DigDspMuxShell0DspChanKeepW, status);
+			setParamStatus(p_Shell0DspChanKeepW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
 
 		break;
 
-    case DigDspMuxShell1DspChanKeepWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_DigDspMuxShell1DspChanKeepW, uValueSet , DigDspMuxShell1DspChanKeepMask);
-		if( (valueSet[0] & DigDspMuxShell1DspChanKeepMask) == (pFromFpga->data & DigDspMuxShell1DspChanKeepMask))
+    case Shell1DspChanKeepWAdr:
+		status = (asynStatus) getUIntDigitalParam(p_Shell1DspChanKeepW, uValueSet , Shell1DspChanKeepMask);
+		if( (valueSet[0] & Shell1DspChanKeepMask) == (pFromFpga->data & Shell1DspChanKeepMask))
 		{
 			// Count the number of bits set
-			tmpData = (pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+			tmpData = (pFromFpga->data & Shell1DspChanKeepMask);
 			for (nchan_ = 0; tmpData; nchan_++)
 			{
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_Circ1NActive, nCirc1Chan_);
-			printf("%s DigDspMuxShell1DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc1Chan_);
+			printf("%s Shell1DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc1Chan_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspChanKeepWString, (unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+				Shell1DspChanKeepWString, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
 		}
 		else
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				DigDspMuxShell1DspChanKeepWString, valueSet[0] & DigDspMuxShell1DspChanKeepMask, (unsigned ) pFromFpga->data & DigDspMuxShell1DspChanKeepMask);
+				Shell1DspChanKeepWString, valueSet[0] & Shell1DspChanKeepMask, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
 			status = asynError;
-			setParamStatus(p_DigDspMuxShell1DspChanKeepW, status);
+			setParamStatus(p_Shell1DspChanKeepW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
 			setIntegerParam(p_CommErrorCount, ++errorCount);
 		}
