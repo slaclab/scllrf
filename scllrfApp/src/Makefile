@@ -8,7 +8,7 @@ include $(TOP)/configure/CONFIG
 # ================================================
 # Build the IOC application
 # ================================================
-# This will attempt to build an IOC application 
+# This will attempt to build an IOC application
 # for every target including the host computer.
 PROD_IOC = scllrf
 #LIBRARY_IOC= scllrf
@@ -69,6 +69,7 @@ scllrf_SRCS_vxWorks += -nil-
  scllrf_SRCS += INTres2tmp.c
  scllrf_SRCS += INTarcTest.st
  scllrf_SRCS += INTheLevel.st
+ scllrf_SRCS += lbnl_test_jsonDriver.cpp
  #USR_CXXFLAGS += -std=c++0x
 
 # =====================================================
@@ -124,7 +125,9 @@ scllrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 
+USR_CXXFLAGS += -std=c++11
+
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
-
+USR_CXXFLAGS += -std=c++11
