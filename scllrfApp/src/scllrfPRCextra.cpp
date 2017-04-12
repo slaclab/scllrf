@@ -1420,8 +1420,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
     case TraceKeepRAdr|flagReadMask:
 		tmpData = pFromFpga->data & TraceKeepMask;
 //    printf("%s got data 0x%x for TraceKeepRAdr\n",__PRETTY_FUNCTION__,tmpData);
-		status = (asynStatus) setUIntDigitalParam(p_TraceKeepR,
-				(pFromFpga->data & TraceKeepMask) , TraceKeepMask);
+		status = (asynStatus) setIntegerParam(p_TraceKeepR,pFromFpga->data);
 		// Count the number of bits set
 		for (nchan_ = 0; tmpData; nchan_++)
 		{
@@ -1436,7 +1435,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	break;
 
     case CircleBufFlipRAdr|flagReadMask:
-	status = (asynStatus) setUIntDigitalParam(p_CircleBufFlipR,
+	status = (asynStatus) setIntegerParam(p_CircleBufFlipR,
 			(pFromFpga->data & CircleBufFlipMask) , CircleBufFlipMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -1445,7 +1444,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	break;
 
     case LlrfCircleReadyRAdr|flagReadMask:
-	status = (asynStatus) setUIntDigitalParam(p_LlrfCircleReadyR,
+	status = (asynStatus) setIntegerParam(p_LlrfCircleReadyR,
 			(pFromFpga->data & LlrfCircleReadyMask) , LlrfCircleReadyMask);
 		// if flags are set for any active channels,
 
@@ -1473,8 +1472,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 
     case Shell0DspChanKeepRAdr|flagReadMask:
 		tmpData = pFromFpga->data & Shell0DspChanKeepMask;
-		status = (asynStatus) setUIntDigitalParam(p_Shell0DspChanKeepR,
-				(pFromFpga->data & Shell0DspChanKeepMask) , Shell0DspChanKeepMask);
+		status = (asynStatus) setIntegerParam(p_Shell0DspChanKeepR,pFromFpga->data);
 		// Count the number of bits set
 		for (nCirc0Chan_ = 0; tmpData; nCirc0Chan_++)
 		{
@@ -1489,7 +1487,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 
     case Shell1DspChanKeepRAdr|flagReadMask:
 	tmpData = pFromFpga->data & Shell1DspChanKeepMask;
-	status = (asynStatus) setUIntDigitalParam(p_Shell1DspChanKeepR,
+	status = (asynStatus) setIntegerParam(p_Shell1DspChanKeepR,
 			(pFromFpga->data & Shell1DspChanKeepMask), Shell1DspChanKeepMask);
 	// Count the number of bits set
 	for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
@@ -1713,7 +1711,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case BufTrigWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_BufTrigW, uValueSet , BufTrigMask);
+		status = (asynStatus) getIntegerParam(p_BufTrigW, valueSet);
 		if( (valueSet[0] & BufTrigMask) == (pFromFpga->data & BufTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -1753,7 +1751,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case TraceResetWeWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_TraceKeepW, uValueSet , TraceKeepMask);
+		status = (asynStatus) getIntegerParam(p_TraceKeepW, valueSet);
 		if( (valueSet[0] & TraceResetWeMask) == (pFromFpga->data & TraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -1765,7 +1763,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case CircleBufFlipWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_CircleBufFlipW, uValueSet , CircleBufFlipMask);
+		status = (asynStatus) getIntegerParam(p_CircleBufFlipW, valueSet);
 		if( (valueSet[0] & CircleBufFlipMask) == (pFromFpga->data & CircleBufFlipMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -1778,7 +1776,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
 
     case Shell0DspChanKeepWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_Shell0DspChanKeepW, uValueSet , Shell0DspChanKeepMask);
+		status = (asynStatus) getIntegerParam(p_Shell0DspChanKeepW, valueSet);
 		////XXXXX Trigger a read whenever we change a bit, whether data is ready or not.
 		//newCircIQBufAvailable_ = lastResponseCount_;
 		//epicsEventSignal(reqCircIQBufEventId_);
@@ -1812,7 +1810,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
 
     case Shell1DspChanKeepWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_Shell1DspChanKeepW, uValueSet , Shell1DspChanKeepMask);
+		status = (asynStatus) getIntegerParam(p_Shell1DspChanKeepW, valueSet);
 		if( (valueSet[0] & Shell1DspChanKeepMask) == (pFromFpga->data & Shell1DspChanKeepMask))
 		{
 			// Count the number of bits set
