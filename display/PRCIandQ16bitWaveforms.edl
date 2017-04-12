@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 15
-y 54
+x 908
+y 51
 w 892
 h 1335
 font "helvetica-medium-r-18.0"
@@ -59,24 +59,24 @@ y2Max 1
 # Trace Properties
 numTraces 8
 yPv {
-  0 "$(P):WF_Q16_0"
-  1 "$(P):WF_Q16_1"
-  2 "$(P):WF_Q16_2"
-  3 "$(P):WF_Q16_3"
-  4 "$(P):WF_Q16_4"
-  5 "$(P):WF_Q16_5"
-  6 "$(P):WF_Q16_6"
-  7 "$(P):WF_Q16_7"
+  0 "$(P)WF_Q16_0"
+  1 "$(P)WF_Q16_1"
+  2 "$(P)WF_Q16_2"
+  3 "$(P)WF_Q16_3"
+  4 "$(P)WF_Q16_4"
+  5 "$(P)WF_Q16_5"
+  6 "$(P)WF_Q16_6"
+  7 "$(P)WF_Q16_7"
 }
 nPv {
-  0 "$(P):I_Q_16BIT_NELM"
-  1 "$(P):I_Q_16BIT_NELM"
-  2 "$(P):I_Q_16BIT_NELM"
-  3 "$(P):I_Q_16BIT_NELM"
-  4 "$(P):I_Q_16BIT_NELM"
-  5 "$(P):I_Q_16BIT_NELM"
-  6 "$(P):I_Q_16BIT_NELM"
-  7 "$(P):I_Q_16BIT_NELM"
+  0 "$(P)I_Q_16BIT_NELM"
+  1 "$(P)I_Q_16BIT_NELM"
+  2 "$(P)I_Q_16BIT_NELM"
+  3 "$(P)I_Q_16BIT_NELM"
+  4 "$(P)I_Q_16BIT_NELM"
+  5 "$(P)I_Q_16BIT_NELM"
+  6 "$(P)I_Q_16BIT_NELM"
+  7 "$(P)I_Q_16BIT_NELM"
 }
 plotStyle {
   0 "point"
@@ -120,201 +120,17 @@ plotColor {
 }
 endObjectProperties
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 670
-y 10
-w 114
-h 21
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "Polling period"
-}
-autoSize
-endObjectProperties
-
-# (Text Entry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 670
-y 40
-w 160
-h 40
-controlPv "$(P):POLL_PERIOD"
-fgColor index 14
-fgAlarm
-bgColor index 0
-fill
-font "helvetica-medium-r-14.0"
-fontAlign "center"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 670
-y 100
-w 162
-h 21
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "Parallel request limit"
-}
-autoSize
-endObjectProperties
-
-# (Text Entry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 670
-y 130
-w 160
-h 40
-controlPv "$(P):MAX_PARALLEL_REQUESTS"
-fgColor index 14
-fgAlarm
-bgColor index 0
-fill
-font "helvetica-medium-r-14.0"
-fontAlign "center"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 670
-y 300
-w 106
-h 21
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "Comm errors"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 670
-y 190
-w 120
-h 42
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "Run Length (s)"
-  "0 = forever"
-}
-autoSize
-endObjectProperties
-
-# (Text Entry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 670
-y 240
-w 160
-h 40
-controlPv "$(P):RUN_STOP.HIGH"
-fgColor index 14
-fgAlarm
-bgColor index 0
-fill
-font "helvetica-medium-r-14.0"
-fontAlign "center"
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 670
-y 330
-w 160
-h 30
-controlPv "$(P):COMM_ERROR_COUNT"
-font "helvetica-medium-r-18.0"
-fontAlign "center"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-motifWidget
-nullColor index 0
-smartRefresh
-fastUpdate
-useHexPrefix
-newPos
-objType "monitors"
-endObjectProperties
-
-# (Choice Button)
-object activeChoiceButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 670
-y 370
-w 160
-h 40
-fgColor index 14
-bgColor index 3
-selectColor index 30
-inconsistentColor index 14
-topShadowColor index 7
-botShadowColor index 12
-controlPv "$(P):RUN_STOP"
-font "helvetica-medium-r-18.0"
-orientation "horizontal"
-endObjectProperties
-
 # (Byte)
 object ByteClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 670
-y 630
+x 680
+y 420
 w 160
 h 20
-controlPv "$(P):DIGDSPTRACE_KEEP_R"
+controlPv "$(P)DIGDSPTRACE_KEEP_R"
 lineColor index 14
 onColor index 15
 offColor index 0
@@ -327,11 +143,11 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 670
-y 600
+x 680
+y 390
 w 160
 h 18
-controlPv "$(P):I_Q_N_ACTIVE"
+controlPv "$(P)I_Q_N_ACTIVE"
 format "exponential"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -352,11 +168,11 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 680
-y 530
+x 700
+y 280
 w 140
 h 30
-controlPv "$(P):DIGDSPTRACE_KEEP_W"
+controlPv "$(P)DIGDSPTRACE_KEEP_W"
 format "hex"
 font "helvetica-medium-r-14.0"
 fgColor index 26
@@ -378,8 +194,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 670
-y 570
+x 680
+y 360
 w 180
 h 21
 font "helvetica-medium-r-18.0"
@@ -398,8 +214,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 670
-y 660
+x 680
+y 450
 w 39
 h 21
 font "helvetica-medium-r-18.0"
@@ -418,8 +234,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 790
-y 660
+x 800
+y 450
 w 39
 h 21
 font "helvetica-medium-r-18.0"
@@ -438,8 +254,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 670
-y 490
+x 680
+y 80
 w 172
 h 21
 font "helvetica-medium-r-18.0"
@@ -458,8 +274,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 670
-y 430
+x 680
+y 20
 w 160
 h 40
 fgColor index 14
@@ -468,7 +284,7 @@ selectColor index 30
 inconsistentColor index 14
 topShadowColor index 7
 botShadowColor index 12
-controlPv "$(P):I_Q_BIT_WIDTH"
+controlPv "$(P)I_Q_BIT_WIDTH"
 font "helvetica-medium-r-18.0"
 orientation "horizontal"
 endObjectProperties
@@ -509,24 +325,24 @@ y2Max 1
 # Trace Properties
 numTraces 8
 yPv {
-  0 "$(P):WF_I16_0"
-  1 "$(P):WF_I16_1"
-  2 "$(P):WF_I16_2"
-  3 "$(P):WF_I16_3"
-  4 "$(P):WF_I16_4"
-  5 "$(P):WF_I16_5"
-  6 "$(P):WF_I16_6"
-  7 "$(P):WF_I16_7"
+  0 "$(P)WF_I16_0"
+  1 "$(P)WF_I16_1"
+  2 "$(P)WF_I16_2"
+  3 "$(P)WF_I16_3"
+  4 "$(P)WF_I16_4"
+  5 "$(P)WF_I16_5"
+  6 "$(P)WF_I16_6"
+  7 "$(P)WF_I16_7"
 }
 nPv {
-  0 "$(P):I_Q_16BIT_NELM"
-  1 "$(P):I_Q_16BIT_NELM"
-  2 "$(P):I_Q_16BIT_NELM"
-  3 "$(P):I_Q_16BIT_NELM"
-  4 "$(P):I_Q_16BIT_NELM"
-  5 "$(P):I_Q_16BIT_NELM"
-  6 "$(P):I_Q_16BIT_NELM"
-  7 "$(P):I_Q_16BIT_NELM"
+  0 "$(P)I_Q_16BIT_NELM"
+  1 "$(P)I_Q_16BIT_NELM"
+  2 "$(P)I_Q_16BIT_NELM"
+  3 "$(P)I_Q_16BIT_NELM"
+  4 "$(P)I_Q_16BIT_NELM"
+  5 "$(P)I_Q_16BIT_NELM"
+  6 "$(P)I_Q_16BIT_NELM"
+  7 "$(P)I_Q_16BIT_NELM"
 }
 plotStyle {
   0 "point"
@@ -568,5 +384,661 @@ plotColor {
   6 index 58
   7 index 63
 }
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 680
+y 490
+w 160
+h 40
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-18.0"
+buttonLabel "Polling Control"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "scllrfPollingControl.edl"
+}
+colorPv "$(P)RUN_STOP"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 680
+y 100
+w 170
+h 220
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 780
+y 120
+w 20
+h 150
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+numBits 8
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 258
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 258
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 239
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 240
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 219
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 220
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 199
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 200
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 180
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 180
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 800
+y 120
+w 20
+h 150
+controlPv "$(P)DIG_DSP_TRACE_KEEP_R"
+lineColor index 14
+onColor index 55
+offColor index 47
+numBits 8
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 160
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 160
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 729
+y 140
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 140
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 730
+y 120
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 120
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 260
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 240
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+bgAlarm
+useDisplayBg
+value {
+  "Ch1"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 830
+y 250
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 220
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch2"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 200
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch3"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 180
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch4"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 160
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch5"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 140
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ch6"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 700
+y 120
+w 23
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+value {
+  "Ch7"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 830
+y 130
+w 15
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 7 "
+}
+autoSize
 endObjectProperties
 

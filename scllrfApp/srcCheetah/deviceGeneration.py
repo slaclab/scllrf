@@ -6,7 +6,8 @@ import argparse
 import json
 from Cheetah.Template import Template
 import re
-import time,struct,json,getopt
+import time,struct,getopt
+from string import replace
 
 def mkdir_p(path):
     try:
@@ -77,10 +78,24 @@ def fix_prc_names(reg_name):
         reg_name = split_names.group(1) + split_names.group(2)
         
     if ':' in reg_name:
-        reg_name = re.sub(r'(.*)_([0-9]*):([0-9]*)_', r'\1_Bits\2to\3', reg_name)
+        reg_name = re.sub(r'(.*)\[([0-9]*):([0-9]*)\]', r'\1_Bits\2to\3', reg_name)
         
     # get rid of any characters from keys that aren't allowed in C++ variable names
     reg_name = re.sub(r'\W', r'_', reg_name)
+
+    reg_name = replace(reg_name, 'application_top_', '')
+    reg_name = replace(reg_name, 'digitizer', 'dig')
+    reg_name = replace(reg_name, 'real_sim_mux', 'mux') 
+    reg_name = replace(reg_name, 'cav4_elec', 'elec') 
+    reg_name = replace(reg_name, 'cavity_', 'c') 
+    reg_name = replace(reg_name, 'mode_', 'm') 
+    reg_name = replace(reg_name, 'dsp_fdbk', 'fdbk') 
+    reg_name = replace(reg_name, 'drive_couple', 'drive_cpl') 
+    reg_name = replace(reg_name, 'out_couple', 'out_cpl') 
+    reg_name = replace(reg_name, '0d0a0d0a', 'd0a0d0a')
+    
+    if len(reg_name) > 48:
+        print("Long name ", reg_name, " didn't make the 48 character cut")
     
     if not (old_name == reg_name):
         print("fixed name ", old_name, " -> ", reg_name)
@@ -118,7 +133,7 @@ if __name__ == "__main__":
                     v['nelm'] = 2**v['addr_width']
                     regmap_dict['registers'].append(v)
                 
-        makeDirectory(regmap_dict)
-        makeAsynDriver(regmap_dict)
-        makeDatabase(regmap_dict)
-        makeGui(regmap_dict)
+    makeDirectory(regmap_dict)
+    makeAsynDriver(regmap_dict)
+    makeDatabase(regmap_dict)
+    makeGui(regmap_dict)

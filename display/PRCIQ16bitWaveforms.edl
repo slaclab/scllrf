@@ -59,34 +59,34 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P):WF_I16_0"
-  1 "$(P):WF_I16_1"
-  2 "$(P):WF_I16_2"
-  3 "$(P):WF_I16_3"
-  4 "$(P):WF_I16_4"
-  5 "$(P):WF_I16_5"
-  6 "$(P):WF_I16_6"
-  7 "$(P):WF_I16_7"
+  0 "$(P)WF_I16_0"
+  1 "$(P)WF_I16_1"
+  2 "$(P)WF_I16_2"
+  3 "$(P)WF_I16_3"
+  4 "$(P)WF_I16_4"
+  5 "$(P)WF_I16_5"
+  6 "$(P)WF_I16_6"
+  7 "$(P)WF_I16_7"
 }
 yPv {
-  0 "$(P):WF_Q16_0"
-  1 "$(P):WF_Q16_1"
-  2 "$(P):WF_Q16_2"
-  3 "$(P):WF_Q16_3"
-  4 "$(P):WF_Q16_4"
-  5 "$(P):WF_Q16_5"
-  6 "$(P):WF_Q16_6"
-  7 "$(P):WF_Q16_7"
+  0 "$(P)WF_Q16_0"
+  1 "$(P)WF_Q16_1"
+  2 "$(P)WF_Q16_2"
+  3 "$(P)WF_Q16_3"
+  4 "$(P)WF_Q16_4"
+  5 "$(P)WF_Q16_5"
+  6 "$(P)WF_Q16_6"
+  7 "$(P)WF_Q16_7"
 }
 nPv {
-  0 "$(P):I_Q_16BIT_NELM"
-  1 "$(P):I_Q_16BIT_NELM"
-  2 "$(P):I_Q_16BIT_NELM"
-  3 "$(P):I_Q_16BIT_NELM"
-  4 "$(P):I_Q_16BIT_NELM"
-  5 "$(P):I_Q_16BIT_NELM"
-  6 "$(P):I_Q_16BIT_NELM"
-  7 "$(P):I_Q_16BIT_NELM"
+  0 "$(P)I_Q_16BIT_NELM"
+  1 "$(P)I_Q_16BIT_NELM"
+  2 "$(P)I_Q_16BIT_NELM"
+  3 "$(P)I_Q_16BIT_NELM"
+  4 "$(P)I_Q_16BIT_NELM"
+  5 "$(P)I_Q_16BIT_NELM"
+  6 "$(P)I_Q_16BIT_NELM"
+  7 "$(P)I_Q_16BIT_NELM"
 }
 plotStyle {
   0 "point"
@@ -170,7 +170,7 @@ x 670
 y 40
 w 160
 h 40
-controlPv "$(P):POLL_PERIOD"
+controlPv "$(P)POLL_PERIOD"
 fgColor index 14
 fgAlarm
 bgColor index 0
@@ -209,7 +209,7 @@ x 670
 y 130
 w 160
 h 40
-controlPv "$(P):MAX_PARALLEL_REQUESTS"
+controlPv "$(P)MAX_PARALLEL_REQUESTS"
 fgColor index 14
 fgAlarm
 bgColor index 0
@@ -269,7 +269,7 @@ x 670
 y 240
 w 160
 h 40
-controlPv "$(P):RUN_STOP.HIGH"
+controlPv "$(P)RUN_STOP.HIGH"
 fgColor index 14
 fgAlarm
 bgColor index 0
@@ -288,7 +288,7 @@ x 670
 y 330
 w 160
 h 30
-controlPv "$(P):COMM_ERROR_COUNT"
+controlPv "$(P)COMM_ERROR_COUNT"
 font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor index 14
@@ -319,7 +319,7 @@ selectColor index 30
 inconsistentColor index 14
 topShadowColor index 7
 botShadowColor index 12
-controlPv "$(P):RUN_STOP"
+controlPv "$(P)RUN_STOP"
 font "helvetica-medium-r-18.0"
 orientation "horizontal"
 endObjectProperties
@@ -334,7 +334,7 @@ x 670
 y 630
 w 160
 h 20
-controlPv "$(P):DIGDSPTRACE_KEEP_R"
+controlPv "$(P)DIGDSPTRACE_KEEP_R"
 lineColor index 14
 onColor index 15
 offColor index 0
@@ -351,7 +351,7 @@ x 670
 y 600
 w 160
 h 18
-controlPv "$(P):I_Q_N_ACTIVE"
+controlPv "$(P)I_Q_N_ACTIVE"
 format "exponential"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -376,7 +376,7 @@ x 680
 y 530
 w 140
 h 30
-controlPv "$(P):DIGDSPTRACE_KEEP_W"
+controlPv "$(P)DIGDSPTRACE_KEEP_W"
 format "hex"
 font "helvetica-medium-r-14.0"
 fgColor index 26
@@ -488,7 +488,7 @@ selectColor index 30
 inconsistentColor index 14
 topShadowColor index 7
 botShadowColor index 12
-controlPv "$(P):I_Q_BIT_WIDTH"
+controlPv "$(P)I_Q_BIT_WIDTH"
 font "helvetica-medium-r-18.0"
 orientation "horizontal"
 endObjectProperties

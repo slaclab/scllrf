@@ -95,7 +95,11 @@ static const unsigned circIQBufWavePoints = circIQBufWaveRegCount/2; // # data p
 static const unsigned maxCircIQBufWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
 static const unsigned circIQBufSegmentCount = (circIQBufWaveRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up
 static const unsigned circIQBufReqMsgSize = circIQBufWaveRegCount + circIQBufSegmentCount; // All register addresses plus nonce space
+static const unsigned slowDataBuffRegCount = 128; // 128 registers
+static const unsigned slowDataBuffSize = slowDataBuffRegCount + nonceSize; // 128 registers and the nonce
 
+static const double LOfrequency = 1.320e9;
+static const double ADCfrequency = LOfrequency/14;
 
 /* Registers */
 
@@ -131,6 +135,24 @@ static const char *CircIQBuf1IString = "CIRC_IQ_BUF_1_I";
 static const char *CircIQBuf1QString = "CIRC_IQ_BUF_1_Q";
 static const char *CircIQBuf1AString = "CIRC_IQ_BUF_1_A";
 static const char *CircIQBuf1PString = "CIRC_IQ_BUF_1_P";
+
+static const char *Shell0CircleCountRString = "SHELL_0_CIRCLE_COUNT_R";
+static const char *Shell0CircleStatRString = "SHELL_0_CIRCLE_STAT_R";
+static const char *Shell0MmRString = "SHELL_0_MM_R";
+static const char *Shell0TagNowRString = "SHELL_0_TAG_NOW_R";
+static const char *Shell0TagOldRString = "SHELL_0_TAG_OLD_R";
+static const char *Shell0TimeStampHighRString = "SHELL_0_TIME_STAMP_HIGH_R";
+static const char *Shell0TimeStampLowRString = "SHELL_0_TIME_STAMP_LOW_R";
+static const char *Shell0SlowDataBufferRString = "SHELL_0_SLOW_DATA_BUFFER_R";
+
+static const char *Shell1CircleCountRString = "SHELL_1_CIRCLE_COUNT_R";
+static const char *Shell1CircleStatRString = "SHELL_1_CIRCLE_STAT_R";
+static const char *Shell1MmRString = "SHELL_1_MM_R";
+static const char *Shell1TagNowRString = "SHELL_1_TAG_NOW_R";
+static const char *Shell1TagOldRString = "SHELL_1_TAG_OLD_R";
+static const char *Shell1TimeStampHighRString = "SHELL_1_TIME_STAMP_HIGH_R";
+static const char *Shell1TimeStampLowRString = "SHELL_1_TIME_STAMP_LOW_R";
+static const char *Shell1SlowDataBufferRString = "SHELL_1_SLOW_DATA_BUFFER_R";
 
 
 class scllrfPRCextra: public scllrfPRCDriver
@@ -182,6 +204,8 @@ protected:
 	// Smaller waveforms I/Q data
 	virtual asynStatus startCircIQBufRequester(); // For system startup
 	FpgaReg pReqCircIQBufMsg_[circIQBufReqMsgSize]; // Canned message to request data buffer
+	FpgaReg pReqSlowBuf0Msg_[slowDataBuffSize]; // Canned message to request slow data buffer 0
+	FpgaReg pReqSlowBuf1Msg_[slowDataBuffSize]; // Canned message to request slow data buffer 1
 	unsigned int nCirc0Chan_;
 	unsigned int nCirc1Chan_;
 	void fillCircIQBufReqMsg();
@@ -189,6 +213,8 @@ protected:
 	epicsEventId reqCircIQBufEventId_; /**< Event ID to signal the waveform requester */
 	unsigned int newCircIQBufAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
 	unsigned int newCircIQBufRead_; /**< netSendCount for the most recent waveform */
+	unsigned int phaseStepH, phaseStepL, phaseModulo;
+	double iFrequency;
 
 	epicsInt16 pCircIQBuf0I_[maxCircIQBufWavesCount][circIQBufWavePoints];
 	epicsInt16 pCircIQBuf0Q_[maxCircIQBufWavesCount][circIQBufWavePoints];
@@ -235,6 +261,24 @@ protected:
     int p_CircIQBuf1Q;
     int p_CircIQBuf1A;
     int p_CircIQBuf1P;
+
+    int p_Shell0CircleCountR;
+    int p_Shell0CircleStatR;
+    int p_Shell0MmR;
+    int p_Shell0TagNowR;
+    int p_Shell0TagOldR;
+    int p_Shell0TimeStampHighR;
+    int p_Shell0TimeStampLowR;
+    int p_Shell0SlowDataBufferR;
+
+    int p_Shell1CircleCountR;
+    int p_Shell1CircleStatR;
+    int p_Shell1MmR;
+    int p_Shell1TagNowR;
+    int p_Shell1TagOldR;
+    int p_Shell1TimeStampHighR;
+    int p_Shell1TimeStampLowR;
+    int p_Shell1SlowDataBufferR;
 
     // Flag to indicate new waveform data is available
     int p_WvformsAvailableR;
