@@ -1256,8 +1256,8 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 static void singleMessageQueuerC(void *drvPvt)
 {
 	printf("%s: starting\n", __PRETTY_FUNCTION__);
-	scllrfPRCextra *pscllrfDriver = (scllrfPRCextra*)drvPvt;
-	pscllrfDriver->traceIQWaveformRequester();
+//	scllrfPRCextra *pscllrfDriver = (scllrfPRCextra*)drvPvt;
+//	pscllrfDriver->traceIQWaveformRequester();
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
