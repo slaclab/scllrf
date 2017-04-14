@@ -125,6 +125,7 @@ static const char *IQ16BitNELMString = "I_Q_16BIT_NELM";
 static const char *IQ22BitNELMString = "I_Q_22BIT_NELM";
 
 // Circle buffer I/Q data
+static const char *CircIQBufString = "CIRC_IQ_BUF";
 static const char *Circ0NActiveString = "CIRC_0_N_ACTIVE";
 static const char *Circ1NActiveString = "CIRC_1_N_ACTIVE";
 static const char *CircIQBuf0IString = "CIRC_IQ_BUF_0_I";
@@ -216,6 +217,7 @@ protected:
 	unsigned int phaseStepH, phaseStepL, phaseModulo;
 	double iFrequency;
 
+	epicsInt32 pCircIQBuf_[circIQBufWaveRegCount];
 	epicsInt16 pCircIQBuf0I_[maxCircIQBufWavesCount][circIQBufWavePoints];
 	epicsInt16 pCircIQBuf0Q_[maxCircIQBufWavesCount][circIQBufWavePoints];
 	epicsInt16 pCircIQBuf1I_[maxCircIQBufWavesCount][circIQBufWavePoints];
@@ -253,6 +255,7 @@ protected:
     // Circle buffer I/Q data
     int p_Circ0NActive;
     int p_Circ1NActive;
+    int p_CircIQBuf;
     int p_CircIQBuf0I;
     int p_CircIQBuf0Q;
     int p_CircIQBuf0A;

@@ -63,6 +63,7 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 
     // Circle Buffer waveforms
 
+    createParam(CircIQBufString, asynParamInt32Array, &p_CircIQBuf);
     createParam(Circ0NActiveString, asynParamInt32, &p_Circ0NActive);
     createParam(Circ1NActiveString, asynParamInt32, &p_Circ1NActive);
     createParam(CircIQBuf0IString, asynParamInt32Array, &p_CircIQBuf0I);
@@ -1162,6 +1163,7 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 	unsigned int i;
 	printf("%s bufferOffset = %u, buf0Number = %u buf0Index =%u\n", __PRETTY_FUNCTION__, bufOffset, buf0Number, buf0Index);
 
+	pCircIQBuf_[regOffset] = pFromFpga->data;
 	// Even number addresses are I, odd are Q
 	switch(regOffset & 1)
 	{
@@ -1187,6 +1189,9 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
+			doCallbacksInt32Array(pCircIQBuf_, circIQBufWaveRegCount, p_CircIQBuf, 0);
+			std::fill( pCircIQBuf_, pCircIQBuf_ + sizeof( pCircIQBuf_ )/sizeof( *pCircIQBuf_), 0 );
+
 			for (i=0; i<maxCircIQBufWavesCount; ++i)
 			{
 				if(i<nCirc0Chan_)
