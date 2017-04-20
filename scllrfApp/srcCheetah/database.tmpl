@@ -40,6 +40,12 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#end if
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
+record(bi, "\$(P)GET_${p.name.upper()}_R")
+{
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+    field( SCAN, "Passive")
+}
 
     #end if
   #end if
@@ -212,6 +218,12 @@ record(mbbiDirect, "\$(P)${p.name.upper()}_R")
     field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
       #end if
     field( SCAN, "I/O Intr")
+}
+record(bi, "\$(P)GET_${p.name.upper()}_R")
+{
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+    field( SCAN, "Passive")
 }
 
     #end if
