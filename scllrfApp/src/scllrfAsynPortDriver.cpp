@@ -152,6 +152,7 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
   * \param[in/out] pMsgBuff An array of the right size to contain a request
   * message for the waveform. The canned message includes the nonce per packet,
   * so for an n element array, size should be N + N/maxRegPerMsg + 1.
+  * \param[in] buffSize The array length, N + N/maxRegPerMsg + 1 for an N register array
   * \param[in] iStartAddr Address of the start of the array.
  */
 void scllrfAsynPortDriver::fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t buffSize, const unsigned int iStartAddr)
@@ -171,7 +172,7 @@ void scllrfAsynPortDriver::fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t b
 		pMsgBuff[msgOffset].data = blankData;
 		printf("%s put addr 0x%x at index %u\n", __PRETTY_FUNCTION__, regAddr | flagReadMask, msgOffset);
 	}
-	htonFpgaRegArray(pMsgBuff, sizeof( pMsgBuff )/sizeof( *pMsgBuff));
+	htonFpgaRegArray(pMsgBuff, buffSize);
 }
 
 
