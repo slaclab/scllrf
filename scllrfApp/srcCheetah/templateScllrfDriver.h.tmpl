@@ -26,56 +26,7 @@
 **/
 \#include "scllrfAsynPortDriver.h"
 
-/* Registers */
-#set $polledRegCount = 0
-#set $writeRegCount = 0
-#set $prevWAdrs = []
-#set $prevRAdrs =[]
-#for $p in sorted($registers, key=lambda k: k['name'])
-  #if $p.has_key('desc')
-// ${p.desc}
-  #end if
-  #if (not $p.has_key('access')) or ('r' in $p.access)
-static const char *${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
-    #if $p.address not in $prevRAdrs
-      #if $p.has_key('nelm') and $p.nelm<=16
-        #set $count_inc = $p.nelm
-## exclude arrays with > 16 elements from polling
-      #else if not $p.has_key('nelm')
-        #set $count_inc = 1
-      #end if
-      #set $polledRegCount += $count_inc
-      #silent $prevRAdrs.append($p.address)
-    #else
-// shared address $p.address for $p.name
-    #end if
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
-static const char *${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
-    #if $p.address not in $prevWAdrs
-      #if $p.has_key('nelm') and $p.nelm<=16
-        #set $count_inc = $p.nelm
-      #else
-        #set $count_inc = 1
-      #end if
-      #set $writeRegCount += $count_inc
-      #silent $prevWAdrs.append($p.address)
-    #end if
-  #end if
-#end for
-
-const unsigned int ${name}PolledRegCount = $polledRegCount;
-##const unsigned int ${name}WriteRegCount = $writeRegCount;
-
-#if $varExists('commands')
-/* Commands */
-#for $c in $commands
-#define C${c.name}String "C_${c.name}"
-#end for
-#end if
-
-
- /* This class implements the AxiVersion driver. */
+ /* This class implements the chassis type specific driver. */
 class ${name}Driver : public scllrfAsynPortDriver {
 public:
 //    ${name}Driver(const char *drvPortName, const char *netPortName);
@@ -93,13 +44,46 @@ protected:
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 
-#if $p.has_key('nelm') and $p.nelm>16
+/* Register names */
+#set $prevWAdrs = []
+#set $prevRAdrs =[]
+#for $p in sorted($registers, key=lambda k: k['name'])
+  #if $p.has_key('desc')
+// ${p.desc}
+  #end if
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+static const char *${p.name.title().replace("_", "")}RString;
+    #if $p.address not in $prevRAdrs
+      #if $p.has_key('nelm') and $p.nelm>16
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+      #end if
+      #silent $prevRAdrs.append($p.address)
+    #else
+// shared address $p.address for $p.name
+    #end if
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+static const char *${p.name.title().replace("_", "")}WString;
+    #if $p.address not in $prevWAdrs
+      #if $p.has_key('nelm') and $p.nelm>16
+	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+      #end if
+      #silent $prevWAdrs.append($p.address)
+    #end if
+  #end if
+#end for
+
+static const unsigned int ${name}PolledRegCount;
+
+#if $varExists('commands')
+/* Commands */
+#for $c in $commands
+#define C${c.name}String "C_${c.name}"
+#end for
 #end if
 
-
 #set $first = True
-/* Registers */
+/* Register handles */
 #for $p in sorted($registers, key=lambda k: k['name'])
   #if (not $p.has_key('access')) or ('r' in $p.access)
     int p_${p.name.title().replace("_", "")}R;

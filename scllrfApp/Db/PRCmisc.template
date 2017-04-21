@@ -173,88 +173,66 @@ record(ao, "$(P)IFDES")
 #}
 
 # Circle buffer "slow data"
-record(longin, "$(P)CIRCLE_COUNT_R")
+record(longin, "$(P)SHELL_0_CIRCLE_COUNT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) CIRCLE_COUNT_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_CIRCLE_COUNT_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(ai, "$(P)CIRCLE_STAT_R")
+record(longin, "$(P)SHELL_0_CIRCLE_STAT_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) CIRCLE_STAT_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_CIRCLE_STAT_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(longin, "$(P)TAG_NOW_R")
+record(longin, "$(P)SHELL_0_TAG_NOW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TAG_NOW_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_TAG_NOW_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(longin, "$(P)TAG_OLD_R")
+record(longin, "$(P)SHELL_0_TAG_OLD_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TAG_OLD_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_TAG_OLD_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(longin, "$(P)MM_R")
+record(longin, "$(P)SHELL_0_MM_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) MM_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_MM_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(longin, "$(P)TIME_STAMP_HIGH_R")
+record(longin, "$(P)SHELL_0_TIME_STAMP_HIGH_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TIME_STAMP_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_TIME_STAMP_HIGH_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(longin, "$(P)TIME_STAMP_LOW_R")
+record(longin, "$(P)SHELL_0_TIME_STAMP_LOW_R")
 {
     field( PINI, "NO")
     field( DTYP, "asynInt32")
-    field( INP,  "@asyn($(PORT),0) TIME_STAMP_R")
+    field( INP,  "@asyn($(PORT),0) SHELL_0_TIME_STAMP_LOW_R")
     field( SCAN, "I/O Intr")
-    field( HOPR, "0xFFFFFFFF")
-    field( LOPR, 0)
-	field(PREC, 3)
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(waveform, "$(P)SHELL_0_SLOW_DATA_BUFFER_R") {
@@ -268,6 +246,69 @@ record(waveform, "$(P)SHELL_0_SLOW_DATA_BUFFER_R") {
   field(FTVL, "UCHAR")
 }
 
+record(longin, "$(P)SHELL_1_CIRCLE_COUNT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_CIRCLE_COUNT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
+record(longin, "$(P)SHELL_1_CIRCLE_STAT_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_CIRCLE_STAT_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
+record(longin, "$(P)SHELL_1_TAG_NOW_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_TAG_NOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
+record(longin, "$(P)SHELL_1_TAG_OLD_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_TAG_OLD_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
+record(longin, "$(P)SHELL_1_MM_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_MM_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
+record(longin, "$(P)SHELL_1_TIME_STAMP_HIGH_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_TIME_STAMP_HIGH_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
+record(longin, "$(P)SHELL_1_TIME_STAMP_LOW_R")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) SHELL_1_TIME_STAMP_LOW_R")
+    field( SCAN, "I/O Intr")
+    info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
 record(waveform, "$(P)SHELL_1_SLOW_DATA_BUFFER_R") {
   field(DESC, "Slow data for shell 1 circle buff")
   field(SCAN, "I/O Intr")
@@ -277,6 +318,17 @@ record(waveform, "$(P)SHELL_1_SLOW_DATA_BUFFER_R") {
   field(EGU, "byte")
   field(NELM, "128")
   field(FTVL, "UCHAR")
+}
+
+record(waveform, "$(P)CIRC_IQ_BUF") {
+  field(DESC, "raw circle buff")
+  field(SCAN, "I/O Intr")
+  field(DTYP, "asynInt32ArrayIn")
+  field(INP, "@asyn($(PORT),0,1)CIRC_IQ_BUF")
+  field(PREC, "1")
+  field(EGU, "counts")
+  field(NELM, "1024")
+  field(FTVL, "LONG")
 }
 
 

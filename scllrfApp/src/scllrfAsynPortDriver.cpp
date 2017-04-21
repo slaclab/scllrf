@@ -33,6 +33,14 @@
 using namespace std;
 #include <math.h>
 
+// EPICS database driver strings
+const char *scllrfAsynPortDriver::RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
+const char *scllrfAsynPortDriver::ReadOneRegString = "READ_ONE_REG"; /* asynInt32 array[2] w */
+const char *scllrfAsynPortDriver::WriteOneRegString = "WRITE_ONE_REG"; /* asynInt32 array[2] w */
+const char *scllrfAsynPortDriver::MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
+const char *scllrfAsynPortDriver::PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
+const char *scllrfAsynPortDriver::CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
+
 /** Constructor for the scllrfAsynPortDriver class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] drvPortName The name of the asyn port driver to be created.
@@ -45,8 +53,8 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 : asynPortDriver(drvPortName,
 		maxAddr, /* maxAddr */
 		paramTableSize,
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynDrvUserMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
-		asynInt32Mask | asynFloat64Mask | asynOctetMask | asynEnumMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
+		asynInt32Mask | asynFloat64Mask | asynInt8ArrayMask | asynOctetMask | asynDrvUserMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
+		asynInt32Mask | asynFloat64Mask | asynInt8ArrayMask | asynOctetMask | asynEnumMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
 		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
@@ -163,14 +171,12 @@ void scllrfAsynPortDriver::fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t b
 	{
 		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
 		{
-			printf("%s inserting a blank nonce at index %u\n", __PRETTY_FUNCTION__, msgOffset);
 			pMsgBuff[msgOffset] = {0,blankData};
 			msgOffset++;
 		}
 
 		pMsgBuff[msgOffset].addr = regAddr | flagReadMask;
 		pMsgBuff[msgOffset].data = blankData;
-		printf("%s put addr 0x%x at index %u\n", __PRETTY_FUNCTION__, regAddr | flagReadMask, msgOffset);
 	}
 	htonFpgaRegArray(pMsgBuff, buffSize);
 }

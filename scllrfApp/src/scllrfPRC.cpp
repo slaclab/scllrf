@@ -31,6 +31,437 @@
 using namespace std;
 #include <math.h>
 
+/* Register names */
+const char *scllrfPRCDriver::U15SpiRdbkRString = "U15_SPI_RDBK_R";
+const char *scllrfPRCDriver::U15SpiStatusRString = "U15_SPI_STATUS_R";
+const char *scllrfPRCDriver::U18SpiRdbkRString = "U18_SPI_RDBK_R";
+const char *scllrfPRCDriver::U18SpiStatusRString = "U18_SPI_STATUS_R";
+const char *scllrfPRCDriver::U2DoutLsbRString = "U2DOUT_LSB_R";
+const char *scllrfPRCDriver::U2DoutMsbRString = "U2DOUT_MSB_R";
+const char *scllrfPRCDriver::U3DoutLsbRString = "U3DOUT_LSB_R";
+const char *scllrfPRCDriver::U3DoutMsbRString = "U3DOUT_MSB_R";
+const char *scllrfPRCDriver::AdcMmcmRString = "ADC_MMCM_R";
+const char *scllrfPRCDriver::AdcMmcmWString = "ADC_MMCM_W";
+const char *scllrfPRCDriver::AdcTestModeRString = "ADC_TEST_MODE_R";
+const char *scllrfPRCDriver::AdcTestModeWString = "ADC_TEST_MODE_W";
+const char *scllrfPRCDriver::AdcTestResetRString = "ADC_TEST_RESET_R";
+const char *scllrfPRCDriver::AdcTestResetWString = "ADC_TEST_RESET_W";
+const char *scllrfPRCDriver::AdcTestTrigCntRString = "ADC_TEST_TRIG_CNT_R";
+const char *scllrfPRCDriver::AdcTestWave1OutRString = "ADC_TEST_WAVE1_OUT_R";
+const char *scllrfPRCDriver::AdcTestWave2OutRString = "ADC_TEST_WAVE2_OUT_R";
+const char *scllrfPRCDriver::AdcTestWave3OutRString = "ADC_TEST_WAVE3_OUT_R";
+const char *scllrfPRCDriver::AdcTestWave4OutRString = "ADC_TEST_WAVE4_OUT_R";
+const char *scllrfPRCDriver::AmplitudeRString = "AMPLITUDE_R";
+const char *scllrfPRCDriver::AmplitudeWString = "AMPLITUDE_W";
+const char *scllrfPRCDriver::AverageLenRString = "AVERAGE_LEN_R";
+const char *scllrfPRCDriver::AverageLenWString = "AVERAGE_LEN_W";
+const char *scllrfPRCDriver::BanyanBufRString = "BANYAN_BUF_R";
+const char *scllrfPRCDriver::BanyanStatusRString = "BANYAN_STATUS_R";
+const char *scllrfPRCDriver::Beam0ModuloRString = "BEAM_0_MODULO_R";
+const char *scllrfPRCDriver::Beam0ModuloWString = "BEAM_0_MODULO_W";
+const char *scllrfPRCDriver::Beam0PhaseInitRString = "BEAM_0_PHASE_INIT_R";
+const char *scllrfPRCDriver::Beam0PhaseInitWString = "BEAM_0_PHASE_INIT_W";
+const char *scllrfPRCDriver::Beam0PhaseStepRString = "BEAM_0_PHASE_STEP_R";
+const char *scllrfPRCDriver::Beam0PhaseStepWString = "BEAM_0_PHASE_STEP_W";
+const char *scllrfPRCDriver::Beam1ModuloRString = "BEAM_1_MODULO_R";
+const char *scllrfPRCDriver::Beam1ModuloWString = "BEAM_1_MODULO_W";
+const char *scllrfPRCDriver::Beam1PhaseInitRString = "BEAM_1_PHASE_INIT_R";
+const char *scllrfPRCDriver::Beam1PhaseInitWString = "BEAM_1_PHASE_INIT_W";
+const char *scllrfPRCDriver::Beam1PhaseStepRString = "BEAM_1_PHASE_STEP_R";
+const char *scllrfPRCDriver::Beam1PhaseStepWString = "BEAM_1_PHASE_STEP_W";
+const char *scllrfPRCDriver::BufTrigRString = "BUF_TRIG_R";
+const char *scllrfPRCDriver::BufTrigWString = "BUF_TRIG_W";
+const char *scllrfPRCDriver::Cav4MechNoiseCoupleKOutWString = "CAV4_MECH_NOISE_COUPLE_K_OUT_W";
+const char *scllrfPRCDriver::Cav4MechPrngIvaRString = "CAV4_MECH_PRNG_IVA_R";
+const char *scllrfPRCDriver::Cav4MechPrngIvaWString = "CAV4_MECH_PRNG_IVA_W";
+const char *scllrfPRCDriver::Cav4MechPrngIvbRString = "CAV4_MECH_PRNG_IVB_R";
+const char *scllrfPRCDriver::Cav4MechPrngIvbWString = "CAV4_MECH_PRNG_IVB_W";
+const char *scllrfPRCDriver::Cav4MechPrngRandomRunRString = "CAV4_MECH_PRNG_RANDOM_RUN_R";
+const char *scllrfPRCDriver::Cav4MechPrngRandomRunWString = "CAV4_MECH_PRNG_RANDOM_RUN_W";
+const char *scllrfPRCDriver::Cav4MechResonatorPropConstWString = "CAV4_MECH_RESONATOR_PROP_CONST_W";
+const char *scllrfPRCDriver::Cavity0DetuneRString = "CAVITY0_DETUNE_R";
+const char *scllrfPRCDriver::Cavity1DetuneRString = "CAVITY1_DETUNE_R";
+const char *scllrfPRCDriver::Cavity0ACavOffsetRString = "CAVITY_0_A_CAV_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0ACavOffsetWString = "CAVITY_0_A_CAV_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0AForOffsetRString = "CAVITY_0_A_FOR_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0AForOffsetWString = "CAVITY_0_A_FOR_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0ARflOffsetRString = "CAVITY_0_A_RFL_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0ARflOffsetWString = "CAVITY_0_A_RFL_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0AmpLpBwRString = "CAVITY_0_AMP_LP_BW_R";
+const char *scllrfPRCDriver::Cavity0AmpLpBwWString = "CAVITY_0_AMP_LP_BW_W";
+const char *scllrfPRCDriver::Cavity0ComprSatCtlRString = "CAVITY_0_COMPR_SAT_CTL_R";
+const char *scllrfPRCDriver::Cavity0ComprSatCtlWString = "CAVITY_0_COMPR_SAT_CTL_W";
+const char *scllrfPRCDriver::Cavity0Dot0KOutWString = "CAVITY_0_DOT_0_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0Dot1KOutWString = "CAVITY_0_DOT_1_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0Dot2KOutWString = "CAVITY_0_DOT_2_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0DriveCoupleOutCouplingRString = "CAVITY_0_DRIVE_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0DriveCoupleOutCouplingWString = "CAVITY_0_DRIVE_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0DriveCoupleOutPhaseOffsetRString = "CAVITY_0_DRIVE_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0DriveCoupleOutPhaseOffsetWString = "CAVITY_0_DRIVE_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0Freq0CoarseFreqRString = "CAVITY_0_FREQ_0_COARSE_FREQ_R";
+const char *scllrfPRCDriver::Cavity0Freq0CoarseFreqWString = "CAVITY_0_FREQ_0_COARSE_FREQ_W";
+const char *scllrfPRCDriver::Cavity0Freq1CoarseFreqRString = "CAVITY_0_FREQ_1_COARSE_FREQ_R";
+const char *scllrfPRCDriver::Cavity0Freq1CoarseFreqWString = "CAVITY_0_FREQ_1_COARSE_FREQ_W";
+const char *scllrfPRCDriver::Cavity0Freq2CoarseFreqRString = "CAVITY_0_FREQ_2_COARSE_FREQ_R";
+const char *scllrfPRCDriver::Cavity0Freq2CoarseFreqWString = "CAVITY_0_FREQ_2_COARSE_FREQ_W";
+const char *scllrfPRCDriver::Cavity0Mode0BeamCouplingRString = "CAVITY_0_MODE_0_BEAM_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode0BeamCouplingWString = "CAVITY_0_MODE_0_BEAM_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode0BwRString = "CAVITY_0_MODE_0_BW_R";
+const char *scllrfPRCDriver::Cavity0Mode0BwWString = "CAVITY_0_MODE_0_BW_W";
+const char *scllrfPRCDriver::Cavity0Mode0CoupleOutCouplingRString = "CAVITY_0_MODE_0_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode0CoupleOutCouplingWString = "CAVITY_0_MODE_0_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode0CoupleOutPhaseOffsetRString = "CAVITY_0_MODE_0_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0Mode0CoupleOutPhaseOffsetWString = "CAVITY_0_MODE_0_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0Mode0DriveCouplingRString = "CAVITY_0_MODE_0_DRIVE_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode0DriveCouplingWString = "CAVITY_0_MODE_0_DRIVE_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode1BeamCouplingRString = "CAVITY_0_MODE_1_BEAM_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode1BeamCouplingWString = "CAVITY_0_MODE_1_BEAM_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode1BwRString = "CAVITY_0_MODE_1_BW_R";
+const char *scllrfPRCDriver::Cavity0Mode1BwWString = "CAVITY_0_MODE_1_BW_W";
+const char *scllrfPRCDriver::Cavity0Mode1CoupleOutCouplingRString = "CAVITY_0_MODE_1_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode1CoupleOutCouplingWString = "CAVITY_0_MODE_1_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode1CoupleOutPhaseOffsetRString = "CAVITY_0_MODE_1_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0Mode1CoupleOutPhaseOffsetWString = "CAVITY_0_MODE_1_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0Mode1DriveCouplingRString = "CAVITY_0_MODE_1_DRIVE_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode1DriveCouplingWString = "CAVITY_0_MODE_1_DRIVE_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode2BeamCouplingRString = "CAVITY_0_MODE_2_BEAM_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode2BeamCouplingWString = "CAVITY_0_MODE_2_BEAM_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode2BwRString = "CAVITY_0_MODE_2_BW_R";
+const char *scllrfPRCDriver::Cavity0Mode2BwWString = "CAVITY_0_MODE_2_BW_W";
+const char *scllrfPRCDriver::Cavity0Mode2CoupleOutCouplingRString = "CAVITY_0_MODE_2_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode2CoupleOutCouplingWString = "CAVITY_0_MODE_2_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0Mode2CoupleOutPhaseOffsetRString = "CAVITY_0_MODE_2_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity0Mode2CoupleOutPhaseOffsetWString = "CAVITY_0_MODE_2_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity0Mode2DriveCouplingRString = "CAVITY_0_MODE_2_DRIVE_COUPLING_R";
+const char *scllrfPRCDriver::Cavity0Mode2DriveCouplingWString = "CAVITY_0_MODE_2_DRIVE_COUPLING_W";
+const char *scllrfPRCDriver::Cavity0ModuloRString = "CAVITY_0_MODULO_R";
+const char *scllrfPRCDriver::Cavity0ModuloWString = "CAVITY_0_MODULO_W";
+const char *scllrfPRCDriver::Cavity0OuterProd0KOutWString = "CAVITY_0_OUTER_PROD_0_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0OuterProd1KOutWString = "CAVITY_0_OUTER_PROD_1_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0OuterProd2KOutWString = "CAVITY_0_OUTER_PROD_2_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0PhaseStepRString = "CAVITY_0_PHASE_STEP_R";
+const char *scllrfPRCDriver::Cavity0PhaseStepWString = "CAVITY_0_PHASE_STEP_W";
+const char *scllrfPRCDriver::Cavity0PiezoCoupleKOutWString = "CAVITY_0_PIEZO_COUPLE_K_OUT_W";
+const char *scllrfPRCDriver::Cavity0PrngIvaRString = "CAVITY_0_PRNG_IVA_R";
+const char *scllrfPRCDriver::Cavity0PrngIvaWString = "CAVITY_0_PRNG_IVA_W";
+const char *scllrfPRCDriver::Cavity0PrngIvbRString = "CAVITY_0_PRNG_IVB_R";
+const char *scllrfPRCDriver::Cavity0PrngIvbWString = "CAVITY_0_PRNG_IVB_W";
+const char *scllrfPRCDriver::Cavity0PrngRandomRunRString = "CAVITY_0_PRNG_RANDOM_RUN_R";
+const char *scllrfPRCDriver::Cavity0PrngRandomRunWString = "CAVITY_0_PRNG_RANDOM_RUN_W";
+const char *scllrfPRCDriver::Cavity1ACavOffsetRString = "CAVITY_1_A_CAV_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1ACavOffsetWString = "CAVITY_1_A_CAV_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1AForOffsetRString = "CAVITY_1_A_FOR_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1AForOffsetWString = "CAVITY_1_A_FOR_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1ARflOffsetRString = "CAVITY_1_A_RFL_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1ARflOffsetWString = "CAVITY_1_A_RFL_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1AmpLpBwRString = "CAVITY_1_AMP_LP_BW_R";
+const char *scllrfPRCDriver::Cavity1AmpLpBwWString = "CAVITY_1_AMP_LP_BW_W";
+const char *scllrfPRCDriver::Cavity1ComprSatCtlRString = "CAVITY_1_COMPR_SAT_CTL_R";
+const char *scllrfPRCDriver::Cavity1ComprSatCtlWString = "CAVITY_1_COMPR_SAT_CTL_W";
+const char *scllrfPRCDriver::Cavity1Dot0KOutWString = "CAVITY_1_DOT_0_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1Dot1KOutWString = "CAVITY_1_DOT_1_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1Dot2KOutWString = "CAVITY_1_DOT_2_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1DriveCoupleOutCouplingRString = "CAVITY_1_DRIVE_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1DriveCoupleOutCouplingWString = "CAVITY_1_DRIVE_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1DriveCoupleOutPhaseOffsetRString = "CAVITY_1_DRIVE_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1DriveCoupleOutPhaseOffsetWString = "CAVITY_1_DRIVE_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1Freq0CoarseFreqRString = "CAVITY_1_FREQ_0_COARSE_FREQ_R";
+const char *scllrfPRCDriver::Cavity1Freq0CoarseFreqWString = "CAVITY_1_FREQ_0_COARSE_FREQ_W";
+const char *scllrfPRCDriver::Cavity1Freq1CoarseFreqRString = "CAVITY_1_FREQ_1_COARSE_FREQ_R";
+const char *scllrfPRCDriver::Cavity1Freq1CoarseFreqWString = "CAVITY_1_FREQ_1_COARSE_FREQ_W";
+const char *scllrfPRCDriver::Cavity1Freq2CoarseFreqRString = "CAVITY_1_FREQ_2_COARSE_FREQ_R";
+const char *scllrfPRCDriver::Cavity1Freq2CoarseFreqWString = "CAVITY_1_FREQ_2_COARSE_FREQ_W";
+const char *scllrfPRCDriver::Cavity1Mode0BeamCouplingRString = "CAVITY_1_MODE_0_BEAM_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode0BeamCouplingWString = "CAVITY_1_MODE_0_BEAM_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode0BwRString = "CAVITY_1_MODE_0_BW_R";
+const char *scllrfPRCDriver::Cavity1Mode0BwWString = "CAVITY_1_MODE_0_BW_W";
+const char *scllrfPRCDriver::Cavity1Mode0CoupleOutCouplingRString = "CAVITY_1_MODE_0_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode0CoupleOutCouplingWString = "CAVITY_1_MODE_0_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode0CoupleOutPhaseOffsetRString = "CAVITY_1_MODE_0_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1Mode0CoupleOutPhaseOffsetWString = "CAVITY_1_MODE_0_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1Mode0DriveCouplingRString = "CAVITY_1_MODE_0_DRIVE_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode0DriveCouplingWString = "CAVITY_1_MODE_0_DRIVE_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode1BeamCouplingRString = "CAVITY_1_MODE_1_BEAM_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode1BeamCouplingWString = "CAVITY_1_MODE_1_BEAM_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode1BwRString = "CAVITY_1_MODE_1_BW_R";
+const char *scllrfPRCDriver::Cavity1Mode1BwWString = "CAVITY_1_MODE_1_BW_W";
+const char *scllrfPRCDriver::Cavity1Mode1CoupleOutCouplingRString = "CAVITY_1_MODE_1_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode1CoupleOutCouplingWString = "CAVITY_1_MODE_1_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode1CoupleOutPhaseOffsetRString = "CAVITY_1_MODE_1_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1Mode1CoupleOutPhaseOffsetWString = "CAVITY_1_MODE_1_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1Mode1DriveCouplingRString = "CAVITY_1_MODE_1_DRIVE_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode1DriveCouplingWString = "CAVITY_1_MODE_1_DRIVE_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode2BeamCouplingRString = "CAVITY_1_MODE_2_BEAM_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode2BeamCouplingWString = "CAVITY_1_MODE_2_BEAM_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode2BwRString = "CAVITY_1_MODE_2_BW_R";
+const char *scllrfPRCDriver::Cavity1Mode2BwWString = "CAVITY_1_MODE_2_BW_W";
+const char *scllrfPRCDriver::Cavity1Mode2CoupleOutCouplingRString = "CAVITY_1_MODE_2_COUPLE_OUT_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode2CoupleOutCouplingWString = "CAVITY_1_MODE_2_COUPLE_OUT_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1Mode2CoupleOutPhaseOffsetRString = "CAVITY_1_MODE_2_COUPLE_OUT_PHASE_OFFSET_R";
+const char *scllrfPRCDriver::Cavity1Mode2CoupleOutPhaseOffsetWString = "CAVITY_1_MODE_2_COUPLE_OUT_PHASE_OFFSET_W";
+const char *scllrfPRCDriver::Cavity1Mode2DriveCouplingRString = "CAVITY_1_MODE_2_DRIVE_COUPLING_R";
+const char *scllrfPRCDriver::Cavity1Mode2DriveCouplingWString = "CAVITY_1_MODE_2_DRIVE_COUPLING_W";
+const char *scllrfPRCDriver::Cavity1ModuloRString = "CAVITY_1_MODULO_R";
+const char *scllrfPRCDriver::Cavity1ModuloWString = "CAVITY_1_MODULO_W";
+const char *scllrfPRCDriver::Cavity1OuterProd0KOutWString = "CAVITY_1_OUTER_PROD_0_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1OuterProd1KOutWString = "CAVITY_1_OUTER_PROD_1_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1OuterProd2KOutWString = "CAVITY_1_OUTER_PROD_2_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1PhaseStepRString = "CAVITY_1_PHASE_STEP_R";
+const char *scllrfPRCDriver::Cavity1PhaseStepWString = "CAVITY_1_PHASE_STEP_W";
+const char *scllrfPRCDriver::Cavity1PiezoCoupleKOutWString = "CAVITY_1_PIEZO_COUPLE_K_OUT_W";
+const char *scllrfPRCDriver::Cavity1PrngIvaRString = "CAVITY_1_PRNG_IVA_R";
+const char *scllrfPRCDriver::Cavity1PrngIvaWString = "CAVITY_1_PRNG_IVA_W";
+const char *scllrfPRCDriver::Cavity1PrngIvbRString = "CAVITY_1_PRNG_IVB_R";
+const char *scllrfPRCDriver::Cavity1PrngIvbWString = "CAVITY_1_PRNG_IVB_W";
+const char *scllrfPRCDriver::Cavity1PrngRandomRunRString = "CAVITY_1_PRNG_RANDOM_RUN_R";
+const char *scllrfPRCDriver::Cavity1PrngRandomRunWString = "CAVITY_1_PRNG_RANDOM_RUN_W";
+const char *scllrfPRCDriver::CcErrorClearRString = "CC_ERROR_CLEAR_R";
+const char *scllrfPRCDriver::CcErrorClearWString = "CC_ERROR_CLEAR_W";
+const char *scllrfPRCDriver::CcLoc1RString = "CC_LOC1_R";
+const char *scllrfPRCDriver::CcLoc1WString = "CC_LOC1_W";
+const char *scllrfPRCDriver::Cct1Cavity0StatusAuxRString = "CCT1_CAVITY0_STATUS_AUX_R";
+const char *scllrfPRCDriver::Cct1Cavity0StatusAuxWString = "CCT1_CAVITY0_STATUS_AUX_W";
+const char *scllrfPRCDriver::Cct1Cavity1StatusAuxRString = "CCT1_CAVITY1_STATUS_AUX_R";
+const char *scllrfPRCDriver::Cct1Cavity1StatusAuxWString = "CCT1_CAVITY1_STATUS_AUX_W";
+const char *scllrfPRCDriver::CicPeriodRString = "CIC_PERIOD_R";
+const char *scllrfPRCDriver::CicPeriodWString = "CIC_PERIOD_W";
+const char *scllrfPRCDriver::CicShiftRString = "CIC_SHIFT_R";
+const char *scllrfPRCDriver::CicShiftWString = "CIC_SHIFT_W";
+const char *scllrfPRCDriver::CircleBufFlipRString = "CIRCLE_BUF_FLIP_R";
+const char *scllrfPRCDriver::CircleBufFlipWString = "CIRCLE_BUF_FLIP_W";
+const char *scllrfPRCDriver::ClkPhaseDiffOutU2RString = "CLK_PHASE_DIFF_OUT_U2_R";
+const char *scllrfPRCDriver::ClkPhaseDiffOutU3RString = "CLK_PHASE_DIFF_OUT_U3_R";
+const char *scllrfPRCDriver::ClkStatusOutRString = "CLK_STATUS_OUT_R";
+const char *scllrfPRCDriver::ConfigU15SpiDataAddrRRString = "CONFIG_U15_SPI_DATA_ADDR_R_R";
+const char *scllrfPRCDriver::ConfigU15SpiDataAddrRWString = "CONFIG_U15_SPI_DATA_ADDR_R_W";
+const char *scllrfPRCDriver::ConfigU15SpiReadAndStartRRString = "CONFIG_U15_SPI_READ_AND_START_R_R";
+const char *scllrfPRCDriver::ConfigU15SpiReadAndStartRWString = "CONFIG_U15_SPI_READ_AND_START_R_W";
+const char *scllrfPRCDriver::ConfigU18SpiDataAddrRRString = "CONFIG_U18_SPI_DATA_ADDR_R_R";
+const char *scllrfPRCDriver::ConfigU18SpiDataAddrRWString = "CONFIG_U18_SPI_DATA_ADDR_R_W";
+const char *scllrfPRCDriver::ConfigU18SpiReadAndStartRRString = "CONFIG_U18_SPI_READ_AND_START_R_R";
+const char *scllrfPRCDriver::ConfigU18SpiReadAndStartRWString = "CONFIG_U18_SPI_READ_AND_START_R_W";
+const char *scllrfPRCDriver::ConfigU2ClkResetRRString = "CONFIG_U2_CLK_RESET_R_R";
+const char *scllrfPRCDriver::ConfigU2ClkResetRWString = "CONFIG_U2_CLK_RESET_R_W";
+const char *scllrfPRCDriver::ConfigU2IserdesResetRRString = "CONFIG_U2_ISERDES_RESET_R_R";
+const char *scllrfPRCDriver::ConfigU2IserdesResetRWString = "CONFIG_U2_ISERDES_RESET_R_W";
+const char *scllrfPRCDriver::ConfigU3ClkResetRRString = "CONFIG_U3_CLK_RESET_R_R";
+const char *scllrfPRCDriver::ConfigU3ClkResetRWString = "CONFIG_U3_CLK_RESET_R_W";
+const char *scllrfPRCDriver::ConfigU3IserdesResetRRString = "CONFIG_U3_ISERDES_RESET_R_R";
+const char *scllrfPRCDriver::ConfigU3IserdesResetRWString = "CONFIG_U3_ISERDES_RESET_R_W";
+const char *scllrfPRCDriver::ConfigU4ResetRRString = "CONFIG_U4_RESET_R_R";
+const char *scllrfPRCDriver::ConfigU4ResetRWString = "CONFIG_U4_RESET_R_W";
+const char *scllrfPRCDriver::ConfigBanyanMaskRString = "CONFIG_BANYAN_MASK_R";
+const char *scllrfPRCDriver::ConfigBanyanMaskWString = "CONFIG_BANYAN_MASK_W";
+const char *scllrfPRCDriver::ConfigBitslipRString = "CONFIG_BITSLIP_R";
+const char *scllrfPRCDriver::ConfigBitslipWString = "CONFIG_BITSLIP_W";
+const char *scllrfPRCDriver::ConfigClkStatusWeRString = "CONFIG_CLK_STATUS_WE_R";
+const char *scllrfPRCDriver::ConfigClkStatusWeWString = "CONFIG_CLK_STATUS_WE_W";
+const char *scllrfPRCDriver::ConfigIdelayctrlResetRRString = "CONFIG_IDELAYCTRL_RESET_R_R";
+const char *scllrfPRCDriver::ConfigIdelayctrlResetRWString = "CONFIG_IDELAYCTRL_RESET_R_W";
+const char *scllrfPRCDriver::ConfigLlspiWeRString = "CONFIG_LLSPI_WE_R";
+const char *scllrfPRCDriver::ConfigLlspiWeWString = "CONFIG_LLSPI_WE_W";
+const char *scllrfPRCDriver::ConfigMmcmResetRRString = "CONFIG_MMCM_RESET_R_R";
+const char *scllrfPRCDriver::ConfigMmcmResetRWString = "CONFIG_MMCM_RESET_R_W";
+const char *scllrfPRCDriver::ConfigPeriphConfigRString = "CONFIG_PERIPH_CONFIG_R";
+const char *scllrfPRCDriver::ConfigPeriphConfigWString = "CONFIG_PERIPH_CONFIG_W";
+const char *scllrfPRCDriver::ConfigPhasexTrigRString = "CONFIG_PHASEX_TRIG_R";
+const char *scllrfPRCDriver::ConfigPhasexTrigWString = "CONFIG_PHASEX_TRIG_W";
+const char *scllrfPRCDriver::ConfigRawadcTrigRString = "CONFIG_RAWADC_TRIG_R";
+const char *scllrfPRCDriver::ConfigRawadcTrigWString = "CONFIG_RAWADC_TRIG_W";
+const char *scllrfPRCDriver::ConfigScanTriggerWeRString = "CONFIG_SCAN_TRIGGER_WE_R";
+const char *scllrfPRCDriver::ConfigScanTriggerWeWString = "CONFIG_SCAN_TRIGGER_WE_W";
+const char *scllrfPRCDriver::ConfigScannerDebugRString = "CONFIG_SCANNER_DEBUG_R";
+const char *scllrfPRCDriver::ConfigScannerDebugWString = "CONFIG_SCANNER_DEBUG_W";
+const char *scllrfPRCDriver::ConfigSyncAd7794CsetRString = "CONFIG_SYNC_AD7794_CSET_R";
+const char *scllrfPRCDriver::ConfigSyncAd7794CsetWString = "CONFIG_SYNC_AD7794_CSET_W";
+const char *scllrfPRCDriver::ConfigSyncTps62210CsetRString = "CONFIG_SYNC_TPS62210_CSET_R";
+const char *scllrfPRCDriver::ConfigSyncTps62210CsetWString = "CONFIG_SYNC_TPS62210_CSET_W";
+const char *scllrfPRCDriver::CrcErrorsRString = "CRC_ERRORS_R";
+const char *scllrfPRCDriver::CtraceRunningRString = "CTRACE_RUNNING_R";
+const char *scllrfPRCDriver::DacDdsResetRString = "DAC_DDS_RESET_R";
+const char *scllrfPRCDriver::DacDdsResetWString = "DAC_DDS_RESET_W";
+const char *scllrfPRCDriver::DacIqPhaseRString = "DAC_IQ_PHASE_R";
+const char *scllrfPRCDriver::DacIqPhaseWString = "DAC_IQ_PHASE_W";
+const char *scllrfPRCDriver::DacModeRString = "DAC_MODE_R";
+const char *scllrfPRCDriver::DacModeWString = "DAC_MODE_W";
+const char *scllrfPRCDriver::DdsaModuloRString = "DDSA_MODULO_R";
+const char *scllrfPRCDriver::DdsaModuloWString = "DDSA_MODULO_W";
+const char *scllrfPRCDriver::DdsaPhstepHRString = "DDSA_PHSTEP_H_R";
+const char *scllrfPRCDriver::DdsaPhstepHWString = "DDSA_PHSTEP_H_W";
+const char *scllrfPRCDriver::DdsaPhstepLRString = "DDSA_PHSTEP_L_R";
+const char *scllrfPRCDriver::DdsaPhstepLWString = "DDSA_PHSTEP_L_W";
+const char *scllrfPRCDriver::DomainJumpRealignRString = "DOMAIN_JUMP_REALIGN_R";
+const char *scllrfPRCDriver::DomainJumpRealignWString = "DOMAIN_JUMP_REALIGN_W";
+const char *scllrfPRCDriver::FfffffffRString = "FFFFFFFF_R";
+const char *scllrfPRCDriver::Frequency4XoutRString = "FREQUENCY_4XOUT_R";
+const char *scllrfPRCDriver::FrequencyAdcRString = "FREQUENCY_ADC_R";
+const char *scllrfPRCDriver::FrequencyClkout3RString = "FREQUENCY_CLKOUT3_R";
+const char *scllrfPRCDriver::FrequencyDcoRString = "FREQUENCY_DCO_R";
+const char *scllrfPRCDriver::FrequencyGtxRxRString = "FREQUENCY_GTX_RX_R";
+const char *scllrfPRCDriver::FrequencyGtxTxRString = "FREQUENCY_GTX_TX_R";
+const char *scllrfPRCDriver::Hello0RString = "HELLO_0_R";
+const char *scllrfPRCDriver::Hello1RString = "HELLO_1_R";
+const char *scllrfPRCDriver::Hello2RString = "HELLO_2_R";
+const char *scllrfPRCDriver::Hello3RString = "HELLO_3_R";
+const char *scllrfPRCDriver::HistCountWStrobeRString = "HIST_COUNT_W_STROBE_R";
+const char *scllrfPRCDriver::HistCountWStrobeWString = "HIST_COUNT_W_STROBE_W";
+const char *scllrfPRCDriver::HistDoutRString = "HIST_DOUT_R";
+const char *scllrfPRCDriver::HistStatusRString = "HIST_STATUS_R";
+const char *scllrfPRCDriver::IccCfgRString = "ICC_CFG_R";
+const char *scllrfPRCDriver::IccCfgWString = "ICC_CFG_W";
+const char *scllrfPRCDriver::IdelayBaseRString = "IDELAY_BASE_R";
+const char *scllrfPRCDriver::IdelayValueOutU2LsbRString = "IDELAY_VALUE_OUT_U2_LSB_R";
+const char *scllrfPRCDriver::IdelayValueOutU2MsbRString = "IDELAY_VALUE_OUT_U2_MSB_R";
+const char *scllrfPRCDriver::IdelayValueOutU3LsbRString = "IDELAY_VALUE_OUT_U3_LSB_R";
+const char *scllrfPRCDriver::IdelayValueOutU3MsbRString = "IDELAY_VALUE_OUT_U3_MSB_R";
+const char *scllrfPRCDriver::LlrfCircleDataRString = "LLRF_CIRCLE_DATA_R";
+const char *scllrfPRCDriver::LlrfCircleReadyRString = "LLRF_CIRCLE_READY_R";
+const char *scllrfPRCDriver::LlrfDspDacEnRString = "LLRF_DSP_DAC_EN_R";
+const char *scllrfPRCDriver::LlrfDspDacEnWString = "LLRF_DSP_DAC_EN_W";
+const char *scllrfPRCDriver::LlspiResultRString = "LLSPI_RESULT_R";
+const char *scllrfPRCDriver::LlspiStatusRString = "LLSPI_STATUS_R";
+const char *scllrfPRCDriver::LoAmpRString = "LO_AMP_R";
+const char *scllrfPRCDriver::LoAmpWString = "LO_AMP_W";
+const char *scllrfPRCDriver::ModuloRString = "MODULO_R";
+const char *scllrfPRCDriver::ModuloWString = "MODULO_W";
+const char *scllrfPRCDriver::PhaseStepHRString = "PHASE_STEP_H_R";
+const char *scllrfPRCDriver::PhaseStepHWString = "PHASE_STEP_H_W";
+const char *scllrfPRCDriver::PhaseStepLRString = "PHASE_STEP_L_R";
+const char *scllrfPRCDriver::PhaseStepLWString = "PHASE_STEP_L_W";
+const char *scllrfPRCDriver::PhasexDoutRString = "PHASEX_DOUT_R";
+const char *scllrfPRCDriver::PhasexStatusRString = "PHASEX_STATUS_R";
+const char *scllrfPRCDriver::PrcDspCavSelRString = "PRC_DSP_CAV_SEL_R";
+const char *scllrfPRCDriver::PrcDspCavSelWString = "PRC_DSP_CAV_SEL_W";
+const char *scllrfPRCDriver::PrcDspPrlCfgRString = "PRC_DSP_PRL_CFG_R";
+const char *scllrfPRCDriver::PrcDspPrlCfgWString = "PRC_DSP_PRL_CFG_W";
+const char *scllrfPRCDriver::PrcDspPrlGainRString = "PRC_DSP_PRL_GAIN_R";
+const char *scllrfPRCDriver::PrcDspPrlGainWString = "PRC_DSP_PRL_GAIN_W";
+const char *scllrfPRCDriver::QsfpBufRString = "QSFP_BUF_R";
+const char *scllrfPRCDriver::QsfpI2CRegRString = "QSFP_I2C_REG_R";
+const char *scllrfPRCDriver::QsfpI2CRegWString = "QSFP_I2C_REG_W";
+const char *scllrfPRCDriver::RewindRString = "REWIND_R";
+const char *scllrfPRCDriver::RewindWString = "REWIND_W";
+const char *scllrfPRCDriver::ScannerResultRString = "SCANNER_RESULT_R";
+const char *scllrfPRCDriver::SfpAddressSetRString = "SFP_ADDRESS_SET_R";
+const char *scllrfPRCDriver::SfpAddressSetWString = "SFP_ADDRESS_SET_W";
+const char *scllrfPRCDriver::Shell0DspChanKeepRString = "SHELL_0_DSP_CHAN_KEEP_R";
+const char *scllrfPRCDriver::Shell0DspChanKeepWString = "SHELL_0_DSP_CHAN_KEEP_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreCoarseScaleRString = "SHELL_0_DSP_FDBK_CORE_COARSE_SCALE_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreCoarseScaleWString = "SHELL_0_DSP_FDBK_CORE_COARSE_SCALE_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcCoeffRString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_COEFF_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcCoeffWString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_COEFF_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcLimRString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_LIM_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcLimWString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_LIM_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcPhOffsetRString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcPhOffsetWString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcSelEnRString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_EN_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcSelEnWString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_EN_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcSelThreshRString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcSelThreshWString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_W";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcSetmpRString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_SETMP_R";
+const char *scllrfPRCDriver::Shell0DspFdbkCoreMpProcSetmpWString = "SHELL_0_DSP_FDBK_CORE_MP_PROC_SETMP_W";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1AKxRString = "SHELL_0_DSP_LP_NOTCH_LP1A_KX_R";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1AKxWString = "SHELL_0_DSP_LP_NOTCH_LP1A_KX_W";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1AKyRString = "SHELL_0_DSP_LP_NOTCH_LP1A_KY_R";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1AKyWString = "SHELL_0_DSP_LP_NOTCH_LP1A_KY_W";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1BKxRString = "SHELL_0_DSP_LP_NOTCH_LP1B_KX_R";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1BKxWString = "SHELL_0_DSP_LP_NOTCH_LP1B_KX_W";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1BKyRString = "SHELL_0_DSP_LP_NOTCH_LP1B_KY_R";
+const char *scllrfPRCDriver::Shell0DspLpNotchLp1BKyWString = "SHELL_0_DSP_LP_NOTCH_LP1B_KY_W";
+const char *scllrfPRCDriver::Shell0DspModuloRString = "SHELL_0_DSP_MODULO_R";
+const char *scllrfPRCDriver::Shell0DspModuloWString = "SHELL_0_DSP_MODULO_W";
+const char *scllrfPRCDriver::Shell0DspPhaseStepRString = "SHELL_0_DSP_PHASE_STEP_R";
+const char *scllrfPRCDriver::Shell0DspPhaseStepWString = "SHELL_0_DSP_PHASE_STEP_W";
+const char *scllrfPRCDriver::Shell0DspPiezoPiezoDcRString = "SHELL_0_DSP_PIEZO_PIEZO_DC_R";
+const char *scllrfPRCDriver::Shell0DspPiezoPiezoDcWString = "SHELL_0_DSP_PIEZO_PIEZO_DC_W";
+const char *scllrfPRCDriver::Shell0DspPiezoSfConstsRString = "SHELL_0_DSP_PIEZO_SF_CONSTS_R";
+const char *scllrfPRCDriver::Shell0DspPiezoSfConstsWString = "SHELL_0_DSP_PIEZO_SF_CONSTS_W";
+const char *scllrfPRCDriver::Shell0DspTagRString = "SHELL_0_DSP_TAG_R";
+const char *scllrfPRCDriver::Shell0DspTagWString = "SHELL_0_DSP_TAG_W";
+const char *scllrfPRCDriver::Shell0DspUseFiberIqRString = "SHELL_0_DSP_USE_FIBER_IQ_R";
+const char *scllrfPRCDriver::Shell0DspUseFiberIqWString = "SHELL_0_DSP_USE_FIBER_IQ_W";
+const char *scllrfPRCDriver::Shell0DspWaveSampPerRString = "SHELL_0_DSP_WAVE_SAMP_PER_R";
+const char *scllrfPRCDriver::Shell0DspWaveSampPerWString = "SHELL_0_DSP_WAVE_SAMP_PER_W";
+const char *scllrfPRCDriver::Shell0DspWaveShiftRString = "SHELL_0_DSP_WAVE_SHIFT_R";
+const char *scllrfPRCDriver::Shell0DspWaveShiftWString = "SHELL_0_DSP_WAVE_SHIFT_W";
+const char *scllrfPRCDriver::Shell0SlowDataRString = "SHELL_0_SLOW_DATA_R";
+const char *scllrfPRCDriver::Shell1DspChanKeepRString = "SHELL_1_DSP_CHAN_KEEP_R";
+const char *scllrfPRCDriver::Shell1DspChanKeepWString = "SHELL_1_DSP_CHAN_KEEP_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreCoarseScaleRString = "SHELL_1_DSP_FDBK_CORE_COARSE_SCALE_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreCoarseScaleWString = "SHELL_1_DSP_FDBK_CORE_COARSE_SCALE_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcCoeffRString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_COEFF_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcCoeffWString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_COEFF_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcLimRString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_LIM_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcLimWString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_LIM_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcPhOffsetRString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcPhOffsetWString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_PH_OFFSET_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcSelEnRString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_EN_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcSelEnWString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_EN_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcSelThreshRString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcSelThreshWString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_SEL_THRESH_W";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcSetmpRString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_SETMP_R";
+const char *scllrfPRCDriver::Shell1DspFdbkCoreMpProcSetmpWString = "SHELL_1_DSP_FDBK_CORE_MP_PROC_SETMP_W";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1AKxRString = "SHELL_1_DSP_LP_NOTCH_LP1A_KX_R";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1AKxWString = "SHELL_1_DSP_LP_NOTCH_LP1A_KX_W";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1AKyRString = "SHELL_1_DSP_LP_NOTCH_LP1A_KY_R";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1AKyWString = "SHELL_1_DSP_LP_NOTCH_LP1A_KY_W";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1BKxRString = "SHELL_1_DSP_LP_NOTCH_LP1B_KX_R";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1BKxWString = "SHELL_1_DSP_LP_NOTCH_LP1B_KX_W";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1BKyRString = "SHELL_1_DSP_LP_NOTCH_LP1B_KY_R";
+const char *scllrfPRCDriver::Shell1DspLpNotchLp1BKyWString = "SHELL_1_DSP_LP_NOTCH_LP1B_KY_W";
+const char *scllrfPRCDriver::Shell1DspModuloRString = "SHELL_1_DSP_MODULO_R";
+const char *scllrfPRCDriver::Shell1DspModuloWString = "SHELL_1_DSP_MODULO_W";
+const char *scllrfPRCDriver::Shell1DspPhaseStepRString = "SHELL_1_DSP_PHASE_STEP_R";
+const char *scllrfPRCDriver::Shell1DspPhaseStepWString = "SHELL_1_DSP_PHASE_STEP_W";
+const char *scllrfPRCDriver::Shell1DspPiezoPiezoDcRString = "SHELL_1_DSP_PIEZO_PIEZO_DC_R";
+const char *scllrfPRCDriver::Shell1DspPiezoPiezoDcWString = "SHELL_1_DSP_PIEZO_PIEZO_DC_W";
+const char *scllrfPRCDriver::Shell1DspPiezoSfConstsRString = "SHELL_1_DSP_PIEZO_SF_CONSTS_R";
+const char *scllrfPRCDriver::Shell1DspPiezoSfConstsWString = "SHELL_1_DSP_PIEZO_SF_CONSTS_W";
+const char *scllrfPRCDriver::Shell1DspTagRString = "SHELL_1_DSP_TAG_R";
+const char *scllrfPRCDriver::Shell1DspTagWString = "SHELL_1_DSP_TAG_W";
+const char *scllrfPRCDriver::Shell1DspUseFiberIqRString = "SHELL_1_DSP_USE_FIBER_IQ_R";
+const char *scllrfPRCDriver::Shell1DspUseFiberIqWString = "SHELL_1_DSP_USE_FIBER_IQ_W";
+const char *scllrfPRCDriver::Shell1DspWaveSampPerRString = "SHELL_1_DSP_WAVE_SAMP_PER_R";
+const char *scllrfPRCDriver::Shell1DspWaveSampPerWString = "SHELL_1_DSP_WAVE_SAMP_PER_W";
+const char *scllrfPRCDriver::Shell1DspWaveShiftRString = "SHELL_1_DSP_WAVE_SHIFT_R";
+const char *scllrfPRCDriver::Shell1DspWaveShiftWString = "SHELL_1_DSP_WAVE_SHIFT_W";
+const char *scllrfPRCDriver::Shell1SlowDataRString = "SHELL_1_SLOW_DATA_R";
+const char *scllrfPRCDriver::SlowChainOutRString = "SLOW_CHAIN_OUT_R";
+const char *scllrfPRCDriver::SsaStimAmpstepRString = "SSA_STIM_AMPSTEP_R";
+const char *scllrfPRCDriver::SsaStimAmpstepWString = "SSA_STIM_AMPSTEP_W";
+const char *scllrfPRCDriver::SsaStimEnRString = "SSA_STIM_EN_R";
+const char *scllrfPRCDriver::SsaStimEnWString = "SSA_STIM_EN_W";
+const char *scllrfPRCDriver::SsaStimGPeriodRString = "SSA_STIM_G_PERIOD_R";
+const char *scllrfPRCDriver::SsaStimGPeriodWString = "SSA_STIM_G_PERIOD_W";
+const char *scllrfPRCDriver::SsaStimPertstepRString = "SSA_STIM_PERTSTEP_R";
+const char *scllrfPRCDriver::SsaStimPertstepWString = "SSA_STIM_PERTSTEP_W";
+const char *scllrfPRCDriver::TagNowRString = "TAG_NOW_R";
+const char *scllrfPRCDriver::TagNowWString = "TAG_NOW_W";
+const char *scllrfPRCDriver::Tgen0DelayPcXxxWString = "TGEN_0_DELAY_PC_XXX_W";
+const char *scllrfPRCDriver::Tgen1DelayPcXxxWString = "TGEN_1_DELAY_PC_XXX_W";
+const char *scllrfPRCDriver::TraceIBufRString = "TRACE_I_BUF_R";
+const char *scllrfPRCDriver::TraceIqBufRString = "TRACE_IQ_BUF_R";
+const char *scllrfPRCDriver::TraceKeepRString = "TRACE_KEEP_R";
+const char *scllrfPRCDriver::TraceKeepWString = "TRACE_KEEP_W";
+const char *scllrfPRCDriver::TraceQBufRString = "TRACE_Q_BUF_R";
+const char *scllrfPRCDriver::TraceResetWeRString = "TRACE_RESET_WE_R";
+const char *scllrfPRCDriver::TraceResetWeWString = "TRACE_RESET_WE_W";
+const char *scllrfPRCDriver::TraceStatus1RString = "TRACE_STATUS1_R";
+const char *scllrfPRCDriver::TraceStatus2RString = "TRACE_STATUS2_R";
+const char *scllrfPRCDriver::TrigInternalRString = "TRIG_INTERNAL_R";
+const char *scllrfPRCDriver::TrigInternalWString = "TRIG_INTERNAL_W";
+const char *scllrfPRCDriver::TrigModeRString = "TRIG_MODE_R";
+const char *scllrfPRCDriver::TrigModeWString = "TRIG_MODE_W";
+const char *scllrfPRCDriver::Wave0OutRString = "WAVE0_OUT_R";
+const char *scllrfPRCDriver::Wave0SrcRString = "WAVE0_SRC_R";
+const char *scllrfPRCDriver::Wave0SrcWString = "WAVE0_SRC_W";
+const char *scllrfPRCDriver::Wave1OutRString = "WAVE1_OUT_R";
+const char *scllrfPRCDriver::Wave1SrcRString = "WAVE1_SRC_R";
+const char *scllrfPRCDriver::Wave1SrcWString = "WAVE1_SRC_W";
+const char *scllrfPRCDriver::WaveformsAvailableRString = "WAVEFORMS_AVAILABLE_R";
+
+const unsigned int scllrfPRCDriver::scllrfPRCPolledRegCount = 268;
+
 /** Constructor for the scllrfPRC class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] drvPortName The name of the asyn port driver to be created.
@@ -5360,7 +5791,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
     {
     case AdcMmcmWAdr:
 		status = (asynStatus) getIntegerParam(p_AdcMmcmW, &valueSet );
-		if( (int32_t)(valueSet & AdcMmcmMask) == (pFromFpga->data & AdcMmcmMask))
+		if( (uint32_t)(valueSet & AdcMmcmMask) == (uint32_t)(pFromFpga->data & AdcMmcmMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcMmcmWString, (unsigned ) pFromFpga->data & AdcMmcmMask);
@@ -5378,7 +5809,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case CcErrorClearWAdr:
 		status = (asynStatus) getIntegerParam(p_CcErrorClearW, &valueSet );
-		if( (int32_t)(valueSet & CcErrorClearMask) == (pFromFpga->data & CcErrorClearMask))
+		if( (uint32_t)(valueSet & CcErrorClearMask) == (uint32_t)(pFromFpga->data & CcErrorClearMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CcErrorClearWString, (unsigned ) pFromFpga->data & CcErrorClearMask);
@@ -5396,7 +5827,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case CcLoc1WAdr:
 		status = (asynStatus) getIntegerParam(p_CcLoc1W, &valueSet );
-		if( (int32_t)(valueSet & CcLoc1Mask) == (pFromFpga->data & CcLoc1Mask))
+		if( (uint32_t)(valueSet & CcLoc1Mask) == (uint32_t)(pFromFpga->data & CcLoc1Mask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CcLoc1WString, (unsigned ) pFromFpga->data & CcLoc1Mask);
@@ -5414,7 +5845,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cct1Cavity0StatusAuxWAdr:
 		status = (asynStatus) getIntegerParam(p_Cct1Cavity0StatusAuxW, &valueSet );
-		if( (int32_t)(valueSet & Cct1Cavity0StatusAuxMask) == (pFromFpga->data & Cct1Cavity0StatusAuxMask))
+		if( (uint32_t)(valueSet & Cct1Cavity0StatusAuxMask) == (uint32_t)(pFromFpga->data & Cct1Cavity0StatusAuxMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cct1Cavity0StatusAuxWString, (unsigned ) pFromFpga->data & Cct1Cavity0StatusAuxMask);
@@ -5432,7 +5863,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cct1Cavity1StatusAuxWAdr:
 		status = (asynStatus) getIntegerParam(p_Cct1Cavity1StatusAuxW, &valueSet );
-		if( (int32_t)(valueSet & Cct1Cavity1StatusAuxMask) == (pFromFpga->data & Cct1Cavity1StatusAuxMask))
+		if( (uint32_t)(valueSet & Cct1Cavity1StatusAuxMask) == (uint32_t)(pFromFpga->data & Cct1Cavity1StatusAuxMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cct1Cavity1StatusAuxWString, (unsigned ) pFromFpga->data & Cct1Cavity1StatusAuxMask);
@@ -5450,7 +5881,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU15SpiDataAddrRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU15SpiDataAddrRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU15SpiDataAddrRMask) == (pFromFpga->data & ConfigU15SpiDataAddrRMask))
+		if( (uint32_t)(valueSet & ConfigU15SpiDataAddrRMask) == (uint32_t)(pFromFpga->data & ConfigU15SpiDataAddrRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU15SpiDataAddrRWString, (unsigned ) pFromFpga->data & ConfigU15SpiDataAddrRMask);
@@ -5468,7 +5899,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU15SpiReadAndStartRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU15SpiReadAndStartRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU15SpiReadAndStartRMask) == (pFromFpga->data & ConfigU15SpiReadAndStartRMask))
+		if( (uint32_t)(valueSet & ConfigU15SpiReadAndStartRMask) == (uint32_t)(pFromFpga->data & ConfigU15SpiReadAndStartRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU15SpiReadAndStartRWString, (unsigned ) pFromFpga->data & ConfigU15SpiReadAndStartRMask);
@@ -5486,7 +5917,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU18SpiDataAddrRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU18SpiDataAddrRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU18SpiDataAddrRMask) == (pFromFpga->data & ConfigU18SpiDataAddrRMask))
+		if( (uint32_t)(valueSet & ConfigU18SpiDataAddrRMask) == (uint32_t)(pFromFpga->data & ConfigU18SpiDataAddrRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU18SpiDataAddrRWString, (unsigned ) pFromFpga->data & ConfigU18SpiDataAddrRMask);
@@ -5504,7 +5935,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU18SpiReadAndStartRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU18SpiReadAndStartRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU18SpiReadAndStartRMask) == (pFromFpga->data & ConfigU18SpiReadAndStartRMask))
+		if( (uint32_t)(valueSet & ConfigU18SpiReadAndStartRMask) == (uint32_t)(pFromFpga->data & ConfigU18SpiReadAndStartRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU18SpiReadAndStartRWString, (unsigned ) pFromFpga->data & ConfigU18SpiReadAndStartRMask);
@@ -5522,7 +5953,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU2ClkResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU2ClkResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU2ClkResetRMask) == (pFromFpga->data & ConfigU2ClkResetRMask))
+		if( (uint32_t)(valueSet & ConfigU2ClkResetRMask) == (uint32_t)(pFromFpga->data & ConfigU2ClkResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU2ClkResetRWString, (unsigned ) pFromFpga->data & ConfigU2ClkResetRMask);
@@ -5540,7 +5971,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU2IserdesResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU2IserdesResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU2IserdesResetRMask) == (pFromFpga->data & ConfigU2IserdesResetRMask))
+		if( (uint32_t)(valueSet & ConfigU2IserdesResetRMask) == (uint32_t)(pFromFpga->data & ConfigU2IserdesResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU2IserdesResetRWString, (unsigned ) pFromFpga->data & ConfigU2IserdesResetRMask);
@@ -5558,7 +5989,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU3ClkResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU3ClkResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU3ClkResetRMask) == (pFromFpga->data & ConfigU3ClkResetRMask))
+		if( (uint32_t)(valueSet & ConfigU3ClkResetRMask) == (uint32_t)(pFromFpga->data & ConfigU3ClkResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU3ClkResetRWString, (unsigned ) pFromFpga->data & ConfigU3ClkResetRMask);
@@ -5576,7 +6007,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU3IserdesResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU3IserdesResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU3IserdesResetRMask) == (pFromFpga->data & ConfigU3IserdesResetRMask))
+		if( (uint32_t)(valueSet & ConfigU3IserdesResetRMask) == (uint32_t)(pFromFpga->data & ConfigU3IserdesResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU3IserdesResetRWString, (unsigned ) pFromFpga->data & ConfigU3IserdesResetRMask);
@@ -5594,7 +6025,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigU4ResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigU4ResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigU4ResetRMask) == (pFromFpga->data & ConfigU4ResetRMask))
+		if( (uint32_t)(valueSet & ConfigU4ResetRMask) == (uint32_t)(pFromFpga->data & ConfigU4ResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigU4ResetRWString, (unsigned ) pFromFpga->data & ConfigU4ResetRMask);
@@ -5612,7 +6043,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigBanyanMaskWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigBanyanMaskW, &valueSet );
-		if( (int32_t)(valueSet & ConfigBanyanMaskMask) == (pFromFpga->data & ConfigBanyanMaskMask))
+		if( (uint32_t)(valueSet & ConfigBanyanMaskMask) == (uint32_t)(pFromFpga->data & ConfigBanyanMaskMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigBanyanMaskWString, (unsigned ) pFromFpga->data & ConfigBanyanMaskMask);
@@ -5630,7 +6061,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigBitslipWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigBitslipW, &valueSet );
-		if( (int32_t)(valueSet & ConfigBitslipMask) == (pFromFpga->data & ConfigBitslipMask))
+		if( (uint32_t)(valueSet & ConfigBitslipMask) == (uint32_t)(pFromFpga->data & ConfigBitslipMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigBitslipWString, (unsigned ) pFromFpga->data & ConfigBitslipMask);
@@ -5648,7 +6079,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigClkStatusWeWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigClkStatusWeW, &valueSet );
-		if( (int32_t)(valueSet & ConfigClkStatusWeMask) == (pFromFpga->data & ConfigClkStatusWeMask))
+		if( (uint32_t)(valueSet & ConfigClkStatusWeMask) == (uint32_t)(pFromFpga->data & ConfigClkStatusWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigClkStatusWeWString, (unsigned ) pFromFpga->data & ConfigClkStatusWeMask);
@@ -5666,7 +6097,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigIdelayctrlResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigIdelayctrlResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigIdelayctrlResetRMask) == (pFromFpga->data & ConfigIdelayctrlResetRMask))
+		if( (uint32_t)(valueSet & ConfigIdelayctrlResetRMask) == (uint32_t)(pFromFpga->data & ConfigIdelayctrlResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigIdelayctrlResetRWString, (unsigned ) pFromFpga->data & ConfigIdelayctrlResetRMask);
@@ -5684,7 +6115,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigLlspiWeWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigLlspiWeW, &valueSet );
-		if( (int32_t)(valueSet & ConfigLlspiWeMask) == (pFromFpga->data & ConfigLlspiWeMask))
+		if( (uint32_t)(valueSet & ConfigLlspiWeMask) == (uint32_t)(pFromFpga->data & ConfigLlspiWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigLlspiWeWString, (unsigned ) pFromFpga->data & ConfigLlspiWeMask);
@@ -5702,7 +6133,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigMmcmResetRWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigMmcmResetRW, &valueSet );
-		if( (int32_t)(valueSet & ConfigMmcmResetRMask) == (pFromFpga->data & ConfigMmcmResetRMask))
+		if( (uint32_t)(valueSet & ConfigMmcmResetRMask) == (uint32_t)(pFromFpga->data & ConfigMmcmResetRMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigMmcmResetRWString, (unsigned ) pFromFpga->data & ConfigMmcmResetRMask);
@@ -5720,7 +6151,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigPeriphConfigWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigPeriphConfigW, &valueSet );
-		if( (int32_t)(valueSet & ConfigPeriphConfigMask) == (pFromFpga->data & ConfigPeriphConfigMask))
+		if( (uint32_t)(valueSet & ConfigPeriphConfigMask) == (uint32_t)(pFromFpga->data & ConfigPeriphConfigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigPeriphConfigWString, (unsigned ) pFromFpga->data & ConfigPeriphConfigMask);
@@ -5738,7 +6169,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigPhasexTrigWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigPhasexTrigW, &valueSet );
-		if( (int32_t)(valueSet & ConfigPhasexTrigMask) == (pFromFpga->data & ConfigPhasexTrigMask))
+		if( (uint32_t)(valueSet & ConfigPhasexTrigMask) == (uint32_t)(pFromFpga->data & ConfigPhasexTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigPhasexTrigWString, (unsigned ) pFromFpga->data & ConfigPhasexTrigMask);
@@ -5756,7 +6187,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigRawadcTrigWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigRawadcTrigW, &valueSet );
-		if( (int32_t)(valueSet & ConfigRawadcTrigMask) == (pFromFpga->data & ConfigRawadcTrigMask))
+		if( (uint32_t)(valueSet & ConfigRawadcTrigMask) == (uint32_t)(pFromFpga->data & ConfigRawadcTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigRawadcTrigWString, (unsigned ) pFromFpga->data & ConfigRawadcTrigMask);
@@ -5774,7 +6205,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigScanTriggerWeWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigScanTriggerWeW, &valueSet );
-		if( (int32_t)(valueSet & ConfigScanTriggerWeMask) == (pFromFpga->data & ConfigScanTriggerWeMask))
+		if( (uint32_t)(valueSet & ConfigScanTriggerWeMask) == (uint32_t)(pFromFpga->data & ConfigScanTriggerWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigScanTriggerWeWString, (unsigned ) pFromFpga->data & ConfigScanTriggerWeMask);
@@ -5792,7 +6223,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigScannerDebugWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigScannerDebugW, &valueSet );
-		if( (int32_t)(valueSet & ConfigScannerDebugMask) == (pFromFpga->data & ConfigScannerDebugMask))
+		if( (uint32_t)(valueSet & ConfigScannerDebugMask) == (uint32_t)(pFromFpga->data & ConfigScannerDebugMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigScannerDebugWString, (unsigned ) pFromFpga->data & ConfigScannerDebugMask);
@@ -5810,7 +6241,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigSyncAd7794CsetWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigSyncAd7794CsetW, &valueSet );
-		if( (int32_t)(valueSet & ConfigSyncAd7794CsetMask) == (pFromFpga->data & ConfigSyncAd7794CsetMask))
+		if( (uint32_t)(valueSet & ConfigSyncAd7794CsetMask) == (uint32_t)(pFromFpga->data & ConfigSyncAd7794CsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigSyncAd7794CsetWString, (unsigned ) pFromFpga->data & ConfigSyncAd7794CsetMask);
@@ -5828,7 +6259,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ConfigSyncTps62210CsetWAdr:
 		status = (asynStatus) getIntegerParam(p_ConfigSyncTps62210CsetW, &valueSet );
-		if( (int32_t)(valueSet & ConfigSyncTps62210CsetMask) == (pFromFpga->data & ConfigSyncTps62210CsetMask))
+		if( (uint32_t)(valueSet & ConfigSyncTps62210CsetMask) == (uint32_t)(pFromFpga->data & ConfigSyncTps62210CsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ConfigSyncTps62210CsetWString, (unsigned ) pFromFpga->data & ConfigSyncTps62210CsetMask);
@@ -5846,7 +6277,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case AdcTestModeWAdr:
 		status = (asynStatus) getIntegerParam(p_AdcTestModeW, &valueSet );
-		if( (int32_t)(valueSet & AdcTestModeMask) == (pFromFpga->data & AdcTestModeMask))
+		if( (uint32_t)(valueSet & AdcTestModeMask) == (uint32_t)(pFromFpga->data & AdcTestModeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestModeWString, (unsigned ) pFromFpga->data & AdcTestModeMask);
@@ -5864,7 +6295,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case AdcTestResetWAdr:
 		status = (asynStatus) getIntegerParam(p_AdcTestResetW, &valueSet );
-		if( (int32_t)(valueSet & AdcTestResetMask) == (pFromFpga->data & AdcTestResetMask))
+		if( (uint32_t)(valueSet & AdcTestResetMask) == (uint32_t)(pFromFpga->data & AdcTestResetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AdcTestResetWString, (unsigned ) pFromFpga->data & AdcTestResetMask);
@@ -5882,7 +6313,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case AmplitudeWAdr:
 		status = (asynStatus) getIntegerParam(p_AmplitudeW, &valueSet );
-		if( (int32_t)(valueSet & AmplitudeMask) == (pFromFpga->data & AmplitudeMask))
+		if( (uint32_t)(valueSet & AmplitudeMask) == (uint32_t)(pFromFpga->data & AmplitudeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AmplitudeWString, (unsigned ) pFromFpga->data & AmplitudeMask);
@@ -5900,7 +6331,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case AverageLenWAdr:
 		status = (asynStatus) getIntegerParam(p_AverageLenW, &valueSet );
-		if( (int32_t)(valueSet & AverageLenMask) == (pFromFpga->data & AverageLenMask))
+		if( (uint32_t)(valueSet & AverageLenMask) == (uint32_t)(pFromFpga->data & AverageLenMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				AverageLenWString, (unsigned ) pFromFpga->data & AverageLenMask);
@@ -5918,7 +6349,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case BufTrigWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_BufTrigW, &uValueSet , BufTrigMask);
-		if( (int32_t)(uValueSet & BufTrigMask) == (pFromFpga->data & BufTrigMask))
+		if( (uint32_t)(uValueSet & BufTrigMask) == (uint32_t)(pFromFpga->data & BufTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				BufTrigWString, (unsigned ) pFromFpga->data & BufTrigMask);
@@ -5936,7 +6367,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case CicPeriodWAdr:
 		status = (asynStatus) getIntegerParam(p_CicPeriodW, &valueSet );
-		if( (int32_t)(valueSet & CicPeriodMask) == (pFromFpga->data & CicPeriodMask))
+		if( (uint32_t)(valueSet & CicPeriodMask) == (uint32_t)(pFromFpga->data & CicPeriodMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CicPeriodWString, (unsigned ) pFromFpga->data & CicPeriodMask);
@@ -5954,7 +6385,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case CicShiftWAdr:
 		status = (asynStatus) getIntegerParam(p_CicShiftW, &valueSet );
-		if( (int32_t)(valueSet & CicShiftMask) == (pFromFpga->data & CicShiftMask))
+		if( (uint32_t)(valueSet & CicShiftMask) == (uint32_t)(pFromFpga->data & CicShiftMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CicShiftWString, (unsigned ) pFromFpga->data & CicShiftMask);
@@ -5972,7 +6403,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case CircleBufFlipWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_CircleBufFlipW, &uValueSet , CircleBufFlipMask);
-		if( (int32_t)(uValueSet & CircleBufFlipMask) == (pFromFpga->data & CircleBufFlipMask))
+		if( (uint32_t)(uValueSet & CircleBufFlipMask) == (uint32_t)(pFromFpga->data & CircleBufFlipMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CircleBufFlipWString, (unsigned ) pFromFpga->data & CircleBufFlipMask);
@@ -5990,7 +6421,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DacDdsResetWAdr:
 		status = (asynStatus) getIntegerParam(p_DacDdsResetW, &valueSet );
-		if( (int32_t)(valueSet & DacDdsResetMask) == (pFromFpga->data & DacDdsResetMask))
+		if( (uint32_t)(valueSet & DacDdsResetMask) == (uint32_t)(pFromFpga->data & DacDdsResetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DacDdsResetWString, (unsigned ) pFromFpga->data & DacDdsResetMask);
@@ -6008,7 +6439,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DacModeWAdr:
 		status = (asynStatus) getIntegerParam(p_DacModeW, &valueSet );
-		if( (int32_t)(valueSet & DacModeMask) == (pFromFpga->data & DacModeMask))
+		if( (uint32_t)(valueSet & DacModeMask) == (uint32_t)(pFromFpga->data & DacModeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DacModeWString, (unsigned ) pFromFpga->data & DacModeMask);
@@ -6026,7 +6457,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DdsaModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_DdsaModuloW, &valueSet );
-		if( (int32_t)(valueSet & DdsaModuloMask) == (pFromFpga->data & DdsaModuloMask))
+		if( (uint32_t)(valueSet & DdsaModuloMask) == (uint32_t)(pFromFpga->data & DdsaModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DdsaModuloWString, (unsigned ) pFromFpga->data & DdsaModuloMask);
@@ -6044,7 +6475,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DdsaPhstepHWAdr:
 		status = (asynStatus) getIntegerParam(p_DdsaPhstepHW, &valueSet );
-		if( (int32_t)(valueSet & DdsaPhstepHMask) == (pFromFpga->data & DdsaPhstepHMask))
+		if( (uint32_t)(valueSet & DdsaPhstepHMask) == (uint32_t)(pFromFpga->data & DdsaPhstepHMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DdsaPhstepHWString, (unsigned ) pFromFpga->data & DdsaPhstepHMask);
@@ -6062,7 +6493,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DdsaPhstepLWAdr:
 		status = (asynStatus) getIntegerParam(p_DdsaPhstepLW, &valueSet );
-		if( (int32_t)(valueSet & DdsaPhstepLMask) == (pFromFpga->data & DdsaPhstepLMask))
+		if( (uint32_t)(valueSet & DdsaPhstepLMask) == (uint32_t)(pFromFpga->data & DdsaPhstepLMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DdsaPhstepLWString, (unsigned ) pFromFpga->data & DdsaPhstepLMask);
@@ -6080,7 +6511,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case HistCountWStrobeWAdr:
 		status = (asynStatus) getIntegerParam(p_HistCountWStrobeW, &valueSet );
-		if( (int32_t)(valueSet & HistCountWStrobeMask) == (pFromFpga->data & HistCountWStrobeMask))
+		if( (uint32_t)(valueSet & HistCountWStrobeMask) == (uint32_t)(pFromFpga->data & HistCountWStrobeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				HistCountWStrobeWString, (unsigned ) pFromFpga->data & HistCountWStrobeMask);
@@ -6098,7 +6529,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case LlrfDspDacEnWAdr:
 		status = (asynStatus) getIntegerParam(p_LlrfDspDacEnW, &valueSet );
-		if( (int32_t)(valueSet & LlrfDspDacEnMask) == (pFromFpga->data & LlrfDspDacEnMask))
+		if( (uint32_t)(valueSet & LlrfDspDacEnMask) == (uint32_t)(pFromFpga->data & LlrfDspDacEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				LlrfDspDacEnWString, (unsigned ) pFromFpga->data & LlrfDspDacEnMask);
@@ -6116,7 +6547,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case LoAmpWAdr:
 		status = (asynStatus) getIntegerParam(p_LoAmpW, &valueSet );
-		if( (int32_t)(valueSet & LoAmpMask) == (pFromFpga->data & LoAmpMask))
+		if( (uint32_t)(valueSet & LoAmpMask) == (uint32_t)(pFromFpga->data & LoAmpMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				LoAmpWString, (unsigned ) pFromFpga->data & LoAmpMask);
@@ -6134,7 +6565,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case ModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_ModuloW, &valueSet );
-		if( (int32_t)(valueSet & ModuloMask) == (pFromFpga->data & ModuloMask))
+		if( (uint32_t)(valueSet & ModuloMask) == (uint32_t)(pFromFpga->data & ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ModuloWString, (unsigned ) pFromFpga->data & ModuloMask);
@@ -6152,7 +6583,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case PhaseStepHWAdr:
 		status = (asynStatus) getIntegerParam(p_PhaseStepHW, &valueSet );
-		if( (int32_t)(valueSet & PhaseStepHMask) == (pFromFpga->data & PhaseStepHMask))
+		if( (uint32_t)(valueSet & PhaseStepHMask) == (uint32_t)(pFromFpga->data & PhaseStepHMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PhaseStepHWString, (unsigned ) pFromFpga->data & PhaseStepHMask);
@@ -6170,7 +6601,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case PhaseStepLWAdr:
 		status = (asynStatus) getIntegerParam(p_PhaseStepLW, &valueSet );
-		if( (int32_t)(valueSet & PhaseStepLMask) == (pFromFpga->data & PhaseStepLMask))
+		if( (uint32_t)(valueSet & PhaseStepLMask) == (uint32_t)(pFromFpga->data & PhaseStepLMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PhaseStepLWString, (unsigned ) pFromFpga->data & PhaseStepLMask);
@@ -6188,7 +6619,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case PrcDspCavSelWAdr:
 		status = (asynStatus) getIntegerParam(p_PrcDspCavSelW, &valueSet );
-		if( (int32_t)(valueSet & PrcDspCavSelMask) == (pFromFpga->data & PrcDspCavSelMask))
+		if( (uint32_t)(valueSet & PrcDspCavSelMask) == (uint32_t)(pFromFpga->data & PrcDspCavSelMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PrcDspCavSelWString, (unsigned ) pFromFpga->data & PrcDspCavSelMask);
@@ -6206,7 +6637,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case PrcDspPrlCfgWAdr:
 		status = (asynStatus) getIntegerParam(p_PrcDspPrlCfgW, &valueSet );
-		if( (int32_t)(valueSet & PrcDspPrlCfgMask) == (pFromFpga->data & PrcDspPrlCfgMask))
+		if( (uint32_t)(valueSet & PrcDspPrlCfgMask) == (uint32_t)(pFromFpga->data & PrcDspPrlCfgMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PrcDspPrlCfgWString, (unsigned ) pFromFpga->data & PrcDspPrlCfgMask);
@@ -6224,7 +6655,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case PrcDspPrlGainWAdr:
 		status = (asynStatus) getIntegerParam(p_PrcDspPrlGainW, &valueSet );
-		if( (int32_t)(valueSet & PrcDspPrlGainMask) == (pFromFpga->data & PrcDspPrlGainMask))
+		if( (uint32_t)(valueSet & PrcDspPrlGainMask) == (uint32_t)(pFromFpga->data & PrcDspPrlGainMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PrcDspPrlGainWString, (unsigned ) pFromFpga->data & PrcDspPrlGainMask);
@@ -6242,7 +6673,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Beam0ModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_Beam0ModuloW, &valueSet );
-		if( (int32_t)(valueSet & Beam0ModuloMask) == (pFromFpga->data & Beam0ModuloMask))
+		if( (uint32_t)(valueSet & Beam0ModuloMask) == (uint32_t)(pFromFpga->data & Beam0ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Beam0ModuloWString, (unsigned ) pFromFpga->data & Beam0ModuloMask);
@@ -6260,7 +6691,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Beam0PhaseInitWAdr:
 		status = (asynStatus) getIntegerParam(p_Beam0PhaseInitW, &valueSet );
-		if( (int32_t)(valueSet & Beam0PhaseInitMask) == (pFromFpga->data & Beam0PhaseInitMask))
+		if( (uint32_t)(valueSet & Beam0PhaseInitMask) == (uint32_t)(pFromFpga->data & Beam0PhaseInitMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Beam0PhaseInitWString, (unsigned ) pFromFpga->data & Beam0PhaseInitMask);
@@ -6278,7 +6709,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Beam0PhaseStepWAdr:
 		status = (asynStatus) getIntegerParam(p_Beam0PhaseStepW, &valueSet );
-		if( (int32_t)(valueSet & Beam0PhaseStepMask) == (pFromFpga->data & Beam0PhaseStepMask))
+		if( (uint32_t)(valueSet & Beam0PhaseStepMask) == (uint32_t)(pFromFpga->data & Beam0PhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Beam0PhaseStepWString, (unsigned ) pFromFpga->data & Beam0PhaseStepMask);
@@ -6296,7 +6727,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Beam1ModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_Beam1ModuloW, &valueSet );
-		if( (int32_t)(valueSet & Beam1ModuloMask) == (pFromFpga->data & Beam1ModuloMask))
+		if( (uint32_t)(valueSet & Beam1ModuloMask) == (uint32_t)(pFromFpga->data & Beam1ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Beam1ModuloWString, (unsigned ) pFromFpga->data & Beam1ModuloMask);
@@ -6314,7 +6745,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Beam1PhaseInitWAdr:
 		status = (asynStatus) getIntegerParam(p_Beam1PhaseInitW, &valueSet );
-		if( (int32_t)(valueSet & Beam1PhaseInitMask) == (pFromFpga->data & Beam1PhaseInitMask))
+		if( (uint32_t)(valueSet & Beam1PhaseInitMask) == (uint32_t)(pFromFpga->data & Beam1PhaseInitMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Beam1PhaseInitWString, (unsigned ) pFromFpga->data & Beam1PhaseInitMask);
@@ -6332,7 +6763,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Beam1PhaseStepWAdr:
 		status = (asynStatus) getIntegerParam(p_Beam1PhaseStepW, &valueSet );
-		if( (int32_t)(valueSet & Beam1PhaseStepMask) == (pFromFpga->data & Beam1PhaseStepMask))
+		if( (uint32_t)(valueSet & Beam1PhaseStepMask) == (uint32_t)(pFromFpga->data & Beam1PhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Beam1PhaseStepWString, (unsigned ) pFromFpga->data & Beam1PhaseStepMask);
@@ -6350,7 +6781,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cav4MechPrngIvaWAdr:
 		status = (asynStatus) getIntegerParam(p_Cav4MechPrngIvaW, &valueSet );
-		if( (int32_t)(valueSet & Cav4MechPrngIvaMask) == (pFromFpga->data & Cav4MechPrngIvaMask))
+		if( (uint32_t)(valueSet & Cav4MechPrngIvaMask) == (uint32_t)(pFromFpga->data & Cav4MechPrngIvaMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cav4MechPrngIvaWString, (unsigned ) pFromFpga->data & Cav4MechPrngIvaMask);
@@ -6368,7 +6799,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cav4MechPrngIvbWAdr:
 		status = (asynStatus) getIntegerParam(p_Cav4MechPrngIvbW, &valueSet );
-		if( (int32_t)(valueSet & Cav4MechPrngIvbMask) == (pFromFpga->data & Cav4MechPrngIvbMask))
+		if( (uint32_t)(valueSet & Cav4MechPrngIvbMask) == (uint32_t)(pFromFpga->data & Cav4MechPrngIvbMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cav4MechPrngIvbWString, (unsigned ) pFromFpga->data & Cav4MechPrngIvbMask);
@@ -6386,7 +6817,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cav4MechPrngRandomRunWAdr:
 		status = (asynStatus) getIntegerParam(p_Cav4MechPrngRandomRunW, &valueSet );
-		if( (int32_t)(valueSet & Cav4MechPrngRandomRunMask) == (pFromFpga->data & Cav4MechPrngRandomRunMask))
+		if( (uint32_t)(valueSet & Cav4MechPrngRandomRunMask) == (uint32_t)(pFromFpga->data & Cav4MechPrngRandomRunMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cav4MechPrngRandomRunWString, (unsigned ) pFromFpga->data & Cav4MechPrngRandomRunMask);
@@ -6404,7 +6835,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0ACavOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0ACavOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0ACavOffsetMask) == (pFromFpga->data & Cavity0ACavOffsetMask))
+		if( (uint32_t)(valueSet & Cavity0ACavOffsetMask) == (uint32_t)(pFromFpga->data & Cavity0ACavOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0ACavOffsetWString, (unsigned ) pFromFpga->data & Cavity0ACavOffsetMask);
@@ -6422,7 +6853,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0AForOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0AForOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0AForOffsetMask) == (pFromFpga->data & Cavity0AForOffsetMask))
+		if( (uint32_t)(valueSet & Cavity0AForOffsetMask) == (uint32_t)(pFromFpga->data & Cavity0AForOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0AForOffsetWString, (unsigned ) pFromFpga->data & Cavity0AForOffsetMask);
@@ -6440,7 +6871,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0ARflOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0ARflOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0ARflOffsetMask) == (pFromFpga->data & Cavity0ARflOffsetMask))
+		if( (uint32_t)(valueSet & Cavity0ARflOffsetMask) == (uint32_t)(pFromFpga->data & Cavity0ARflOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0ARflOffsetWString, (unsigned ) pFromFpga->data & Cavity0ARflOffsetMask);
@@ -6458,7 +6889,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0AmpLpBwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0AmpLpBwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0AmpLpBwMask) == (pFromFpga->data & Cavity0AmpLpBwMask))
+		if( (uint32_t)(valueSet & Cavity0AmpLpBwMask) == (uint32_t)(pFromFpga->data & Cavity0AmpLpBwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0AmpLpBwWString, (unsigned ) pFromFpga->data & Cavity0AmpLpBwMask);
@@ -6476,7 +6907,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Freq0CoarseFreqWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Freq0CoarseFreqW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Freq0CoarseFreqMask) == (pFromFpga->data & Cavity0Freq0CoarseFreqMask))
+		if( (uint32_t)(valueSet & Cavity0Freq0CoarseFreqMask) == (uint32_t)(pFromFpga->data & Cavity0Freq0CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Freq0CoarseFreqWString, (unsigned ) pFromFpga->data & Cavity0Freq0CoarseFreqMask);
@@ -6494,7 +6925,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Freq1CoarseFreqWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Freq1CoarseFreqW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Freq1CoarseFreqMask) == (pFromFpga->data & Cavity0Freq1CoarseFreqMask))
+		if( (uint32_t)(valueSet & Cavity0Freq1CoarseFreqMask) == (uint32_t)(pFromFpga->data & Cavity0Freq1CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Freq1CoarseFreqWString, (unsigned ) pFromFpga->data & Cavity0Freq1CoarseFreqMask);
@@ -6512,7 +6943,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Freq2CoarseFreqWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Freq2CoarseFreqW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Freq2CoarseFreqMask) == (pFromFpga->data & Cavity0Freq2CoarseFreqMask))
+		if( (uint32_t)(valueSet & Cavity0Freq2CoarseFreqMask) == (uint32_t)(pFromFpga->data & Cavity0Freq2CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Freq2CoarseFreqWString, (unsigned ) pFromFpga->data & Cavity0Freq2CoarseFreqMask);
@@ -6530,7 +6961,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode0BeamCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode0BeamCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode0BeamCouplingMask) == (pFromFpga->data & Cavity0Mode0BeamCouplingMask))
+		if( (uint32_t)(valueSet & Cavity0Mode0BeamCouplingMask) == (uint32_t)(pFromFpga->data & Cavity0Mode0BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode0BeamCouplingWString, (unsigned ) pFromFpga->data & Cavity0Mode0BeamCouplingMask);
@@ -6548,7 +6979,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode0BwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode0BwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode0BwMask) == (pFromFpga->data & Cavity0Mode0BwMask))
+		if( (uint32_t)(valueSet & Cavity0Mode0BwMask) == (uint32_t)(pFromFpga->data & Cavity0Mode0BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode0BwWString, (unsigned ) pFromFpga->data & Cavity0Mode0BwMask);
@@ -6566,7 +6997,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode0DriveCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode0DriveCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode0DriveCouplingMask) == (pFromFpga->data & Cavity0Mode0DriveCouplingMask))
+		if( (uint32_t)(valueSet & Cavity0Mode0DriveCouplingMask) == (uint32_t)(pFromFpga->data & Cavity0Mode0DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode0DriveCouplingWString, (unsigned ) pFromFpga->data & Cavity0Mode0DriveCouplingMask);
@@ -6584,7 +7015,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode1BeamCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode1BeamCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode1BeamCouplingMask) == (pFromFpga->data & Cavity0Mode1BeamCouplingMask))
+		if( (uint32_t)(valueSet & Cavity0Mode1BeamCouplingMask) == (uint32_t)(pFromFpga->data & Cavity0Mode1BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode1BeamCouplingWString, (unsigned ) pFromFpga->data & Cavity0Mode1BeamCouplingMask);
@@ -6602,7 +7033,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode1BwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode1BwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode1BwMask) == (pFromFpga->data & Cavity0Mode1BwMask))
+		if( (uint32_t)(valueSet & Cavity0Mode1BwMask) == (uint32_t)(pFromFpga->data & Cavity0Mode1BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode1BwWString, (unsigned ) pFromFpga->data & Cavity0Mode1BwMask);
@@ -6620,7 +7051,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode1DriveCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode1DriveCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode1DriveCouplingMask) == (pFromFpga->data & Cavity0Mode1DriveCouplingMask))
+		if( (uint32_t)(valueSet & Cavity0Mode1DriveCouplingMask) == (uint32_t)(pFromFpga->data & Cavity0Mode1DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode1DriveCouplingWString, (unsigned ) pFromFpga->data & Cavity0Mode1DriveCouplingMask);
@@ -6638,7 +7069,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode2BeamCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode2BeamCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode2BeamCouplingMask) == (pFromFpga->data & Cavity0Mode2BeamCouplingMask))
+		if( (uint32_t)(valueSet & Cavity0Mode2BeamCouplingMask) == (uint32_t)(pFromFpga->data & Cavity0Mode2BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode2BeamCouplingWString, (unsigned ) pFromFpga->data & Cavity0Mode2BeamCouplingMask);
@@ -6656,7 +7087,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode2BwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode2BwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode2BwMask) == (pFromFpga->data & Cavity0Mode2BwMask))
+		if( (uint32_t)(valueSet & Cavity0Mode2BwMask) == (uint32_t)(pFromFpga->data & Cavity0Mode2BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode2BwWString, (unsigned ) pFromFpga->data & Cavity0Mode2BwMask);
@@ -6674,7 +7105,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0Mode2DriveCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0Mode2DriveCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0Mode2DriveCouplingMask) == (pFromFpga->data & Cavity0Mode2DriveCouplingMask))
+		if( (uint32_t)(valueSet & Cavity0Mode2DriveCouplingMask) == (uint32_t)(pFromFpga->data & Cavity0Mode2DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0Mode2DriveCouplingWString, (unsigned ) pFromFpga->data & Cavity0Mode2DriveCouplingMask);
@@ -6692,7 +7123,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0ModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0ModuloW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0ModuloMask) == (pFromFpga->data & Cavity0ModuloMask))
+		if( (uint32_t)(valueSet & Cavity0ModuloMask) == (uint32_t)(pFromFpga->data & Cavity0ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0ModuloWString, (unsigned ) pFromFpga->data & Cavity0ModuloMask);
@@ -6710,7 +7141,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0PhaseStepWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0PhaseStepW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0PhaseStepMask) == (pFromFpga->data & Cavity0PhaseStepMask))
+		if( (uint32_t)(valueSet & Cavity0PhaseStepMask) == (uint32_t)(pFromFpga->data & Cavity0PhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0PhaseStepWString, (unsigned ) pFromFpga->data & Cavity0PhaseStepMask);
@@ -6728,7 +7159,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0ComprSatCtlWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0ComprSatCtlW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0ComprSatCtlMask) == (pFromFpga->data & Cavity0ComprSatCtlMask))
+		if( (uint32_t)(valueSet & Cavity0ComprSatCtlMask) == (uint32_t)(pFromFpga->data & Cavity0ComprSatCtlMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0ComprSatCtlWString, (unsigned ) pFromFpga->data & Cavity0ComprSatCtlMask);
@@ -6746,7 +7177,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0PrngIvaWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0PrngIvaW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0PrngIvaMask) == (pFromFpga->data & Cavity0PrngIvaMask))
+		if( (uint32_t)(valueSet & Cavity0PrngIvaMask) == (uint32_t)(pFromFpga->data & Cavity0PrngIvaMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0PrngIvaWString, (unsigned ) pFromFpga->data & Cavity0PrngIvaMask);
@@ -6764,7 +7195,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0PrngIvbWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0PrngIvbW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0PrngIvbMask) == (pFromFpga->data & Cavity0PrngIvbMask))
+		if( (uint32_t)(valueSet & Cavity0PrngIvbMask) == (uint32_t)(pFromFpga->data & Cavity0PrngIvbMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0PrngIvbWString, (unsigned ) pFromFpga->data & Cavity0PrngIvbMask);
@@ -6782,7 +7213,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity0PrngRandomRunWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity0PrngRandomRunW, &valueSet );
-		if( (int32_t)(valueSet & Cavity0PrngRandomRunMask) == (pFromFpga->data & Cavity0PrngRandomRunMask))
+		if( (uint32_t)(valueSet & Cavity0PrngRandomRunMask) == (uint32_t)(pFromFpga->data & Cavity0PrngRandomRunMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity0PrngRandomRunWString, (unsigned ) pFromFpga->data & Cavity0PrngRandomRunMask);
@@ -6800,7 +7231,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1ACavOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1ACavOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1ACavOffsetMask) == (pFromFpga->data & Cavity1ACavOffsetMask))
+		if( (uint32_t)(valueSet & Cavity1ACavOffsetMask) == (uint32_t)(pFromFpga->data & Cavity1ACavOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1ACavOffsetWString, (unsigned ) pFromFpga->data & Cavity1ACavOffsetMask);
@@ -6818,7 +7249,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1AForOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1AForOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1AForOffsetMask) == (pFromFpga->data & Cavity1AForOffsetMask))
+		if( (uint32_t)(valueSet & Cavity1AForOffsetMask) == (uint32_t)(pFromFpga->data & Cavity1AForOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1AForOffsetWString, (unsigned ) pFromFpga->data & Cavity1AForOffsetMask);
@@ -6836,7 +7267,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1ARflOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1ARflOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1ARflOffsetMask) == (pFromFpga->data & Cavity1ARflOffsetMask))
+		if( (uint32_t)(valueSet & Cavity1ARflOffsetMask) == (uint32_t)(pFromFpga->data & Cavity1ARflOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1ARflOffsetWString, (unsigned ) pFromFpga->data & Cavity1ARflOffsetMask);
@@ -6854,7 +7285,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1AmpLpBwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1AmpLpBwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1AmpLpBwMask) == (pFromFpga->data & Cavity1AmpLpBwMask))
+		if( (uint32_t)(valueSet & Cavity1AmpLpBwMask) == (uint32_t)(pFromFpga->data & Cavity1AmpLpBwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1AmpLpBwWString, (unsigned ) pFromFpga->data & Cavity1AmpLpBwMask);
@@ -6872,7 +7303,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Freq0CoarseFreqWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Freq0CoarseFreqW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Freq0CoarseFreqMask) == (pFromFpga->data & Cavity1Freq0CoarseFreqMask))
+		if( (uint32_t)(valueSet & Cavity1Freq0CoarseFreqMask) == (uint32_t)(pFromFpga->data & Cavity1Freq0CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Freq0CoarseFreqWString, (unsigned ) pFromFpga->data & Cavity1Freq0CoarseFreqMask);
@@ -6890,7 +7321,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Freq1CoarseFreqWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Freq1CoarseFreqW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Freq1CoarseFreqMask) == (pFromFpga->data & Cavity1Freq1CoarseFreqMask))
+		if( (uint32_t)(valueSet & Cavity1Freq1CoarseFreqMask) == (uint32_t)(pFromFpga->data & Cavity1Freq1CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Freq1CoarseFreqWString, (unsigned ) pFromFpga->data & Cavity1Freq1CoarseFreqMask);
@@ -6908,7 +7339,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Freq2CoarseFreqWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Freq2CoarseFreqW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Freq2CoarseFreqMask) == (pFromFpga->data & Cavity1Freq2CoarseFreqMask))
+		if( (uint32_t)(valueSet & Cavity1Freq2CoarseFreqMask) == (uint32_t)(pFromFpga->data & Cavity1Freq2CoarseFreqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Freq2CoarseFreqWString, (unsigned ) pFromFpga->data & Cavity1Freq2CoarseFreqMask);
@@ -6926,7 +7357,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode0BeamCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode0BeamCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode0BeamCouplingMask) == (pFromFpga->data & Cavity1Mode0BeamCouplingMask))
+		if( (uint32_t)(valueSet & Cavity1Mode0BeamCouplingMask) == (uint32_t)(pFromFpga->data & Cavity1Mode0BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode0BeamCouplingWString, (unsigned ) pFromFpga->data & Cavity1Mode0BeamCouplingMask);
@@ -6944,7 +7375,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode0BwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode0BwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode0BwMask) == (pFromFpga->data & Cavity1Mode0BwMask))
+		if( (uint32_t)(valueSet & Cavity1Mode0BwMask) == (uint32_t)(pFromFpga->data & Cavity1Mode0BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode0BwWString, (unsigned ) pFromFpga->data & Cavity1Mode0BwMask);
@@ -6962,7 +7393,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode0DriveCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode0DriveCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode0DriveCouplingMask) == (pFromFpga->data & Cavity1Mode0DriveCouplingMask))
+		if( (uint32_t)(valueSet & Cavity1Mode0DriveCouplingMask) == (uint32_t)(pFromFpga->data & Cavity1Mode0DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode0DriveCouplingWString, (unsigned ) pFromFpga->data & Cavity1Mode0DriveCouplingMask);
@@ -6980,7 +7411,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode1BeamCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode1BeamCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode1BeamCouplingMask) == (pFromFpga->data & Cavity1Mode1BeamCouplingMask))
+		if( (uint32_t)(valueSet & Cavity1Mode1BeamCouplingMask) == (uint32_t)(pFromFpga->data & Cavity1Mode1BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode1BeamCouplingWString, (unsigned ) pFromFpga->data & Cavity1Mode1BeamCouplingMask);
@@ -6998,7 +7429,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode1BwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode1BwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode1BwMask) == (pFromFpga->data & Cavity1Mode1BwMask))
+		if( (uint32_t)(valueSet & Cavity1Mode1BwMask) == (uint32_t)(pFromFpga->data & Cavity1Mode1BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode1BwWString, (unsigned ) pFromFpga->data & Cavity1Mode1BwMask);
@@ -7016,7 +7447,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode1DriveCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode1DriveCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode1DriveCouplingMask) == (pFromFpga->data & Cavity1Mode1DriveCouplingMask))
+		if( (uint32_t)(valueSet & Cavity1Mode1DriveCouplingMask) == (uint32_t)(pFromFpga->data & Cavity1Mode1DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode1DriveCouplingWString, (unsigned ) pFromFpga->data & Cavity1Mode1DriveCouplingMask);
@@ -7034,7 +7465,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode2BeamCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode2BeamCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode2BeamCouplingMask) == (pFromFpga->data & Cavity1Mode2BeamCouplingMask))
+		if( (uint32_t)(valueSet & Cavity1Mode2BeamCouplingMask) == (uint32_t)(pFromFpga->data & Cavity1Mode2BeamCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode2BeamCouplingWString, (unsigned ) pFromFpga->data & Cavity1Mode2BeamCouplingMask);
@@ -7052,7 +7483,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode2BwWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode2BwW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode2BwMask) == (pFromFpga->data & Cavity1Mode2BwMask))
+		if( (uint32_t)(valueSet & Cavity1Mode2BwMask) == (uint32_t)(pFromFpga->data & Cavity1Mode2BwMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode2BwWString, (unsigned ) pFromFpga->data & Cavity1Mode2BwMask);
@@ -7070,7 +7501,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1Mode2DriveCouplingWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1Mode2DriveCouplingW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1Mode2DriveCouplingMask) == (pFromFpga->data & Cavity1Mode2DriveCouplingMask))
+		if( (uint32_t)(valueSet & Cavity1Mode2DriveCouplingMask) == (uint32_t)(pFromFpga->data & Cavity1Mode2DriveCouplingMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1Mode2DriveCouplingWString, (unsigned ) pFromFpga->data & Cavity1Mode2DriveCouplingMask);
@@ -7088,7 +7519,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1ModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1ModuloW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1ModuloMask) == (pFromFpga->data & Cavity1ModuloMask))
+		if( (uint32_t)(valueSet & Cavity1ModuloMask) == (uint32_t)(pFromFpga->data & Cavity1ModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1ModuloWString, (unsigned ) pFromFpga->data & Cavity1ModuloMask);
@@ -7106,7 +7537,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1PhaseStepWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1PhaseStepW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1PhaseStepMask) == (pFromFpga->data & Cavity1PhaseStepMask))
+		if( (uint32_t)(valueSet & Cavity1PhaseStepMask) == (uint32_t)(pFromFpga->data & Cavity1PhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1PhaseStepWString, (unsigned ) pFromFpga->data & Cavity1PhaseStepMask);
@@ -7124,7 +7555,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1ComprSatCtlWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1ComprSatCtlW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1ComprSatCtlMask) == (pFromFpga->data & Cavity1ComprSatCtlMask))
+		if( (uint32_t)(valueSet & Cavity1ComprSatCtlMask) == (uint32_t)(pFromFpga->data & Cavity1ComprSatCtlMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1ComprSatCtlWString, (unsigned ) pFromFpga->data & Cavity1ComprSatCtlMask);
@@ -7142,7 +7573,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1PrngIvaWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1PrngIvaW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1PrngIvaMask) == (pFromFpga->data & Cavity1PrngIvaMask))
+		if( (uint32_t)(valueSet & Cavity1PrngIvaMask) == (uint32_t)(pFromFpga->data & Cavity1PrngIvaMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1PrngIvaWString, (unsigned ) pFromFpga->data & Cavity1PrngIvaMask);
@@ -7160,7 +7591,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1PrngIvbWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1PrngIvbW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1PrngIvbMask) == (pFromFpga->data & Cavity1PrngIvbMask))
+		if( (uint32_t)(valueSet & Cavity1PrngIvbMask) == (uint32_t)(pFromFpga->data & Cavity1PrngIvbMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1PrngIvbWString, (unsigned ) pFromFpga->data & Cavity1PrngIvbMask);
@@ -7178,7 +7609,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Cavity1PrngRandomRunWAdr:
 		status = (asynStatus) getIntegerParam(p_Cavity1PrngRandomRunW, &valueSet );
-		if( (int32_t)(valueSet & Cavity1PrngRandomRunMask) == (pFromFpga->data & Cavity1PrngRandomRunMask))
+		if( (uint32_t)(valueSet & Cavity1PrngRandomRunMask) == (uint32_t)(pFromFpga->data & Cavity1PrngRandomRunMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Cavity1PrngRandomRunWString, (unsigned ) pFromFpga->data & Cavity1PrngRandomRunMask);
@@ -7196,7 +7627,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DacIqPhaseWAdr:
 		status = (asynStatus) getIntegerParam(p_DacIqPhaseW, &valueSet );
-		if( (int32_t)(valueSet & DacIqPhaseMask) == (pFromFpga->data & DacIqPhaseMask))
+		if( (uint32_t)(valueSet & DacIqPhaseMask) == (uint32_t)(pFromFpga->data & DacIqPhaseMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DacIqPhaseWString, (unsigned ) pFromFpga->data & DacIqPhaseMask);
@@ -7214,7 +7645,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspChanKeepWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_Shell0DspChanKeepW, &uValueSet , Shell0DspChanKeepMask);
-		if( (int32_t)(uValueSet & Shell0DspChanKeepMask) == (pFromFpga->data & Shell0DspChanKeepMask))
+		if( (uint32_t)(uValueSet & Shell0DspChanKeepMask) == (uint32_t)(pFromFpga->data & Shell0DspChanKeepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspChanKeepWString, (unsigned ) pFromFpga->data & Shell0DspChanKeepMask);
@@ -7232,7 +7663,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspFdbkCoreCoarseScaleWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspFdbkCoreCoarseScaleW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspFdbkCoreCoarseScaleMask) == (pFromFpga->data & Shell0DspFdbkCoreCoarseScaleMask))
+		if( (uint32_t)(valueSet & Shell0DspFdbkCoreCoarseScaleMask) == (uint32_t)(pFromFpga->data & Shell0DspFdbkCoreCoarseScaleMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspFdbkCoreCoarseScaleWString, (unsigned ) pFromFpga->data & Shell0DspFdbkCoreCoarseScaleMask);
@@ -7250,7 +7681,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspFdbkCoreMpProcPhOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspFdbkCoreMpProcPhOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspFdbkCoreMpProcPhOffsetMask) == (pFromFpga->data & Shell0DspFdbkCoreMpProcPhOffsetMask))
+		if( (uint32_t)(valueSet & Shell0DspFdbkCoreMpProcPhOffsetMask) == (uint32_t)(pFromFpga->data & Shell0DspFdbkCoreMpProcPhOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspFdbkCoreMpProcPhOffsetWString, (unsigned ) pFromFpga->data & Shell0DspFdbkCoreMpProcPhOffsetMask);
@@ -7268,7 +7699,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspFdbkCoreMpProcSelEnWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspFdbkCoreMpProcSelEnW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspFdbkCoreMpProcSelEnMask) == (pFromFpga->data & Shell0DspFdbkCoreMpProcSelEnMask))
+		if( (uint32_t)(valueSet & Shell0DspFdbkCoreMpProcSelEnMask) == (uint32_t)(pFromFpga->data & Shell0DspFdbkCoreMpProcSelEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspFdbkCoreMpProcSelEnWString, (unsigned ) pFromFpga->data & Shell0DspFdbkCoreMpProcSelEnMask);
@@ -7286,7 +7717,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspFdbkCoreMpProcSelThreshWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspFdbkCoreMpProcSelThreshW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspFdbkCoreMpProcSelThreshMask) == (pFromFpga->data & Shell0DspFdbkCoreMpProcSelThreshMask))
+		if( (uint32_t)(valueSet & Shell0DspFdbkCoreMpProcSelThreshMask) == (uint32_t)(pFromFpga->data & Shell0DspFdbkCoreMpProcSelThreshMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspFdbkCoreMpProcSelThreshWString, (unsigned ) pFromFpga->data & Shell0DspFdbkCoreMpProcSelThreshMask);
@@ -7304,7 +7735,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspModuloW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspModuloMask) == (pFromFpga->data & Shell0DspModuloMask))
+		if( (uint32_t)(valueSet & Shell0DspModuloMask) == (uint32_t)(pFromFpga->data & Shell0DspModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspModuloWString, (unsigned ) pFromFpga->data & Shell0DspModuloMask);
@@ -7322,7 +7753,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspPhaseStepWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspPhaseStepW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspPhaseStepMask) == (pFromFpga->data & Shell0DspPhaseStepMask))
+		if( (uint32_t)(valueSet & Shell0DspPhaseStepMask) == (uint32_t)(pFromFpga->data & Shell0DspPhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspPhaseStepWString, (unsigned ) pFromFpga->data & Shell0DspPhaseStepMask);
@@ -7340,7 +7771,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspPiezoPiezoDcWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspPiezoPiezoDcW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspPiezoPiezoDcMask) == (pFromFpga->data & Shell0DspPiezoPiezoDcMask))
+		if( (uint32_t)(valueSet & Shell0DspPiezoPiezoDcMask) == (uint32_t)(pFromFpga->data & Shell0DspPiezoPiezoDcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspPiezoPiezoDcWString, (unsigned ) pFromFpga->data & Shell0DspPiezoPiezoDcMask);
@@ -7358,7 +7789,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspTagWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspTagW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspTagMask) == (pFromFpga->data & Shell0DspTagMask))
+		if( (uint32_t)(valueSet & Shell0DspTagMask) == (uint32_t)(pFromFpga->data & Shell0DspTagMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspTagWString, (unsigned ) pFromFpga->data & Shell0DspTagMask);
@@ -7376,7 +7807,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspUseFiberIqWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspUseFiberIqW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspUseFiberIqMask) == (pFromFpga->data & Shell0DspUseFiberIqMask))
+		if( (uint32_t)(valueSet & Shell0DspUseFiberIqMask) == (uint32_t)(pFromFpga->data & Shell0DspUseFiberIqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspUseFiberIqWString, (unsigned ) pFromFpga->data & Shell0DspUseFiberIqMask);
@@ -7394,7 +7825,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspWaveSampPerWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspWaveSampPerW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspWaveSampPerMask) == (pFromFpga->data & Shell0DspWaveSampPerMask))
+		if( (uint32_t)(valueSet & Shell0DspWaveSampPerMask) == (uint32_t)(pFromFpga->data & Shell0DspWaveSampPerMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspWaveSampPerWString, (unsigned ) pFromFpga->data & Shell0DspWaveSampPerMask);
@@ -7412,7 +7843,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell0DspWaveShiftWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell0DspWaveShiftW, &valueSet );
-		if( (int32_t)(valueSet & Shell0DspWaveShiftMask) == (pFromFpga->data & Shell0DspWaveShiftMask))
+		if( (uint32_t)(valueSet & Shell0DspWaveShiftMask) == (uint32_t)(pFromFpga->data & Shell0DspWaveShiftMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspWaveShiftWString, (unsigned ) pFromFpga->data & Shell0DspWaveShiftMask);
@@ -7430,7 +7861,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspChanKeepWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_Shell1DspChanKeepW, &uValueSet , Shell1DspChanKeepMask);
-		if( (int32_t)(uValueSet & Shell1DspChanKeepMask) == (pFromFpga->data & Shell1DspChanKeepMask))
+		if( (uint32_t)(uValueSet & Shell1DspChanKeepMask) == (uint32_t)(pFromFpga->data & Shell1DspChanKeepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspChanKeepWString, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
@@ -7448,7 +7879,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspFdbkCoreCoarseScaleWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspFdbkCoreCoarseScaleW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspFdbkCoreCoarseScaleMask) == (pFromFpga->data & Shell1DspFdbkCoreCoarseScaleMask))
+		if( (uint32_t)(valueSet & Shell1DspFdbkCoreCoarseScaleMask) == (uint32_t)(pFromFpga->data & Shell1DspFdbkCoreCoarseScaleMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspFdbkCoreCoarseScaleWString, (unsigned ) pFromFpga->data & Shell1DspFdbkCoreCoarseScaleMask);
@@ -7466,7 +7897,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspFdbkCoreMpProcPhOffsetWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspFdbkCoreMpProcPhOffsetW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspFdbkCoreMpProcPhOffsetMask) == (pFromFpga->data & Shell1DspFdbkCoreMpProcPhOffsetMask))
+		if( (uint32_t)(valueSet & Shell1DspFdbkCoreMpProcPhOffsetMask) == (uint32_t)(pFromFpga->data & Shell1DspFdbkCoreMpProcPhOffsetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspFdbkCoreMpProcPhOffsetWString, (unsigned ) pFromFpga->data & Shell1DspFdbkCoreMpProcPhOffsetMask);
@@ -7484,7 +7915,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspFdbkCoreMpProcSelEnWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspFdbkCoreMpProcSelEnW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspFdbkCoreMpProcSelEnMask) == (pFromFpga->data & Shell1DspFdbkCoreMpProcSelEnMask))
+		if( (uint32_t)(valueSet & Shell1DspFdbkCoreMpProcSelEnMask) == (uint32_t)(pFromFpga->data & Shell1DspFdbkCoreMpProcSelEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspFdbkCoreMpProcSelEnWString, (unsigned ) pFromFpga->data & Shell1DspFdbkCoreMpProcSelEnMask);
@@ -7502,7 +7933,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspFdbkCoreMpProcSelThreshWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspFdbkCoreMpProcSelThreshW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspFdbkCoreMpProcSelThreshMask) == (pFromFpga->data & Shell1DspFdbkCoreMpProcSelThreshMask))
+		if( (uint32_t)(valueSet & Shell1DspFdbkCoreMpProcSelThreshMask) == (uint32_t)(pFromFpga->data & Shell1DspFdbkCoreMpProcSelThreshMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspFdbkCoreMpProcSelThreshWString, (unsigned ) pFromFpga->data & Shell1DspFdbkCoreMpProcSelThreshMask);
@@ -7520,7 +7951,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspModuloWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspModuloW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspModuloMask) == (pFromFpga->data & Shell1DspModuloMask))
+		if( (uint32_t)(valueSet & Shell1DspModuloMask) == (uint32_t)(pFromFpga->data & Shell1DspModuloMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspModuloWString, (unsigned ) pFromFpga->data & Shell1DspModuloMask);
@@ -7538,7 +7969,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspPhaseStepWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspPhaseStepW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspPhaseStepMask) == (pFromFpga->data & Shell1DspPhaseStepMask))
+		if( (uint32_t)(valueSet & Shell1DspPhaseStepMask) == (uint32_t)(pFromFpga->data & Shell1DspPhaseStepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspPhaseStepWString, (unsigned ) pFromFpga->data & Shell1DspPhaseStepMask);
@@ -7556,7 +7987,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspPiezoPiezoDcWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspPiezoPiezoDcW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspPiezoPiezoDcMask) == (pFromFpga->data & Shell1DspPiezoPiezoDcMask))
+		if( (uint32_t)(valueSet & Shell1DspPiezoPiezoDcMask) == (uint32_t)(pFromFpga->data & Shell1DspPiezoPiezoDcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspPiezoPiezoDcWString, (unsigned ) pFromFpga->data & Shell1DspPiezoPiezoDcMask);
@@ -7574,7 +8005,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspTagWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspTagW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspTagMask) == (pFromFpga->data & Shell1DspTagMask))
+		if( (uint32_t)(valueSet & Shell1DspTagMask) == (uint32_t)(pFromFpga->data & Shell1DspTagMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspTagWString, (unsigned ) pFromFpga->data & Shell1DspTagMask);
@@ -7592,7 +8023,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspUseFiberIqWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspUseFiberIqW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspUseFiberIqMask) == (pFromFpga->data & Shell1DspUseFiberIqMask))
+		if( (uint32_t)(valueSet & Shell1DspUseFiberIqMask) == (uint32_t)(pFromFpga->data & Shell1DspUseFiberIqMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspUseFiberIqWString, (unsigned ) pFromFpga->data & Shell1DspUseFiberIqMask);
@@ -7610,7 +8041,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspWaveSampPerWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspWaveSampPerW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspWaveSampPerMask) == (pFromFpga->data & Shell1DspWaveSampPerMask))
+		if( (uint32_t)(valueSet & Shell1DspWaveSampPerMask) == (uint32_t)(pFromFpga->data & Shell1DspWaveSampPerMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspWaveSampPerWString, (unsigned ) pFromFpga->data & Shell1DspWaveSampPerMask);
@@ -7628,7 +8059,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Shell1DspWaveShiftWAdr:
 		status = (asynStatus) getIntegerParam(p_Shell1DspWaveShiftW, &valueSet );
-		if( (int32_t)(valueSet & Shell1DspWaveShiftMask) == (pFromFpga->data & Shell1DspWaveShiftMask))
+		if( (uint32_t)(valueSet & Shell1DspWaveShiftMask) == (uint32_t)(pFromFpga->data & Shell1DspWaveShiftMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspWaveShiftWString, (unsigned ) pFromFpga->data & Shell1DspWaveShiftMask);
@@ -7646,7 +8077,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case RewindWAdr:
 		status = (asynStatus) getIntegerParam(p_RewindW, &valueSet );
-		if( (int32_t)(valueSet & RewindMask) == (pFromFpga->data & RewindMask))
+		if( (uint32_t)(valueSet & RewindMask) == (uint32_t)(pFromFpga->data & RewindMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				RewindWString, (unsigned ) pFromFpga->data & RewindMask);
@@ -7664,7 +8095,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case SsaStimAmpstepWAdr:
 		status = (asynStatus) getIntegerParam(p_SsaStimAmpstepW, &valueSet );
-		if( (int32_t)(valueSet & SsaStimAmpstepMask) == (pFromFpga->data & SsaStimAmpstepMask))
+		if( (uint32_t)(valueSet & SsaStimAmpstepMask) == (uint32_t)(pFromFpga->data & SsaStimAmpstepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SsaStimAmpstepWString, (unsigned ) pFromFpga->data & SsaStimAmpstepMask);
@@ -7682,7 +8113,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case SsaStimEnWAdr:
 		status = (asynStatus) getIntegerParam(p_SsaStimEnW, &valueSet );
-		if( (int32_t)(valueSet & SsaStimEnMask) == (pFromFpga->data & SsaStimEnMask))
+		if( (uint32_t)(valueSet & SsaStimEnMask) == (uint32_t)(pFromFpga->data & SsaStimEnMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SsaStimEnWString, (unsigned ) pFromFpga->data & SsaStimEnMask);
@@ -7700,7 +8131,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case SsaStimGPeriodWAdr:
 		status = (asynStatus) getIntegerParam(p_SsaStimGPeriodW, &valueSet );
-		if( (int32_t)(valueSet & SsaStimGPeriodMask) == (pFromFpga->data & SsaStimGPeriodMask))
+		if( (uint32_t)(valueSet & SsaStimGPeriodMask) == (uint32_t)(pFromFpga->data & SsaStimGPeriodMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SsaStimGPeriodWString, (unsigned ) pFromFpga->data & SsaStimGPeriodMask);
@@ -7718,7 +8149,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case SsaStimPertstepWAdr:
 		status = (asynStatus) getIntegerParam(p_SsaStimPertstepW, &valueSet );
-		if( (int32_t)(valueSet & SsaStimPertstepMask) == (pFromFpga->data & SsaStimPertstepMask))
+		if( (uint32_t)(valueSet & SsaStimPertstepMask) == (uint32_t)(pFromFpga->data & SsaStimPertstepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SsaStimPertstepWString, (unsigned ) pFromFpga->data & SsaStimPertstepMask);
@@ -7736,7 +8167,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case TraceKeepWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_TraceKeepW, &uValueSet , TraceKeepMask);
-		if( (int32_t)(uValueSet & TraceKeepMask) == (pFromFpga->data & TraceKeepMask))
+		if( (uint32_t)(uValueSet & TraceKeepMask) == (uint32_t)(pFromFpga->data & TraceKeepMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceKeepWString, (unsigned ) pFromFpga->data & TraceKeepMask);
@@ -7754,7 +8185,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case TraceResetWeWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_TraceResetWeW, &uValueSet , TraceResetWeMask);
-		if( (int32_t)(uValueSet & TraceResetWeMask) == (pFromFpga->data & TraceResetWeMask))
+		if( (uint32_t)(uValueSet & TraceResetWeMask) == (uint32_t)(pFromFpga->data & TraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceResetWeWString, (unsigned ) pFromFpga->data & TraceResetWeMask);
@@ -7772,7 +8203,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case TrigInternalWAdr:
 		status = (asynStatus) getIntegerParam(p_TrigInternalW, &valueSet );
-		if( (int32_t)(valueSet & TrigInternalMask) == (pFromFpga->data & TrigInternalMask))
+		if( (uint32_t)(valueSet & TrigInternalMask) == (uint32_t)(pFromFpga->data & TrigInternalMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TrigInternalWString, (unsigned ) pFromFpga->data & TrigInternalMask);
@@ -7790,7 +8221,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case TrigModeWAdr:
 		status = (asynStatus) getIntegerParam(p_TrigModeW, &valueSet );
-		if( (int32_t)(valueSet & TrigModeMask) == (pFromFpga->data & TrigModeMask))
+		if( (uint32_t)(valueSet & TrigModeMask) == (uint32_t)(pFromFpga->data & TrigModeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TrigModeWString, (unsigned ) pFromFpga->data & TrigModeMask);
@@ -7808,7 +8239,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Wave0SrcWAdr:
 		status = (asynStatus) getIntegerParam(p_Wave0SrcW, &valueSet );
-		if( (int32_t)(valueSet & Wave0SrcMask) == (pFromFpga->data & Wave0SrcMask))
+		if( (uint32_t)(valueSet & Wave0SrcMask) == (uint32_t)(pFromFpga->data & Wave0SrcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Wave0SrcWString, (unsigned ) pFromFpga->data & Wave0SrcMask);
@@ -7826,7 +8257,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case Wave1SrcWAdr:
 		status = (asynStatus) getIntegerParam(p_Wave1SrcW, &valueSet );
-		if( (int32_t)(valueSet & Wave1SrcMask) == (pFromFpga->data & Wave1SrcMask))
+		if( (uint32_t)(valueSet & Wave1SrcMask) == (uint32_t)(pFromFpga->data & Wave1SrcMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Wave1SrcWString, (unsigned ) pFromFpga->data & Wave1SrcMask);
@@ -7844,7 +8275,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case DomainJumpRealignWAdr:
 		status = (asynStatus) getIntegerParam(p_DomainJumpRealignW, &valueSet );
-		if( (int32_t)(valueSet & DomainJumpRealignMask) == (pFromFpga->data & DomainJumpRealignMask))
+		if( (uint32_t)(valueSet & DomainJumpRealignMask) == (uint32_t)(pFromFpga->data & DomainJumpRealignMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				DomainJumpRealignWString, (unsigned ) pFromFpga->data & DomainJumpRealignMask);
@@ -7862,7 +8293,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case IccCfgWAdr:
 		status = (asynStatus) getIntegerParam(p_IccCfgW, &valueSet );
-		if( (int32_t)(valueSet & IccCfgMask) == (pFromFpga->data & IccCfgMask))
+		if( (uint32_t)(valueSet & IccCfgMask) == (uint32_t)(pFromFpga->data & IccCfgMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				IccCfgWString, (unsigned ) pFromFpga->data & IccCfgMask);
@@ -7880,7 +8311,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case QsfpI2CRegWAdr:
 		status = (asynStatus) getIntegerParam(p_QsfpI2CRegW, &valueSet );
-		if( (int32_t)(valueSet & QsfpI2CRegMask) == (pFromFpga->data & QsfpI2CRegMask))
+		if( (uint32_t)(valueSet & QsfpI2CRegMask) == (uint32_t)(pFromFpga->data & QsfpI2CRegMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				QsfpI2CRegWString, (unsigned ) pFromFpga->data & QsfpI2CRegMask);
@@ -7898,7 +8329,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case SfpAddressSetWAdr:
 		status = (asynStatus) getIntegerParam(p_SfpAddressSetW, &valueSet );
-		if( (int32_t)(valueSet & SfpAddressSetMask) == (pFromFpga->data & SfpAddressSetMask))
+		if( (uint32_t)(valueSet & SfpAddressSetMask) == (uint32_t)(pFromFpga->data & SfpAddressSetMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				SfpAddressSetWString, (unsigned ) pFromFpga->data & SfpAddressSetMask);
@@ -7916,7 +8347,7 @@ asynStatus scllrfPRCDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		break;
     case TagNowWAdr:
 		status = (asynStatus) getIntegerParam(p_TagNowW, &valueSet );
-		if( (int32_t)(valueSet & TagNowMask) == (pFromFpga->data & TagNowMask))
+		if( (uint32_t)(valueSet & TagNowMask) == (uint32_t)(pFromFpga->data & TagNowMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TagNowWString, (unsigned ) pFromFpga->data & TagNowMask);
