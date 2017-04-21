@@ -93,7 +93,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DIG_DSP_BUF_TRIG"
+  "BUF_TRIG"
 }
 autoSize
 endObjectProperties
@@ -108,7 +108,7 @@ x 202
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_BUF_TRIG_W"
+controlPv "$(P)BUF_TRIG_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -129,7 +129,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B0"
+controlPv "$(P)BUF_TRIG_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -153,7 +153,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B0"
+controlPv "$(P)BUF_TRIG_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -177,7 +177,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B1"
+controlPv "$(P)BUF_TRIG_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -201,7 +201,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B1"
+controlPv "$(P)BUF_TRIG_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -225,7 +225,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B2"
+controlPv "$(P)BUF_TRIG_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -249,7 +249,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B2"
+controlPv "$(P)BUF_TRIG_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -273,7 +273,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B3"
+controlPv "$(P)BUF_TRIG_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -297,7 +297,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B3"
+controlPv "$(P)BUF_TRIG_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -321,7 +321,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B4"
+controlPv "$(P)BUF_TRIG_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -345,7 +345,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B4"
+controlPv "$(P)BUF_TRIG_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -364,7 +364,7 @@ x 219
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_BUF_TRIG_R"
+controlPv "$(P)BUF_TRIG_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -385,7 +385,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B5"
+controlPv "$(P)BUF_TRIG_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -409,7 +409,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B5"
+controlPv "$(P)BUF_TRIG_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -433,7 +433,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B6"
+controlPv "$(P)BUF_TRIG_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -457,7 +457,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B6"
+controlPv "$(P)BUF_TRIG_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -481,7 +481,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B7"
+controlPv "$(P)BUF_TRIG_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -505,7 +505,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B7"
+controlPv "$(P)BUF_TRIG_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -529,7 +529,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B8"
+controlPv "$(P)BUF_TRIG_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -553,7 +553,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B8"
+controlPv "$(P)BUF_TRIG_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -577,7 +577,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B9"
+controlPv "$(P)BUF_TRIG_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -601,7 +601,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.B9"
+controlPv "$(P)BUF_TRIG_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -625,7 +625,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BA"
+controlPv "$(P)BUF_TRIG_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -649,7 +649,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BA"
+controlPv "$(P)BUF_TRIG_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -673,7 +673,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BB"
+controlPv "$(P)BUF_TRIG_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -697,7 +697,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BB"
+controlPv "$(P)BUF_TRIG_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -721,7 +721,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BC"
+controlPv "$(P)BUF_TRIG_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -745,7 +745,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BC"
+controlPv "$(P)BUF_TRIG_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -769,7 +769,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BD"
+controlPv "$(P)BUF_TRIG_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -793,7 +793,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BD"
+controlPv "$(P)BUF_TRIG_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -817,7 +817,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BE"
+controlPv "$(P)BUF_TRIG_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -841,7 +841,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BE"
+controlPv "$(P)BUF_TRIG_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -865,7 +865,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BF"
+controlPv "$(P)BUF_TRIG_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -889,7 +889,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_BUF_TRIG_W.BF"
+controlPv "$(P)BUF_TRIG_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1345,7 +1345,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DIG_DSP_CIRCLE_BUF_FLIP"
+  "CIRCLE_BUF_FLIP"
 }
 autoSize
 endObjectProperties
@@ -1360,7 +1360,7 @@ x 438
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W"
+controlPv "$(P)CIRCLE_BUF_FLIP_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -1381,7 +1381,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B0"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1405,7 +1405,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B0"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1429,7 +1429,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B1"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1453,7 +1453,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B1"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1477,7 +1477,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B2"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1501,7 +1501,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B2"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1525,7 +1525,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B3"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1549,7 +1549,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B3"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1573,7 +1573,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B4"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1597,7 +1597,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B4"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1616,7 +1616,7 @@ x 455
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_R"
+controlPv "$(P)CIRCLE_BUF_FLIP_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -1637,7 +1637,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B5"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1661,7 +1661,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B5"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1685,7 +1685,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B6"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1709,7 +1709,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B6"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1733,7 +1733,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B7"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1757,7 +1757,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B7"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1781,7 +1781,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B8"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1805,7 +1805,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B8"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1829,7 +1829,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B9"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1853,7 +1853,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.B9"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1877,7 +1877,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BA"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1901,7 +1901,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BA"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1925,7 +1925,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BB"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1949,7 +1949,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BB"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -1973,7 +1973,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BC"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -1997,7 +1997,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BC"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -2021,7 +2021,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BD"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -2045,7 +2045,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BD"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -2069,7 +2069,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BE"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -2093,7 +2093,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BE"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -2117,7 +2117,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BF"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -2141,7 +2141,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_CIRCLE_BUF_FLIP_W.BF"
+controlPv "$(P)CIRCLE_BUF_FLIP_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -2597,265 +2597,9 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP"
+  "LLRF_CIRCLE_READY"
 }
 autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 674
-y 75
-w 15
-h 288
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W"
-lineColor index 14
-onColor index 55
-offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 348
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B0"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 348
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B0"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 329
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B1"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 329
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B1"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 310
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B2"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 310
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B2"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 291
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B3"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 291
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B3"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 273
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B4"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 273
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B4"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -2868,538 +2612,10 @@ x 691
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_R"
+controlPv "$(P)LLRF_CIRCLE_READY_R"
 lineColor index 14
 onColor index 55
 offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 256
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B5"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 256
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B5"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 237
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B6"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 237
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B6"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 219
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B7"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 219
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B7"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 201
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B8"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 201
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B8"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 183
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B9"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 183
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.B9"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 165
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BA"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 165
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BA"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 147
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BB"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 147
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BB"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 129
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BC"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 129
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BC"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 112
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BD"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 112
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BD"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 94
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BE"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 94
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BE"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 76
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BF"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 76
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_0_DSP_CHAN_KEEP_W.BF"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -3417,7 +2633,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch0"
+    "c0_ready"
 }
 autoSize
 endObjectProperties
@@ -3438,7 +2654,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "Ch1"
+    "c1_ready"
 }
 autoSize
 endObjectProperties
@@ -3498,7 +2714,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch2"
+  "bit 2"
 }
 autoSize
 endObjectProperties
@@ -3518,7 +2734,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch3"
+  "bit 3"
 }
 autoSize
 endObjectProperties
@@ -3538,7 +2754,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch4"
+  "bit 4"
 }
 autoSize
 endObjectProperties
@@ -3558,7 +2774,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch5"
+  "bit 5"
 }
 autoSize
 endObjectProperties
@@ -3578,7 +2794,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch6"
+  "bit 6"
 }
 autoSize
 endObjectProperties
@@ -3597,7 +2813,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "Ch7"
+  "bit 7"
 }
 autoSize
 endObjectProperties
@@ -3657,7 +2873,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch8"
+  "bit 8"
 }
 autoSize
 endObjectProperties
@@ -3677,7 +2893,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch9"
+  "bit 9"
 }
 autoSize
 endObjectProperties
@@ -3697,7 +2913,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch10"
+  "bit 10"
 }
 autoSize
 endObjectProperties
@@ -3717,7 +2933,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch11"
+  "bit 11"
 }
 autoSize
 endObjectProperties
@@ -3737,7 +2953,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+  "bit 12"
 }
 autoSize
 endObjectProperties
@@ -3757,7 +2973,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+  "bit 13"
 }
 autoSize
 endObjectProperties
@@ -3777,7 +2993,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "bit 14"
+  "bit 14"
 }
 autoSize
 endObjectProperties
@@ -3820,7 +3036,6 @@ endGroup
 
 endObjectProperties
 
-  
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -3849,7 +3064,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP"
+  "SHELL_0_DSP_CHAN_KEEP"
 }
 autoSize
 endObjectProperties
@@ -3864,7 +3079,7 @@ x 910
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -3885,7 +3100,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B0"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -3909,7 +3124,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B0"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -3933,7 +3148,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B1"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -3957,7 +3172,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B1"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -3981,7 +3196,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B2"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4005,7 +3220,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B2"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4029,7 +3244,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B3"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4053,7 +3268,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B3"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4077,7 +3292,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B4"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4101,7 +3316,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B4"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4120,7 +3335,7 @@ x 927
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_R"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -4141,7 +3356,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B5"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4165,7 +3380,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B5"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4189,7 +3404,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B6"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4213,7 +3428,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B6"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4237,7 +3452,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B7"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4261,7 +3476,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B7"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4285,7 +3500,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B8"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4309,7 +3524,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B8"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4333,7 +3548,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B9"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4357,7 +3572,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.B9"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4381,7 +3596,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BA"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4405,7 +3620,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BA"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4429,7 +3644,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BB"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4453,7 +3668,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BB"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4477,7 +3692,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BC"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4501,7 +3716,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BC"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4525,7 +3740,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BD"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4549,7 +3764,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BD"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4573,7 +3788,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BE"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4597,7 +3812,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BE"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4621,7 +3836,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BF"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -4645,7 +3860,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_MUX_SHELL_1_DSP_CHAN_KEEP_W.BF"
+controlPv "$(P)SHELL_0_DSP_CHAN_KEEP_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -4770,7 +3985,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch3"
+  "bit 3"
 }
 autoSize
 endObjectProperties
@@ -4790,7 +4005,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch4"
+    "Ch3"
 }
 autoSize
 endObjectProperties
@@ -4810,7 +4025,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch5"
+    "Ch4"
 }
 autoSize
 endObjectProperties
@@ -4830,7 +4045,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch6"
+    "Ch5"
 }
 autoSize
 endObjectProperties
@@ -4849,7 +4064,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "Ch7"
+  "bit 7"
 }
 autoSize
 endObjectProperties
@@ -4909,7 +4124,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch8"
+    "Ch6"
 }
 autoSize
 endObjectProperties
@@ -4929,7 +4144,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch9"
+    "Ch7"
 }
 autoSize
 endObjectProperties
@@ -4949,7 +4164,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch10"
+    "Ch8"
 }
 autoSize
 endObjectProperties
@@ -4969,7 +4184,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch11"
+       "bit 11"
 }
 autoSize
 endObjectProperties
@@ -4989,7 +4204,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+    "Ch9"
 }
 autoSize
 endObjectProperties
@@ -5009,7 +4224,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+    "Ch10"
 }
 autoSize
 endObjectProperties
@@ -5029,7 +4244,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "bit 14"
+    "Ch11"
 }
 autoSize
 endObjectProperties
@@ -5101,7 +4316,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DIG_DSP_TRACE_KEEP"
+  "SHELL_1_DSP_CHAN_KEEP"
 }
 autoSize
 endObjectProperties
@@ -5116,7 +4331,7 @@ x 1146
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -5137,7 +4352,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B0"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5161,7 +4376,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B0"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5185,7 +4400,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B1"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5209,7 +4424,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B1"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5233,7 +4448,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B2"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5257,7 +4472,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B2"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5281,7 +4496,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B3"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5305,7 +4520,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B3"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5329,7 +4544,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B4"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5353,7 +4568,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B4"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5372,7 +4587,7 @@ x 1163
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_TRACE_KEEP_R"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -5393,7 +4608,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B5"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5417,7 +4632,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B5"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5441,7 +4656,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B6"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5465,7 +4680,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B6"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5489,7 +4704,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B7"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5513,7 +4728,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B7"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5537,7 +4752,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B8"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5561,7 +4776,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B8"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5585,7 +4800,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B9"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5609,7 +4824,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.B9"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5633,7 +4848,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BA"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5657,7 +4872,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BA"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5681,7 +4896,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BB"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5705,7 +4920,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BB"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5729,7 +4944,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BC"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5753,7 +4968,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BC"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5777,7 +4992,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BD"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5801,7 +5016,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BD"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5825,7 +5040,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BE"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5849,7 +5064,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BE"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -5873,7 +5088,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BF"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -5897,7 +5112,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_KEEP_W.BF"
+controlPv "$(P)SHELL_1_DSP_CHAN_KEEP_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6022,7 +5237,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch3"
+  "bit 3"
 }
 autoSize
 endObjectProperties
@@ -6042,7 +5257,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch4"
+    "Ch3"
 }
 autoSize
 endObjectProperties
@@ -6062,7 +5277,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch5"
+    "Ch4"
 }
 autoSize
 endObjectProperties
@@ -6082,7 +5297,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "Ch6"
+    "Ch5"
 }
 autoSize
 endObjectProperties
@@ -6101,7 +5316,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "Ch7"
+  "bit 7"
 }
 autoSize
 endObjectProperties
@@ -6161,7 +5376,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 8"
+    "Ch6"
 }
 autoSize
 endObjectProperties
@@ -6181,7 +5396,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 9"
+    "Ch7"
 }
 autoSize
 endObjectProperties
@@ -6201,7 +5416,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 10"
+    "Ch8"
 }
 autoSize
 endObjectProperties
@@ -6241,7 +5456,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+    "Ch9"
 }
 autoSize
 endObjectProperties
@@ -6261,7 +5476,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+    "Ch10"
 }
 autoSize
 endObjectProperties
@@ -6281,7 +5496,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "bit 14"
+    "Ch11"
 }
 autoSize
 endObjectProperties
@@ -6353,7 +5568,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "DIG_DSP_TRACE_RESET_WE"
+  "TRACE_KEEP"
 }
 autoSize
 endObjectProperties
@@ -6368,7 +5583,7 @@ x 1382
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W"
+controlPv "$(P)TRACE_KEEP_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -6389,7 +5604,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B0"
+controlPv "$(P)TRACE_KEEP_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6413,7 +5628,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B0"
+controlPv "$(P)TRACE_KEEP_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6437,7 +5652,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B1"
+controlPv "$(P)TRACE_KEEP_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6461,7 +5676,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B1"
+controlPv "$(P)TRACE_KEEP_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6485,7 +5700,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B2"
+controlPv "$(P)TRACE_KEEP_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6509,7 +5724,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B2"
+controlPv "$(P)TRACE_KEEP_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6533,7 +5748,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B3"
+controlPv "$(P)TRACE_KEEP_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6557,7 +5772,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B3"
+controlPv "$(P)TRACE_KEEP_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6581,7 +5796,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B4"
+controlPv "$(P)TRACE_KEEP_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6605,7 +5820,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B4"
+controlPv "$(P)TRACE_KEEP_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6624,7 +5839,7 @@ x 1399
 y 75
 w 15
 h 288
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_R"
+controlPv "$(P)TRACE_KEEP_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -6645,7 +5860,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B5"
+controlPv "$(P)TRACE_KEEP_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6669,7 +5884,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B5"
+controlPv "$(P)TRACE_KEEP_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6693,7 +5908,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B6"
+controlPv "$(P)TRACE_KEEP_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6717,7 +5932,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B6"
+controlPv "$(P)TRACE_KEEP_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6741,7 +5956,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B7"
+controlPv "$(P)TRACE_KEEP_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6765,7 +5980,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B7"
+controlPv "$(P)TRACE_KEEP_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6789,7 +6004,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B8"
+controlPv "$(P)TRACE_KEEP_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6813,7 +6028,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B8"
+controlPv "$(P)TRACE_KEEP_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6837,7 +6052,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B9"
+controlPv "$(P)TRACE_KEEP_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6861,7 +6076,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.B9"
+controlPv "$(P)TRACE_KEEP_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6885,7 +6100,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BA"
+controlPv "$(P)TRACE_KEEP_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6909,7 +6124,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BA"
+controlPv "$(P)TRACE_KEEP_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6933,7 +6148,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BB"
+controlPv "$(P)TRACE_KEEP_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -6957,7 +6172,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BB"
+controlPv "$(P)TRACE_KEEP_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -6981,7 +6196,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BC"
+controlPv "$(P)TRACE_KEEP_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -7005,7 +6220,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BC"
+controlPv "$(P)TRACE_KEEP_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -7029,7 +6244,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BD"
+controlPv "$(P)TRACE_KEEP_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -7053,7 +6268,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BD"
+controlPv "$(P)TRACE_KEEP_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -7077,7 +6292,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BE"
+controlPv "$(P)TRACE_KEEP_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -7101,7 +6316,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BE"
+controlPv "$(P)TRACE_KEEP_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -7125,7 +6340,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BF"
+controlPv "$(P)TRACE_KEEP_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -7149,7 +6364,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)DIG_DSP_TRACE_RESET_WE_W.BF"
+controlPv "$(P)TRACE_KEEP_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -7173,7 +6388,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 0"
+    "Ch0"
 }
 autoSize
 endObjectProperties
@@ -7194,7 +6409,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-  "bit 1"
+    "Ch1"
 }
 autoSize
 endObjectProperties
@@ -7254,7 +6469,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 2"
+    "Ch2"
 }
 autoSize
 endObjectProperties
@@ -7294,7 +6509,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 4"
+    "Ch3"
 }
 autoSize
 endObjectProperties
@@ -7314,7 +6529,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 5"
+    "Ch4"
 }
 autoSize
 endObjectProperties
@@ -7334,7 +6549,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 6"
+    "Ch5"
 }
 autoSize
 endObjectProperties
@@ -7413,7 +6628,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 8"
+    "Ch6"
 }
 autoSize
 endObjectProperties
@@ -7433,7 +6648,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 9"
+    "Ch7"
 }
 autoSize
 endObjectProperties
@@ -7605,9 +6820,265 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "LLRF_CIRCLE_READY"
+  "TRACE_RESET_WE"
 }
 autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 202
+y 430
+w 15
+h 288
+controlPv "$(P)TRACE_RESET_WE_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 703
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 703
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 684
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 684
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 665
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 665
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 646
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 646
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 628
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 628
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -7620,10 +7091,538 @@ x 219
 y 430
 w 15
 h 288
-controlPv "$(P)LLRF_CIRCLE_READY_R"
+controlPv "$(P)TRACE_RESET_WE_R"
 lineColor index 14
 onColor index 55
 offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 611
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 611
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 592
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 592
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 574
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 574
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 556
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B8"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 556
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B8"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 538
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B9"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 538
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.B9"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 520
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BA"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 520
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BA"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 502
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BB"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 502
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BB"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 484
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BC"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 484
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BC"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 467
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BD"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 467
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BD"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 449
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BE"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 449
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BE"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 151
+y 431
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BF"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 167
+y 431
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_RESET_WE_W.BF"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -7641,7 +7640,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "c0_ready"
+  "bit 0"
 }
 autoSize
 endObjectProperties
@@ -7662,7 +7661,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "c1_ready"
+  "bit 1"
 }
 autoSize
 endObjectProperties
@@ -7881,7 +7880,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 8"
+       "bit 8"
 }
 autoSize
 endObjectProperties
@@ -7901,7 +7900,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 9"
+       "bit 9"
 }
 autoSize
 endObjectProperties
@@ -7921,7 +7920,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 10"
+       "bit 10"
 }
 autoSize
 endObjectProperties
@@ -7941,7 +7940,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 11"
+       "bit 11"
 }
 autoSize
 endObjectProperties
@@ -7961,7 +7960,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 12"
+       "bit 12"
 }
 autoSize
 endObjectProperties
@@ -7981,7 +7980,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 13"
+       "bit 13"
 }
 autoSize
 endObjectProperties
@@ -8001,7 +8000,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 14"
+    "bit 14"
 }
 autoSize
 endObjectProperties
@@ -8044,4 +8043,5 @@ endGroup
 
 endObjectProperties
 
+  
 

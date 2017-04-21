@@ -99,13 +99,6 @@ static const double defaultPollPeriod = 0.1; // seconds
 static const double throttleLoopDelay = 0.001; // seconds, delay when sending is outstripping reading
 static const unsigned int defaultMaxParallelRequests = 1; // throttle requests when this many are outstanding
 
-// EPICS database driver strings
-static const char *RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
-static const char *ReadOneRegString = "READ_ONE_REG"; /* asynInt32 array[2] w */
-static const char *WriteOneRegString = "WRITE_ONE_REG"; /* asynInt32 array[2] w */
-static const char *MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
-static const char *PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
-static const char *CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
 
 /* Registers */
 
@@ -138,6 +131,14 @@ public:
 	virtual void init();
 
 protected:
+
+	// EPICS database driver strings
+	static const char *RunStopString; /* asynInt32,    r/w */
+	static const char *ReadOneRegString; /* asynInt32 array[2] w */
+	static const char *WriteOneRegString; /* asynInt32 array[2] w */
+	static const char *MaxParallelRequestsString; /* asynInt32,    r/w */
+	static const char *PollPeriodString; /* asynInt32,    r/w */
+	static const char *CommErrorCountString;  /* asynInt32,    r */
 
 	// For readable registers that are polled together at the set polling rate
 	FpgaReg *pPolledRegMsg_; // Leave the first array element blank, for use as the nonce

@@ -31,6 +31,48 @@
 using namespace std;
 \#include <math.h>
 
+/* Register names */
+#set $polledRegCount = 0
+#set $writeRegCount = 0
+#set $prevWAdrs = []
+#set $prevRAdrs =[]
+#for $p in sorted($registers, key=lambda k: k['name'])
+  #if $p.has_key('desc')
+// ${p.desc}
+  #end if
+  #if (not $p.has_key('access')) or ('r' in $p.access)
+const char *${name}Driver::${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
+    #if $p.address not in $prevRAdrs
+      #if ($p.has_key('nelm') and $p.nelm>16) or bool(re.search(r'U\d|lspi', $p.name))
+## exclude arrays with > 16 elements and registers with side effectes from polling
+        #set $count_inc = 0 
+      #else if $p.has_key('nelm') and $p.nelm<=16
+        #set $count_inc = $p.nelm
+      #else if not $p.has_key('nelm')
+        #set $count_inc = 1
+      #end if
+      #set $polledRegCount += $count_inc
+      #silent $prevRAdrs.append($p.address)
+    #else
+// shared address $p.address for $p.name
+    #end if
+  #end if
+  #if $p.has_key('access') and ('w' in $p.access)
+const char *${name}Driver::${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
+    #if $p.address not in $prevWAdrs
+      #if $p.has_key('nelm') and $p.nelm<=16
+        #set $count_inc = $p.nelm
+      #else
+        #set $count_inc = 1
+      #end if
+      #set $writeRegCount += $count_inc
+      #silent $prevWAdrs.append($p.address)
+    #end if
+  #end if
+#end for
+
+const unsigned int ${name}Driver::${name}PolledRegCount = $polledRegCount;
+
 /** Constructor for the ${name} class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] drvPortName The name of the asyn port driver to be created.
@@ -55,7 +97,7 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 		paramTableAdds + NUM_${name.upper()}_PARAMS)
 {
     epicsThreadSleep(defaultPollPeriod);
-
+#import re
 #for $p in sorted($registers, key=lambda k: k['name'])
 #if $p.has_key('nelm') and $p.nelm>16
   #if (not $p.has_key('access')) or ('r' in $p.access)
@@ -95,7 +137,7 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
   #else
     #set $chan_count = 1
   #end if
-  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>16)
+  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>16) or bool(re.search(r'U\d|lspi', $p.name))
     #for $chan_num in range(0, $chan_count )
       #if msgRegCount % 174 == 0
 		{ 0, 0 },
@@ -105,9 +147,9 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
         #else
 		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr) + $chan_num, blankData },
         #end if
+      #set $prevAdr = $p.address
+      #set $msgRegCount += 1
     #end for
-    #set $prevAdr = $p.address
-    #set $msgRegCount += 1
   #end unless
 #end for
 	};
@@ -327,7 +369,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
       #set $retVal = 'valueSet'
     #end if
 		status = (asynStatus) get${paramType}Param(p_${p.name.title().replace("_", "")}W, &$retVal $maskParam);
-		if( (int32_t)($retVal $maskStr) == (pFromFpga->data $maskStr))
+		if( (uint32_t)($retVal $maskStr) == (uint32_t)(pFromFpga->data $maskStr))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);

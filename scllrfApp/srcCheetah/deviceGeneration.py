@@ -128,9 +128,21 @@ if __name__ == "__main__":
             json_regmap = json.load(f)
             for k, v in json_regmap.items():
                 if type(v) is dict:
-                    v['name'] = fix_prc_names(k)
+                    v['name'] = k
                     v['address'] = (v['base_addr'] if type(v['base_addr']) is int else int(v['base_addr'], 16))
                     v['nelm'] = 2**v['addr_width']
+                    if 'buf_trig' in k:
+                        v['bits'] = {}
+                    if 'trace_reset' in k:
+                        v['bits'] = {}
+                    if 'llrf_circle_ready' in k:
+                        v['bits'] = { "c0_ready": 1, "c1_ready": 2 }
+                    if 'circle_buf_flip' in k:
+                        v['bits'] = { "flip_c0_buf": 1, "flip_c1_buf": 2 }
+                    if 'dsp_chan_keep' in k:
+                        v['bits'] = { "Ch0": 0x1, "Ch1": 0x2, "Ch2": 0x4, "Ch3": 0x10, "Ch4": 0x20, "Ch5": 0x40, "Ch6": 0x100, "Ch7": 0x200, "Ch8": 0x400, "Ch9": 0x1000, "Ch10": 0x2000, "Ch11": 0x4000, }
+                    if 'trace_keep' in k:
+                        v['bits'] = { "Ch0": 0x1, "Ch1": 0x2, "Ch2": 0x4, "Ch3": 0x10, "Ch4": 0x20, "Ch5": 0x40, "Ch6": 0x100, "Ch7": 0x200 }
                     regmap_dict['registers'].append(v)
                 
     makeDirectory(regmap_dict)
