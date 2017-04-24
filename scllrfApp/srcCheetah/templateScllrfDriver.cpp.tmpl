@@ -43,10 +43,10 @@ using namespace std;
   #if (not $p.has_key('access')) or ('r' in $p.access)
 const char *${name}Driver::${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
     #if $p.address not in $prevRAdrs
-      #if ($p.has_key('nelm') and $p.nelm>16) or bool(re.search(r'U\d|lspi', $p.name))
-## exclude arrays with > 16 elements and registers with side effectes from polling
+      #if ($p.has_key('nelm') and $p.nelm>32) or bool(re.search(r'U\d|lspi', $p.name))
+## exclude arrays with > 32 elements and registers with side effectes from polling
         #set $count_inc = 0 
-      #else if $p.has_key('nelm') and $p.nelm<=16
+      #else if $p.has_key('nelm') and $p.nelm<=32
         #set $count_inc = $p.nelm
       #else if not $p.has_key('nelm')
         #set $count_inc = 1
@@ -60,7 +60,7 @@ const char *${name}Driver::${p.name.title().replace("_", "")}RString = "${p.name
   #if $p.has_key('access') and ('w' in $p.access)
 const char *${name}Driver::${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
     #if $p.address not in $prevWAdrs
-      #if $p.has_key('nelm') and $p.nelm<=16
+      #if $p.has_key('nelm') and $p.nelm<=32
         #set $count_inc = $p.nelm
       #else
         #set $count_inc = 1
@@ -99,12 +99,12 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
     epicsThreadSleep(defaultPollPeriod);
 #import re
 #for $p in sorted($registers, key=lambda k: k['name'])
-#if $p.has_key('nelm') and $p.nelm>16
+#if $p.has_key('nelm') and $p.nelm>32
   #if (not $p.has_key('access')) or ('r' in $p.access)
     createParam(${p.name.title().replace("_", "")}RString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}R);
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
-    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}W);
+    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
   #end if
 #else
   #if (not $p.has_key('access')) or ('r' in $p.access)
@@ -132,12 +132,12 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 #set $msgRegCount = 0
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key('nelm') and $p.nelm<=16
+  #if $p.has_key('nelm') and $p.nelm<=32
     #set $chan_count = $p.nelm
   #else
     #set $chan_count = 1
   #end if
-  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>16) or bool(re.search(r'U\d|lspi', $p.name))
+  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>32) or bool(re.search(r'U\d|lspi', $p.name))
     #for $chan_num in range(0, $chan_count )
       #if msgRegCount % 174 == 0
 		{ 0, 0 },
@@ -273,9 +273,9 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 		break;
 
 	default:
-		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+		// Arrays larger than 32 elements should be handled in a subclass, generally more complicated
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 16
+  #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 32
 		if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
 				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + $p.nelm)))
 		{
@@ -388,9 +388,9 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
   #end if
 #end for
 	default:
-		// Arrays larger than 16 elements should be handled in a subclass, generally more complicated
+		// Arrays larger than 32 elements should be handled in a subclass, generally more complicated
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 16
+  #if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and $p.nelm > 1
 		if ((pFromFpga->addr >= ${p.name.title().replace("_", "")}WAdr) &&
 				(pFromFpga->addr < (${p.name.title().replace("_", "")}WAdr + $p.nelm)))
 		{
