@@ -512,8 +512,8 @@ void scllrfPRCextra::fillCircIQBufReqMsg()
 	fillWaveRequestMsg(pReqCircIQBufMsg_, sizeof(pReqCircIQBufMsg_)/sizeof(*pReqCircIQBufMsg_), circIQBufStart);
 
 	// Also get "slow data registers" every time
-	fillWaveRequestMsg(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_), Shell0SlowData0RAdr);
-	fillWaveRequestMsg(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_), Shell1SlowData0RAdr);
+	fillWaveRequestMsg(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_), Shell0SlowDataRAdr);
+	fillWaveRequestMsg(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_), Shell1SlowDataRAdr);
 
 }
 
@@ -910,7 +910,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	break;
 
     case LlrfCircleReadyRAdr|flagReadMask:
-	status = (asynStatus) setIntegerParam(p_LlrfCircleReadyR,
+	status = (asynStatus) setUIntDigitalParam(p_LlrfCircleReadyR,
 			(pFromFpga->data & LlrfCircleReadyMask) , LlrfCircleReadyMask);
 		// if flags are set for any active channels,
 		if ( (pFromFpga->data & 0x3) &&
@@ -963,7 +963,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 			(unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
 	break;
 
-    case Shell0SlowData0RAdr |flagReadMask:
+    case Shell0SlowDataRAdr |flagReadMask:
 	////XXXX A few variables for testing, can be removed along with code that uses them once we know this stuff works
 	int lastCount, newCount, tagNow, tagOld;
 	////XXXX
@@ -972,7 +972,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
 //printf("%d, ",pFromFpga[i].data);
-			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowData0Mask;
+			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowDataMask;
 		}
 //printf("\n");
 		getIntegerParam(p_Shell0CircleCountR, &lastCount);
@@ -1017,14 +1017,14 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 
 	break;
 
-    case Shell1SlowData0RAdr |flagReadMask:
+    case Shell1SlowDataRAdr |flagReadMask:
 
 	//printf("Raw slow data: ");
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
 			//printf("%d, ",pFromFpga[i].data);
-			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowData0Mask;
+			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowDataMask;
 		}
 		//printf("\n");
 
@@ -1310,7 +1310,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
 				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				Shell1DspChanKeepWString, valueSet[0] & Shell1DspChanKeepMask, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
+				Shell1DspChanKeepWString, uValueSet[0] & Shell1DspChanKeepMask, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
 			status = asynError;
 			setParamStatus(p_Shell1DspChanKeepW, status);
 			getIntegerParam(p_CommErrorCount, &errorCount);
