@@ -54,7 +54,7 @@ protected:
   #if (not $p.has_key('access')) or ('r' in $p.access)
 static const char *${p.name.title().replace("_", "")}RString;
     #if $p.address not in $prevRAdrs
-      #if $p.has_key('nelm') and $p.nelm>16
+      #if $p.has_key('nelm') and $p.nelm>32
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
       #end if
       #silent $prevRAdrs.append($p.address)
@@ -65,9 +65,6 @@ static const char *${p.name.title().replace("_", "")}RString;
   #if $p.has_key('access') and ('w' in $p.access)
 static const char *${p.name.title().replace("_", "")}WString;
     #if $p.address not in $prevWAdrs
-      #if $p.has_key('nelm') and $p.nelm>16
-	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
-      #end if
       #silent $prevWAdrs.append($p.address)
     #end if
   #end if
