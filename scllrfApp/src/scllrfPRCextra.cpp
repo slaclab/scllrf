@@ -646,7 +646,7 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
-			doCallbacksInt32Array(pCircIQBuf_, circIQBufWaveRegCount, p_LlrfCircleData, 0);
+			doCallbacksInt32Array(pCircIQBuf_, circIQBufWaveRegCount, p_LlrfCircleDataR, 0);
 			std::fill( pCircIQBuf_, pCircIQBuf_ + sizeof( pCircIQBuf_ )/sizeof( *pCircIQBuf_), 0 );
 
 			for (i=0; i<maxCircIQBufWavesCount; ++i)
