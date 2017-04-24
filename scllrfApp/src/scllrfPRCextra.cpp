@@ -63,7 +63,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 
     // Circle Buffer waveforms
 
-    createParam(CircIQBufString, asynParamInt32Array, &p_CircIQBuf);
     createParam(Circ0NActiveString, asynParamInt32, &p_Circ0NActive);
     createParam(Circ1NActiveString, asynParamInt32, &p_Circ1NActive);
     createParam(CircIQBuf0IString, asynParamInt32Array, &p_CircIQBuf0I);
@@ -82,7 +81,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell0TagOldRString, asynParamInt32, &p_Shell0TagOldR);
     createParam(Shell0TimeStampHighRString, asynParamInt32, &p_Shell0TimeStampHighR);
     createParam(Shell0TimeStampLowRString, asynParamInt32, &p_Shell0TimeStampLowR);
-    createParam(Shell0SlowDataBufferRString, asynParamInt8Array, &p_Shell0SlowDataBufferR);
 
     createParam(Shell1CircleCountRString, asynParamInt32, &p_Shell1CircleCountR);
     createParam(Shell1CircleStatRString, asynParamInt32, &p_Shell1CircleStatR);
@@ -91,9 +89,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell1TagOldRString, asynParamInt32, &p_Shell1TagOldR);
     createParam(Shell1TimeStampHighRString, asynParamInt32, &p_Shell1TimeStampHighR);
     createParam(Shell1TimeStampLowRString, asynParamInt32, &p_Shell1TimeStampLowR);
-    createParam(Shell1SlowDataBufferRString, asynParamInt8Array, &p_Shell1SlowDataBufferR);
-
-
 
     epicsThreadSleep(defaultPollPeriod);
     std::cout << __PRETTY_FUNCTION__ << " created " << NUM_SCLLRFPRCEXTRA_PARAMS << " parameters." << std::endl;
@@ -1013,7 +1008,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		setIntegerParam(p_Shell0TimeStampLowR, (int) timeStamp & ((2^32) - 1));
 //printf("Time stamp is %u %u\n", (timeStamp>>32), timeStamp & ((2^32) - 1));
 
-		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataBufferR, 0);
+		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataR, 0);
 
 	break;
 
@@ -1028,7 +1023,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		}
 		//printf("\n");
 
-		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataBufferR, 0);
+		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataR, 0);
 		getIntegerParam(p_Shell1CircleCountR, &lastCount);
 		setIntegerParam(p_Shell1CircleCountR, (slowDataFromFpga[0]<<8)+ slowDataFromFpga[1]);
 		getIntegerParam(p_Shell1CircleCountR, &newCount);
