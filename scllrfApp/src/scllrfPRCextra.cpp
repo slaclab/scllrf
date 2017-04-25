@@ -643,7 +643,6 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
-			printf("%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
 			doCallbacksInt32Array(pCircIQBuf_, circIQBufWaveRegCount, p_LlrfCircleDataR, 0);
 			std::fill( pCircIQBuf_, pCircIQBuf_ + sizeof( pCircIQBuf_ )/sizeof( *pCircIQBuf_), 0 );
 
@@ -965,14 +964,11 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	////XXXX A few variables for testing, can be removed along with code that uses them once we know this stuff works
 	int lastCount, newCount, tagNow, tagOld;
 	////XXXX
-printf("Raw slow data: ");
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-printf("0x%x=%d, ",pFromFpga[i].addr,pFromFpga[i].data);
 			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowDataMask;
 		}
-printf("\n");
 		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataR, 0);
 		getIntegerParam(p_Shell0CircleCountR, &lastCount);
 		setIntegerParam(p_Shell0CircleCountR, (slowDataFromFpga[0]<<8)+ slowDataFromFpga[1]);
@@ -1016,14 +1012,11 @@ printf("\n");
 
     case Shell1SlowDataRAdr |flagReadMask:
 
-	printf("Raw slow data: ");
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-			printf("0x%x=%d, ",pFromFpga[i].addr,pFromFpga[i].data);
 			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowDataMask;
 		}
-		printf("\n");
 
 		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataR, 0);
 		getIntegerParam(p_Shell1CircleCountR, &lastCount);
