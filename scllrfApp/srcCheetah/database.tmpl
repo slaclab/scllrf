@@ -287,6 +287,7 @@ record(waveform, "\$(P)${p.name.upper()}_R")
       #end if
     #end if
     field( NELM, "${p.nelm}")
+	field( SCAN, "I/O Intr")
     field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
