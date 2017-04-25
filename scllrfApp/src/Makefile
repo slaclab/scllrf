@@ -69,7 +69,7 @@ scllrf_SRCS_vxWorks += -nil-
  scllrf_SRCS += INTres2tmp.c
  scllrf_SRCS += INTarcTest.st
  scllrf_SRCS += INTheLevel.st
- scllrf_SRCS += lbnl_test_jsonDriver.cpp
+ #scllrf_SRCS += lbnl_test_jsonDriver.cpp
  #USR_CXXFLAGS += -std=c++0x
 
 # =====================================================
@@ -125,9 +125,9 @@ scllrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 
-USR_CXXFLAGS += -std=c++11
+//USR_CXXFLAGS += -std=c++11
 
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
-USR_CXXFLAGS += -std=c++11
+//USR_CXXFLAGS += -std=c++11
