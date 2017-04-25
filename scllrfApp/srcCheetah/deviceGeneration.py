@@ -16,7 +16,7 @@ def mkdir_p(path):
         if exc.errno == errno.EEXIST and os.path.isdir(path):
             pass
         else: raise
-        
+
 def makeDirectory(regmap_dict):
     mkdir_p(regmap_dict['name'])
 #    mkdir_p(regmap_dict['name']+'/deviceLibrary')
@@ -29,7 +29,7 @@ def makeDirectory(regmap_dict):
 #     f=open(regmap_dict['name']+'/deviceLibrary/'+regmap_dict['name']+'.cc', 'w')
 #     print(Template( file='./builder.cc.tmpl', searchList = [regmap_dict] ), file=f)
 #     f.close()
-#     
+#
 #     f=open(regmap_dict['name']+'/deviceLibrary/'+regmap_dict['name']+'.h', 'w')
 #     print(Template( file='./builder.h.tmpl', searchList = [regmap_dict] ), file=f)
 #     f.close()
@@ -39,15 +39,15 @@ def makeAsynDriver(regmap_dict):
     f=open(regmap_dict['name']+'/src/Makefile', 'w')
     print(Template( file='./Makefile.tmpl', searchList = [regmap_dict] ), file=f)
     f.close()
-    
+
     f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'.cpp', 'w')
     print(Template( file='./templateScllrfDriver.cpp.tmpl', searchList = [regmap_dict] ), file=f)
     f.close()
-    
+
     f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'.h', 'w')
     print(Template( file='./templateScllrfDriver.h.tmpl', searchList = [regmap_dict] ), file=f)
     f.close()
-    
+
     f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'DriverSupportInclude.dbd', 'w')
     print(Template( file='./templateDriverSupportInclude.dbd.tmpl', searchList = [regmap_dict] ), file=f)
     f.close()
@@ -76,32 +76,32 @@ def fix_prc_names(reg_name):
     if ',' in reg_name:
         split_names = find_reg.match(reg_name)
         reg_name = split_names.group(1) + split_names.group(2)
-        
+
     if ':' in reg_name:
         reg_name = re.sub(r'(.*)\[([0-9]*):([0-9]*)\]', r'\1_Bits\2to\3', reg_name)
-        
+
     # get rid of any characters from keys that aren't allowed in C++ variable names
     reg_name = re.sub(r'\W', r'_', reg_name)
 
     reg_name = replace(reg_name, 'application_top_', '')
     reg_name = replace(reg_name, 'digitizer', 'dig')
-    reg_name = replace(reg_name, 'real_sim_mux', 'mux') 
-    reg_name = replace(reg_name, 'cav4_elec', 'elec') 
-    reg_name = replace(reg_name, 'cavity_', 'c') 
-    reg_name = replace(reg_name, 'mode_', 'm') 
-    reg_name = replace(reg_name, 'dsp_fdbk', 'fdbk') 
-    reg_name = replace(reg_name, 'drive_couple', 'drive_cpl') 
-    reg_name = replace(reg_name, 'out_couple', 'out_cpl') 
+    reg_name = replace(reg_name, 'real_sim_mux', 'mux')
+    reg_name = replace(reg_name, 'cav4_elec', 'elec')
+    reg_name = replace(reg_name, 'cavity_', 'c')
+    reg_name = replace(reg_name, 'mode_', 'm')
+    reg_name = replace(reg_name, 'dsp_fdbk', 'fdbk')
+    reg_name = replace(reg_name, 'drive_couple', 'drive_cpl')
+    reg_name = replace(reg_name, 'out_couple', 'out_cpl')
     reg_name = replace(reg_name, '0d0a0d0a', 'd0a0d0a')
-    
+
     if len(reg_name) > 48:
         print("Long name ", reg_name, " didn't make the 48 character cut")
-    
+
     if not (old_name == reg_name):
         print("fixed name ", old_name, " -> ", reg_name)
-        
+
     return reg_name
-    
+
 
 def usage(progname):
     print("%s:  Make EPICS files for peripheral", progname)
@@ -113,14 +113,14 @@ if __name__ == "__main__":
     parser.add_argument('-c', dest='core', help='core name')
 
     args = parser.parse_args()
-    
+    print("input_D", args.input_d)
     # If the input is a python dictionary
     if args.input_d is not None:
         device = __import__(args.input_d.replace('.py', ''))
         regmap_dict = device.d
         if args.core is not None:
             regmap_dict.name = args.core
-        
+
     # if the input is a json file
     if args.input_j is not None:
         regmap_dict = {'name': args.core, 'registers': []}
@@ -144,7 +144,7 @@ if __name__ == "__main__":
                     if 'trace_keep' in k:
                         v['bits'] = { "Ch0": 0x1, "Ch1": 0x2, "Ch2": 0x4, "Ch3": 0x8, "Ch4": 0x10, "Ch5": 0x20, "Ch6": 0x40, "Ch7": 0x80 }
                     regmap_dict['registers'].append(v)
-                
+
     makeDirectory(regmap_dict)
     makeAsynDriver(regmap_dict)
     makeDatabase(regmap_dict)
