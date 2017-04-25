@@ -252,7 +252,6 @@ protected:
     // Circle buffer I/Q data
     int p_Circ0NActive;
     int p_Circ1NActive;
-    int p_CircIQBuf;
     int p_CircIQBuf0I;
     int p_CircIQBuf0Q;
     int p_CircIQBuf0A;
@@ -269,7 +268,6 @@ protected:
     int p_Shell0TagOldR;
     int p_Shell0TimeStampHighR;
     int p_Shell0TimeStampLowR;
-    int p_Shell0SlowDataBufferR;
 
     int p_Shell1CircleCountR;
     int p_Shell1CircleStatR;
@@ -278,7 +276,6 @@ protected:
     int p_Shell1TagOldR;
     int p_Shell1TimeStampHighR;
     int p_Shell1TimeStampLowR;
-    int p_Shell1SlowDataBufferR;
 
     // Flag to indicate new waveform data is available
     int p_WvformsAvailableR;

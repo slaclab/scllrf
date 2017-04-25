@@ -246,14 +246,11 @@ record(longin, "$(P)SHELL_0_TIME_STAMP_LOW_R")
     info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(waveform, "$(P)SHELL_0_SLOW_DATA_BUFFER_R") {
+record(waveform, "$(P)SHELL_0_SLOW_DATA_R") {
   field(DESC, "Slow data for shell 0 circle buff")
   field(SCAN, "I/O Intr")
   field(DTYP, "asynInt8ArrayIn")
-  field(INP, "@asyn($(PORT),0,1)SHELL_0_SLOW_DATA_BUFFER_R")
-  field(PREC, "1")
   field(EGU, "byte")
-  field(NELM, "128")
   field(FTVL, "UCHAR")
 }
 
@@ -320,18 +317,15 @@ record(longin, "$(P)SHELL_1_TIME_STAMP_LOW_R")
     info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(waveform, "$(P)SHELL_1_SLOW_DATA_BUFFER_R") {
+record(waveform, "$(P)SHELL_1_SLOW_DATA_R") {
   field(DESC, "Slow data for shell 1 circle buff")
   field(SCAN, "I/O Intr")
   field(DTYP, "asynInt8ArrayIn")
-  field(INP, "@asyn($(PORT),0,1)SHELL_1_SLOW_DATA_BUFFER_R")
-  field(PREC, "1")
   field(EGU, "byte")
-  field(NELM, "128")
   field(FTVL, "UCHAR")
 }
 
-record(waveform, "$(P)CIRC_IQ_BUF") {
+record(waveform, "$(P)CIRC_IQ_BUF_R") {
   field(DESC, "raw circle buff")
   field(SCAN, "I/O Intr")
   field(DTYP, "asynInt32ArrayIn")
