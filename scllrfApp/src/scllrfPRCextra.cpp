@@ -81,7 +81,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell0TagOldRString, asynParamInt32, &p_Shell0TagOldR);
     createParam(Shell0TimeStampHighRString, asynParamInt32, &p_Shell0TimeStampHighR);
     createParam(Shell0TimeStampLowRString, asynParamInt32, &p_Shell0TimeStampLowR);
-    createParam(Shell0SlowDataRString, asynParamInt8Array, &p_Shell0SlowDataR);
+    // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
+    //    createParam(Shell0SlowDataRString, asynParamInt8Array, &p_Shell0SlowDataR);
 
     createParam(Shell1CircleCountRString, asynParamInt32, &p_Shell1CircleCountR);
     createParam(Shell1CircleStatRString, asynParamInt32, &p_Shell1CircleStatR);
@@ -90,7 +91,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell1TagOldRString, asynParamInt32, &p_Shell1TagOldR);
     createParam(Shell1TimeStampHighRString, asynParamInt32, &p_Shell1TimeStampHighR);
     createParam(Shell1TimeStampLowRString, asynParamInt32, &p_Shell1TimeStampLowR);
-    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
+    // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
+    //    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
 
     epicsThreadSleep(defaultPollPeriod);
     std::cout << __PRETTY_FUNCTION__ << " created " << NUM_SCLLRFPRCEXTRA_PARAMS << " parameters." << std::endl;
