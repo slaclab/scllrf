@@ -89,7 +89,7 @@ static const unsigned traceIQWaveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
 // .....
 //
 static const uint32_t circIQBufStart = 0x170000; // From FPGA design, base address
-static const uint32_t circIQBufEnd = 0x170fff; // max possible
+static const uint32_t circIQBufEnd = 0x171fff; // max possible
 static const unsigned circIQBufWaveRegCount = circIQBufEnd - circIQBufStart + 1;
 static const unsigned circIQBufWavePoints = circIQBufWaveRegCount/2; // # data points for I or Q. Half the registers are I data, half Q
 static const unsigned maxCircIQBufWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
