@@ -506,7 +506,7 @@ asynStatus scllrfPRCextra::startCircIQBufRequester()
 // run this to compose new waveform request message for circle buffer.
 void scllrfPRCextra::fillCircIQBufReqMsg()
 {
-	fillWaveRequestMsg(pReqCircIQBufMsg_, sizeof(pReqCircIQBufMsg_)/sizeof(*pReqCircIQBufMsg_), LlrfCircleDataRAdr);
+	fillWaveRequestMsg(pReqCircIQBufMsg_, sizeof(pReqCircIQBufMsg_)/sizeof(*pReqCircIQBufMsg_), circIQBufStart);
 
 	// Also get "slow data registers" every time
 	fillWaveRequestMsg(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_), Shell0SlowDataRAdr);
@@ -600,7 +600,7 @@ void scllrfPRCextra::circIQBufRequester()
 // parse register data, write to array PV
 asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 {
-	unsigned int regOffset = (pFromFpga->addr & addrMask) - LlrfCircleDataRAdr;
+	unsigned int regOffset = (pFromFpga->addr & addrMask) - circIQBufStart;
 	// avoid divide by 0 errors when waveforms are inactive
 	if ((nCirc0Chan_ <=0) && (nCirc1Chan_ <=0) && regOffset == 0)
 	{
@@ -1066,7 +1066,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 			processTraceIQWaveReadback(pFromFpga);
 		}
 		else
-		if( LlrfCircleDataRAdr <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= circIQBufEnd )
+		if( circIQBufStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= circIQBufEnd )
 		{
 			////printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
 			processCircIQBufReadback(pFromFpga);
