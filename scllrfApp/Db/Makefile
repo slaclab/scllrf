@@ -50,6 +50,7 @@ DB_INSTALLS += STMPextra.template
 DB_INSTALLS += ARCTextra.template
 DB_INSTALLS += CPLTextra.template
 DB_INSTALLS += HELLextra.template
+#DB_INSTALLS += lbnl_test_jsonRegisters.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
@@ -58,4 +59,3 @@ DB_INSTALLS += HELLextra.template
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
-

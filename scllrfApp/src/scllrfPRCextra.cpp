@@ -63,7 +63,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 
     // Circle Buffer waveforms
 
-    createParam(CircIQBufString, asynParamInt32Array, &p_CircIQBuf);
     createParam(Circ0NActiveString, asynParamInt32, &p_Circ0NActive);
     createParam(Circ1NActiveString, asynParamInt32, &p_Circ1NActive);
     createParam(CircIQBuf0IString, asynParamInt32Array, &p_CircIQBuf0I);
@@ -82,7 +81,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell0TagOldRString, asynParamInt32, &p_Shell0TagOldR);
     createParam(Shell0TimeStampHighRString, asynParamInt32, &p_Shell0TimeStampHighR);
     createParam(Shell0TimeStampLowRString, asynParamInt32, &p_Shell0TimeStampLowR);
-    createParam(Shell0SlowDataBufferRString, asynParamInt8Array, &p_Shell0SlowDataBufferR);
+    // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
+    //    createParam(Shell0SlowDataRString, asynParamInt8Array, &p_Shell0SlowDataR);
 
     createParam(Shell1CircleCountRString, asynParamInt32, &p_Shell1CircleCountR);
     createParam(Shell1CircleStatRString, asynParamInt32, &p_Shell1CircleStatR);
@@ -91,302 +91,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell1TagOldRString, asynParamInt32, &p_Shell1TagOldR);
     createParam(Shell1TimeStampHighRString, asynParamInt32, &p_Shell1TimeStampHighR);
     createParam(Shell1TimeStampLowRString, asynParamInt32, &p_Shell1TimeStampLowR);
-    createParam(Shell1SlowDataBufferRString, asynParamInt8Array, &p_Shell1SlowDataBufferR);
-
-//    // A canned request to read all registers
-//    static const FpgaReg pCustomPolledRegMsg[] =
-//	{
-//		{ 0, 0 },
-//		{ (flagReadMask | Hello0RAdr), blankData },
-//		{ (flagReadMask | Hello1RAdr), blankData },
-//		{ (flagReadMask | Hello2RAdr), blankData },
-//		{ (flagReadMask | Hello3RAdr), blankData },
-//		{ (flagReadMask | ClkStatusOutRAdr), blankData },
-//		{ (flagReadMask | FfffffffRAdr), blankData },
-//		{ (flagReadMask | FrequencyAdcRAdr), blankData },
-//		{ (flagReadMask | Frequency4XoutRAdr), blankData },
-//		{ (flagReadMask | FrequencyClkout3RAdr), blankData },
-//		{ (flagReadMask | FrequencyDcoRAdr), blankData },
-//		{ (flagReadMask | Wave0OutRAdr), blankData },
-//		{ (flagReadMask | Wave1OutRAdr), blankData },
-//		{ (flagReadMask | AdcTestWave1OutRAdr), blankData },
-//		{ (flagReadMask | AdcTestWave2OutRAdr), blankData },
-//		{ (flagReadMask | AdcTestWave3OutRAdr), blankData },
-//		{ (flagReadMask | AdcTestWave4OutRAdr), blankData },
-//		{ (flagReadMask | CtraceRunningRAdr), blankData },
-//		{ (flagReadMask | FrequencyGtxTxRAdr), blankData },
-//		{ (flagReadMask | FrequencyGtxRxRAdr), blankData },
-//		{ (flagReadMask | HistStatusRAdr), blankData },
-//		{ (flagReadMask | PhasexStatusRAdr), blankData },
-//		{ (flagReadMask | CrcErrorsRAdr), blankData },
-//		{ (flagReadMask | Cavity0DetuneRAdr), blankData },
-//		{ (flagReadMask | Cavity1DetuneRAdr), blankData },
-//		{ (flagReadMask | AdcTestTrigCntRAdr), blankData },
-//		{ (flagReadMask | WaveformsAvailableRAdr), blankData },
-//		{ (flagReadMask | BanyanStatusRAdr), blankData },
-//		{ (flagReadMask | SlowChainOutRAdr), blankData },
-//		{ (flagReadMask | TraceStatus1RAdr), blankData },
-//		{ (flagReadMask | TraceStatus2RAdr), blankData },
-//		{ (flagReadMask | LlrfCircleReadyRAdr), blankData },
-//		{ (flagReadMask | IdelayBaseRAdr), blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 1, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 2, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 3, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 4, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 5, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 6, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 7, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 8, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 9, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 10, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 11, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 12, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 13, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 14, blankData },
-//		{ (flagReadMask | IdelayBaseRAdr) + 15, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr), blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 4, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 5, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 6, blankData },
-//		{ (flagReadMask | Shell0DspPiezoSfConstsRAdr) + 7, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr), blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 4, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 5, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 6, blankData },
-//		{ (flagReadMask | Shell1DspPiezoSfConstsRAdr) + 7, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcCoeffRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcCoeffRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcCoeffRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcCoeffRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcLimRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcLimRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcLimRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcLimRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcSetmpRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcSetmpRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcSetmpRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcSetmpRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeffRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeffRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeffRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcCoeffRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcLimRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcLimRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcLimRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcLimRAdr) + 3, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcSetmpRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcSetmpRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcSetmpRAdr) + 2, blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcSetmpRAdr) + 3, blankData },
-//		{ (flagReadMask | Cavity0DriveCoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0DriveCoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0DriveCoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0DriveCoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0Mode0CoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode0CoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode0CoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0Mode1CoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode1CoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0Mode1CoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode1CoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0Mode2CoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode2CoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity0Mode2CoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode2CoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1DriveCoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1DriveCoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1DriveCoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1DriveCoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1Mode0CoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode0CoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1Mode0CoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode0CoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1Mode1CoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode1CoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode1CoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1Mode2CoupleOutCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode2CoupleOutCouplingRAdr) + 1, blankData },
-//		{ (flagReadMask | Cavity1Mode2CoupleOutPhaseOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode2CoupleOutPhaseOffsetRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1AKxRAdr), blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1AKxRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1AKyRAdr), blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1AKyRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1BKxRAdr), blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1BKxRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1BKyRAdr), blankData },
-//		{ (flagReadMask | Shell0DspLpNotchLp1BKyRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1AKxRAdr), blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1AKxRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1AKyRAdr), blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1AKyRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1BKxRAdr), blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1BKxRAdr) + 1, blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1BKyRAdr), blankData },
-//		{ (flagReadMask | Shell1DspLpNotchLp1BKyRAdr) + 1, blankData },
-//		{ (flagReadMask | AdcMmcmRAdr), blankData },
-//		{ (flagReadMask | CcErrorClearRAdr), blankData },
-//		{ (flagReadMask | CcLoc1RAdr), blankData },
-//		{ (flagReadMask | Cct1Cavity0StatusAuxRAdr), blankData },
-//		{ (flagReadMask | Cct1Cavity1StatusAuxRAdr), blankData },
-//		{ (flagReadMask | ConfigBanyanMaskRAdr), blankData },
-//		{ (flagReadMask | ConfigBitslipRAdr), blankData },
-//		{ (flagReadMask | ConfigClkStatusWeRAdr), blankData },
-//		{ (flagReadMask | ConfigIdelayctrlResetRRAdr), blankData },
-//		{ (flagReadMask | ConfigMmcmResetRRAdr), blankData },
-//		{ (flagReadMask | ConfigPeriphConfigRAdr), blankData },
-//		{ (flagReadMask | ConfigPhasexTrigRAdr), blankData },
-//		{ (flagReadMask | ConfigRawadcTrigRAdr), blankData },
-//		{ (flagReadMask | ConfigScanTriggerWeRAdr), blankData },
-//		{ (flagReadMask | ConfigScannerDebugRAdr), blankData },
-//		{ (flagReadMask | ConfigSyncAd7794CsetRAdr), blankData },
-//		{ (flagReadMask | ConfigSyncTps62210CsetRAdr), blankData },
-//		{ (flagReadMask | AdcTestModeRAdr), blankData },
-//		{ (flagReadMask | AdcTestResetRAdr), blankData },
-//		{ (flagReadMask | AmplitudeRAdr), blankData },
-//		{ (flagReadMask | AverageLenRAdr), blankData },
-//		{ (flagReadMask | BufTrigRAdr), blankData },
-//		{ (flagReadMask | CicPeriodRAdr), blankData },
-//		{ (flagReadMask | CicShiftRAdr), blankData },
-//		{ (flagReadMask | CircleBufFlipRAdr), blankData },
-//		{ (flagReadMask | DacDdsResetRAdr), blankData },
-//		{ (flagReadMask | DacModeRAdr), blankData },
-//		{ (flagReadMask | DdsaModuloRAdr), blankData },
-//		{ (flagReadMask | DdsaPhstepHRAdr), blankData },
-//		{ (flagReadMask | DdsaPhstepLRAdr), blankData },
-//		{ (flagReadMask | HistCountWStrobeRAdr), blankData },
-//		{ (flagReadMask | LlrfDspDacEnRAdr), blankData },
-//		{ (flagReadMask | LoAmpRAdr), blankData },
-//		{ (flagReadMask | ModuloRAdr), blankData },
-//		{ (flagReadMask | PhaseStepHRAdr), blankData },
-//		{ (flagReadMask | PhaseStepLRAdr), blankData },
-//		{ (flagReadMask | PrcDspCavSelRAdr), blankData },
-//		{ (flagReadMask | PrcDspPrlCfgRAdr), blankData },
-//		{ (flagReadMask | PrcDspPrlGainRAdr), blankData },
-//		{ 0, 0 }, // This should stay on line 273, 175 registers from the start of this structure on line 98
-//		{ (flagReadMask | Beam0ModuloRAdr), blankData },
-//		{ (flagReadMask | Beam0PhaseInitRAdr), blankData },
-//		{ (flagReadMask | Beam0PhaseStepRAdr), blankData },
-//		{ (flagReadMask | Beam1ModuloRAdr), blankData },
-//		{ (flagReadMask | Beam1PhaseInitRAdr), blankData },
-//		{ (flagReadMask | Beam1PhaseStepRAdr), blankData },
-//		{ (flagReadMask | Cav4MechPrngIvaRAdr), blankData },
-//		{ (flagReadMask | Cav4MechPrngIvbRAdr), blankData },
-//		{ (flagReadMask | Cav4MechPrngRandomRunRAdr), blankData },
-//		{ (flagReadMask | Cavity0ACavOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0AForOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0ARflOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity0AmpLpBwRAdr), blankData },
-//		{ (flagReadMask | Cavity0Freq0CoarseFreqRAdr), blankData },
-//		{ (flagReadMask | Cavity0Freq1CoarseFreqRAdr), blankData },
-//		{ (flagReadMask | Cavity0Freq2CoarseFreqRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode0BeamCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode0BwRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode0DriveCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode1BeamCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode1BwRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode1DriveCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode2BeamCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode2BwRAdr), blankData },
-//		{ (flagReadMask | Cavity0Mode2DriveCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity0ModuloRAdr), blankData },
-//		{ (flagReadMask | Cavity0PhaseStepRAdr), blankData },
-//		{ (flagReadMask | Cavity0ComprSatCtlRAdr), blankData },
-//		{ (flagReadMask | Cavity0PrngIvaRAdr), blankData },
-//		{ (flagReadMask | Cavity0PrngIvbRAdr), blankData },
-//		{ (flagReadMask | Cavity0PrngRandomRunRAdr), blankData },
-//		{ (flagReadMask | Cavity1ACavOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1AForOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1ARflOffsetRAdr), blankData },
-//		{ (flagReadMask | Cavity1AmpLpBwRAdr), blankData },
-//		{ (flagReadMask | Cavity1Freq0CoarseFreqRAdr), blankData },
-//		{ (flagReadMask | Cavity1Freq1CoarseFreqRAdr), blankData },
-//		{ (flagReadMask | Cavity1Freq2CoarseFreqRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode0BeamCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode0BwRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode0DriveCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode1BeamCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode1BwRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode1DriveCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode2BeamCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode2BwRAdr), blankData },
-//		{ (flagReadMask | Cavity1Mode2DriveCouplingRAdr), blankData },
-//		{ (flagReadMask | Cavity1ModuloRAdr), blankData },
-//		{ (flagReadMask | Cavity1PhaseStepRAdr), blankData },
-//		{ (flagReadMask | Cavity1ComprSatCtlRAdr), blankData },
-//		{ (flagReadMask | Cavity1PrngIvaRAdr), blankData },
-//		{ (flagReadMask | Cavity1PrngIvbRAdr), blankData },
-//		{ (flagReadMask | Cavity1PrngRandomRunRAdr), blankData },
-//		{ (flagReadMask | DacIqPhaseRAdr), blankData },
-//		{ (flagReadMask | Shell0DspChanKeepRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreCoarseScaleRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcPhOffsetRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcSelEnRAdr), blankData },
-//		{ (flagReadMask | Shell0DspFdbkCoreMpProcSelThreshRAdr), blankData },
-//		{ (flagReadMask | Shell0DspModuloRAdr), blankData },
-//		{ (flagReadMask | Shell0DspPhaseStepRAdr), blankData },
-//		{ (flagReadMask | Shell0DspPiezoPiezoDcRAdr), blankData },
-//		{ (flagReadMask | Shell0DspTagRAdr), blankData },
-//		{ (flagReadMask | Shell0DspUseFiberIqRAdr), blankData },
-//		{ (flagReadMask | Shell0DspWaveSampPerRAdr), blankData },
-//		{ (flagReadMask | Shell0DspWaveShiftRAdr), blankData },
-//		{ (flagReadMask | Shell1DspChanKeepRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreCoarseScaleRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcPhOffsetRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcSelEnRAdr), blankData },
-//		{ (flagReadMask | Shell1DspFdbkCoreMpProcSelThreshRAdr), blankData },
-//		{ (flagReadMask | Shell1DspModuloRAdr), blankData },
-//		{ (flagReadMask | Shell1DspPhaseStepRAdr), blankData },
-//		{ (flagReadMask | Shell1DspPiezoPiezoDcRAdr), blankData },
-//		{ (flagReadMask | Shell1DspTagRAdr), blankData },
-//		{ (flagReadMask | Shell1DspUseFiberIqRAdr), blankData },
-//		{ (flagReadMask | Shell1DspWaveSampPerRAdr), blankData },
-//		{ (flagReadMask | Shell1DspWaveShiftRAdr), blankData },
-//		{ (flagReadMask | RewindRAdr), blankData },
-//		{ (flagReadMask | SsaStimAmpstepRAdr), blankData },
-//		{ (flagReadMask | SsaStimEnRAdr), blankData },
-//		{ (flagReadMask | SsaStimGPeriodRAdr), blankData },
-//		{ (flagReadMask | SsaStimPertstepRAdr), blankData },
-//		{ (flagReadMask | TraceKeepRAdr), blankData },
-//		{ (flagReadMask | TraceResetWeRAdr), blankData },
-//		{ (flagReadMask | TrigInternalRAdr), blankData },
-//		{ (flagReadMask | TrigModeRAdr), blankData },
-//		{ (flagReadMask | Wave0SrcRAdr), blankData },
-//		{ (flagReadMask | Wave1SrcRAdr), blankData },
-//		{ (flagReadMask | DomainJumpRealignRAdr), blankData },
-//		{ (flagReadMask | IccCfgRAdr), blankData },
-//		{ (flagReadMask | QsfpI2CRegRAdr), blankData },
-//		{ (flagReadMask | SfpAddressSetRAdr), blankData },
-//		{ (flagReadMask | TagNowRAdr), blankData },
-//	};//pCustomPolledRegMsg
-//
-//    PolledRegMsgSize_ = sizeof( pCustomPolledRegMsg )/sizeof( *pCustomPolledRegMsg);
-//
-//    if (pPolledRegMsg_ != NULL)
-//    {
-//    	//printf("%s rejects the base class's message and replaces it with its own.\n",__PRETTY_FUNCTION__);
-//    	delete[] pPolledRegMsg_;
-//    	pPolledRegMsg_ = new FpgaReg[sizeof( pCustomPolledRegMsg )/sizeof( *pCustomPolledRegMsg)];
-//        std::copy( pCustomPolledRegMsg, pCustomPolledRegMsg + sizeof( pCustomPolledRegMsg )/sizeof( *pCustomPolledRegMsg), (FpgaReg) pPolledRegMsg_ );
-//        for(int i = 0; i<PolledRegMsgSize_; i++)
-//        	{
-//        	pPolledRegMsg_[i] = pCustomPolledRegMsg[i];
-//        	std::cout << std::hex << "{ 0x" << pCustomPolledRegMsg[i].addr << ", 0x"  << pCustomPolledRegMsg[i].data << "} --> ";
-//        	std::cout << std::hex << "{ 0x" << pPolledRegMsg_[i].addr << ", 0x"  << pPolledRegMsg_[i].data << "}, ";
-//        	}
-//        std::cout << std::endl;
-//    }
-//
-//    std::cout << "polled register msg size is " << PolledRegMsgSize_ << std::endl;
-//	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
+    // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
+    //    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
 
     epicsThreadSleep(defaultPollPeriod);
     std::cout << __PRETTY_FUNCTION__ << " created " << NUM_SCLLRFPRCEXTRA_PARAMS << " parameters." << std::endl;
@@ -667,7 +373,7 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	{
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 			"%s waveform length set to %u but array index is %u\n",
-			__PRETTY_FUNCTION__, (unsigned int) npt_, pFromFpga->addr);
+				__PRETTY_FUNCTION__, (unsigned int) npt_, pFromFpga->addr);
 		return asynError;
 	}
 
@@ -939,7 +645,7 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
-			doCallbacksInt32Array(pCircIQBuf_, circIQBufWaveRegCount, p_CircIQBuf, 0);
+			doCallbacksInt32Array(pCircIQBuf_, circIQBufWaveRegCount, p_LlrfCircleDataR, 0);
 			std::fill( pCircIQBuf_, pCircIQBuf_ + sizeof( pCircIQBuf_ )/sizeof( *pCircIQBuf_), 0 );
 
 			for (i=0; i<maxCircIQBufWavesCount; ++i)
@@ -1014,10 +720,10 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 
 static void singleMessageQueuerC(void *drvPvt)
 {
-	//printf("%s: starting\n", __PRETTY_FUNCTION__);
+	printf("%s: starting\n", __PRETTY_FUNCTION__);
 //	scllrfPRCextra *pscllrfDriver = (scllrfPRCextra*)drvPvt;
 //	pscllrfDriver->traceIQWaveformRequester();
-	//printf("%s: exiting\n", __PRETTY_FUNCTION__);
+	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
 /** Starts the poller thread.
@@ -1186,14 +892,14 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		  tmpData &= tmpData - 1; // clear the least significant bit set
 		}
 		setIntegerParam(p_IQNActive, nchan_);
-
+//	    printf("%s TraceKeepRAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceKeepRString,
 				(unsigned ) pFromFpga->data & TraceKeepMask);
 	break;
 
-    case CircleBufFlipRAdr|flagReadMask:
+   case CircleBufFlipRAdr|flagReadMask:
 	status = (asynStatus) setUIntDigitalParam(p_CircleBufFlipR,
 			(pFromFpga->data & CircleBufFlipMask) , CircleBufFlipMask);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
@@ -1205,15 +911,15 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
     case LlrfCircleReadyRAdr|flagReadMask:
 	status = (asynStatus) setUIntDigitalParam(p_LlrfCircleReadyR,
 			(pFromFpga->data & LlrfCircleReadyMask) , LlrfCircleReadyMask);
-
 		// if flags are set for any active channels,
 		if ( (pFromFpga->data & 0x3) &&
-		// and there isn't a pending waveform read, and there is at least one active channel
-		(newCircIQBufAvailable_ == newCircIQBufRead_) && (nCirc0Chan_+nCirc1Chan_ > 0))
+					// and there isn't a pending waveform read, and there is at least one active channel
+					(newCircIQBufAvailable_ == newCircIQBufRead_) && (nCirc0Chan_+nCirc1Chan_ > 0))
 		{
 			// Set the message counter with a "new waveform" notification
 			// to the message counter value for the message we just received
 			newCircIQBufAvailable_ = lastResponseCount_;
+
 			epicsEventSignal(reqCircIQBufEventId_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
 					__PRETTY_FUNCTION__);
@@ -1244,13 +950,13 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		tmpData = pFromFpga->data & Shell1DspChanKeepMask;
 		status = (asynStatus) setUIntDigitalParam(p_Shell1DspChanKeepR,
 				(pFromFpga->data & Shell1DspChanKeepMask), Shell1DspChanKeepMask);
-		// Count the number of bits set
-		for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
-		{
-			tmpData &= tmpData - 1; // clear the least significant bit set
-		}
-		setIntegerParam(p_Circ1NActive, nCirc1Chan_);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+	// Count the number of bits set
+	for (nCirc1Chan_ = 0; tmpData; nCirc1Chan_++)
+	{
+		tmpData &= tmpData - 1; // clear the least significant bit set
+	}
+	setIntegerParam(p_Circ1NActive, nCirc1Chan_);
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 			Shell1DspChanKeepRString,
 			(unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
@@ -1260,14 +966,12 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	////XXXX A few variables for testing, can be removed along with code that uses them once we know this stuff works
 	int lastCount, newCount, tagNow, tagOld;
 	////XXXX
-//printf("Raw slow data: ");
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-//printf("%d, ",pFromFpga[i].data);
 			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowDataMask;
 		}
-//printf("\n");
+		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataR, 0);
 		getIntegerParam(p_Shell0CircleCountR, &lastCount);
 		setIntegerParam(p_Shell0CircleCountR, (slowDataFromFpga[0]<<8)+ slowDataFromFpga[1]);
 		getIntegerParam(p_Shell0CircleCountR, &newCount);
@@ -1306,22 +1010,17 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		setIntegerParam(p_Shell0TimeStampLowR, (int) timeStamp & ((2^32) - 1));
 //printf("Time stamp is %u %u\n", (timeStamp>>32), timeStamp & ((2^32) - 1));
 
-		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataBufferR, 0);
-
 	break;
 
     case Shell1SlowDataRAdr |flagReadMask:
 
-	//printf("Raw slow data: ");
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-			//printf("%d, ",pFromFpga[i].data);
 			slowDataFromFpga[i] = pFromFpga[i].data & Shell1SlowDataMask;
 		}
-		//printf("\n");
 
-		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataBufferR, 0);
+		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell1SlowDataR, 0);
 		getIntegerParam(p_Shell1CircleCountR, &lastCount);
 		setIntegerParam(p_Shell1CircleCountR, (slowDataFromFpga[0]<<8)+ slowDataFromFpga[1]);
 		getIntegerParam(p_Shell1CircleCountR, &newCount);
@@ -1506,7 +1205,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_IQNActive, nchan_);
-		    //printf("%s TraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
+		    printf("%s TraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -1565,7 +1264,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_Circ0NActive, nCirc0Chan_);
-			//printf("%s Shell0DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc0Chan_);
+			printf("%s Shell0DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc0Chan_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspChanKeepWString, (unsigned ) pFromFpga->data & Shell0DspChanKeepMask);
@@ -1594,7 +1293,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_Circ1NActive, nCirc1Chan_);
-			//printf("%s Shell1DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc1Chan_);
+			printf("%s Shell1DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc1Chan_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspChanKeepWString, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);

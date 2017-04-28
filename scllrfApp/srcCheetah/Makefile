@@ -1,12 +1,13 @@
 PY_FILES := $(wildcard *.py)
 PY_FILES := $(filter-out deviceGeneration.py, $(PY_FILES))
+PY_FILES := $(filter-out process_regmap.py, $(PY_FILES))
 DIRS := $(patsubst %.py, %, $(PY_FILES))
 
 all: $(PY_FILES)
 	for i in $^ ; do \
 		python deviceGeneration.py -d $$i ; \
 	done  ; \
-	python deviceGeneration.py -c scllrfPRC -i prc_regmap.json
+	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
 
 % : %.py
 	python deviceGeneration.py -d $^
@@ -25,7 +26,7 @@ copy:
 	cp */src/*.cpp ../src/;
 	cp */ui/* ../../display/.;
 	cp */Db/*.template ../Db/.;
-	
+
 all_install: $(DIRS)
 	for i in $^ ; do \
 		${ii}_install; \

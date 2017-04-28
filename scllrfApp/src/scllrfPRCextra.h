@@ -29,7 +29,7 @@
 #include "scllrfPRC.h"
 #include <epicsMessageQueue.h>
 
-static const unsigned maxChannel = 16; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
+static const unsigned maxChannel = 4096; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
 // Waveform data is packed as 2D arrays, not one after the other
 // in the network data. See cmoc code "submodules/common_hdl/circle.txt" for more details.
@@ -89,7 +89,7 @@ static const unsigned traceIQWaveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
 // .....
 //
 static const uint32_t circIQBufStart = 0x170000; // From FPGA design, base address
-static const uint32_t circIQBufEnd = 0x170fff; // max possible
+static const uint32_t circIQBufEnd = 0x171fff; // max possible
 static const unsigned circIQBufWaveRegCount = circIQBufEnd - circIQBufStart + 1;
 static const unsigned circIQBufWavePoints = circIQBufWaveRegCount/2; // # data points for I or Q. Half the registers are I data, half Q
 static const unsigned maxCircIQBufWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
@@ -125,7 +125,6 @@ static const char *IQ16BitNELMString = "I_Q_16BIT_NELM";
 static const char *IQ22BitNELMString = "I_Q_22BIT_NELM";
 
 // Circle buffer I/Q data
-static const char *CircIQBufString = "CIRC_IQ_BUF";
 static const char *Circ0NActiveString = "CIRC_0_N_ACTIVE";
 static const char *Circ1NActiveString = "CIRC_1_N_ACTIVE";
 static const char *CircIQBuf0IString = "CIRC_IQ_BUF_0_I";
@@ -144,7 +143,6 @@ static const char *Shell0TagNowRString = "SHELL_0_TAG_NOW_R";
 static const char *Shell0TagOldRString = "SHELL_0_TAG_OLD_R";
 static const char *Shell0TimeStampHighRString = "SHELL_0_TIME_STAMP_HIGH_R";
 static const char *Shell0TimeStampLowRString = "SHELL_0_TIME_STAMP_LOW_R";
-static const char *Shell0SlowDataBufferRString = "SHELL_0_SLOW_DATA_BUFFER_R";
 
 static const char *Shell1CircleCountRString = "SHELL_1_CIRCLE_COUNT_R";
 static const char *Shell1CircleStatRString = "SHELL_1_CIRCLE_STAT_R";
@@ -153,7 +151,6 @@ static const char *Shell1TagNowRString = "SHELL_1_TAG_NOW_R";
 static const char *Shell1TagOldRString = "SHELL_1_TAG_OLD_R";
 static const char *Shell1TimeStampHighRString = "SHELL_1_TIME_STAMP_HIGH_R";
 static const char *Shell1TimeStampLowRString = "SHELL_1_TIME_STAMP_LOW_R";
-static const char *Shell1SlowDataBufferRString = "SHELL_1_SLOW_DATA_BUFFER_R";
 
 
 class scllrfPRCextra: public scllrfPRCDriver
@@ -255,7 +252,6 @@ protected:
     // Circle buffer I/Q data
     int p_Circ0NActive;
     int p_Circ1NActive;
-    int p_CircIQBuf;
     int p_CircIQBuf0I;
     int p_CircIQBuf0Q;
     int p_CircIQBuf0A;
@@ -272,7 +268,6 @@ protected:
     int p_Shell0TagOldR;
     int p_Shell0TimeStampHighR;
     int p_Shell0TimeStampLowR;
-    int p_Shell0SlowDataBufferR;
 
     int p_Shell1CircleCountR;
     int p_Shell1CircleStatR;
@@ -281,7 +276,6 @@ protected:
     int p_Shell1TagOldR;
     int p_Shell1TimeStampHighR;
     int p_Shell1TimeStampLowR;
-    int p_Shell1SlowDataBufferR;
 
     // Flag to indicate new waveform data is available
     int p_WvformsAvailableR;

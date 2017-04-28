@@ -54,7 +54,7 @@ protected:
   #if (not $p.has_key('access')) or ('r' in $p.access)
 static const char *${p.name.title().replace("_", "")}RString;
     #if $p.address not in $prevRAdrs
-      #if $p.has_key('nelm') and $p.nelm32
+      #if $p.has_key('nelm') and $p.nelm>32
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
       #end if
       #silent $prevRAdrs.append($p.address)

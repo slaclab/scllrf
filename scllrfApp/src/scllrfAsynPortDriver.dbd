@@ -11,4 +11,4 @@ registrar(INTarcTestRegistrar)
 registrar(INTheLevelRegistrar)
 #.......................function(INTres2tmpInit)
 #.......................function(INTres2tmpProc)
-
+#registrar(lbnl_test_jsonRegister)
