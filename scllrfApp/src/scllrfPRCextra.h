@@ -29,7 +29,7 @@
 #include "scllrfPRC.h"
 #include <epicsMessageQueue.h>
 
-static const unsigned maxChannel = 4096; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
+static const unsigned maxChannel = 1024; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
 // Waveform data is packed as 2D arrays, not one after the other
 // in the network data. See cmoc code "submodules/common_hdl/circle.txt" for more details.
