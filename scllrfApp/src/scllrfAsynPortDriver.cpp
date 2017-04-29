@@ -59,7 +59,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
 		0), /* Default stack size*/
-		isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
+		_singleMsgQ (maxMsgSize, maxMsgSize), isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
 		newWaveAvailable_(0), newWaveRead_ (0), p_RunStop (stop)
 {
 	asynStatus status = asynSuccess;
@@ -119,7 +119,10 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
 
 	pollEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startPoller(defaultPollPeriod);
-	
+
+	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
+	startSingleMessageQueuer();
+
     printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 }
 
@@ -130,6 +133,8 @@ void scllrfAsynPortDriver::init()
 scllrfAsynPortDriver::~scllrfAsynPortDriver()
 {
 	isShuttingDown_ = true;
+	FpgaReg lastMsg = {0,blankData};
+	_singleMsgQ.send(&lastMsg, sizeof(FpgaReg));
 	epicsThreadSleep(0.1); // Allow threads to run and exit
 	wakeupPoller();
 	wakeupReader();
@@ -182,6 +187,104 @@ void scllrfAsynPortDriver::fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t b
 }
 
 
+static void singleMessageQueuerC(void *drvPvt)
+{
+	printf("%s: starting\n", __PRETTY_FUNCTION__);
+	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	pscllrfDriver->singleMessageQueuer();
+	printf("%s: exiting\n", __PRETTY_FUNCTION__);
+}
+
+/** Starts the poller thread.
+ ** Derived classes will typically call this at near the end of their constructor.
+ ** Derived classes can typically use the base class implementation of the poller thread,
+ ** but are free to re-implement it if necessary.
+ ** \param[in] pollPeriod The time between polls. */
+asynStatus scllrfAsynPortDriver::startSingleMessageQueuer()
+{
+	epicsThreadCreate("singleMessageQueuer",
+			epicsThreadPriorityMedium,
+			epicsThreadGetStackSize(epicsThreadStackMedium),
+			(EPICSTHREADFUNC)singleMessageQueuerC, (void *)this);
+	return asynSuccess;
+}
+
+
+void scllrfAsynPortDriver::singleMessageQueuer()
+{
+	epicsEventWaitStatus status;
+	FpgaReg pMsgBuff[maxRegPerMsg + nonceSize]; // buffer big enough for one packet
+	std::fill( pMsgBuff, pMsgBuff + sizeof( pMsgBuff )/sizeof( *pMsgBuff),
+			(FpgaReg) {flagReadMask,blankData} );
+	unsigned int sendBufByteCount;
+	unsigned int sendBufRegCount;
+	printf("\n%s \n", __PRETTY_FUNCTION__);
+//    htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
+//
+//	// Main polling loop
+	while (1)
+	{
+		// pMsgBuff[0] is the nonce space
+		sendBufByteCount = sizeof(FpgaReg);
+
+		// Block and wait for incoming single register writes
+		sendBufByteCount+=_singleMsgQ.receive(&pMsgBuff[1],sizeof(pMsgBuff));
+//		status = epicsEventWait(reqWaveEventId_);
+		if(sendBufByteCount%sizeof(FpgaReg) != 0)
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", __PRETTY_FUNCTION__, sendBufByteCount);
+		}
+
+		if (isShuttingDown_)
+		{
+			printf("%s exiting.\n", __PRETTY_FUNCTION__);
+			break;
+		}
+		if(sendBufByteCount < sizeof(FpgaReg))// receive returned -1
+		{
+			continue;
+		}
+
+		sendBufRegCount = sendBufByteCount/sizeof(FpgaReg);
+
+		while(_singleMsgQ.pending()>0)
+		{
+			if(_singleMsgQ.pending() + sendBufByteCount < sizeof(pMsgBuff))
+			{
+				sendBufByteCount += _singleMsgQ.tryReceive(&pMsgBuff[sendBufRegCount],sizeof(pMsgBuff));
+				sendBufRegCount = sendBufByteCount/sizeof(FpgaReg);
+			}
+			else
+			{
+				break;
+			}
+		}
+		if(sendBufByteCount%sizeof(FpgaReg) != 0)
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", __PRETTY_FUNCTION__, sendBufByteCount);
+		}
+
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufByteCount-1);
+		printf("%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufByteCount-1);
+
+		if(sendBufRegCount < minRegPerMsg)
+		{
+			printf("%s: only %u registers to send, padding to %u\n", __PRETTY_FUNCTION__, sendBufRegCount, minRegPerMsg);
+			std::fill( &pMsgBuff[sendBufRegCount], pMsgBuff + sizeof( pMsgBuff )/sizeof( *pMsgBuff),
+					(FpgaReg) {flagReadMask,blankData} );
+			sendBufRegCount = minRegPerMsg;
+		}
+
+		sendRegRequest(pMsgBuff, sendBufRegCount);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: done sending %u queued requests\n", __PRETTY_FUNCTION__, sendBufRegCount);
+	}
+	printf("%s: exiting\n", __PRETTY_FUNCTION__);
+}
+
 asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
 asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
@@ -189,7 +292,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
+    FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
     std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {flagReadMask,blankData} );
     int chan;
 
@@ -217,13 +320,24 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     	if (status == asynSuccess) // Yes, this function is a register write
     	{
     		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: found function=%d, name=%s, at chan %d + %d\n",
-  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
+    				"%s: found function=%d, name=%s, at chan %d + %d\n",
+					__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
     		regSendBuf[1].data = (uint32_t) value;
     		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
-    		regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
-        	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
-        	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+    		if(chan == 0)
+    		{
+    			regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
+    		}
+    		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+
+    		if(chan== 0)
+    		{
+    			_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
+    		}
+    		else
+    		{
+    			_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
+    		}
     	}
     	else
     	{
@@ -256,7 +370,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
+    FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
     std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
     int chan;
 
@@ -287,9 +401,21 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
   			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
     		regSendBuf[1].data = (int32_t) value;
     		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
-    		regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
-        	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
-        	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+    		// Writable arrays are not also readable.
+    		if(chan == 0)
+    		{
+    			regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
+    		}
+    		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+
+    		if(chan== 0)
+    		{
+    			_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
+    		}
+    		else
+    		{
+    			_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
+    		}
     	}
     	else
     	{
@@ -322,7 +448,7 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 //	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-    FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
+    FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
     std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
     int address;
 

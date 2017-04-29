@@ -27,7 +27,6 @@
  * ----------------------------------------------------------------------------
 **/
 #include "scllrfPRC.h"
-#include <epicsMessageQueue.h>
 
 static const unsigned maxChannel = 1024; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
@@ -163,17 +162,11 @@ public:
 	enum traceIQWavBitWidth { read22bit, read16bit };
 	void traceIQWaveformRequester(); // When signaled that waveforms are waiting, request them.
 	void circIQBufRequester(); // When signaled that waveforms are waiting, request them.
-	void singleMessageQueuer(); // Accumulates individual requests until they can be sent together.
 
 protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
-
-	virtual asynStatus startSingleMessageQueuer();
-	epicsEventId singleMsgQueueEventId_; /**< Event ID to signal the waveform requester */
-	epicsMessageQueueId _singleMsgQId;
-
 
 	//// Bigger waveforms I/Q data
 	virtual asynStatus startTraceIQWaveformRequester(); // For system startup

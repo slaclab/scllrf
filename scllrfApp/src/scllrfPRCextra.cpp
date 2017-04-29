@@ -103,9 +103,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 	reqCircIQBufEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startCircIQBufRequester();
 
-	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
-	startSingleMessageQueuer();
-
     epicsThreadSleep(defaultPollPeriod);
     wakeupPoller();
     wakeupReader();
@@ -717,88 +714,6 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 //	return asynSuccess;
 //}
 
-
-static void singleMessageQueuerC(void *drvPvt)
-{
-	printf("%s: starting\n", __PRETTY_FUNCTION__);
-//	scllrfPRCextra *pscllrfDriver = (scllrfPRCextra*)drvPvt;
-//	pscllrfDriver->traceIQWaveformRequester();
-	printf("%s: exiting\n", __PRETTY_FUNCTION__);
-}
-
-/** Starts the poller thread.
- ** Derived classes will typically call this at near the end of their constructor.
- ** Derived classes can typically use the base class implementation of the poller thread,
- ** but are free to re-implement it if necessary.
- ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfPRCextra::startSingleMessageQueuer()
-{
-	epicsThreadCreate("singleMessageQueuer",
-			epicsThreadPriorityMedium,
-			epicsThreadGetStackSize(epicsThreadStackMedium),
-			(EPICSTHREADFUNC)singleMessageQueuerC, (void *)this);
-	return asynSuccess;
-}
-
-
-void scllrfPRCextra::singleMessageQueuer()
-{
-//	epicsEventWaitStatus status;
-//	static FpgaReg traceAck[] =
-//	{
-//			{0,0},
-////			{TraceResetWeWAdr,1},
-//			{BufTrigWAdr,0},
-//			{BufTrigWAdr,1},
-//			{BufTrigWAdr,0}
-//	};
-//	////printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
-//    htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
-//
-//	// Main polling loop
-//	while (1)
-//	{
-//		status = epicsEventWait(reqWaveEventId_);
-//
-//		if (isShuttingDown_)
-//		{
-//			break;
-//		}
-//
-//		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-//				"%s: signaled by reqWaveEventId_\n", __PRETTY_FUNCTION__);
-//
-//		// avoid divide by 0 errors when waveforms are inactive
-//		if (nchan_ <=0 || npt_ <=0)
-//		{
-//			epicsThreadSleep(pollPeriod_);
-//		}
-//		else {
-//			/* We got an event, rather than a timeout.
-//			 **/
-//			switch (wavBitWidth_)
-//			{
-//			case read16bit:
-//				reqOneWaveform(pReqIQ16bAMsg_);
-//				reqOneWaveform(pReqIQ16bBMsg_);
-//				break;
-//			case read22bit:
-//				reqOneWaveform(pReqI22bMsg_);
-//				reqOneWaveform(pReqQ22bMsg_);
-//				break;
-//			default:
-//				//printf("%s: impossible bit width\n", __PRETTY_FUNCTION__);
-//				break;
-//			}
-//
-//			newWaveRead_ = newWaveAvailable_; // Indicate that we got the signal
-//			sendRegRequest(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
-//			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-//					"%s: done sending waveform request\n", __PRETTY_FUNCTION__);
-//		}
-//	}
-	//	//printf("%s: exiting\n", __PRETTY_FUNCTION__);
-}
 
 /**  Extract register address and data from the received message and set the appropriate
  * asyn parameter.

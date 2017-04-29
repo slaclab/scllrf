@@ -44,6 +44,7 @@
 #include <epicsThread.h>
 #include <epicsEvent.h>
 #include <iocsh.h>
+#include <epicsMessageQueue.h>
 
 #include <asynPortDriver.h>
 
@@ -91,6 +92,7 @@ static const int32_t blankData = 0xDEADBEEF;
 
 static const unsigned maxMsgSize = 1400; // Estimated MTU minus fudge factor, in bytes
 static const unsigned maxRegPerMsg = maxMsgSize/sizeof(FpgaReg)-1; // Number of register requests minus the nonce
+static const unsigned minRegPerMsg = 5; // Limitation of UDP and what the FPGA's limited network stack can cope with
 
 // Communication tuning parameters
 static const double readTimeout = 1.0; // seconds
@@ -129,6 +131,7 @@ public:
 	virtual void responseHandler(); // Readback loop, processes data from FPGAs when it arrives
 	virtual asynStatus wakeupReader(); // Alert responseHandler to expect new data
 	virtual void init();
+	void singleMessageQueuer(); // Accumulates individual requests until they can be sent together.
 
 protected:
 
@@ -154,6 +157,10 @@ protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
+
+	virtual asynStatus startSingleMessageQueuer();
+	epicsEventId singleMsgQueueEventId_; /**< Event ID to signal the write message queuer */
+	epicsMessageQueue _singleMsgQ;
 
 	void fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t buffSize, const unsigned int iStartAddr); /**< For requesting a waveform, fill canned message request with sequential addresses */
 
