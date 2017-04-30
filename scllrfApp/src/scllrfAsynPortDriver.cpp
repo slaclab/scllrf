@@ -214,8 +214,6 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 {
 	epicsEventWaitStatus status;
 	FpgaReg pMsgBuff[maxRegPerMsg + nonceSize]; // buffer big enough for one packet
-	std::fill( pMsgBuff, pMsgBuff + sizeof( pMsgBuff )/sizeof( *pMsgBuff),
-			(FpgaReg) {flagReadMask,blankData} );
 	unsigned int sendBufByteCount;
 	unsigned int sendBufRegCount;
 	printf("\n%s \n", __PRETTY_FUNCTION__);
@@ -224,6 +222,10 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 //	// Main polling loop
 	while (1)
 	{
+
+		std::fill( pMsgBuff, pMsgBuff + minRegPerMsg,
+				(FpgaReg) {flagReadMask,blankData} );
+		htonFpgaRegArray(pMsgBuff, minRegPerMsg + nonceSize);
 		// pMsgBuff[0] is the nonce space
 		sendBufByteCount = sizeof(FpgaReg);
 
@@ -273,8 +275,6 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		if(sendBufRegCount < minRegPerMsg)
 		{
 			printf("%s: only %u registers to send, padding to %u\n", __PRETTY_FUNCTION__, sendBufRegCount, minRegPerMsg);
-			std::fill( &pMsgBuff[sendBufRegCount], pMsgBuff + sizeof( pMsgBuff )/sizeof( *pMsgBuff),
-					(FpgaReg) {flagReadMask,blankData} );
 			sendBufRegCount = minRegPerMsg;
 		}
 

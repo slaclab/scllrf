@@ -132,12 +132,8 @@ scllrfPRCextra::~scllrfPRCextra()
 asynStatus scllrfPRCextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
 	int function = pasynUser->reason;
-//	int addr = 0;
 	asynStatus status = asynSuccess;
     const char *paramName;
-//    FpgaReg regSendBuf[2];
-
-	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
@@ -152,9 +148,6 @@ asynStatus scllrfPRCextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
     }
 
     scllrfAsynPortDriver::writeInt32(pasynUser, value);
-
-	/* Do callbacks so higher layers see any changes */
-	status = (asynStatus) callParamCallbacks();
 
     if (status)
         epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
