@@ -90,7 +90,6 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	  #else
 	field(PREC, 3)
 	  #end if
-    info( asyn:READBACK, "1")
     info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -253,7 +252,6 @@ record(mbboDirect, "\$(P)${p.name.upper()}_W")
     field( OUT,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_W")
 #end if
     field( SCAN, "Passive")
-    info( asyn:READBACK, "1")
     info( autosaveFields, "DESC")
 }
 
@@ -356,7 +354,6 @@ record(longout, "\$(P)C_${c.name.upper()}")
     field( DTYP, "asynInt32")
     field( OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
     field( SCAN, "I/O Intr")
-    info( asyn:READBACK, "1")
     info( autosaveFields, "DESC")
 }
 
