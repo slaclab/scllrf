@@ -55,7 +55,8 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 		paramTableSize,
 		asynInt32Mask | asynFloat64Mask | asynInt8ArrayMask | asynOctetMask | asynDrvUserMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
 		asynInt32Mask | asynFloat64Mask | asynInt8ArrayMask | asynOctetMask | asynEnumMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
-		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
+//		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
+		ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
 		0), /* Default stack size*/
@@ -214,8 +215,6 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 {
 	epicsEventWaitStatus status;
 	FpgaReg pMsgBuff[maxRegPerMsg + nonceSize]; // buffer big enough for one packet
-	std::fill( pMsgBuff, pMsgBuff + sizeof( pMsgBuff )/sizeof( *pMsgBuff),
-			(FpgaReg) {flagReadMask,blankData} );
 	unsigned int sendBufByteCount;
 	unsigned int sendBufRegCount;
 	printf("\n%s \n", __PRETTY_FUNCTION__);
@@ -224,6 +223,10 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 //	// Main polling loop
 	while (1)
 	{
+
+		std::fill( pMsgBuff, pMsgBuff + minRegPerMsg,
+				(FpgaReg) {flagReadMask,blankData} );
+		htonFpgaRegArray(pMsgBuff, minRegPerMsg + nonceSize);
 		// pMsgBuff[0] is the nonce space
 		sendBufByteCount = sizeof(FpgaReg);
 
@@ -252,7 +255,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		{
 			if(_singleMsgQ.pending() + sendBufByteCount < sizeof(pMsgBuff))
 			{
-				sendBufByteCount += _singleMsgQ.tryReceive(&pMsgBuff[sendBufRegCount],sizeof(pMsgBuff));
+				sendBufByteCount += _singleMsgQ.tryReceive(&pMsgBuff[sendBufRegCount],sizeof(pMsgBuff)-sendBufByteCount);
 				sendBufRegCount = sendBufByteCount/sizeof(FpgaReg);
 			}
 			else
@@ -273,8 +276,6 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		if(sendBufRegCount < minRegPerMsg)
 		{
 			printf("%s: only %u registers to send, padding to %u\n", __PRETTY_FUNCTION__, sendBufRegCount, minRegPerMsg);
-			std::fill( &pMsgBuff[sendBufRegCount], pMsgBuff + sizeof( pMsgBuff )/sizeof( *pMsgBuff),
-					(FpgaReg) {flagReadMask,blankData} );
 			sendBufRegCount = minRegPerMsg;
 		}
 
@@ -378,13 +379,11 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 
     // Some registers have more than 1 "channel"
     getAddress(pasynUser, &chan);
-    /* Set the parameter in the parameter library. */
-    status = (asynStatus) setIntegerParam(chan, function, value);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s channel %d\n",
-			__PRETTY_FUNCTION__, function, paramName, chan);
+    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s channel %d, value %d\n",
+			__PRETTY_FUNCTION__, function, paramName, chan, value);
 
     if (function == p_RunStop) {
 printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
@@ -425,6 +424,8 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     	}
     }
 
+    /* Set the parameter in the parameter library. */
+    status = (asynStatus) setIntegerParam(chan, function, value);
 	/* Do callbacks so higher layers see any changes */
 	status = (asynStatus) callParamCallbacks(chan, chan);
 
