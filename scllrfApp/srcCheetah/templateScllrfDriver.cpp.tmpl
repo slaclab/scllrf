@@ -368,21 +368,9 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
       #set $maskParam = ''
       #set $retVal = 'valueSet'
     #end if
-		status = (asynStatus) get${paramType}Param(p_${p.name.title().replace("_", "")}W, &$retVal $maskParam);
-		if( (uint32_t)($retVal $maskStr) == (uint32_t)(pFromFpga->data $maskStr))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				${p.name.title().replace("_", "")}WString, $retVal $maskStr, (unsigned ) pFromFpga->data $maskStr);
-			status = asynError;
-			setParamStatus(p_${p.name.title().replace("_", "")}W, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
 
 		break;
   #end if
@@ -394,23 +382,9 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		if ((pFromFpga->addr >= ${p.name.title().replace("_", "")}WAdr) &&
 				(pFromFpga->addr < (${p.name.title().replace("_", "")}WAdr + $p.nelm)))
 		{
-			status = (asynStatus) getIntegerParam((pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr),
-					p_${p.name.title().replace("_", "")}W, &valueSet);##We're assuming here no arrays of bit fields, otherwise handle valueSet as above'
-			if( (valueSet $maskStr) == (pFromFpga->data $maskStr))
-				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-					"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
-					${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), (unsigned ) pFromFpga->data $maskStr);
-			else
-			{
-				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-					"%s: value sent to %s, channel %u, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-					${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), valueSet $maskStr, (unsigned ) pFromFpga->data $maskStr);
-				status = asynError;
-				setParamStatus(p_${p.name.title().replace("_", "")}W, status);
-				getIntegerParam(p_CommErrorCount, &errorCount);
-				setIntegerParam(p_CommErrorCount, ++errorCount);
-			}
-
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), (unsigned ) pFromFpga->data $maskStr);
 
 		}
 		else
