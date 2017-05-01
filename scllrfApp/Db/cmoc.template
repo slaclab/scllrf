@@ -347,7 +347,7 @@ record(longout, "$(P)DSP_CHAN_KEEP")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_CHAN_KEEP")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -357,7 +357,7 @@ record(longout, "$(P)DSP_FDBK_CORE_COARSE_SCALE")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_COARSE_SCALE")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -367,7 +367,7 @@ record(longout, "$(P)DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -377,7 +377,7 @@ record(longout, "$(P)DSP_FDBK_CORE_MP_PROC_SEL_EN")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_MP_PROC_SEL_EN")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -387,7 +387,7 @@ record(longout, "$(P)DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -397,7 +397,7 @@ record(longout, "$(P)DSP_MODULO")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_MODULO")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -407,7 +407,7 @@ record(longout, "$(P)DSP_PHASE_STEP")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_PHASE_STEP")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -417,7 +417,7 @@ record(longout, "$(P)DSP_PIEZO_PIEZO_DC")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_PIEZO_PIEZO_DC")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -427,7 +427,7 @@ record(longout, "$(P)DSP_TAG")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_TAG")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -437,7 +437,7 @@ record(longout, "$(P)DSP_WAVE_SAMP_PER")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_WAVE_SAMP_PER")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -447,7 +447,7 @@ record(longout, "$(P)DSP_WAVE_SHIFT")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_WAVE_SHIFT")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -457,7 +457,7 @@ record(longout, "$(P)STA_CAV4_ELEC_DRV_CPL_OUT_CPLNG")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_DRV_CPL_OUT_CPLNG")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -467,7 +467,7 @@ record(longout, "$(P)STA_CAV4_ELEC_DRV_CPL_OUT_PH_OFF")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_DRV_CPL_OUT_PH_OFF")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -477,7 +477,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_PH_OFF")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_0_OUT_CPL_OUT_PH_OFF")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -487,7 +487,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_PH_OFF")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_PH_OFF")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -497,7 +497,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_CPLNG")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_CPLNG")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -507,7 +507,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_PH_OFF")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_2_OUT_CPL_OUT_PH_OFF")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -517,7 +517,7 @@ record(longout, "$(P)BEAM_MODULO")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) BEAM_MODULO")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -527,7 +527,7 @@ record(longout, "$(P)BEAM_PHASE_STEP")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) BEAM_PHASE_STEP")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -537,7 +537,7 @@ record(longout, "$(P)CAV4_MECH_PRNG_IVA")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) CAV4_MECH_PRNG_IVA")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -547,7 +547,7 @@ record(longout, "$(P)CAV4_MECH_PRNG_IVB")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) CAV4_MECH_PRNG_IVB")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -557,7 +557,7 @@ record(longout, "$(P)CAV4_MECH_PRNG_RANDOM_RUN")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) CAV4_MECH_PRNG_RANDOM_RUN")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -567,7 +567,7 @@ record(longout, "$(P)STA_A_CAV_OFFSET")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_A_CAV_OFFSET")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -577,7 +577,7 @@ record(longout, "$(P)STA_A_FOR_OFFSET")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_A_FOR_OFFSET")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -587,7 +587,7 @@ record(longout, "$(P)STA_A_RFL_OFFSET")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_A_RFL_OFFSET")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -597,7 +597,7 @@ record(longout, "$(P)STA_AMP_LP_BW")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_AMP_LP_BW")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -607,7 +607,7 @@ record(longout, "$(P)STA_CAV4_ELEC_FREQ_0_COARSE_FREQ")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_FREQ_0_COARSE_FREQ")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -617,7 +617,7 @@ record(longout, "$(P)STA_CAV4_ELEC_FREQ_1_COARSE_FREQ")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_FREQ_1_COARSE_FREQ")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -627,7 +627,7 @@ record(longout, "$(P)STA_CAV4_ELEC_FREQ_2_COARSE_FREQ")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_FREQ_2_COARSE_FREQ")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -637,7 +637,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_0_BEAM_CPL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_0_BEAM_CPL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -647,7 +647,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_0_BW")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_0_BW")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -657,7 +657,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_0_DRV_CPL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_0_DRV_CPL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -667,7 +667,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_1_BEAM_CPL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_1_BEAM_CPL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -677,7 +677,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_1_BW")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_1_BW")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -687,7 +687,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_1_DRV_CPL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_1_DRV_CPL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -697,7 +697,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_2_BEAM_CPL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_2_BEAM_CPL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -707,7 +707,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_2_BW")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_2_BW")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -717,7 +717,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_2_DRV_CPL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_2_DRV_CPL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -727,7 +727,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODULO")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODULO")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -737,7 +737,7 @@ record(longout, "$(P)STA_CAV4_ELEC_PHASE_STEP")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_PHASE_STEP")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -747,7 +747,7 @@ record(longout, "$(P)STA_COMPR_SAT_CTL")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_COMPR_SAT_CTL")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -757,7 +757,7 @@ record(longout, "$(P)STA_PRNG_IVA")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_PRNG_IVA")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -767,7 +767,7 @@ record(longout, "$(P)STA_PRNG_IVB")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_PRNG_IVB")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -777,7 +777,7 @@ record(longout, "$(P)STA_PRNG_RANDOM_RUN")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_PRNG_RANDOM_RUN")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -787,7 +787,7 @@ record(longout, "$(P)STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_CPLNG")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) STA_CAV4_ELEC_MODE_1_OUT_CPL_OUT_CPLNG")
     field(SCAN, "I/O Intr")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -969,7 +969,7 @@ record(ao, "$(P)POLL_PERIOD")
     field(DTYP, "asynFloat64")
     field(OUT,  "@asyn($(PORT),0) POLL_PERIOD")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -990,7 +990,7 @@ record(longout, "$(P)MAX_PARALLEL_REQUESTS")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) MAX_PARALLEL_REQUESTS")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
     info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 

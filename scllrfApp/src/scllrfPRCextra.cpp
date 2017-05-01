@@ -388,20 +388,20 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	case 0: //TODO: verify the packing of the bits for 16 bit data
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
-		// Amplitude = sqrt(I^2+Q^2)
-		pWave16bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt((pWave16bitI_[waveNumber][waveIndex]^2)+(pWave16bitQ_[waveNumber][waveIndex]^2));
+		// Amplitude = qrt(I^2+Q^2)
+
 		// phase = arctan(Q/I)
-		pWave16bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave16bitQ_[waveNumber][waveIndex] / pWave16bitI_[waveNumber][waveIndex]);
+
 		break;
 
 	case 1:
 		waveIndex += npt_; // continued from addresses in "case 0"
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
-		// Amplitude = sqrt(I^2+Q^2)
-		pWave16bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt((pWave16bitI_[waveNumber][waveIndex]^2)+(pWave16bitQ_[waveNumber][waveIndex]^2));
+
+
 		// phase = arctan(Q/I)
-		pWave16bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave16bitQ_[waveNumber][waveIndex] / pWave16bitI_[waveNumber][waveIndex]);
+
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
 		{
 			setIntegerParam(p_IQ16BitNELM, npt_ * 2/nchan_);
@@ -437,10 +437,10 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	case 3:
 		pWave22bitQ_[waveNumber][waveIndex] =
                      ((epicsInt32) pFromFpga->data) >> 10;
-		// Amplitude = sqrt(I^2+Q^2)
-		pWave22bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt((pWave22bitI_[waveNumber][waveIndex]^2)+(pWave22bitQ_[waveNumber][waveIndex]^2));
+
+
 		// phase = arctan(Q/I)
-		pWave22bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave22bitQ_[waveNumber][waveIndex] / pWave22bitI_[waveNumber][waveIndex]);
+
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
 		{
 			setIntegerParam(p_IQ22BitNELM, npt_/nchan_);
@@ -620,16 +620,16 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 
 	case 1: // odd numbered address
 		pCircIQBuf0Q_[buf0Number][buf0Index] = (epicsInt16) pFromFpga->data;
-		// Amplitude = sqrt(I^2+Q^2)
-		pCircIQBuf0A_[buf0Number][buf0Index] = (epicsFloat32) sqrt((pCircIQBuf0I_[buf0Number][buf0Index]^2)+(pCircIQBuf0Q_[buf0Number][buf0Index]^2));
+
+
 		// phase = arctan(Q/I)
-		pCircIQBuf0P_[buf0Number][buf0Index] = (epicsFloat32) pCircIQBuf0I_[buf0Number][buf0Index]==0? NAN: atan(pCircIQBuf0Q_[buf0Number][buf0Index] / pCircIQBuf0I_[buf0Number][buf0Index]);
+
 
 		pCircIQBuf1Q_[buf1Number][buf1Index] = (epicsInt16) (pFromFpga->data >> 16);
-		// Amplitude = sqrt(I^2+Q^2)
-		pCircIQBuf1A_[buf1Number][buf1Index] = (epicsFloat32) sqrt((pCircIQBuf1I_[buf1Number][buf1Index]^2)+(pCircIQBuf1Q_[buf1Number][buf1Index]^2));
+
+
 		// phase = arctan(Q/I)
-		pCircIQBuf1P_[buf1Number][buf1Index] = (epicsFloat32) pCircIQBuf1I_[buf1Number][buf1Index]==0? NAN: atan(pCircIQBuf1Q_[buf1Number][buf1Index] / pCircIQBuf1I_[buf1Number][buf1Index]);
+
 
 		if ((pFromFpga->addr & addrMask) == circIQBufEnd) // if this is the last point of the buffer
 		{

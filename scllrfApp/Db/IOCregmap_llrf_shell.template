@@ -74,7 +74,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_CHAN_KEEP")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_CHAN_KEEP")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_COARSE_SCALE")
 {
@@ -82,7 +82,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_COARSE_SCALE")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_COARSE_SCALE")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
 {
@@ -90,7 +90,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_MP_PROC_PH_OFFSET")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_MP_PROC_SEL_EN")
 {
@@ -98,7 +98,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_MP_PROC_SEL_EN")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_MP_PROC_SEL_EN")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
 {
@@ -106,7 +106,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_FDBK_CORE_MP_PROC_SEL_THRESH")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_MODULO")
 {
@@ -114,7 +114,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_MODULO")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_MODULO")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_PHASE_STEP")
 {
@@ -122,7 +122,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_PHASE_STEP")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_PHASE_STEP")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_PIEZO_PIEZO_DC")
 {
@@ -130,7 +130,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_PIEZO_PIEZO_DC")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_PIEZO_PIEZO_DC")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_TAG")
 {
@@ -138,7 +138,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_TAG")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_TAG")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_WAVE_SAMP_PER")
 {
@@ -146,7 +146,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_WAVE_SAMP_PER")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_WAVE_SAMP_PER")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 record(ao, "$(DEVICE):$(PORT):DSP_WAVE_SHIFT")
 {
@@ -154,7 +154,7 @@ record(ao, "$(DEVICE):$(PORT):DSP_WAVE_SHIFT")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),0) DSP_WAVE_SHIFT")
     field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
+
 }
 
 

@@ -55,8 +55,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 		paramTableSize,
 		asynInt32Mask | asynFloat64Mask | asynInt8ArrayMask | asynOctetMask | asynDrvUserMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask, /* Interface mask */
 		asynInt32Mask | asynFloat64Mask | asynInt8ArrayMask | asynOctetMask | asynEnumMask | asynFloat32ArrayMask | asynInt32ArrayMask | asynInt16ArrayMask | asynUInt32DigitalMask,  /* Interrupt mask */
-//		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
-		ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
+		ASYN_CANBLOCK | ASYN_MULTIDEVICE, /* asynFlags.  This driver does block and it is multi-device, so flag is 1 */
 		1, /* Autoconnect */
 		epicsThreadPriorityMedium,
 		0), /* Default stack size*/
