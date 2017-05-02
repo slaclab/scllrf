@@ -269,12 +269,10 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		}
 
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufByteCount-1);
-		printf("%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufByteCount-1);
+				"%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufRegCount);
 
 		if(sendBufRegCount < minRegPerMsg)
 		{
-			printf("%s: only %u registers to send, padding to %u\n", __PRETTY_FUNCTION__, sendBufRegCount, minRegPerMsg);
 			sendBufRegCount = minRegPerMsg;
 		}
 
@@ -310,7 +308,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 			__PRETTY_FUNCTION__, function, paramName);
 
     if (function == p_RunStop) {
-printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
+    	printf("%s setting RunStop for polling loop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
         if (value == run)
         	epicsEventSignal(pollEventId_);
     }
