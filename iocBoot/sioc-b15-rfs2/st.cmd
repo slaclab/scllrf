@@ -44,8 +44,11 @@ asynSetTraceIOMask("myReg",-1,4)
 ##############################################################################
 # BEGIN: Load the record databases
 ##############################################################################
+####XXXX A bit of a hack to get the right iocAdmin PVs
+epicsEnvSet("TYPE","RFS")
 < iocBoot/common/iocAdmin.cmd
 #< iocBoot/common/autoSaveConf.cmd
+epicsEnvSet("TYPE","PRC")
 
 # =====================================================================
 #Load Additional databases:
