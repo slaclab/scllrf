@@ -44,6 +44,9 @@ protected:
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 
+	/* SHA1 hash of register map */
+	static const char *regMapSha1String;
+
 /* Register names */
 #set $prevWAdrs = []
 #set $prevRAdrs =[]
@@ -52,7 +55,7 @@ protected:
 // ${p.desc}
   #end if
   #if (not $p.has_key('access')) or ('r' in $p.access)
-static const char *${p.name.title().replace("_", "")}RString;
+	static const char *${p.name.title().replace("_", "")}RString;
     #if $p.address not in $prevRAdrs
       #if $p.has_key('nelm') and $p.nelm>32
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
@@ -63,14 +66,14 @@ static const char *${p.name.title().replace("_", "")}RString;
     #end if
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
-static const char *${p.name.title().replace("_", "")}WString;
+	static const char *${p.name.title().replace("_", "")}WString;
     #if $p.address not in $prevWAdrs
       #silent $prevWAdrs.append($p.address)
     #end if
   #end if
 #end for
 
-static const unsigned int ${name}PolledRegCount;
+	static const unsigned int ${name}PolledRegCount;
 
 #if $varExists('commands')
 /* Commands */
