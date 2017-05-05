@@ -8,6 +8,7 @@ from Cheetah.Template import Template
 import re
 import time,struct,getopt
 from string import replace
+import hashlib
 
 def mkdir_p(path):
     try:
@@ -118,6 +119,11 @@ if __name__ == "__main__":
     if args.input_d is not None:
         device = __import__(args.input_d.replace('.py', ''))
         regmap_dict = device.d
+        sha = hashlib.sha1()
+        fv = open(args.input_d).read()
+        sha.update(fv)
+        print(sha.hexdigest())
+        regmap_dict['sha1'] = sha.hexdigest()
         if args.core is not None:
             regmap_dict.name = args.core
 
@@ -125,6 +131,11 @@ if __name__ == "__main__":
     if args.input_j is not None:
         regmap_dict = {'name': args.core, 'registers': []}
         with open(args.input_j, 'r') as f:
+            sha = hashlib.sha1()
+            fv = open(args.input_j).read()
+            sha.update(fv)
+            print(sha.hexdigest())
+            regmap_dict['sha1'] = sha.hexdigest()
             json_regmap = json.load(f)
             for k, v in json_regmap.items():
                 if type(v) is dict:
