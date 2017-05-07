@@ -179,7 +179,7 @@ protected:
 	unsigned int nchan_;
 	void fillTraceIQWavReqMsg();
 	void reqTraceIQWWaveform(FpgaReg (*readTraceIQWaveformsMsg)[traceIQWaveSegmentSize]);
-	//	std::ostringstream strGitSHA1;
+	std::ostringstream strGitSHA1;
 	epicsInt16 pWave16bitI_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];
 	epicsInt16 pWave16bitQ_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];
 	epicsFloat32 pWave16bitA_[maxTraceIQWavesCount][traceIQWaveBuffSize *2];

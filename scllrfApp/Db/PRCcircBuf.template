@@ -9,7 +9,7 @@ record(waveform, "$(P)CIRC_IQ_BUF_$(SH)_I_$(N)") {
   field(INP, "@asyn($(PORT),$(N),1)CIRC_IQ_BUF_$(SH)_I")
   field(PREC, "1")
   field(EGU, "$(EGU)")
-  field(NELM, "1024")
+  field(NELM, "4096")
   field(FTVL, "SHORT")
   field(SDIS, "$(P)CIRC_BUF_$(SH)_$(N)_DISA")
 }
@@ -21,7 +21,7 @@ record(waveform, "$(P)CIRC_IQ_BUF_$(SH)_Q_$(N)") {
   field(INP, "@asyn($(PORT),$(N),1)CIRC_IQ_BUF_$(SH)_Q")
   field(PREC, "1")
   field(EGU, "$(EGU)")
-  field(NELM, "1024")
+  field(NELM, "4096")
   field(FTVL, "SHORT")
   field(SDIS, "$(P)CIRC_BUF_$(SH)_$(N)_DISA")
 }
@@ -33,7 +33,7 @@ record(waveform, "$(P)CIRC_IQ_BUF_$(SH)_A_$(N)") {
   field(INP, "@asyn($(PORT),$(N),1)CIRC_IQ_BUF_$(SH)_A")
   field(PREC, "1")
   field(EGU, "$(EGU)")
-  field(NELM, "1024")
+  field(NELM, "4096")
   field(FTVL, "FLOAT")
   field(SDIS, "$(P)CIRC_BUF_$(SH)_$(N)_DISA")
 }
@@ -45,7 +45,7 @@ record(waveform, "$(P)CIRC_IQ_BUF_$(SH)_P_$(N)") {
   field(INP, "@asyn($(PORT),$(N),1)CIRC_IQ_BUF_$(SH)_P")
   field(PREC, "1")
   field(EGU, "$(EGU)")
-  field(NELM, "1024")
+  field(NELM, "4096")
   field(FTVL, "FLOAT")
   field(SDIS, "$(P)CIRC_BUF_$(SH)_$(N)_DISA")
 }

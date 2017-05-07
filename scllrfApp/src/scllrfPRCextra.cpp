@@ -33,6 +33,8 @@
 #include <iostream>
 using namespace std;
 #include <math.h>
+#include <cmath>
+#include <exception>
 
 /** Constructor for the scllrfPRC class.
  * Calls constructor for the asynPortDriver base class.
@@ -388,20 +390,20 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	case 0: //TODO: verify the packing of the bits for 16 bit data
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
-		// Amplitude = qrt(I^2+Q^2)
-
+		// Amplitude = sqrt(I^2+Q^2)
+		pWave16bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt(pow(pWave16bitI_[waveNumber][waveIndex],2)+pow(pWave16bitQ_[waveNumber][waveIndex],2));
 		// phase = arctan(Q/I)
-
+////		pWave16bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave16bitQ_[waveNumber][waveIndex] / pWave16bitI_[waveNumber][waveIndex]);
 		break;
 
 	case 1:
 		waveIndex += npt_; // continued from addresses in "case 0"
 		pWave16bitI_[waveNumber][waveIndex] = (epicsInt16) pFromFpga->data;
 		pWave16bitQ_[waveNumber][waveIndex] = (epicsInt16) (pFromFpga->data >> 16);
-
-
+		// Amplitude = sqrt(I^2+Q^2)
+		pWave16bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt(pow(pWave16bitI_[waveNumber][waveIndex],2)+pow(pWave16bitQ_[waveNumber][waveIndex],2));
 		// phase = arctan(Q/I)
-
+////		pWave16bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave16bitQ_[waveNumber][waveIndex] / pWave16bitI_[waveNumber][waveIndex]);
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
 		{
 			setIntegerParam(p_IQ16BitNELM, npt_ * 2/nchan_);
@@ -437,10 +439,10 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	case 3:
 		pWave22bitQ_[waveNumber][waveIndex] =
                      ((epicsInt32) pFromFpga->data) >> 10;
-
-
+		// Amplitude = sqrt(I^2+Q^2)
+		pWave22bitA_[waveNumber][waveIndex] = (epicsFloat32) sqrt(pow(pWave22bitI_[waveNumber][waveIndex],2)+pow(pWave22bitQ_[waveNumber][waveIndex],2));
 		// phase = arctan(Q/I)
-
+//		pWave22bitP_[waveNumber][waveIndex] = (epicsFloat32) atan(pWave22bitQ_[waveNumber][waveIndex] / pWave22bitI_[waveNumber][waveIndex]);
 		if (waveOffset +1 == npt_) // if this is the last point of the waveform
 		{
 			setIntegerParam(p_IQ22BitNELM, npt_/nchan_);
@@ -608,6 +610,7 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 	unsigned int buf1Number = nCirc1Chan_>0? bufOffset % nCirc1Chan_ : 0;
 	unsigned int buf1Index = nCirc1Chan_>0? bufOffset / nCirc1Chan_ : 0;
 	unsigned int i;
+	float fI, fQ;
 
 	pCircIQBuf_[regOffset] = pFromFpga->data;
 	// Even number addresses are I, odd are Q
@@ -620,16 +623,36 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 
 	case 1: // odd numbered address
 		pCircIQBuf0Q_[buf0Number][buf0Index] = (epicsInt16) pFromFpga->data;
-
-
+		// Amplitude = sqrt(I^2+Q^2)
+		fI = (float)pCircIQBuf0I_[buf0Number][buf0Index];
+		fQ = (float)pCircIQBuf0Q_[buf0Number][buf0Index];
+		pCircIQBuf0A_[buf0Number][buf0Index] = (epicsFloat32) sqrt(pow(fI,2)+pow(fQ,2));
 		// phase = arctan(Q/I)
-
+		try
+		{
+			pCircIQBuf0P_[buf0Number][buf0Index] = pCircIQBuf0I_[buf0Number][buf0Index]==0? NAN: atan(pCircIQBuf0Q_[buf0Number][buf0Index] / pCircIQBuf0I_[buf0Number][buf0Index]);
+		}
+		catch (std::exception& e)
+		{
+			std::cerr << "exception caught: " << e.what() << endl;
+			printf("pCircIQBuf0I_[%u][%u] = %d, ", buf0Number, buf0Index, pCircIQBuf0I_[buf0Number][buf0Index]);
+			printf("pCircIQBuf0Q_[%u][%u] = %d, ", buf0Number, buf0Index, pCircIQBuf0Q_[buf0Number][buf0Index]);
+		}
 
 		pCircIQBuf1Q_[buf1Number][buf1Index] = (epicsInt16) (pFromFpga->data >> 16);
-
-
+		// Amplitude = sqrt(I^2+Q^2)
+		pCircIQBuf1A_[buf1Number][buf1Index] = (epicsFloat32) sqrt(pow(pCircIQBuf1I_[buf1Number][buf1Index],2)+pow(pCircIQBuf1Q_[buf1Number][buf1Index],2));
 		// phase = arctan(Q/I)
-
+		try
+		{
+			pCircIQBuf1P_[buf1Number][buf1Index] = pCircIQBuf1I_[buf1Number][buf1Index]==0? NAN: (epicsFloat32) atan(pCircIQBuf1Q_[buf1Number][buf1Index] / pCircIQBuf1I_[buf1Number][buf1Index]);
+		}
+		catch (std::exception& e)
+		{
+			std::cerr << "exception caught: " << e.what() << endl;
+			printf("pCircIQBuf1I_[%u][%u] = %d, ", buf1Number, buf1Index, pCircIQBuf1I_[buf1Number][buf1Index]);
+			printf("pCircIQBuf1Q_[%u][%u] = %d\n", buf1Number, buf1Index, pCircIQBuf1Q_[buf1Number][buf1Index]);
+		}
 
 		if ((pFromFpga->addr & addrMask) == circIQBufEnd) // if this is the last point of the buffer
 		{
@@ -696,13 +719,13 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga)
 //	strGitSHA1.clear();
 //	strGitSHA1<<std::hex;
 //
-////	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
-////	{
-////		status = (asynStatus) getIntegerParam(i, &oneByte);
-////		strGitSHA1<< std::setw(2) << oneByte;
-////	}
-////	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
-////	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
+//	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
+//	{
+//		status = (asynStatus) getIntegerParam(i, &oneByte);
+//		strGitSHA1<< std::setw(2) << oneByte;
+//	}
+//	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
+//	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
 //
 //	return asynSuccess;
 //}
@@ -915,8 +938,8 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		timeStamp >>= 5;
 
 		setIntegerParam(p_Shell0TimeStampHighR, (int) (timeStamp>>32));
-		setIntegerParam(p_Shell0TimeStampLowR, (int) timeStamp & ((2^32) - 1));
-//printf("Time stamp is %u %u\n", (timeStamp>>32), timeStamp & ((2^32) - 1));
+		setIntegerParam(p_Shell0TimeStampLowR, (int) timeStamp & (((int)pow(2,32)) - 1));
+//printf("Time stamp is %u %u\n", (timeStamp>>32), timeStamp & (pow(2,32) - 1));
 
 	break;
 
@@ -964,8 +987,8 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		timeStamp >>= 5;
 
 		setIntegerParam(p_Shell1TimeStampHighR, (int) (timeStamp>>32));
-		setIntegerParam(p_Shell1TimeStampLowR, (int) timeStamp & ((2^32) - 1));
-		//printf("Time stamp is %u %u\n", (timeStamp>>32), timeStamp & ((2^32) - 1));
+		setIntegerParam(p_Shell1TimeStampLowR, (int) timeStamp & (((int)pow(2,32)) - 1));
+		//printf("Time stamp is %u %u\n", (timeStamp>>32), timeStamp & (pow(2,32) - 1));
 
 	break;
 
