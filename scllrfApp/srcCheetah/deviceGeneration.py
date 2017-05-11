@@ -140,9 +140,9 @@ if __name__ == "__main__":
                     if 'circle_buf_flip' in k:
                         v['bits'] = { "flip_c0_buf": 1, "flip_c1_buf": 2 }
                     if 'dsp_chan_keep' in k:
-                        v['bits'] = { "Ch0": 0x1, "Ch1": 0x2, "Ch2": 0x4, "Ch3": 0x8, "Ch4": 0x10, "Ch5": 0x20, "Ch6": 0x40, "Ch7": 0x80, "Ch8": 0x100, "Ch9": 0x200, "Ch10": 0x400, "Ch11": 0x800, }
+                        v['bits'] = { "Ch0": 0, "Ch1": 1, "Ch2": 2, "Ch3": 3, "Ch4": 4, "Ch5": 5, "Ch6": 6, "Ch7": 7, "Ch8": 8, "Ch9": 9, "Ch10": 10, "Ch11": 11, }
                     if 'trace_keep' in k:
-                        v['bits'] = { "Ch0": 0x1, "Ch1": 0x2, "Ch2": 0x4, "Ch3": 0x8, "Ch4": 0x10, "Ch5": 0x20, "Ch6": 0x40, "Ch7": 0x80 }
+                        v['bits'] = { "Ch0": 0, "Ch1": 1, "Ch2": 2, "Ch3": 3, "Ch4": 4, "Ch5": 5, "Ch6": 6, "Ch7": 7 }
                     regmap_dict['registers'].append(v)
 
     makeDirectory(regmap_dict)

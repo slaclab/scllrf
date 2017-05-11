@@ -47,6 +47,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
 : scllrfPRCDriver(drvPortName, netPortName, maxChannel, NUM_SCLLRFPRCEXTRA_PARAMS),
 	newCircIQBufAvailable_(0), newCircIQBufRead_ (0)
 {
+	unsigned int i;
+
     createParam(WaveformI16BitString, asynParamInt16Array, &p_WaveformI16Bit);
     createParam(WaveformQ16BitString, asynParamInt16Array, &p_WaveformQ16Bit);
     createParam(WaveformI22BitString, asynParamInt32Array, &p_WaveformI22Bit);
@@ -95,13 +97,25 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
     //    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
 
+    for (i=0; i<maxCircIQBufWavesCount; i++)
+    {
+		std::fill( pCircIQBuf0_[i], pCircIQBuf0_[i] + circIQBufWavePoints, 0 );
+		std::fill( pCircIQBuf1_[i], pCircIQBuf1_[i] + circIQBufWavePoints, 0 );
+    }
+    for (i=0; i<maxCircIQBufWavesCount/2; i++)
+    {
+		std::fill( pCircIQBuf0A_[i], pCircIQBuf0A_[i] + circIQBufWavePoints, 0 );
+		std::fill( pCircIQBuf0P_[i], pCircIQBuf0P_[i] + circIQBufWavePoints, 0 );
+		std::fill( pCircIQBuf1A_[i], pCircIQBuf1A_[i] + circIQBufWavePoints, 0 );
+		std::fill( pCircIQBuf1P_[i], pCircIQBuf1P_[i] + circIQBufWavePoints, 0 );
+    }
+
     epicsThreadSleep(defaultPollPeriod);
     std::cout << __PRETTY_FUNCTION__ << " created " << NUM_SCLLRFPRCEXTRA_PARAMS << " parameters." << std::endl;
 
 	reqWaveEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startTraceIQWaveformRequester();
 
-	reqCircIQBufEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startCircIQBufRequester();
 
     epicsThreadSleep(defaultPollPeriod);
@@ -596,7 +610,8 @@ void scllrfPRCextra::circIQBufRequester()
 	// Main polling loop
 	while (1)
 	{
-		status = epicsEventWait(reqCircIQBufEventId_);
+		newCircIQBufRead_ = newCircIQBufAvailable_; // Indicate that we got the previous signal
+		reqCircIQBufEvent_.wait();
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: got data ready flag\n", __PRETTY_FUNCTION__);
 
@@ -613,7 +628,7 @@ void scllrfPRCextra::circIQBufRequester()
 		if (nCirc0Chan_ <=0 || ((readyBits & 0x1) == 0))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-						"%s: nCirc0Chan_=%d, nCirc1Chan_=%d\n", __PRETTY_FUNCTION__, nCirc0Chan_, nCirc1Chan_);
+						"%s: nCirc0Chan_=%d\n", __PRETTY_FUNCTION__, nCirc0Chan_);
 			epicsThreadSleep(pollPeriod_);
 		}
 		else
@@ -622,16 +637,15 @@ void scllrfPRCextra::circIQBufRequester()
 			 **/
 			reqCircIQBuf(0);
 
-			newCircIQBufRead_ = newCircIQBufAvailable_; // Indicate that we got the signal
 			sendRegRequest(circ0Ack, sizeof(circ0Ack)/sizeof(FpgaReg));
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: done sending waveform request\n", __PRETTY_FUNCTION__);
 
 		}
-		if (nCirc0Chan_ <=0  || ((readyBits & 0x2) == 0))
+		if (nCirc1Chan_ <=0  || ((readyBits & 0x2) == 0))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-						"%s: nCirc0Chan_=%d, nCirc1Chan_=%d\n", __PRETTY_FUNCTION__, nCirc0Chan_, nCirc1Chan_);
+						"%s: nCirc1Chan_=%d\n", __PRETTY_FUNCTION__, nCirc1Chan_);
 			epicsThreadSleep(pollPeriod_);
 		}
 		else
@@ -640,7 +654,6 @@ void scllrfPRCextra::circIQBufRequester()
 			 **/
 			reqCircIQBuf(1);
 
-			newCircIQBufRead_ = newCircIQBufAvailable_; // Indicate that we got the signal
 			sendRegRequest(circ1Ack, sizeof(circ1Ack)/sizeof(FpgaReg));
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: done sending waveform request\n", __PRETTY_FUNCTION__);
@@ -692,8 +705,8 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga, un
 		break;
 	case 1:
 		regOffset = (pFromFpga->addr & addrMask) - Shell1CircleDataRAdr;
-		bufNumber = nCirc0Chan_>0? regOffset % nCirc0Chan_ : 0;
-		bufIndex = nCirc0Chan_>0? regOffset / nCirc0Chan_ : 0;
+		bufNumber = nCirc1Chan_>0? regOffset % nCirc1Chan_ : 0;
+		bufIndex = nCirc1Chan_>0? regOffset / nCirc1Chan_ : 0;
 		nCircChan = nCirc1Chan_;
 		bufCircleData = bufShell1CircleData;
 		pCircIQChanBuf = &pCircIQBuf1_;
@@ -734,38 +747,69 @@ asynStatus scllrfPRCextra::processCircIQBufReadback(const FpgaReg *pFromFpga, un
 				"%s: got last waveform datapoint. Publishing.\n", __PRETTY_FUNCTION__);
 		doCallbacksInt32Array(bufCircleData, circIQBufWaveRegCount, rawParam, 0);
 		std::fill( bufCircleData, bufCircleData + sizeof( bufCircleData )/sizeof( *bufCircleData), 0 );
-		bitset<maxChannel> bitset_chan_keep (chan_keep);
+		bitset<maxCircIQBufWavesCount> bitset_chan_keep (chan_keep);
 
-		for (rel_chan_ix=0; rel_chan_ix<maxCircIQBufWavesCount; ++rel_chan_ix)
+		for (rel_chan_ix=0; rel_chan_ix<nCircChan; ++rel_chan_ix)
 		{
 			num_of_chans = 0;
 			abs_chan_ix = 0;
-			cout << __PRETTY_FUNCTION__ << bitset_chan_keep.to_string() << "\n";
-			for (abs_chan_ix=0; num_of_chans<rel_chan_ix; ++abs_chan_ix)
-			{
-				num_of_chans = bitset_chan_keep.test(abs_chan_ix) ? ++num_of_chans : num_of_chans;
-			}
-			cout << "relative index:" << rel_chan_ix << " total: " << num_of_chans << " abs index:" << abs_chan_ix << "\n";
+//			cout << __PRETTY_FUNCTION__ << " with " << bitset_chan_keep.to_string() << "\n";
+            for (abs_chan_ix=bitset_chan_keep.size(); num_of_chans<=rel_chan_ix;num_of_chans += bitset_chan_keep.test(abs_chan_ix))
+            {
+                //num_of_chans = bitset_chan_keep.test(abs_chan_ix) ? ++num_of_chans : num_of_chans;
+                --abs_chan_ix;
+//                cout << abs_chan_ix;
+            }
+            //--abs_chan_ix;
+//			cout << "relative index:" << rel_chan_ix << " total: " << num_of_chans << " abs index:" << abs_chan_ix << "\n";
 
 			if(abs_chan_ix%2 == 0) // if this is a Q channel
 			{
+//				cout << "publishing Q waveform " << abs_chan_ix/2 << " shell " << shellNum << ", from relative channel" << rel_chan_ix << endl;
 				doCallbacksInt32Array((*pCircIQChanBuf)[rel_chan_ix], circIQBufWavePoints/nCircChan, QParam, abs_chan_ix/2);
+//				cout << "bitset for " << abs_chan_ix << ": " << bitset_chan_keep.test(abs_chan_ix);
+//				cout << ", bitset for " << abs_chan_ix-1 << ": " << bitset_chan_keep.test(abs_chan_ix+1) << endl;
+				if(bitset_chan_keep.test(abs_chan_ix+1)) // if the corresponding Q is also active
+				{
+//					cout << "calculating A/P for shell " << shellNum << endl;
+					for (i=0; i<circIQBufWavePoints/nCircChan; i++)
+					{
+						try
+						{
+							(*bufCircleAData)[abs_chan_ix/2][i] = (epicsFloat32) hypot((*pCircIQChanBuf)[rel_chan_ix][i], (*pCircIQChanBuf)[rel_chan_ix-1][i]);
+							(*bufCirclePData)[abs_chan_ix/2][i] = (epicsFloat32) (atan2((*pCircIQChanBuf)[rel_chan_ix-1][i], (*pCircIQChanBuf)[rel_chan_ix][i]));
+						}
+						catch (std::exception& e)
+						{
+							printf("pCircIQBuf%dI_[%u][%u] = %d, ", shellNum, rel_chan_ix, i, (*pCircIQChanBuf)[rel_chan_ix][i]);
+							printf("pCircIQBuf%dQ_[%u][%u] = %d, ", shellNum, rel_chan_ix-1, i, (*pCircIQChanBuf)[rel_chan_ix-1][i]);
+							std::cerr << "exception caught: " << e.what() << endl;
+						}
+					}
+
+//					cout << "publishing A/P waveform " << abs_chan_ix/2 << " shell " << shellNum << endl;
+					doCallbacksFloat32Array((*bufCircleAData)[abs_chan_ix/2], circIQBufWavePoints/nCircChan, AParam, abs_chan_ix/2);
+					doCallbacksFloat32Array((*bufCirclePData)[abs_chan_ix/2], circIQBufWavePoints/nCircChan, PParam, abs_chan_ix/2);
+					std::fill( (*bufCircleAData)[abs_chan_ix/2],
+							(*bufCircleAData)[abs_chan_ix/2] + sizeof( (*bufCircleAData)[abs_chan_ix/2] )/sizeof( *(*bufCircleAData)[abs_chan_ix/2]), 0 );
+					std::fill( (*bufCirclePData)[abs_chan_ix/2],
+							(*bufCirclePData)[abs_chan_ix/2] + sizeof( (*bufCirclePData)[abs_chan_ix/2] )/sizeof( *(*bufCirclePData)[abs_chan_ix/2]), 0 );
+				}
+				else
+				{
+					std::fill( (*bufCircleAData)[abs_chan_ix/2],
+							(*bufCircleAData)[abs_chan_ix/2] + sizeof( (*bufCircleAData)[abs_chan_ix/2] )/sizeof( *(*bufCircleAData)[abs_chan_ix/2]), 0 );
+					std::fill( (*bufCirclePData)[abs_chan_ix/2],
+							(*bufCirclePData)[abs_chan_ix/2] + sizeof( (*bufCirclePData)[abs_chan_ix/2] )/sizeof( *(*bufCirclePData)[abs_chan_ix/2]), 0 );
+					doCallbacksFloat32Array((*bufCircleAData)[abs_chan_ix/2], 1, AParam, abs_chan_ix/2);
+					doCallbacksFloat32Array((*bufCirclePData)[abs_chan_ix/2], 1, PParam, abs_chan_ix/2);
+				}
+
 			}
 			else
 			{
+//				cout << "publishing I waveform " << abs_chan_ix/2 << " shell " << shellNum << ", from relative channel" << rel_chan_ix << endl;
 				doCallbacksInt32Array((*pCircIQChanBuf)[rel_chan_ix], circIQBufWavePoints/nCircChan, IParam, abs_chan_ix/2);
-				if(bitset_chan_keep.test(abs_chan_ix-1)) // if the corresponding Q is also active
-				{
-					for (i=0; i<circIQBufWavePoints/nCircChan; i++)
-					{
-						(*bufCircleAData)[rel_chan_ix][i] = (epicsFloat32) hypot((*pCircIQChanBuf)[rel_chan_ix][i], (*pCircIQChanBuf)[rel_chan_ix-1][i]);
-						(*bufCirclePData)[rel_chan_ix][i] = (epicsFloat32) (atan2((*pCircIQChanBuf)[rel_chan_ix-1][i], (*pCircIQChanBuf)[rel_chan_ix][i]));
-					}
-
-					doCallbacksFloat32Array((*bufCircleAData)[rel_chan_ix], circIQBufWavePoints/nCircChan, AParam, abs_chan_ix/2);
-					doCallbacksFloat32Array((*bufCirclePData)[rel_chan_ix], circIQBufWavePoints/nCircChan, PParam, abs_chan_ix/2);
-				}
-
 			}
 
 			// TODO: fill with 0 after publishing, change size of unused channels to 0
@@ -922,7 +966,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 			// to the message counter value for the message we just received
 			newCircIQBufAvailable_ = lastResponseCount_;
 
-			epicsEventSignal(reqCircIQBufEventId_);
+			reqCircIQBufEvent_.signal();
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
 					__PRETTY_FUNCTION__);
 		}
@@ -1258,10 +1302,6 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
     case Shell0DspChanKeepWAdr:
 		status = (asynStatus) getUIntDigitalParam(p_Shell0DspChanKeepW, uValueSet , Shell0DspChanKeepMask);
-		////XXXXX Trigger a read whenever we change a bit, whether data is ready or not.
-		//newCircIQBufAvailable_ = lastResponseCount_;
-		//epicsEventSignal(reqCircIQBufEventId_);
-		////XXXX
 
 		if( (uValueSet[0] & Shell0DspChanKeepMask) == (pFromFpga->data & Shell0DspChanKeepMask))
 		{

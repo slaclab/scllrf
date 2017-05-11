@@ -187,7 +187,7 @@ protected:
 	static const uint32_t circIQBufShell0End = Shell0CircleDataRAdr + sizeof(bufShell0CircleData)/sizeof(*bufShell0CircleData); // max possible
 	static const uint32_t circIQBufShell1End = Shell1CircleDataRAdr + sizeof(bufShell1CircleData)/sizeof(*bufShell1CircleData); // max possible
 	static const unsigned circIQBufWaveRegCount = sizeof(bufShell0CircleData)/sizeof(*bufShell0CircleData);
-	static const unsigned circIQBufWavePoints = circIQBufWaveRegCount/2; // # data points for I or Q. Half the registers are I data, half Q
+	static const unsigned circIQBufWavePoints = circIQBufWaveRegCount; // # data points for I or Q. Half the registers are I data, half Q
 	static const unsigned maxCircIQBufWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
 	static const unsigned circIQBufSegmentCount = (circIQBufWaveRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up
 	static const unsigned circIQBufReqMsgSize = circIQBufWaveRegCount + circIQBufSegmentCount; // All register addresses plus nonce space
@@ -204,7 +204,7 @@ protected:
 	unsigned int nCirc1Chan_;
 	void fillCircIQBufReqMsg();
 	void reqCircIQBuf(unsigned int shellNum);
-	epicsEventId reqCircIQBufEventId_; /**< Event ID to signal the waveform requester */
+	epicsEvent reqCircIQBufEvent_; /**< Event to signal the waveform requester */
 	unsigned int newCircIQBufAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
 	unsigned int newCircIQBufRead_; /**< netSendCount for the most recent waveform */
 	unsigned int phaseStepH, phaseStepL, phaseModulo;
