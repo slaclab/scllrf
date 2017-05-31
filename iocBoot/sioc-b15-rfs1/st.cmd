@@ -15,7 +15,7 @@ epicsEnvSet("N","1")
 # PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
 epicsEnvSet("P", "RFS$(N):$(LOCA):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.40")
+epicsEnvSet( FPGA_IP, "192.168.165.69")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 
@@ -44,8 +44,11 @@ asynSetTraceIOMask("myReg",-1,4)
 ##############################################################################
 # BEGIN: Load the record databases
 ##############################################################################
+####XXXX A bit of a hack to get the right iocAdmin PVs
+epicsEnvSet("TYPE","RFS")
 < iocBoot/common/iocAdmin.cmd
 #< iocBoot/common/autoSaveConf.cmd
+epicsEnvSet("TYPE","PRC")
 
 # =====================================================================
 #Load Additional databases:
@@ -97,8 +100,8 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpf $(P)RUN_STOP.HIGH 0.11
-dbpf $(P)RUN_STOP 1
+#dbpf $(P)RUN_STOP.HIGH 0.11
+#dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

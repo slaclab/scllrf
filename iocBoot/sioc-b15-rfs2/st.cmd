@@ -6,6 +6,7 @@
 
 < envPaths
 
+epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
 # System Location:
 epicsEnvSet("LOCA","B15")
 # Hardware type [PRC, RFS, RES, INT]
@@ -105,4 +106,6 @@ dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)
+
+< iocBoot/common/default_prc_params.cmd
 
