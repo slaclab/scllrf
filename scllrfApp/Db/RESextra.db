@@ -1,0 +1,62 @@
+record(mbboDirect, "$(P)PIEZO_WAVE_KEEP_L")
+{
+    field( PINI, "NO")
+#    field( DTYP, "asynUInt32Digital")
+#    field( OUT,  "@asynMask($(PORT),0, 0xFFFF, 0.1) PIEZO_WAVE_KEEP")
+#    field( OUT, 
+    field( NOBT, "16")
+    field( SCAN, "Passive")
+#    field(FLNK, "$(P)PIEZO_WAVE_KEEP_CALC")
+    info( autosaveFields, "DESC")
+}
+
+record(mbboDirect, "$(P)PIEZO_WAVE_KEEP_H")
+{
+    field( PINI, "NO")
+#    field( DTYP, "asynUInt32Digital")
+#    field( OUT,  "@asynMask($(PORT),0, 0xFFFF0000, 0.1) PIEZO_WAVE_KEEP")
+    field( NOBT, "16")
+    field( SCAN, "Passive")
+#    field(FLNK, "$(P)PIEZO_WAVE_KEEP_CALC")
+    info( autosaveFields, "DESC")
+}
+
+record(calcout, "$(P)PIEZO_WAVE_KEEP_CALC")
+{
+    field(INPA, "$(P)PIEZO_WAVE_KEEP_H CP")
+    field(INPB, "$(P)PIEZO_WAVE_KEEP_L CP")
+    field(CALC, "(A<<16)|B")
+#    field(FLNK, "$(P)PIEZO_WAVE_KEEP")
+}
+
+record(longout, "$(P)PIEZO_WAVE_KEEP")
+{
+    field(OMSL, "closed_loop")
+    field(DOL, "$(P)PIEZO_WAVE_KEEP_CALC CP")
+    field( DTYP, "asynInt32")
+    field( OUT,  "@asyn($(PORT),0, 1) PIEZO_WAVE_KEEP")
+    field( SCAN, "Passive")
+    info( autosaveFields, "DESC")
+}
+
+record(bo, "$(P)PIEZO_WAVE_UPDATE")
+{
+    field(OMSL, "closed_loop")
+    field(DOL, "$(P)PIEZO_WAVE_KEEP CP")
+    field(HIGH, 0.2)
+}
+
+record(mbbiDirect, "$(P)PZT_WAVE_AVAIL_H")
+{
+    field( PINI, "NO")
+    field( DTYP, "asynUInt32Digital")
+    field( INP,  "@asynMask($(PORT),0, 0xFFFF0000, 1) PZT_WAVE_AVAIL_R")
+    field( SCAN, "I/O Intr")
+}
+record(bi, "$(P)GET_PZT_WAVE_AVAIL_H")
+{
+    field( DTYP, "asynInt32")
+    field( INP,  "@asyn($(PORT),0) PZT_WAVE_AVAIL_R")
+    field( SCAN, "Passive")
+}
+

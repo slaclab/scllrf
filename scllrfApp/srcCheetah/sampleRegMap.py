@@ -38,8 +38,8 @@ d = { "name" : "example",
 		"desc"        : "Every field",
 	# If a register is a bit map or has flags in it, specify the name and mask for each.
  		"bits" :
-		{	"wav_ready" : 0x100,
-			"bar"       : 0x200
+		{	"wav_ready" : 9,
+			"bar"       : 10
 		}
 	},
 	# This includes all fields expected. If it doesn't meet your needs, we can
@@ -72,8 +72,8 @@ d = { "name" : "example",
 		"desc"        : "Every field",
 	# If a register is a bit map or has flags in it, specify the name and mask for each.
  		"bits" :
-		{	"wav_ready" : 0x100,
-			"bar"       : 0x200
+		{	"wav_ready" : 9,
+			"bar"       : 10
 		}
 	},
 	# This includes all fields expected. If it doesn't meet your needs, we can
@@ -106,8 +106,8 @@ d = { "name" : "example",
 		"desc"        : "Every field",
 	# If a register is a bit map or has flags in it, specify the name and mask for each.
  		"bits" :
-		{	"wav_ready" : 0x100,
-			"bar"       : 0x200
+		{	"wav_ready" : 9,
+			"bar"       : 10
 		}
 	},
 	# This includes all fields expected. If it doesn't meet your needs, we can
@@ -140,21 +140,20 @@ d = { "name" : "example",
 		"desc"        : "Every field",
 	# If a register is a bit map or has flags in it, specify the name and mask for each.
  		"bits" :
-		{	"wav_ready" : 0x100,
-			"bar"       : 0x200
+        {    "wav_ready" : 9,
+            "bar"       : 10
 		}
 	},
 	{"name" : "arc_faults",
 		"bits":
-		{	"cav1" : 0x0001,
-			"cav2" : 0x0002,
-			"cav3" : 0x0004,
-			"cav4" : 0x0008,
-			"cav1Mask" : 0x0100,
-			"cav2Mask" : 0x0200,
-			"cav3Mask" : 0x0400,
-			"cav4Mask" : 0x0800
-		},
+		{	"cav1" : 0,
+			"cav2" : 1,
+			"cav3" : 2,
+			"cav4" : 3,
+			"cav1Mask" : 8,
+			"cav2Mask" : 9,
+			"cav3Mask" : 10,
+			"cav4Mask" : 11	},
 		"address" : 0xabcdef,
 		"access"  : "rw",
 		"desc"    : "Arc fault bits and mask for half a cryo module"
