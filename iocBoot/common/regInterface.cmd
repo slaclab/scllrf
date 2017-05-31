@@ -54,7 +54,7 @@ dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=myIP,ADDR=0,IMAX=0,OMAX=
 
 
 #epicsThreadSleep(1.0)
-scllrf$(TYPE)Configure( "myReg","myIP")
+scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP")
 dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=myReg,ADDR=0,IMAX=0,OMAX=0")
 
 epicsThreadSleep(0.2)

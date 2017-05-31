@@ -106,7 +106,11 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
     createParam(${p.name.title().replace("_", "")}RString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}R);
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
+    #if $p.has_key('nelm') and $p.nelm>512
+    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}W);
+    #else
     createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+    #end if
   #end if
 #else
   #if (not $p.has_key('access')) or ('r' in $p.access)

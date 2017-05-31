@@ -163,8 +163,9 @@ protected:
 	epicsMessageQueue _singleMsgQ;
 
 	void fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t buffSize, const unsigned int iStartAddr); /**< For requesting a waveform, fill canned message request with sequential addresses */
+	asynStatus sendBigBuffer(FpgaReg *regBuffer, unsigned int regBuffCount); /**< A message composed by fillWaveRequestMsg can be sent with this function */
 
-	epicsEventId pollEventId_; /**< Event ID to wake up poller */
+	epicsEvent pollEvent_; /**< Event ID to wake up poller */
 	double pollPeriod_; /**< The time between polls */
 	epicsEventId readEventId_; /**< Event ID to wake up network message response reader */
 	double readTimeout_; /**< The time between polls */

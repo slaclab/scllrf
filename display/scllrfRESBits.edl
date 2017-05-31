@@ -6,7 +6,7 @@ release 1
 x 0
 y 0
 w 1180
-h 1889
+h 2173
 font "helvetica-medium-r-12.0"
 ctlFont "helvetica-bold-r-14.0"
 ctlFontAlign "center"
@@ -93,265 +93,9 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "MOTOR1_CNTL"
+  "CCR_SUMMARY"
 }
 autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 202
-y 75
-w 15
-h 288
-controlPv "$(P)MOTOR1_CNTL_W"
-lineColor index 14
-onColor index 55
-offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 348
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B0"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 348
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B0"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 329
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B1"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 329
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B1"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 310
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B2"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 310
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B2"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 291
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B3"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 291
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B3"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 273
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B4"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 273
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B4"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -364,538 +108,10 @@ x 219
 y 75
 w 15
 h 288
-controlPv "$(P)MOTOR1_CNTL_R"
+controlPv "$(P)CCR_SUMMARY_R"
 lineColor index 14
 onColor index 55
 offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 256
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B5"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 256
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B5"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 237
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B6"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 237
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B6"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 219
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B7"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 219
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B7"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 201
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B8"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 201
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B8"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 183
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B9"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 183
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.B9"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 165
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BA"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 165
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BA"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 147
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BB"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 147
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BB"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 129
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BC"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 129
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BC"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 112
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BD"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 112
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BD"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 94
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BE"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 94
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BE"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 76
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BF"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 76
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR1_CNTL_W.BF"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -913,7 +129,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "go"
+    "ccr_location0"
 }
 autoSize
 endObjectProperties
@@ -934,7 +150,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "inhbit_mask"
+    "ccr_location1"
 }
 autoSize
 endObjectProperties
@@ -994,7 +210,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "crash_motor"
+    "ccr_location2"
 }
 autoSize
 endObjectProperties
@@ -1014,7 +230,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "stop_motor"
+    "ccr_gateware_type0"
 }
 autoSize
 endObjectProperties
@@ -1034,7 +250,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "clear_done_flag"
+    "ccr_gateware_type1"
 }
 autoSize
 endObjectProperties
@@ -1054,7 +270,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "direction"
+    "ccr_gateware_type2"
 }
 autoSize
 endObjectProperties
@@ -1074,7 +290,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "low_current_mask"
+    "ccr_protocol_ver0"
 }
 autoSize
 endObjectProperties
@@ -1093,7 +309,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "auto_mode"
+    "ccr_protocol_ver1"
 }
 autoSize
 endObjectProperties
@@ -1153,7 +369,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "clr_sgn_steps"
+    "ccr_protocol_ver2"
 }
 autoSize
 endObjectProperties
@@ -1173,7 +389,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "clr_abs_steps"
+    "ccr_protocol_ver3"
 }
 autoSize
 endObjectProperties
@@ -1193,7 +409,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "sgn_sub_inhibit"
+    "ccr_faults0"
 }
 autoSize
 endObjectProperties
@@ -1213,7 +429,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "abs_sub_inhibit"
+    "ccr_faults1"
 }
 autoSize
 endObjectProperties
@@ -1233,7 +449,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "slow_gdr_enable"
+    "ccr_faults2"
 }
 autoSize
 endObjectProperties
@@ -1253,7 +469,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+    "ccr_faults3"
 }
 autoSize
 endObjectProperties
@@ -1273,7 +489,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "bit 14"
+    "ccr_error"
 }
 autoSize
 endObjectProperties
@@ -1316,7 +532,6 @@ endGroup
 
 endObjectProperties
 
-  
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -1337,6 +552,1258 @@ major 4
 minor 1
 release 1
 x 371
+y 375
+w 48
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "MOTOR1_CNTL"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 438
+y 75
+w 15
+h 288
+controlPv "$(P)MOTOR1_CNTL_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 348
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 348
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 329
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 329
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 310
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 310
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 291
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 291
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 273
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 273
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 455
+y 75
+w 15
+h 288
+controlPv "$(P)MOTOR1_CNTL_R"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 256
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 256
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 237
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 237
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 219
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 219
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 201
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B8"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 201
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B8"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 183
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B9"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 183
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.B9"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 165
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BA"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 165
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BA"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 147
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BB"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 147
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BB"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 129
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BC"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 129
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BC"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 112
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BD"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 112
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BD"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 94
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BE"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 94
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BE"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 76
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BF"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 76
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR1_CNTL_W.BF"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 349
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "go"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 330
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+bgAlarm
+useDisplayBg
+value {
+    "inhbit_mask"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 473
+y 347
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 473
+y 77
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "15"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 311
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "crash_motor"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 292
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "stop_motor"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 274
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "clear_done_flag"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 257
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "direction"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 238
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "low_current_mask"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 220
+w 43
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+value {
+    "auto_mode"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 473
+y 221
+w 15
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 7 "
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 473
+y 203
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 202
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "clr_sgn_steps"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 185
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "clr_abs_steps"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 167
+w 57
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "sgn_sub_inhibit"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 148
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "abs_sub_inhibit"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 130
+w 66
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "slow_gdr_enable"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 113
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+       "bit 13"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 95
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "bit 14"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 296
+y 77
+w 54
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 15"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 287
+y 63
+w 216
+h 335
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+  
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 523
+y 63
+w 216
+h 335
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 607
 y 375
 w 48
 h 16
@@ -1356,7 +1823,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 455
+x 691
 y 75
 w 15
 h 288
@@ -1372,7 +1839,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 349
 w 56
 h 14
@@ -1392,7 +1859,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 330
 w 56
 h 14
@@ -1413,7 +1880,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 473
+x 709
 y 347
 w 11
 h 14
@@ -1433,7 +1900,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 473
+x 709
 y 77
 w 14
 h 14
@@ -1453,7 +1920,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 311
 w 56
 h 14
@@ -1473,7 +1940,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 292
 w 56
 h 14
@@ -1493,7 +1960,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 274
 w 56
 h 14
@@ -1513,7 +1980,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 257
 w 56
 h 14
@@ -1533,7 +2000,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 238
 w 56
 h 14
@@ -1553,7 +2020,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 220
 w 43
 h 14
@@ -1572,7 +2039,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 473
+x 709
 y 221
 w 15
 h 14
@@ -1592,7 +2059,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 473
+x 709
 y 203
 w 11
 h 14
@@ -1612,7 +2079,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 202
 w 56
 h 14
@@ -1632,7 +2099,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 185
 w 56
 h 14
@@ -1652,7 +2119,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 167
 w 57
 h 14
@@ -1672,7 +2139,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 148
 w 56
 h 14
@@ -1692,7 +2159,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 130
 w 66
 h 14
@@ -1712,7 +2179,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 113
 w 72
 h 14
@@ -1732,7 +2199,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 95
 w 72
 h 14
@@ -1752,7 +2219,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 296
+x 532
 y 77
 w 54
 h 14
@@ -1772,7 +2239,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 287
+x 523
 y 63
 w 216
 h 335
@@ -1790,7 +2257,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 523
+x 759
 y 63
 w 216
 h 335
@@ -1803,7 +2270,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 607
+x 843
 y 375
 w 48
 h 16
@@ -1823,7 +2290,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 674
+x 910
 y 75
 w 15
 h 288
@@ -1839,7 +2306,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 348
 w 15
 h 16
@@ -1863,7 +2330,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 348
 w 15
 h 16
@@ -1887,7 +2354,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 329
 w 15
 h 16
@@ -1911,7 +2378,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 329
 w 15
 h 16
@@ -1935,7 +2402,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 310
 w 15
 h 16
@@ -1959,7 +2426,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 310
 w 15
 h 16
@@ -1983,7 +2450,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 291
 w 15
 h 16
@@ -2007,7 +2474,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 291
 w 15
 h 16
@@ -2031,7 +2498,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 273
 w 15
 h 16
@@ -2055,7 +2522,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 273
 w 15
 h 16
@@ -2079,7 +2546,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 691
+x 927
 y 75
 w 15
 h 288
@@ -2095,7 +2562,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 256
 w 15
 h 16
@@ -2119,7 +2586,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 256
 w 15
 h 16
@@ -2143,7 +2610,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 237
 w 15
 h 16
@@ -2167,7 +2634,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 237
 w 15
 h 16
@@ -2191,7 +2658,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 219
 w 15
 h 16
@@ -2215,7 +2682,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 219
 w 15
 h 16
@@ -2239,7 +2706,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 201
 w 15
 h 16
@@ -2263,7 +2730,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 201
 w 15
 h 16
@@ -2287,7 +2754,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 183
 w 15
 h 16
@@ -2311,7 +2778,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 183
 w 15
 h 16
@@ -2335,7 +2802,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 165
 w 15
 h 16
@@ -2359,7 +2826,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 165
 w 15
 h 16
@@ -2383,7 +2850,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 147
 w 15
 h 16
@@ -2407,7 +2874,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 147
 w 15
 h 16
@@ -2431,7 +2898,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 129
 w 15
 h 16
@@ -2455,7 +2922,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 129
 w 15
 h 16
@@ -2479,7 +2946,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 112
 w 15
 h 16
@@ -2503,7 +2970,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 112
 w 15
 h 16
@@ -2527,7 +2994,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 94
 w 15
 h 16
@@ -2551,7 +3018,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 94
 w 15
 h 16
@@ -2575,7 +3042,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 623
+x 859
 y 76
 w 15
 h 16
@@ -2599,7 +3066,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 639
+x 875
 y 76
 w 15
 h 16
@@ -2623,7 +3090,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 349
 w 56
 h 14
@@ -2643,7 +3110,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 330
 w 56
 h 14
@@ -2664,7 +3131,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 709
+x 945
 y 347
 w 11
 h 14
@@ -2684,7 +3151,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 709
+x 945
 y 77
 w 14
 h 14
@@ -2704,7 +3171,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 311
 w 56
 h 14
@@ -2724,7 +3191,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 292
 w 56
 h 14
@@ -2744,7 +3211,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 274
 w 56
 h 14
@@ -2764,7 +3231,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 257
 w 56
 h 14
@@ -2784,7 +3251,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 238
 w 56
 h 14
@@ -2804,7 +3271,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 220
 w 43
 h 14
@@ -2823,7 +3290,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 709
+x 945
 y 221
 w 15
 h 14
@@ -2843,7 +3310,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 709
+x 945
 y 203
 w 11
 h 14
@@ -2863,7 +3330,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 202
 w 56
 h 14
@@ -2883,7 +3350,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 185
 w 56
 h 14
@@ -2903,7 +3370,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 167
 w 57
 h 14
@@ -2923,7 +3390,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 148
 w 56
 h 14
@@ -2943,7 +3410,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 130
 w 66
 h 14
@@ -2963,7 +3430,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 113
 w 72
 h 14
@@ -2983,7 +3450,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 95
 w 72
 h 14
@@ -3003,7 +3470,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 532
+x 768
 y 77
 w 54
 h 14
@@ -3023,7 +3490,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 523
+x 759
 y 63
 w 216
 h 335
@@ -3042,7 +3509,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 759
+x 995
 y 63
 w 216
 h 335
@@ -3055,7 +3522,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 843
+x 1079
 y 375
 w 48
 h 16
@@ -3075,7 +3542,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 927
+x 1163
 y 75
 w 15
 h 288
@@ -3091,7 +3558,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 349
 w 56
 h 14
@@ -3111,7 +3578,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 330
 w 56
 h 14
@@ -3132,7 +3599,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 945
+x 1181
 y 347
 w 11
 h 14
@@ -3152,7 +3619,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 945
+x 1181
 y 77
 w 14
 h 14
@@ -3172,7 +3639,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 311
 w 56
 h 14
@@ -3192,7 +3659,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 292
 w 56
 h 14
@@ -3212,7 +3679,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 274
 w 56
 h 14
@@ -3232,7 +3699,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 257
 w 56
 h 14
@@ -3252,7 +3719,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 238
 w 56
 h 14
@@ -3272,7 +3739,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 220
 w 43
 h 14
@@ -3291,7 +3758,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 945
+x 1181
 y 221
 w 15
 h 14
@@ -3311,7 +3778,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 945
+x 1181
 y 203
 w 11
 h 14
@@ -3331,7 +3798,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 202
 w 56
 h 14
@@ -3351,7 +3818,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 185
 w 56
 h 14
@@ -3371,7 +3838,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 167
 w 57
 h 14
@@ -3391,7 +3858,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 148
 w 56
 h 14
@@ -3411,7 +3878,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 130
 w 66
 h 14
@@ -3431,7 +3898,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 113
 w 72
 h 14
@@ -3451,7 +3918,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 95
 w 72
 h 14
@@ -3471,7 +3938,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 768
+x 1004
 y 77
 w 54
 h 14
@@ -3491,7 +3958,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 759
+x 995
 y 63
 w 216
 h 335
@@ -3509,7 +3976,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 995
+x 1231
 y 63
 w 216
 h 335
@@ -3522,7 +3989,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1079
+x 1315
 y 375
 w 48
 h 16
@@ -3542,7 +4009,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 1146
+x 1382
 y 75
 w 15
 h 288
@@ -3558,7 +4025,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 348
 w 15
 h 16
@@ -3582,7 +4049,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 348
 w 15
 h 16
@@ -3606,7 +4073,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 329
 w 15
 h 16
@@ -3630,7 +4097,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 329
 w 15
 h 16
@@ -3654,7 +4121,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 310
 w 15
 h 16
@@ -3678,7 +4145,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 310
 w 15
 h 16
@@ -3702,7 +4169,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 291
 w 15
 h 16
@@ -3726,7 +4193,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 291
 w 15
 h 16
@@ -3750,7 +4217,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 273
 w 15
 h 16
@@ -3774,7 +4241,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 273
 w 15
 h 16
@@ -3798,7 +4265,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 1163
+x 1399
 y 75
 w 15
 h 288
@@ -3814,7 +4281,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 256
 w 15
 h 16
@@ -3838,7 +4305,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 256
 w 15
 h 16
@@ -3862,7 +4329,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 237
 w 15
 h 16
@@ -3886,7 +4353,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 237
 w 15
 h 16
@@ -3910,7 +4377,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 219
 w 15
 h 16
@@ -3934,7 +4401,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 219
 w 15
 h 16
@@ -3958,7 +4425,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 201
 w 15
 h 16
@@ -3982,7 +4449,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 201
 w 15
 h 16
@@ -4006,7 +4473,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 183
 w 15
 h 16
@@ -4030,7 +4497,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 183
 w 15
 h 16
@@ -4054,7 +4521,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 165
 w 15
 h 16
@@ -4078,7 +4545,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 165
 w 15
 h 16
@@ -4102,7 +4569,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 147
 w 15
 h 16
@@ -4126,7 +4593,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 147
 w 15
 h 16
@@ -4150,7 +4617,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 129
 w 15
 h 16
@@ -4174,7 +4641,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 129
 w 15
 h 16
@@ -4198,7 +4665,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 112
 w 15
 h 16
@@ -4222,7 +4689,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 112
 w 15
 h 16
@@ -4246,7 +4713,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 94
 w 15
 h 16
@@ -4270,7 +4737,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 94
 w 15
 h 16
@@ -4294,7 +4761,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1095
+x 1331
 y 76
 w 15
 h 16
@@ -4318,7 +4785,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 1111
+x 1347
 y 76
 w 15
 h 16
@@ -4342,7 +4809,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 349
 w 56
 h 14
@@ -4362,7 +4829,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 330
 w 56
 h 14
@@ -4383,7 +4850,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1181
+x 1417
 y 347
 w 11
 h 14
@@ -4403,7 +4870,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1181
+x 1417
 y 77
 w 14
 h 14
@@ -4423,7 +4890,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 311
 w 56
 h 14
@@ -4443,7 +4910,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 292
 w 56
 h 14
@@ -4463,7 +4930,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 274
 w 56
 h 14
@@ -4483,7 +4950,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 257
 w 56
 h 14
@@ -4503,7 +4970,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 238
 w 56
 h 14
@@ -4523,7 +4990,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 220
 w 43
 h 14
@@ -4542,7 +5009,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1181
+x 1417
 y 221
 w 15
 h 14
@@ -4562,7 +5029,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1181
+x 1417
 y 203
 w 11
 h 14
@@ -4582,7 +5049,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 202
 w 56
 h 14
@@ -4602,7 +5069,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 185
 w 56
 h 14
@@ -4622,7 +5089,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 167
 w 57
 h 14
@@ -4642,7 +5109,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 148
 w 56
 h 14
@@ -4662,7 +5129,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 130
 w 66
 h 14
@@ -4682,7 +5149,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 113
 w 72
 h 14
@@ -4702,7 +5169,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 95
 w 72
 h 14
@@ -4722,7 +5189,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 1004
+x 1240
 y 77
 w 54
 h 14
@@ -4742,7 +5209,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 995
+x 1231
 y 63
 w 216
 h 335
@@ -4755,473 +5222,6 @@ endGroup
 endObjectProperties
 
   
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 1231
-y 63
-w 216
-h 335
-
-beginGroup
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1315
-y 375
-w 48
-h 16
-font "helvetica-medium-r-14.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "MOTOR3_STAT"
-}
-autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 1399
-y 75
-w 15
-h 288
-controlPv "$(P)MOTOR3_STAT_R"
-lineColor index 14
-onColor index 55
-offColor index 47
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 349
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "motor_moving"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 330
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-bgAlarm
-useDisplayBg
-value {
-    "last_direction"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1417
-y 347
-w 11
-h 14
-font "helvetica-bold-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  " 0"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1417
-y 77
-w 14
-h 14
-font "helvetica-bold-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "15"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 311
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "motor_done"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 292
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "limit_low"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 274
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "limit_high"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 257
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "any_limit"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 238
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "inhbit_mask"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 220
-w 43
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 3
-value {
-    "low_current"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1417
-y 221
-w 15
-h 14
-font "helvetica-bold-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  " 7 "
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1417
-y 203
-w 11
-h 14
-font "helvetica-bold-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  " 8"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 202
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "sign_step_limit"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 185
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "abs_step_limit"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 167
-w 57
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "step_inhibit"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 148
-w 56
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "deta_disc"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 130
-w 66
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-    "slow_gdr"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 113
-w 72
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "bit 13"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 95
-w 72
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "bit 14"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 1240
-y 77
-w 54
-h 14
-font "helvetica-medium-r-12.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "bit 15"
-}
-autoSize
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 1231
-y 63
-w 216
-h 335
-lineColor index 14
-fillColor index 34
-endObjectProperties
-
-endGroup
-
-endObjectProperties
-
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -5250,265 +5250,9 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "MOTOR4_CNTL"
+  "MOTOR3_STAT"
 }
 autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 202
-y 430
-w 15
-h 288
-controlPv "$(P)MOTOR4_CNTL_W"
-lineColor index 14
-onColor index 55
-offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 703
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B0"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 703
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B0"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 684
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B1"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 684
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B1"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 665
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B2"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 665
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B2"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 646
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B3"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 646
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B3"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 628
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B4"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 628
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B4"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -5521,538 +5265,10 @@ x 219
 y 430
 w 15
 h 288
-controlPv "$(P)MOTOR4_CNTL_R"
+controlPv "$(P)MOTOR3_STAT_R"
 lineColor index 14
 onColor index 55
 offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 611
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B5"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 611
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B5"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 592
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B6"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 592
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B6"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 574
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B7"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 574
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B7"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 556
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B8"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 556
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B8"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 538
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B9"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 538
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.B9"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 520
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BA"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 520
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BA"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 502
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BB"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 502
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BB"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 484
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BC"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 484
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BC"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 467
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BD"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 467
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BD"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 449
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BE"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 449
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BE"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 151
-y 431
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BF"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 167
-y 431
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)MOTOR4_CNTL_W.BF"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -6070,7 +5286,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "go"
+    "motor_moving"
 }
 autoSize
 endObjectProperties
@@ -6091,7 +5307,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "inhbit_mask"
+    "last_direction"
 }
 autoSize
 endObjectProperties
@@ -6151,7 +5367,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "crash_motor"
+    "motor_done"
 }
 autoSize
 endObjectProperties
@@ -6171,7 +5387,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "stop_motor"
+    "limit_low"
 }
 autoSize
 endObjectProperties
@@ -6191,7 +5407,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "clear_done_flag"
+    "limit_high"
 }
 autoSize
 endObjectProperties
@@ -6211,7 +5427,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "direction"
+    "any_limit"
 }
 autoSize
 endObjectProperties
@@ -6231,7 +5447,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "low_current_mask"
+    "inhbit_mask"
 }
 autoSize
 endObjectProperties
@@ -6250,7 +5466,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "auto_mode"
+    "low_current"
 }
 autoSize
 endObjectProperties
@@ -6310,7 +5526,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "clr_sgn_steps"
+    "sign_step_limit"
 }
 autoSize
 endObjectProperties
@@ -6330,7 +5546,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "clr_abs_steps"
+    "abs_step_limit"
 }
 autoSize
 endObjectProperties
@@ -6350,7 +5566,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "sgn_sub_inhibit"
+    "step_inhibit"
 }
 autoSize
 endObjectProperties
@@ -6370,7 +5586,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "abs_sub_inhibit"
+    "deta_disc"
 }
 autoSize
 endObjectProperties
@@ -6390,7 +5606,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "slow_gdr_enable"
+    "slow_gdr"
 }
 autoSize
 endObjectProperties
@@ -6410,7 +5626,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+  "bit 13"
 }
 autoSize
 endObjectProperties
@@ -6430,7 +5646,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "bit 14"
+  "bit 14"
 }
 autoSize
 endObjectProperties
@@ -6473,7 +5689,6 @@ endGroup
 
 endObjectProperties
 
-  
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -6502,9 +5717,265 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "MOTOR4_STAT"
+  "MOTOR4_CNTL"
 }
 autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 438
+y 430
+w 15
+h 288
+controlPv "$(P)MOTOR4_CNTL_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 703
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 703
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 684
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 684
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 665
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 665
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 646
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 646
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 628
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 628
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -6517,10 +5988,538 @@ x 455
 y 430
 w 15
 h 288
-controlPv "$(P)MOTOR4_STAT_R"
+controlPv "$(P)MOTOR4_CNTL_R"
 lineColor index 14
 onColor index 55
 offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 611
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 611
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 592
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 592
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 574
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 574
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 556
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B8"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 556
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B8"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 538
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B9"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 538
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.B9"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 520
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BA"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 520
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BA"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 502
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BB"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 502
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BB"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 484
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BC"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 484
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BC"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 467
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BD"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 467
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BD"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 449
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BE"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 449
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BE"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 387
+y 431
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BF"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 403
+y 431
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)MOTOR4_CNTL_W.BF"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -6538,7 +6537,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "motor_moving"
+    "go"
 }
 autoSize
 endObjectProperties
@@ -6559,7 +6558,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "last_direction"
+    "inhbit_mask"
 }
 autoSize
 endObjectProperties
@@ -6619,7 +6618,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "motor_done"
+    "crash_motor"
 }
 autoSize
 endObjectProperties
@@ -6639,7 +6638,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "limit_low"
+    "stop_motor"
 }
 autoSize
 endObjectProperties
@@ -6659,7 +6658,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "limit_high"
+    "clear_done_flag"
 }
 autoSize
 endObjectProperties
@@ -6679,7 +6678,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "any_limit"
+    "direction"
 }
 autoSize
 endObjectProperties
@@ -6699,7 +6698,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "inhbit_mask"
+    "low_current_mask"
 }
 autoSize
 endObjectProperties
@@ -6718,7 +6717,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "low_current"
+    "auto_mode"
 }
 autoSize
 endObjectProperties
@@ -6778,7 +6777,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "sign_step_limit"
+    "clr_sgn_steps"
 }
 autoSize
 endObjectProperties
@@ -6798,7 +6797,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "abs_step_limit"
+    "clr_abs_steps"
 }
 autoSize
 endObjectProperties
@@ -6818,7 +6817,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "step_inhibit"
+    "sgn_sub_inhibit"
 }
 autoSize
 endObjectProperties
@@ -6838,7 +6837,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "deta_disc"
+    "abs_sub_inhibit"
 }
 autoSize
 endObjectProperties
@@ -6858,7 +6857,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "slow_gdr"
+    "slow_gdr_enable"
 }
 autoSize
 endObjectProperties
@@ -6878,7 +6877,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 13"
+       "bit 13"
 }
 autoSize
 endObjectProperties
@@ -6898,7 +6897,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 14"
+    "bit 14"
 }
 autoSize
 endObjectProperties
@@ -6941,6 +6940,7 @@ endGroup
 
 endObjectProperties
 
+  
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -6969,265 +6969,9 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO1_CNTL"
+  "MOTOR4_STAT"
 }
 autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 674
-y 430
-w 15
-h 288
-controlPv "$(P)PIEZO1_CNTL_W"
-lineColor index 14
-onColor index 55
-offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 703
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B0"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 703
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B0"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 684
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B1"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 684
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B1"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 665
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B2"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 665
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B2"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 646
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B3"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 646
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B3"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 628
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B4"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 628
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B4"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -7240,538 +6984,10 @@ x 691
 y 430
 w 15
 h 288
-controlPv "$(P)PIEZO1_CNTL_R"
+controlPv "$(P)MOTOR4_STAT_R"
 lineColor index 14
 onColor index 55
 offColor index 47
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 611
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B5"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 611
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B5"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 592
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B6"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 592
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B6"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 574
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B7"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 574
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B7"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 556
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B8"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 556
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B8"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 538
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B9"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 538
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.B9"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 520
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BA"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 520
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BA"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 502
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BB"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 502
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BB"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 484
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BC"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 484
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BC"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 467
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BD"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 467
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BD"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 449
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BE"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 449
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BE"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 623
-y 431
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BF"
-pressValue "0"
-onLabel "0"
-offLabel "0"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 639
-y 431
-w 15
-h 16
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)PIEZO1_CNTL_W.BF"
-pressValue "1"
-onLabel "1"
-offLabel "1"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -7789,7 +7005,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_capture_enable"
+    "motor_moving"
 }
 autoSize
 endObjectProperties
@@ -7810,7 +7026,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "piezo_dac_enable"
+    "last_direction"
 }
 autoSize
 endObjectProperties
@@ -7870,7 +7086,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_0"
+    "motor_done"
 }
 autoSize
 endObjectProperties
@@ -7890,7 +7106,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_1"
+    "limit_low"
 }
 autoSize
 endObjectProperties
@@ -7910,7 +7126,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_2"
+    "limit_high"
 }
 autoSize
 endObjectProperties
@@ -7930,7 +7146,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_3"
+    "any_limit"
 }
 autoSize
 endObjectProperties
@@ -7950,7 +7166,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_4"
+    "inhbit_mask"
 }
 autoSize
 endObjectProperties
@@ -7969,7 +7185,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "piezo_buff_trig_5"
+    "low_current"
 }
 autoSize
 endObjectProperties
@@ -8029,7 +7245,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_6"
+    "sign_step_limit"
 }
 autoSize
 endObjectProperties
@@ -8049,7 +7265,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_7"
+    "abs_step_limit"
 }
 autoSize
 endObjectProperties
@@ -8069,7 +7285,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_adc_reset"
+    "step_inhibit"
 }
 autoSize
 endObjectProperties
@@ -8089,7 +7305,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 11"
+    "deta_disc"
 }
 autoSize
 endObjectProperties
@@ -8109,7 +7325,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+    "slow_gdr"
 }
 autoSize
 endObjectProperties
@@ -8129,7 +7345,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+  "bit 13"
 }
 autoSize
 endObjectProperties
@@ -8149,7 +7365,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "bit 14"
+  "bit 14"
 }
 autoSize
 endObjectProperties
@@ -8192,7 +7408,6 @@ endGroup
 
 endObjectProperties
 
-  
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -8221,9 +7436,265 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO1_STAT"
+  "PERIPH_CONFIG"
 }
 autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 910
+y 430
+w 15
+h 288
+controlPv "$(P)PERIPH_CONFIG_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 703
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 703
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 684
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 684
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 665
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 665
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 646
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 646
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 628
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 628
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Byte)
@@ -8236,10 +7707,538 @@ x 927
 y 430
 w 15
 h 288
-controlPv "$(P)PIEZO1_STAT_R"
+controlPv "$(P)PERIPH_CONFIG_R"
 lineColor index 14
 onColor index 55
 offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 611
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 611
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 592
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 592
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 574
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 574
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 556
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B8"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 556
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B8"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 538
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B9"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 538
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.B9"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 520
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BA"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 520
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BA"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 502
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BB"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 502
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BB"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 484
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BC"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 484
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BC"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 467
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BD"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 467
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BD"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 449
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BE"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 449
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BE"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 859
+y 431
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BF"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 875
+y 431
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PERIPH_CONFIG_W.BF"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Static Text)
@@ -8257,7 +8256,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "dac_busy"
+  "bit 0"
 }
 autoSize
 endObjectProperties
@@ -8278,7 +8277,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "adc_busy"
+  "bit 1"
 }
 autoSize
 endObjectProperties
@@ -8497,7 +8496,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 8"
+       "bit 8"
 }
 autoSize
 endObjectProperties
@@ -8517,7 +8516,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 9"
+       "bit 9"
 }
 autoSize
 endObjectProperties
@@ -8537,7 +8536,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 10"
+       "bit 10"
 }
 autoSize
 endObjectProperties
@@ -8557,7 +8556,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 11"
+       "bit 11"
 }
 autoSize
 endObjectProperties
@@ -8577,7 +8576,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 12"
+    "U50_reset"
 }
 autoSize
 endObjectProperties
@@ -8597,7 +8596,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 13"
+    "U30_reset"
 }
 autoSize
 endObjectProperties
@@ -8617,7 +8616,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "bit 14"
+    "bit 14"
 }
 autoSize
 endObjectProperties
@@ -8660,6 +8659,7 @@ endGroup
 
 endObjectProperties
 
+  
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -8688,7 +8688,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO2_CNTL"
+  "PIEZO1_CNTL"
 }
 autoSize
 endObjectProperties
@@ -8703,7 +8703,7 @@ x 1146
 y 430
 w 15
 h 288
-controlPv "$(P)PIEZO2_CNTL_W"
+controlPv "$(P)PIEZO1_CNTL_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -8724,7 +8724,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B0"
+controlPv "$(P)PIEZO1_CNTL_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -8748,7 +8748,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B0"
+controlPv "$(P)PIEZO1_CNTL_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -8772,7 +8772,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B1"
+controlPv "$(P)PIEZO1_CNTL_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -8796,7 +8796,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B1"
+controlPv "$(P)PIEZO1_CNTL_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -8820,7 +8820,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B2"
+controlPv "$(P)PIEZO1_CNTL_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -8844,7 +8844,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B2"
+controlPv "$(P)PIEZO1_CNTL_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -8868,7 +8868,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B3"
+controlPv "$(P)PIEZO1_CNTL_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -8892,7 +8892,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B3"
+controlPv "$(P)PIEZO1_CNTL_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -8916,7 +8916,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B4"
+controlPv "$(P)PIEZO1_CNTL_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -8940,7 +8940,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B4"
+controlPv "$(P)PIEZO1_CNTL_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -8959,7 +8959,7 @@ x 1163
 y 430
 w 15
 h 288
-controlPv "$(P)PIEZO2_CNTL_R"
+controlPv "$(P)PIEZO1_CNTL_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -8980,7 +8980,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B5"
+controlPv "$(P)PIEZO1_CNTL_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9004,7 +9004,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B5"
+controlPv "$(P)PIEZO1_CNTL_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9028,7 +9028,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B6"
+controlPv "$(P)PIEZO1_CNTL_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9052,7 +9052,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B6"
+controlPv "$(P)PIEZO1_CNTL_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9076,7 +9076,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B7"
+controlPv "$(P)PIEZO1_CNTL_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9100,7 +9100,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B7"
+controlPv "$(P)PIEZO1_CNTL_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9124,7 +9124,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B8"
+controlPv "$(P)PIEZO1_CNTL_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9148,7 +9148,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B8"
+controlPv "$(P)PIEZO1_CNTL_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9172,7 +9172,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B9"
+controlPv "$(P)PIEZO1_CNTL_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9196,7 +9196,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.B9"
+controlPv "$(P)PIEZO1_CNTL_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9220,7 +9220,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BA"
+controlPv "$(P)PIEZO1_CNTL_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9244,7 +9244,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BA"
+controlPv "$(P)PIEZO1_CNTL_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9268,7 +9268,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BB"
+controlPv "$(P)PIEZO1_CNTL_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9292,7 +9292,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BB"
+controlPv "$(P)PIEZO1_CNTL_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9316,7 +9316,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BC"
+controlPv "$(P)PIEZO1_CNTL_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9340,7 +9340,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BC"
+controlPv "$(P)PIEZO1_CNTL_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9364,7 +9364,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BD"
+controlPv "$(P)PIEZO1_CNTL_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9388,7 +9388,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BD"
+controlPv "$(P)PIEZO1_CNTL_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9412,7 +9412,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BE"
+controlPv "$(P)PIEZO1_CNTL_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9436,7 +9436,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BE"
+controlPv "$(P)PIEZO1_CNTL_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9460,7 +9460,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BF"
+controlPv "$(P)PIEZO1_CNTL_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -9484,7 +9484,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO2_CNTL_W.BF"
+controlPv "$(P)PIEZO1_CNTL_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -9508,7 +9508,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_capture_enable"
+    "piezo_board_enable"
 }
 autoSize
 endObjectProperties
@@ -9529,7 +9529,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "piezo_dac_enable"
+    "piezo_capture_enable"
 }
 autoSize
 endObjectProperties
@@ -9589,7 +9589,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_0"
+    "piezo_dac_enable"
 }
 autoSize
 endObjectProperties
@@ -9609,7 +9609,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_1"
+    "piezo_buff_trig_0"
 }
 autoSize
 endObjectProperties
@@ -9629,7 +9629,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_2"
+    "piezo_buff_trig_1"
 }
 autoSize
 endObjectProperties
@@ -9649,7 +9649,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_3"
+    "piezo_buff_trig_2"
 }
 autoSize
 endObjectProperties
@@ -9669,7 +9669,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_4"
+    "piezo_buff_trig_3"
 }
 autoSize
 endObjectProperties
@@ -9688,7 +9688,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "piezo_buff_trig_5"
+    "piezo_buff_trig_4"
 }
 autoSize
 endObjectProperties
@@ -9748,7 +9748,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_6"
+    "piezo_buff_trig_5"
 }
 autoSize
 endObjectProperties
@@ -9768,7 +9768,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_7"
+    "piezo_buff_trig_6"
 }
 autoSize
 endObjectProperties
@@ -9788,7 +9788,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_adc_reset"
+    "piezo_buff_trig_7"
 }
 autoSize
 endObjectProperties
@@ -9808,7 +9808,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 11"
+    "piezo_adc_reset"
 }
 autoSize
 endObjectProperties
@@ -9828,7 +9828,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+    "piezo_debug0"
 }
 autoSize
 endObjectProperties
@@ -9848,7 +9848,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+    "piezo_debug1"
 }
 autoSize
 endObjectProperties
@@ -9940,7 +9940,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO2_STAT"
+  "PIEZO1_STAT"
 }
 autoSize
 endObjectProperties
@@ -9955,7 +9955,7 @@ x 1399
 y 430
 w 15
 h 288
-controlPv "$(P)PIEZO2_STAT_R"
+controlPv "$(P)PIEZO1_STAT_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -10407,7 +10407,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO3_CNTL"
+  "PIEZO2_CNTL"
 }
 autoSize
 endObjectProperties
@@ -10422,7 +10422,7 @@ x 202
 y 785
 w 15
 h 288
-controlPv "$(P)PIEZO3_CNTL_W"
+controlPv "$(P)PIEZO2_CNTL_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -10443,7 +10443,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B0"
+controlPv "$(P)PIEZO2_CNTL_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10467,7 +10467,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B0"
+controlPv "$(P)PIEZO2_CNTL_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10491,7 +10491,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B1"
+controlPv "$(P)PIEZO2_CNTL_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10515,7 +10515,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B1"
+controlPv "$(P)PIEZO2_CNTL_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10539,7 +10539,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B2"
+controlPv "$(P)PIEZO2_CNTL_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10563,7 +10563,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B2"
+controlPv "$(P)PIEZO2_CNTL_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10587,7 +10587,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B3"
+controlPv "$(P)PIEZO2_CNTL_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10611,7 +10611,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B3"
+controlPv "$(P)PIEZO2_CNTL_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10635,7 +10635,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B4"
+controlPv "$(P)PIEZO2_CNTL_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10659,7 +10659,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B4"
+controlPv "$(P)PIEZO2_CNTL_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10678,7 +10678,7 @@ x 219
 y 785
 w 15
 h 288
-controlPv "$(P)PIEZO3_CNTL_R"
+controlPv "$(P)PIEZO2_CNTL_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -10699,7 +10699,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B5"
+controlPv "$(P)PIEZO2_CNTL_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10723,7 +10723,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B5"
+controlPv "$(P)PIEZO2_CNTL_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10747,7 +10747,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B6"
+controlPv "$(P)PIEZO2_CNTL_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10771,7 +10771,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B6"
+controlPv "$(P)PIEZO2_CNTL_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10795,7 +10795,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B7"
+controlPv "$(P)PIEZO2_CNTL_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10819,7 +10819,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B7"
+controlPv "$(P)PIEZO2_CNTL_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10843,7 +10843,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B8"
+controlPv "$(P)PIEZO2_CNTL_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10867,7 +10867,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B8"
+controlPv "$(P)PIEZO2_CNTL_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10891,7 +10891,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B9"
+controlPv "$(P)PIEZO2_CNTL_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10915,7 +10915,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.B9"
+controlPv "$(P)PIEZO2_CNTL_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10939,7 +10939,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BA"
+controlPv "$(P)PIEZO2_CNTL_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -10963,7 +10963,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BA"
+controlPv "$(P)PIEZO2_CNTL_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -10987,7 +10987,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BB"
+controlPv "$(P)PIEZO2_CNTL_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -11011,7 +11011,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BB"
+controlPv "$(P)PIEZO2_CNTL_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -11035,7 +11035,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BC"
+controlPv "$(P)PIEZO2_CNTL_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -11059,7 +11059,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BC"
+controlPv "$(P)PIEZO2_CNTL_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -11083,7 +11083,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BD"
+controlPv "$(P)PIEZO2_CNTL_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -11107,7 +11107,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BD"
+controlPv "$(P)PIEZO2_CNTL_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -11131,7 +11131,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BE"
+controlPv "$(P)PIEZO2_CNTL_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -11155,7 +11155,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BE"
+controlPv "$(P)PIEZO2_CNTL_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -11179,7 +11179,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BF"
+controlPv "$(P)PIEZO2_CNTL_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -11203,7 +11203,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO3_CNTL_W.BF"
+controlPv "$(P)PIEZO2_CNTL_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -11227,7 +11227,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_capture_enable"
+    "piezo_board_enable"
 }
 autoSize
 endObjectProperties
@@ -11248,7 +11248,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "piezo_dac_enable"
+    "piezo_capture_enable"
 }
 autoSize
 endObjectProperties
@@ -11308,7 +11308,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_0"
+    "piezo_dac_enable"
 }
 autoSize
 endObjectProperties
@@ -11328,7 +11328,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_1"
+    "piezo_buff_trig_0"
 }
 autoSize
 endObjectProperties
@@ -11348,7 +11348,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_2"
+    "piezo_buff_trig_1"
 }
 autoSize
 endObjectProperties
@@ -11368,7 +11368,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_3"
+    "piezo_buff_trig_2"
 }
 autoSize
 endObjectProperties
@@ -11388,7 +11388,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_4"
+    "piezo_buff_trig_3"
 }
 autoSize
 endObjectProperties
@@ -11407,7 +11407,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "piezo_buff_trig_5"
+    "piezo_buff_trig_4"
 }
 autoSize
 endObjectProperties
@@ -11467,7 +11467,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_6"
+    "piezo_buff_trig_5"
 }
 autoSize
 endObjectProperties
@@ -11487,7 +11487,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_7"
+    "piezo_buff_trig_6"
 }
 autoSize
 endObjectProperties
@@ -11507,7 +11507,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_adc_reset"
+    "piezo_buff_trig_7"
 }
 autoSize
 endObjectProperties
@@ -11527,7 +11527,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 11"
+    "piezo_adc_reset"
 }
 autoSize
 endObjectProperties
@@ -11547,7 +11547,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+    "piezo_debug0"
 }
 autoSize
 endObjectProperties
@@ -11567,7 +11567,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+    "piezo_debug1"
 }
 autoSize
 endObjectProperties
@@ -11659,7 +11659,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO3_STAT"
+  "PIEZO2_STAT"
 }
 autoSize
 endObjectProperties
@@ -11674,7 +11674,7 @@ x 455
 y 785
 w 15
 h 288
-controlPv "$(P)PIEZO3_STAT_R"
+controlPv "$(P)PIEZO2_STAT_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -12126,7 +12126,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO4_CNTL"
+  "PIEZO3_CNTL"
 }
 autoSize
 endObjectProperties
@@ -12141,7 +12141,7 @@ x 674
 y 785
 w 15
 h 288
-controlPv "$(P)PIEZO4_CNTL_W"
+controlPv "$(P)PIEZO3_CNTL_W"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -12162,7 +12162,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B0"
+controlPv "$(P)PIEZO3_CNTL_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12186,7 +12186,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B0"
+controlPv "$(P)PIEZO3_CNTL_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12210,7 +12210,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B1"
+controlPv "$(P)PIEZO3_CNTL_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12234,7 +12234,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B1"
+controlPv "$(P)PIEZO3_CNTL_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12258,7 +12258,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B2"
+controlPv "$(P)PIEZO3_CNTL_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12282,7 +12282,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B2"
+controlPv "$(P)PIEZO3_CNTL_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12306,7 +12306,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B3"
+controlPv "$(P)PIEZO3_CNTL_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12330,7 +12330,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B3"
+controlPv "$(P)PIEZO3_CNTL_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12354,7 +12354,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B4"
+controlPv "$(P)PIEZO3_CNTL_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12378,7 +12378,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B4"
+controlPv "$(P)PIEZO3_CNTL_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12397,7 +12397,7 @@ x 691
 y 785
 w 15
 h 288
-controlPv "$(P)PIEZO4_CNTL_R"
+controlPv "$(P)PIEZO3_CNTL_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -12418,7 +12418,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B5"
+controlPv "$(P)PIEZO3_CNTL_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12442,7 +12442,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B5"
+controlPv "$(P)PIEZO3_CNTL_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12466,7 +12466,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B6"
+controlPv "$(P)PIEZO3_CNTL_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12490,7 +12490,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B6"
+controlPv "$(P)PIEZO3_CNTL_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12514,7 +12514,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B7"
+controlPv "$(P)PIEZO3_CNTL_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12538,7 +12538,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B7"
+controlPv "$(P)PIEZO3_CNTL_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12562,7 +12562,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B8"
+controlPv "$(P)PIEZO3_CNTL_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12586,7 +12586,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B8"
+controlPv "$(P)PIEZO3_CNTL_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12610,7 +12610,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B9"
+controlPv "$(P)PIEZO3_CNTL_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12634,7 +12634,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.B9"
+controlPv "$(P)PIEZO3_CNTL_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12658,7 +12658,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BA"
+controlPv "$(P)PIEZO3_CNTL_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12682,7 +12682,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BA"
+controlPv "$(P)PIEZO3_CNTL_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12706,7 +12706,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BB"
+controlPv "$(P)PIEZO3_CNTL_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12730,7 +12730,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BB"
+controlPv "$(P)PIEZO3_CNTL_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12754,7 +12754,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BC"
+controlPv "$(P)PIEZO3_CNTL_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12778,7 +12778,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BC"
+controlPv "$(P)PIEZO3_CNTL_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12802,7 +12802,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BD"
+controlPv "$(P)PIEZO3_CNTL_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12826,7 +12826,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BD"
+controlPv "$(P)PIEZO3_CNTL_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12850,7 +12850,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BE"
+controlPv "$(P)PIEZO3_CNTL_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12874,7 +12874,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BE"
+controlPv "$(P)PIEZO3_CNTL_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12898,7 +12898,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BF"
+controlPv "$(P)PIEZO3_CNTL_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -12922,7 +12922,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "$(P)PIEZO4_CNTL_W.BF"
+controlPv "$(P)PIEZO3_CNTL_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -12946,7 +12946,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_capture_enable"
+    "piezo_board_enable"
 }
 autoSize
 endObjectProperties
@@ -12967,7 +12967,7 @@ bgColor index 0
 bgAlarm
 useDisplayBg
 value {
-    "piezo_dac_enable"
+    "piezo_capture_enable"
 }
 autoSize
 endObjectProperties
@@ -13027,7 +13027,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_0"
+    "piezo_dac_enable"
 }
 autoSize
 endObjectProperties
@@ -13047,7 +13047,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_1"
+    "piezo_buff_trig_0"
 }
 autoSize
 endObjectProperties
@@ -13067,7 +13067,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_2"
+    "piezo_buff_trig_1"
 }
 autoSize
 endObjectProperties
@@ -13087,7 +13087,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_3"
+    "piezo_buff_trig_2"
 }
 autoSize
 endObjectProperties
@@ -13107,7 +13107,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_4"
+    "piezo_buff_trig_3"
 }
 autoSize
 endObjectProperties
@@ -13126,7 +13126,7 @@ font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 value {
-    "piezo_buff_trig_5"
+    "piezo_buff_trig_4"
 }
 autoSize
 endObjectProperties
@@ -13186,7 +13186,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_6"
+    "piezo_buff_trig_5"
 }
 autoSize
 endObjectProperties
@@ -13206,7 +13206,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_buff_trig_7"
+    "piezo_buff_trig_6"
 }
 autoSize
 endObjectProperties
@@ -13226,7 +13226,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-    "piezo_adc_reset"
+    "piezo_buff_trig_7"
 }
 autoSize
 endObjectProperties
@@ -13246,7 +13246,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 11"
+    "piezo_adc_reset"
 }
 autoSize
 endObjectProperties
@@ -13266,7 +13266,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 12"
+    "piezo_debug0"
 }
 autoSize
 endObjectProperties
@@ -13286,7 +13286,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-       "bit 13"
+    "piezo_debug1"
 }
 autoSize
 endObjectProperties
@@ -13378,7 +13378,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "PIEZO4_STAT"
+  "PIEZO3_STAT"
 }
 autoSize
 endObjectProperties
@@ -13393,7 +13393,7 @@ x 927
 y 785
 w 15
 h 288
-controlPv "$(P)PIEZO4_STAT_R"
+controlPv "$(P)PIEZO3_STAT_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -13807,6 +13807,2192 @@ minor 0
 release 0
 x 759
 y 773
+w 216
+h 335
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 995
+y 773
+w 216
+h 335
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1079
+y 1085
+w 48
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "PIEZO4_CNTL"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1146
+y 785
+w 15
+h 288
+controlPv "$(P)PIEZO4_CNTL_W"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 1058
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 1058
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 1039
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 1039
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 1020
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 1020
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 1001
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 1001
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 983
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 983
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1163
+y 785
+w 15
+h 288
+controlPv "$(P)PIEZO4_CNTL_R"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 966
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 966
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 947
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 947
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 929
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 929
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 911
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B8"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 911
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B8"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 893
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B9"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 893
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.B9"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 875
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BA"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 875
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BA"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 857
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BB"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 857
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BB"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 839
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BC"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 839
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BC"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 822
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BD"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 822
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BD"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 804
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BE"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 804
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BE"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1095
+y 786
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BF"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1111
+y 786
+w 15
+h 16
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)PIEZO4_CNTL_W.BF"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 1059
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_board_enable"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 1040
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+bgAlarm
+useDisplayBg
+value {
+    "piezo_capture_enable"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1181
+y 1057
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1181
+y 787
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "15"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 1021
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_dac_enable"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 1002
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 984
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_1"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 967
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_2"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 948
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_3"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 930
+w 43
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+value {
+    "piezo_buff_trig_4"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1181
+y 931
+w 15
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 7 "
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1181
+y 913
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 912
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_5"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 895
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_6"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 877
+w 57
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_buff_trig_7"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 858
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_adc_reset"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 840
+w 66
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_debug0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 823
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "piezo_debug1"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 805
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "bit 14"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1004
+y 787
+w 54
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 15"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 995
+y 773
+w 216
+h 335
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+  
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1231
+y 773
+w 216
+h 335
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1315
+y 1085
+w 48
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "PIEZO4_STAT"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1399
+y 785
+w 15
+h 288
+controlPv "$(P)PIEZO4_STAT_R"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 1059
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+    "dac_busy"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 1040
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+bgAlarm
+useDisplayBg
+value {
+    "adc_busy"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1417
+y 1057
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1417
+y 787
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "15"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 1021
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 2"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 1002
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 3"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 984
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 4"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 967
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 5"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 948
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 6"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 930
+w 43
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+value {
+  "bit 7"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1417
+y 931
+w 15
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 7 "
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1417
+y 913
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 912
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 895
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 9"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 877
+w 57
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 10"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 858
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 11"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 840
+w 66
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 12"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 823
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 13"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 805
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 14"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1240
+y 787
+w 54
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 15"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1231
+y 773
+w 216
+h 335
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 51
+y 1128
+w 216
+h 335
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 135
+y 1440
+w 48
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "PZT_WAVE_AVAIL"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 219
+y 1140
+w 15
+h 288
+controlPv "$(P)PZT_WAVE_AVAIL_R"
+lineColor index 14
+onColor index 55
+offColor index 47
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1414
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1395
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+bgAlarm
+useDisplayBg
+value {
+  "bit 1"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 237
+y 1412
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 0"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 237
+y 1142
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "15"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1376
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 2"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1357
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 3"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1339
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 4"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1322
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 5"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1303
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 6"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1285
+w 43
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+value {
+  "bit 7"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 237
+y 1286
+w 15
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 7 "
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 237
+y 1268
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1267
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 8"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1250
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 9"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1232
+w 57
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 10"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1213
+w 56
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 11"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1195
+w 66
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 12"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1178
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 13"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1160
+w 72
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 14"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 1142
+w 54
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "bit 15"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 51
+y 1128
 w 216
 h 335
 lineColor index 14

@@ -18,6 +18,9 @@ epicsEnvSet("P", "$(TYPE)$(N):")
 epicsEnvSet( FPGA_IP, "134.79.216.36")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "7")
+# If this chassis has a subclass, by convention called extra, set its name
+# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+epicsEnvSet( EXTRA, "extra")
 
 < ../common/regInterface.cmd
 
@@ -45,12 +48,12 @@ asynSetTraceIOMask("myReg",-1,4)
 # BEGIN: Load the record databases
 ##############################################################################
 < iocBoot/common/iocAdmin.cmd
-< iocBoot/common/autoSaveConf.cmd
+#< iocBoot/common/autoSaveConf.cmd
 
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-#dbLoadRecords("db/scllrfICCextra.template","P=ICC,PORT=myReg")
+dbLoadRecords("db/RESextra.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -81,7 +84,7 @@ iocInit()
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
 
-< iocBoot/common/autoSaveStart.cmd
+#< iocBoot/common/autoSaveStart.cmd
 
 # ===========================================================================
 
@@ -97,6 +100,8 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
+dbpf $(P)PIEZO_WAVE_KEEP_L 65535
+dbpf $(P)PIEZO_WAVE_KEEP_H 65535
 dbpf $(TYPE)$(N):RUN_STOP.HIGH 0.11
 dbpf $(TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)

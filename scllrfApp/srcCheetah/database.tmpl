@@ -97,7 +97,7 @@ record(ao, "\$(P)${p.name.upper()}_W")
   #end if
 #end for
 
-# multi-element analog I/O, arrays of 8 or fewer
+# multi-element analog I/O, arrays of certain length or fewer
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: if access is specified it's 'read', and that this isn't a waveform.
   #if (not($p.has_key('access')) or ('r' in $p.access )) and $p.has_key('nelm') and $p.nelm<=32 and $p.nelm > 1

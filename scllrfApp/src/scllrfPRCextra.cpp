@@ -305,15 +305,6 @@ void scllrfPRCextra::traceIQWaveformRequester()
 			{BufTrigWAdr,1},
 			{BufTrigWAdr,0}
 	};
-
-//	FpgaReg traceAck[5] =
-//	{
-//			{0,0},
-//			{CircleBufFlipWAdr,1},
-//			{CircleBufFlipWAdr,2},
-//			{CircleBufFlipRAdr | flagReadMask,1},
-//			{CircleBufFlipRAdr | flagReadMask,2},
-//	};
 	////printf("\n%s calling htonFpgaRegArray for %u registers of traceAck\n", __PRETTY_FUNCTION__, 5 );
     htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
     //htonFpgaRegArray(traceAck, 5);
@@ -533,41 +524,15 @@ void scllrfPRCextra::reqCircIQBuf(unsigned int shellNum)
 	{
 	case 0:
 
-	sendRegRequest(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_));
+		sendRegRequest(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_));
 
-	for (i=0; i<circIQBufSegmentCount; ++i)
-	{
-		if(regsLeftToSend > (int) (maxRegPerMsg + nonceSize))
-		{
-			sendRegRequest(&pReqCircIQBufShell0Msg_[i * (maxRegPerMsg + nonceSize)], maxRegPerMsg + nonceSize);
-			regsLeftToSend -= maxRegPerMsg;
-		}
-		else
-		{
-			sendRegRequest(&pReqCircIQBufShell0Msg_[i * (maxRegPerMsg + nonceSize)], regsLeftToSend + nonceSize);
-			//printf("%s sent segment %u, last %d registers\n", __PRETTY_FUNCTION__, i, regsLeftToSend);
-			break;
-		}
-	}
-	break;
+		sendBigBuffer(pReqCircIQBufShell0Msg_, circIQBufWaveRegCount);
+		break;
 	case 1:
 
 		sendRegRequest(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_));
 
-		for (i=0; i<circIQBufSegmentCount; ++i)
-		{
-			if(regsLeftToSend > (int) (maxRegPerMsg + nonceSize))
-			{
-				sendRegRequest(&pReqCircIQBufShell1Msg_[i * (maxRegPerMsg + nonceSize)], maxRegPerMsg + nonceSize);
-				regsLeftToSend -= maxRegPerMsg;
-			}
-			else
-			{
-				sendRegRequest(&pReqCircIQBufShell1Msg_[i * (maxRegPerMsg + nonceSize)], regsLeftToSend + nonceSize);
-				//printf("%s sent segment %u, last %d registers\n", __PRETTY_FUNCTION__, i, regsLeftToSend);
-				break;
-			}
-		}
+		sendBigBuffer(pReqCircIQBufShell1Msg_, circIQBufWaveRegCount);
 		break;
 	default:
 		break;

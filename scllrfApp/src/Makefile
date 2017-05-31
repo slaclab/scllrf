@@ -65,13 +65,14 @@ scllrf_SRCS_vxWorks += -nil-
  scllrf_SRCS += scllrfPRC.cpp
  scllrf_SRCS += scllrfPRCextra.cpp
  scllrf_SRCS += scllrfRES.cpp
+ scllrf_SRCS += scllrfRESextra.cpp
  scllrf_SRCS += INTmbboCopy.st
  scllrf_SRCS += INTres2tmp.c
  scllrf_SRCS += INTarcTest.st
  scllrf_SRCS += INTheLevel.st
  #scllrf_SRCS += lbnl_test_jsonDriver.cpp
  #USR_CXXFLAGS += -std=c++0x
-
+USR_CXXFLAGS += -g -rdynamic
 # =====================================================
 # Link in the code from other libraries
 # =====================================================

@@ -2,6 +2,7 @@ include "base.dbd"
 include "asyn.dbd"
 registrar("scllrfAsynPortDriverRegister")
 registrar("scllrfPRCextraRegister")
+registrar("scllrfRESextraRegister")
 registrar("scllrfRESRegister")
 registrar(scllrfINTRegister)
 #..............registrar(INTres2tmpRegister)
