@@ -32,6 +32,7 @@
 #include <initializer_list>
 using namespace std;
 #include <math.h>
+#include <execinfo.h>
 
 // EPICS database driver strings
 const char *scllrfAsynPortDriver::RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
@@ -117,7 +118,6 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
 
     epicsThreadSleep(defaultPollPeriod);
 
-	pollEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startPoller(defaultPollPeriod);
 
 	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
@@ -310,7 +310,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
     if (function == p_RunStop) {
     	printf("%s setting RunStop for polling loop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
         if (value == run)
-        	epicsEventSignal(pollEventId_);
+        	pollEvent_.signal();
     }
     else {
     	// Convert function to address & FpgaReg.
@@ -385,7 +385,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
     if (function == p_RunStop) {
 printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
         if (value == run)
-        	epicsEventSignal(pollEventId_);
+        	pollEvent_.signal();
     }
     else {
     	// Convert function to address & FpgaReg.
@@ -549,7 +549,7 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
     		if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
     		{
     			htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
-    			sendRegRequest(regSendBuf, uOutBuffIndex+1);
+    			status = sendRegRequest(regSendBuf, uOutBuffIndex+1);
 
     			if (status)
     				epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
@@ -613,17 +613,17 @@ void scllrfAsynPortDriver::regPoller()
     unsigned int regBuffCount;
     FpgaReg *pTempRegMsg = pPolledRegMsg_;
 
-	epicsEventWait(pollEventId_); // Block when first created, to give subclass constructors a chance to finish
+	pollEvent_.wait(); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
 		getDoubleParam(p_PollPeriod, &pollPeriod_);
 		getIntegerParam(p_RunStop, &runStop);
 		if (runStop == run && pollPeriod_ != 0.0)
 		{
-			status = epicsEventWaitWithTimeout(pollEventId_, pollPeriod_);
+			pollEvent_.wait( pollPeriod_);
 		}
 		else
 		{
-			status = epicsEventWait(pollEventId_);
+			pollEvent_.wait();
 		}
 
 		if (status == epicsEventWaitOK)
@@ -650,13 +650,14 @@ void scllrfAsynPortDriver::regPoller()
 		// The register polling message may be too big for a single request.
 		// If so, it is expected to have an extra "nonce" element every
 		// maxMsgSize/sizeof(FpgaReg)
-		while (regBuffCount > maxMsgSize/sizeof(FpgaReg))
-		{
-			sendRegRequest(pTempRegMsg, maxMsgSize/sizeof(FpgaReg));
-			regBuffCount -= maxMsgSize/sizeof(FpgaReg);
-			pTempRegMsg = &pTempRegMsg[maxMsgSize/sizeof(FpgaReg)];
-		}
-		sendRegRequest(pTempRegMsg, regBuffCount);
+		sendBigBuffer(pTempRegMsg, regBuffCount);
+//		while (regBuffCount > maxMsgSize/sizeof(FpgaReg))
+//		{
+//			sendRegRequest(pTempRegMsg, maxMsgSize/sizeof(FpgaReg));
+//			regBuffCount -= maxMsgSize/sizeof(FpgaReg);
+//			pTempRegMsg = &pTempRegMsg[maxMsgSize/sizeof(FpgaReg)];
+//		}
+//		sendRegRequest(pTempRegMsg, regBuffCount);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
 	}
@@ -665,9 +666,36 @@ void scllrfAsynPortDriver::regPoller()
 /** Wakes up the poller thread to make it start polling. */
 asynStatus scllrfAsynPortDriver::wakeupPoller()
 {
-	epicsEventSignal(pollEventId_);
+	pollEvent_.signal();
 	return asynSuccess;
 }
+
+
+// The register request message may be too big for a single UDP packet.
+// If so, it is expected to have an extra "nonce" element every
+// maxMsgSize/sizeof(FpgaReg) and be send in one maxMsgSize segments.
+// FpgaReg arrays sent to this function should have a blank inserted
+// ahead of every maxRegPerMsg register messages.
+asynStatus scllrfAsynPortDriver::sendBigBuffer(FpgaReg *regBuffer, unsigned int regBuffCount)
+{
+	asynStatus status = asynSuccess;
+	unsigned int regBuffRemainingCount = regBuffCount;
+
+	while (regBuffRemainingCount > maxMsgSize/sizeof(FpgaReg))
+	{
+		status = sendRegRequest(regBuffer, maxMsgSize/sizeof(FpgaReg));
+		if(status != asynSuccess)
+		{
+			return status;
+		}
+		regBuffRemainingCount -= maxMsgSize/sizeof(FpgaReg);
+		regBuffer = &regBuffer[maxMsgSize/sizeof(FpgaReg)];
+	}
+
+	status = sendRegRequest(regBuffer, regBuffRemainingCount);
+	return status;
+}
+
 
 /** Polls the device
   * \param[in] regBuffer array of FpgaReg messages in network byte order.
@@ -679,8 +707,20 @@ asynStatus scllrfAsynPortDriver::wakeupPoller()
   **  */
 asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount)
 {
-	assert(regBuffer != NULL);
-	assert(regBuffCount >= 1);
+	if(regBuffer == NULL || regBuffCount < 5)
+	{
+		  void *array[10];
+		  size_t size;
+
+		  // get void*'s for all entries on the stack
+		  size = backtrace(array, 10);
+
+		  // print out all the frames to stderr
+		  fprintf(stderr, "Problem with send request. regBuffCount = %d:\n", regBuffCount);
+		  backtrace_symbols_fd(array, size, STDERR_FILENO);
+
+		  epicsThreadSuspendSelf();
+	}
 	size_t writtenCount;
 	epicsInt32 errorCount;
 	asynStatus status = asynSuccess;
