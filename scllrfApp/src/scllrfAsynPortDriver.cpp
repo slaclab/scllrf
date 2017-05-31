@@ -285,7 +285,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 
 asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
-asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
+asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRETTY_FUNCTION__, value, mask);
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
@@ -304,7 +304,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
+    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, %s\n",
 			__PRETTY_FUNCTION__, function, paramName);
 
     if (function == p_RunStop) {
@@ -350,11 +350,11 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: ", __PRETTY_FUNCTION__);
 
     if (status)
         epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                  "%s: status=%d, function=%d, name=%s, value=%d",
+                  "%s: status=%d, function=%d, name=%s, value=%u",
 				  __PRETTY_FUNCTION__, status, function, paramName, value);
     else
         asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-              "<-- %s: function=%d, name=%s, value=%d\n",
+              "<-- %s: function=%d, name=%s, value=%u\n",
 			  __PRETTY_FUNCTION__, function, paramName, value);
     return status;
 }
