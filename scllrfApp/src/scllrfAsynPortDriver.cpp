@@ -234,7 +234,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 //		status = epicsEventWait(reqWaveEventId_);
 		if(sendBufByteCount%sizeof(FpgaReg) != 0)
 		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", __PRETTY_FUNCTION__, sendBufByteCount);
 		}
 
@@ -264,11 +264,11 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		}
 		if(sendBufByteCount%sizeof(FpgaReg) != 0)
 		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", __PRETTY_FUNCTION__, sendBufByteCount);
 		}
 
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufRegCount);
 
 		if(sendBufRegCount < minRegPerMsg)
@@ -277,7 +277,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		}
 
 		sendRegRequest(pMsgBuff, sendBufRegCount);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: done sending %u queued requests\n", __PRETTY_FUNCTION__, sendBufRegCount);
 	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
@@ -658,7 +658,7 @@ void scllrfAsynPortDriver::regPoller()
 //			pTempRegMsg = &pTempRegMsg[maxMsgSize/sizeof(FpgaReg)];
 //		}
 //		sendRegRequest(pTempRegMsg, regBuffCount);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
 	}
 }
@@ -730,13 +730,13 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	int maxParallelRequests;
 	getIntegerParam(p_MaxParallelRequests, &maxParallelRequests);
 
-	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "--> %s( regBuffer=%p, regBuffCount=%u )\n",
+	asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "--> %s( regBuffer=%p, regBuffCount=%u )\n",
 			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
 
 	mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
 	// Throttle so that we don't overflow buffers if response handling falls behind
 	if( netWaitingRequests_ >= (unsigned) maxParallelRequests )
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: too many requests waiting for responses (%u), throttling requests.\n",__PRETTY_FUNCTION__, maxParallelRequests);
 
 	while( netWaitingRequests_ >= (unsigned) maxParallelRequests )
@@ -761,7 +761,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 
 	if (status != asynSuccess)
 	{
-		asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,"%s: failed to write. %s\n", __PRETTY_FUNCTION__,
+		asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s: failed to write. %s\n", __PRETTY_FUNCTION__,
 				pOctetAsynUser_->errorMessage);
 		getIntegerParam(p_CommErrorCount, &errorCount);
 		setIntegerParam(p_CommErrorCount, errorCount + 1);
@@ -775,7 +775,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	wakeupReader();
 	epicsThreadSleep(0); // to allow other threads to take the CPU
 
-	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "<-- %s( regBuffer=%p, regBuffCount=%u )\n",
+	asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "<-- %s( regBuffer=%p, regBuffCount=%u )\n",
 			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
 	return asynSuccess;
 }
@@ -828,7 +828,7 @@ void scllrfAsynPortDriver::responseHandler()
 
 		// The asyn framework doesn't allow writes while a read is blocking,
 		// so the same behavior is approximated here with events.
-		//asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		//asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 		//		"waiting for data... ");
 		waitStatus = epicsEventWaitWithTimeout(readEventId_, readTimeout_);
 
@@ -865,12 +865,12 @@ void scllrfAsynPortDriver::responseHandler()
 					noDataCounter = 0;
 					if(ntohl(pRegReadback[0].data) <= (int) maxMsgSize)
 					{ // read in the number of bytes the nonce says to expect, starting with the second register location
-						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
+						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
 								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
 						status = pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
 								ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
 						readCount += nonceSize*sizeof(FpgaReg);
-						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: got %u bytes total for response #%u\n",
+						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: got %u bytes total for response #%u\n",
 								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
 					}
 					else
@@ -878,7 +878,7 @@ void scllrfAsynPortDriver::responseHandler()
 						// Clear out any cruft left over that we didn't process.
 						pasynOctetSyncIO->flush(pOctetAsynUser_);
 						netWaitingRequests_--;
-						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+						asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 							"%s: presumed nonce says sequence # %u with %d bytes.\n",
 							__PRETTY_FUNCTION__, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
 						epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
@@ -908,7 +908,7 @@ void scllrfAsynPortDriver::responseHandler()
 		{
 			if(netWaitingRequests_>0)
 			{
-				asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+				asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 						"%s: receive thread timed out after %fs waiting for %d responses. Network losses?\n", __PRETTY_FUNCTION__, readTimeout_, netWaitingRequests_);
 				netWaitingRequests_--;
 			}
@@ -948,14 +948,14 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 			pasynOctetSyncIO->flush(pOctetAsynUser_); // Should we clear out waiting partial messages?
 			if(netWaitingRequests_ > 0)
 				netWaitingRequests_--;
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: Read %u bytes from network, %d bytes left to process, but expected %u bytes\n",
 					__PRETTY_FUNCTION__, readCount, bytesLeft, (unsigned) pRegReadback[0].data);
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: Response from request #%u, expected is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: Discarding this message\n",
 					__PRETTY_FUNCTION__);
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -965,7 +965,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 
 		if (pRegReadback[0].addr > lastResponseCount_ + 1)
 		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: Missing response message, got response from request #%u, expected is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
@@ -975,7 +975,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		}
 		if (pRegReadback[0].addr < lastResponseCount_ + 1)
 		{// NOTE: In testing so far, it has only reached here from data problems other than true out-of-order data
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: Out-of-order response message, got response from request #%u, expected is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
@@ -1006,7 +1006,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 						(unsigned) pRegReadback[i].addr,
 						(unsigned) pRegReadback[i].data);
 			//		else
-			//			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			//			asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 			//					"%s: address=0x%x, value=%u\n", __PRETTY_FUNCTION__,
 			//					(unsigned ) pRegReadback[i].addr,
 			//					(unsigned ) pRegReadback[i].data);
@@ -1015,7 +1015,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		// check if this was a response to the most recent request
 		if (pRegReadback[0].addr < netSendCount_ )
 		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 					"%s: processed response from request #%u, most recent is request #%u\n",
 					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					netSendCount_);
@@ -1043,7 +1043,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		// to the message counter value for the message we just received
 		newWaveAvailable_ = pRegReadback[0].addr;
 		epicsEventSignal(reqWaveEventId_);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
 				__PRETTY_FUNCTION__);
 	}
 
@@ -1068,7 +1068,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 		iReg[0] = pFromFpga->addr;
 		iReg[1] = pFromFpga->data;
 		doCallbacksInt32Array(iReg, 2, p_ReadOneReg, 0);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: got one reg read response.\n", __PRETTY_FUNCTION__);
 	}
 	return asynSuccess;
@@ -1093,7 +1093,7 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 		iReg[0] = pFromFpga->addr;
 		iReg[1] = pFromFpga->data;
 		doCallbacksInt32Array(iReg, 2, p_WriteOneReg, 0);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: got one reg write response.\n", __PRETTY_FUNCTION__);
 	}
 	return asynSuccess;

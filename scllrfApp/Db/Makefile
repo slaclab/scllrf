@@ -13,7 +13,6 @@ include $(TOP)/configure/CONFIG
 DB += cmocRegisters.db
 DB += cmocWaveforms.db
 DB += PRCextra.db
-DB += RESextra.db
 
 # Install Common databases needed by All IOCs
 # ========================================================
@@ -42,8 +41,8 @@ endif
 DB_INSTALLS += scllrfCommon.template
 DB_INSTALLS += scllrfINTRegisters.template
 DB_INSTALLS += scllrfPRCRegisters.template
-DB_INSTALLS += scllrfPRCRegisterAsync.db
 DB_INSTALLS += scllrfRESRegisters.template
+DB_INSTALLS += RESextra.db
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
 DB_INSTALLS += ZZZextra.template
 DB_INSTALLS += STMPextra.template

@@ -29,14 +29,38 @@ record(calcout, "$(P)PIEZO_WAVE_KEEP_CALC")
 #    field(FLNK, "$(P)PIEZO_WAVE_KEEP")
 }
 
-record(longout, "$(P)PIEZO_WAVE_KEEP")
+record(ao, "$(P)PIEZO_WAVE_KEEP")
 {
     field(OMSL, "closed_loop")
     field(DOL, "$(P)PIEZO_WAVE_KEEP_CALC CP")
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn($(PORT),0, 1) PIEZO_WAVE_KEEP")
+    field( DTYP, "asynFloat64")
+    field( OUT,  "@asyn($(PORT),0) PIEZO_WAVE_KEEP")
     field( SCAN, "Passive")
     info( autosaveFields, "DESC")
+}
+
+record(calcout, "$(P)PIEZO1_WAVE_KEEP_CALC")
+{
+    field(INPB, "$(P)PIEZO_WAVE_KEEP_L CP")
+    field(CALC, "0xFF & B")
+}
+
+record(calcout, "$(P)PIEZO2_WAVE_KEEP_CALC")
+{
+    field(INPB, "$(P)PIEZO_WAVE_KEEP_L CP")
+    field(CALC, "B>>8")
+}
+
+record(calcout, "$(P)PIEZO3_WAVE_KEEP_CALC")
+{
+    field(INPA, "$(P)PIEZO_WAVE_KEEP_H CP")
+    field(CALC, "0xFF & B")
+}
+
+record(calcout, "$(P)PIEZO4_WAVE_KEEP_CALC")
+{
+    field(INPA, "$(P)PIEZO_WAVE_KEEP_H CP")
+    field(CALC, "A>>8")
 }
 
 record(bo, "$(P)PIEZO_WAVE_UPDATE")

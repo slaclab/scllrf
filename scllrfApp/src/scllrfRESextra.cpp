@@ -91,7 +91,12 @@ scllrfRESextra::scllrfRESextra(const char *drvPortName, const char *netPortName)
 		Piezo4C2DriveVWave_(Piezo4C2DriveVRAdr, p_Piezo4C2DriveVR, bufPiezo4C2DriveV),
 		Piezo4C2OutVWave_(Piezo4C2OutVRAdr, p_Piezo4C2OutVR, bufPiezo4C2OutV)
 {
-    createParam(PiezoWaveKeepString, asynParamInt32, &p_PiezoWaveKeep);
+	// Note on the parameter type for piezoWaveKeep: the only unsigned EPICS record types
+	// are limited to 16 bits. The 32 bit signed have problems converting to/from unsigned
+	// when the calcout record used to combine two 16 bit mbboDirect records into one 32 bit
+	// number gives a result over the positive range of a signed int. Ugly though it is,
+	// converting a floating point value to/from a 32 bit mask works. Tested working.
+    createParam(PiezoWaveKeepString, asynParamFloat64, &p_PiezoWaveKeep);
 
     epicsThreadSleep(defaultPollPeriod);
     std::cout << __PRETTY_FUNCTION__ << " created " << NUM_SCLLRFRESEXTRA_PARAMS << " parameters." << std::endl;
@@ -139,171 +144,222 @@ asynStatus scllrfRESextra::startPiezoBufRequester()
 void scllrfRESextra::piezoBufRequester()
 {
 	epicsUInt32 activeChannels;
+	double activeChannelsSigned;
 	epicsUInt32 channelsWithData;
 	uint32_t thisChannel;
+	epicsUInt32 piezoCntl; // For setting the buffer triggers when reading is done
 
 	// Main polling loop
 	while (1)
 	{
 		reqPiezoWave_.wait();
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: got data ready flag\n", __PRETTY_FUNCTION__);
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "%s: got data ready flag\n", __PRETTY_FUNCTION__);
 
 		if (isShuttingDown_)
 		{
 			break;
 		}
 
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: signaled by reqWaveEventId_\n", __PRETTY_FUNCTION__);
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "%s: signaled by reqWaveEventId_\n", __PRETTY_FUNCTION__);
 
 		// Check which channels have data, and request them
-		getUIntDigitalParam(p_PiezoWaveKeep, &activeChannels, (epicsUInt32) 0xFFFFFFFF);
+		getDoubleParam(p_PiezoWaveKeep, &activeChannelsSigned);  // using double type as mask
+		activeChannels = (epicsUInt32)(activeChannelsSigned);  // because sign bit and signed int range break 32 bit mask otherwise
 		getUIntDigitalParam(p_PztWaveAvailR, &channelsWithData, (epicsUInt32) 0xFFFFFFFF);
-cout << "active: " << activeChannels << ", have data: " << channelsWithData << endl;
-   		for (thisChannel = 1; thisChannel != 0; thisChannel <<=1)
+
+		for (thisChannel = 1; thisChannel != 0; thisChannel <<= 1)
 		{
+			// See if thisChannel is active and has data available
 			switch (thisChannel & activeChannels & channelsWithData)
 			{
 			case 0x0: // thisChannel is inactive or doesn't have data
 				break;
 
-			case 0x1 :
+			case 0x1:
 				sendBigBuffer(Piezo1C1InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-
-			case 0x2 :
+			case 0x2:
 				sendBigBuffer(Piezo1C1IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-
-			case 0x4 :
+			case 0x4:
 				sendBigBuffer(Piezo1C1OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x8 :
+			case 0x8:
 				sendBigBuffer(Piezo1C1DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x10 :
+			case 0x10:
 				sendBigBuffer(Piezo1C2InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x20 :
+			case 0x20:
 				sendBigBuffer(Piezo1C2IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x40 :
+			case 0x40:
 				sendBigBuffer(Piezo1C2OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x80 :
+			case 0x80:
 				sendBigBuffer(Piezo1C2DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x100 :
+			case 0x100:
 				sendBigBuffer(Piezo2C1InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x200 :
+			case 0x200:
 				sendBigBuffer(Piezo2C1IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x400 :
+			case 0x400:
 				sendBigBuffer(Piezo2C1OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x800 :
+			case 0x800:
 				sendBigBuffer(Piezo2C1DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x1000 :
+			case 0x1000:
 				sendBigBuffer(Piezo2C2InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x2000 :
+			case 0x2000:
 				sendBigBuffer(Piezo2C2IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x4000 :
+			case 0x4000:
 				sendBigBuffer(Piezo2C2OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x8000 :
+			case 0x8000:
 				sendBigBuffer(Piezo2C2DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x10000 :
+			case 0x10000:
 				sendBigBuffer(Piezo3C1InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x20000 :
+			case 0x20000:
 				sendBigBuffer(Piezo3C1IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x40000 :
+			case 0x40000:
 				sendBigBuffer(Piezo3C1OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x80000 :
+			case 0x80000:
 				sendBigBuffer(Piezo3C1DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x100000 :
+			case 0x100000:
 				sendBigBuffer(Piezo3C2InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x200000 :
+			case 0x200000:
 				sendBigBuffer(Piezo3C2IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x400000 :
+			case 0x400000:
 				sendBigBuffer(Piezo3C2OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x800000 :
+			case 0x800000:
 				sendBigBuffer(Piezo3C2DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x1000000 :
+			case 0x1000000:
 				sendBigBuffer(Piezo4C1InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x2000000 :
+			case 0x2000000:
 				sendBigBuffer(Piezo4C1IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x4000000 :
+			case 0x4000000:
 				sendBigBuffer(Piezo4C1OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x8000000 :
+			case 0x8000000:
 				sendBigBuffer(Piezo4C1DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x10000000 :
+			case 0x10000000:
 				sendBigBuffer(Piezo4C2InWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x20000000 :
+			case 0x20000000:
 				sendBigBuffer(Piezo4C2IpWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x40000000 :
+			case 0x40000000:
 				sendBigBuffer(Piezo4C2OutVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
-			case 0x80000000 :
+			case 0x80000000:
 				sendBigBuffer(Piezo4C2DriveVWave_.requestMsg, PiezoWave::piezoWaveRegCount);
 				break;
 
 			default:
 				break;
 			}
+
+			// After waveform requests are sent, toggle piezo_buff_trig_* bits for active waveforms controlled
+			// by the same PIEZOx_CNTL register, to tell the FPGA to get more data
+			switch (thisChannel) // Even if thisChannel isn't active, we want to execute the next part
+			{
+			case 0x80:
+				getUIntDigitalParam(p_Piezo1CntlR, &piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				piezoCntl |= (activeChannels & 0xFF) << 3; // Set active channel bits high without changing other bits
+				pasynUserSelf->reason = p_Piezo1CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+
+				piezoCntl &= ~(0xFF << 3); // Set all channel trigger bits low
+				pasynUserSelf->reason = p_Piezo1CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				break;
+			case 0x8000:
+				getUIntDigitalParam(p_Piezo2CntlR, &piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				piezoCntl |= ((activeChannels >> 8) & 0xFF) << 3; // Set active channel bits high without changing other bits
+				pasynUserSelf->reason = p_Piezo2CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+
+				piezoCntl &= ~(0xFF << 3); // Set all channel trigger bits low
+				pasynUserSelf->reason = p_Piezo2CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				break;
+			case 0x800000:
+				getUIntDigitalParam(p_Piezo3CntlR, &piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				piezoCntl |= ((activeChannels >> 16) & 0xFF) << 3; // Set active channel bits high without changing other bits
+				pasynUserSelf->reason = p_Piezo3CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+
+				piezoCntl &= ~(0xFF << 3); // Set all channel trigger bits low
+				pasynUserSelf->reason = p_Piezo3CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				break;
+			case 0x80000000:
+				getUIntDigitalParam(p_Piezo4CntlR, &piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				piezoCntl |= ((activeChannels >> 24) & 0xFF) << 3; // Set active channel bits high without changing other bits
+				pasynUserSelf->reason = p_Piezo4CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+
+				piezoCntl &= ~(0xFF << 3); // Set all channel trigger bits low
+				pasynUserSelf->reason = p_Piezo4CntlW;
+				writeUInt32Digital(pasynUserSelf, piezoCntl, (epicsUInt32) 0xFFFFFFFF);
+				break;
+
+			default:
+				// This isn't the last waveform controlled by a cntl register, do nothing
+				break;
+			}
 		}
 	}
 }
+
 asynStatus PiezoWave::processPiezoBufReadback(const FpgaReg *pFromFpga, scllrfRESDriver *pDriver)
 {
 	waveReadback[readCount] = pFromFpga->data;
@@ -325,6 +381,8 @@ asynStatus PiezoWave::processPiezoBufReadback(const FpgaReg *pFromFpga, scllrfRE
 */
 asynStatus scllrfRESextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
+	epicsUInt32 activeChannels;
+	double activeChannelsSigned;
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 
@@ -335,16 +393,15 @@ asynStatus scllrfRESextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 
         status = (asynStatus) setUIntDigitalParam(p_PztWaveAvailR,
                                 pFromFpga->data , PztWaveAvailMask);
-        if(pFromFpga->data != 0)
+		// Check which channels are selected by the user
+		getDoubleParam(p_PiezoWaveKeep, &activeChannelsSigned);  // using double type as mask
+		activeChannels = (epicsUInt32)(activeChannelsSigned);  // because sign bit and signed int range break 32 bit mask otherwise
+        if((pFromFpga->data | activeChannels) != 0) // If any waveform has data or is active
         {
-            reqPiezoWave_.signal();
+            reqPiezoWave_.signal(); // Trigger a waveform read cycle
         }
-////XXXX Force reading for a test, not the normal way to do it.
-status = (asynStatus) setUIntDigitalParam(p_PztWaveAvailR,
-                                0x12345678 , PztWaveAvailMask);
-reqPiezoWave_.signal();
-//XXXX    
-            asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+
+            asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
                                 "%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
                                 PztWaveAvailRString, (unsigned ) pFromFpga->data);
     break;
@@ -352,223 +409,223 @@ reqPiezoWave_.signal();
     case Piezo1C1InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C1InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C1InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C1IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C1IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C1IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C1OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C1OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C1OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C1DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C1DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C1DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C2InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C2InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C2InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C2IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C2IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C2IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C2OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C2OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C2OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo1C2DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo1C2DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo1C2DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C1InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C1InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C1InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C1IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C1IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C1IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C1OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C1OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C1OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C1DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C1DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C1DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C2InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C2InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C2InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C2IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C2IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C2IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C2OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C2OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C2OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo2C2DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo2C2DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo2C2DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C1InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C1InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C1InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C1IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C1IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C1IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C1OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C1OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C1OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C1DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C1DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C1DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C2InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C2InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C2InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C2IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C2IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C2IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C2OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C2OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C2OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo3C2DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo3C2DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo3C2DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C1InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C1InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C1InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C1IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C1IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C1IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C1OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C1OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C1OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C1DriveVRAdr|flagReadMask:
 		status = (asynStatus) Piezo4C1DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C1DriveVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C2InRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C2InWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C2InRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C2IpRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C2IpWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C2IpRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C2OutVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C2OutVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C2OutVRString, (unsigned ) pFromFpga->data);
 	break;
     case Piezo4C2DriveVRAdr|flagReadMask:
 
 		status = (asynStatus) Piezo4C2DriveVWave_.processPiezoBufReadback(pFromFpga, this);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Piezo4C2DriveVRString, (unsigned ) pFromFpga->data);
 	break;

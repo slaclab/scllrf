@@ -19,6 +19,9 @@ epicsEnvSet("P", "$(TYPE)$(N):")
 epicsEnvSet( FPGA_IP, "129.57.231.90")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
+# If this chassis has a subclass, by convention called extra, set its name
+# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+epicsEnvSet( EXTRA, "extra")
 
 < ../common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
@@ -51,7 +54,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-#dbLoadRecords("db/scllrf$(TYPE)extra.template","P=ICC,PORT=myReg")
+dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################

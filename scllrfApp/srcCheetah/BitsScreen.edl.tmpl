@@ -10,19 +10,17 @@ y 0
  #if $p.has_key('bits')
   #if $p.has_key('access') and ('w' in $p.access)
     #set $regcount += 1
-  #end if
-  #if (not $p.has_key('access')) or ('r' in $p.access)
+  #else ## We're not trying to handle write only registers. No current need.
     #set $regcount += 1
   #end if
  #end if
 #end for
 #if $regcount < 5
-w ${236*$regcount}
-h 485
+w ${30+236*$regcount}
 #else
-w 1180
-h ${185 + $regcount*355/5}
+w 1220
 #end if
+h ${63 + ($regcount/5)*355}
 font "helvetica-medium-r-12.0"
 ctlFont "helvetica-bold-r-14.0"
 ctlFontAlign "center"
@@ -54,7 +52,7 @@ y 0
 #if $regcount < 5
 w ${236*$regcount}
 #else
-w 1180
+w 1220
 #end if
 h 40
 font "helvetica-bold-r-14.0"
@@ -75,7 +73,7 @@ release 0
 #if $regcount < 5
 x ${136+236*$regcount/5}
 #else
-x 1024
+x 1130
 #end if
 y 4
 w 52
@@ -100,7 +98,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 51}
+x ${xoffset + 25}
 y ${yoffset + 63}
 w 216
 h 335
@@ -113,9 +111,9 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 135}
+x ${xoffset + 35}
 y ${yoffset + 375}
-w 48
+w 200
 h 16
 font "helvetica-medium-r-14.0"
 fgColor index 14
@@ -133,7 +131,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 202}
+x ${xoffset + 185}
 y ${yoffset + 75}
 w 15
 h 288
@@ -149,7 +147,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 348}
 w 15
 h 16
@@ -173,7 +171,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 348}
 w 15
 h 16
@@ -197,7 +195,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 329}
 w 15
 h 16
@@ -221,7 +219,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 329}
 w 15
 h 16
@@ -245,7 +243,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 310}
 w 15
 h 16
@@ -269,7 +267,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 310}
 w 15
 h 16
@@ -293,7 +291,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 291}
 w 15
 h 16
@@ -317,7 +315,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 291}
 w 15
 h 16
@@ -341,7 +339,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 273}
 w 15
 h 16
@@ -365,7 +363,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 273}
 w 15
 h 16
@@ -389,7 +387,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 219}
+x ${xoffset + 205}
 y ${yoffset + 75}
 w 15
 h 288
@@ -405,7 +403,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 256}
 w 15
 h 16
@@ -429,7 +427,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 256}
 w 15
 h 16
@@ -453,7 +451,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 237}
 w 15
 h 16
@@ -477,7 +475,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 237}
 w 15
 h 16
@@ -501,7 +499,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 219}
 w 15
 h 16
@@ -525,7 +523,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 219}
 w 15
 h 16
@@ -549,7 +547,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 201}
 w 15
 h 16
@@ -573,7 +571,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 201}
 w 15
 h 16
@@ -597,7 +595,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 183}
 w 15
 h 16
@@ -621,7 +619,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 183}
 w 15
 h 16
@@ -645,7 +643,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 165}
 w 15
 h 16
@@ -669,7 +667,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 165}
 w 15
 h 16
@@ -693,7 +691,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 147}
 w 15
 h 16
@@ -717,7 +715,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 147}
 w 15
 h 16
@@ -741,7 +739,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 129}
 w 15
 h 16
@@ -765,7 +763,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 129}
 w 15
 h 16
@@ -789,7 +787,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 112}
 w 15
 h 16
@@ -813,7 +811,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 112}
 w 15
 h 16
@@ -837,7 +835,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 94}
 w 15
 h 16
@@ -861,7 +859,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 94}
 w 15
 h 16
@@ -885,7 +883,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 151}
+x ${xoffset + 155}
 y ${yoffset + 76}
 w 15
 h 16
@@ -909,7 +907,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${xoffset + 167}
+x ${xoffset + 170}
 y ${yoffset + 76}
 w 15
 h 16
@@ -933,7 +931,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 349}
 w 56
 h 14
@@ -963,7 +961,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 330}
 w 56
 h 14
@@ -994,7 +992,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 347}
 w 11
 h 14
@@ -1014,7 +1012,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 77}
 w 14
 h 14
@@ -1034,7 +1032,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 311}
 w 56
 h 14
@@ -1064,7 +1062,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 292}
 w 56
 h 14
@@ -1094,7 +1092,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 274}
 w 56
 h 14
@@ -1124,7 +1122,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 257}
 w 56
 h 14
@@ -1154,7 +1152,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 238}
 w 56
 h 14
@@ -1184,7 +1182,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 220}
 w 43
 h 14
@@ -1213,7 +1211,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 221}
 w 15
 h 14
@@ -1233,7 +1231,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 203}
 w 11
 h 14
@@ -1253,7 +1251,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 202}
 w 56
 h 14
@@ -1283,7 +1281,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 185}
 w 56
 h 14
@@ -1313,7 +1311,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 167}
 w 57
 h 14
@@ -1343,7 +1341,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 148}
 w 56
 h 14
@@ -1373,7 +1371,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 130}
 w 66
 h 14
@@ -1403,7 +1401,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 113}
 w 72
 h 14
@@ -1433,7 +1431,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 95}
 w 72
 h 14
@@ -1463,7 +1461,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 77}
 w 54
 h 14
@@ -1493,7 +1491,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 51}
+x ${xoffset + 25}
 y ${yoffset + 63}
 w 216
 h 335
@@ -1513,7 +1511,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 51}
+x ${xoffset + 25}
 y ${yoffset + 63}
 w 216
 h 335
@@ -1526,7 +1524,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 135}
+x ${xoffset + 35}
 y ${yoffset + 375}
 w 48
 h 16
@@ -1546,7 +1544,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 219}
+x ${xoffset + 205}
 y ${yoffset + 75}
 w 15
 h 288
@@ -1562,7 +1560,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 349}
 w 56
 h 14
@@ -1592,7 +1590,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 330}
 w 56
 h 14
@@ -1623,7 +1621,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 347}
 w 11
 h 14
@@ -1643,7 +1641,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 77}
 w 14
 h 14
@@ -1663,7 +1661,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 311}
 w 56
 h 14
@@ -1693,7 +1691,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 292}
 w 56
 h 14
@@ -1723,7 +1721,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 274}
 w 56
 h 14
@@ -1753,7 +1751,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 257}
 w 56
 h 14
@@ -1783,7 +1781,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 238}
 w 56
 h 14
@@ -1813,7 +1811,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 220}
 w 43
 h 14
@@ -1842,7 +1840,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 221}
 w 15
 h 14
@@ -1862,7 +1860,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 237}
+x ${xoffset + 225}
 y ${yoffset + 203}
 w 11
 h 14
@@ -1882,7 +1880,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 202}
 w 56
 h 14
@@ -1912,7 +1910,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 185}
 w 56
 h 14
@@ -1942,7 +1940,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 167}
 w 57
 h 14
@@ -1972,7 +1970,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 148}
 w 56
 h 14
@@ -2002,7 +2000,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 130}
 w 66
 h 14
@@ -2032,7 +2030,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 113}
 w 72
 h 14
@@ -2062,7 +2060,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 95}
 w 72
 h 14
@@ -2092,7 +2090,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x ${xoffset + 60}
+x ${xoffset + 35}
 y ${yoffset + 77}
 w 54
 h 14
@@ -2122,7 +2120,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x ${xoffset + 51}
+x ${xoffset + 25}
 y ${yoffset + 63}
 w 216
 h 335
@@ -2137,7 +2135,7 @@ endObjectProperties
   #end if  
   #set $xoffset = $xoffset + 236
  #end if
- #if $xoffset > 1180
+ #if $xoffset > 995
   #set $xoffset = 0
   #set $yoffset = $yoffset + 355
  #end if 
