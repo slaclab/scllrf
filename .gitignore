@@ -8,3 +8,5 @@ iocBoot/*/envPaths
 /data/
 *.pyc
 O.*
+/info_positions.req
+/info_settings.req
