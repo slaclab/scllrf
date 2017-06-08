@@ -325,4 +325,22 @@ record(waveform, "$(P)CIRC_IQ_BUF_R") {
   field(FTVL, "LONG")
 }
 
+record(bo, "$(P)SHELL_0_DSP_UPDATE_PLOT")
+{
+    field(OMSL, "closed_loop")
+    field(DOL, "$(P)SHELL_0_DSP_CHAN_KEEP_W CP")
+    field(HIGH, 0.2)
+}
+record(bo, "$(P)SHELL_1_DSP_UPDATE_PLOT")
+{
+    field(OMSL, "closed_loop")
+    field(DOL, "$(P)SHELL_1_DSP_CHAN_KEEP_W CP")
+    field(HIGH, 0.2)
+}
+record(bo, "$(P)TRACE_UPDATE_PLOT")
+{
+    field(OMSL, "closed_loop")
+    field(DOL, "$(P)TRACE_KEEP_W CP")
+    field(HIGH, 0.2)
+}
 
