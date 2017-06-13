@@ -210,6 +210,18 @@ protected:
 	unsigned int phaseStepH, phaseStepL, phaseModulo;
 	double iFrequency;
 
+	static const unsigned CIC_PERIOD;
+	static const unsigned SHIFT_BASE;
+	static const float CLK_FREQ;
+    static const char* WaveTimeStep;
+    static const float cordicGain;
+    static const float firGain;
+    static const float phaseOffFast;
+    static const float phaseOffSlow;
+    static const float phaseOffDAC;
+    static const float phaseOffLoop;
+	int calcWaveScale(int32_t wave_samp_per);
+
 //	epicsInt32 bufShell0CircleData[circIQBufWaveRegCount]; from generated code
 //	epicsInt32 bufShell1CircleData[circIQBufWaveRegCount]; from generated code
 	epicsInt32 pCircIQBuf0_[maxCircIQBufWavesCount][circIQBufWavePoints];

@@ -53,7 +53,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/RESextra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################

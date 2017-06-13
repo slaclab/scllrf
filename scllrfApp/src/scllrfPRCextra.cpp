@@ -35,6 +35,17 @@
 using namespace std;
 #include <math.h>
 
+const float scllrfPRCextra::cordicGain = 1.64676;
+const float scllrfPRCextra::firGain = 0.66424725;
+const float scllrfPRCextra::phaseOffFast = 2.39109;
+const float scllrfPRCextra::phaseOffSlow = 0.428352;
+const float scllrfPRCextra::phaseOffDAC = 1.452;
+const float scllrfPRCextra::phaseOffLoop = -4.75;
+
+const unsigned scllrfPRCextra::CIC_PERIOD = 11*4;
+const unsigned scllrfPRCextra::SHIFT_BASE = 8;
+const float scllrfPRCextra::CLK_FREQ = 499.64*11/12/2*1000000;
+
 /** Constructor for the scllrfPRC class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] portName The name of the asyn port driver to be created.
@@ -85,7 +96,7 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell0TimeStampHighRString, asynParamInt32, &p_Shell0TimeStampHighR);
     createParam(Shell0TimeStampLowRString, asynParamInt32, &p_Shell0TimeStampLowR);
     // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
-    //    createParam(Shell0SlowDataRString, asynParamInt8Array, &p_Shell0SlowDataR);
+    createParam(Shell0SlowDataRString, asynParamInt8Array, &p_Shell0SlowDataR);
 
     createParam(Shell1CircleCountRString, asynParamInt32, &p_Shell1CircleCountR);
     createParam(Shell1CircleStatRString, asynParamInt32, &p_Shell1CircleStatR);
@@ -95,7 +106,7 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell1TimeStampHighRString, asynParamInt32, &p_Shell1TimeStampHighR);
     createParam(Shell1TimeStampLowRString, asynParamInt32, &p_Shell1TimeStampLowR);
     // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
-    //    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
+    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
 
     for (i=0; i<maxCircIQBufWavesCount; i++)
     {
@@ -479,6 +490,62 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 //	//printf("<-- %s\n", __PRETTY_FUNCTION__);
 	return asynSuccess;
 }
+
+/*
+def calc_xscale(self):
+    """
+    Calculate monitor channel gain by combining LO, CIC and data
+    truncations. Called after time scale change.
+    Returns register for ccfilter.v, total gain and xscale
+    """
+    cic_r = self.wave_samp_per * self.cic_period
+    self.time_step_mon = cic_r / self.clk_freq
+    cic_bit_growth = 2 * np.log2(cic_r)
+    cic_snr_bit_growth = .5 * np.log2(cic_r / 2)
+    total_bit_growth = (np.log2(self.lo_dds_gain) + cic_bit_growth)
+
+    full_shift = np.floor(total_bit_growth - cic_snr_bit_growth)
+    wave_shift = int(max(0, (full_shift - self.shift_base)/2))
+    self.cic_gain = 2**(total_bit_growth - (2*wave_shift + self.shift_base) + 1)
+*/
+int scllrfPRCextra::calcWaveScale(int32_t wave_samp_per)
+{
+    unsigned int cic_r;
+    float cic_bit_growth;
+    float cic_snr_bit_growth;
+    float total_bit_growth;
+    unsigned int full_shift;
+    unsigned int wave_shift;
+    float cic_gain;
+
+    cic_r =  wave_samp_per * CIC_PERIOD;
+    cic_bit_growth = 2 * log2(cic_r);
+    cic_snr_bit_growth = .5 * log2(cic_r / 2);
+    total_bit_growth = cic_bit_growth;
+    printf("total_bit_growth: %f\n", total_bit_growth);
+    full_shift = (unsigned int)floor(total_bit_growth - cic_snr_bit_growth);
+    printf("full_shift: %d\n", full_shift);
+    wave_shift = (full_shift > SHIFT_BASE) ? (unsigned int)((full_shift - SHIFT_BASE)/2) : 0;
+    printf("wave_shift: %f\n", wave_shift);
+    cic_gain = pow(2.0, total_bit_growth - (2*wave_shift + SHIFT_BASE) + 1);
+    printf("cic_gain: %f\n", cic_gain);
+
+    for (uint i=0; i<maxCircIQBufWavesCount; ++i)
+    {
+        if (i<2)
+        {
+//            pCircIQMonGain_Amp[i] = cic_gain * firGain;
+//            pCircIQMonGain_Phs[i] = -phaseOffFast;
+        } else
+        {
+//            pCircIQMonGain_Amp[i] = cic_gain;
+//            pCircIQMonGain_Phs[i] = -phaseOffSlow;
+        }
+    }
+
+    return wave_shift;
+}
+
 static void circIQBufRequesterC(void *drvPvt)
 {
 	//printf("%s: starting\n", __PRETTY_FUNCTION__);
@@ -980,7 +1047,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		// Slow buffer request is packed into one UDP packet, so this is safe.
 		for(i=0; i<slowDataBuffRegCount;i++)
 		{
-			slowDataFromFpga[i] = pFromFpga[i].data & Shell0SlowDataMask;
+			slowDataFromFpga[i] = (pFromFpga[i].data & Shell0SlowDataMask);
 		}
 		doCallbacksInt8Array(slowDataFromFpga, slowDataBuffRegCount, p_Shell0SlowDataR, 0);
 		getIntegerParam(p_Shell0CircleCountR, &lastCount);
@@ -1361,14 +1428,7 @@ static const iocshArg initArg1 = { "IP port name",iocshArgString};
 static const iocshArg * const initArgs[] = {&initArg0,
 		&initArg1};
 
-/* NOTE: The command name defined below, "scllrfPRCConfigure", conflicts
- * with the same command defined in the base class if both register functions
- * are left in the dbd file. If it's renamed here, it breaks the macro definition
- * scheme used in iocBoot/common/regInterface.cmd. Is there a better way to resolve
- * the conflict than this duplicate name and leaving scllrfPRCRegister out of the
- * dbd file?
- */
-static const iocshFuncDef initFuncDef = {"scllrfPRCConfigure",2,initArgs};
+static const iocshFuncDef initFuncDef = {"scllrfPRCextraConfigure",2,initArgs};
 static void initCallFunc(const iocshArgBuf *args)
 {
 	scllrfPRCextraConfigure(args[0].sval, args[1].sval);

@@ -18,8 +18,12 @@ epicsEnvSet("P", "$(TYPE)$(N)")
 epicsEnvSet( FPGA_IP, "134.79.216.36")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "7")
+# If this chassis has a subclass, by convention called extra, set its name
+# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+epicsEnvSet( EXTRA, "")
 
 < ../common/regInterface.cmd
+# regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
 # ======================================================================
@@ -38,19 +42,25 @@ asynSetTraceIOMask("myIP",-1,4)
 asynSetTraceMask("myReg",-1,0xB)
 #asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myReg",-1,4)
-#
-# regInterface.cmd leaves us in $(TOP) directory
+####XXXX End Turn on heavy logging for development
 
 ##############################################################################
 # BEGIN: Load the record databases
 ##############################################################################
 < iocBoot/common/iocAdmin.cmd
-< iocBoot/common/autoSaveConf.cmd
+#< iocBoot/common/autoSaveConf.cmd
 
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-#dbLoadRecords("db/scllrfICCextra.template","P=ICC,PORT=myReg")
+#dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
+dbLoadRecords("db/ZZZextra.template","P=$(P)")
+dbLoadRecords("db/STMPextra.template","P=$(P)")
+dbLoadRecords("db/ARCTextra.template","P=$(P)")
+dbLoadRecords("db/CPLTextra.template","P=$(P)")
+dbLoadRecords("db/HELLextra.template","P=$(P)")
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
 #
 # END: Loading the record databases
 ########################################################################
@@ -80,8 +90,13 @@ iocInit()
 
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
+#seq &INTmbboCopy,"PREFC=INT1"
+seq &INTarcTest,"PREFC=INT1"
+seq &INTheLevel,"PREFC=INT1"
+#++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
 
-< iocBoot/common/autoSaveStart.cmd
+#< iocBoot/common/autoSaveStart.cmd
 
 # ===========================================================================
 
@@ -97,8 +112,8 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpf $(TYPE)$(N):RUN_STOP.HIGH 0.11
-dbpf $(TYPE)$(N):RUN_STOP 1
+dbpf $(P)RUN_STOP.HIGH 0.11
+dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

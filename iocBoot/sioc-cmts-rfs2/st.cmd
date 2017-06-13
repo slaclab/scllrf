@@ -20,10 +20,10 @@ epicsEnvSet( FPGA_IP, "rfs2")
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
 # here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
-# TODO: Update prcExtra to support this
-epicsEnvSet( EXTRA, "")
+epicsEnvSet( EXTRA, "extra")
 
 < ../common/regInterface.cmd
+# regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
 # ======================================================================
@@ -42,16 +42,16 @@ asynSetTraceIOMask("myIP",-1,4)
 asynSetTraceMask("myReg",-1,0xB)
 #asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myReg",-1,4)
-#
-# regInterface.cmd leaves us in $(TOP) directory
+####XXXX End Turn on heavy logging for development
 
 ##############################################################################
 # BEGIN: Load the record databases
 ##############################################################################
+####XXXX A bit of a hack to get the right iocAdmin PVs
 epicsEnvSet("TYPE","RFS")
 < iocBoot/common/iocAdmin.cmd
-epicsEnvSet("TYPE","PRC")
 #< iocBoot/common/autoSaveConf.cmd
+epicsEnvSet("TYPE","PRC")
 
 # =====================================================================
 #Load Additional databases:

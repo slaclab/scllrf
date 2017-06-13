@@ -18,8 +18,12 @@ epicsEnvSet("P", "RFS$(N):$(LOCA):")
 epicsEnvSet( FPGA_IP, "192.168.165.69")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
+# If this chassis has a subclass, by convention called extra, set its name
+# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+epicsEnvSet( EXTRA, "extra")
 
 < ../common/regInterface.cmd
+# regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
 # ======================================================================
@@ -38,8 +42,7 @@ asynSetTraceIOMask("myIP",-1,4)
 asynSetTraceMask("myReg",-1,0xB)
 #asynSetTraceIOMask("myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
 asynSetTraceIOMask("myReg",-1,4)
-#
-# regInterface.cmd leaves us in $(TOP) directory
+####XXXX End Turn on heavy logging for development
 
 ##############################################################################
 # BEGIN: Load the record databases
