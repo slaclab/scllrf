@@ -58,6 +58,7 @@ protected:
 	static const char *${p.name.title().replace("_", "")}RString;
     #if $p.address not in $prevRAdrs
       #if $p.has_key('nelm') and $p.nelm>32
+	static const char *${p.name.title().replace("_", "")}WavString;
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
       #end if
       #silent $prevRAdrs.append($p.address)
@@ -67,6 +68,10 @@ protected:
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
 	static const char *${p.name.title().replace("_", "")}WString;
+    #if $p.has_key('nelm') and $p.nelm>32 and (not('r' in $p.access))
+	static const char *${p.name.title().replace("_", "")}WavString;
+	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+    #end if
     #if $p.address not in $prevWAdrs
       #silent $prevWAdrs.append($p.address)
     #end if
@@ -100,6 +105,10 @@ protected:
     \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}W
     #set $first = False
     #end if
+  #end if
+  #if ( $p.has_key('nelm') and $p.nelm > 1 )
+    int p_${p.name.title().replace("_", "")}Wav;
+    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "Wav"
   #end if
 #end for
 #if $varExists('commands')

@@ -285,7 +285,7 @@ record(waveform, "\$(P)${p.name.upper()}_R")
     #end if
     field( NELM, "${p.nelm}")
 	field( SCAN, "I/O Intr")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
@@ -328,7 +328,7 @@ record(waveform, "\$(P)${p.name.upper()}_W")
       #end if
     #end if
     field( NELM, "${p.nelm}")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
+    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
     #if $p.has_key('range_top')
     field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')

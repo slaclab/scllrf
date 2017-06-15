@@ -96,7 +96,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell0TimeStampHighRString, asynParamInt32, &p_Shell0TimeStampHighR);
     createParam(Shell0TimeStampLowRString, asynParamInt32, &p_Shell0TimeStampLowR);
     // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
-    createParam(Shell0SlowDataRString, asynParamInt8Array, &p_Shell0SlowDataR);
 
     createParam(Shell1CircleCountRString, asynParamInt32, &p_Shell1CircleCountR);
     createParam(Shell1CircleStatRString, asynParamInt32, &p_Shell1CircleStatR);
@@ -106,7 +105,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     createParam(Shell1TimeStampHighRString, asynParamInt32, &p_Shell1TimeStampHighR);
     createParam(Shell1TimeStampLowRString, asynParamInt32, &p_Shell1TimeStampLowR);
     // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
-    createParam(Shell1SlowDataRString, asynParamInt8Array, &p_Shell1SlowDataR);
 
     for (i=0; i<maxCircIQBufWavesCount; i++)
     {

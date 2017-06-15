@@ -664,13 +664,7 @@ static const iocshArg initArg1 = { "IP port name",iocshArgString};
 static const iocshArg * const initArgs[] = {&initArg0,
 		&initArg1};
 
-/* NOTE: The command name defined below, "scllrfRESConfigure", conflicts
- * with the same command defined in the base class if both register functions
- * are left in the dbd file. If it's renamed here, it breaks the macro definition
- * scheme used in iocBoot/common/regInterface.cmd. Is there a better way to resolve
- * the conflict than this duplicate name and leaving scllrfRESRegister out of the
- * dbd file?
- */
+
 static const iocshFuncDef initFuncDef = {"scllrfRESextraConfigure",2,initArgs};
 static void initCallFunc(const iocshArgBuf *args)
 {
