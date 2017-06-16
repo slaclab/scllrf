@@ -147,9 +147,9 @@ if __name__ == "__main__":
                     if 'trace_reset' in k:
                         v['bits'] = {}
                     if 'llrf_circle_ready' in k:
-                        v['bits'] = { "c0_ready": 1, "c1_ready": 2 }
+                        v['bits'] = { "c0_ready": 0, "c1_ready": 1 }
                     if 'circle_buf_flip' in k:
-                        v['bits'] = { "flip_c0_buf": 1, "flip_c1_buf": 2 }
+                        v['bits'] = { "flip_c0_buf": 0, "flip_c1_buf": 1 }
                     if 'dsp_chan_keep' in k:
                         v['bits'] = { "Ch0": 0, "Ch1": 1, "Ch2": 2, "Ch3": 3, "Ch4": 4, "Ch5": 5, "Ch6": 6, "Ch7": 7, "Ch8": 8, "Ch9": 9, "Ch10": 10, "Ch11": 11, }
                     if 'trace_keep' in k:
