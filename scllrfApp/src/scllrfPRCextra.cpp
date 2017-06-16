@@ -1207,7 +1207,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		if( (int32_t)(valueSet[0] & ModuloMask) == (pFromFpga->data & ModuloMask))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				ModuloWString, (unsigned ) pFromFpga->data & ModuloMask);
 			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 		}
@@ -1228,7 +1228,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		if( (int32_t)(valueSet[0] & PhaseStepHMask) == (pFromFpga->data & PhaseStepHMask))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PhaseStepHWString, (unsigned ) pFromFpga->data & PhaseStepHMask);
 			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 		}
@@ -1249,7 +1249,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		if( (int32_t)(valueSet[0] & PhaseStepLMask) == (pFromFpga->data & PhaseStepLMask))
 		{
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				PhaseStepLWString, (unsigned ) pFromFpga->data & PhaseStepLMask);
 			iFrequency = ADCfrequency * ((phaseStepH + (phaseStepL/(4096-phaseModulo))));
 		}
@@ -1269,7 +1269,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		status = (asynStatus) getUIntDigitalParam(p_BufTrigW, uValueSet , BufTrigMask);
 		if( (uValueSet[0] & BufTrigMask) == (pFromFpga->data & BufTrigMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				BufTrigWString, (unsigned ) pFromFpga->data & BufTrigMask);
 		else
 		{
@@ -1290,7 +1290,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		    printf("%s TraceKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nchan_);
 
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceKeepWString, (unsigned ) pFromFpga->data & TraceKeepMask);
 		}
 		else
@@ -1309,7 +1309,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		status = (asynStatus) getUIntDigitalParam(p_TraceKeepW, uValueSet , TraceKeepMask);
 		if( (uValueSet[0] & TraceResetWeMask) == (pFromFpga->data & TraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				TraceResetWeWString, (unsigned ) pFromFpga->data & TraceResetWeMask);
 		else
 		{
@@ -1318,15 +1318,11 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case CircleBufFlipWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_CircleBufFlipW, uValueSet , CircleBufFlipMask);
-		if( (uValueSet[0] & CircleBufFlipMask) == (pFromFpga->data & CircleBufFlipMask))
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+    	// This register is written by waveform request, outside EPICS.
+    	// Don't worry about asyn parameter values.
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				CircleBufFlipWString, (unsigned ) pFromFpga->data & CircleBufFlipMask);
-		else
-		{
-			// That's normal for this register
-		}
 
 		break;
 
@@ -1344,7 +1340,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 			setIntegerParam(p_Circ0NActive, nCirc0Chan_);
 			printf("%s Shell0DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc0Chan_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell0DspChanKeepWString, (unsigned ) pFromFpga->data & Shell0DspChanKeepMask);
 		}
 		else
@@ -1373,7 +1369,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 			setIntegerParam(p_Circ1NActive, nCirc1Chan_);
 			printf("%s Shell1DspChanKeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,nCirc1Chan_);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspChanKeepWString, (unsigned ) pFromFpga->data & Shell1DspChanKeepMask);
 		}
 		else
