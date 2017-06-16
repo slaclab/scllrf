@@ -395,8 +395,8 @@ asynStatus scllrfPRCextra::processTraceIQWaveReadback(const FpgaReg *pFromFpga)
 	unsigned int waveIndex = waveOffset / nchan_;
 	unsigned int i;
 
-	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-			"%s bufferOffset = %u, npt_ = %zu, waveNumber = %u waveIndex =%u\n", __PRETTY_FUNCTION__, bufferOffset, npt_, waveNumber, waveIndex);
+//	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+//			"%s bufferOffset = %u, npt_ = %zu, waveNumber = %u waveIndex =%u\n", __PRETTY_FUNCTION__, bufferOffset, npt_, waveNumber, waveIndex);
 
 	switch (bufferNumber)
 	{
@@ -591,13 +591,13 @@ void scllrfPRCextra::reqCircIQBuf(unsigned int shellNum)
 
 		sendRegRequest(pReqSlowBuf0Msg_, sizeof(pReqSlowBuf0Msg_)/sizeof(*pReqSlowBuf0Msg_));
 
-		sendBigBuffer(pReqCircIQBufShell0Msg_, circIQBufWaveRegCount);
+		sendBigBuffer(pReqCircIQBufShell0Msg_, circIQBufReqMsgSize);
 		break;
 	case 1:
 
 		sendRegRequest(pReqSlowBuf1Msg_, sizeof(pReqSlowBuf1Msg_)/sizeof(*pReqSlowBuf1Msg_));
 
-		sendBigBuffer(pReqCircIQBufShell1Msg_, circIQBufWaveRegCount);
+		sendBigBuffer(pReqCircIQBufShell1Msg_, circIQBufReqMsgSize);
 		break;
 	default:
 		break;
