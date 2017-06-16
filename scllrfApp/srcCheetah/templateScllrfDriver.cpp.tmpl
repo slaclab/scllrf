@@ -397,7 +397,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
       #set $retVal = 'valueSet'
     #end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 			${p.name.title().replace("_", "")}WString, (unsigned ) pFromFpga->data $maskStr);
 
 		break;
@@ -414,7 +414,7 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 			buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
 			doCallbacksInt32Array(buf${p.name.title().replace("_", "")}, $p.nelm, p_${p.name.title().replace("_", "")}Wav, 0);
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s: echo for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), (unsigned ) pFromFpga->data $maskStr);
 
 		}
