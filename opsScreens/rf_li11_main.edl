@@ -1,0 +1,5296 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1944
+y 475
+w 935
+h 547
+font "helvetica-medium-r-10.0"
+ctlFont "helvetica-medium-r-10.0"
+btnFont "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 5
+textColor index 14
+ctlFgColor1 index 25
+ctlFgColor2 index 18
+ctlBgColor1 index 4
+ctlBgColor2 index 4
+topShadowColor index 1
+botShadowColor index 11
+showGrid
+snapToGrid
+gridSize 4
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 12
+y 20
+w 896
+h 372
+lineColor index 3
+fill
+fillColor index 3
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 248
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:11,KLY=0-1,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF01:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 308
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:21,KLY=0-2,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF02:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 368
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:31,KLY=0-3,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF03:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 428
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:41,KLY=0-4,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF04:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 488
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:51,KLY-0-5,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF05:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 544
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:61,KLY-0-6,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF06:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 604
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:71,KLY=0-7,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF07:MOD"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 668
+y 108
+w 45
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_modulator"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "DEV=SSA:L0:81,KLY=0-8,IOC=IOC:L0:KY01,PLC=PLC:L0:HPRF08:MOD"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 596
+y 404
+w 320
+h 80
+lineColor index 3
+fill
+fillColor index 3
+lineWidth 2
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 12
+y 404
+w 576
+h 80
+lineColor index 3
+fill
+fillColor index 3
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 136
+y 260
+w 604
+h 0
+lineColor index 6
+fillColor index 4
+lineWidth 4
+numPoints 2
+xPoints {
+  0 136
+  1 740
+}
+yPoints {
+  0 260
+  1 260
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 32
+y 324
+w 851
+h 0
+lineColor index 14
+fillColor index 4
+lineWidth 3
+numPoints 3
+xPoints {
+  0 32
+  1 531
+  2 883
+}
+yPoints {
+  0 324
+  1 324
+  2 324
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 156
+y 268
+w 72
+h 24
+font "helvetica-medium-r-10.0"
+fgColor index 8
+bgColor index 3
+useDisplayBg
+value {
+  "Linac Tunnel"
+  "Sector 0"
+}
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 156
+y 224
+w 80
+h 28
+font "helvetica-medium-r-10.0"
+fgColor index 8
+bgColor index 3
+useDisplayBg
+value {
+  "SSAtron Gallery"
+  "Sector 0"
+}
+lineWidth 2
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 20
+y 36
+w 876
+h 0
+lineColor index 14
+fill
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 20
+  1 896
+}
+yPoints {
+  0 36
+  1 36
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 144
+y 20
+w 88
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 8
+bgColor index 3
+value {
+  "Main Drive Line"
+}
+lineWidth 5
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 212
+y 40
+w 114
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 8
+bgColor index 3
+value {
+  "L0 Phase Reference Line"
+}
+autoSize
+lineWidth 5
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 196
+y 52
+w 576
+h 0
+lineColor index 14
+fill
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 196
+  1 772
+}
+yPoints {
+  0 52
+  1 52
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 596
+y 396
+w 136
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "Diagnostic Displays"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 400
+w 156
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "RF Displays"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 4
+w 88
+h 20
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "Schematic"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 204
+y 52
+w 0
+h 60
+lineColor index 14
+fillColor index 4
+lineWidth 2
+numPoints 3
+xPoints {
+  0 204
+  1 204
+  2 204
+}
+yPoints {
+  0 52
+  1 110
+  2 110
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 192
+y 32
+w 0
+h 79
+lineColor index 14
+fillColor index 4
+lineWidth 2
+numPoints 3
+xPoints {
+  0 192
+  1 192
+  2 192
+}
+yPoints {
+  0 36
+  1 107
+  2 107
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 56
+y 40
+w 44
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 8
+bgColor index 3
+value {
+  "LI26 PRL"
+}
+autoSize
+lineWidth 5
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 40
+y 52
+w 144
+h 0
+lineColor index 14
+fill
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 40
+  1 184
+}
+yPoints {
+  0 52
+  1 52
+}
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 184
+y 44
+w 12
+h 16
+lineColor index 14
+fillColor index 4
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 108
+y 44
+w 70
+h 20
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "Phase Monitor"
+}
+border
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 812
+y 40
+w 42
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 8
+bgColor index 3
+value {
+  "L0B PRL"
+}
+autoSize
+lineWidth 5
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 776
+y 64
+w 16
+h 16
+lineColor index 8
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 776
+  1 792
+}
+yPoints {
+  0 64
+  1 80
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 784
+y 52
+w 92
+h 0
+lineColor index 14
+fill
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 784
+  1 876
+}
+yPoints {
+  0 52
+  1 52
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 732
+y 44
+w 70
+h 20
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "Phase Monitor"
+}
+border
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 764
+y 92
+w 84
+h 24
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 8
+bgColor index 3
+useDisplayBg
+value {
+  "0B/0 Head-Tail"
+}
+lineWidth 2
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 256
+y 136
+w 0
+h 171
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 256
+  1 256
+}
+yPoints {
+  0 136
+  1 305
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 320
+y 136
+w 0
+h 166
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 320
+  1 320
+}
+yPoints {
+  0 136
+  1 300
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 384
+y 140
+w 0
+h 165
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 384
+  1 384
+}
+yPoints {
+  0 139
+  1 304
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 444
+y 136
+w 0
+h 165
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 444
+  1 444
+}
+yPoints {
+  0 136
+  1 301
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 504
+y 140
+w 0
+h 161
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 504
+  1 504
+}
+yPoints {
+  0 139
+  1 300
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 564
+y 140
+w 0
+h 162
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 564
+  1 564
+}
+yPoints {
+  0 139
+  1 301
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 632
+y 140
+w 0
+h 160
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 632
+  1 632
+}
+yPoints {
+  0 139
+  1 299
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 616
+y 288
+w 0
+h 0
+lineColor index 14
+fillColor index 4
+numPoints 1
+xPoints {
+  0 616
+}
+yPoints {
+  0 287
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 596
+y 288
+w 0
+h 0
+lineColor index 14
+fillColor index 4
+numPoints 1
+xPoints {
+  0 596
+}
+yPoints {
+  0 287
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 688
+y 136
+w 0
+h 164
+lineColor index 14
+fillColor index 4
+lineWidth 3
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 688
+  1 688
+}
+yPoints {
+  0 136
+  1 300
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 768
+y 228
+w 88
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 768
+y 228
+w 88
+h 40
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vvs_diag"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "LOCA=L0B"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 768
+y 228
+w 88
+h 40
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "L0B VVS..."
+}
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 664
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 665
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 664
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-8"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 604
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 605
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 604
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-7"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 544
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 545
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 544
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-6"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 484
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 485
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 484
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-5"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 424
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 425
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 424
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-4"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 364
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 365
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 364
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-3"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 304
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 305
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 304
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-2"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 244
+y 108
+w 49
+h 32
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 245
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 244
+y 108
+w 48
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  " SSA"
+  "0-1"
+}
+border
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 172
+y 80
+w 8
+h 12
+font "new century schoolbook-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+visPv "LLRF:L0:1:PH_N-1_NFP"
+visMin "1"
+visMax "2"
+value {
+  "*"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 850
+y 80
+w 13
+h 10
+font "new century schoolbook-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+visPv "LLRF:L0B:1:PH_N-1_NFP"
+visMin "1"
+visMax "2"
+value {
+  "*"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 764
+y 80
+w 86
+h 15
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "phase_monitor_ht_limits"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "dev=LLRF:L0B:1:PH_N-1_N,LOCA=L0B,C=1,M=02"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 764
+y 80
+w 88
+h 16
+controlPv "LLRF:L0B:1:PH_N-1_N"
+format "decimal"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 4
+limitsFromDb
+nullColor index 4
+nullCondition "nullEq0"
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 296
+y 420
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "PIOP PPYY Log..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "PPYYLOG"
+  1 "PPYYLOG"
+  2 "PPYYLOG"
+  3 "PPYYLOG"
+  4 "PPYYLOG"
+  5 "PPYYLOG"
+  6 "PPYYLOG"
+  7 "PPYYLOG"
+  8 "PPYYLOG"
+  9 "PPYYLOG"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+  9 "initSector=7, initUnit=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 296
+y 442
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "PIOP RATE Log..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "RATELOG"
+  1 "RATELOG"
+  2 "RATELOG"
+  3 "RATELOG"
+  4 "RATELOG"
+  5 "RATELOG"
+  6 "RATELOG"
+  7 "RATELOG"
+  8 "RATELOG"
+  9 "RATELOG"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+  9 "initSector=7, initUnit=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 196
+y 420
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SSAtron Rate..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "TMSK"
+}
+symbols {
+  0 "initSector=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 15
+y 420
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "PIOP Displays..."
+numPvs 4
+numDsps 9
+displayFileName {
+  0 "sbst_piop_display"
+  1 "SSA_piop_display"
+  2 "SSA_piop_display"
+  3 "SSA_piop_display"
+  4 "SSA_piop_display"
+  5 "SSA_piop_display"
+  6 "SSA_piop_display"
+  7 "SSA_piop_display"
+  8 "SSA_piop_display"
+}
+menuLabel {
+  0 "S-0-1..."
+  1 "K-0-1..."
+  2 "K-0-2..."
+  3 "K-0-3..."
+  4 "K-0-4..."
+  5 "K-0-5..."
+  6 "K-0-6..."
+  7 "K-0-7..."
+  8 "K-0-8..."
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "initDev=0, initSector=7, device=SBST,unit=1"
+  1 "initSector=7, initDev=0"
+  2 "initSector=7, initDev=1"
+  3 "initSector=7, initDev=2"
+  4 "initSector=7, initDev=3"
+  5 "initSector=7, initDev=4"
+  6 "initSector=7, initDev=5"
+  7 "initSector=7, initDev=6"
+  8 "initSector=7, initDev=7"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 15
+y 464
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "FTPs..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "FTP_all"
+  1 "FTP"
+  2 "FTP"
+  3 "FTP"
+  4 "FTP"
+  5 "FTP"
+  6 "FTP"
+  7 "FTP"
+  8 "FTP"
+  9 "FTP"
+}
+menuLabel {
+  0 "All..."
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initDev=0"
+  2 "initSector=7, initDev=1"
+  3 "initSector=7, initDev=2"
+  4 "initSector=7, initDev=3"
+  5 "initSector=7, initDev=4"
+  6 "initSector=7, initDev=5"
+  7 "initSector=7, initDev=6"
+  8 "initSector=7, initDev=7"
+  9 "initSector=7, initDev=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 196
+y 442
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "Subst PP Bitmask..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "SUBPP"
+  1 "SUBPP"
+  2 "SUBPP"
+  3 "SUBPP"
+  4 "SUBPP"
+  5 "SUBPP"
+  6 "SUBPP"
+  7 "SUBPP"
+  8 "SUBPP"
+  9 "SUBPP"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+  9 "initSector=7, initUnit=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 105
+y 464
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "Error Count..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_ERRLOG"
+}
+symbols {
+  0 "initSector=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 105
+y 420
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "PIOP IPL..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "PIOP_IPL"
+  1 "PIOP_IPL"
+  2 "PIOP_IPL"
+  3 "PIOP_IPL"
+  4 "PIOP_IPL"
+  5 "PIOP_IPL"
+  6 "PIOP_IPL"
+  7 "PIOP_IPL"
+  8 "PIOP_IPL"
+  9 "PIOP_IPL"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+  9 "initSector=7, initUnit=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 15
+y 442
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "FOX Control..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "SSA_FOXHOME"
+  1 "SSA_FOXHOME"
+  2 "SSA_FOXHOME"
+  3 "SSA_FOXHOME"
+  4 "SSA_FOXHOME"
+  5 "SSA_FOXHOME"
+  6 "SSA_FOXHOME"
+  7 "SSA_FOXHOME"
+  8 "SSA_FOXHOME"
+  9 "PIOP_IPL"
+}
+menuLabel {
+  1 "K-0-1..."
+  2 "K-0-2..."
+  3 "K-0-3..."
+  4 "K-0-4..."
+  5 "K-0-5..."
+  6 "K-0-6..."
+  7 "K-0-7..."
+  8 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 105
+y 442
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SLED Control..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_TRIMSLED"
+}
+symbols {
+  0 "initSector=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 732
+y 408
+w 168
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Sector 0 RF Status (SLC)..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_interlocks_sector_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 732
+y 432
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-1..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=11"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 776
+y 432
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-2..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=21"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 816
+y 432
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-3..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=31"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 860
+y 432
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-4..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=41"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 732
+y 456
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-5..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=51"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 776
+y 456
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-6..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=61"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 816
+y 456
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-7..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=71"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 860
+y 456
+w 42
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-8..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_status_slc"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "micro=L0,unit=81"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 760
+y 168
+w 100
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_focus_bulk_diag"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "LOCA=L0"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 760
+y 168
+w 100
+h 32
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "L0/L0B SSA "
+  "Mag Focus Bulk..."
+}
+lineWidth 2
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 176
+y 108
+w 48
+h 32
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SBST..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "sbst_diag_00B"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "LOCA=L0,GM=10"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 196
+y 464
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SSA ENTER..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "SSA_ENTER"
+  1 "SSA_ENTER"
+  2 "SSA_ENTER"
+  3 "SSA_ENTER"
+  4 "SSA_ENTER"
+  5 "SSA_ENTER"
+  6 "SSA_ENTER"
+  7 "SSA_ENTER"
+  8 "SSA_ENTER"
+  9 "SSA_ENTER"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+  9 "initSector=7, initUnit=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 296
+y 464
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SSA RESET..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "SSA_MODULATOR"
+  1 "SSA_MODULATOR"
+  2 "SSA_MODULATOR"
+  3 "SSA_MODULATOR"
+  4 "SSA_MODULATOR"
+  5 "SSA_MODULATOR"
+  6 "SSA_MODULATOR"
+  7 "SSA_MODULATOR"
+  8 "SSA_MODULATOR"
+  9 "SSA_MODULATOR"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7, initUnit=8"
+  1 "initSector=7, initUnit=8"
+  2 "initSector=7, initUnit=0"
+  3 "initSector=7, initUnit=1"
+  4 "initSector=7, initUnit=2"
+  5 "initSector=7, initUnit=3"
+  6 "initSector=7, initUnit=4"
+  7 "initSector=7, initUnit=5"
+  8 "initSector=7, initUnit=6"
+  9 "initSector=7, initUnit=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 395
+y 420
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SSA SECTOR..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_SECTOR_USER"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "initSector=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 396
+y 464
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SSA HISTORY..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_HIST"
+}
+symbols {
+  0 "initSector=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 396
+y 442
+w 96
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SSA PHASE..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SSA_SECTOR_DIAG"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "initSector=7"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 496
+y 420
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "PIOP MSG..."
+numPvs 4
+numDsps 10
+displayFileName {
+  0 "PIOP_MSG"
+  1 "PIOP_MSG"
+  2 "PIOP_MSG"
+  3 "PIOP_MSG"
+  4 "PIOP_MSG"
+  5 "PIOP_MSG"
+  6 "PIOP_MSG"
+  7 "PIOP_MSG"
+  8 "PIOP_MSG"
+  9 "PIOP_MSG"
+}
+menuLabel {
+  1 "S-0-1..."
+  2 "K-0-1..."
+  3 "K-0-2..."
+  4 "K-0-3..."
+  5 "K-0-4..."
+  6 "K-0-5..."
+  7 "K-0-6..."
+  8 "K-0-7..."
+  9 "K-0-8..."
+}
+symbols {
+  0 "initSector=7"
+  1 "initSector=7, initUnit=0"
+  2 "initSector=7, initUnit=1"
+  3 "initSector=7, initUnit=2"
+  4 "initSector=7, initUnit=3"
+  5 "initSector=7, initUnit=4"
+  6 "initSector=7, initUnit=5"
+  7 "initSector=7, initUnit=6"
+  8 "initSector=7, initUnit=7"
+  9 "initSector=7, initUnit=8"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 496
+y 442
+w 86
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-10.0"
+buttonLabel "SBI Status..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "SBI_STATUS"
+}
+symbols {
+  0 "initSector=7, initUnit=0"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 496
+y 464
+w 84
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Triggers..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "evnt_camac_main"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "LOCA_EW=7"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 176
+y 108
+w 48
+h 32
+lineColor index 15
+lineAlarm
+fillColor index 4
+fillAlarm
+alarmPv "SBST:L0:RF01:STATSUMY"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 144
+y 504
+w 168
+h 20
+
+beginGroup
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 236
+y 504
+w 76
+h 20
+controlPv "CAMC:L0:CV01:STATUS"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 4
+limitsFromDb
+nullColor index 18
+colorPv "CAMC:L0:CV01:STATUS"
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 144
+y 508
+w 85
+h 12
+font "helvetica-medium-r-10.0"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "CAMCOM Status:"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 236
+y 504
+w 76
+h 20
+lineColor index 20
+fillColor index 4
+visPv "CAMC:L0:CV01:STATUS"
+visMin "1"
+visMax "2"
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 40
+y 68
+w 92
+h 56
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 41
+y 67
+w 92
+h 56
+fgColor index 14
+bgColor index 52
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-10.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "opsnSsaDisplay"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "sector=L0,device=SSA,unit=11,x=7,y=1"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 81
+w 54
+h 28
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 33
+useDisplayBg
+value {
+  "Ops SSA"
+  "Display"
+}
+autoSize
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 768
+y 228
+w 88
+h 40
+lineColor index 15
+lineAlarm
+fillColor index 4
+fillAlarm
+alarmPv "VVS:L0B:RF01:STATSUMY"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 760
+y 168
+w 100
+h 32
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 760
+y 168
+w 100
+h 32
+lineColor index 35
+lineAlarm
+fillColor index 4
+lineWidth 2
+visPv "CALC\\\{MAX(A,B)\}(SSA:L0:1:FOCUSBULK_STATE.SEVR,SSA:L0:1:FOCUSBULK_STATUS.SEVR)"
+visMin "1"
+visMax "2"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 760
+y 168
+w 100
+h 32
+lineColor index 20
+lineAlarm
+fillColor index 4
+lineWidth 2
+visPv "CALC\\\{MAX(A,B)\}(SSA:L0:1:FOCUSBULK_STATE.SEVR,SSA:L0:1:FOCUSBULK_STATUS.SEVR)"
+visMin "2"
+visMax "3"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 760
+y 168
+w 100
+h 32
+lineColor index 46
+lineAlarm
+fillColor index 4
+lineWidth 2
+visPv "CALC\\\{MAX(A,B)\}(SSA:L0:1:FOCUSBULK_STATE.SEVR,SSA:L0:1:FOCUSBULK_STATUS.SEVR)"
+visMin "3"
+visMax "4"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 760
+y 168
+w 100
+h 32
+lineColor index 16
+lineAlarm
+fillColor index 4
+lineWidth 2
+visPv "CALC\\\{MAX(A,B)\}(SSA:L0:1:FOCUSBULK_STATE.SEVR,SSA:L0:1:FOCUSBULK_STATUS.SEVR)"
+visMin "0"
+visMax "1"
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 716
+y 504
+w 144
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "PDU Delay (expert)..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "fiducial_pdu_delay_expert"
+}
+setPosition {
+  0 "parentWindow"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 40
+y 68
+w 94
+h 56
+lineColor index 15
+lineAlarm
+fillColor index 4
+lineWidth 2
+alarmPv "SSA:L0:RF01:STATSUMY"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 48
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 121
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 109
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 97
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 85
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 73
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 61
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 49
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 121
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 109
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 97
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 85
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 73
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 61
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 49
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 152
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 225
+y 308
+w 12
+h 40
+lineColor index 20
+lineAlarm
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 213
+y 308
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 201
+y 308
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 189
+y 308
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 177
+y 308
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 165
+y 308
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 153
+y 308
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 225
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 213
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 201
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 189
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 177
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 165
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 153
+y 299
+w 12
+h 40
+lineColor index 20
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 260
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 330
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 318
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 306
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 294
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 282
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 258
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 330
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 318
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 306
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 294
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 282
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 258
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 364
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 423
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 411
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 399
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 387
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 375
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 363
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 423
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 411
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 399
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 387
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 375
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 363
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 468
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 528
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 516
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 504
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 492
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 480
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 468
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 528
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 516
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 504
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 492
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 480
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 468
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 572
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 645
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 633
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 621
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 609
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 597
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 585
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 573
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 645
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 633
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 621
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 609
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 597
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 585
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 573
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 680
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 750
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 738
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 726
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 714
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 702
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 690
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 678
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 750
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 738
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 726
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 714
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 702
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 690
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 678
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 784
+y 300
+w 84
+h 52
+
+beginGroup
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 856
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 844
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 832
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 820
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 808
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 796
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 784
+y 308
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+startAngle 180
+totalAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 856
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 844
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 832
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 820
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 808
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 796
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 784
+y 299
+w 12
+h 40
+lineColor index 15
+fillColor index 34
+lineWidth 2
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 72
+y 312
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-1"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 176
+y 316
+w 40
+h 20
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-2"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 284
+y 312
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-3"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 388
+y 312
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-4"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 492
+y 312
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-5"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 596
+y 312
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-6"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 704
+y 312
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-7"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 808
+y 316
+w 40
+h 25
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+  "0-8"
+}
+border
+lineWidth 2
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 72
+y 312
+w 40
+h 25
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-1..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_l1s_main.edl"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "PRIM=LLRF,LOCA=B15,UNIT=A"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 176
+y 314
+w 40
+h 25
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-2..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_l1s_main.edl"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "PRIM=LLRF,LOCA=B15,UNIT=A"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 284
+y 312
+w 40
+h 25
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-3..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_l1s_main.edl"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "PRIM=LLRF,LOCA=B15,UNIT=A"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 388
+y 312
+w 40
+h 25
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "0-4..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rf_l1s_main.edl"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "PRIM=LLRF,LOCA=B15,UNIT=A"
+}
+endObjectProperties
+
