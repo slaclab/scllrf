@@ -92,8 +92,8 @@ iocInit()
 #seq sncExample,"user=gwbrownHost"
 #++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
 #seq &INTmbboCopy,"PREFC=INT1"
-seq &INTarcTest,"PREFC=INT1"
-seq &INTheLevel,"PREFC=INT1"
+seq &INTarcTest,"PREFC=INT1:B15"
+seq &INTheLevel,"PREFC=INT1:B15"
 #++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
 
 #< iocBoot/common/autoSaveStart.cmd

@@ -37,16 +37,6 @@ public:
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 #end if
 
-
-protected:
-    virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
-	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
-			bool &waveIsReady); // parse register data, write to PVs
-	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
-
-	/* SHA1 hash of register map */
-	static const char *regMapSha1String;
-
 /* Register names */
 #set $prevWAdrs = []
 #set $prevRAdrs =[]
@@ -59,7 +49,17 @@ protected:
     #if $p.address not in $prevRAdrs
       #if $p.has_key('nelm') and $p.nelm>32
 	static const char *${p.name.title().replace("_", "")}WavString;
+	static const unsigned int ${p.name.title().replace("_", "")}BufRegCount = $p.nelm;
+	static const unsigned int ${p.name.title().replace("_", "")}ReqSegmentCount = (${p.name.title().replace("_", "")}BufRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up;
+	static const unsigned int ${p.name.title().replace("_", "")}ReqMsgSize = ${p.name.title().replace("_", "")}BufRegCount + ${p.name.title().replace("_", "")}ReqSegmentCount; // All register addresses plus nonce space
+	FpgaReg req${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}ReqMsgSize]; // Canned message to request data buffer
+        #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	epicsInt8 buf${p.name.title().replace("_", "")}[$p.nelm];
+        #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	epicsInt16 buf${p.name.title().replace("_", "")}[$p.nelm];
+        #else
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+        #end if
       #end if
       #silent $prevRAdrs.append($p.address)
     #else
@@ -70,7 +70,13 @@ protected:
 	static const char *${p.name.title().replace("_", "")}WString;
     #if $p.has_key('nelm') and $p.nelm>32 and (not('r' in $p.access))
 	static const char *${p.name.title().replace("_", "")}WavString;
+      #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	epicsInt8 buf${p.name.title().replace("_", "")}[$p.nelm];
+      #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	epicsInt16 buf${p.name.title().replace("_", "")}[$p.nelm];
+      #else
 	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+      #end if
     #end if
     #if $p.address not in $prevWAdrs
       #silent $prevWAdrs.append($p.address)
@@ -86,6 +92,16 @@ protected:
 #define C${c.name}String "C_${c.name}"
 #end for
 #end if
+
+
+protected:
+    virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
+	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
+			bool &waveIsReady); // parse register data, write to PVs
+	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
+
+	/* SHA1 hash of register map */
+	static const char *regMapSha1String;
 
 #set $first = True
 /* Register handles */

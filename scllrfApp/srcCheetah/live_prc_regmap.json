@@ -154,7 +154,7 @@
     "beam_0_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407434,
+        "base_addr": 8407436,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -162,7 +162,7 @@
     "beam_0_phase_init": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407435,
+        "base_addr": 8407437,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -170,7 +170,7 @@
     "beam_0_phase_step": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407436,
+        "base_addr": 8407438,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -178,7 +178,7 @@
     "beam_1_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407437,
+        "base_addr": 8407439,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -186,7 +186,7 @@
     "beam_1_phase_init": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407438,
+        "base_addr": 8407440,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -194,7 +194,7 @@
     "beam_1_phase_step": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407439,
+        "base_addr": 8407441,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -218,7 +218,7 @@
     "cav4_mech_prng_iva": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407440,
+        "base_addr": 8407442,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -226,7 +226,7 @@
     "cav4_mech_prng_ivb": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407441,
+        "base_addr": 8407443,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -234,7 +234,7 @@
     "cav4_mech_prng_random_run": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407442,
+        "base_addr": 8407444,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -278,7 +278,7 @@
     "cavity_0_a_cav_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407443,
+        "base_addr": 8407445,
         "data_width": 10,
         "description": "",
         "sign": "signed"
@@ -286,7 +286,7 @@
     "cavity_0_a_for_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407444,
+        "base_addr": 8407446,
         "data_width": 10,
         "description": "",
         "sign": "signed"
@@ -294,7 +294,7 @@
     "cavity_0_a_rfl_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407445,
+        "base_addr": 8407447,
         "data_width": 10,
         "description": "",
         "sign": "signed"
@@ -302,7 +302,7 @@
     "cavity_0_amp_lp_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407446,
+        "base_addr": 8407448,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -310,7 +310,7 @@
     "cavity_0_compr_sat_ctl": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407461,
+        "base_addr": 8407463,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -358,7 +358,7 @@
     "cavity_0_freq_0_coarse_freq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407447,
+        "base_addr": 8407449,
         "data_width": 28,
         "description": "",
         "sign": "signed"
@@ -366,7 +366,7 @@
     "cavity_0_freq_1_coarse_freq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407448,
+        "base_addr": 8407450,
         "data_width": 28,
         "description": "",
         "sign": "signed"
@@ -374,7 +374,7 @@
     "cavity_0_freq_2_coarse_freq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407449,
+        "base_addr": 8407451,
         "data_width": 28,
         "description": "",
         "sign": "signed"
@@ -382,7 +382,7 @@
     "cavity_0_mode_0_beam_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407450,
+        "base_addr": 8407452,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -390,7 +390,7 @@
     "cavity_0_mode_0_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407451,
+        "base_addr": 8407453,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -414,7 +414,7 @@
     "cavity_0_mode_0_drive_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407452,
+        "base_addr": 8407454,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -422,7 +422,7 @@
     "cavity_0_mode_1_beam_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407453,
+        "base_addr": 8407455,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -430,7 +430,7 @@
     "cavity_0_mode_1_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407454,
+        "base_addr": 8407456,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -454,7 +454,7 @@
     "cavity_0_mode_1_drive_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407455,
+        "base_addr": 8407457,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -462,7 +462,7 @@
     "cavity_0_mode_2_beam_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407456,
+        "base_addr": 8407458,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -470,7 +470,7 @@
     "cavity_0_mode_2_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407457,
+        "base_addr": 8407459,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -494,7 +494,7 @@
     "cavity_0_mode_2_drive_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407458,
+        "base_addr": 8407460,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -502,7 +502,7 @@
     "cavity_0_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407459,
+        "base_addr": 8407461,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -534,7 +534,7 @@
     "cavity_0_phase_step": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407460,
+        "base_addr": 8407462,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -550,7 +550,7 @@
     "cavity_0_prng_iva": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407462,
+        "base_addr": 8407464,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -558,7 +558,7 @@
     "cavity_0_prng_ivb": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407463,
+        "base_addr": 8407465,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -566,7 +566,7 @@
     "cavity_0_prng_random_run": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407464,
+        "base_addr": 8407466,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -574,7 +574,7 @@
     "cavity_1_a_cav_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407465,
+        "base_addr": 8407467,
         "data_width": 10,
         "description": "",
         "sign": "signed"
@@ -582,7 +582,7 @@
     "cavity_1_a_for_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407466,
+        "base_addr": 8407468,
         "data_width": 10,
         "description": "",
         "sign": "signed"
@@ -590,7 +590,7 @@
     "cavity_1_a_rfl_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407467,
+        "base_addr": 8407469,
         "data_width": 10,
         "description": "",
         "sign": "signed"
@@ -598,7 +598,7 @@
     "cavity_1_amp_lp_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407468,
+        "base_addr": 8407470,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -606,7 +606,7 @@
     "cavity_1_compr_sat_ctl": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407483,
+        "base_addr": 8407485,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -654,7 +654,7 @@
     "cavity_1_freq_0_coarse_freq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407469,
+        "base_addr": 8407471,
         "data_width": 28,
         "description": "",
         "sign": "signed"
@@ -662,7 +662,7 @@
     "cavity_1_freq_1_coarse_freq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407470,
+        "base_addr": 8407472,
         "data_width": 28,
         "description": "",
         "sign": "signed"
@@ -670,7 +670,7 @@
     "cavity_1_freq_2_coarse_freq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407471,
+        "base_addr": 8407473,
         "data_width": 28,
         "description": "",
         "sign": "signed"
@@ -678,7 +678,7 @@
     "cavity_1_mode_0_beam_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407472,
+        "base_addr": 8407474,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -686,7 +686,7 @@
     "cavity_1_mode_0_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407473,
+        "base_addr": 8407475,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -710,7 +710,7 @@
     "cavity_1_mode_0_drive_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407474,
+        "base_addr": 8407476,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -718,7 +718,7 @@
     "cavity_1_mode_1_beam_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407475,
+        "base_addr": 8407477,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -726,7 +726,7 @@
     "cavity_1_mode_1_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407476,
+        "base_addr": 8407478,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -750,7 +750,7 @@
     "cavity_1_mode_1_drive_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407477,
+        "base_addr": 8407479,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -758,7 +758,7 @@
     "cavity_1_mode_2_beam_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407478,
+        "base_addr": 8407480,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -766,7 +766,7 @@
     "cavity_1_mode_2_bw": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407479,
+        "base_addr": 8407481,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -790,7 +790,7 @@
     "cavity_1_mode_2_drive_coupling": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407480,
+        "base_addr": 8407482,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -798,7 +798,7 @@
     "cavity_1_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407481,
+        "base_addr": 8407483,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -830,7 +830,7 @@
     "cavity_1_phase_step": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407482,
+        "base_addr": 8407484,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -846,7 +846,7 @@
     "cavity_1_prng_iva": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407484,
+        "base_addr": 8407486,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -854,7 +854,7 @@
     "cavity_1_prng_ivb": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407485,
+        "base_addr": 8407487,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -862,7 +862,7 @@
     "cavity_1_prng_random_run": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407486,
+        "base_addr": 8407488,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -919,6 +919,14 @@
         "access": "rw",
         "addr_width": 0,
         "base_addr": 8407419,
+        "data_width": 2,
+        "description": "",
+        "sign": "unsigned"
+    },
+    "circle_buf_stop": {
+        "access": "rw",
+        "addr_width": 0,
+        "base_addr": 8407420,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1145,7 +1153,7 @@
     "dac_dds_reset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407420,
+        "base_addr": 8407421,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1153,7 +1161,7 @@
     "dac_iq_phase": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407487,
+        "base_addr": 8407489,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1161,7 +1169,7 @@
     "dac_mode": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407421,
+        "base_addr": 8407422,
         "data_width": 4,
         "description": "",
         "sign": "unsigned"
@@ -1169,7 +1177,7 @@
     "ddsa_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407422,
+        "base_addr": 8407423,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1177,7 +1185,7 @@
     "ddsa_phstep_h": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407423,
+        "base_addr": 8407424,
         "data_width": 20,
         "description": "",
         "sign": "unsigned"
@@ -1185,7 +1193,7 @@
     "ddsa_phstep_l": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407424,
+        "base_addr": 8407425,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1193,7 +1201,7 @@
     "domain_jump_realign": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407524,
+        "base_addr": 8407526,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1201,7 +1209,7 @@
     "dtrace_cmd": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407488,
+        "base_addr": 8407490,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1220,6 +1228,21 @@
         "data_width": 3,
         "sign": "unsigned"
     },
+    "fdbk_drive_buf_ctl": {
+        "access": "rw",
+        "addr_width": 0,
+        "base_addr": 8407426,
+        "data_width": 2,
+        "description": "",
+        "sign": "unsigned"
+    },
+    "fdbk_drive_buf_data": {
+        "access": "r",
+        "addr_width": 10,
+        "base_addr": 1900544,
+        "data_width": 14,
+        "sign": "signed"
+    },
     "ffffffff": {
         "access": "r",
         "addr_width": 0,
@@ -1230,7 +1253,7 @@
     "fiber_reset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407525,
+        "base_addr": 8407527,
         "data_width": 9,
         "description": "",
         "sign": "unsigned"
@@ -1308,7 +1331,7 @@
     "hist_count_w_strobe": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407425,
+        "base_addr": 8407427,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1330,7 +1353,7 @@
     "icc_cfg": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407526,
+        "base_addr": 8407528,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -1380,7 +1403,7 @@
     "llrf_dsp_dac_en": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407426,
+        "base_addr": 8407428,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1409,7 +1432,7 @@
     "lo_amp": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407427,
+        "base_addr": 8407429,
         "data_width": 18,
         "description": "",
         "sign": "unsigned"
@@ -1417,7 +1440,7 @@
     "modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407428,
+        "base_addr": 8407430,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1425,7 +1448,7 @@
     "phase_step_h": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407429,
+        "base_addr": 8407431,
         "data_width": 20,
         "description": "",
         "sign": "unsigned"
@@ -1433,7 +1456,7 @@
     "phase_step_l": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407430,
+        "base_addr": 8407432,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1455,7 +1478,7 @@
     "prc_dsp_cav_sel": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407431,
+        "base_addr": 8407433,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1463,7 +1486,7 @@
     "prc_dsp_prl_cfg": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407432,
+        "base_addr": 8407434,
         "data_width": 9,
         "description": "",
         "sign": "unsigned"
@@ -1471,7 +1494,7 @@
     "prc_dsp_prl_gain": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407433,
+        "base_addr": 8407435,
         "data_width": 16,
         "description": "",
         "sign": "signed"
@@ -1486,7 +1509,7 @@
     "qsfp_i2c_reg": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407527,
+        "base_addr": 8407529,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -1494,7 +1517,7 @@
     "rewind": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407513,
+        "base_addr": 8407515,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1509,7 +1532,7 @@
     "sfp_address_set": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407528,
+        "base_addr": 8407530,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -1518,13 +1541,13 @@
         "access": "r",
         "addr_width": 13,
         "base_addr": 1703936,
-        "data_width": 16,
+        "data_width": 20,
         "sign": "signed"
     },
     "shell_0_dsp_chan_keep": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407489,
+        "base_addr": 8407491,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1532,7 +1555,7 @@
     "shell_0_dsp_fdbk_core_coarse_scale": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407490,
+        "base_addr": 8407492,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1556,7 +1579,7 @@
     "shell_0_dsp_fdbk_core_mp_proc_ph_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407491,
+        "base_addr": 8407493,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -1564,7 +1587,7 @@
     "shell_0_dsp_fdbk_core_mp_proc_sel_en": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407492,
+        "base_addr": 8407494,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1572,7 +1595,7 @@
     "shell_0_dsp_fdbk_core_mp_proc_sel_thresh": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407493,
+        "base_addr": 8407495,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -1620,7 +1643,7 @@
     "shell_0_dsp_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407494,
+        "base_addr": 8407496,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1628,7 +1651,7 @@
     "shell_0_dsp_phase_step": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407495,
+        "base_addr": 8407497,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -1636,7 +1659,7 @@
     "shell_0_dsp_piezo_piezo_dc": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407496,
+        "base_addr": 8407498,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -1660,7 +1683,7 @@
     "shell_0_dsp_tag": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407497,
+        "base_addr": 8407499,
         "data_width": 8,
         "description": "",
         "sign": "unsigned"
@@ -1668,7 +1691,7 @@
     "shell_0_dsp_use_fiber_iq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407498,
+        "base_addr": 8407500,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1676,7 +1699,7 @@
     "shell_0_dsp_wave_samp_per": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407499,
+        "base_addr": 8407501,
         "data_width": 8,
         "description": "",
         "sign": "unsigned"
@@ -1684,7 +1707,7 @@
     "shell_0_dsp_wave_shift": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407500,
+        "base_addr": 8407502,
         "data_width": 3,
         "description": "",
         "sign": "unsigned"
@@ -1700,13 +1723,13 @@
         "access": "r",
         "addr_width": 13,
         "base_addr": 1769472,
-        "data_width": 16,
+        "data_width": 20,
         "sign": "signed"
     },
     "shell_1_dsp_chan_keep": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407501,
+        "base_addr": 8407503,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1714,7 +1737,7 @@
     "shell_1_dsp_fdbk_core_coarse_scale": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407502,
+        "base_addr": 8407504,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1738,7 +1761,7 @@
     "shell_1_dsp_fdbk_core_mp_proc_ph_offset": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407503,
+        "base_addr": 8407505,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -1746,7 +1769,7 @@
     "shell_1_dsp_fdbk_core_mp_proc_sel_en": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407504,
+        "base_addr": 8407506,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1754,7 +1777,7 @@
     "shell_1_dsp_fdbk_core_mp_proc_sel_thresh": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407505,
+        "base_addr": 8407507,
         "data_width": 18,
         "description": "",
         "sign": "signed"
@@ -1802,7 +1825,7 @@
     "shell_1_dsp_modulo": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407506,
+        "base_addr": 8407508,
         "data_width": 12,
         "description": "",
         "sign": "unsigned"
@@ -1810,7 +1833,7 @@
     "shell_1_dsp_phase_step": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407507,
+        "base_addr": 8407509,
         "data_width": 32,
         "description": "",
         "sign": "unsigned"
@@ -1818,7 +1841,7 @@
     "shell_1_dsp_piezo_piezo_dc": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407508,
+        "base_addr": 8407510,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -1842,7 +1865,7 @@
     "shell_1_dsp_tag": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407509,
+        "base_addr": 8407511,
         "data_width": 8,
         "description": "",
         "sign": "unsigned"
@@ -1850,7 +1873,7 @@
     "shell_1_dsp_use_fiber_iq": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407510,
+        "base_addr": 8407512,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -1858,7 +1881,7 @@
     "shell_1_dsp_wave_samp_per": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407511,
+        "base_addr": 8407513,
         "data_width": 8,
         "description": "",
         "sign": "unsigned"
@@ -1866,7 +1889,7 @@
     "shell_1_dsp_wave_shift": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407512,
+        "base_addr": 8407514,
         "data_width": 3,
         "description": "",
         "sign": "unsigned"
@@ -1888,7 +1911,7 @@
     "ssa_stim_ampstep": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407514,
+        "base_addr": 8407516,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -1896,7 +1919,7 @@
     "ssa_stim_en": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407515,
+        "base_addr": 8407517,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1904,7 +1927,7 @@
     "ssa_stim_g_period": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407516,
+        "base_addr": 8407518,
         "data_width": 10,
         "description": "",
         "sign": "unsigned"
@@ -1912,7 +1935,7 @@
     "ssa_stim_pertstep": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407517,
+        "base_addr": 8407519,
         "data_width": 16,
         "description": "",
         "sign": "unsigned"
@@ -1920,7 +1943,7 @@
     "tag_now": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407529,
+        "base_addr": 8407531,
         "data_width": 8,
         "description": "",
         "sign": "unsigned"
@@ -1928,7 +1951,7 @@
     "tgen_0_bank_next": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407530,
+        "base_addr": 8407532,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1944,7 +1967,7 @@
     "tgen_1_bank_next": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407531,
+        "base_addr": 8407533,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -1974,7 +1997,7 @@
     "trace_keep": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407518,
+        "base_addr": 8407520,
         "data_width": 8,
         "description": "",
         "sign": "unsigned"
@@ -1989,7 +2012,7 @@
     "trace_reset_we": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407519,
+        "base_addr": 8407521,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -2011,7 +2034,7 @@
     "trig_internal": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407520,
+        "base_addr": 8407522,
         "data_width": 1,
         "description": "",
         "sign": "unsigned"
@@ -2019,7 +2042,7 @@
     "trig_mode": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407521,
+        "base_addr": 8407523,
         "data_width": 2,
         "description": "",
         "sign": "unsigned"
@@ -2034,7 +2057,7 @@
     "wave0_src": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407522,
+        "base_addr": 8407524,
         "data_width": 3,
         "description": "",
         "sign": "unsigned"
@@ -2049,7 +2072,7 @@
     "wave1_src": {
         "access": "rw",
         "addr_width": 0,
-        "base_addr": 8407523,
+        "base_addr": 8407525,
         "data_width": 3,
         "description": "",
         "sign": "unsigned"

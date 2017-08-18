@@ -359,7 +359,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
     return status;
 }
 
-/** Called when asyn clients call pasynInt32->read().
+/** Called when asyn clients call pasynInt32->write().
  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
  * \param[in] value Pointer to the value to read. */
 asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
@@ -385,7 +385,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
     if (function == p_RunStop) {
 printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
         if (value == run)
-        	pollEvent_.signal();
+        	pollEvent_.signal(); // wake up the polling thread
     }
     else {
     	// Convert function to address & FpgaReg.
@@ -398,13 +398,13 @@ printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"ST
     		regSendBuf[1].data = (int32_t) value;
     		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
     		// Writable arrays are not also readable.
-    		if(chan == 0)
+    		if(chan == 0) // If not a writable array, send along a readback request
     		{
     			regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
     		}
     		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 
-    		if(chan== 0)
+    		if(chan== 0) // Probably not a writable array
     		{
     			_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
     		}
@@ -709,16 +709,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 {
 	if(regBuffer == NULL || regBuffCount < 5)
 	{
-		  void *array[10];
-		  size_t size;
-
-		  // get void*'s for all entries on the stack
-		  size = backtrace(array, 10);
-
-		  // print out all the frames to stderr
 		  fprintf(stderr, "Problem with send request. regBuffCount = %d:\n", regBuffCount);
-		  backtrace_symbols_fd(array, size, STDERR_FILENO);
-
 		  epicsThreadSuspendSelf();
 	}
 	size_t writtenCount;
@@ -809,6 +800,7 @@ asynStatus scllrfAsynPortDriver::wakeupReader()
 	return asynSuccess;
 }
 
+// Most of the main loop is network error handling, signaling, network details.
 void scllrfAsynPortDriver::responseHandler()
 {
 	asynStatus status;

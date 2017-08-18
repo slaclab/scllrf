@@ -154,6 +154,8 @@ if __name__ == "__main__":
                         v['bits'] = { "Ch0": 0, "Ch1": 1, "Ch2": 2, "Ch3": 3, "Ch4": 4, "Ch5": 5, "Ch6": 6, "Ch7": 7, "Ch8": 8, "Ch9": 9, "Ch10": 10, "Ch11": 11, }
                     if 'trace_keep' in k:
                         v['bits'] = { "Ch0": 0, "Ch1": 1, "Ch2": 2, "Ch3": 3, "Ch4": 4, "Ch5": 5, "Ch6": 6, "Ch7": 7 }
+                    if 'circle_buf_stop' in k:
+                        v['bits'] = { "stop_c0_buf": 0, "stop_c1_buf": 1 }
                     regmap_dict['registers'].append(v)
 
     makeDirectory(regmap_dict)

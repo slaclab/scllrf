@@ -49,6 +49,9 @@ const char *${name}Driver::${p.name.title().replace("_", "")}RString = "${p.name
         ## exclude arrays with > 32 elements from polling
         #set $count_inc = 0 
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
+//const unsigned int ${p.name.title().replace("_", "")}BufRegCount = $p.nelm;
+//const unsigned int ${p.name.title().replace("_", "")}ReqSegmentCount = (${p.name.title().replace("_", "")}BufRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up;
+//const unsigned int ${p.name.title().replace("_", "")}ReqMsgSize = ${p.name.title().replace("_", "")}BufRegCount + ${p.name.title().replace("_", "")}ReqSegmentCount; // All register addresses plus nonce space
       #else if bool(re.search(r'U\d|lspi', $p.name))
         ## exclude registers with side effectes from polling
         #set $count_inc = 0
@@ -112,10 +115,10 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 #import re
 #for $p in sorted($registers, key=lambda k: k['name'])
 #if $p.has_key('nelm') and $p.nelm>32
-  #if ($p.has_key('bit_width') and ($p.bit_width == 16)) or ($p.has_key('data_width') and ($p.data_width == 16))
-    createParam(${p.name.title().replace("_", "")}WavString, asynParamInt16Array, &p_${p.name.title().replace("_", "")}Wav);
-  #else if ($p.has_key('bit_width') and ($p.bit_width == 8)) or ($p.has_key('data_width') and ($p.data_width == 8))
+  #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
     createParam(${p.name.title().replace("_", "")}WavString, asynParamInt8Array, &p_${p.name.title().replace("_", "")}Wav);
+  #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+    createParam(${p.name.title().replace("_", "")}WavString, asynParamInt16Array, &p_${p.name.title().replace("_", "")}Wav);
   #else
     createParam(${p.name.title().replace("_", "")}WavString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}Wav);
   #end if
@@ -412,7 +415,13 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			index = pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr;
 			buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
+#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+			doCallbacksInt8Array(buf${p.name.title().replace("_", "")}, $p.nelm, p_${p.name.title().replace("_", "")}Wav, 0);
+#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+			doCallbacksInt16Array(buf${p.name.title().replace("_", "")}, $p.nelm, p_${p.name.title().replace("_", "")}Wav, 0);
+#else
 			doCallbacksInt32Array(buf${p.name.title().replace("_", "")}, $p.nelm, p_${p.name.title().replace("_", "")}Wav, 0);
+#end if
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: echo for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), (unsigned ) pFromFpga->data $maskStr);
