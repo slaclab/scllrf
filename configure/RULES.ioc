@@ -1,6 +1,5 @@
 #RULES.ioc
 include $(CONFIG)/RULES.ioc
-
 IOCNAME := $(shell $(PERL) $(TOP)/configure/IocName.pl)
 STARTUP_FILES += $(TARGETS)
 #Automatically add st.cmd to files to be installed if it exists

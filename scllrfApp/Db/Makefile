@@ -38,18 +38,18 @@ endif
 
 # =======================================================================
 # Install to deployment dir (eg. PROD)
-DB_INSTALLS += scllrfCommon.template
-DB_INSTALLS += scllrfINTRegisters.template
-DB_INSTALLS += scllrfPRCRegisters.template
-DB_INSTALLS += scllrfRESRegisters.template
-DB_INSTALLS += RESextra.db
+DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfCommon.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfINTRegisters.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfPRCRegisters.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfRESRegisters.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/RESextra.db
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
-DB_INSTALLS += ZZZextra.template
-DB_INSTALLS += STMPextra.template
-DB_INSTALLS += ARCTextra.template
-DB_INSTALLS += CPLTextra.template
-DB_INSTALLS += HELLextra.template
-#DB_INSTALLS += lbnl_test_jsonRegisters.db
+DB_INSTALLS += $(TOP)/scllrfApp/Db/ZZZextra.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/STMPextra.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/ARCTextra.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/CPLTextra.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/HELLextra.template
+#DB_INSTALLS += $(TOP)/scllrfApp/Db/lbnl_test_jsonRegisters.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

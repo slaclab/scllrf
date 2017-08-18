@@ -20,7 +20,7 @@ w ${30+236*$regcount}
 #else
 w 1220
 #end if
-h ${63 + ($regcount/5)*355}
+h ${63 + (1+$regcount/5)*355}
 font "helvetica-medium-r-12.0"
 ctlFont "helvetica-bold-r-14.0"
 ctlFontAlign "center"
@@ -177,7 +177,7 @@ h 288
 controlPv "\$(P)${p.name.upper()}_W"
 lineColor index 14
 onColor index 55
-offColor index 47
+offColor index 57
 endObjectProperties
 
 \# (Message Button)
@@ -433,7 +433,7 @@ h 288
 controlPv "\$(P)${p.name.upper()}_R"
 lineColor index 14
 onColor index 55
-offColor index 47
+offColor index 57
 endObjectProperties
 
 \# (Message Button)

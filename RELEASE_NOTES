@@ -9,9 +9,7 @@
 #  Auth: xx-Dec-2012, XXX         (xxx)
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
-icdTemplates-R1-2-1: Fixed errors, added missing database files, updated st.cmd @common
 
-icdTemplates-R1-2-0: For EPICS BASE: R3-14-12-4_1-0
-
-icdTemplates-R1-0-1: First official release to be consumed.
-                     EPICS BASE: R3-14-12-3_1-0
+scllrf-R1-0-3: RFS waveforms scale with number of samples per point.
+               Calculating average of amplitude and phase waveforms, and
+               offering waveforms which average N previous waveforms.

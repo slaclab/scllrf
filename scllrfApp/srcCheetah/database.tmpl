@@ -11,21 +11,21 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
-    field( SCAN, "I/O Intr")
+	field( PINI, "NO")
+	field( DTYP, "asynInt32")
+	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+	field( SCAN, "I/O Intr")
     #if $p.has_key('range_top')
-    field( HOPR, "${p.range_top}")
+	field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
-    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
     #else if $p.has_key('data_width')
-    field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
     #end if
     #if $p.has_key('range_bottom')
-    field( LOPR, "${p.range_bottom}")
+	field( LOPR, "${p.range_bottom}")
     #else if $p.has_key('bit_width') or $p.has_key('data_width')
-    field( LOPR, 0)
+	field( LOPR, 0)
     #end if
 	#if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -38,13 +38,13 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#else
 	field(PREC, 3)
 	#end if
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
-    field( SCAN, "Passive")
+	field( DTYP, "asynInt32")
+	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+	field( SCAN, "Passive")
 }
 
     #end if
@@ -63,21 +63,21 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	  #if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	  #end if
-    field( PINI, "NO")
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
-    field( SCAN, "Passive")
+	field( PINI, "NO")
+	field( DTYP, "asynInt32")
+	field( OUT,  "@asyn(\$(PORT),0) ${p.name.upper()}_W")
+	field( SCAN, "Passive")
       #if $p.has_key('range_top')
-    field( HOPR, "${p.range_top}")
+	field( HOPR, "${p.range_top}")
       #else if $p.has_key('bit_width')
-    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
       #else if $p.has_key('data_width')
-    field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
       #end if
 	  #if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
       #else if $p.has_key('bit_width') or $p.has_key('data_width')
-    field( LOPR, 0)
+	field( LOPR, 0)
 	  #end if
 	  #if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -90,7 +90,7 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	  #else
 	field(PREC, 3)
 	  #end if
-    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
     #end if
@@ -156,21 +156,21 @@ record(ao, "\$(P)${p.name.upper()}_W${i}")
 	  #if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	  #end if
-  field( PINI, "NO")
-  field( DTYP, "asynInt32")
-  field( OUT,  "@asyn(\$(PORT),${i}) ${p.name.upper()}_W")
-  field( SCAN, "Passive")
-    #if $p.has_key('range_top')
-  field( HOPR, "${p.range_top}")
-    #else if $p.has_key('bit_width')
-  field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
-    #else if $p.has_key('data_width')
-  field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
-    #end if
+	field( PINI, "NO")
+	field( DTYP, "asynInt32")
+	field( OUT,  "@asyn(\$(PORT),${i}) ${p.name.upper()}_W")
+	field( SCAN, "Passive")
+      #if $p.has_key('range_top')
+	field( HOPR, "${p.range_top}")
+      #else if $p.has_key('bit_width')
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+      #else if $p.has_key('data_width')
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+      #end if
 	  #if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-    #else if $p.has_key('bit_width') or $p.has_key('data_width')
-  field( LOPR, 0)
+      #else if $p.has_key('bit_width') or $p.has_key('data_width')
+	field( LOPR, 0)
 	  #end if
 	  #if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -204,24 +204,24 @@ record(mbbiDirect, "\$(P)${p.name.upper()}_R")
 	  #if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	  #end if
-    field( PINI, "NO")
-    field( DTYP, "asynUInt32Digital")
+	field( PINI, "NO")
+	field( DTYP, "asynUInt32Digital")
       #if $p.has_key('bit_width')
-    field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
-    field( NOBT, "$p.bit_width")
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
+	field( NOBT, "$p.bit_width")
       #else if $p.has_key('data_width')
-    field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
-    field( NOBT, "$p.data_width")
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
+	field( NOBT, "$p.data_width")
       #else
-    field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
+	field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
       #end if
-    field( SCAN, "I/O Intr")
+	field( SCAN, "I/O Intr")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
-    field( DTYP, "asynInt32")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
-    field( SCAN, "Passive")
+	field( DTYP, "asynInt32")
+	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+	field( SCAN, "Passive")
 }
 
     #end if
@@ -240,19 +240,19 @@ record(mbboDirect, "\$(P)${p.name.upper()}_W")
 	  #if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	  #end if
-    field( PINI, "NO")
-    field( DTYP, "asynUInt32Digital")
-#if $p.has_key('bit_width')
-    field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
-    field( NOBT, "$p.bit_width")
-#else if $p.has_key('data_width')
-    field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
-    field( NOBT, "$p.data_width")
-#else
-    field( OUT,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_W")
-#end if
-    field( SCAN, "Passive")
-    info( autosaveFields, "DESC")
+	field( PINI, "NO")
+	field( DTYP, "asynUInt32Digital")
+	  #if $p.has_key('bit_width')
+	field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
+	field( NOBT, "$p.bit_width")
+	  #else if $p.has_key('data_width')
+	field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
+	field( NOBT, "$p.data_width")
+	  #else
+	field( OUT,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_W")
+	  #end if
+	field( SCAN, "Passive")
+	info( autosaveFields, "DESC")
 }
 
     #end if
@@ -271,34 +271,50 @@ record(waveform, "\$(P)${p.name.upper()}_R")
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
-    field( PINI, "NO")
+	field( PINI, "NO")
     #if $p.has_key('dtype') and ($p.dtype == "string")
-    field( DTYP, "asynOctetRead")
-    field( FTVL, "CHAR")
+	field( DTYP, "asynOctetRead")
+	field( FTVL, "CHAR")
     #else
-    field( DTYP, "asynInt32ArrayIn")
-      #if $p.has_key('signed') and ($p.signed == 'unsigned')
-    field( FTVL, "ULONG")
+      #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	field( DTYP, "asynInt8ArrayIn")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "UCHAR")
+        #else
+	field( FTVL, "CHAR")
+        #end if
+      #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	field( DTYP, "asynInt16ArrayIn")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "USHORT")
+        #else
+	field( FTVL, "SHORT")
+        #end if
       #else
-    field( FTVL, "LONG")
+	field( DTYP, "asynInt32ArrayIn")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "ULONG")
+        #else
+	field( FTVL, "LONG")
+        #end if
       #end if
     #end if
-    field( NELM, "${p.nelm}")
+	field( NELM, "${p.nelm}")
 	field( SCAN, "I/O Intr")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
+	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
     #if $p.has_key('range_top')
-    field( HOPR, "${p.range_top}")
+	field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
-    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
     #else if $p.has_key('data_width')
-    field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
     #end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
     #else if $p.has_key('bit_width') or $p.has_key('data_width')
-    field( LOPR, 0)
+	field( LOPR, 0)
 	#end if
-    info( autosaveFields, "DESC EGU HOPR LOPR PREC")
+	info( autosaveFields, "DESC EGU HOPR LOPR PREC")
 }
 
   #end if
@@ -315,33 +331,49 @@ record(waveform, "\$(P)${p.name.upper()}_W")
 	#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
 	#end if
-    field( PINI, "NO")
+	field( PINI, "NO")
     #if $p.has_key('dtype') and ($p.dtype == "string")
-    field( DTYP, "asynOctetRead")
-    field( FTVL, "CHAR")
+	field( DTYP, "asynOctetRead")
+	field( FTVL, "CHAR")
     #else
-    field( DTYP, "asynInt32ArrayOut")
-      #if $p.has_key('signed') and ($p.signed == 'unsigned')
-    field( FTVL, "ULONG")
+      #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	field( DTYP, "asynInt8ArrayOut")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "UCHAR")
+        #else
+	field( FTVL, "CHAR")
+        #end if
+      #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	field( DTYP, "asynInt16ArrayOut")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "USHORT")
+        #else
+	field( FTVL, "SHORT")
+        #end if
       #else
-    field( FTVL, "LONG")
+	field( DTYP, "asynInt32ArrayOut")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "ULONG")
+        #else
+	field( FTVL, "LONG")
+        #end if
       #end if
     #end if
-    field( NELM, "${p.nelm}")
-    field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
+	field( NELM, "${p.nelm}")
+	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
     #if $p.has_key('range_top')
-    field( HOPR, "${p.range_top}")
+	field( HOPR, "${p.range_top}")
     #else if $p.has_key('bit_width')
-    field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
     #else if $p.has_key('data_width')
-    field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
     #end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
     #else if $p.has_key('bit_width') or $p.has_key('data_width')
-    field( LOPR, 0)
+	field( LOPR, 0)
 	#end if
-    info( autosaveFields, "DESC EGU HOPR LOPR PREC")
+	info( autosaveFields, "DESC EGU HOPR LOPR PREC")
 }
 
   #end if
@@ -351,10 +383,10 @@ record(waveform, "\$(P)${p.name.upper()}_W")
   #for $c in $commands
 record(longout, "\$(P)C_${c.name.upper()}")
 {
-    field( DTYP, "asynInt32")
-    field( OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
-    field( SCAN, "I/O Intr")
-    info( autosaveFields, "DESC")
+	field( DTYP, "asynInt32")
+	field( OUT,  "@asyn(\$(PORT),0) C_${c.name.upper()}")
+	field( SCAN, "I/O Intr")
+	info( autosaveFields, "DESC")
 }
 
   #end for

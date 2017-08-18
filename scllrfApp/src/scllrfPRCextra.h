@@ -27,86 +27,138 @@
  * ----------------------------------------------------------------------------
 **/
 #include "scllrfPRC.h"
+#include <math.h>
 
-static const unsigned maxChannel = 1024; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
+class scllrfPRCextra;
 
-// Waveform data is packed as 2D arrays, not one after the other
-// in the network data. See cmoc code "submodules/common_hdl/circle.txt" for more details.
-// Summary: (array 1, data 1 and 2), (array 2, data 1 and 2), (array 3, data 1 and 2)....
-// Addressing: I/Q waveforms base address = 0x140000
-	// additional base offsets, calculated from npt = 1 << ((trace_status >> 24) & 0x3F)
-	//   0 * npt  16-bit I and Q
-	//   1 * npt  16-bit I and Q
-	//   2 * npt  22-bit I
-	//   3 * npt  22-bit Q
-static const uint32_t traceIQWavesStart = 0x140000; // From FPGA design, base address
-static const uint32_t traceIQWavesEnd = 0x14ffff; // max possible
-static const unsigned traceIQWaveRegCount = traceIQWavesEnd - traceIQWavesStart + 1;
-static const unsigned maxTraceIQWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
-static const unsigned traceIQWaveBuffSize = traceIQWaveRegCount/4 + traceIQWaveRegCount/(maxMsgSize-sizeof(FpgaReg)); // divide by number of buffers
-/**< Waveform buffer is read in waveSegmentCount segments due to network packet size limits.
- *  1+ is an approximation of "round upwards". -sizeof(FpgaReg) makes space for the nonce */
-static const unsigned traceIQWaveSegmentCount = 1 + (sizeof(FpgaReg) * traceIQWaveBuffSize)
-				/ (maxMsgSize - sizeof(FpgaReg));
+class CircleWave
+{
+	// ----  Waveform data at 0x170000 to 0x170fff, "circle buffer" llrfCircleData  ----
+	//
+	// digDspCircleBufFlip register: write 1 to bit 0 or bit 1 to flip between the buffer
+	// with ready data and the buffer that is filling, for cavities 0 or 1 respectively.
+	//
+	// LlrfCircleReady register: bits 0 or 1 indicate that the active buffer is full
+	// and ready to be read
+	//
+	// digDspMuxShell0DspChanKeep, digDspMuxShell1DspChanKeep: status data that correlates with the
+	// waveforms, should be read at the same time.
+	//
+	// The sequence would be to wait for the bits in the LlrfCircleReady register to be set,
+	// read the corresponding buffer, read digDspMuxShell*DspChanKeep, then write a 1 to the
+	// bit in digDspCircleBufFlip to indicate that you're done reading that buffer
+	// and ready for data from the next
+	//
+	// Data is two 16 bit signed values per 32 bit register
+	// First 16 is for one cavity, second for another cavity
+	//
+	// digDspMuxShell0DspChanKeep digDspMuxShell1DspChanKeep, 12 bits to activate I or Q for 6 channels
+	// Each of the above registers looks like:
+	// msb _________________________________________________________________________________________ lsb
+	// | Ch5 Q | Ch5 I | Ch4 Q | Ch4 I | Ch3 Q | Ch3 I | Ch2 Q | Ch2 I | Ch1 Q | Ch1 I | Ch0 Q | Ch0 I |
+	// -------------------------------------------------------------------------------------------------
+	// Data is interleaved, based on the number of active channels. For example C1 has Ch5 and 4 I/Q enabled,
+	// it would be packed like:
+	// |   C1 Ch4 I
+	// |   C1 Ch4 Q
+	// |   C1 Ch5 I
+	// |   C1 Ch5 Q
+	// |   C1 Ch4 I
+	// |   C1 Ch4 Q
+	// .....
+	//
+public:
 
-/**< Size of each segment, in number of registers */
-static const unsigned traceIQWaveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
-//		+ (waveBuffSize + waveSegmentCount) / waveSegmentCount;
+	static const unsigned maxWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
+	static const unsigned reqBufSegmentCount; // # of UDP requests, divide and round up
+	static const unsigned reqMsgSize; // All register addresses plus nonce space
+	static const unsigned slowDataBuffRegCount; // 128 registers
+	static const unsigned slowDataBuffSize; // 128 registers and the nonce
+	static const unsigned circleBufRegCount=scllrfPRCDriver::Shell0CircleDataBufRegCount;  // This will be ok as long as register map has same size for shell 0 and 1
 
-static const double LOfrequency = 1.320e9;
-static const double ADCfrequency = LOfrequency/14;
+	static const unsigned CIC_PERIOD;
+	static const unsigned SHIFT_BASE;
+	static const float CLK_FREQ;
+    static const float cordicGain;
+    static const float firGain;
+    static const float phaseOffFast;
+    static const float phaseOffSlow;
+    static const float phaseOffDAC;
+    static const float phaseOffLoop;
+	static const unsigned SLOW_OFFSET;
 
-/* Registers */
+	CircleWave(scllrfPRCextra *pDriver, unsigned int waveAddr, unsigned int slowAddr,
+			int *rawParamIndex, int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
+			int *iFaultParamIndex, int *qFaultParamIndex, int *aFaultParamIndex, int *pFaultParamIndex, int *slowDataParamIndex,
+			int *circleCountParamIndex, int *circleStatParamIndex, int *minsParamIndex, int *maxsParamIndex, int *tagNowParamIndex,
+			int *tagOldParamIndex, int *timeStampHighParamIndex, int *timeStampLowParamIndex,
+			epicsInt32 *readBuffer, FpgaReg *requestMsg, epicsUInt8 *slowData, FpgaReg *reqSlowDataMsg);
 
-// I and Q waveforms
-static const char *WaveformI16BitString = "WAVEFORM_I_16_BIT";
-static const char *WaveformQ16BitString = "WAVEFORM_Q_16_BIT";
-static const char *WaveformI22BitString = "WAVEFORM_I_22_BIT";
-static const char *WaveformQ22BitString = "WAVEFORM_Q_22_BIT";
+	void ReqCircIQBuf();
+	int CalcWaveScale(int32_t wave_samp_per);
 
-// Amplitude and Phase waveforms
-static const char *WaveformA16BitString = "WAVEFORM_A_16_BIT";
-static const char *WaveformP16BitString = "WAVEFORM_P_16_BIT";
-static const char *WaveformA22BitString = "WAVEFORM_A_22_BIT";
-static const char *WaveformP22BitString = "WAVEFORM_P_22_BIT";
+	unsigned int nChan_;
+	epicsUInt32 chanKeep_;
+	epicsInt32* waveReadback_;
+	uint32_t GetEndAddr(){return regEndAddr_;}
+	asynStatus ProcessCircIQBufReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
+	asynStatus ProcessSlowDataReadback(const FpgaReg *pFromFpga); // parse register data, write to various parameters
+	unsigned int nextTag(){tag_ = ((tag_+1-4) % (unsigned int) pow(2,7))+4; return tag_;};
 
-// Binary 0 for 22 bit data, 1 for 16 bit data
-static const char *IQBitWidthString = "I_Q_BIT_WIDTH";
-// Number of active waveforms, from 0 to 8
-static const char *IQNActiveString = "I_Q_N_ACTIVE";
-// A buffer holds all active waveforms while remaining the same size.
-// NELM is the size of each active waveform, so NELM * N_ACTIVE = total bufffer size
-static const char *IQ16BitNELMString = "I_Q_16BIT_NELM";
-static const char *IQ22BitNELMString = "I_Q_22BIT_NELM";
+private:
+	scllrfPRCextra *pDriver_;
+	FpgaReg *pRequestMsg_; // Canned message to request data buffer
+	bool readInProgress_;
+	uint32_t regStartAddr_;
+	uint32_t regEndAddr_;
+	int *iParamIndex_;
+	int *qParamIndex_;
+	int *aParamIndex_;
+	int *pParamIndex_;
+	int *iFaultParamIndex_;
+	int *qFaultParamIndex_;
+	int *aFaultParamIndex_;
+	int *pFaultParamIndex_;
+	int *rawParamIndex_;
+	int *slowDataParamIndex_;
+    int *circleCountParamIndex_;
+    int *circleStatParamIndex_;
+    int *minsParamIndex_;
+    int *maxsParamIndex_;
+    int *tagNowParamIndex_;
+    int *tagOldParamIndex_;
+    int *timeStampHighParamIndex_;
+    int *timeStampLowParamIndex_;
+	epicsUInt16 faultAddr_; // When there's a fault, this is the offset of the end of fault data.
+    bool fault_; // If true, the buffer contains a fault waveform
+    bool wrap_; // If false, the fault waveform is the previously read buffer
+               // plus the current buffer up to faultAddr.
+               // If true, the fault waveform is only the current buffer, starting
+               // from faultAddr+1 to circleBufRegCount and wrapping around to
+               // 0 to faultAddr.
+    bool tagMismatch_; // if tagOld != tagNew, put up this flag and drop data
 
-// Circle buffer I/Q data
-static const char *Circ0NActiveString = "CIRC_0_N_ACTIVE";
-static const char *Circ1NActiveString = "CIRC_1_N_ACTIVE";
-static const char *CircIQBuf0IString = "CIRC_IQ_BUF_0_I";
-static const char *CircIQBuf0QString = "CIRC_IQ_BUF_0_Q";
-static const char *CircIQBuf0AString = "CIRC_IQ_BUF_0_A";
-static const char *CircIQBuf0PString = "CIRC_IQ_BUF_0_P";
-static const char *CircIQBuf1IString = "CIRC_IQ_BUF_1_I";
-static const char *CircIQBuf1QString = "CIRC_IQ_BUF_1_Q";
-static const char *CircIQBuf1AString = "CIRC_IQ_BUF_1_A";
-static const char *CircIQBuf1PString = "CIRC_IQ_BUF_1_P";
+	// slow data:
+	unsigned int lastCount_, newCount_, tag_;
+	int16_t mins_[3];
+	int16_t maxs_[3];
+	uint64_t timeStamp_;
+	epicsUInt8 *slowData_;
+	FpgaReg *pReqSlowDataMsg_; // Canned message to request slow data buffer
+	uint32_t slowAddr_;
+	epicsFloat32 gain_;
 
-static const char *Shell0CircleCountRString = "SHELL_0_CIRCLE_COUNT_R";
-static const char *Shell0CircleStatRString = "SHELL_0_CIRCLE_STAT_R";
-static const char *Shell0MmRString = "SHELL_0_MM_R";
-static const char *Shell0TagNowRString = "SHELL_0_TAG_NOW_R";
-static const char *Shell0TagOldRString = "SHELL_0_TAG_OLD_R";
-static const char *Shell0TimeStampHighRString = "SHELL_0_TIME_STAMP_HIGH_R";
-static const char *Shell0TimeStampLowRString = "SHELL_0_TIME_STAMP_LOW_R";
 
-static const char *Shell1CircleCountRString = "SHELL_1_CIRCLE_COUNT_R";
-static const char *Shell1CircleStatRString = "SHELL_1_CIRCLE_STAT_R";
-static const char *Shell1MmRString = "SHELL_1_MM_R";
-static const char *Shell1TagNowRString = "SHELL_1_TAG_NOW_R";
-static const char *Shell1TagOldRString = "SHELL_1_TAG_OLD_R";
-static const char *Shell1TimeStampHighRString = "SHELL_1_TIME_STAMP_HIGH_R";
-static const char *Shell1TimeStampLowRString = "SHELL_1_TIME_STAMP_LOW_R";
-
+	//	epicsInt32 bufShell0CircleData[circleBufRegCount]; from generated code
+	//	epicsInt32 bufShell1CircleData[circleBufRegCount]; from generated code
+	epicsInt32 pIQBuf_[maxWavesCount][circleBufRegCount]; // Data mapped into channels, I/Q separated
+	epicsFloat32 pABuf_[maxWavesCount/2][circleBufRegCount]; // Amplitude data channels
+	epicsFloat32 pPBuf_[maxWavesCount/2][circleBufRegCount]; // Phase data channels
+	// Fault waveforms hold up to twice as much as the regular buffer, in case digitizing hasn't wrapped
+	epicsInt32 pIQFaultBuf_[maxWavesCount][circleBufRegCount*2]; // fault data mapped into channels, I/Q separated
+	epicsFloat32 pAFaultBuf_[maxWavesCount/2][circleBufRegCount*2]; // Amplitude fault data channels
+	epicsFloat32 pPFaultBuf_[maxWavesCount/2][circleBufRegCount*2]; // Phase fault data channels
+};
 
 class scllrfPRCextra: public scllrfPRCDriver
 {
@@ -114,15 +166,115 @@ public:
 	scllrfPRCextra(const char *drvPortName, const char *netPortName);
 	virtual ~scllrfPRCextra();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+	virtual asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
+
+
+	static const unsigned maxChannel; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
+
+	// Waveform data is packed as 2D arrays, not one after the other
+	// in the network data. See cmoc code "submodules/common_hdl/circle.txt" for more details.
+	// Summary: (array 1, data 1 and 2), (array 2, data 1 and 2), (array 3, data 1 and 2)....
+	// Addressing: I/Q waveforms base address = 0x140000
+		// additional base offsets, calculated from npt = 1 << ((trace_status >> 24) & 0x3F)
+		//   0 * npt  16-bit I and Q
+		//   1 * npt  16-bit I and Q
+		//   2 * npt  22-bit I
+		//   3 * npt  22-bit Q
+	static const uint32_t traceIQWavesStart = 0x140000; // From FPGA design, base address
+	static const uint32_t traceIQWavesEnd = 0x14ffff; // max possible
+	static const unsigned traceIQWaveRegCount = traceIQWavesEnd - traceIQWavesStart + 1;
+	static const unsigned maxTraceIQWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
+	static const unsigned traceIQWaveBuffSize = traceIQWaveRegCount/4 + traceIQWaveRegCount/(maxMsgSize-sizeof(FpgaReg)); // divide by number of buffers
+	/**< Waveform buffer is read in waveSegmentCount segments due to network packet size limits.
+	 *  1+ is an approximation of "round upwards". -sizeof(FpgaReg) makes space for the nonce */
+	static const unsigned traceIQWaveSegmentCount = (traceIQWaveRegCount/4 + maxRegPerMsg -1)/maxRegPerMsg;
+
+	/**< Size of each segment, in number of registers */
+	static const unsigned traceIQWaveSegmentSize = (maxMsgSize/sizeof(FpgaReg));
+	//		+ (waveBuffSize + waveSegmentCount) / waveSegmentCount;
+
+	static const double LOfrequency;
+	static const double ADCfrequency;
+	static const char *IfFreqString;
+
+	/* Registers */
+
+	// I and Q waveforms
+	static const char *WaveformI16BitString;
+	static const char *WaveformQ16BitString;
+	static const char *WaveformI22BitString;
+	static const char *WaveformQ22BitString;
+
+	// Amplitude and Phase waveforms
+	static const char *WaveformA16BitString;
+	static const char *WaveformP16BitString;
+	static const char *WaveformA22BitString;
+	static const char *WaveformP22BitString;
+
+	// Binary 0 for 22 bit data, 1 for 16 bit data
+	static const char *IQBitWidthString;
+	// Number of active waveforms, from 0 to 8
+	static const char *IQNActiveString;
+	// A buffer holds all active waveforms while remaining the same size.
+	// NELM is the size of each active waveform, so NELM * N_ACTIVE = total bufffer size
+	static const char *IQ16BitNELMString;
+	static const char *IQ22BitNELMString;
+
+	// Circle buffer I/Q data
+	static const char *Circ0NActiveString;
+	static const char *Circ0BufChanEnableString;
+	static const char *CircIQBuf0IString;
+	static const char *CircIQBuf0QString;
+	static const char *CircIQBuf0AString;
+	static const char *CircIQBuf0PString;
+	static const char *CircIQFaultBuf0IString;
+	static const char *CircIQFaultBuf0QString;
+	static const char *CircIQFaultBuf0AString;
+	static const char *CircIQFaultBuf0PString;
+
+	static const char *Circ1NActiveString;
+	static const char *Circ1BufChanEnableString;
+	static const char *CircIQBuf1IString;
+	static const char *CircIQBuf1QString;
+	static const char *CircIQBuf1AString;
+	static const char *CircIQBuf1PString;
+	static const char *CircIQFaultBuf1IString;
+	static const char *CircIQFaultBuf1QString;
+	static const char *CircIQFaultBuf1AString;
+	static const char *CircIQFaultBuf1PString;
+
+	static const char *Shell0CircleCountRString;
+	static const char *Shell0CircleStatRString;
+	static const char *Shell0MinsRString;
+	static const char *Shell0MaxsRString;
+	static const char *Shell0TagNowRString;
+	static const char *Shell0TagOldRString;
+	static const char *Shell0TimeStampHighRString;
+	static const char *Shell0TimeStampLowRString;
+    static const char* Shell0TimeStepString;
+
+	static const char *Shell1CircleCountRString;
+	static const char *Shell1CircleStatRString;
+	static const char *Shell1MinsRString;
+	static const char *Shell1MaxsRString;
+	static const char *Shell1TagNowRString;
+	static const char *Shell1TagOldRString;
+	static const char *Shell1TimeStampHighRString;
+	static const char *Shell1TimeStampLowRString;
+    static const char* Shell1TimeStepString;
+
 
 	enum traceIQWavBitWidth { read22bit, read16bit };
 	void traceIQWaveformRequester(); // When signaled that waveforms are waiting, request them.
 	void circIQBufRequester(); // When signaled that waveforms are waiting, request them.
+	static const unsigned circleBufRegCount; // # data points for I or Q. Half the registers are I data, half Q
+	friend class ::CircleWave;
 
 protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
+	void testCannedResponse();
 
 	//// Bigger waveforms I/Q data
 	virtual asynStatus startTraceIQWaveformRequester(); // For system startup
@@ -149,90 +301,15 @@ protected:
 //	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
 
 
-	// ----  Waveform data at 0x170000 to 0x170fff, "circle buffer" llrfCircleData  ----
-	//
-	// digDspCircleBufFlip register: write 1 to bit 0 or bit 1 to flip between the buffer
-	// with ready data and the buffer that is filling, for cavities 0 or 1 respectively.
-	//
-	// LlrfCircleReady register: bits 0 or 1 indicate that the active buffer is full
-	// and ready to be read
-	//
-	// digDspMuxShell0DspChanKeep, digDspMuxShell1DspChanKeep: status data that correlates with the
-	// waveforms, should be read at the same time.
-	//
-	// The sequence would be to wait for the bits in the LlrfCircleReady register to be set,
-	// read the corresponding buffer, read digDspMuxShell*DspChanKeep, then write a 1 to the
-	// bit in digDspCircleBufFlip to indicate that you're done reading that buffer
-	// and ready for data from the next
-	//
-	// Data is two 16 bit signed values per 32 bit register
-	// First 16 is for one cavity, second for another cavity
-	//
-	// digDspMuxShell0DspChanKeep digDspMuxShell1DspChanKeep, 12 bits to activate I or Q for 6 channels
-	// Each of the above registers looks like:
-	// msb _________________________________________________________________________________________ lsb
-	// | Ch5 Q | Ch5 I | Ch4 Q | Ch4 I | Ch3 Q | Ch3 I | Ch2 Q | Ch2 I | Ch1 Q | Ch1 I | Ch0 Q | Ch0 I |
-	// -------------------------------------------------------------------------------------------------
-	// Data is interleaved, based on the number of active channels. For example, if C0 has Ch4 I/Q enabled,
-	// and C1 has Ch5 and 4 I/Q enabled, it would be packed like:
-	// | High 16 bits | Low 16 bits |
-	// |   C1 Ch4 I   |   C0 Ch4 I  |
-	// |   C1 Ch4 Q   |   C0 Ch4 Q  |
-	// |   C1 Ch5 I   |   C0 Ch4 I  |
-	// |   C1 Ch5 Q   |   C0 Ch4 Q  |
-	// |   C1 Ch4 I   |   C0 Ch4 I  |
-	// |   C1 Ch4 Q   |   C0 Ch4 Q  |
-	// .....
-	//
-	static const uint32_t circIQBufShell0End = Shell0CircleDataRAdr + sizeof(bufShell0CircleData)/sizeof(*bufShell0CircleData); // max possible
-	static const uint32_t circIQBufShell1End = Shell1CircleDataRAdr + sizeof(bufShell1CircleData)/sizeof(*bufShell1CircleData); // max possible
-	static const unsigned circIQBufWaveRegCount = sizeof(bufShell0CircleData)/sizeof(*bufShell0CircleData);
-	static const unsigned circIQBufWavePoints = circIQBufWaveRegCount; // # data points for I or Q. Half the registers are I data, half Q
-	static const unsigned maxCircIQBufWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
-	static const unsigned circIQBufSegmentCount = (circIQBufWaveRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up
-	static const unsigned circIQBufReqMsgSize = circIQBufWaveRegCount + circIQBufSegmentCount; // All register addresses plus nonce space
-	static const unsigned slowDataBuffRegCount = 128; // 128 registers
-	static const unsigned slowDataBuffSize = slowDataBuffRegCount + nonceSize; // 128 registers and the nonce
-
-	// Smaller waveforms I/Q data
-	virtual asynStatus startCircIQBufRequester(); // For system startup
-	FpgaReg pReqCircIQBufShell0Msg_[circIQBufReqMsgSize]; // Canned message to request data buffer
-	FpgaReg pReqCircIQBufShell1Msg_[circIQBufReqMsgSize]; // Canned message to request data buffer
-	FpgaReg pReqSlowBuf0Msg_[slowDataBuffSize]; // Canned message to request slow data buffer 0
-	FpgaReg pReqSlowBuf1Msg_[slowDataBuffSize]; // Canned message to request slow data buffer 1
-	unsigned int nCirc0Chan_;
-	unsigned int nCirc1Chan_;
-	void fillCircIQBufReqMsg();
-	void reqCircIQBuf(unsigned int shellNum);
 	epicsEvent reqCircIQBufEvent_; /**< Event to signal the waveform requester */
 	unsigned int newCircIQBufAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
 	unsigned int newCircIQBufRead_; /**< netSendCount for the most recent waveform */
 	unsigned int phaseStepH, phaseStepL, phaseModulo;
 	double iFrequency;
 
-	static const unsigned CIC_PERIOD;
-	static const unsigned SHIFT_BASE;
-	static const float CLK_FREQ;
-    static const char* WaveTimeStep;
-    static const float cordicGain;
-    static const float firGain;
-    static const float phaseOffFast;
-    static const float phaseOffSlow;
-    static const float phaseOffDAC;
-    static const float phaseOffLoop;
-	int calcWaveScale(int32_t wave_samp_per);
+	CircleWave shell0CircBuf_, shell1CircBuf_;
 
-//	epicsInt32 bufShell0CircleData[circIQBufWaveRegCount]; from generated code
-//	epicsInt32 bufShell1CircleData[circIQBufWaveRegCount]; from generated code
-	epicsInt32 pCircIQBuf0_[maxCircIQBufWavesCount][circIQBufWavePoints];
-	epicsInt32 pCircIQBuf1_[maxCircIQBufWavesCount][circIQBufWavePoints];
-	epicsFloat32 pCircIQBuf0A_[maxCircIQBufWavesCount/2][circIQBufWavePoints];
-	epicsFloat32 pCircIQBuf0P_[maxCircIQBufWavesCount/2][circIQBufWavePoints];
-	epicsFloat32 pCircIQBuf1A_[maxCircIQBufWavesCount/2][circIQBufWavePoints];
-	epicsFloat32 pCircIQBuf1P_[maxCircIQBufWavesCount/2][circIQBufWavePoints];
-
-	virtual asynStatus processCircIQBufReadback(const FpgaReg *pFromFpga, unsigned int shellNum); // parse register data, write to array PV
-
+	virtual asynStatus startCircIQBufRequester(); // For system startup
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
@@ -258,7 +335,9 @@ protected:
 
     // Circle buffer I/Q data
     int p_Circ0NActive;
+    int p_Circ0BufChanEnable;
     int p_Circ1NActive;
+    int p_Circ1BufChanEnable;
     int p_CircIQBuf0I;
     int p_CircIQBuf0Q;
     int p_CircIQBuf0A;
@@ -267,22 +346,36 @@ protected:
     int p_CircIQBuf1Q;
     int p_CircIQBuf1A;
     int p_CircIQBuf1P;
+    int p_CircIQFaultBuf0I;
+    int p_CircIQFaultBuf0Q;
+    int p_CircIQFaultBuf0A;
+    int p_CircIQFaultBuf0P;
+    int p_CircIQFaultBuf1I;
+    int p_CircIQFaultBuf1Q;
+    int p_CircIQFaultBuf1A;
+    int p_CircIQFaultBuf1P;
 
     int p_Shell0CircleCountR;
     int p_Shell0CircleStatR;
-    int p_Shell0MmR;
+    int p_Shell0MinsR;
+    int p_Shell0MaxsR;
     int p_Shell0TagNowR;
     int p_Shell0TagOldR;
     int p_Shell0TimeStampHighR;
     int p_Shell0TimeStampLowR;
+    int p_Shell0TimeStep;
 
     int p_Shell1CircleCountR;
     int p_Shell1CircleStatR;
-    int p_Shell1MmR;
+    int p_Shell1MinsR;
+    int p_Shell1MaxsR;
     int p_Shell1TagNowR;
     int p_Shell1TagOldR;
     int p_Shell1TimeStampHighR;
     int p_Shell1TimeStampLowR;
+    int p_Shell1TimeStep;
+
+    int p_IF; // intermediate frequency
 
     // Flag to indicate new waveform data is available
     int p_WvformsAvailableR;
