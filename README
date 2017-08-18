@@ -16,9 +16,14 @@
 #
 #==============================================================
 #
-# NOTE:
-# Please do not type make here !!
-# This module is only a template used by makeBaseApp.pl to create an EPICS IOC Application
+
+BUILDING: Requires code generated from register maps which are updated in scllrfApp/srcCheetah
+To generate this code:
+cd scllrfApp/srcCheetah
+make
+make copy
+
+Then return to TOP (cd ../..) and make
 
 This is the LLRF IOC for LLRF hardware using the network protocol from LBL for register
 access. This is not part of the LCLS-II "Common Platform". The messages are formatted like:
