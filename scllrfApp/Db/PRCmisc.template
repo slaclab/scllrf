@@ -292,7 +292,7 @@ record(waveform, "$(P)SHELL_0_SLOW_DATA_R") {
 
 record(calcout, "$(P)SHELL_0_X_NUSE")
 {
-  field(DESC, "More channels active -> shorter waveforms")
+  field(DESC, "More channels = shorter waveforms")
   field(INPA, "$(P)CIRC_0_N_ACTIVE CPP")
   field(CALC, "8192/A")
   field(OUT, "$(P)SHELL_0_CALCX.NUSE PP")
@@ -451,7 +451,7 @@ record(waveform, "$(P)SHELL_1_SLOW_DATA_R") {
 
 record(calcout, "$(P)SHELL_1_X_NUSE")
 {
-  field(DESC, "More channels active -> shorter waveforms")
+  field(DESC, "More channels = shorter waveforms")
   field(INPA, "$(P)CIRC_1_N_ACTIVE CPP")
   field(CALC, "8192/A")
   field(OUT, "$(P)SHELL_1_CALCX.NUSE PP")

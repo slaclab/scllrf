@@ -13,7 +13,7 @@
 # Normally CHECK_RELEASE should be set to YES.
 # Set CHECK_RELEASE to NO to disable checking completely.
 # Set CHECK_RELEASE to WARN to perform consistency checking but
-#   continue building anyway if conflicts are found.
+#   continue building even if conflicts are found.
 CHECK_RELEASE = YES
 
 # Set this when you only want to compile this application
@@ -24,23 +24,28 @@ CHECK_RELEASE = YES
 
 # If you only want to build for the host then uncomment the line below and no cross targets
 # will be built.  Remember EPICS will build for the HOST ARCH by default.
-CROSS_COMPILER_TARGET_ARCHS =
+CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86_64
 #CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linuxRT_glibc-x86_64 linux-x86
 
 # To install files into a location other than $(TOP) define
 #   INSTALL_LOCATION here.
-#INSTALL_LOCATION=</path/name/to/install/top>
+#INSTALL_LOCATION=</absolute/path/to/install/top>
 
-# Set this when your IOC and the host use different paths
-#   to access the application. This will be needed to boot
-#   from a Microsoft FTP server or with some NFS mounts.
-# You must rebuild in the iocBoot directory for this to
-#   take effect.
-#IOCS_APPL_TOP = </IOC/path/to/application/top>
-IOCS_APPL_TOP  = $(INSTALL_LOCATION)
+# Set this when the IOC and build host use different paths
+#   to the install location. This may be needed to boot from
+#   a Microsoft FTP server say, or on some NFS configurations.
+#IOCS_APPL_TOP = </IOC's/absolute/path/to/install/top>
 
-INSTALL_LOCATION_STARTUP += $(INSTALL_LOCATION)/startup
-DIRECTORY_TARGETS += $(INSTALL_LOCATION_STARTUP)
+# For application debugging purposes, override the HOST_OPT and/
+#   or CROSS_OPT settings from base/configure/CONFIG_SITE
+#HOST_OPT = NO
+#CROSS_OPT = NO
 
+# These allow developers to override the CONFIG_SITE variable
+# settings without having to modify the configure/CONFIG_SITE
+# file itself.
 SHARED_LIBRARIES=NO
 STATIC_BUILD=YES
+-include $(TOP)/../CONFIG_SITE.local
+-include $(TOP)/configure/CONFIG_SITE.local
+

@@ -1,4 +1,4 @@
-#!../../bin/linux-x86_64/scllrf
+#!../../bin/rhel6-x86_64/scllrf
 # Later will run as:
 #!../../bin/linuxRT-x86_64/scllrf
 ## You may have to change scllrf to something else

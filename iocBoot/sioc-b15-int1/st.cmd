@@ -1,4 +1,4 @@
-#!../../bin/linux-x86_64/scllrf
+#!../../bin/linuxRT-x86_64/scllrf
 # Later will run as:
 #!../../bin/linuxRT-x86_64/scllrf
 ## You may have to change scllrf to something else
@@ -48,7 +48,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # BEGIN: Load the record databases
 ##############################################################################
 < iocBoot/common/iocAdmin.cmd
-#< iocBoot/common/autoSaveConf.cmd
+< iocBoot/common/autoSaveConf.cmd
 
 # =====================================================================
 #Load Additional databases:

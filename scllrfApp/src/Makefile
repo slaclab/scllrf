@@ -25,7 +25,7 @@ ifneq ($(IOCADMIN),)
 scllrf_DBD += devIocStats.dbd
 endif
 ifneq ($(AUTOSAVE),)
-scllrf_DBD += autosaveSupport.dbd
+scllrf_DBD += asSupport.dbd
 endif
 ifneq ($(CAPUTLOG),)
 scllrf_DBD += caPutLog.dbd
@@ -38,11 +38,11 @@ scllrf_DBD += $(CEXP_DBDS)
 # ================================================================================
 scllrf_DBD += system.dbd
 
-scllrf_DBD += drvAsynIPPort.dbd
-scllrf_DBD += asynRecord.dbd
+#scllrf_DBD += drvAsynIPPort.dbd
+#scllrf_DBD += asynRecord.dbd
 scllrf_DBD += asyn.dbd
 scllrf_DBD += scllrfAsynPortDriver.dbd
-scllrf_DBD += aCalcoutRecord.dbd
+#scllrf_DBD += aCalcoutRecord.dbd
 scllrf_DBD += calcSupport.dbd
 
 # ======================================================================
@@ -126,9 +126,9 @@ scllrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 
-//USR_CXXFLAGS += -std=c++11
+#USR_CXXFLAGS += -std=c++11
 
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
-//USR_CXXFLAGS += -std=c++11
+#USR_CXXFLAGS += -std=c++11

@@ -1,5 +1,5 @@
 -include $(TOP)/configure/CONFIG_SITE
-
+USR_CXXFLAGS += -std=c++11
 # For Build Type: x86_64-glibc-linux
 # #
 LINUX_VERSION=rhel6-linux

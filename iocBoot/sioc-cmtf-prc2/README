@@ -8,7 +8,7 @@ CONFIGURATION
 There are a series of environment variables at the top of st.cmd. The comments
 there describe how to use them and what valid values are.
 
-If your system architecture isn't linux-x86_64, change #! at the top of st.cmd if
+If your system architecture isn't linuxRT-x86_64, change #! at the top of st.cmd if
 you want to start the IOC by invoking ./st.cmd. If you're runnign and building on
 the same machine, use ../../bin/[architecture name].
 

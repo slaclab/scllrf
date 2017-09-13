@@ -1,15 +1,9 @@
-#include "base.dbd"
-#include "asyn.dbd"
 registrar("scllrfAsynPortDriverRegister")
 registrar("scllrfPRCextraRegister")
 registrar("scllrfRESextraRegister")
 registrar("scllrfRESRegister")
 registrar(scllrfINTRegister)
-#..............registrar(INTres2tmpRegister)
 registrar(INTres2tmp_reg)
 registrar(INTmbboCopyRegistrar)
 registrar(INTarcTestRegistrar)
 registrar(INTheLevelRegistrar)
-#.......................function(INTres2tmpInit)
-#.......................function(INTres2tmpProc)
-#registrar(lbnl_test_jsonRegister)
