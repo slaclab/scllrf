@@ -38,12 +38,11 @@ scllrf_DBD += $(CEXP_DBDS)
 # ================================================================================
 scllrf_DBD += system.dbd
 
-#scllrf_DBD += drvAsynIPPort.dbd
-#scllrf_DBD += asynRecord.dbd
+scllrf_DBD += drvAsynIPPort.dbd
 scllrf_DBD += asyn.dbd
 scllrf_DBD += scllrfAsynPortDriver.dbd
-#scllrf_DBD += aCalcoutRecord.dbd
 scllrf_DBD += calcSupport.dbd
+scllrf_DBD += ether_ip.dbd
 
 # ======================================================================
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
@@ -66,13 +65,16 @@ scllrf_SRCS_vxWorks += -nil-
  scllrf_SRCS += scllrfPRCextra.cpp
  scllrf_SRCS += scllrfRES.cpp
  scllrf_SRCS += scllrfRESextra.cpp
+ scllrf_SRCS += GUNB.cpp
  scllrf_SRCS += INTmbboCopy.st
  scllrf_SRCS += INTres2tmp.c
  scllrf_SRCS += INTarcTest.st
  scllrf_SRCS += INTheLevel.st
- #scllrf_SRCS += lbnl_test_jsonDriver.cpp
- #USR_CXXFLAGS += -std=c++0x
-USR_CXXFLAGS += -g -rdynamic
+ scllrf_SRCS += BMB7Sup.c
+# scllrf_SRCS += cavity_fit.cc
+#scllrf_SRCS += lbnl_test_jsonDriver.cpp
+#USR_CXXFLAGS += -std=c++0x
+USR_CXXFLAGS += -g -rdynamic -I$(TOP)/scllrfApp/src/newmat10
 # =====================================================
 # Link in the code from other libraries
 # =====================================================
@@ -97,6 +99,7 @@ scllrf_LIBS += $(CEXP_LIBS)
 scllrf_LIBS += asyn
 scllrf_LIBS += calc
 scllrf_LIBS += sscan
+scllrf_LIBS += ether_ip
 
 # =====================================================
 # END EVR libraries

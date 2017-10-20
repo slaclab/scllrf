@@ -13,6 +13,8 @@ include $(TOP)/configure/CONFIG
 DB += cmocRegisters.db
 DB += cmocWaveforms.db
 DB += PRCextra.db
+DB += BMB7monitor.db
+DB += cryo-plc.db
 
 # Install Common databases needed by All IOCs
 # ========================================================
@@ -42,6 +44,7 @@ DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfCommon.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfINTRegisters.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfPRCRegisters.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfRESRegisters.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/GUNBRegisters.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/RESextra.db
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
 DB_INSTALLS += $(TOP)/scllrfApp/Db/ZZZextra.template
