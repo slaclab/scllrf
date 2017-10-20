@@ -47,7 +47,7 @@ public:
   #if (not $p.has_key('access')) or ('r' in $p.access)
 	static const char *${p.name.title().replace("_", "")}RString;
     #if $p.address not in $prevRAdrs
-      #if $p.has_key('nelm') and $p.nelm>32
+      #if $p.has_key('nelm') and $p.nelm>1
 	static const char *${p.name.title().replace("_", "")}WavString;
 	static const unsigned int ${p.name.title().replace("_", "")}BufRegCount = $p.nelm;
 	static const unsigned int ${p.name.title().replace("_", "")}ReqSegmentCount = (${p.name.title().replace("_", "")}BufRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up;
@@ -68,7 +68,7 @@ public:
   #end if
   #if $p.has_key('access') and ('w' in $p.access)
 	static const char *${p.name.title().replace("_", "")}WString;
-    #if $p.has_key('nelm') and $p.nelm>32 and (not('r' in $p.access))
+    #if $p.has_key('nelm') and $p.nelm>1 and (not('r' in $p.access))
 	static const char *${p.name.title().replace("_", "")}WavString;
       #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
 	epicsInt8 buf${p.name.title().replace("_", "")}[$p.nelm];

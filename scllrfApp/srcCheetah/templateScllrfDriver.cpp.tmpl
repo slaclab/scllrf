@@ -57,6 +57,9 @@ const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.na
         #set $count_inc = 0
       #else if $p.has_key('nelm') and $p.nelm<=32
         #set $count_inc = $p.nelm
+        #if $p.nelm>1
+const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
+        #end if
       #else if not $p.has_key('nelm')
         #set $count_inc = 1
       #end if
@@ -70,6 +73,9 @@ const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.na
 const char *${name}Driver::${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
     #if $p.address not in $prevWAdrs
       #if $p.has_key('nelm') and $p.nelm<=32
+        #if ($p.nelm>1) and ($p.address not in $prevRAdrs)
+const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
+        #end if
         #set $count_inc = $p.nelm
       #else if $p.has_key('nelm') and $p.nelm>32
         #set $count_inc = 0
@@ -114,7 +120,7 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
     epicsThreadSleep(defaultPollPeriod);
 #import re
 #for $p in sorted($registers, key=lambda k: k['name'])
-#if $p.has_key('nelm') and $p.nelm>32
+#if $p.has_key('nelm') and $p.nelm>1
   #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
     createParam(${p.name.title().replace("_", "")}WavString, asynParamInt8Array, &p_${p.name.title().replace("_", "")}Wav);
   #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))

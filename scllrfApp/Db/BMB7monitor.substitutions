@@ -1,6 +1,6 @@
 # Thanks to Eric Norum for this interface he wrote for LBNL's "bpmcc" interface.
 
-file "bpmccPerBMB7monitor.template"
+file "BMB7monitorAi.template"
 { pattern
 {    P,        R,     PORT,              NAME,  A,         EGU,       ESLO,   EOFF, LOLO,  LOW, HIGH, HIHI }
 {"\$(P)","\$(R)","\$(PORT)", "A0:temperature", 00, "degrees C",     0.0625, -273.2,    1,    0,   55,   60 }

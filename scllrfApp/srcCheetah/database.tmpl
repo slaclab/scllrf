@@ -262,7 +262,7 @@ record(mbboDirect, "\$(P)${p.name.upper()}_W")
 # Waveforms
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: if access is specified it's 'read', and that this is a waveform.
-  #if (not($p.has_key('access')) or ('r' in $p.access )) and ($p.has_key('nelm') and $p.nelm>32)
+  #if (not($p.has_key('access')) or ('r' in $p.access )) and ($p.has_key('nelm') and $p.nelm>1)
 record(waveform, "\$(P)${p.name.upper()}_R")
 {
 	#if $p.has_key('desc')
@@ -322,7 +322,7 @@ record(waveform, "\$(P)${p.name.upper()}_R")
 
 #for $p in sorted($registers, key=lambda k: k['address'])
   ## Check that: this has write access, and is a waveofrm
-  #if $p.has_key('access') and ( 'w' in $p.access ) and ($p.has_key('nelm') and $p.nelm>32)
+  #if $p.has_key('access') and ( 'w' in $p.access ) and ($p.has_key('nelm') and $p.nelm>1)
 record(waveform, "\$(P)${p.name.upper()}_W")
 {
 	#if $p.has_key('desc')

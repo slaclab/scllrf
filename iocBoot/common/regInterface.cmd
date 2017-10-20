@@ -54,7 +54,7 @@ dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=myIP,ADDR=0,IMAX=0,OMAX=
 
 
 #epicsThreadSleep(1.0)
-scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP")
+$(SC=scllrf)$(TYPE)$(EXTRA=extra)Configure( "myReg","myIP")
 dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=myReg,ADDR=0,IMAX=0,OMAX=0")
 
 epicsThreadSleep(0.2)
@@ -63,4 +63,4 @@ epicsThreadSleep(0.2)
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/scllrfCommon.template", "TYPE=$(TYPE),P=$(P),PORT=myReg")
+dbLoadRecords("db/scllrfCommon.template", "TYPE=$(TYPE),P=$(P),PORT=myReg,SC=$(SC)")

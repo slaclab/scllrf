@@ -482,6 +482,15 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     return status;
 }
 
+asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
+                                size_t nElements)
+{
+	epicsInt32 *value32 = new epicsInt32[nElements];
+	std::copy(value, value+nElements, value32);
+	writeInt32Array(pasynUser, value32, nElements);
+	delete value32;
+}
+
 /** Called when asyn clients call pasynInt32Array->write().
   * The base class implementation simply prints an error message.
   * Derived classes may reimplement this function if required.

@@ -292,6 +292,14 @@ octetRead(void *pvt, asynUser *pasynUser, char *data, size_t maxchars, size_t *n
 static asynOctet octetMethods = { NULL, octetRead };
 
 /*
+ * asynUInt32Digital methods -- there are none.
+ * Everything is handled in SCAN="I/O Intr" callback.
+ */
+static asynUInt32Digital uint32DigitalMethods;
+static asynInt32Array int32ArrayMethods;
+static asynFloat32Array float32ArrayMethods;
+static asynFloat64Array float64ArrayMethods;
+/*
  * asynInt32 methods
  */
 static void
@@ -687,9 +695,9 @@ setLink(drvPvt *pdpvt, const char *address, const char *ext, portLink *link, int
 {
     asynStatus status;
 
-    link->portName = callocMustSucceed(1, strlen(pdpvt->portName)+strlen(ext)+1, "bpmccConf");
+    link->portName = callocMustSucceed(1, strlen(pdpvt->portName)+strlen(ext)+1, "bmb7Conf");
     sprintf(link->portName, "%s%s", pdpvt->portName, ext);
-    link->hostInfo = callocMustSucceed(1, strlen(address)+20, "bpmccConf");
+    link->hostInfo = callocMustSucceed(1, strlen(address)+20, "bmb7Conf");
     sprintf(link->hostInfo, "%s:%d UDP", address, udpPort);
     /* No autoconnect, No process EOS */
     drvAsynIPPortConfigure(link->portName, link->hostInfo, priority, 1, 1);
@@ -715,13 +723,8 @@ setLink(drvPvt *pdpvt, const char *address, const char *ext, portLink *link, int
 }
 
 static void
-bpmccConfigure(const char *portName, const char *address,
-               int cellIndex, int cellCount, int bpmCount,
-               int priority,
-               int EEBIselect0, int EEBIselect1,
-               int EEBIoffset0, int EEBIoffset1,
-               int EEBIlimit0 , int EEBIlimit1,
-               int EEBIskewLimit, int EEBIcurrentThreshold)
+bmb7Configure(const char *portName, const char *address,
+               int priority)
 {
     drvPvt *pdpvt;
     asynStatus status;
@@ -734,18 +737,6 @@ bpmccConfigure(const char *portName, const char *address,
     if ((portName == NULL) || (*portName == '\0')
      || (address == NULL)  || (*address == '\0')) {
         printf("Required argument not present!\n");
-        return;
-    }
-    if ((cellCount <= 0) || (cellCount > CC_PROTOCOL_MAX_CELLS)) {
-        printf("Invalid cell count (must be [1..%d]\n", CC_PROTOCOL_MAX_CELLS);
-        return;
-    }
-    if ((bpmCount < 0) || (bpmCount > CC_PROTOCOL_MAX_BPM_PER_CELL)) {
-        printf("Invalid BPM count (must be [0..%d]\n", CC_PROTOCOL_MAX_BPM_PER_CELL);
-        return;
-    }
-    if ((cellIndex < 0) || (cellIndex > 31)) {
-        printf("Invalid cell index (must be [0..31]\n");
         return;
     }
 
@@ -765,9 +756,9 @@ bpmccConfigure(const char *portName, const char *address,
     /*
      * Set up local storage
      */
-    pdpvt = (drvPvt *)callocMustSucceed(1, sizeof(drvPvt), "bpmccConf");
+    pdpvt = (drvPvt *)callocMustSucceed(1, sizeof(drvPvt), "bmb7Conf");
     pdpvt->portName = epicsStrDup(portName);
-    pdpvt->cellInfo = (bpmCount << 16) | (cellCount << 8) | cellIndex;
+
 
     /*
      * Create the ports that we'll use to communicate with the BMB7.
@@ -775,26 +766,6 @@ bpmccConfigure(const char *portName, const char *address,
     if ((setLink(pdpvt, address, "_MON", &pdpvt->monitorLink,
                                 CC_MONITOR_UDP_PORT, priority) != asynSuccess))
         return;
-
-    /*
-     * Set up EEBI if so requested
-     */
-    if (EEBIselect0 != EEBIselect1) {
-        printf("Errant Electron Beam Interlock operation enabled.\n");
-        int plane0 = (EEBIselect0 >= CC_PROTOCOL_FOFB_CAPACITY_PER_PLANE);
-        int plane1 = (EEBIselect1 >= CC_PROTOCOL_FOFB_CAPACITY_PER_PLANE);
-        pdpvt->EEBIselect =
-                (((plane1 * CC_PROTOCOL_FOFB_CAPACITY_PER_PLANE) |
-                  (EEBIselect1 % CC_PROTOCOL_FOFB_CAPACITY_PER_PLANE)) << 16) |
-                 ((plane0 * CC_PROTOCOL_FOFB_CAPACITY_PER_PLANE) |
-                  (EEBIselect0 % CC_PROTOCOL_FOFB_CAPACITY_PER_PLANE));
-        pdpvt->EEBIoffset0 = EEBIoffset0;
-        pdpvt->EEBIlimit0 = EEBIlimit0;
-        pdpvt->EEBIoffset1 = EEBIoffset1;
-        pdpvt->EEBIlimit1 = EEBIlimit1;
-        pdpvt->EEBIskewLimit = EEBIskewLimit;
-        pdpvt->EEBIcurrentThreshold = EEBIcurrentThreshold;
-    }
 
     /*
      * Create our port
@@ -873,41 +844,23 @@ bpmccConfigure(const char *portName, const char *address,
 /*
  * IOC shell command registration
  */
-static const iocshArg bpmccConfigureArg0 ={ "port",             iocshArgString};
-static const iocshArg bpmccConfigureArg1 ={ "address",          iocshArgString};
-static const iocshArg bpmccConfigureArg2 ={ "cell Index",       iocshArgInt};
-static const iocshArg bpmccConfigureArg3 ={ "cell Count",       iocshArgInt};
-static const iocshArg bpmccConfigureArg4 ={ "cell BPM count",   iocshArgInt};
-static const iocshArg bpmccConfigureArg5 ={ "priority",         iocshArgInt};
-static const iocshArg bpmccConfigureArg6 ={ "EEBIselect0",      iocshArgInt};
-static const iocshArg bpmccConfigureArg7 ={ "EEBIselect1",      iocshArgInt};
-static const iocshArg bpmccConfigureArg8 ={ "EEBIoffset0",      iocshArgInt};
-static const iocshArg bpmccConfigureArg9 ={ "EEBIoffset1",      iocshArgInt};
-static const iocshArg bpmccConfigureArg10={ "EEBIlimit0",       iocshArgInt};
-static const iocshArg bpmccConfigureArg11={ "EEBIlimit1",       iocshArgInt};
-static const iocshArg bpmccConfigureArg12={ "EEBIskewLimit",    iocshArgInt};
-static const iocshArg bpmccConfigureArg13={ "EEBIcurrentThreshold",iocshArgInt};
-static const iocshArg *bpmccConfigureArgs[] = {
-                    &bpmccConfigureArg0, &bpmccConfigureArg1,
-                    &bpmccConfigureArg2, &bpmccConfigureArg3,
-                    &bpmccConfigureArg4, &bpmccConfigureArg5,
-                    &bpmccConfigureArg6, &bpmccConfigureArg7,
-                    &bpmccConfigureArg8, &bpmccConfigureArg9,
-                    &bpmccConfigureArg10,&bpmccConfigureArg11,
-                    &bpmccConfigureArg12,&bpmccConfigureArg13};
-static const iocshFuncDef bpmccConfigureFuncDef =
-                                     {"bpmccConfigure", 14, bpmccConfigureArgs};
-static void bpmccConfigureCallFunc(const iocshArgBuf *args)
+static const iocshArg bmb7ConfigureArg0 ={ "port",             iocshArgString};
+static const iocshArg bmb7ConfigureArg1 ={ "address",          iocshArgString};
+static const iocshArg bmb7ConfigureArg2 ={ "priority",         iocshArgInt};
+static const iocshArg *bmb7ConfigureArgs[] = {
+                    &bmb7ConfigureArg0, &bmb7ConfigureArg1,
+                    &bmb7ConfigureArg2};
+static const iocshFuncDef bmb7ConfigureFuncDef =
+                                     {"bmb7Configure", 3, bmb7ConfigureArgs};
+static void bmb7ConfigureCallFunc(const iocshArgBuf *args)
 {
-    bpmccConfigure(args[0].sval, args[1].sval,
-                   args[2].ival, args[3].ival, args[4].ival, args[5].ival,
-                   args[6].ival, args[7].ival, args[8].ival, args[9].ival,
-                   args[10].ival,args[11].ival,args[12].ival,args[13].ival);
+    bmb7Configure(args[0].sval, args[1].sval,
+                   args[2].ival);
 }
 
 static void
-bpmcc_RegisterCommands(void)
+bmb7_RegisterCommands(void)
 {
-    iocshRegister(&bpmccConfigureFuncDef, bpmccConfigureCallFunc);
+    iocshRegister(&bmb7ConfigureFuncDef, bmb7ConfigureCallFunc);
 }
-epicsExportRegistrar(bpmcc_RegisterCommands);
+epicsExportRegistrar(bmb7_RegisterCommands);

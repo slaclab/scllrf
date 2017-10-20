@@ -112,6 +112,8 @@ public:
 	virtual ~scllrfAsynPortDriver();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	virtual asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
+	virtual asynStatus writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
+            size_t nElements);
 	virtual asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
 //	virtual asynStatus readInt32Array(asynUser *pasynUser, epicsInt32 *value,
