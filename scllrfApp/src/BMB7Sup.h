@@ -1,0 +1,9 @@
+#ifndef _CELL_CONTROLLER_PROTOCOL_
+#define _CELL_CONTROLLER_PROTOCOL_
+
+#include <stdint.h>
+
+#define CC_PROTOCOL_CMD_MASK_HI             0xFF00
+#define CC_PROTOCOL_CMD_HI_BMB7_MONITOR     0xF000
+
+#endif /* _CELL_CONTROLLER_PROTOCOL_ */

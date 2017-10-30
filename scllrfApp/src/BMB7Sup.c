@@ -27,20 +27,13 @@
 #include <asynFloat64Array.h>
 #include <asynCommonSyncIO.h>
 
-#include "../../bpmccS_u-p.tmp/src/cellControllerProtocol.h"
-
-/*
- * Time conversion
- */
-#define NOMINAL_RF_FREQUENCY 499.642e6
-#define NS_PER_TICK (1.0e9 / ((NOMINAL_RF_FREQUENCY / 4)))
-#define NOMINAL_FAST_UPDATE_FREQUENCY (NOMINAL_RF_FREQUENCY/328.0/152.0)
+#include "BMB7Sup.h"
 
 /*
  * ASYN subaddresses
  * Augment protocol command groups
  */
-#define A_HI_STATISTICS         0x0E00
+//#define A_HI_STATISTICS         0x0E00
 
 /*
  * Number of times to retry a command
@@ -75,14 +68,10 @@ typedef struct drvPvt {
      */
     char                *portName;
     asynInterface        asynCommon;
-    asynInterface        asynOctet;
     asynInterface        asynInt32;
     void                *asynInt32InterruptPvt;
     asynInterface        asynUInt32Digital;
     void                *asynUInt32DigitalInterruptPvt;
-    asynInterface        asynInt32Array;
-    asynInterface        asynFloat32Array;
-    asynInterface        asynFloat64Array;
 
     /*
      * Link to lower ports
@@ -92,22 +81,6 @@ typedef struct drvPvt {
     int                  cellInfo;
     portLink             monitorLink;
 
-    /*
-     * Pilot tone PLL low-level I/O
-     */
-    asynStatus           pllRegIOstatus;
-    epicsUInt32          pllRegIOvalue;
-
-    /*
-     * EEBI coefficients
-     */
-    epicsInt32           EEBIselect;
-    epicsInt32           EEBIoffset0;
-    epicsInt32           EEBIlimit0;
-    epicsInt32           EEBIoffset1;
-    epicsInt32           EEBIlimit1;
-    epicsInt32           EEBIskewLimit;
-    epicsInt32           EEBIcurrentThreshold;
 
     /*
      * Statistics
@@ -151,281 +124,17 @@ disconnect(void *pvt, asynUser *pasynUser)
 }
 static asynCommon commonMethods = { report, connect, disconnect };
 
-static asynStatus
-cmdWriteRead(drvPvt *pdpvt, asynUser *pasynUser,
-             struct ccProtocolPacket *cmdp, size_t cmdSize,
-             struct ccProtocolPacket *replyp, size_t *replySize)
-{
-    asynStatus status;
-    int retryCount;
-    int eom;
-    size_t ntrans;
-    asynOctet *pasynOctet = pdpvt->cmdLink.poctet->pinterface;
-    int omitSend = 0;
-
-    if (!pdpvt->cmdLink.isCommunicating) {
-        status = pasynCommonSyncIO->connectDevice(pdpvt->cmdLink.pasynUserCommon);
-        if (status != asynSuccess) {
-            asynPrint(pasynUser, ASYN_TRACE_ERROR,
-                            "%s failed to connect to %s: %s\n",
-                                pdpvt->cmdLink.portName,
-                                pdpvt->cmdLink.hostInfo,
-                                pdpvt->cmdLink.pasynUserOctet->errorMessage);
-            return status;
-        }
-        pdpvt->cmdLink.isCommunicating = 1;
-    }
-    cmdp->magic = CC_PROTOCOL_MAGIC;
-    cmdp->identifier = ++pdpvt->identifier;
-    cmdp->cellInfo = pdpvt->cellInfo;
-    pdpvt->cmdLink.pasynUserOctet->timeout = 0.2;
-    for (retryCount = 0 ; ; ) {
-        pasynManager->lockPort(pdpvt->cmdLink.pasynUserOctet);
-        if (omitSend) {
-            status = asynSuccess;
-            omitSend = 0;
-        }
-        else {
-            asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                    "ID:%d CMD:%#X ARGS:%d\n",
-                                cmdp->identifier,
-                                cmdp->command,
-                                (int)CC_PROTOCOL_SIZE_TO_ARG_COUNT(cmdSize));
-            status = pasynOctet->write(pdpvt->cmdLink.poctet->drvPvt,
-                                          pdpvt->cmdLink.pasynUserOctet,
-                                          (const char *)cmdp, cmdSize, &ntrans);
-        }
-        if (status == asynSuccess) {
-            status = pasynOctet->read(pdpvt->cmdLink.poctet->drvPvt,
-                                      pdpvt->cmdLink.pasynUserOctet,
-                                      (char *)replyp, sizeof *replyp,
-                                      replySize, &eom);
-        }
-        pasynManager->unlockPort(pdpvt->cmdLink.pasynUserOctet);
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                        "Read status %d, count %zu\n", (int)status, *replySize);
-        if (status == asynSuccess) {
-            if ((*replySize >= CC_PROTOCOL_ARG_COUNT_TO_SIZE(0))
-             && (*replySize <= CC_PROTOCOL_ARG_COUNT_TO_SIZE(CC_PROTOCOL_ARG_CAPACITY))) {
-                if (replyp->identifier == cmdp->identifier) {
-                    pdpvt->commandCount[retryCount]++;
-                    return asynSuccess;
-                }
-                epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                            "Sent command %u, got reply %u",
-                                             (unsigned int)cmdp->identifier,
-                                             (unsigned int)replyp->identifier);
-                status = asynError;
-                omitSend = 1;
-            }
-            else {
-                epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                                    "Got %lu bytes", (unsigned long)*replySize);
-                status = asynError;
-            }
-        }
-        if (++retryCount > COMMAND_RETRY_LIMIT)
-            break;
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s retry: %s\n",
-                   pdpvt->cmdLink.portName,
-                   status == asynTimeout ? "Timeout" : pasynUser->errorMessage);
-        pdpvt->cmdLink.pasynUserOctet->timeout = retryCount / 2.0;
-    }
-    if (status == asynTimeout)
-        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                                                                    "Timeout");
-    if (pasynCommonSyncIO->disconnectDevice(pdpvt->cmdLink.pasynUserCommon) !=
-                                                                    asynSuccess)
-        asynPrint(pasynUser, ASYN_TRACE_ERROR, "%s can't disconnect: %s\n",
-                                pdpvt->cmdLink.portName,
-                                pdpvt->cmdLink.pasynUserCommon->errorMessage);
-    pdpvt->cmdLink.isCommunicating = 0;
-    pdpvt->commandFailedCount++;
-    return status;
-}
-
-/*
- * asynOctet methods
- */
-static asynStatus
-octetRead(void *pvt, asynUser *pasynUser, char *data, size_t maxchars, size_t *nTransferred, int *eomReason)
-{
-    drvPvt *pdpvt = (drvPvt *)pvt;
-    asynStatus status;
-    int address, ahi, alo, idx;
-    struct ccProtocolPacket cmd, reply;
-    size_t replySize, len;
-    time_t buildDate;
-
-    if ((status = pasynManager->getAddr(pasynUser, &address)) != asynSuccess)
-        return status;
-    ahi = address & CC_PROTOCOL_CMD_MASK_HI;
-    alo = address & CC_PROTOCOL_CMD_MASK_LO;
-    idx = address & CC_PROTOCOL_CMD_MASK_IDX;
-    if ((ahi != CC_PROTOCOL_CMD_HI_LONGIN)
-     || (alo != 0)
-     || ((idx != CC_PROTOCOL_CMD_LONGIN_IDX_FIRMWARE_BUILD_DATE)
-      && (idx != CC_PROTOCOL_CMD_LONGIN_IDX_SOFTWARE_BUILD_DATE)))
-        return asynError;
-    cmd.command = address;
-    status = cmdWriteRead(pdpvt, pasynUser, &cmd,
-                                              CC_PROTOCOL_ARG_COUNT_TO_SIZE(0),
-                                              &reply, &replySize);
-    if (status != asynSuccess) return status;
-    if (CC_PROTOCOL_SIZE_TO_ARG_COUNT(replySize) != 1) return asynError;
-    buildDate = reply.args[0];
-    len = strftime(data, maxchars, "%F %T", localtime(&buildDate));
-    if (len == 0) {
-        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                                            "Target string buffer too small");
-        return asynError;
-    }
-    len++; /* Include '\0' */
-    *nTransferred = len;
-    if (eomReason) {
-        *eomReason = ASYN_EOM_END;
-        if (len == maxchars) *eomReason |= ASYN_EOM_CNT;
-    }
-    return asynSuccess;
-}
-
-static asynOctet octetMethods = { NULL, octetRead };
 
 /*
  * asynUInt32Digital methods -- there are none.
  * Everything is handled in SCAN="I/O Intr" callback.
  */
 static asynUInt32Digital uint32DigitalMethods;
-static asynInt32Array int32ArrayMethods;
-static asynFloat32Array float32ArrayMethods;
-static asynFloat64Array float64ArrayMethods;
+
 /*
  * asynInt32 methods
  */
-static void
-processSysmonReply(drvPvt *pdpvt, struct ccProtocolPacket *replyp, int argc)
-{
-    ELLLIST *pclientList;
-    interruptNode *pnode;
-    extern volatile int interruptAccept;
 
-    if (!interruptAccept) return;
-    pasynManager->interruptStart(pdpvt->asynInt32InterruptPvt, &pclientList);
-    pnode = (interruptNode *)ellFirst(pclientList);
-    while (pnode) {
-        asynInt32Interrupt *int32Interrupt = pnode->drvPvt;
-        pnode = (interruptNode *)ellNext(&pnode->node);
-        if ((int32Interrupt->addr & CC_PROTOCOL_CMD_MASK_HI) ==
-                                                    CC_PROTOCOL_CMD_HI_SYSMON) {
-            int idx = int32Interrupt->addr & ~CC_PROTOCOL_CMD_MASK_HI;
-            epicsUInt16 value;
-            if (idx >= argc*2) {
-                int32Interrupt->pasynUser->auxStatus = asynError;
-                value = 0;
-            }
-            else {
-                int32Interrupt->pasynUser->auxStatus = asynSuccess;
-                value = replyp->args[idx/2] >> ((idx & 0x1) ? 16 : 0);
-            }
-            int32Interrupt->callback(int32Interrupt->userPvt,
-                                     int32Interrupt->pasynUser,
-                                     value);
-        }
-    }
-    pasynManager->interruptEnd(pdpvt->asynInt32InterruptPvt);
-}
-
-static void
-processLinkstatsReply(drvPvt *pdpvt, struct ccProtocolPacket *replyp, int argc)
-{
-    ELLLIST *pclientList;
-    interruptNode *pnode;
-    extern volatile int interruptAccept;
-
-    if (!interruptAccept) return;
-    pasynManager->interruptStart(pdpvt->asynInt32InterruptPvt, &pclientList);
-    pnode = (interruptNode *)ellFirst(pclientList);
-    while (pnode) {
-        asynInt32Interrupt *int32Interrupt = pnode->drvPvt;
-        int idx = int32Interrupt->addr & CC_PROTOCOL_CMD_MASK_IDX;
-        pnode = (interruptNode *)ellNext(&pnode->node);
-        if ((int32Interrupt->addr & CC_PROTOCOL_CMD_MASK_HI) ==
-                                                CC_PROTOCOL_CMD_HI_LINKSTATS) {
-            epicsUInt32 value;
-            if (idx >= argc) {
-                int32Interrupt->pasynUser->auxStatus = asynError;
-                value = 0;
-            }
-            else {
-                int32Interrupt->pasynUser->auxStatus = asynSuccess;
-                value = replyp->args[idx];
-            }
-            int32Interrupt->callback(int32Interrupt->userPvt,
-                                     int32Interrupt->pasynUser,
-                                     value);
-        }
-    }
-    pasynManager->interruptEnd(pdpvt->asynInt32InterruptPvt);
-}
-
-/*
- * Get time from data or system
- */
-static void
-setTimestamp(int isValid,
-              epicsUInt32 seconds, epicsUInt32 ticks, epicsTimeStamp *ts)
-{
-    if (isValid && (seconds != 0)) {
-        if (seconds > POSIX_TIME_AT_EPICS_EPOCH)
-            ts->secPastEpoch = seconds - POSIX_TIME_AT_EPICS_EPOCH;
-        else
-            ts->secPastEpoch = seconds;
-        ts->nsec = ticks * NS_PER_TICK;
-        if (ts->nsec >= 1000000000) {
-            ts->secPastEpoch += ts->nsec / 1000000000;
-            ts->nsec %= 1000000000;
-        }
-    }
-    else {
-        epicsTimeGetCurrent(ts);
-    }
-}
-
-static void
-processEEBIreply(drvPvt *pdpvt, struct ccProtocolPacket *replyp, int argc)
-{
-    ELLLIST *pclientList;
-    interruptNode *pnode;
-    epicsTimeStamp ts;
-    extern volatile int interruptAccept;
-
-    if (!interruptAccept) return;
-    setTimestamp((argc > 0), replyp->args[2], replyp->args[3], &ts);
-    pasynManager->interruptStart(pdpvt->asynUInt32DigitalInterruptPvt, &pclientList);
-    pnode = (interruptNode *)ellFirst(pclientList);
-    while (pnode) {
-        asynUInt32DigitalInterrupt *uint32DigitalInterrupt = pnode->drvPvt;
-        int idx = uint32DigitalInterrupt->addr & CC_PROTOCOL_CMD_MASK_IDX;
-        pnode = (interruptNode *)ellNext(&pnode->node);
-        if ((uint32DigitalInterrupt->addr & CC_PROTOCOL_CMD_MASK_HI) ==
-                                                CC_PROTOCOL_CMD_HI_GET_EEBI) {
-            epicsUInt32 value;
-            if (idx >= argc) {
-                uint32DigitalInterrupt->pasynUser->auxStatus = asynError;
-                value = 0;
-            }
-            else {
-                uint32DigitalInterrupt->pasynUser->auxStatus = asynSuccess;
-                uint32DigitalInterrupt->pasynUser->timestamp = ts;
-                value = replyp->args[idx];
-            }
-            uint32DigitalInterrupt->callback(uint32DigitalInterrupt->userPvt,
-                                     uint32DigitalInterrupt->pasynUser,
-                                     value);
-        }
-    }
-    pasynManager->interruptEnd(pdpvt->asynUInt32DigitalInterruptPvt);
-}
 
 static void
 processBMB7MonitorResponse(drvPvt *pdpvt, int fault)
@@ -634,41 +343,6 @@ crankBMB7monitor(asynUser *pasynUser, drvPvt *pdpvt)
     return asynSuccess;
 }
 
-static asynStatus
-int32Write(void *pvt, asynUser *pasynUser, epicsInt32 value)
-{
-    drvPvt *pdpvt = (drvPvt *)pvt;
-    asynStatus status;
-    int address, ahi;
-    int argc = 0;
-    struct ccProtocolPacket cmd, reply;
-    size_t replySize;
-
-    if ((status = pasynManager->getAddr(pasynUser, &address)) != asynSuccess)
-        return status;
-    ahi = address & CC_PROTOCOL_CMD_MASK_HI;
-    cmd.command = address;
-    if (ahi == CC_PROTOCOL_CMD_HI_SET_EEBI_CONFIG) {
-        cmd.args[argc++] = pdpvt->EEBIselect;
-        cmd.args[argc++] = pdpvt->EEBIoffset0;
-        cmd.args[argc++] = pdpvt->EEBIoffset1;
-        cmd.args[argc++] = pdpvt->EEBIlimit0;
-        cmd.args[argc++] = pdpvt->EEBIlimit1;
-        cmd.args[argc++] = pdpvt->EEBIskewLimit;
-        cmd.args[argc++] = pdpvt->EEBIcurrentThreshold;
-        cmd.args[argc++] = value;
-    }
-    else {
-        cmd.args[argc++] = value;
-    }
-    status = cmdWriteRead(pdpvt, pasynUser, &cmd,
-                      CC_PROTOCOL_ARG_COUNT_TO_SIZE(argc), &reply, &replySize);
-    if (ahi == CC_PROTOCOL_CMD_HI_PLL_REG_IO) {
-        pdpvt->pllRegIOstatus = status;
-        pdpvt->pllRegIOvalue = reply.args[0];
-    }
-    return status;
-}
 
 static asynStatus
 int32Read(void *pvt, asynUser *pasynUser, epicsInt32 *value)
@@ -676,7 +350,6 @@ int32Read(void *pvt, asynUser *pasynUser, epicsInt32 *value)
     drvPvt *pdpvt = (drvPvt *)pvt;
     asynStatus status;
     int address;
-    size_t replySize;
 
     if ((status = pasynManager->getAddr(pasynUser, &address)) != asynSuccess)
         return status;
@@ -685,7 +358,7 @@ int32Read(void *pvt, asynUser *pasynUser, epicsInt32 *value)
     return status;
 }
 
-static asynInt32 int32Methods = { int32Write, int32Read };
+static asynInt32 int32Methods = { NULL, int32Read };
 
 /*
  * Create a new lower port and set up a link to it
@@ -785,14 +458,8 @@ bmb7Configure(const char *portName, const char *address,
         printf("registerInterface failed\n");
         return;
     }
-    pdpvt->asynOctet.interfaceType = asynOctetType;
-    pdpvt->asynOctet.pinterface  = &octetMethods;
-    pdpvt->asynOctet.drvPvt = pdpvt;
-    status = pasynOctetBase->initialize(pdpvt->portName, &pdpvt->asynOctet, 0, 0, 0);
-    if (status != asynSuccess) {
-        printf("pasynOctetBase->initialize failed\n");
-        return;
-    }
+
+
     pdpvt->asynInt32.interfaceType = asynInt32Type;
     pdpvt->asynInt32.pinterface  = &int32Methods;
     pdpvt->asynInt32.drvPvt = pdpvt;
@@ -815,30 +482,7 @@ bmb7Configure(const char *portName, const char *address,
     pasynManager->registerInterruptSource(pdpvt->portName,
                                          &pdpvt->asynUInt32Digital,
                                          &pdpvt->asynUInt32DigitalInterruptPvt);
-    pdpvt->asynInt32Array.interfaceType = asynInt32ArrayType;
-    pdpvt->asynInt32Array.pinterface  = &int32ArrayMethods;
-    pdpvt->asynInt32Array.drvPvt = pdpvt;
-    status = pasynInt32ArrayBase->initialize(pdpvt->portName, &pdpvt->asynInt32Array);
-    if (status != asynSuccess) {
-        printf("pasynInt32ArrayBase->initialize failed\n");
-        return;
-    }
-    pdpvt->asynFloat32Array.interfaceType = asynFloat32ArrayType;
-    pdpvt->asynFloat32Array.pinterface  = &float32ArrayMethods;
-    pdpvt->asynFloat32Array.drvPvt = pdpvt;
-    status = pasynFloat32ArrayBase->initialize(pdpvt->portName, &pdpvt->asynFloat32Array);
-    if (status != asynSuccess) {
-        printf("pasynFloat32ArrayBase->initialize failed\n");
-        return;
-    }
-    pdpvt->asynFloat64Array.interfaceType = asynFloat64ArrayType;
-    pdpvt->asynFloat64Array.pinterface  = &float64ArrayMethods;
-    pdpvt->asynFloat64Array.drvPvt = pdpvt;
-    status = pasynFloat64ArrayBase->initialize(pdpvt->portName, &pdpvt->asynFloat64Array);
-    if (status != asynSuccess) {
-        printf("pasynFloat64ArrayBase->initialize failed\n");
-        return;
-    }
+
 }
 
 /*
