@@ -1,0 +1,9 @@
+#
+# Crank the monitor readback state machine
+#
+record(longin, "$(P)$(R)monitorCrank_") {
+    field(DESC, "Crank monitor readback state machine")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT) 0xF000 0)")
+    field(SCAN, "10 second")
+}
