@@ -1,0 +1,23 @@
+{
+"test": {"access": "rw","addr_width": 0,"base_addr": 0,"data_width": 20,"sign": "unsigned"}
+,"keep": {"access": "w","addr_width": 0,"base_addr": 5,"data_width": 32,"sign": "unsigned"}
+,"trace_reset": {"access": "w","addr_width": 0,"base_addr": 7,"data_width": 1,"sign": "unsigned"}
+,"trace_status1": {"access": "r","addr_width": 0,"base_addr": 8,"data_width": 32,"sign": "unsigned"}
+,"trace_status2": {"access": "r","addr_width": 0,"base_addr": 9,"data_width": 32,"sign": "unsigned"}
+,"clkcnt": {"access": "r","addr_width": 0,"base_addr": 21,"data_width": 32,"sign": "unsigned"}
+,"frequency_4xout": {"access": "r","addr_width": 0,"base_addr": 22,"data_width": 32,"sign": "unsigned"}
+,"frequency_adc": {"access": "r","addr_width": 0,"base_addr": 23,"data_width": 32,"sign": "unsigned"}
+,"frequency_clkout3": {"access": "r","addr_width": 0,"base_addr": 24,"data_width": 32,"sign": "unsigned"}
+,"frequency_dac_dco": {"access": "r","addr_width": 0,"base_addr": 25,"data_width": 32,"sign": "unsigned"}
+,"U2_dout":{"access":"r", "addr_width": 0,"base_addr":44,"data_width":64,"sign":"unsigned"}
+,"U3_dout":{"access":"r", "addr_width": 0,"base_addr":46,"data_width":64,"sign":"unsigned"}
+,"frequency_adc2": {"access": "r","addr_width": 0,"base_addr": 60,"data_width": 32,"sign": "unsigned"}
+,"phase_step_h":{"access":"w", "addr_width": 0,"base_addr":61,"data_width":20,"sign":"unsigned"}
+,"phase_step_l":{"access":"w", "addr_width": 0,"base_addr":62,"data_width":12,"sign":"unsigned"}
+,"modulo":{"access":"w", "addr_width": 0,"base_addr":63,"data_width":12,"sign":"unsigned"}
+,"ampi":{"access":"w", "addr_width": 0,"base_addr":64,"data_width":16,"sign":"unsigned"}
+,"ampq":{"access":"w", "addr_width": 0,"base_addr":65,"data_width":16,"sign":"unsigned"}
+,"dds_reset":{"access":"w", "addr_width": 0,"base_addr":66,"data_width":1,"sign":"unsigned"}
+,"ramtest": {"access": "rw","addr_width": 3,"base_addr": "0x02000","data_width": 16,"sign": "unsigned"}
+,"trace_data": {"access": "r","addr_width": 13,"base_addr": "0x20000","data_width": 32,"sign": "unsigned"}
+}
