@@ -81,6 +81,14 @@ void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount);
  */
 void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount);
 
+// snagged from https://graphics.stanford.edu/~seander/bithacks.html#Interleave64bitOps
+
+// I and Q in the *keep registers alternate bits indicating active I or Q.
+// This function removes every other bit, so you can get only I or only Q.
+// Pinched from https://stackoverflow.com/questions/4909263/how-to-efficiently-de-interleave-bits-inverse-morton
+uint32_t DeInterleaveBits(uint32_t x);
+unsigned short InterleaveEnableBits(unsigned char i, unsigned char q);
+
 // Set this bit in the control portion of address to request a reg read
 static const uint32_t flagReadMask = 0x10000000;
 
@@ -90,7 +98,7 @@ static const uint32_t addrMask = 0x00FFFFFF;
 // Something easy to spot assigned to uninitialized data
 static const int32_t blankData = 0xDEADBEEF;
 
-static const unsigned maxMsgSize = 1400; // Estimated MTU minus fudge factor, in bytes
+static const unsigned maxMsgSize = 1450; // Estimated MTU minus fudge factor, in bytes
 static const unsigned maxRegPerMsg = maxMsgSize/sizeof(FpgaReg)-1; // Number of register requests minus the nonce
 static const unsigned minRegPerMsg = 5; // Limitation of UDP and what the FPGA's limited network stack can cope with
 
@@ -112,6 +120,14 @@ public:
 	virtual ~scllrfAsynPortDriver();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	virtual asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
+	virtual asynStatus readInt8Array(asynUser *pasynUser, epicsInt8 *value,
+            size_t nElements, size_t *nIn);
+	virtual asynStatus readInt16Array(asynUser *pasynUser, epicsInt16 *value,
+            size_t nElements, size_t *nIn);
+	virtual asynStatus readInt32Array(asynUser *pasynUser, epicsInt32 *value,
+			size_t nElements, size_t *nIn);
+	virtual asynStatus writeInt8Array(asynUser *pasynUser, epicsInt8 *value,
+            size_t nElements);
 	virtual asynStatus writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
             size_t nElements);
 	virtual asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
@@ -145,6 +161,49 @@ protected:
 	static const char *PollPeriodString; /* asynInt32,    r/w */
 	static const char *CommErrorCountString;  /* asynInt32,    r */
 
+
+	// Registers relating to the firmware build
+	static const char *BoardTypeRString;
+	// Day firmware was built
+	static const char *BuildDayRString;
+	// Hour firmware was built
+	static const char *BuildHourRString;
+	// Minute firmware was built
+	static const char *BuildMinuteRString;
+	// Month firmware was built
+	static const char *BuildMonthRString;
+	// Year firmware was built
+	static const char *BuildYearRString;
+	static const char *CodeIsCleanRString;
+	static const char *DspFlavorRString;
+	static const char *GitSha1ARString;
+	static const char *GitSha1BRString;
+	static const char *GitSha1CRString;
+	static const char *GitSha1DRString;
+	static const char *GitSha1ERString;
+	static const char *GitSha1FRString;
+	static const char *GitSha1GRString;
+	static const char *GitSha1HRString;
+	static const char *GitSha1IRString;
+	static const char *GitSha1JRString;
+	static const char *GitSha1KRString;
+	static const char *GitSha1LRString;
+	static const char *GitSha1MRString;
+	static const char *GitSha1NRString;
+	static const char *GitSha1ORString;
+	static const char *GitSha1PRString;
+	static const char *GitSha1QRString;
+	static const char *GitSha1RRString;
+	static const char *GitSha1SRString;
+	static const char *GitSha1TRString;
+	static const char *GitSHA1String;  /* asynOctet,    r */
+	static const char *MagicRString;
+	static const char *ToolRevRString;
+	// Name of person compiling firmware
+	static const char *UserRString;
+	static const char *VersionRString;
+
+
 	// For readable registers that are polled together at the set polling rate
 	FpgaReg *pPolledRegMsg_; // Leave the first array element blank, for use as the nonce
 	size_t PolledRegMsgSize_; // number of registers plus one for the nonce
@@ -159,6 +218,8 @@ protected:
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
+
+	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
 
 	virtual asynStatus startSingleMessageQueuer();
 	epicsEventId singleMsgQueueEventId_; /**< Event ID to signal the write message queuer */
@@ -187,6 +248,10 @@ protected:
 		stop, run
 	};
 
+	/* SHA1 hash of register map */
+	static const char *regMapSha1String;
+	std::ostringstream strGitSHA1;
+
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
 	int p_RunStop;
@@ -197,8 +262,42 @@ protected:
 	int p_PollPeriod;
 	int p_CommErrorCount;
 
+	// Registers relating to the firmware build
+    int p_BoardTypeR;
+    int p_BuildDayR;
+    int p_BuildHourR;
+    int p_BuildMinuteR;
+    int p_BuildMonthR;
+    int p_BuildYearR;
+    int p_CodeIsCleanR;
+    int p_DspFlavorR;
+    int p_GitSha1AR;
+    int p_GitSha1BR;
+    int p_GitSha1CR;
+    int p_GitSha1DR;
+    int p_GitSha1ER;
+    int p_GitSha1FR;
+    int p_GitSha1GR;
+    int p_GitSha1HR;
+    int p_GitSha1IR;
+    int p_GitSha1JR;
+    int p_GitSha1KR;
+    int p_GitSha1LR;
+    int p_GitSha1MR;
+    int p_GitSha1NR;
+    int p_GitSha1OR;
+    int p_GitSha1PR;
+    int p_GitSha1QR;
+    int p_GitSha1RR;
+    int p_GitSha1SR;
+    int p_GitSha1TR;
+    int p_GitSHA1;
+    int p_MagicR;
+    int p_ToolRevR;
+    int p_UserR;
+    int p_VersionR;
 /* Registers */
-    #define LAST_SCLLRF_PARAM p_CommErrorCount
+    #define LAST_SCLLRF_PARAM p_VersionR
 
 	epicsUInt32 uReadOneRegAddr, uWriteOneRegAddr;
 
@@ -207,12 +306,79 @@ protected:
 #define NUM_SCLLRF_PARAMS (&LAST_SCLLRF_PARAM - &FIRST_SCLLRF_PARAM + 1)
 
 	// mapping of register names to addresses
-
-    // mapping of register names to addresses
-
-    // mapping of register names to addresses
+    enum ReadRegAddrs
+    {
+    	MagicRAdr = 0x00000800,
+    	DspFlavorRAdr = 0x00000801,
+    	BuildYearRAdr = 0x00000802,
+    	BuildMonthRAdr = 0x00000803,
+    	BuildDayRAdr = 0x00000804,
+    	BuildHourRAdr = 0x00000805,
+    	BuildMinuteRAdr = 0x00000806,
+    	CodeIsCleanRAdr = 0x00000807,
+    	ToolRevRAdr = 0x00000808,
+    	UserRAdr = 0x00000809,
+    	BoardTypeRAdr = 0x0000080A,
+    	VersionRAdr = 0x0000080B,
+    	GitSha1ARAdr = 0x0000080C,
+    	GitSha1BRAdr = 0x0000080D,
+    	GitSha1CRAdr = 0x0000080E,
+    	GitSha1DRAdr = 0x0000080F,
+    	GitSha1ERAdr = 0x00000810,
+    	GitSha1FRAdr = 0x00000811,
+    	GitSha1GRAdr = 0x00000812,
+    	GitSha1HRAdr = 0x00000813,
+    	GitSha1IRAdr = 0x00000814,
+    	GitSha1JRAdr = 0x00000815,
+    	GitSha1KRAdr = 0x00000816,
+    	GitSha1LRAdr = 0x00000817,
+    	GitSha1MRAdr = 0x00000818,
+    	GitSha1NRAdr = 0x00000819,
+    	GitSha1ORAdr = 0x0000081A,
+    	GitSha1PRAdr = 0x0000081B,
+    	GitSha1QRAdr = 0x0000081C,
+    	GitSha1RRAdr = 0x0000081D,
+    	GitSha1SRAdr = 0x0000081E,
+    	GitSha1TRAdr = 0x0000081F,
+    };
 
     // masks applied to returned register data
+    enum RegMasks
+    {
+    	MagicMask =  0x000000FF,
+    	DspFlavorMask =  0x000000FF,
+    	BuildYearMask =  0x000000FF,
+    	BuildMonthMask =  0x000000FF,
+    	BuildDayMask =  0x000000FF,
+    	BuildHourMask =  0x000000FF,
+    	BuildMinuteMask =  0x000000FF,
+    	CodeIsCleanMask =  0x000000FF,
+    	ToolRevMask =  0x000000FF,
+    	UserMask =  0x000000FF,
+    	BoardTypeMask =  0x000000FF,
+    	VersionMask =  0x000000FF,
+    	GitSha1AMask =  0x000000FF,
+    	GitSha1BMask =  0x000000FF,
+    	GitSha1CMask =  0x000000FF,
+    	GitSha1DMask =  0x000000FF,
+    	GitSha1EMask =  0x000000FF,
+    	GitSha1FMask =  0x000000FF,
+    	GitSha1GMask =  0x000000FF,
+    	GitSha1HMask =  0x000000FF,
+    	GitSha1IMask =  0x000000FF,
+    	GitSha1JMask =  0x000000FF,
+    	GitSha1KMask =  0x000000FF,
+    	GitSha1LMask =  0x000000FF,
+    	GitSha1MMask =  0x000000FF,
+    	GitSha1NMask =  0x000000FF,
+    	GitSha1OMask =  0x000000FF,
+    	GitSha1PMask =  0x000000FF,
+    	GitSha1QMask =  0x000000FF,
+    	GitSha1RMask =  0x000000FF,
+    	GitSha1SMask =  0x000000FF,
+    	GitSha1TMask =  0x000000FF,
+
+    };
 };
 
 #endif /* SCLLRFAPP_SRC_SCLLRFASYNPORTDRIVER_H_ */

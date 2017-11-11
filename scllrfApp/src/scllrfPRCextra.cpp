@@ -105,12 +105,6 @@ const char *scllrfPRCextra::Shell1TimeStampHighRString = "SHELL_1_TIME_STAMP_HIG
 const char *scllrfPRCextra::Shell1TimeStampLowRString = "SHELL_1_TIME_STAMP_LOW_R";
 const char* scllrfPRCextra::Shell1TimeStepString = "SHELL_1_TIME_STEP";
 
-const float CircleWave::cordicGain = 1.646760258;
-//const float CircleWave::firGain = 0.66424725;
-//const float CircleWave::phaseOffFast = 2.39109;
-//const float CircleWave::phaseOffSlow = 0.428352;
-//const float CircleWave::phaseOffDAC = 1.452;
-//const float CircleWave::phaseOffLoop = -4.75;
 
 // Constants used in llrf_close_loop.py
 //    cic_base_period = 33  # default parameter in llrf_dsp.v
@@ -119,9 +113,9 @@ const float CircleWave::cordicGain = 1.646760258;
 const unsigned CircleWave::CIC_PERIOD = 33;
 const unsigned CircleWave::SHIFT_BASE = 4;
 //const float CircleWave::CLK_FREQ = 499.64*11/12/2*1000000; // Du's value
-const float CircleWave::CLK_FREQ = 1320e6/14; // from app.py
+const float CircleWave::CLK_FREQ = 1320e6/14; // LCLS-II value from app.py
 
-const unsigned CircleWave::SLOW_OFFSET = 17;
+const unsigned CircleWave::SLOW_OFFSET = 17; // register address offset from start of slow buffer to the data we care about
 const unsigned scllrfPRCextra::circleBufRegCount = sizeof(bufShell0CircleData)/sizeof(*bufShell0CircleData);
 
 
@@ -258,9 +252,6 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     // What will happen if we leave the param as a 32 bit array, even though PV is 8 bit array?
     createParam(Shell1TimeStepString, asynParamFloat64, &p_Shell1TimeStep);
 
-    // For testing, call this function after adding the FPGA response data copied from Wireshark
-    //testCannedResponse();
-
     // Start with a sensible X axis for circle buffer waveforms
     adHocMessage.addr = Shell0DspWaveSampPerRAdr|flagReadMask;
     adHocMessage.data = 1;
@@ -268,6 +259,8 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     adHocMessage.addr = Shell1DspWaveSampPerRAdr|flagReadMask;
     processRegReadback(&adHocMessage, waveIsReady);
 
+    // For testing, call this function after adding the FPGA response data copied from Wireshark
+//    testCannedResponse();
 
     epicsThreadSleep(defaultPollPeriod);
     std::cout << __PRETTY_FUNCTION__ << " created " << NUM_SCLLRFPRCEXTRA_PARAMS << " parameters." << std::endl;
@@ -280,6 +273,51 @@ scllrfPRCextra::scllrfPRCextra(const char *drvPortName, const char *netPortName)
     epicsThreadSleep(defaultPollPeriod);
     wakeupPoller();
     wakeupReader();
+
+    // Message size is the number of read registers, plus 1 nonce for every 175 read registers
+    unsigned int FirmwareRegMsgSize_ = 33;
+	// A canned request to read all registers
+    FpgaReg* pFirmwareRegMsg_ = new FpgaReg[FirmwareRegMsgSize_]
+	{
+		{ 0, 0 },
+		{ (flagReadMask | MagicRAdr), blankData },
+		{ (flagReadMask | DspFlavorRAdr), blankData },
+		{ (flagReadMask | BuildYearRAdr), blankData },
+		{ (flagReadMask | BuildMonthRAdr), blankData },
+		{ (flagReadMask | BuildDayRAdr), blankData },
+		{ (flagReadMask | BuildHourRAdr), blankData },
+		{ (flagReadMask | BuildMinuteRAdr), blankData },
+		{ (flagReadMask | CodeIsCleanRAdr), blankData },
+		{ (flagReadMask | ToolRevRAdr), blankData },
+		{ (flagReadMask | UserRAdr), blankData },
+		{ (flagReadMask | BoardTypeRAdr), blankData },
+		{ (flagReadMask | VersionRAdr), blankData },
+		{ (flagReadMask | GitSha1ARAdr), blankData },
+		{ (flagReadMask | GitSha1BRAdr), blankData },
+		{ (flagReadMask | GitSha1CRAdr), blankData },
+		{ (flagReadMask | GitSha1DRAdr), blankData },
+		{ (flagReadMask | GitSha1ERAdr), blankData },
+		{ (flagReadMask | GitSha1FRAdr), blankData },
+		{ (flagReadMask | GitSha1GRAdr), blankData },
+		{ (flagReadMask | GitSha1HRAdr), blankData },
+		{ (flagReadMask | GitSha1IRAdr), blankData },
+		{ (flagReadMask | GitSha1JRAdr), blankData },
+		{ (flagReadMask | GitSha1KRAdr), blankData },
+		{ (flagReadMask | GitSha1LRAdr), blankData },
+		{ (flagReadMask | GitSha1MRAdr), blankData },
+		{ (flagReadMask | GitSha1NRAdr), blankData },
+		{ (flagReadMask | GitSha1ORAdr), blankData },
+		{ (flagReadMask | GitSha1PRAdr), blankData },
+		{ (flagReadMask | GitSha1QRAdr), blankData },
+		{ (flagReadMask | GitSha1RRAdr), blankData },
+		{ (flagReadMask | GitSha1SRAdr), blankData },
+		{ (flagReadMask | GitSha1TRAdr), blankData },
+	};
+
+	htonFpgaRegArray(pFirmwareRegMsg_, FirmwareRegMsgSize_);
+	_singleMsgQ.send(&pFirmwareRegMsg_[1], (FirmwareRegMsgSize_-1)*sizeof( FpgaReg ));
+
+
 }
 
 scllrfPRCextra::~scllrfPRCextra()
@@ -305,17 +343,15 @@ void scllrfPRCextra::testCannedResponse()
 	// set up fake chassis response in this file. It can be quite long.
 	// Note that data can be copied from Wireshark. Next time, note the
 	// regex that translates to the right format.
-#include "PRCcannedResponseTest.cpp"
-		std::cout << "<- " <<__PRETTY_FUNCTION__ << endl;
-}
 
-// snagged from https://graphics.stanford.edu/~seander/bithacks.html#Interleave64bitOps
-unsigned short InterleaveEnableBits(unsigned char i, unsigned char q)
-{
-	return (((i * 0x0101010101010101ULL & 0x8040201008040201ULL) *
-     0x0102040810204081ULL >> 49) & 0x5555) |
-    (((q * 0x0101010101010101ULL & 0x8040201008040201ULL) *
-     0x0102040810204081ULL >> 48) & 0xAAAA);
+	bool dummy; // For the waveform flag
+
+	pasynTrace->setTraceMask((pasynUserSelf), 0xb);
+	pasynTrace->setTraceMask(pOctetAsynUser_, 0xb);
+
+//#include "PRCcannedSlowDataResponseTest.cpp"
+//#include "PRCcannedCircleBuffResponseTest.cpp"
+		std::cout << "<- " <<__PRETTY_FUNCTION__ << endl;
 }
 
 asynStatus scllrfPRCextra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
@@ -604,7 +640,6 @@ void scllrfPRCextra::reqTraceIQWWaveform(FpgaReg (*readWaveformsMsg)[traceIQWave
 
 void scllrfPRCextra::traceIQWaveformRequester()
 {
-	epicsEventWaitStatus status;
 	FpgaReg traceAck[5] =
 	{
 			{0,0},
@@ -621,7 +656,7 @@ void scllrfPRCextra::traceIQWaveformRequester()
 	// Main polling loop
 	while (1)
 	{
-		status = epicsEventWait(reqWaveEventId_);
+		epicsEventWait(reqWaveEventId_);
 
 		if (isShuttingDown_)
 		{
@@ -1100,6 +1135,7 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
 	unsigned int nFaultPoints = nPoints;
 	unsigned int i;
 
+	waveReadback_[regOffset] = pFromFpga->data;
 	// avoid divide by 0 errors when waveforms are inactive
 	if (nChan_ <=0)
 	{
@@ -1139,7 +1175,6 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
 	}
 
 
-	waveReadback_[regOffset] = pFromFpga->data;
 	// Even number addresses are not necessarily I, odd are Q
 
 	pIQBuf_[bufNumber][bufIndex] = (epicsInt16) pFromFpga->data;
@@ -1166,9 +1201,11 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
             //--abs_chan_ix;
 //			cout << "relative index:" << rel_chan_ix << " total: " << num_of_chans << " abs index:" << abs_chan_ix << "\n";
 
-			if(abs_chan_ix%2 == 0) // if this is a Q channel
+			if(abs_chan_ix%2 == 0) // if this is an I channel
 			{
-//				cout << "publishing Q waveform " << abs_chan_ix/2 << ", from relative channel" << rel_chan_ix << endl;
+				asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "%s publishing Q waveform %d, from relative channel %d\n",
+						__PRETTY_FUNCTION__ , abs_chan_ix/2, rel_chan_ix);
+
 				pDriver_->doCallbacksInt32Array(pIQBuf_[rel_chan_ix], nPoints, *qParamIndex_, abs_chan_ix/2);
 				if (fault_)
 				{
@@ -1185,6 +1222,7 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
 						{
 							pABuf_[abs_chan_ix/2][i] = pAFaultBuf_[abs_chan_ix/2][i] = (epicsFloat32) hypot(pIQBuf_[rel_chan_ix][i], pIQBuf_[rel_chan_ix-1][i])/gain_;
 							pPBuf_[abs_chan_ix/2][i] = pPFaultBuf_[abs_chan_ix/2][i] = (epicsFloat32) (atan2(pIQBuf_[rel_chan_ix-1][i], pIQBuf_[rel_chan_ix][i]));
+							cout << "relative waveform " << rel_chan_ix << ", physical channel " << abs_chan_ix/2 << ", I = " << pIQBuf_[rel_chan_ix-1][i] << ", Q = " << pIQBuf_[rel_chan_ix][i]<< ", A = " << pABuf_[abs_chan_ix/2][i] << ", P = " << pPBuf_[abs_chan_ix/2][i] << endl;
 						}
 						catch (std::exception& e)
 						{
@@ -1194,7 +1232,8 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
 						}
 					}
 
-//					cout << "publishing A/P waveform " << abs_chan_ix/2 << endl;
+					asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "%s publishing amplitude and phase waveforms %d, from relative channels %d/%d\n",
+							__PRETTY_FUNCTION__ , abs_chan_ix/2, rel_chan_ix-1, rel_chan_ix);
 					pDriver_->doCallbacksFloat32Array(pABuf_[abs_chan_ix/2], nPoints, *aParamIndex_, abs_chan_ix/2);
 					pDriver_->doCallbacksFloat32Array(pPBuf_[abs_chan_ix/2], nPoints, *pParamIndex_, abs_chan_ix/2);
 					std::fill( pABuf_[abs_chan_ix/2],
@@ -1238,6 +1277,8 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
 			}
 			else
 			{
+				asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DRIVER, "%s publishing I waveform %d, from relative channel %d\n",
+						__PRETTY_FUNCTION__ , abs_chan_ix/2, rel_chan_ix);
 //				cout << "publishing I waveform " << abs_chan_ix/2 << ", from relative channel" << rel_chan_ix << endl;
 				pDriver_->doCallbacksInt32Array(pIQBuf_[rel_chan_ix], nPoints, *iParamIndex_, abs_chan_ix/2);
 				if (fault_)
@@ -1255,42 +1296,6 @@ asynStatus CircleWave::ProcessCircIQBufReadback(const FpgaReg *pFromFpga)
 	}
 
 	return asynSuccess;
-}
-
-
-//asynStatus scllrfPRC::catGitSHA1()
-//{
-//	int oneByte;
-//	int i;
-//	asynStatus status;
-//
-//	strGitSHA1.str("");
-//	strGitSHA1.clear();
-//	strGitSHA1<<std::hex;
-//
-////	for (i=p_GitSHA1a; i<=p_GitSHA1t; i++)
-////	{
-////		status = (asynStatus) getIntegerParam(i, &oneByte);
-////		strGitSHA1<< std::setw(2) << oneByte;
-////	}
-////	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
-////	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
-//
-//	return asynSuccess;
-//}
-
-
-// I and Q in the *keep registers alternate bits indicating active I or Q.
-// This function removes every other bit, so you can get only I or only Q.
-// Pinched from https://stackoverflow.com/questions/4909263/how-to-efficiently-de-interleave-bits-inverse-morton
-uint32_t DeInterleaveBits(uint32_t x)
-{
-    x = x & 0x55555555;
-    x = (x | (x >> 1)) & 0x33333333;
-    x = (x | (x >> 2)) & 0x0F0F0F0F;
-    x = (x | (x >> 4)) & 0x00FF00FF;
-    x = (x | (x >> 8)) & 0x0000FFFF;
-    return x;
 }
 
 /**  Extract register address and data from the received message and set the appropriate
@@ -1391,15 +1396,6 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 				(unsigned ) pFromFpga->data & TraceKeepMask);
 	break;
 
-   case CircleBufFlipRAdr|flagReadMask:
-	status = (asynStatus) setUIntDigitalParam(p_CircleBufFlipR,
-			(pFromFpga->data & CircleBufFlipMask) , CircleBufFlipMask);
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				CircleBufFlipRString,
-				(unsigned ) pFromFpga->data & CircleBufFlipMask);
-	break;
-
     case LlrfCircleReadyRAdr|flagReadMask:
 	status = (asynStatus) setUIntDigitalParam(p_LlrfCircleReadyR,
 			(pFromFpga->data & LlrfCircleReadyMask) , LlrfCircleReadyMask);
@@ -1426,43 +1422,42 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	epicsInt32 last_wave_samp_per;
 	unsigned int wave_shift;
 	epicsFloat64 wave_time_step;
-    // Protect against read errors or whatever else could cause implausible readbacks
+	// Protect against read errors or whatever else could cause implausible readbacks
 	tmpData = (pFromFpga->data & Shell0DspWaveSampPerMask) >= 1? (pFromFpga->data & Shell0DspWaveSampPerMask): 1;
 
-        getIntegerParam(p_Shell0DspWaveSampPerR, &last_wave_samp_per);
-		status = (asynStatus) setIntegerParam(p_Shell0DspWaveSampPerR,
-				(pFromFpga->data & Shell0DspWaveSampPerMask) );
-        if (last_wave_samp_per != pFromFpga->data)
-        {
-            // Update waveform scale and Time Step
-            printf("new_wave_samp_per: %d\n", pFromFpga->data);
-        wave_shift = shell0CircBuf_.CalcWaveScale(tmpData);
-        wave_time_step = tmpData * CircleWave::CIC_PERIOD / CircleWave::CLK_FREQ;
+	getIntegerParam(p_Shell0DspWaveSampPerR, &last_wave_samp_per);
+	status = (asynStatus) setIntegerParam(p_Shell0DspWaveSampPerR,
+			(pFromFpga->data & Shell0DspWaveSampPerMask) );
+	if (last_wave_samp_per != pFromFpga->data)
+	{
+		// Update waveform scale and Time Step
+		printf("new_wave_samp_per: %d\n", pFromFpga->data);
+		wave_shift = shell0CircBuf_.CalcWaveScale(tmpData);
+		wave_time_step = tmpData * CircleWave::CIC_PERIOD / CircleWave::CLK_FREQ;
 
-        pasynUserSelf->reason = p_Shell0DspWaveShiftW;
+		pasynUserSelf->reason = p_Shell0DspWaveShiftW;
 		writeInt32(pasynUserSelf, wave_shift & Shell0DspWaveShiftMask);
 
-        setDoubleParam(p_Shell0TimeStep, wave_time_step);
-        printf("wave_time_step: %e\n", wave_time_step);
-        }
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				Shell0DspWaveSampPerRString,
-				(unsigned ) pFromFpga->data & Shell0DspWaveSampPerMask);
+		setDoubleParam(p_Shell0TimeStep, wave_time_step);
+		printf("wave_time_step: %e\n", wave_time_step);
+	}
+	asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+			"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			Shell0DspWaveSampPerRString,
+			(unsigned ) pFromFpga->data & Shell0DspWaveSampPerMask);
 	break;
 
     case Shell1DspWaveSampPerRAdr|flagReadMask:
-    // Protect against read errors or whatever else could cause implausible readbacks
+	// Protect against read errors or whatever else could cause implausible readbacks
 	tmpData = (pFromFpga->data & Shell1DspWaveSampPerMask) >= 1? (pFromFpga->data & Shell1DspWaveSampPerMask): 1;
 
-        getIntegerParam(p_Shell1DspWaveSampPerR, &last_wave_samp_per);
-		status = (asynStatus) setIntegerParam(p_Shell1DspWaveSampPerR,
-				(pFromFpga->data & Shell1DspWaveSampPerMask) );
-        if (last_wave_samp_per != pFromFpga->data)
-        {
-            // Update waveform scale and Time Step
-            printf("new_wave_samp_per: %d\n", pFromFpga->data);
-        }
+	getIntegerParam(p_Shell1DspWaveSampPerR, &last_wave_samp_per);
+	status = (asynStatus) setIntegerParam(p_Shell1DspWaveSampPerR,
+			(pFromFpga->data & Shell1DspWaveSampPerMask) );
+	if (last_wave_samp_per != pFromFpga->data)
+	{
+		// Update waveform scale and Time Step
+		printf("new_wave_samp_per: %d\n", pFromFpga->data);
         wave_shift = shell1CircBuf_.CalcWaveScale(tmpData);
         wave_time_step = tmpData * CircleWave::CIC_PERIOD / CircleWave::CLK_FREQ;
 
@@ -1475,6 +1470,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 				"%s: readback for address=%s, value=1x%x\n", __PRETTY_FUNCTION__,
 				Shell1DspWaveSampPerRString,
 				(unsigned ) pFromFpga->data & Shell1DspWaveSampPerMask);
+    }
 	break;
 
     case Shell0DspChanKeepRAdr|flagReadMask:
@@ -1533,6 +1529,327 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 	status = shell1CircBuf_.ProcessSlowDataReadback(pFromFpga);
 	break;
 
+    case MagicRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_MagicR,
+				(pFromFpga->data & MagicMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				MagicRString,
+				(unsigned int) (pFromFpga->data & MagicMask));
+	break;
+
+    case DspFlavorRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_DspFlavorR,
+				(pFromFpga->data & DspFlavorMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFlavorRString,
+				(unsigned int) (pFromFpga->data & DspFlavorMask));
+	break;
+
+    case BuildYearRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildYearR,
+				(pFromFpga->data & BuildYearMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildYearRString,
+				(unsigned int) (pFromFpga->data & BuildYearMask));
+	break;
+
+    case BuildMonthRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildMonthR,
+				(pFromFpga->data & BuildMonthMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildMonthRString,
+				(unsigned int) (pFromFpga->data & BuildMonthMask));
+	break;
+
+    case BuildDayRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildDayR,
+				(pFromFpga->data & BuildDayMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildDayRString,
+				(unsigned int) (pFromFpga->data & BuildDayMask));
+	break;
+
+    case BuildHourRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildHourR,
+				(pFromFpga->data & BuildHourMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildHourRString,
+				(unsigned int) (pFromFpga->data & BuildHourMask));
+	break;
+
+    case BuildMinuteRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildMinuteR,
+				(pFromFpga->data & BuildMinuteMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildMinuteRString,
+				(unsigned int) (pFromFpga->data & BuildMinuteMask));
+	break;
+
+    case CodeIsCleanRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_CodeIsCleanR,
+				(pFromFpga->data & CodeIsCleanMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				CodeIsCleanRString,
+				(unsigned int) (pFromFpga->data & CodeIsCleanMask));
+	break;
+
+    case ToolRevRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_ToolRevR,
+				(pFromFpga->data & ToolRevMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				ToolRevRString,
+				(unsigned int) (pFromFpga->data & ToolRevMask));
+	break;
+
+    case UserRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_UserR,
+				(pFromFpga->data & UserMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				UserRString,
+				(unsigned int) (pFromFpga->data & UserMask));
+	break;
+
+    case BoardTypeRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BoardTypeR,
+				(pFromFpga->data & BoardTypeMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BoardTypeRString,
+				(unsigned int) (pFromFpga->data & BoardTypeMask));
+	break;
+
+    case VersionRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_VersionR,
+				(pFromFpga->data & VersionMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				VersionRString,
+				(unsigned int) (pFromFpga->data & VersionMask));
+	break;
+
+    case GitSha1ARAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1AR,
+				(pFromFpga->data & GitSha1AMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1ARString,
+				(unsigned int) (pFromFpga->data & GitSha1AMask));
+	break;
+
+    case GitSha1BRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1BR,
+				(pFromFpga->data & GitSha1BMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1BRString,
+				(unsigned int) (pFromFpga->data & GitSha1BMask));
+	break;
+
+    case GitSha1CRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1CR,
+				(pFromFpga->data & GitSha1CMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1CRString,
+				(unsigned int) (pFromFpga->data & GitSha1CMask));
+	break;
+
+    case GitSha1DRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1DR,
+				(pFromFpga->data & GitSha1DMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1DRString,
+				(unsigned int) (pFromFpga->data & GitSha1DMask));
+	break;
+
+    case GitSha1ERAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1ER,
+				(pFromFpga->data & GitSha1EMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1ERString,
+				(unsigned int) (pFromFpga->data & GitSha1EMask));
+	break;
+
+    case GitSha1FRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1FR,
+				(pFromFpga->data & GitSha1FMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1FRString,
+				(unsigned int) (pFromFpga->data & GitSha1FMask));
+	break;
+
+    case GitSha1GRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1GR,
+				(pFromFpga->data & GitSha1GMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1GRString,
+				(unsigned int) (pFromFpga->data & GitSha1GMask));
+	break;
+
+    case GitSha1HRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1HR,
+				(pFromFpga->data & GitSha1HMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1HRString,
+				(unsigned int) (pFromFpga->data & GitSha1HMask));
+	break;
+
+    case GitSha1IRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1IR,
+				(pFromFpga->data & GitSha1IMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1IRString,
+				(unsigned int) (pFromFpga->data & GitSha1IMask));
+	break;
+
+    case GitSha1JRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1JR,
+				(pFromFpga->data & GitSha1JMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1JRString,
+				(unsigned int) (pFromFpga->data & GitSha1JMask));
+	break;
+
+    case GitSha1KRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1KR,
+				(pFromFpga->data & GitSha1KMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1KRString,
+				(unsigned int) (pFromFpga->data & GitSha1KMask));
+	break;
+
+    case GitSha1LRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1LR,
+				(pFromFpga->data & GitSha1LMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1LRString,
+				(unsigned int) (pFromFpga->data & GitSha1LMask));
+	break;
+
+    case GitSha1MRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1MR,
+				(pFromFpga->data & GitSha1MMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1MRString,
+				(unsigned int) (pFromFpga->data & GitSha1MMask));
+	break;
+
+    case GitSha1NRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1NR,
+				(pFromFpga->data & GitSha1NMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1NRString,
+				(unsigned int) (pFromFpga->data & GitSha1NMask));
+	break;
+
+    case GitSha1ORAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1OR,
+				(pFromFpga->data & GitSha1OMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1ORString,
+				(unsigned int) (pFromFpga->data & GitSha1OMask));
+	break;
+
+    case GitSha1PRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1PR,
+				(pFromFpga->data & GitSha1PMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1PRString,
+				(unsigned int) (pFromFpga->data & GitSha1PMask));
+	break;
+
+    case GitSha1QRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1QR,
+				(pFromFpga->data & GitSha1QMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1QRString,
+				(unsigned int) (pFromFpga->data & GitSha1QMask));
+	break;
+
+    case GitSha1RRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1RR,
+				(pFromFpga->data & GitSha1RMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1RRString,
+				(unsigned int) (pFromFpga->data & GitSha1RMask));
+	break;
+
+    case GitSha1SRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1SR,
+				(pFromFpga->data & GitSha1SMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1SRString,
+				(unsigned int) (pFromFpga->data & GitSha1SMask));
+	break;
+
+    case GitSha1TRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1TR,
+				(pFromFpga->data & GitSha1TMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1TRString,
+				(unsigned int) (pFromFpga->data & GitSha1TMask));
+		catGitSHA1();
+		break;
+
 	default:
 		if( traceIQWavesStart <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= traceIQWavesEnd )
 		{
@@ -1542,7 +1859,7 @@ asynStatus scllrfPRCextra::processRegReadback(const FpgaReg *pFromFpga, bool &wa
 		else
 		if( Shell0CircleDataRAdr <= (pFromFpga->addr & addrMask) && (pFromFpga->addr & addrMask) <= shell0CircBuf_.GetEndAddr() )
 		{
-//			printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
+			printf("%s waveform addres 0x%x, value %d\n", __PRETTY_FUNCTION__, (pFromFpga->addr & addrMask), pFromFpga->data);
 			shell0CircBuf_.ProcessCircIQBufReadback(pFromFpga);
 		}
 		else
@@ -1701,7 +2018,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		break;
     case TraceResetWeWAdr:
-		status = (asynStatus) getUIntDigitalParam(p_TraceKeepW, uValueSet , TraceKeepMask);
+		status = (asynStatus) getUIntDigitalParam(p_TraceResetWeW, uValueSet , TraceResetWeMask);
 		if( (uValueSet[0] & TraceResetWeMask) == (pFromFpga->data & TraceResetWeMask))
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
@@ -1728,7 +2045,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			// Count the number of bits set
 			tmpData = (pFromFpga->data & Shell0DspChanKeepMask);
-			for (nchan_ = 0; tmpData; nchan_++)
+			for (shell0CircBuf_.nChan_ = 0; tmpData; shell0CircBuf_.nChan_++)
 			{
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}
@@ -1758,7 +2075,7 @@ asynStatus scllrfPRCextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		{
 			// Count the number of bits set
 			tmpData = (pFromFpga->data & Shell1DspChanKeepMask);
-			for (nchan_ = 0; tmpData; nchan_++)
+			for (shell1CircBuf_.nChan_ = 0; tmpData; shell1CircBuf_.nChan_++)
 			{
 			  tmpData &= tmpData - 1; // clear the least significant bit set
 			}

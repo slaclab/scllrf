@@ -41,6 +41,47 @@ const char *scllrfAsynPortDriver::WriteOneRegString = "WRITE_ONE_REG"; /* asynIn
 const char *scllrfAsynPortDriver::MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
 const char *scllrfAsynPortDriver::PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
 const char *scllrfAsynPortDriver::CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
+const char *scllrfAsynPortDriver::BoardTypeRString = "BOARD_TYPE_R";
+// Day firmware was built
+const char *scllrfAsynPortDriver::BuildDayRString = "BUILD_DAY_R";
+// Hour firmware was built
+const char *scllrfAsynPortDriver::BuildHourRString = "BUILD_HOUR_R";
+// Minute firmware was built
+const char *scllrfAsynPortDriver::BuildMinuteRString = "BUILD_MINUTE_R";
+// Month firmware was built
+const char *scllrfAsynPortDriver::BuildMonthRString = "BUILD_MONTH_R";
+// Year firmware was built
+const char *scllrfAsynPortDriver::BuildYearRString = "BUILD_YEAR_R";
+const char *scllrfAsynPortDriver::CodeIsCleanRString = "CODE_IS_CLEAN_R";
+const char *scllrfAsynPortDriver::DspFlavorRString = "DSP_FLAVOR_R";
+// Git SHA1 sum as individual characters
+const char *scllrfAsynPortDriver::GitSha1ARString = "GIT_SHA1_A_R";
+const char *scllrfAsynPortDriver::GitSha1BRString = "GIT_SHA1_B_R";
+const char *scllrfAsynPortDriver::GitSha1CRString = "GIT_SHA1_C_R";
+const char *scllrfAsynPortDriver::GitSha1DRString = "GIT_SHA1_D_R";
+const char *scllrfAsynPortDriver::GitSha1ERString = "GIT_SHA1_E_R";
+const char *scllrfAsynPortDriver::GitSha1FRString = "GIT_SHA1_F_R";
+const char *scllrfAsynPortDriver::GitSha1GRString = "GIT_SHA1_G_R";
+const char *scllrfAsynPortDriver::GitSha1HRString = "GIT_SHA1_H_R";
+const char *scllrfAsynPortDriver::GitSha1IRString = "GIT_SHA1_I_R";
+const char *scllrfAsynPortDriver::GitSha1JRString = "GIT_SHA1_J_R";
+const char *scllrfAsynPortDriver::GitSha1KRString = "GIT_SHA1_K_R";
+const char *scllrfAsynPortDriver::GitSha1LRString = "GIT_SHA1_L_R";
+const char *scllrfAsynPortDriver::GitSha1MRString = "GIT_SHA1_M_R";
+const char *scllrfAsynPortDriver::GitSha1NRString = "GIT_SHA1_N_R";
+const char *scllrfAsynPortDriver::GitSha1ORString = "GIT_SHA1_O_R";
+const char *scllrfAsynPortDriver::GitSha1PRString = "GIT_SHA1_P_R";
+const char *scllrfAsynPortDriver::GitSha1QRString = "GIT_SHA1_Q_R";
+const char *scllrfAsynPortDriver::GitSha1RRString = "GIT_SHA1_R_R";
+const char *scllrfAsynPortDriver::GitSha1SRString = "GIT_SHA1_S_R";
+const char *scllrfAsynPortDriver::GitSha1TRString = "GIT_SHA1_T_R";
+const char *scllrfAsynPortDriver::GitSHA1String = "GIT_SHA1";  /* asynOctet,    r */
+const char *scllrfAsynPortDriver::MagicRString = "MAGIC_R";
+const char *scllrfAsynPortDriver::ToolRevRString = "TOOL_REV_R";
+// Name of person compiling firmware
+const char *scllrfAsynPortDriver::UserRString = "USER_R";
+const char *scllrfAsynPortDriver::VersionRString = "VERSION_R";
+
 
 /** Constructor for the scllrfAsynPortDriver class.
  * Calls constructor for the asynPortDriver base class.
@@ -82,6 +123,40 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
     createParam(ReadOneRegString, asynParamInt32Array, &p_ReadOneReg);
     createParam(WriteOneRegString, asynParamInt32Array, &p_WriteOneReg);
 
+    createParam(BoardTypeRString, asynParamInt32, &p_BoardTypeR);
+    createParam(BuildDayRString, asynParamInt32, &p_BuildDayR);
+    createParam(BuildHourRString, asynParamInt32, &p_BuildHourR);
+    createParam(BuildMinuteRString, asynParamInt32, &p_BuildMinuteR);
+    createParam(BuildMonthRString, asynParamInt32, &p_BuildMonthR);
+    createParam(BuildYearRString, asynParamInt32, &p_BuildYearR);
+    createParam(CodeIsCleanRString, asynParamInt32, &p_CodeIsCleanR);
+    createParam(DspFlavorRString, asynParamInt32, &p_DspFlavorR);
+    createParam(GitSha1ARString, asynParamInt32, &p_GitSha1AR);
+    createParam(GitSha1BRString, asynParamInt32, &p_GitSha1BR);
+    createParam(GitSha1CRString, asynParamInt32, &p_GitSha1CR);
+    createParam(GitSha1DRString, asynParamInt32, &p_GitSha1DR);
+    createParam(GitSha1ERString, asynParamInt32, &p_GitSha1ER);
+    createParam(GitSha1FRString, asynParamInt32, &p_GitSha1FR);
+    createParam(GitSha1GRString, asynParamInt32, &p_GitSha1GR);
+    createParam(GitSha1HRString, asynParamInt32, &p_GitSha1HR);
+    createParam(GitSha1IRString, asynParamInt32, &p_GitSha1IR);
+    createParam(GitSha1JRString, asynParamInt32, &p_GitSha1JR);
+    createParam(GitSha1KRString, asynParamInt32, &p_GitSha1KR);
+    createParam(GitSha1LRString, asynParamInt32, &p_GitSha1LR);
+    createParam(GitSha1MRString, asynParamInt32, &p_GitSha1MR);
+    createParam(GitSha1NRString, asynParamInt32, &p_GitSha1NR);
+    createParam(GitSha1ORString, asynParamInt32, &p_GitSha1OR);
+    createParam(GitSha1PRString, asynParamInt32, &p_GitSha1PR);
+    createParam(GitSha1QRString, asynParamInt32, &p_GitSha1QR);
+    createParam(GitSha1RRString, asynParamInt32, &p_GitSha1RR);
+    createParam(GitSha1SRString, asynParamInt32, &p_GitSha1SR);
+    createParam(GitSha1TRString, asynParamInt32, &p_GitSha1TR);
+	createParam(GitSHA1String, asynParamOctet, &p_GitSHA1);
+    createParam(MagicRString, asynParamInt32, &p_MagicR);
+    createParam(ToolRevRString, asynParamInt32, &p_ToolRevR);
+    createParam(UserRString, asynParamInt32, &p_UserR);
+    createParam(VersionRString, asynParamInt32, &p_VersionR);
+    
 	// Set these early, consider adding interlock for race condition with polling loop.
     setIntegerParam(p_RunStop, stop);
 printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
@@ -212,7 +287,6 @@ asynStatus scllrfAsynPortDriver::startSingleMessageQueuer()
 
 void scllrfAsynPortDriver::singleMessageQueuer()
 {
-	epicsEventWaitStatus status;
 	FpgaReg pMsgBuff[maxRegPerMsg + nonceSize]; // buffer big enough for one packet
 	unsigned int sendBufByteCount;
 	unsigned int sendBufRegCount;
@@ -482,13 +556,26 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
     return status;
 }
 
-asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
-                                size_t nElements)
+asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *value,
+                                size_t nElements, size_t *nIn)
 {
+	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
 	std::copy(value, value+nElements, value32);
-	writeInt32Array(pasynUser, value32, nElements);
+	status = readInt32Array(pasynUser, value32, nElements, nIn);
 	delete value32;
+	return status;
+}
+
+asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 *value,
+                                size_t nElements, size_t *nIn)
+{
+	asynStatus status;
+	epicsInt32 *value32 = new epicsInt32[nElements];
+	std::copy(value, value+nElements, value32);
+	status = readInt32Array(pasynUser, value32, nElements, nIn);
+	delete value32;
+	return status;
 }
 
 /** Called when asyn clients call pasynInt32Array->write().
@@ -497,8 +584,8 @@ asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16
   * \param[in] pasynUser pasynUser structure that encodes the reason and address.
   * \param[in] value Pointer to the array to write.
   * \param[in] nElements Number of elements to write. */
-asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
-                                size_t nElements)
+asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 *value,
+                                size_t nElements, size_t *nIn)
 {
 	int function = pasynUser->reason;
 	asynStatus status = asynSuccess;
@@ -514,8 +601,6 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 
     /* Fetch the parameter string name for possible use in debugging */
     getParamName(function, &paramName);
-    printf("%s: array with %d elements, function=%d, %s\n",
-				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
 
 	if(nElements < 2)
 	{
@@ -551,6 +636,121 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
     	for(i=0; i<nElements; ++i, ++uOutBuffIndex)
     	{
     		regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
+    		regSendBuf[uOutBuffIndex].addr = (uint32_t) (uRegAddr + i)|flagReadMask;
+
+    		// If there's more to send than will fit in the max message size, break
+    		// it up into chunks and send each chunk individually
+    		if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
+    		{
+    			htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
+    			status = sendRegRequest(regSendBuf, uOutBuffIndex+1);
+
+    			if (status)
+    				epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+    						"%s: status=%d, function=%d, sending array segment %u of %s", __PRETTY_FUNCTION__,
+							status, function, i/uOutBuffIndex +1, paramName);
+    			else
+    				asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sending array segment %u of %s\n",
+    						__PRETTY_FUNCTION__, function, i/uOutBuffIndex +1, paramName);
+    			uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
+    		}
+    	}
+    }
+
+	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
+	sendRegRequest(regSendBuf, uOutBuffIndex);
+	*nIn = nElements;
+	if (status)
+		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+				"%s: status=%d, function=%d, sent %s", __PRETTY_FUNCTION__,
+				status, function, paramName);
+	else
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "<-- %s: function=%d, sent %s\n",
+				__PRETTY_FUNCTION__, function, paramName);
+
+	return status; //(writeArray < epicsInt32 > (pasynUser, value, nElements));
+}
+
+asynStatus scllrfAsynPortDriver::writeInt8Array(asynUser *pasynUser, epicsInt8 *value,
+                                size_t nElements)
+{
+	asynStatus status;
+	epicsInt32 *value32 = new epicsInt32[nElements];
+	std::copy(value, value+nElements, value32);
+	status = writeInt32Array(pasynUser, value32, nElements);
+	delete value32;
+	return status;
+}
+
+asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
+                                size_t nElements)
+{
+	asynStatus status;
+	epicsInt32 *value32 = new epicsInt32[nElements];
+	std::copy(value, value+nElements, value32);
+	status = writeInt32Array(pasynUser, value32, nElements);
+	delete value32;
+	return status;
+}
+
+/** Called when asyn clients call pasynInt32Array->write().
+  * The base class implementation simply prints an error message.
+  * Derived classes may reimplement this function if required.
+  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
+  * \param[in] value Pointer to the array to write.
+  * \param[in] nElements Number of elements to write. */
+asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
+                                size_t nElements)
+{
+	int function = pasynUser->reason;
+	asynStatus status = asynSuccess;
+//	int nCopy;
+	FpgaReg regSendBuf[maxMsgSize/sizeof(FpgaReg)];
+	unsigned int i, uOutBuffIndex;
+	uint32_t uRegAddr;
+    const char *paramName;
+
+	//getIntegerParam(P_ArrayLength, &nCopy);
+	//if ((int) nElements < nCopy)
+	//	nCopy = (int) nElements;
+
+    /* Fetch the parameter string name for possible use in debugging */
+    getParamName(function, &paramName);
+
+	if(nElements < 2)
+	{
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: array with %d elements, function=%d, %s\n",
+				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
+		return status;
+	}
+	else
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: array with %d elements, function=%d, %s\n",
+				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
+
+    if ( function == p_ReadOneReg )
+    {
+    	uOutBuffIndex = 1; // index of first register past the nonce
+    	regSendBuf[1].addr = uReadOneRegAddr = value[0] | flagReadMask;
+    	regSendBuf[1].data = value[1];
+    }
+    else if ( function == p_WriteOneReg  )
+    {
+    	uOutBuffIndex = 1; // index of first register past the nonce
+    	regSendBuf[1].addr = uWriteOneRegAddr = value[0];
+    	regSendBuf[1].data = value[1];
+    }
+    else
+    {
+    	status = functionToRegister(function, &regSendBuf[1]);
+    	if (status != asynSuccess)
+    		return status;
+
+    	uRegAddr = addrMask & regSendBuf[1].addr;
+    	uOutBuffIndex = 1; // index of first register past the nonce
+
+    	for(i=0; i<nElements; ++i, ++uOutBuffIndex)
+    	{
+    		regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
     		regSendBuf[uOutBuffIndex].addr = (uint32_t) uRegAddr + i;
 
     		// If there's more to send than will fit in the max message size, break
@@ -572,8 +772,8 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
     	}
     }
 
-	htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
-	sendRegRequest(regSendBuf, uOutBuffIndex+1);
+	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
+	sendRegRequest(regSendBuf, uOutBuffIndex);
 
 	if (status)
 		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
@@ -617,22 +817,23 @@ asynStatus scllrfAsynPortDriver::startPoller(double pollPeriod)
 
 void scllrfAsynPortDriver::regPoller()
 {
-	epicsEventWaitStatus status;
+	bool status = (bool) epicsEventWaitOK;
     int runStop;
     unsigned int regBuffCount;
     FpgaReg *pTempRegMsg = pPolledRegMsg_;
 
-	pollEvent_.wait(); // Block when first created, to give subclass constructors a chance to finish
+    pollEvent_.wait(); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
 		getDoubleParam(p_PollPeriod, &pollPeriod_);
 		getIntegerParam(p_RunStop, &runStop);
 		if (runStop == run && pollPeriod_ != 0.0)
 		{
-			pollEvent_.wait( pollPeriod_);
+			status = pollEvent_.wait( pollPeriod_);
 		}
 		else
 		{
 			pollEvent_.wait();
+			status = (bool) epicsEventWaitOK;
 		}
 
 		if (status == epicsEventWaitOK)
@@ -724,7 +925,6 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	size_t writtenCount;
 	epicsInt32 errorCount;
 	asynStatus status = asynSuccess;
-	epicsMutexLockStatus mutexStatus;
 	char * pWriteBuffer;
 	pWriteBuffer = reinterpret_cast<char*>(regBuffer);
 	int maxParallelRequests;
@@ -733,7 +933,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 	asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "--> %s( regBuffer=%p, regBuffCount=%u )\n",
 			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
 
-	mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
+	epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
 	// Throttle so that we don't overflow buffers if response handling falls behind
 	if( netWaitingRequests_ >= (unsigned) maxParallelRequests )
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
@@ -748,7 +948,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 			return asynDisconnected;
 		}
 		epicsThreadSleep(throttleLoopDelay);
-		mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
+		epicsMutexLock(comCountersMutexId_); // protect netSendCount and netWaitingRequests
 	}
 
 	++netSendCount_; // increment and roll over if needed
@@ -812,7 +1012,6 @@ asynStatus scllrfAsynPortDriver::wakeupReader()
 // Most of the main loop is network error handling, signaling, network details.
 void scllrfAsynPortDriver::responseHandler()
 {
-	asynStatus status;
 	epicsEventWaitStatus waitStatus;
 	epicsMutexLockStatus mutexStatus;
 	static char pReadBuffer[maxMsgSize];
@@ -847,9 +1046,10 @@ void scllrfAsynPortDriver::responseHandler()
 				pRegReadback[0] = (FpgaReg) {0, 0}; // Reset count, so we won't try to process data that isn't there.
 
 				mutexStatus = epicsMutexLock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
+				assert(mutexStatus != epicsMutexLockError);
 
 				// First read just the nonce for a sanity check.
-				status = pasynOctetSyncIO->read(pOctetAsynUser_, pReadBuffer,
+				pasynOctetSyncIO->read(pOctetAsynUser_, pReadBuffer,
 						nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
 
 				// Prevent an endless loop here while senders are throttled
@@ -868,7 +1068,7 @@ void scllrfAsynPortDriver::responseHandler()
 					{ // read in the number of bytes the nonce says to expect, starting with the second register location
 						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
 								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
-						status = pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
+						pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
 								ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
 						readCount += nonceSize*sizeof(FpgaReg);
 						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: got %u bytes total for response #%u\n",
@@ -900,7 +1100,7 @@ void scllrfAsynPortDriver::responseHandler()
 
 				processReadbackBuffer(pRegReadback, readCount);
 				/* Do callbacks so higher layers see any changes */
-				status = (asynStatus) callParamCallbacks();
+				(asynStatus) callParamCallbacks();
 
 				epicsThreadSleep(0); // sleep to be nice to other threads
 			} // while (netWaitingRequests>0)
@@ -1051,6 +1251,27 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 	return asynSuccess;
 }
 
+asynStatus scllrfAsynPortDriver::catGitSHA1()
+{
+	int oneByte;
+	int i;
+	asynStatus status;
+
+	strGitSHA1.str("");
+	strGitSHA1.clear();
+	strGitSHA1<<std::hex;
+
+	for (i=p_GitSha1AR; i<=p_GitSha1TR; i++)
+	{
+		status = (asynStatus) getIntegerParam(i, &oneByte);
+		strGitSHA1<< std::setw(2) << oneByte;
+	}
+	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
+	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
+
+	return asynSuccess;
+}
+
 /**  Extract register address and data from the received message and set the appropriate
  * asyn parameter.
  * Some registers have a "new waveform data ready" flag. If they have this and it is set,
@@ -1062,6 +1283,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 */
 asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
+	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
 	// Base class only has a generic register. Decode if appropriate
 	if(pFromFpga->addr == (uReadOneRegAddr|flagReadMask))
@@ -1071,8 +1293,15 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 		doCallbacksInt32Array(iReg, 2, p_ReadOneReg, 0);
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: got one reg read response.\n", __PRETTY_FUNCTION__);
+		return asynSuccess;
 	}
-	return asynSuccess;
+
+	asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+		"%s: value read from unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+		pFromFpga->addr, (unsigned ) pFromFpga->data);
+	getIntegerParam(p_CommErrorCount, &errorCount);
+	setIntegerParam(p_CommErrorCount, ++errorCount);
+	return asynError;
 }
 
 /**  Extract register address and data from the received message and set the appropriate
@@ -1086,6 +1315,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 */
 asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
+	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
 
 	// Base class only has a generic register. Decode if appropriate
@@ -1096,9 +1326,15 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 		doCallbacksInt32Array(iReg, 2, p_WriteOneReg, 0);
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: got one reg write response.\n", __PRETTY_FUNCTION__);
+		return asynSuccess;
 	}
-	return asynSuccess;
-	return asynSuccess;
+
+	asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+		"%s: write response from FPGA for unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+		pFromFpga->addr, (unsigned ) pFromFpga->data);
+	getIntegerParam(p_CommErrorCount, &errorCount);
+	setIntegerParam(p_CommErrorCount, ++errorCount);
+	return asynError;
 }
 
 void htonFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
@@ -1124,6 +1360,28 @@ void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
 	}
 }
 
+
+// snagged from https://graphics.stanford.edu/~seander/bithacks.html#Interleave64bitOps
+unsigned short InterleaveEnableBits(unsigned char i, unsigned char q)
+{
+	return (((i * 0x0101010101010101ULL & 0x8040201008040201ULL) *
+     0x0102040810204081ULL >> 49) & 0x5555) |
+    (((q * 0x0101010101010101ULL & 0x8040201008040201ULL) *
+     0x0102040810204081ULL >> 48) & 0xAAAA);
+}
+
+// I and Q in the *keep registers alternate bits indicating active I or Q.
+// This function removes every other bit, so you can get only I or only Q.
+// Pinched from https://stackoverflow.com/questions/4909263/how-to-efficiently-de-interleave-bits-inverse-morton
+uint32_t DeInterleaveBits(uint32_t x)
+{
+    x = x & 0x55555555;
+    x = (x | (x >> 1)) & 0x33333333;
+    x = (x | (x >> 2)) & 0x0F0F0F0F;
+    x = (x | (x >> 4)) & 0x00FF00FF;
+    x = (x | (x >> 8)) & 0x0000FFFF;
+    return x;
+}
 
 extern "C" {
 

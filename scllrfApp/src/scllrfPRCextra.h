@@ -79,12 +79,12 @@ public:
 	static const unsigned CIC_PERIOD;
 	static const unsigned SHIFT_BASE;
 	static const float CLK_FREQ;
-    static const float cordicGain;
-    static const float firGain;
-    static const float phaseOffFast;
-    static const float phaseOffSlow;
-    static const float phaseOffDAC;
-    static const float phaseOffLoop;
+//    static const float cordicGain;
+//    static const float firGain;
+//    static const float phaseOffFast;
+//    static const float phaseOffSlow;
+//    static const float phaseOffDAC;
+//    static const float phaseOffLoop;
 	static const unsigned SLOW_OFFSET;
 
 	CircleWave(scllrfPRCextra *pDriver, unsigned int waveAddr, unsigned int slowAddr,
@@ -180,7 +180,7 @@ public:
 		//   1 * npt  16-bit I and Q
 		//   2 * npt  22-bit I
 		//   3 * npt  22-bit Q
-	static const uint32_t traceIQWavesStart = 0x140000; // From FPGA design, base address
+	static const uint32_t traceIQWavesStart = TraceIqBufRAdr; // From FPGA design, base address
 	static const uint32_t traceIQWavesEnd = 0x14ffff; // max possible
 	static const unsigned traceIQWaveRegCount = traceIQWavesEnd - traceIQWavesStart + 1;
 	static const unsigned maxTraceIQWavesCount = 8; // max channels, max number of waveforms interlaced in waveform buffer
