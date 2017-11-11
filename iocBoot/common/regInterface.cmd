@@ -63,4 +63,4 @@ epicsThreadSleep(0.2)
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/scllrfCommon.template", "TYPE=$(TYPE),P=$(P),PORT=myReg,SC=$(SC)")
+dbLoadRecords("db/scllrfCommon.template", "TYPE=$(TYPE),P=$(P),PORT=myReg,SC=$(SC=scllrf)")

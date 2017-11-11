@@ -57,24 +57,22 @@ scllrf_SRCS_vxWorks += -nil-
 # Add locally compiled object code
 # For example, subroutines
 # ========================================================================
-# scllrf_SRCS += file1.c
  scllrf_SRCS += scllrfAsynPortDriver.cpp
-# scllrf_SRCS += scllrfCMOC.cpp
  scllrf_SRCS += scllrfINT.cpp
  scllrf_SRCS += scllrfPRC.cpp
  scllrf_SRCS += scllrfPRCextra.cpp
  scllrf_SRCS += scllrfRES.cpp
  scllrf_SRCS += scllrfRESextra.cpp
  scllrf_SRCS += GUNB.cpp
+ scllrf_SRCS += GUNBextra.cpp
  scllrf_SRCS += INTmbboCopy.st
  scllrf_SRCS += INTres2tmp.c
  scllrf_SRCS += INTarcTest.st
  scllrf_SRCS += INTheLevel.st
  scllrf_SRCS += BMB7Sup.c
 # scllrf_SRCS += cavity_fit.cc
-#scllrf_SRCS += lbnl_test_jsonDriver.cpp
 #USR_CXXFLAGS += -std=c++0x
-USR_CXXFLAGS += -g -rdynamic -I$(TOP)/scllrfApp/src/newmat10
+USR_CXXFLAGS += -g -rdynamic -I$(TOP)/newmat10
 # =====================================================
 # Link in the code from other libraries
 # =====================================================
@@ -100,6 +98,8 @@ scllrf_LIBS += asyn
 scllrf_LIBS += calc
 scllrf_LIBS += sscan
 scllrf_LIBS += ether_ip
+scllrf_LIBS += newmat
+newmat_DIR = $(TOP)/newmat10/
 
 # =====================================================
 # END EVR libraries

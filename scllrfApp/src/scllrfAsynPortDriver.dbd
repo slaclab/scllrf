@@ -1,6 +1,7 @@
 registrar("scllrfAsynPortDriverRegister")
 registrar("scllrfPRCextraRegister")
 registrar("scllrfRESextraRegister")
+registrar("GUNBextraRegister")
 registrar("scllrfRESRegister")
 registrar(scllrfINTRegister)
 registrar(INTres2tmp_reg)

@@ -139,6 +139,12 @@ record(ai, "\$(P)${p.name.upper()}_R${i}")
 	#end if
   info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
+record(bi, "\$(P)GET_${p.name.upper()}_R${i}")
+{
+	field( DTYP, "asynInt32")
+	field( INP,  "@asyn(\$(PORT),${i}) ${p.name.upper()}_R")
+	field( SCAN, "Passive")
+}
 
     #end for
   #end if
@@ -219,7 +225,7 @@ record(mbbiDirect, "\$(P)${p.name.upper()}_R")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
-	field( DTYP, "asynInt32")
+	field( DTYP, "asynUInt32Digital")
 	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
 	field( SCAN, "Passive")
 }
@@ -315,6 +321,46 @@ record(waveform, "\$(P)${p.name.upper()}_R")
 	field( LOPR, 0)
 	#end if
 	info( autosaveFields, "DESC EGU HOPR LOPR PREC")
+}
+record(waveform, "\$(P)GET_${p.name.upper()}_R")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+	field( PINI, "NO")
+    #if $p.has_key('dtype') and ($p.dtype == "string")
+	field( DTYP, "asynOctetRead")
+	field( FTVL, "CHAR")
+    #else
+      #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	field( DTYP, "asynInt8ArrayIn")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "UCHAR")
+        #else
+	field( FTVL, "CHAR")
+        #end if
+      #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	field( DTYP, "asynInt16ArrayIn")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "USHORT")
+        #else
+	field( FTVL, "SHORT")
+        #end if
+      #else
+	field( DTYP, "asynInt32ArrayIn")
+        #if $p.has_key('signed') and ($p.signed == 'unsigned')
+	field( FTVL, "ULONG")
+        #else
+	field( FTVL, "LONG")
+        #end if
+      #end if
+    #end if
+	field( NELM, "${p.nelm}")
+	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_WAV")
+	field( SCAN, "Passive")
 }
 
   #end if

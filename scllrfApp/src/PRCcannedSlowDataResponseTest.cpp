@@ -1,9 +1,6 @@
+	cout << "Now processing " << __FILE__ << endl;
 
-	bool dummy;
-
-	pasynTrace->setTraceMask((pasynUserSelf), 0xb);
-	std::cout << "-> " <<__PRETTY_FUNCTION__ << endl;
-	FpgaReg cannedResponse[388] =
+	FpgaReg cannedSlowDataResponse[388] =
 	{
 		{ 0x10180000, 0x00000000},
 		{ 0x10180001, 0x00000000},
@@ -309,14 +306,19 @@
 
 	};
 
-	std::fill( &cannedResponse[302], &cannedResponse[387], (FpgaReg)  {flagReadMask,blankData}  );
+	std::fill( &cannedSlowDataResponse[302], &cannedSlowDataResponse[387], (FpgaReg)  {flagReadMask,blankData}  );
 
 
 	for ( unsigned int i = 0; i< 302; i++)
 	{
-		if (cannedResponse[i].addr & flagReadMask)
+		cout << "Fake data read: addr 0x" << std::hex << cannedSlowDataResponse[i].addr << ", data: 0x" << cannedSlowDataResponse[i].data << endl;
+		if (cannedSlowDataResponse[i].addr & flagReadMask)
 		{
-			processRegReadback(&cannedResponse[i], dummy);
+			processRegReadback(&cannedSlowDataResponse[i], dummy);
+		}
+		else
+		{
+			processRegWriteResponse(&cannedSlowDataResponse[i]);
 		}
 	}
 	lastResponseCount_ += 1;

@@ -5,6 +5,45 @@
 ## everywhere it appears in this file
 
 < envPaths
+# ====================================================================
+# Setup some additional environment variables
+# ====================================================================
+# Setup environment variables
+
+# tag log messages with IOC name
+# How to escape the "vioc-dev" as the PERL program
+# will try to replace it.
+# So, uncomment the following and remove the backslash
+epicsEnvSet("EPICS\_IOC\_LOG_CLIENT_INET","${IOC}")
+
+# Need this path to EPICS BASE so that caRepeater can be started:
+# Let's figure out a way to pass this one in via the IOC's
+# initial startup.cmd: another job for hookIOC.py :)
+# Not needed caRepeater is started up by laci for all IOCs at
+# CPU boot up.
+epicsEnvSet(PATH,"${EPICS_BASE}/bin/$(ARCH)")
+
+# ========================================================
+# Support Large Arrays/Waveforms; Number in Bytes
+# Please calculate the size of the largest waveform
+# that you support in your IOC.  Do not just copy numbers
+# from other apps.  This will only lead to an exhaustion
+# of resources and problems with your IOC.
+# The default maximum size for a channel access array is
+# 16K bytes.
+# ========================================================
+# Uncomment and set appropriate size for your application:
+#epicsEnvSet("EPICS_CA_MAX_ARRAY_BYTES", "800000")
+
+# END: Additional environment variables
+# ====================================================================
+
+cd ${TOP}
+# ====================================================
+## Register all support components
+dbLoadDatabase("dbd/scllrf.dbd",0,0)
+scllrf_registerRecordDeviceDriver(pdbbase)
+# ====================================================
 
 # System Location:
 epicsEnvSet("LOCA","B15")
@@ -27,20 +66,20 @@ epicsEnvSet( SC, "")
 < iocBoot/common/iocAdmin.cmd
 #< iocBoot/common/autoSaveConf.cmd
 
-# =====================================================================
-#Load Additional databases:
-# =====================================================================
-dbLoadRecords("db/cryo-plc.db","CM=01,area=B15,plc=PLC-B15")
-#
-# END: Loading the record databases
-########################################################################
-
 ## Initialize EtherIP driver and define PLC
 drvEtherIP_init()
 # drvEtherIP_define_PLC <name>, <ip_addr>, <slot>
-drvEtherIP_define_PLC("PLC_B15","plc-b15", 1)
+drvEtherIP_define_PLC("PLC_B15","192.168.1.21", 0)
 EIP_verbosity(0)
 #drvEtherIP_default_rate(5)
+
+# =====================================================================
+#Load Additional databases:
+# =====================================================================
+dbLoadRecords("db/cryo-plc.db","CM=01,area=B15,plc=PLC_B15")
+#
+# END: Loading the record databases
+########################################################################
 
 # =====================================================================
 # Channel Access Security:  

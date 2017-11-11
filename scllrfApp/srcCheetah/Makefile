@@ -8,12 +8,12 @@ all: $(PY_FILES)
 		python deviceGeneration.py -d $$i ; \
 	done  ; \
 	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
-	python deviceGeneration.py -c GUNB -i garth.json
+	python deviceGeneration.py -c GUNB -i regmapold.json
 
 % : %.py
 	python deviceGeneration.py -d $^
 
-realclean:
+realclean: clean
 clean:
 	rm -f *.pyc
 	for i in $(DIRS) ; do \
@@ -22,7 +22,7 @@ clean:
 		fi ; \
 	done  ; \
 
-copy:
+copy: all
 	cp */src/*.h ../src/;
 	cp */src/*.cpp ../src/;
 	cp */ui/* ../../display/.;
@@ -34,7 +34,9 @@ all_install: $(DIRS)
 	done  ; \
 
 #We don't want this to run every time we build the generated code etc., so make a dummy install target
-install:
+#install:
+# Or use this one if you want it to generate and copy code every time
+install: copy
 
 
 %_install: %

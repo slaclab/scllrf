@@ -10,9 +10,8 @@ include $(TOP)/configure/CONFIG
 #----------------------------------------------------
 # Create and install (or just install)
 # databases, templates, substitutions like this
-DB += cmocRegisters.db
-DB += cmocWaveforms.db
 DB += PRCextra.db
+DB += GUNextra.db
 DB += BMB7monitor.db
 DB += cryo-plc.db
 

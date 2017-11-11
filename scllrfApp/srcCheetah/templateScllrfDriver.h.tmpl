@@ -54,11 +54,11 @@ public:
 	static const unsigned int ${p.name.title().replace("_", "")}ReqMsgSize = ${p.name.title().replace("_", "")}BufRegCount + ${p.name.title().replace("_", "")}ReqSegmentCount; // All register addresses plus nonce space
 	FpgaReg req${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}ReqMsgSize]; // Canned message to request data buffer
         #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
-	epicsInt8 buf${p.name.title().replace("_", "")}[$p.nelm];
+	epicsInt8 buf${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}BufRegCount];
         #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
-	epicsInt16 buf${p.name.title().replace("_", "")}[$p.nelm];
+	epicsInt16 buf${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}BufRegCount];
         #else
-	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
+	epicsInt32 buf${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}BufRegCount];
         #end if
       #end if
       #silent $prevRAdrs.append($p.address)

@@ -20,7 +20,7 @@ epicsEnvSet( FPGA_IP, "192.168.165.69")
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
 # here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
-epicsEnvSet( EXTRA, "")
+epicsEnvSet( EXTRA, "extra")
 # This will work for the gun, which is not sc.
 epicsEnvSet( SC, "")
 
@@ -58,7 +58,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-#dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/GUNextra.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################
@@ -105,9 +105,9 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-#dbpf $(P)RUN_STOP.HIGH 0.11
+dbpf $(P)RUN_STOP.HIGH 0.11
 #dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
-asynSetTraceMask("myIP",-1,1)
-asynSetTraceMask("myReg",-1,1)
+#asynSetTraceMask("myIP",-1,1)
+#asynSetTraceMask("myReg",-1,1)
 
