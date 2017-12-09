@@ -3,12 +3,12 @@
 #! DBDEND
 
 
-record(calcout, "$(P)LASER_FREQ_Hz") {
-alias( "$(P)laser_freq_Hz" )
-field(INPA, "$(P)LASER_FREQ")
-field(INPB, "-13.6239")
-field(CALC, "A*B")
-}
+#record(calcout, "$(P)LASER_FREQ_Hz") {
+#alias( "$(P)laser_freq_Hz" )
+#field(INPA, "$(P)LASER_FREQ")
+#field(INPB, "-13.6239")
+#field(CALC, "A*B")
+#}
 
 #record(stringin,"string_test")
 #{

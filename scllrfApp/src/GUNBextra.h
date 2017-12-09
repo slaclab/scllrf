@@ -20,7 +20,7 @@
  * This file is part of LCLS II. It is subject to
  * the license terms in the LICENSE.txt file found in the top-level directory
  * of this distribution and at:
-    * https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+	* https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
  * No part of LCLS II, including this file, may be
  * copied, modified, propagated, or distributed except according to the terms
  * contained in the LICENSE.txt file.
@@ -29,9 +29,9 @@
 #include "GUNB.h"
 #include <math.h>
 
-#include "../../newmat10/newmat.h"
-#include "../../newmat10/newmatap.h"
-#include "../../newmat10/newmatio.h"
+#include "newmat.h"
+#include "newmatap.h"
+#include "newmatio.h"
 using namespace NEWMAT;
 
 class GUNBextra;
@@ -76,8 +76,8 @@ private:
 	int *aParamIndex_;
 	int *pParamIndex_;
 	int *rawParamIndex_;
-    int *minsParamIndex_;
-    int *maxsParamIndex_;
+	int *minsParamIndex_;
+	int *maxsParamIndex_;
 	epicsFloat32 gain_;
 
 	float* CavityDecayConstantCompute(int *decay_real, int *decay_imag, unsigned int start);
@@ -112,9 +112,13 @@ public:
 	static const char *TraceDataQString;
 	static const char *TraceDataAString;
 	static const char *TraceDataPString;
+	static const char *DecayConstantBString;
+	static const char *DecayStrengthString;
+	static const char *DecayFitStdDevString;
 	static const char *TraceDataMinsRString;
 	static const char *TraceDataMaxsRString;
-    static const char* TraceDataTimeStepString;
+	static const char* TraceDataTimeStepString;
+	static const char* TraceDataFastUpdateString;
 
 	void TraceDataRequester(); // When signaled that waveforms are waiting, request them.
 	static const unsigned TraceDataRegCount; // # data points for I or Q. Half the registers are I data, half Q
@@ -129,45 +133,49 @@ protected:
 	epicsEvent reqTraceDataEvent_; /**< Event to signal the waveform requester */
 	unsigned int newTraceDataAvailable_; /**< netSendCount value of the latest response with the "new waveform" flag set */
 	unsigned int newTraceDataRead_; /**< netSendCount for the most recent waveform */
-	unsigned int phaseStepH, phaseStepL, phaseModulo;
-	double iFrequency;
 
 	TraceData traceData_;
+	unsigned int phaseStepH, phaseStepL, phaseModulo;
+	double iFrequency;
 
 	virtual asynStatus StartTraceDataRequester(); // For system startup
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
 
-    // parameters for reading I/Q waveforms
-    // Circle buffer I/Q data
-    int p_TraceDataNActive;
+	// parameters for reading I/Q waveforms
+	// Circle buffer I/Q data
+	int p_TraceDataNActive;
 #define FIRST_GUNBEXTRA_PARAM p_TraceDataNActive
-    int p_TraceDataChanEnable;
-    int p_TraceDataI;
-    int p_TraceDataQ;
-    int p_TraceDataA;
-    int p_TraceDataP;
-    int p_TraceDataMinsR;
-    int p_TraceDataMaxsR;
-    int p_TraceDataTimeStep;
+	int p_TraceDataChanEnable;
+	int p_TraceDataI;
+	int p_TraceDataQ;
+	int p_TraceDataA;
+	int p_TraceDataP;
+	int p_TraceDataMinsR;
+	int p_TraceDataMaxsR;
+	int p_TraceDataTimeStep;
+	int p_TraceDataFastUpdate;
+	int p_DecayConstantB;
+	int p_DecayStrength;
+	int p_DecayFitStdDev;
 
-    int p_IF; // intermediate frequency
+	int p_IF; // intermediate frequency
 
-    #define LAST_GUNBEXTRA_PARAM p_IF
+	#define LAST_GUNBEXTRA_PARAM p_IF
 
 #define NUM_GUNBEXTRA_PARAMS (&LAST_GUNBEXTRA_PARAM - &FIRST_GUNBEXTRA_PARAM + 1)
 
 private:
 
-    // masks applied to returned register data
-    enum ExtraRegMasks
-    {
-    	TraceKeepRMask = 0x000000FF,
-    	TraceKeepWMask = 0x000000FF,
+	// masks applied to returned register data
+	enum ExtraRegMasks
+	{
+		TraceKeepRMask = 0x000000FF,
+		TraceKeepWMask = 0x000000FF,
 		TraceDataIsReadyMask = 0x40000000, // flag for trace data
 		nptMask = 0x3F000000 // for trace status reg
-    };
+	};
 };
 
 #endif
