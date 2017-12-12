@@ -153,6 +153,51 @@ record( calcout, "$(P)PULSE_LENGTH_Sync"){
 	field( PREC, "7")
 }
 
+# When ramping duty cycle, increase the frequency, not the pulse length
+record( ao, "$(P)DUTY_CYCLE")
+{
+	field( LOPR, "0")
+	field( DRVL, "0")
+	field( HOPR, "100")
+	field( DRVH, "100")
+	field( EGU, "%")
+	field( FLNK, "$(P)DUTY_CYCLE_Sync_Out")
+	field( PREC, "7")
+}
+
+record( calcout, "$(P)DUTY_CYCLE_Sync_Out")
+{
+	field( INPA, "$(P)DUTY_CYCLE")
+	field( INPB, "$(P)PULSE_LENGTH")
+	field( OCAL, "A==0?0:B/(A*100)")
+	field( DOPT, "Use OCAL")
+	field( OUT, "$(P)REP_PERIOD")
+	# Only output when neither length nor period are updating
+	field( INPC, "$(P)PULSE_LENGTH.PACT")
+	field( INPD, "$(P)REP_PERIOD.PACT")
+	field( CALC, "C|D")
+	field( OOPT, "When Zero")
+	field( SDIS, "$(P)DUTY_CYCLE_Sync_In.PACT")
+	field( DISV, "1")
+	field( EGU, "%")
+#	field( FLNK, "$(P)REP_PERIOD")
+	field( PREC, "7")
+}
+
+record( calcout, "$(P)DUTY_CYCLE_Sync_In")
+{
+	field( INPA, "$(P)REP_PERIOD CP")
+	field( INPB, "$(P)PULSE_LENGTH CP")
+	field( CALC, "A==0?0:B>A?100:100*B/A")
+	field( OOPT, "On Change")
+	field( OUT, "$(P)DUTY_CYCLE PP")
+	field( SDIS, "$(P)DUTY_CYCLE_Sync_Out.PACT")
+	field( DISV, "1")
+	field( EGU, "%")
+	field( PREC, "7")
+}
+
+
 # On the user side, setpoints are amplitude/phase.
 # On the FPGA side, they're I/Q
 record( ao, "$(P)ADES"){
