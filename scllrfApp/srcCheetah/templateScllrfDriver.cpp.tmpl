@@ -15,7 +15,7 @@
  * This file is part of LCLS II. It is subject to
  * the license terms in the LICENSE.txt file found in the top-level directory
  * of this distribution and at:
-    * https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+	* https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
  * No part of LCLS II, including this file, may be
  * copied, modified, propagated, or distributed except according to the terms
  * contained in the LICENSE.txt file.
@@ -39,57 +39,57 @@ const char *${name}Driver::regMapSha1String = "${sha1}";
 #set $prevWAdrs = []
 #set $prevRAdrs =[]
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if $p.has_key('desc')
+#if $p.has_key('desc')
 // ${p.desc}
-  #end if
-  #if (not $p.has_key('access')) or ('r' in $p.access)
+#end if
+#if (not $p.has_key('access')) or ('r' in $p.access)
 const char *${name}Driver::${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
-    #if $p.address not in $prevRAdrs
-      #if ($p.has_key('nelm') and $p.nelm>32)
-        ## exclude arrays with > 32 elements from polling
-        #set $count_inc = 0 
+	#if $p.address not in $prevRAdrs
+	  #if ($p.has_key('nelm') and $p.nelm>32)
+		## exclude arrays with > 32 elements from polling
+		#set $count_inc = 0
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
 //const unsigned int ${p.name.title().replace("_", "")}BufRegCount = $p.nelm;
 //const unsigned int ${p.name.title().replace("_", "")}ReqSegmentCount = (${p.name.title().replace("_", "")}BufRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up;
 //const unsigned int ${p.name.title().replace("_", "")}ReqMsgSize = ${p.name.title().replace("_", "")}BufRegCount + ${p.name.title().replace("_", "")}ReqSegmentCount; // All register addresses plus nonce space
-      #else if bool(re.search(r'U\d|lspi', $p.name))
-        ## exclude registers with side effectes from polling
-        #set $count_inc = 0
-      #else if $p.has_key('nelm') and $p.nelm<=32
-        #set $count_inc = $p.nelm
-        #if $p.nelm>1
+	  #else if bool(re.search(r'U\d|lspi', $p.name))
+		## exclude registers with side effectes from polling
+		#set $count_inc = 0
+	  #else if $p.has_key('nelm') and $p.nelm<=32
+		#set $count_inc = $p.nelm
+		#if $p.nelm>1
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
-        #end if
-      #else if not $p.has_key('nelm')
-        #set $count_inc = 1
-      #end if
-      #set $polledRegCount += $count_inc
-      #silent $prevRAdrs.append($p.address)
-    #else
+		#end if
+	  #else if not $p.has_key('nelm')
+		#set $count_inc = 1
+	  #end if
+	  #set $polledRegCount += $count_inc
+	  #silent $prevRAdrs.append($p.address)
+	#else
 // shared address $p.address for $p.name
-    #end if
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
+	#end if
+#end if
+#if $p.has_key('access') and ('w' in $p.access)
 const char *${name}Driver::${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
-    #if $p.address not in $prevWAdrs
-      #if $p.has_key('nelm') and $p.nelm<=32
-        #if ($p.nelm>1) and ($p.address not in $prevRAdrs)
+	#if $p.address not in $prevWAdrs
+	  #if $p.has_key('nelm') and $p.nelm<=32
+		#if ($p.nelm>1) and ($p.address not in $prevRAdrs)
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
-        #end if
-        #set $count_inc = $p.nelm
-      #else if $p.has_key('nelm') and $p.nelm>32
-        #set $count_inc = 0
-        ## WAV doesn't have R and W variations, skip if this was done in the R section above
-        #if $p.address not in $prevRAdrs
+		#end if
+		#set $count_inc = $p.nelm
+	  #else if $p.has_key('nelm') and $p.nelm>32
+		#set $count_inc = 0
+		## WAV doesn't have R and W variations, skip if this was done in the R section above
+		#if $p.address not in $prevRAdrs
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
-        #end if
-      #else
-        #set $count_inc = 1
-      #end if
-      #set $writeRegCount += $count_inc
-      #silent $prevWAdrs.append($p.address)
-    #end if
-  #end if
+		#end if
+	  #else
+		#set $count_inc = 1
+	  #end if
+	  #set $writeRegCount += $count_inc
+	  #silent $prevWAdrs.append($p.address)
+	#end if
+#end if
 #end for
 
 const unsigned int ${name}Driver::${name}PolledRegCount = $polledRegCount;
@@ -117,82 +117,82 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 		maxAddr, /* maxAddr, i.e. number of channels */
 		paramTableAdds + NUM_${name.upper()}_PARAMS)
 {
-    epicsThreadSleep(defaultPollPeriod);
+	epicsThreadSleep(defaultPollPeriod);
 #import re
 #for $p in sorted($registers, key=lambda k: k['name'])
 #if $p.has_key('nelm') and $p.nelm>1
-  #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
-    createParam(${p.name.title().replace("_", "")}WavString, asynParamInt8Array, &p_${p.name.title().replace("_", "")}Wav);
-  #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
-    createParam(${p.name.title().replace("_", "")}WavString, asynParamInt16Array, &p_${p.name.title().replace("_", "")}Wav);
-  #else
-    createParam(${p.name.title().replace("_", "")}WavString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}Wav);
-  #end if
-  #if (not $p.has_key('access')) or ('r' in $p.access)
-    createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
-    #if $p.has_key('nelm') and $p.nelm>512
-    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
-    #else
-    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
-    #end if
-  #end if
+#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	createParam(${p.name.title().replace("_", "")}WavString, asynParamInt8Array, &p_${p.name.title().replace("_", "")}Wav);
+#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	createParam(${p.name.title().replace("_", "")}WavString, asynParamInt16Array, &p_${p.name.title().replace("_", "")}Wav);
 #else
-  #if (not $p.has_key('access')) or ('r' in $p.access)
-    #if ($p.has_key('bits'))
-    createParam(${p.name.title().replace("_", "")}RString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}R);
-    #else
-    createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
-    #end if
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
-    #if ($p.has_key('bits'))
-    createParam(${p.name.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}W);
-    #else
-    createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
-    #end if
-  #end if
+	createParam(${p.name.title().replace("_", "")}WavString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}Wav);
+#end if
+#if (not $p.has_key('access')) or ('r' in $p.access)
+	createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
+#end if
+#if $p.has_key('access') and ('w' in $p.access)
+	#if $p.has_key('nelm') and $p.nelm>512
+	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+	#else
+	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+	#end if
+#end if
+#else
+#if (not $p.has_key('access')) or ('r' in $p.access)
+	#if ($p.has_key('bits'))
+	createParam(${p.name.title().replace("_", "")}RString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}R);
+	#else
+	createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
+	#end if
+#end if
+#if $p.has_key('access') and ('w' in $p.access)
+	#if ($p.has_key('bits'))
+	createParam(${p.name.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}W);
+	#else
+	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+	#end if
+#end if
 #end if
 #end for
 
-    // Message size is the number of read registers, plus 1 nonce for every 175 read registers
-    PolledRegMsgSize_ = ${name}PolledRegCount + (${name}PolledRegCount / 175) + 1;
+	// Message size is the number of read registers, plus 1 nonce for every 175 read registers
+	PolledRegMsgSize_ = ${name}PolledRegCount + (${name}PolledRegCount / 175) + 1;
 	// A canned request to read all registers
-    pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
+	pPolledRegMsg_ = new FpgaReg[PolledRegMsgSize_]
 	{
 #set $msgRegCount = 0
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key('nelm') and $p.nelm<=32
-    #set $chan_count = $p.nelm
-  #else
-    #set $chan_count = 1
-  #end if
-  #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>32) or bool(re.search(r'U\d|lspi', $p.name))
-    #for $chan_num in range(0, $chan_count )
-      #if msgRegCount % 174 == 0
+#if $p.has_key('nelm') and $p.nelm<=32
+	#set $chan_count = $p.nelm
+#else
+	#set $chan_count = 1
+#end if
+#unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>32) or bool(re.search(r'U\d|lspi', $p.name))
+	#for $chan_num in range(0, $chan_count )
+	  #if msgRegCount % 174 == 0
 		{ 0, 0 },
-      #end if
-        #if $chan_num == 0
+	  #end if
+		#if $chan_num == 0
 		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr), blankData },
-        #else
+		#else
 		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr) + $chan_num, blankData },
-        #end if
-      #set $prevAdr = $p.address
-      #set $msgRegCount += 1
-    #end for
-  #end unless
+		#end if
+	  #set $prevAdr = $p.address
+	  #set $msgRegCount += 1
+	#end for
+#end unless
 #end for
 	};
 
 	htonFpgaRegArray(pPolledRegMsg_, PolledRegMsgSize_);
 
-    epicsThreadSleep(defaultPollPeriod);
-    printf("%s created %ld of %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS, paramTableAdds+NUM_${name.upper()}_PARAMS);
+	epicsThreadSleep(defaultPollPeriod);
+	printf("%s created %ld of %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS, paramTableAdds+NUM_${name.upper()}_PARAMS);
 
-    wakeupPoller();
-    wakeupReader();
+	wakeupPoller();
+	wakeupReader();
 }
 
 ${name}Driver::~${name}Driver()
@@ -221,32 +221,32 @@ asynStatus ${name}Driver::functionToRegister(const int function, FpgaReg *pToFpg
 	asynStatus status = asynSuccess;
 
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if (not $p.has_key('access')) or ('r' in $p.access)
-    #if ( $p.has_key('nelm') and $p.nelm > 1 )
-    if( (function == p_${p.name.title().replace("_", "")}R ) or (function == p_${p.name.title().replace("_", "")}Wav ))
-    #else
-    if( function == p_${p.name.title().replace("_", "")}R )
-    #end if
-    {
+#if (not $p.has_key('access')) or ('r' in $p.access)
+	#if ( $p.has_key('nelm') and $p.nelm > 1 )
+	if( (function == p_${p.name.title().replace("_", "")}R ) or (function == p_${p.name.title().replace("_", "")}Wav ))
+	#else
+	if( function == p_${p.name.title().replace("_", "")}R )
+	#end if
+	{
 		pToFpga->addr = ${p.name.title().replace("_", "")}RAdr|flagReadMask;
-    }
-    else
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
-    #if ( $p.has_key('nelm') and $p.nelm > 1 )
-    if( (function == p_${p.name.title().replace("_", "")}W ) or (function == p_${p.name.title().replace("_", "")}Wav ))
-    #else
-        if( function == p_${p.name.title().replace("_", "")}W )
-    #end if
-    {
+	}
+	else
+#end if
+#if $p.has_key('access') and ('w' in $p.access)
+	#if ( $p.has_key('nelm') and $p.nelm > 1 )
+	if( (function == p_${p.name.title().replace("_", "")}W ) or (function == p_${p.name.title().replace("_", "")}Wav ))
+	#else
+		if( function == p_${p.name.title().replace("_", "")}W )
+	#end if
+	{
 		pToFpga->addr = ${p.name.title().replace("_", "")}WAdr;
-    }
-    else
-  #end if
+	}
+	else
+#end if
 #end for
-    	status = asynError;
+		status = asynError;
 
-    return status;
+	return status;
 }
 
 /**  Extract register address and data from the received message and set the appropriate
@@ -263,65 +263,66 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and ($p.has_key("signed") and $p.signed == "signed") and  ($p.has_key("bit_width") or $p.has_key("data_width"))
+#if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and ($p.has_key("signed") and $p.signed == "signed") and  ($p.has_key("bit_width") or $p.has_key("data_width"))
 	int32_t signExtBits = 0;
-    #break
-  #end if
+	#break
+#end if
 #end for
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if ((($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and ($p.has_key('nelm') and $p.nelm > 1))
+#if ((($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and ($p.has_key('nelm') and $p.nelm > 1))
 	int index;
-    #break
-  #end if
+	#break
+#end if
 #end for
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
-    {
+	{
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
 #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and not ($p.has_key('nelm') and $p.nelm > 1)
-  #unless ($prevAdr == $p.address)
+#unless ($prevAdr == $p.address)
 	break;
 
-    case ${p.name.title().replace("_", "")}RAdr|flagReadMask:
-  #else
+	case ${p.name.title().replace("_", "")}RAdr|flagReadMask:
+#else
 	// shared address with ${p.name.title().replace("_", "")}RAdr  $prevAdr == $p.address
-  #end unless
-  #set $prevAdr = $p.address
+#end unless
+#set $prevAdr = $p.address
 
-  #if ($p.has_key('bits'))
-    #set $paramType = 'UIntDigital'
-    #set $maskParam =  ", " + $p.name.title().replace("_", "") + "Mask"
-  #else
-    #set $paramType = 'Integer'
-    #set $maskParam = ''
-  #end if
-  #if $p.has_key("bit_width") or $p.has_key("data_width")
-    #if $p.has_key("signed") and $p.signed == "signed"
+#if ($p.has_key('bits'))
+	#set $paramType = 'UIntDigital'
+	#set $maskParam =  ", " + $p.name.title().replace("_", "") + "Mask"
+#else
+	#set $paramType = 'Integer'
+	#set $maskParam = ''
+#end if
+#if $p.has_key("bit_width") or $p.has_key("data_width")
+	#if $p.has_key("signed") and $p.signed == "signed"
 		signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits $maskParam);
-    #else
+	#else
 		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) $maskParam);
-    #end if
+	#end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString,
 				(unsigned int) (pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
-  #else
+#else
 		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
 				pFromFpga->data $maskParam);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
-  #end if
+#end if
 #else if $p.has_key('access') and ( $p.access == "w" ) and (($p.has_key('nelm') and $p.nelm == 1) or not($p.has_key('nelm')))
 	break;
 
-    case ${p.name.title().replace("_", "")}WAdr|flagReadMask:
-	// Ignore read from write-only address
+	case ${p.name.title().replace("_", "")}WAdr|flagReadMask:
+	// Ignore read from write-only address ${p.name.title().replace("_", "")}WAdr
+#set $prevAdr = $p.address
 #end if
 #end for
 		break;
@@ -329,36 +330,36 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 	default:
 		// Arrays larger than 32 elements should be handled in a subclass, generally more complicated
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 32
+#if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 32
 		if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
 				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + ${p.name.title().replace("_", "")}BufRegCount)))
 		{
 			index = (pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask));
-    #if $p.has_key("bit_width") or $p.has_key("data_width")
-      #if $p.has_key("signed") and $p.signed == "signed"
+	#if $p.has_key("bit_width") or $p.has_key("data_width")
+	  #if $p.has_key("signed") and $p.signed == "signed"
 			signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 			status = (asynStatus) setIntegerParam(index,
 				p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
 			buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits;
-      #else
+	  #else
 			status = (asynStatus) setIntegerParam(index,
 				p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
 			buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
-      #end if
+	  #end if
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString,index,
 				(unsigned int) (pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
-    #else
+	#else
 			status = (asynStatus) setIntegerParam(index,
 				p_${p.name.title().replace("_", "")}R, pFromFpga->data);
 			buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString, index, (unsigned ) pFromFpga->data);
-    #end if
+	#end if
 			if (index > 0)
 			{
 				callParamCallbacks(index, index);
@@ -366,60 +367,60 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 
 			if(index == ${p.name.title().replace("_", "")}BufRegCount - 1)
 			{
-    #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
 				doCallbacksInt8Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
-    #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
 				doCallbacksInt16Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
-    #else
+	#else
 				doCallbacksInt32Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
-    #end if
+	#end if
 			}
 		}
 		else
-  #else if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 32
+#else if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 32
 			if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
 					(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + ${p.name.title().replace("_", "")}BufRegCount)))
 			{
 				index = (pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask));
-	    #if $p.has_key("bit_width") or $p.has_key("data_width")
-	      #if $p.has_key("signed") and $p.signed == "signed"
+		#if $p.has_key("bit_width") or $p.has_key("data_width")
+		  #if $p.has_key("signed") and $p.signed == "signed"
 				signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 				buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits;
-	      #else
+		  #else
 				buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
-	      #end if
+		  #end if
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
 					${p.name.title().replace("_", "")}RString,index,
 					(unsigned int) (pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
-	    #else
+		#else
 				buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 					"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
 					${p.name.title().replace("_", "")}RString, index, (unsigned ) pFromFpga->data);
-	    #end if
+		#end if
 				if(index == ${p.name.title().replace("_", "")}BufRegCount - 1)
 				{
-	    #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+		#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
 					doCallbacksInt8Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
-	    #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+		#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
 					doCallbacksInt16Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
-	    #else
+		#else
 					doCallbacksInt32Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
-	    #end if
+		#end if
 				}
 			}
 			else
-  #end if
+#end if
 #end for
 		{
 			status = scllrfAsynPortDriver::processRegReadback(pFromFpga, waveIsReady);
 		}
 
 		break;
-    }
+	}
 
-    return status;
+	return status;
 }
 
 
@@ -448,49 +449,49 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 ##  #end if
 ###end for
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and ($p.nelm > 1)
+#if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and ($p.nelm > 1)
 	unsigned int index;
-    #break
-  #end if
+	#break
+#end if
 #end for
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
-    {
+	{
 #set $prevAdr=-1
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key("bit_width") or $p.has_key("data_width")
-    #set $maskStr = "& " + $p.name.title().replace("_", "") + "Mask"
-  #else
-    #set $maskStr = ""
-  #end if
-  #if $p.has_key('access') and ( "w" in $p.access ) and (($p.has_key('nelm') and $p.nelm == 1) or not($p.has_key('nelm')))
-    #unless ($prevAdr == $p.address)
-    case ${p.name.title().replace("_", "")}WAdr:
-    #else
+#if $p.has_key("bit_width") or $p.has_key("data_width")
+	#set $maskStr = "& " + $p.name.title().replace("_", "") + "Mask"
+#else
+	#set $maskStr = ""
+#end if
+#if $p.has_key('access') and ( "w" in $p.access ) and (($p.has_key('nelm') and $p.nelm == 1) or not($p.has_key('nelm')))
+	#unless ($prevAdr == $p.address)
+	case ${p.name.title().replace("_", "")}WAdr:
+	#else
 	// shared address with ${p.name.title().replace("_", "")}WAdr
-    #end unless
-    #set $prevAdr = $p.address
-    #if ($p.has_key('bits'))
-      #set $paramType = 'UIntDigital'
-      #set $maskParam = ", " + $p.name.title().replace("_", "") + "Mask"
-      #set $retVal = 'uValueSet'
-    #else
-      #set $paramType = 'Integer'
-      #set $maskParam = ''
-      #set $retVal = 'valueSet'
-    #end if
+	#end unless
+	#set $prevAdr = $p.address
+	#if ($p.has_key('bits'))
+	  #set $paramType = 'UIntDigital'
+	  #set $maskParam = ", " + $p.name.title().replace("_", "") + "Mask"
+	  #set $retVal = 'uValueSet'
+	#else
+	  #set $paramType = 'Integer'
+	  #set $maskParam = ''
+	  #set $retVal = 'valueSet'
+	#end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 			"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 			${p.name.title().replace("_", "")}WString, (unsigned int) (pFromFpga->data $maskStr));
 
 		break;
-  #end if
+#end if
 #end for
 	default:
 		// Arrays larger than 32 elements should be handled in a subclass, generally more complicated
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and $p.nelm > 1
+#if $p.has_key('access') and ( "w" in $p.access ) and $p.has_key('nelm') and $p.nelm > 1
 		if ((pFromFpga->addr >= ${p.name.title().replace("_", "")}WAdr) &&
 				(pFromFpga->addr < (${p.name.title().replace("_", "")}WAdr + $p.nelm)))
 		{
@@ -502,18 +503,18 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 		}
 		else
-  #end if
+#end if
 #end for
 		{
 			scllrfAsynPortDriver::processRegWriteResponse(pFromFpga);
 		}
 
 		break;
-    }
+	}
 
 	// TODO: handle arrays
 
-    return status;
+	return status;
 }
 
 
