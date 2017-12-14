@@ -161,7 +161,7 @@ record( ao, "$(P)DUTY_CYCLE")
 	field( HOPR, "100")
 	field( DRVH, "100")
 	field( EGU, "%")
-	field( FLNK, "$(P)DUTY_CYCLE_Sync_Out")
+	field( FLNK, "$(P)DUTY_CYCLE_Sync_Out PP")
 	field( PREC, "7")
 }
 
@@ -169,9 +169,9 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_Out")
 {
 	field( INPA, "$(P)DUTY_CYCLE")
 	field( INPB, "$(P)PULSE_LENGTH")
-	field( OCAL, "A==0?0:B/(A*100)")
+	field( OCAL, "A==0?0:B/(A/100)")
 	field( DOPT, "Use OCAL")
-	field( OUT, "$(P)REP_PERIOD")
+	field( OUT, "$(P)REP_PERIOD PP")
 	# Only output when neither length nor period are updating
 	field( INPC, "$(P)PULSE_LENGTH.PACT")
 	field( INPD, "$(P)REP_PERIOD.PACT")
@@ -344,14 +344,38 @@ record(acalcout, "$(P)RAMTEST_Syncin")
 	field( DISV, "1")
 }
 
+# The PUSLE_BOUNDARY register sets the start of the waveform to:
+# Free running, not synchronized, when set to 0
+# Rising pulse edge at the start of the trace, when set to 2
+# Falling pulse edge at the start of the trace, when set to 3
+record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER")
+{
+	field(ZRST, "Free Run")
+	field(ZRVL, 0)
+	field(ONST, "Rising Edge")
+	field(ONVL, 2)
+	field(TWST, "Falling Edge")
+	field(TWVL, 3)
+	field(OUT, "$(P)PULSE_BOUNDARY_W PP")
+
+}
+
+record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER_Sync")
+{
+	field(OMSL, "closed_loop")
+	field(DOL, "$(P)PULSE_BOUNDARY_W")
+	field(OUT, "$(P)TRACE_DATA_EDGE_TRIGGER")
+}
+
 record(mbboDirect, "$(P)TRACE_DATA_CHAN_ENABLE")
 {
-	field( PINI, "NO")
+	field( PINI, "YES")
 	field( DTYP, "asynUInt32Digital")
 	field( OUT,  "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
 	field( NOBT, "12")
 	field( SCAN, "Passive")
 	info( autosaveFields, "DESC")
+	info( asyn:READBACK, "1")
 }
 record(longin, "$(P)TRACE_DATA_N_ACTIVE") {
 	field(PINI, "NO")
@@ -366,11 +390,6 @@ record(ai, "$(P)IFACT") {
 	field(INP, "@asyn($(PORT),0) IF_FREQ")
 	field(SCAN, "I/O Intr")
 }
-
-record(ao, "$(P)IFDES") {
-	field(PINI, "NO")
-}
-
 
 record(ai, "$(P)DECAY_CONSTANT_B") {
 	field(PINI, "NO")
