@@ -1,0 +1,1605 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 510
+y 91
+w 450
+h 691
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 210
+h 460
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 0
+w 210
+h 460
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 100
+y 400
+w 80
+h 30
+controlPv "$(P)TRACE_DATA_N_ACTIVE"
+format "exponential"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 15
+fgAlarm
+bgColor index 12
+nullColor index 0
+smartRefresh
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 270
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_2_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 400
+w 72
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "# Active:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 10
+w 172
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Active Channel Mask"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 140
+w 20
+h 240
+controlPv "$(P)KEEP_R"
+lineColor index 14
+onColor index 55
+offColor index 56
+numBits 12
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 140
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 45
+value {
+  "Cav In"
+  "Rev"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 180
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 41
+value {
+  "Cav In Fwd"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 220
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 36
+value {
+  "SSA Rev"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 260
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 31
+value {
+  "SSA Fwd"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 300
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 1
+bgColor index 26
+value {
+  "RF2 Loop"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 340
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 21
+value {
+  "RF1 Loop"
+}
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 380
+w 80
+h 20
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 50
+botShadowColor index 52
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE"
+pressValue "0"
+onLabel "All Off"
+offLabel "All Off"
+3d
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 270
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_2_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 340
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B0"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 340
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B0"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 300
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B1"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 300
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B1"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 260
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B2"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 260
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B2"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 220
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B3"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 220
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B3"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 180
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B4"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 180
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B4"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 140
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B5"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 140
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B5"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 60
+w 40
+h 320
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE"
+lineColor index 14
+onColor index 55
+offColor index 56
+numBits 8
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 470
+w 420
+h 110
+fgColor index 15
+bgColor index 8
+2ndBgColor index 13
+controlColor index 25
+indicatorColor index 15
+font "helvetica-medium-r-18.0"
+controlPv "$(P)WAVE_SAMP_PER_W"
+indicatorPv "$(P)WAVE_SAMP_PER_R"
+controlLabel "Time Scale Multiplier"
+increment 1
+incMultiplier 1
+limitsFromDb
+displayFormat "FFloat"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 140
+y 30
+w 20
+h 20
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "W"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 100
+y 30
+w 29
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Set"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 350
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_0_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 350
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_0_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 310
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_1_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 310
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_1_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 230
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_3_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 230
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_3_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 190
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_4_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 190
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_4_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 150
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_5_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 150
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_5_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 240
+y 10
+w 122
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Waveform Avg"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 230
+y 40
+w 64
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Amplitude"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 340
+y 40
+w 41
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Phase"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 670
+y 110
+w 430
+h 540
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 680
+y 120
+w 71
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Controls"
+}
+autoSize
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 140
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+bgAlarm 1
+2ndBgColor index 12
+topShadowColor index 1
+botShadowColor index 12
+increment 1
+controlPv "$(P)ADES"
+controlLabel "Amplitude"
+font "helvetica-medium-r-18.0"
+limitsFromDb
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 220
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+bgAlarm 1
+2ndBgColor index 12
+topShadowColor index 1
+botShadowColor index 12
+controlPv "$(P)PDES"
+controlLabel "Phase"
+font "helvetica-medium-r-18.0"
+limitsFromDb
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 300
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+bgAlarm 1
+2ndBgColor index 12
+topShadowColor index 1
+botShadowColor index 12
+controlPv "$(P)PULSE_LENGTH"
+controlLabel "Pulse Width"
+font "helvetica-medium-r-18.0"
+limitsFromDb
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 380
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+2ndBgColor index 12
+topShadowColor index 2
+botShadowColor index 12
+increment 0.0106061
+controlPv "$(P)REP_PERIOD"
+controlLabel "Pulse Interval"
+font "helvetica-medium-r-18.0"
+scaleMin 0.1
+scaleMax 10
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 460
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+2ndBgColor index 12
+topShadowColor index 2
+botShadowColor index 12
+increment 3.21242e-07
+controlPv "$(P)REP_FREQUENCY"
+controlLabel "Pulse Frequency"
+font "helvetica-medium-r-18.0"
+scaleMin 0.1
+scaleMax 10
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 670
+y 110
+w 430
+h 540
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 680
+y 120
+w 71
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Controls"
+}
+autoSize
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 140
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+bgAlarm 1
+2ndBgColor index 12
+topShadowColor index 1
+botShadowColor index 12
+increment 1
+controlPv "$(P)ADES"
+controlLabel "Amplitude"
+font "helvetica-medium-r-18.0"
+limitsFromDb
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 220
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+bgAlarm 1
+2ndBgColor index 12
+topShadowColor index 1
+botShadowColor index 12
+controlPv "$(P)PDES"
+controlLabel "Phase"
+font "helvetica-medium-r-18.0"
+limitsFromDb
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 300
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+bgAlarm 1
+2ndBgColor index 12
+topShadowColor index 1
+botShadowColor index 12
+controlPv "$(P)PULSE_LENGTH"
+controlLabel "Pulse Width"
+font "helvetica-medium-r-18.0"
+limitsFromDb
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 380
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+2ndBgColor index 12
+topShadowColor index 2
+botShadowColor index 12
+increment 0.0106061
+controlPv "$(P)REP_PERIOD"
+controlLabel "Pulse Interval"
+font "helvetica-medium-r-18.0"
+scaleMin 0.1
+scaleMax 10
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Motif Slider)
+object activeMotifSliderClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 680
+y 460
+w 410
+h 70
+fgColor index 25
+bgColor index 55
+2ndBgColor index 12
+topShadowColor index 2
+botShadowColor index 12
+increment 3.21242e-07
+controlPv "$(P)REP_FREQUENCY"
+controlLabel "Pulse Frequency"
+font "helvetica-medium-r-18.0"
+scaleMin 0.1
+scaleMax 10
+showLimits
+showLabel
+showValue
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 20
+y 380
+w 80
+h 20
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 50
+botShadowColor index 52
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE"
+pressValue "0xC3"
+onLabel "Defaults"
+offLabel "Defaults"
+3d
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 100
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B6"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 100
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B6"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 60
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B7"
+pressValue "0"
+onLabel "0"
+offLabel "0"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 60
+w 20
+h 40
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B7"
+pressValue "1"
+onLabel "1"
+offLabel "1"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 60
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 55
+value {
+  "Circ Load"
+  "Rev"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 100
+w 80
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 50
+value {
+  "Circ Load"
+  "Fwd"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 110
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_4_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 110
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_4_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 230
+y 70
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_A_5_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 70
+w 90
+h 20
+controlPv "$(P)TRACE_DATA_P_5_AVG"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 600
+w 120
+h 30
+fgColor index 14
+bgColor index 4
+inconsistentColor index 36
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(P)TRACE_DATA_EDGE_TRIGGER"
+indicatorPv "$(P)PULSE_BOUNDARY_W"
+font "helvetica-medium-r-14.0"
+endObjectProperties
+

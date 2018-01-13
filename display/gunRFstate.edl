@@ -1,0 +1,200 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1385
+y 131
+w 453
+h 566
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 430
+h 540
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 20
+w 20
+h 20
+controlPv "$(P)DETUNE_GOOD"
+lineColor index 14
+onColor index 15
+offColor index 20
+numBits 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 20
+w 111
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Detune Good"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 60
+w 20
+h 20
+controlPv "$(P)READY_TO_TUNE"
+lineColor index 14
+onColor index 15
+offColor index 20
+numBits 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 60
+w 121
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ready to Tune"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 240
+y 300
+w 40
+h 20
+fgColor index 0
+onColor index 28
+offColor index 25
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)BT_DO_FREQ_CORRECTION"
+buttonType "push"
+3d
+font "helvetica-bold-r-14.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 300
+w 156
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Correct Frequency"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 240
+y 330
+w 40
+h 20
+fgColor index 0
+onColor index 28
+offColor index 25
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)BT_CLOSELOOP"
+3d
+font "helvetica-bold-r-14.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 330
+w 214
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Close Loop (phase loop?)"
+}
+autoSize
+endObjectProperties
+

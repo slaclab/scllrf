@@ -50,4 +50,14 @@ file GUNBRegisterAlias.template
 {
 	{ NULL = NULL }
 }
-
+file ADCcalibration.template {
+pattern { N, EGU }
+		{ 0, V   }
+		{ 1, V   }
+		{ 2, V   }
+		{ 3, V   }
+		{ 4, V   }
+		{ 5, V   }
+		{ 6, V   }
+		{ 7, V   }
+}

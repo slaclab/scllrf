@@ -1,0 +1,228 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 693
+y 158
+w 1138
+h 778
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 340
+y 720
+w 160
+h 40
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-18.0"
+buttonLabel "Polling Control"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "scllrfPollingControl.edl"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 510
+y 720
+w 160
+h 40
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-18.0"
+buttonLabel "Smoothed Wave"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "PRCAPvstcircSmoothed.edl"
+}
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 690
+y 40
+w 440
+h 720
+fgColor index 12
+bgColor index 2
+topShadowColor index 1
+botShadowColor index 12
+displaySource "menu"
+filePv "LOC\\$(!W)showIt=e:0,Waveforms,Sliders,State,Limits"
+sizeOfs 5
+numDsps 4
+displayFileName {
+  0 "gunRFwave.edl"
+  1 "gunRFslider.edl"
+  2 "gunRFstate.edl"
+  3 "gunRFlimits.edl"
+}
+noScroll
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 690
+y 10
+w 440
+h 30
+fgColor index 13
+bgColor index 4
+selectColor index 2
+inconsistentColor index 8
+topShadowColor index 4
+botShadowColor index 4
+controlPv "LOC\\$(!W)showIt"
+font "helvetica-medium-r-18.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 720
+w 110
+h 40
+fgColor index 14
+onColor index 15
+offColor index 35
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)TRACE_DATA_FAST_UPDATE"
+onLabel "Enabled"
+offLabel "Disabled"
+3d
+invisible
+font "helvetica-medium-r-18.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 160
+y 720
+w 170
+h 40
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-24.0"
+buttonLabel "Registers etc."
+numPvs 4
+numDsps 3
+displayFileName {
+  0 "GUNBRegisters.edl"
+  1 "GUNBBits.edl"
+  2 "BMB7Registers.edl"
+}
+menuLabel {
+  0 "All raw registers"
+  1 "Registers with bit fields"
+  2 "BMB7 health"
+}
+symbols {
+  0 "P=GUN1:B15:"
+  1 "P=GUN1:B15:"
+  2 "P=GUN1:B15:"
+}
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 10
+w 660
+h 30
+fgColor index 13
+bgColor index 4
+selectColor index 2
+inconsistentColor index 8
+topShadowColor index 4
+botShadowColor index 4
+controlPv "LOC\\$(!W)showGrph"
+font "helvetica-medium-r-18.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 50
+w 660
+h 660
+fgColor index 12
+bgColor index 2
+topShadowColor index 1
+botShadowColor index 12
+displaySource "menu"
+filePv "LOC\\$(!W)showGrph=e:0,Amplitude and Phase,I and Q vs. t,I vs. Q"
+center
+sizeOfs 5
+numDsps 3
+displayFileName {
+  0 "gunAPgraph.edl"
+  1 "gunIQvstgraph.edl"
+  2 "gunIvsQgraph.edl"
+}
+noScroll
+endObjectProperties
+

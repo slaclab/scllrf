@@ -4,89 +4,100 @@
 
 
 record(waveform, "$(P)TRACE_DATA_I_$(N)") {
-  field(DESC, "Ch $(N) I Waveform")
-  field(SCAN, "I/O Intr")
-  field(DTYP, "asynInt32ArrayIn")
-  field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_I")
-  field(PREC, "1")
-  field(EGU, "$(EGU)")
-  field(NELM, "8192")
-  field(FTVL, "LONG")
+field(DESC, "Ch $(N) I Waveform")
+field(SCAN, "I/O Intr")
+field(DTYP, "asynInt32ArrayIn")
+field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_I")
+field(PREC, "1")
+field(EGU, "$(EGU)")
+field(NELM, "8192")
+field(FTVL, "LONG")
 }
 
 record(waveform, "$(P)TRACE_DATA_Q_$(N)") {
-  field(DESC, "Ch $(N) Q Waveform")
-  field(SCAN, "I/O Intr")
-  field(DTYP, "asynInt32ArrayIn")
-  field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_Q")
-  field(PREC, "1")
-  field(EGU, "$(EGU)")
-  field(NELM, "8192")
-  field(FTVL, "LONG")
+field(DESC, "Ch $(N) Q Waveform")
+field(SCAN, "I/O Intr")
+field(DTYP, "asynInt32ArrayIn")
+field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_Q")
+field(PREC, "1")
+field(EGU, "$(EGU)")
+field(NELM, "8192")
+field(FTVL, "LONG")
 }
 
 record(waveform, "$(P)TRACE_DATA_A_$(N)") {
-  field(DESC, "Ch $(N) amplitude Waveform")
-  field(SCAN, "I/O Intr")
-  field(DTYP, "asynFloat32ArrayIn")
-  field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_A")
-  field(PREC, "1")
-  field(EGU, "$(EGU)")
-  field(NELM, "8192")
-  field(FTVL, "FLOAT")
+field(DESC, "Ch $(N) amplitude Waveform")
+field(SCAN, "I/O Intr")
+field(DTYP, "asynFloat32ArrayIn")
+field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_A")
+field(PREC, "1")
+field(EGU, "$(EGU)")
+field(NELM, "8192")
+field(FTVL, "FLOAT")
+field(FLNK, "$(P)TRACE_DATA_A_$(N)_NUSE")
 }
 
 record(dfanout, "$(P)TRACE_DATA_A_$(N)_NUSE") {
-  field(OUTA, "$(P)TRACE_DATA_A_$(N)_SMOO.NUSE")
-  field(OUTB, "$(P)TRACE_DATA_A_$(N)_AVG.NUSE")
-  field(DOL, "$(P)TRACE_DATA_A_$(N).NORD")
-  field(OMSL, "closed_loop")
+field(OUTA, "$(P)TRACE_DATA_A_$(N)_SMOO.NUSE")
+field(OUTB, "$(P)TRACE_DATA_A_$(N)_AVG.NUSE")
+field(OUTC, "$(P)TRACE_DATA_A_$(N)_STDAVG.NUSE")
+field(DOL, "$(P)TRACE_DATA_A_$(N).NORD")
+field(OMSL, "closed_loop")
 }
 
 record(acalcout, "$(P)TRACE_DATA_A_$(N)_SMOO") {
-  field(INAA, "$(P)TRACE_DATA_A_$(N) CPP")
-  field(A, "50")
-  field(CALC, "(AA/A)+(AVAL*(1-1/A))")
-  field(NELM, "8192")
+field(INAA, "$(P)TRACE_DATA_A_$(N) CPP")
+field(A, "50")
+field(CALC, "(AA/A)+(AVAL*(1-1/A))")
+field(NELM, "8192")
 }
 
 record(acalcout, "$(P)TRACE_DATA_A_$(N)_AVG") {
-  field(INAA, "$(P)TRACE_DATA_A_$(N) CPP")
-  field(CALC, "AVG(AA)")
-  field(NELM, "8192")
-  field(PREC, "7")
+field(INAA, "$(P)TRACE_DATA_A_$(N) CPP")
+field(CALC, "AVG(AA)")
+field(NELM, "8192")
+field(PREC, "7")
+}
+
+record(acalcout, "$(P)TRACE_DATA_A_$(N)_STDAVG") {
+field(DESC, "Normalized standard deviation")
+field(INAA, "$(P)TRACE_DATA_A_$(N) CPP")
+field(CALC, "STD(AA)/AVG(AA)")
+field(NELM, "8192")
+field(PREC, "7")
 }
 
 record(waveform, "$(P)TRACE_DATA_P_$(N)") {
-  field(DESC, "Ch $(N) phase Waveform")
-  field(SCAN, "I/O Intr")
-  field(DTYP, "asynFloat32ArrayIn")
-  field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_P")
-  field(PREC, "1")
-  field(EGU, "$(EGU)")
-  field(NELM, "8192")
-  field(FTVL, "FLOAT")
+field(DESC, "Ch $(N) phase Waveform")
+field(SCAN, "I/O Intr")
+field(DTYP, "asynFloat32ArrayIn")
+field(INP, "@asyn($(PORT),$(N),1)TRACE_DATA_P")
+field(PREC, "1")
+field(EGU, "$(EGU)")
+field(NELM, "8192")
+field(FTVL, "FLOAT")
+field(FLNK, "$(P)TRACE_DATA_P_$(N)_NUSE")
 }
 
 record(dfanout, "$(P)TRACE_DATA_P_$(N)_NUSE") {
-  field(OUTA, "$(P)TRACE_DATA_P_$(N)_SMOO.NUSE")
-  field(OUTB, "$(P)TRACE_DATA_P_$(N)_AVG.NUSE")
-  field(DOL, "$(P)TRACE_DATA_P_$(N).NORD")
-  field(OMSL, "closed_loop")
+field(OUTA, "$(P)TRACE_DATA_P_$(N)_SMOO.NUSE")
+field(OUTB, "$(P)TRACE_DATA_P_$(N)_AVG.NUSE")
+field(DOL, "$(P)TRACE_DATA_P_$(N).NORD")
+field(OMSL, "closed_loop")
 }
 
 record(acalcout, "$(P)TRACE_DATA_P_$(N)_SMOO") {
-  field(INAA, "$(P)TRACE_DATA_P_$(N) CPP")
-  field(A, "50")
-  field(CALC, "(AA/A)+(AVAL*(1-1/A))")
-  field(NELM, "8192")
+field(INAA, "$(P)TRACE_DATA_P_$(N) CPP")
+field(A, "50")
+field(CALC, "(AA/A)+(AVAL*(1-1/A))")
+field(NELM, "8192")
 }
 
 record(acalcout, "$(P)TRACE_DATA_P_$(N)_AVG") {
-  field(INAA, "$(P)TRACE_DATA_P_$(N) CPP")
-  field(CALC, "AVG(AA)")
-  field(NELM, "8192")
-  field(PREC, "7")
+field(INAA, "$(P)TRACE_DATA_P_$(N) CPP")
+field(CALC, "AVG(AA)")
+field(NELM, "8192")
+field(PREC, "7")
 }
 
 #! Further lines contain data used by VisualDCT
