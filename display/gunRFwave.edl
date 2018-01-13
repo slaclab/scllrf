@@ -3,9 +3,9 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 510
-y 91
-w 450
+x 1959
+y 123
+w 460
 h 691
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
@@ -21,6 +21,7 @@ topShadowColor index 0
 botShadowColor index 14
 showGrid
 snapToGrid
+gridSize 5
 endScreenProperties
 
 # (Rectangle)
@@ -31,7 +32,7 @@ minor 0
 release 0
 x 0
 y 0
-w 210
+w 170
 h 460
 lineColor index 14
 fillColor index 34
@@ -43,9 +44,9 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 220
+x 165
 y 0
-w 210
+w 280
 h 460
 lineColor index 14
 fillColor index 34
@@ -59,7 +60,7 @@ minor 7
 release 0
 x 100
 y 400
-w 80
+w 40
 h 30
 controlPv "$(P)TRACE_DATA_N_ACTIVE"
 format "exponential"
@@ -82,16 +83,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 270
 w 90
-h 20
+h 25
 controlPv "$(P)TRACE_DATA_A_2_AVG"
-format "float"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -129,14 +131,16 @@ minor 1
 release 1
 x 20
 y 10
-w 172
-h 21
+w 124
+h 42
 font "helvetica-medium-r-18.0"
+fontAlign "center"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Active Channel Mask"
+  "Active Channel"
+  "Mask"
 }
 autoSize
 endObjectProperties
@@ -147,7 +151,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 160
+x 120
 y 140
 w 20
 h 240
@@ -166,7 +170,7 @@ minor 1
 release 1
 x 10
 y 140
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -186,7 +190,7 @@ minor 1
 release 1
 x 10
 y 180
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -205,7 +209,7 @@ minor 1
 release 1
 x 10
 y 220
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -224,7 +228,7 @@ minor 1
 release 1
 x 10
 y 260
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -243,7 +247,7 @@ minor 1
 release 1
 x 10
 y 300
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -262,7 +266,7 @@ minor 1
 release 1
 x 10
 y 340
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -279,9 +283,9 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
+x 80
 y 380
-w 80
+w 60
 h 20
 fgColor index 14
 onColor index 51
@@ -302,16 +306,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 270
-w 90
-h 20
+w 65
+h 25
 controlPv "$(P)TRACE_DATA_P_2_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -327,10 +332,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 340
-w 20
-h 40
+x 70
+y 355
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -338,8 +343,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B0"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -351,10 +356,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 340
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -362,8 +367,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B0"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -375,10 +380,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 300
-w 20
-h 40
+x 70
+y 315
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -386,8 +391,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B1"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -399,10 +404,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 300
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -410,8 +415,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B1"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -423,10 +428,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 260
-w 20
-h 40
+x 70
+y 275
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -434,8 +439,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B2"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -447,10 +452,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 260
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -458,8 +463,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B2"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -471,10 +476,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 220
-w 20
-h 40
+x 70
+y 235
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -482,8 +487,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B3"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -495,10 +500,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 220
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -506,8 +511,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B3"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -519,10 +524,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 180
-w 20
-h 40
+x 70
+y 195
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -530,8 +535,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B4"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -543,10 +548,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 180
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -554,8 +559,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B4"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -567,10 +572,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 140
-w 20
-h 40
+x 70
+y 155
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -578,8 +583,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B5"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -591,10 +596,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 140
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -602,8 +607,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B5"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -615,7 +620,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 140
+x 100
 y 60
 w 40
 h 320
@@ -634,7 +639,7 @@ minor 0
 release 0
 x 0
 y 470
-w 420
+w 430
 h 110
 fgColor index 15
 bgColor index 8
@@ -651,61 +656,23 @@ limitsFromDb
 displayFormat "FFloat"
 endObjectProperties
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 140
-y 30
-w 20
-h 20
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "W"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 100
-y 30
-w 29
-h 21
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "Set"
-}
-autoSize
-endObjectProperties
-
 # (Text Control)
 object activeXTextDspClass
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 350
 w 90
-h 20
+h 25
 controlPv "$(P)TRACE_DATA_A_0_AVG"
-format "float"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -721,16 +688,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 350
-w 90
-h 20
+w 65
+h 25
 controlPv "$(P)TRACE_DATA_P_0_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -746,16 +714,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 310
 w 90
-h 20
+h 25
 controlPv "$(P)TRACE_DATA_A_1_AVG"
-format "float"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -771,16 +740,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 310
-w 90
-h 20
+w 65
+h 25
 controlPv "$(P)TRACE_DATA_P_1_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -796,16 +766,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 230
 w 90
-h 20
+h 25
 controlPv "$(P)TRACE_DATA_A_3_AVG"
-format "float"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -821,16 +792,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 230
-w 90
-h 20
+w 65
+h 25
 controlPv "$(P)TRACE_DATA_P_3_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -846,16 +818,43 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 190
 w 90
-h 20
-controlPv "$(P)TRACE_DATA_A_4_AVG"
+h 25
+controlPv "$(P)TRACE_DATA_A_3_AVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 370
+y 190
+w 65
+h 25
+controlPv "$(P)TRACE_DATA_P_3_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -871,41 +870,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
-y 190
-w 90
-h 20
-controlPv "$(P)TRACE_DATA_P_4_AVG"
-format "float"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 230
+x 275
 y 150
 w 90
-h 20
+h 25
 controlPv "$(P)TRACE_DATA_A_5_AVG"
-format "float"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -921,16 +896,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 150
-w 90
-h 20
+w 65
+h 25
 controlPv "$(P)TRACE_DATA_P_5_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -948,14 +924,14 @@ minor 1
 release 1
 x 240
 y 10
-w 122
+w 132
 h 21
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Waveform Avg"
+  "Waveform Stats"
 }
 autoSize
 endObjectProperties
@@ -966,15 +942,17 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 230
-y 40
-w 64
-h 16
+x 275
+y 35
+w 70
+h 30
 font "helvetica-medium-r-14.0"
+fontAlign "center"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
+  "Mean"
   "Amplitude"
 }
 autoSize
@@ -986,15 +964,17 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 340
-y 40
+x 385
+y 35
 w 41
-h 16
+h 32
 font "helvetica-medium-r-14.0"
+fontAlign "center"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
+  "Mean"
   "Phase"
 }
 autoSize
@@ -1332,7 +1312,7 @@ minor 1
 release 0
 x 20
 y 380
-w 80
+w 60
 h 20
 fgColor index 14
 onColor index 51
@@ -1353,10 +1333,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 100
-w 20
-h 40
+x 70
+y 115
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -1364,8 +1344,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B6"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -1377,10 +1357,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 100
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -1388,8 +1368,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B6"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -1401,10 +1381,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 100
-y 60
-w 20
-h 40
+x 70
+y 75
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -1412,8 +1392,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B7"
 pressValue "0"
-onLabel "0"
-offLabel "0"
+onLabel "Off"
+offLabel "Off"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -1425,10 +1405,10 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 120
+x 70
 y 60
-w 20
-h 40
+w 30
+h 15
 fgColor index 14
 onColor index 51
 offColor index 51
@@ -1436,8 +1416,8 @@ topShadowColor index 0
 botShadowColor index 14
 controlPv "$(P)TRACE_DATA_CHAN_ENABLE.B7"
 pressValue "1"
-onLabel "1"
-offLabel "1"
+onLabel "On"
+offLabel "On"
 3d
 useEnumNumeric
 font "helvetica-medium-r-8.0"
@@ -1451,7 +1431,7 @@ minor 1
 release 1
 x 10
 y 60
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1471,7 +1451,7 @@ minor 1
 release 1
 x 10
 y 100
-w 80
+w 60
 h 30
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1489,16 +1469,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 110
 w 90
-h 20
-controlPv "$(P)TRACE_DATA_A_4_AVG"
-format "float"
+h 25
+controlPv "$(P)TRACE_DATA_A_6_AVG"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1514,16 +1495,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 110
-w 90
-h 20
-controlPv "$(P)TRACE_DATA_P_4_AVG"
+w 65
+h 25
+controlPv "$(P)TRACE_DATA_P_6_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1539,16 +1521,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 230
+x 275
 y 70
 w 90
-h 20
-controlPv "$(P)TRACE_DATA_A_5_AVG"
-format "float"
+h 25
+controlPv "$(P)TRACE_DATA_A_7_AVG"
+format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 3
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1564,16 +1547,17 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 330
+x 370
 y 70
-w 90
-h 20
-controlPv "$(P)TRACE_DATA_P_5_AVG"
+w 65
+h 25
+controlPv "$(P)TRACE_DATA_P_7_AVG"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
 bgColor index 12
 motifWidget
+precision 4
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -1601,5 +1585,235 @@ botShadowColor index 11
 controlPv "$(P)TRACE_DATA_EDGE_TRIGGER"
 indicatorPv "$(P)PULSE_BOUNDARY_W"
 font "helvetica-medium-r-14.0"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 270
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_2_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 350
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_0_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 310
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_1_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 230
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_3_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 190
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_3_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 150
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_5_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 110
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_6_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 70
+w 90
+h 25
+controlPv "$(P)TRACE_DATA_A_7_STDAVG"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 190
+y 35
+w 70
+h 30
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Amplitude"
+  "Std/Mean"
+}
+autoSize
 endObjectProperties
 

@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 240
-y 179
+x 1137
+y 283
 w 649
 h 658
 font "helvetica-medium-r-18.0"
@@ -45,7 +45,8 @@ gridColor index 11
 font "helvetica-medium-r-18.0"
 # Operating Modes
 nPts 2
-resetPv "$(P)SHELL_$(N)_DSP_UPDATE_PLOT"
+traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
+resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -60,7 +61,7 @@ yShowLabelGrid
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 6
+numTraces 8
 xPv {
   0 "$(P)TRACE_DATA_I_0"
   1 "$(P)TRACE_DATA_I_1"
@@ -68,6 +69,8 @@ xPv {
   3 "$(P)TRACE_DATA_I_3"
   4 "$(P)TRACE_DATA_I_4"
   5 "$(P)TRACE_DATA_I_5"
+  6 "$(P)TRACE_DATA_I_6"
+  7 "$(P)TRACE_DATA_I_7"
 }
 yPv {
   0 "$(P)TRACE_DATA_Q_0"
@@ -76,6 +79,8 @@ yPv {
   3 "$(P)TRACE_DATA_Q_3"
   4 "$(P)TRACE_DATA_Q_4"
   5 "$(P)TRACE_DATA_Q_5"
+  6 "$(P)TRACE_DATA_Q_6"
+  7 "$(P)TRACE_DATA_Q_7"
 }
 nPv {
   0 "$(P)TRACE_DATA_I_0.NORD"
@@ -84,6 +89,8 @@ nPv {
   3 "$(P)TRACE_DATA_I_3.NORD"
   4 "$(P)TRACE_DATA_I_4.NORD"
   5 "$(P)TRACE_DATA_I_5.NORD"
+  6 "$(P)TRACE_DATA_I_6.NORD"
+  7 "$(P)TRACE_DATA_I_7.NORD"
 }
 xSigned {
   0 1
@@ -92,6 +99,8 @@ xSigned {
   3 1
   4 1
   5 1
+  6 1
+  7 1
 }
 ySigned {
   0 1
@@ -100,6 +109,8 @@ ySigned {
   3 1
   4 1
   5 1
+  6 1
+  7 1
 }
 plotColor {
   0 index 21
@@ -108,6 +119,8 @@ plotColor {
   3 index 36
   4 index 41
   5 index 45
+  6 index 50
+  7 index 55
 }
 endObjectProperties
 

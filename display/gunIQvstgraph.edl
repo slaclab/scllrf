@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 249
-y 56
+x 1193
+y 127
 w 651
 h 646
 font "helvetica-medium-r-18.0"
@@ -44,7 +44,8 @@ bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-nPts 2
+traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
+resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -57,7 +58,7 @@ yMax 1
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 6
+numTraces 8
 xPv {
   0 "$(P)TRACE_DATA_X_AXIS"
   1 "$(P)TRACE_DATA_X_AXIS"
@@ -65,6 +66,8 @@ xPv {
   3 "$(P)TRACE_DATA_X_AXIS"
   4 "$(P)TRACE_DATA_X_AXIS"
   5 "$(P)TRACE_DATA_X_AXIS"
+  6 "$(P)TRACE_DATA_X_AXIS"
+  7 "$(P)TRACE_DATA_X_AXIS"
 }
 yPv {
   0 "$(P)TRACE_DATA_I_0"
@@ -73,6 +76,8 @@ yPv {
   3 "$(P)TRACE_DATA_I_3"
   4 "$(P)TRACE_DATA_I_4"
   5 "$(P)TRACE_DATA_I_5"
+  6 "$(P)TRACE_DATA_I_6"
+  7 "$(P)TRACE_DATA_I_7"
 }
 nPv {
   0 "$(P)TRACE_DATA_I_0.NORD"
@@ -81,6 +86,8 @@ nPv {
   3 "$(P)TRACE_DATA_I_3.NORD"
   4 "$(P)TRACE_DATA_I_4.NORD"
   5 "$(P)TRACE_DATA_I_5.NORD"
+  6 "$(P)TRACE_DATA_I_6.NORD"
+  7 "$(P)TRACE_DATA_I_7.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -89,6 +96,8 @@ plotUpdateMode {
   3 "xOrY"
   4 "xOrY"
   5 "xOrY"
+  6 "xOrY"
+  7 "xOrY"
 }
 opMode {
   0 "plot"
@@ -97,6 +106,8 @@ opMode {
   3 "plot"
   4 "plot"
   5 "plot"
+  6 "plot"
+  7 "plot"
 }
 ySigned {
   0 1
@@ -105,6 +116,8 @@ ySigned {
   3 1
   4 1
   5 1
+  6 1
+  7 1
 }
 plotColor {
   0 index 21
@@ -113,6 +126,8 @@ plotColor {
   3 index 36
   4 index 41
   5 index 45
+  6 index 50
+  7 index 55
 }
 endObjectProperties
 
@@ -137,8 +152,8 @@ bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-nPts 2
-resetPv "$(P)TRACE_DATA_DSP_UPDATE_PLOT"
+traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
+resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -151,7 +166,7 @@ yMax 1
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 6
+numTraces 8
 xPv {
   0 "$(P)TRACE_DATA_X_AXIS"
   1 "$(P)TRACE_DATA_X_AXIS"
@@ -159,6 +174,8 @@ xPv {
   3 "$(P)TRACE_DATA_X_AXIS"
   4 "$(P)TRACE_DATA_X_AXIS"
   5 "$(P)TRACE_DATA_X_AXIS"
+  6 "$(P)TRACE_DATA_X_AXIS"
+  7 "$(P)TRACE_DATA_X_AXIS"
 }
 yPv {
   0 "$(P)TRACE_DATA_Q_0"
@@ -167,6 +184,8 @@ yPv {
   3 "$(P)TRACE_DATA_Q_3"
   4 "$(P)TRACE_DATA_Q_4"
   5 "$(P)TRACE_DATA_Q_5"
+  6 "$(P)TRACE_DATA_Q_6"
+  7 "$(P)TRACE_DATA_Q_7"
 }
 nPv {
   0 "$(P)TRACE_DATA_Q_0.NORD"
@@ -175,6 +194,8 @@ nPv {
   3 "$(P)TRACE_DATA_Q_3.NORD"
   4 "$(P)TRACE_DATA_Q_4.NORD"
   5 "$(P)TRACE_DATA_Q_5.NORD"
+  6 "$(P)TRACE_DATA_Q_6.NORD"
+  7 "$(P)TRACE_DATA_Q_7.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -183,6 +204,8 @@ plotUpdateMode {
   3 "xOrY"
   4 "xOrY"
   5 "xOrY"
+  6 "xOrY"
+  7 "xOrY"
 }
 opMode {
   0 "plot"
@@ -191,6 +214,8 @@ opMode {
   3 "plot"
   4 "plot"
   5 "plot"
+  6 "plot"
+  7 "plot"
 }
 ySigned {
   0 1
@@ -199,6 +224,8 @@ ySigned {
   3 1
   4 1
   5 1
+  6 1
+  7 1
 }
 plotColor {
   0 index 21
@@ -207,6 +234,8 @@ plotColor {
   3 index 36
   4 index 41
   5 index 45
+  6 index 50
+  7 index 55
 }
 endObjectProperties
 

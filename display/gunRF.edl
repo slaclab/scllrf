@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 693
-y 158
+x 2361
+y 121
 w 1138
-h 778
+h 831
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -29,15 +29,15 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 340
+x 410
 y 720
-w 160
+w 120
 h 40
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
 botShadowColor index 12
-font "helvetica-medium-r-18.0"
+font "helvetica-bold-r-14.0"
 buttonLabel "Polling Control"
 numPvs 4
 numDsps 1
@@ -52,15 +52,15 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 510
+x 540
 y 720
-w 160
+w 130
 h 40
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
 botShadowColor index 12
-font "helvetica-medium-r-18.0"
+font "helvetica-bold-r-14.0"
 buttonLabel "Smoothed Wave"
 numPvs 4
 numDsps 1
@@ -78,7 +78,7 @@ release 0
 x 690
 y 40
 w 440
-h 720
+h 780
 fgColor index 12
 bgColor index 2
 topShadowColor index 1
@@ -149,32 +149,35 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 160
+x 290
 y 720
-w 170
+w 110
 h 40
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
 botShadowColor index 12
-font "helvetica-bold-r-24.0"
+font "helvetica-bold-r-14.0"
 buttonLabel "Registers etc."
 numPvs 4
-numDsps 3
+numDsps 4
 displayFileName {
   0 "GUNBRegisters.edl"
   1 "GUNBBits.edl"
   2 "BMB7Registers.edl"
+  3 "GUNBCalibration.edl"
 }
 menuLabel {
   0 "All raw registers"
   1 "Registers with bit fields"
   2 "BMB7 health"
+  3 "Calibration"
 }
 symbols {
   0 "P=GUN1:B15:"
   1 "P=GUN1:B15:"
   2 "P=GUN1:B15:"
+  3 "P=GUN1:B15:"
 }
 endObjectProperties
 
@@ -224,5 +227,156 @@ displayFileName {
   2 "gunIvsQgraph.edl"
 }
 noScroll
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 20
+y 800
+w 140
+h 20
+controlPv "$(P)DECAY_CONSTANT_B"
+font "helvetica-medium-r-14.0"
+fgColor index 25
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 770
+w 132
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Decay Constant"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 180
+y 770
+w 129
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Decay Strength"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 800
+w 140
+h 16
+controlPv "$(P)DECAY_STRENGTH"
+font "helvetica-medium-r-14.0"
+fgColor index 25
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 360
+y 770
+w 146
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Decay Fit StdDev"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 360
+y 800
+w 140
+h 16
+controlPv "$(P)DECAY_FIT_STDDEV"
+font "helvetica-medium-r-14.0"
+fgColor index 25
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 150
+y 720
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+buttonLabel "Start IOC"
+numCmds 1
+command {
+  0 "iocConsole -d sioc-b15-gun1"
+}
 endObjectProperties
 

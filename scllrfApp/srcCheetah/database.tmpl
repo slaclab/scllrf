@@ -18,14 +18,24 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#if $p.has_key('range_top')
 	field( HOPR, "${p.range_top}")
 	#else if $p.has_key('bit_width')
-	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+	field( HOPR, "${2**$p.bit_width - 1}")
 	#else if $p.has_key('data_width')
-	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( HOPR, "${2**$p.data_width - 1}")
 	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-	#else if $p.has_key('bit_width') or $p.has_key('data_width')
+	#else if $p.has_key('bit_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
 	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.bit_width - 1)}")
+	#end if
+	#else if $p.has_key('data_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
+	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.data_width - 1)}")
+	#end if
 	#end if
 	#if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -38,7 +48,7 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#else
 	field(PREC, 3)
 	#end if
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
@@ -71,16 +81,31 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	field( HOPR, "${p.range_top}")
 	field( DRVH, "${p.range_top}")
 	#else if $p.has_key('bit_width')
-	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
-	field( DRVH, "0x${format(2**$p.bit_width - 1, '08X')}")
+	field( HOPR, "${2**$p.bit_width - 1}")
+	field( DRVH, "${2**$p.bit_width - 1}")
 	#else if $p.has_key('data_width')
-	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
-	field( DRVH, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( HOPR, "${2**$p.data_width - 1}")
+	field( DRVH, "${2**$p.data_width - 1}")
 	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-	#else if $p.has_key('bit_width') or $p.has_key('data_width')
+	field( DRVL, "${p.range_bottom}")
+	#else if $p.has_key('bit_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
 	field( LOPR, 0)
+	field( DRVL, 0)
+	#else
+	field( LOPR, "${-(2**$p.bit_width - 1)}")
+	field( DRVL, "${-(2**$p.bit_width - 1)}")
+	#end if
+	#else if $p.has_key('data_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
+	field( LOPR, 0)
+	field( DRVL, 0)
+	#else
+	field( LOPR, "${-(2**$p.data_width - 1)}")
+	field( DRVL, "${-(2**$p.data_width - 1)}")
+	#end if
 	#end if
 	#if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -93,7 +118,7 @@ record(ao, "\$(P)${p.name.upper()}_W")
 	#else
 	field(PREC, 3)
 	#end if
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 	#end if
@@ -126,8 +151,18 @@ record(ai, "\$(P)${p.name.upper()}_R${i}")
 	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-	#else if $p.has_key('bit_width') or $p.has_key('data_width')
+	#else if $p.has_key('bit_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
 	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.bit_width - 1)}")
+	#end if
+	#else if $p.has_key('data_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
+	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.data_width - 1)}")
+	#end if
 	#end if
 	#if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -181,8 +216,23 @@ record(ao, "\$(P)${p.name.upper()}_W${i}")
 	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-	#else if $p.has_key('bit_width') or $p.has_key('data_width')
+	field( DRVL, "${p.range_bottom}")
+	#else if $p.has_key('bit_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
 	field( LOPR, 0)
+	field( DRVL, 0)
+	#else
+	field( LOPR, "${-(2**$p.bit_width - 1)}")
+	field( DRVL, "${-(2**$p.bit_width - 1)}")
+	#end if
+	#else if $p.has_key('data_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
+	field( LOPR, 0)
+	field( DRVL, 0)
+	#else
+	field( LOPR, "${-(2**$p.data_width - 1)}")
+	field( DRVL, "${-(2**$p.data_width - 1)}")
+	#end if
 	#end if
 	#if $p.has_key('ASLO')
 	field( ASLO, "${p.ASLO}")
@@ -323,8 +373,18 @@ record(waveform, "\$(P)${p.name.upper()}_R")
 	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-	#else if $p.has_key('bit_width') or $p.has_key('data_width')
+	#else if $p.has_key('bit_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
 	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.bit_width - 1)}")
+	#end if
+	#else if $p.has_key('data_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
+	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.data_width - 1)}")
+	#end if
 	#end if
 	info( autosaveFields, "DESC EGU HOPR LOPR PREC")
 }
@@ -422,8 +482,18 @@ record(waveform, "\$(P)${p.name.upper()}_W")
 	#end if
 	#if $p.has_key('range_bottom')
 	field( LOPR, "${p.range_bottom}")
-	#else if $p.has_key('bit_width') or $p.has_key('data_width')
+	#else if $p.has_key('bit_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
 	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.bit_width - 1)}")
+	#end if
+	#else if $p.has_key('data_width')
+	#if $p.has_key('signed') and ( $p.signed == 'unsigned')
+	field( LOPR, 0)
+	#else
+	field( LOPR, "${-(2**$p.data_width - 1)}")
+	#end if
 	#end if
 	info( autosaveFields, "DESC EGU HOPR LOPR PREC")
 }

@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1348
-y 78
+x 1350
+y 104
 w 439
 h 759
 font "helvetica-medium-r-18.0"
@@ -80,7 +80,7 @@ controlPv "$(P)ADES"
 indicatorPv "$(P)AACT"
 controlLabel "Amplitude"
 readLabel "Readback"
-increment 1
+increment 100
 limitsFromDb
 displayFormat "FFloat"
 endObjectProperties
@@ -105,6 +105,7 @@ controlPv "$(P)PDES"
 indicatorPv "$(P)PACT"
 controlLabel "Phase (radians)"
 readLabel "Readback"
+increment 0.0314159
 limitsFromDb
 displayFormat "FFloat"
 endObjectProperties
@@ -151,7 +152,7 @@ indicatorColor index 15
 font "helvetica-medium-r-18.0"
 controlPv "$(P)REP_PERIOD"
 controlLabel "Pulse Interval (ms)"
-increment 0.0106061
+increment 1
 scaleMin 1
 scaleMax 100
 displayFormat "FFloat"
@@ -175,7 +176,7 @@ indicatorColor index 15
 font "helvetica-medium-r-18.0"
 controlPv "$(P)REP_FREQUENCY"
 controlLabel "Pulse Freq. (Hz)"
-increment 3.21242e-07
+increment 10
 scaleMin 10
 scaleMax 1000
 displayFormat "FFloat"
