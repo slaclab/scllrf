@@ -330,7 +330,8 @@ asynStatus GUNBextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 				regSendBuf[1].addr = WaveShiftWAdr;
 				regSendBuf[1].data = wave_shift & WaveShiftMask;
 
-				wave_time_step = positiveSampPer * TraceData::CIC_PERIOD / TraceData::CLK_FREQ;
+				// For the gun, CIC_PERIOD is a factor of 4 higher than other systems.
+				wave_time_step = 4*positiveSampPer * TraceData::CIC_PERIOD / TraceData::CLK_FREQ;
 				setDoubleParam(p_TraceDataTimeStep, wave_time_step);
 				printf("new wave_time_step: %e s\n", wave_time_step);
 
@@ -625,6 +626,7 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
 
 	pIQBuf_[bufNumber][bufIndex] = (epicsInt16) pFromFpga->data;
 //cout << "regOffset is " << regOffset << ", waiting for " << (regEndAddr_ - regStartAddr_) << endl;
+	//// TODO: Break the rest of this function off into a separate thread to allow more parallelism
 	if (regOffset == (regEndAddr_ - regStartAddr_)) // if this is the last point of the buffer
 	{
 		bitset<maxWavesCount> bitset_chan_keep (chanKeep_);
@@ -835,9 +837,9 @@ asynStatus GUNBextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 			(unsigned int) (pFromFpga->data & WaveSampPerMask));
 	break;
 
-	case KeepWAdr|flagReadMask:
+	case KeepRAdr|flagReadMask:
 		tmpData = pFromFpga->data & KeepMask;
-		status = (asynStatus) setUIntDigitalParam(p_KeepW,
+		status = (asynStatus) setUIntDigitalParam(p_KeepR,
 				(pFromFpga->data & KeepMask) , KeepMask);
 		// Keep read and write consistent for this one.
 		status = (asynStatus) setUIntDigitalParam(p_KeepW,
@@ -855,7 +857,7 @@ asynStatus GUNBextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		setIntegerParam(p_TraceDataNActive, traceData_.nChan_);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for address=%s, value=0x%x, now %d active channels\n", __PRETTY_FUNCTION__,
-				KeepWString, (unsigned int) (pFromFpga->data & KeepMask), traceData_.nChan_);
+				KeepRString, (unsigned int) (pFromFpga->data & KeepMask), traceData_.nChan_);
 	break;
 
 	default:
@@ -963,10 +965,7 @@ asynStatus GUNBextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 
 	case KeepWAdr:
 		tmpData = pFromFpga->data & KeepMask;
-		//status = (asynStatus) getIntegerParam(p_KeepW, valueSet);
-		// [IF KEEP BECOMES READABLE, UNCOMMENT THE LINE ABOVE AND DELETE THE LINES BELOW]
-		status = (asynStatus) setIntegerParam(p_KeepW, tmpData);
-		valueSet[0] = tmpData;
+		status = (asynStatus) getUIntDigitalParam(p_KeepW, (epicsUInt32*) valueSet , KeepMask);
 
 		if( (valueSet[0] & KeepMask) == (pFromFpga->data & KeepMask))
 		{
@@ -977,7 +976,7 @@ asynStatus GUNBextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 			// Count the number of bits set
 			for (traceData_.nChan_ = 0; tmpData; traceData_.nChan_++)
 			{
-			tmpData &= tmpData - 1; // clear the least significant bit set
+				tmpData &= tmpData - 1; // clear the least significant bit set
 			}
 			setIntegerParam(p_TraceDataNActive, traceData_.nChan_);
 
