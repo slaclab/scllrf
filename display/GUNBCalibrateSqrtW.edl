@@ -1,0 +1,392 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 247
+y 531
+w 203
+h 536
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-bold-r-14.0"
+ctlFontAlign "center"
+btnFont "helvetica-medium-r-12.0"
+btnFontAlign "center"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "All GUNB Bit Fields"
+showGrid
+snapToGrid
+gridSize 4
+endScreenProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 44
+y 4
+w 101
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Full scale dBm"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 32
+y 28
+w 124
+h 24
+controlPv "$(P)FULL_SCALE_dBm_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 28
+y 72
+w 130
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Full scale raw ADC"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 32
+y 96
+w 124
+h 24
+controlPv "$(P)FULL_SCALE_ADC_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 52
+y 152
+w 79
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Coupler dB"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 32
+y 176
+w 124
+h 24
+controlPv "$(P)COUPLER_dB_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 224
+w 63
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Cable dB"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 32
+y 252
+w 124
+h 24
+controlPv "$(P)CABLE_dB_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 44
+y 300
+w 97
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Attenuator dB"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 32
+y 328
+w 124
+h 24
+controlPv "$(P)ATTENUATOR_dB_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 32
+y 392
+w 19
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "dB"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 4
+y 412
+w 84
+h 24
+controlPv "$(P)FUDGE_FACTOR_dB_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 108
+y 392
+w 66
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Multiplier"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 100
+y 412
+w 84
+h 24
+controlPv "$(P)FUDGE_FACTOR_$(N)"
+font "helvetica-medium-r-12.0"
+fgColor index 25
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 48
+y 372
+w 93
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Fudge Factor"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 16
+y 460
+w 162
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Combined Scale Factor"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 4
+y 492
+w 184
+h 28
+controlPv "$(P)SCALE_FACTOR_$(N)"
+format "exponential"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 8
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
