@@ -40,13 +40,18 @@ pattern { N, EGU }
 #}
 
 
-file GUNmisc.template
+file GunMisc.template
 {
 	{ NULL = NULL }
 }
 
+file PVramp.template
+{
+	{PV0 = ADES, PV1 = PDES, PV2 = PULSE_LENGTH, PV3 = REP_PERIOD, PV4 = REP_FREQUENCY, PV5 = DUTY_CYCLE, PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
+}
 
-file GUNBRegisterAlias.template
+
+file GunRegisterAlias.template
 {
 	{ NULL = NULL }
 }

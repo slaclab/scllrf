@@ -1,0 +1,184 @@
+/*
+ * Ramp a PV by multiplying the original value by a
+ * constant or adding a constant, every 1/10 second
+ * for some number of seconds
+ */
+
+program PVramp
+option +r;    /* re-entrant */
+option +c;    /* wait until all connection are established */
+option +w; // Initially, extra warnings
+
+%{
+	#include <math.h>
+	#include <stdio.h>
+	#include <errlog.h> /* errlogPrintf */
+
+	#define  RATE 0.1 /* seconds between increments */
+
+	#define LINEAR 0 // for linear ramp, add a constant to last setting
+	#define EXPONENTIAL 1 // for exponential ramp, multiply last setting by scale factor
+	typedef enum { linear=0, exponential=1 } exp_lin;
+}%
+
+string     name;
+string     facility;
+
+/* Complete ramp in this much time */
+double     ramp_time;
+assign     ramp_time           to "{PREFIX}RAMP_TIME";
+
+/* Ramp the specified PV to this value */
+double     ramp_to;
+assign     ramp_to           to "{PREFIX}RAMP_TO";
+
+/* Initial value of the PV to ramp */
+double     ramp_from;
+double     ramp_increment;
+unsigned int ramp_steps_expected;
+unsigned int ramp_step_counter;
+
+/* Linear or exponential ramping? */
+unsigned int ramp_exp_lin;
+assign     ramp_exp_lin    to "{PREFIX}RAMP_EXP_LIN";
+
+/* PV name to be ramped */
+string     ramping_pv_name;
+assign     ramping_pv_name          to "{PREFIX}RAMPING_PV_NAME";
+
+/* Assign the PV being ramped to this variable before ramping.
+ * use: pvAssign( ramping_pv, ramping_pv_name);
+ */
+double     ramping_pv;
+assign ramping_pv to "";
+
+unsigned int       ramp_in_progress;
+assign     ramp_in_progress    to "{PREFIX}RAMP_IN_PROGRESS";
+
+unsigned int       ramp_go;
+assign     ramp_go            to "{PREFIX}RAMP_GO";
+monitor    ramp_go;
+
+unsigned int       ramp_abort;
+assign     ramp_abort          to "{PREFIX}RAMP_ABORT";
+monitor    ramp_abort;
+
+
+entry {
+	ramp_exp_lin = EXPONENTIAL;
+	pvPut(ramp_exp_lin);
+
+	ramp_in_progress = FALSE;
+	pvPut(ramp_in_progress);
+
+	ramp_go = FALSE;
+	pvPut(ramp_go);
+
+	ramp_abort = FALSE;
+	pvPut(ramp_abort);
+}
+
+
+ss ramp
+{
+	state init {
+		when()
+		{
+		printf("Starting the PV ramper\n");
+		/* Place holder for now, delete this if it's not used */
+		} state wait
+	} /* state init */
+
+	state wait {
+		option +t;    /* reset timer everytime */
+		option +e;    /* inhibit entry execution for self-state-transition */
+
+		entry{
+
+			ramp_in_progress = FALSE;
+			pvPut(ramp_in_progress);
+
+			ramp_go = FALSE;
+			pvPut(ramp_go);
+
+			ramp_abort = FALSE;
+			pvPut(ramp_abort);
+		}
+
+		/* Do nothing until the go button is pushed */
+		when(ramp_go != FALSE) {
+		} state ready_ramp
+
+	} /* state wait */
+
+	state ready_ramp {
+		entry {
+			pvGet(ramping_pv_name);
+			pvGet(ramp_time);
+			pvGet(ramp_to);
+			pvGet(ramp_exp_lin);
+			pvAssign( ramping_pv, ramping_pv_name);
+		}
+
+		when(pvConnected(ramping_pv))
+		{
+			pvGet(ramping_pv);
+			ramp_from = ramping_pv;
+			printf("PV ramper connected to %s = %f\n", ramping_pv_name, ramp_from);
+			ramp_steps_expected = ramp_time/RATE;
+			ramp_step_counter = 0;
+
+			if (ramp_exp_lin == LINEAR)
+			{
+				ramp_increment = (ramp_to - ramp_from)/ramp_steps_expected;
+			}
+			else
+			{
+				ramp_increment = pow((ramp_to / ramp_from), 1.0/ramp_steps_expected);
+			}
+		} state ramp
+
+		when(delay(3))
+		{
+			printf("PV ramper timed out connecting to %s\n", ramping_pv_name);
+		} state wait
+	}
+
+
+	state ramp {
+		option +t;    /* reset timer everytime */
+		option +e;    /* inhibit entry execution for self-state-transition */
+		option -x;    /* do exit  execution for self-state-transition */
+
+		entry {
+			ramp_in_progress = TRUE;
+			pvPut(ramp_in_progress);
+		}
+		when(ramp_abort) { /* force reset */
+			errlogPrintf("%s %s Ramping Aborted\n", facility, name);
+		} state wait
+
+		// Small floating point errors can add up. This last step is exact.
+		when(ramp_step_counter >= ramp_steps_expected)
+		{
+			ramping_pv = ramp_to;
+			pvPut(ramping_pv);
+			printf("Ramping PV %s from %f to %f complete.", ramping_pv_name, ramp_from, ramp_to);
+		} state wait
+
+		when(ramp_exp_lin == LINEAR && delay(RATE)) {
+			ramping_pv += ramp_increment;
+			pvPut(ramping_pv);
+		} state ramp
+
+		when(ramp_exp_lin == EXPONENTIAL && delay(RATE)) {
+			ramping_pv *= ramp_increment;
+			pvPut(ramping_pv);
+		} state ramp
+
+		exit
+		{
+			ramp_step_counter++;
+		}
+	} /* state ramp */
+} /* ss ramp */

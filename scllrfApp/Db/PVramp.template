@@ -1,0 +1,65 @@
+# All the PVs needed to go with PVramp.stt
+
+
+# Complete ramp in this much time
+record(ao, "$(P)RAMP_TIME")
+{
+	field(EGU, "s")
+}
+
+# Ramp the specified PV to this value
+record(ao, "$(P)RAMP_TO")
+{
+}
+
+# Linear or exponential ramping?
+record(bo, "$(P)RAMP_EXP_LIN")
+{
+	field(ZNAM, "Linear")
+	field(ONAM, "Exponential")
+}
+
+# PV name to be ramped
+record(stringout, "$(P)RAMPING_PV_NAME")
+{
+	field(OMSL, "closed_loop")
+	field(DOL, "$(P)RAMPING_PV_LIST PP")
+}
+
+record(mbbo, "$(P)RAMPING_PV_LIST")
+{
+	field(ZRST, "$(P)$(PV0='')")
+	field(ONST, "$(P)$(PV1='')")
+	field(TWST, "$(P)$(PV2='')")
+	field(THST, "$(P)$(PV3='')")
+	field(FRST, "$(P)$(PV4='')")
+	field(FVST, "$(P)$(PV5='')")
+	field(SXST, "$(P)$(PV6='')")
+	field(SVST, "$(P)$(PV7='')")
+	field(EIST, "$(P)$(PV8='')")
+	field(NIST, "$(P)$(PV9='')")
+	field(TEST, "$(P)$(PV10='')")
+	field(ELST, "$(P)$(PV11='')")
+	field(TVST, "$(P)$(PV12='')")
+	field(TTST, "$(P)$(PV13='')")
+	field(FTST, "$(P)$(PV14='')")
+	field(FFST, "$(P)$(PV15='')")
+}
+
+record(bi, "$(P)RAMP_IN_PROGRESS")
+{
+	field(ZNAM, "Idle")
+	field(ONAM, "Ramping")
+}
+
+record(bo, "$(P)RAMP_GO")
+{
+	field(ZNAM, "Start")
+	field(ONAM, "Ramping")
+}
+
+record(bo, "$(P)RAMP_ABORT")
+{
+	field(ZNAM, "Abort")
+	field(ONAM, "Aborting")
+}

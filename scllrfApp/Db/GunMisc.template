@@ -2,11 +2,6 @@
 #! DBDSTART
 #! DBDEND
 
-record(ao, "$(P)RAMP_TIME")
-{
-	field(DESC, "ramp in this many seconds")
-	field(EGU, "s")
-}
 
 #Make PVs for pulse width in us, pulse frequency in MHz, and duty cycle in %, so that they calculate each other. Leave raw register values in raw counts.
 
@@ -306,7 +301,7 @@ record( calcout, "$(P)IQ_TO_A")
 {
 	field( INPA, "$(P)SOURCE_RE_R")
 	field( INPB, "$(P)SOURCE_IM_R")
-field(CALC, "(SQRT(A^2+B^2))")
+	field(CALC, "(SQRT(A^2+B^2))")
 	field( OUT, "$(P)AACT PP")
 }
 
@@ -358,78 +353,12 @@ record(acalcout, "$(P)RAMTEST_Syncin")
 	field( DISV, "1")
 }
 
-# Aliases used by LBNL Matlab that don't lend themselves well to
-# macros, shell scripts, or other automation
-alias("$(P)TRACE_DATA_I_0", "$(P)W1")
-alias("$(P)TRACE_DATA_Q_0", "$(P)W2")
-alias("$(P)TRACE_DATA_I_1", "$(P)W3")
-alias("$(P)TRACE_DATA_Q_1", "$(P)W4")
-alias("$(P)TRACE_DATA_I_2", "$(P)W5")
-alias("$(P)TRACE_DATA_Q_2", "$(P)W6")
-alias("$(P)TRACE_DATA_I_3", "$(P)W7")
-alias("$(P)TRACE_DATA_Q_3", "$(P)W8")
-alias("$(P)TRACE_DATA_I_4", "$(P)W9")
-alias("$(P)TRACE_DATA_Q_4", "$(P)WA")
-alias("$(P)TRACE_DATA_I_5", "$(P)WB")
-alias("$(P)TRACE_DATA_Q_5", "$(P)WC")
-alias("$(P)TRACE_DATA_I_6", "$(P)WD")
-alias("$(P)TRACE_DATA_Q_6", "$(P)WE")
-alias("$(P)TRACE_DATA_I_7", "$(P)WF")
-
 # Normally we want calibration disabled
 # TODO: Probalby we want access control on this record
 record(bo, "$(P)CALIBRATION_ALLOWED")
 {
 	field(ZNAM, "Disabled")
 	field(ONAM, "Enabled")
-}
-
-# The PUSLE_BOUNDARY register sets the start of the waveform to:
-# Free running, not synchronized, when set to 0
-# Rising pulse edge at the start of the trace, when set to 2
-# Falling pulse edge at the start of the trace, when set to 3
-record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER")
-{
-	field(ZRST, "Free Run")
-	field(ZRVL, 0)
-	field(ONST, "Rising Edge")
-	field(ONVL, 2)
-	field(TWST, "Falling Edge")
-	field(TWVL, 3)
-	field(OUT, "$(P)PULSE_BOUNDARY_W PP")
-	field(DTYP, "Raw Soft Channel")
-
-}
-
-record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER_Sync")
-{
-	field(OMSL, "closed_loop")
-	field(DOL, "$(P)PULSE_BOUNDARY_W")
-	field(OUT, "$(P)TRACE_DATA_EDGE_TRIGGER")
-}
-
-record(mbboDirect, "$(P)TRACE_DATA_CHAN_ENABLE")
-{
-	field( PINI, "YES")
-	field( DTYP, "asynUInt32Digital")
-	field( OUT,  "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
-	field( NOBT, "12")
-	field( SCAN, "Passive")
-	field( FLNK, "$(P)TRACE_DATA_CHAN_DISABLE")
-	info( autosaveFields, "DESC")
-	info( asyn:READBACK, "1")
-}
-record(calc, "$(P)TRACE_DATA_CHAN_DISABLE")
-{
-	field( SCAN, "Passive")
-	field( INPA, "$(P)TRACE_DATA_CHAN_ENABLE")
-	field( CALC, "~A")
-}
-record(longin, "$(P)TRACE_DATA_N_ACTIVE") {
-	field(PINI, "NO")
-	field(DTYP, "asynInt32")
-	field(INP, "@asyn($(PORT),0) TRACE_DATA_N_ACTIVE")
-	field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P)IFACT") {
@@ -602,6 +531,55 @@ record(ai, "$(P)DECAY_FIT_STDDEV") {
 #  field(FTVL, "UCHAR")
 #}
 
+
+# The PUSLE_BOUNDARY register sets the start of the waveform to:
+# Free running, not synchronized, when set to 0
+# Rising pulse edge at the start of the trace, when set to 2
+# Falling pulse edge at the start of the trace, when set to 3
+record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER")
+{
+	field(ZRST, "Free Run")
+	field(ZRVL, 0)
+	field(ONST, "Rising Edge")
+	field(ONVL, 2)
+	field(TWST, "Falling Edge")
+	field(TWVL, 3)
+	field(OUT, "$(P)PULSE_BOUNDARY_W PP")
+	field(DTYP, "Raw Soft Channel")
+
+}
+
+record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER_Sync")
+{
+	field(OMSL, "closed_loop")
+	field(DOL, "$(P)PULSE_BOUNDARY_W")
+	field(OUT, "$(P)TRACE_DATA_EDGE_TRIGGER")
+}
+
+record(mbboDirect, "$(P)TRACE_DATA_CHAN_ENABLE")
+{
+	field( PINI, "YES")
+	field( DTYP, "asynUInt32Digital")
+	field( OUT,  "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
+	field( NOBT, "12")
+	field( SCAN, "Passive")
+	field( FLNK, "$(P)TRACE_DATA_CHAN_DISABLE")
+	info( autosaveFields, "DESC")
+	info( asyn:READBACK, "1")
+}
+record(calc, "$(P)TRACE_DATA_CHAN_DISABLE")
+{
+	field( SCAN, "Passive")
+	field( INPA, "$(P)TRACE_DATA_CHAN_ENABLE")
+	field( CALC, "~A")
+}
+record(longin, "$(P)TRACE_DATA_N_ACTIVE") {
+	field(PINI, "NO")
+	field(DTYP, "asynInt32")
+	field(INP, "@asyn($(PORT),0) TRACE_DATA_N_ACTIVE")
+	field(SCAN, "I/O Intr")
+}
+
 record(calcout, "$(P)TRACE_DATA_X_NUSE")
 {
 	field(DESC, "More channels = shorter waveforms")
@@ -675,8 +653,26 @@ record(calcout, "$(P)TRACE_DATA_UPDATE_PLOT_CALC") {
 }
 # The waveform displays use this record to know when to update parameters
 record(bo, "$(P)TRACE_DATA_UPDATE_PLOT") {
-	field(HIGH, "1")
+	field(HIGH, "0.2")
 }
+
+# Aliases used by LBNL Matlab that don't lend themselves well to
+# macros, shell scripts, or other automation
+alias("$(P)TRACE_DATA_I_0", "$(P)W1")
+alias("$(P)TRACE_DATA_Q_0", "$(P)W2")
+alias("$(P)TRACE_DATA_I_1", "$(P)W3")
+alias("$(P)TRACE_DATA_Q_1", "$(P)W4")
+alias("$(P)TRACE_DATA_I_2", "$(P)W5")
+alias("$(P)TRACE_DATA_Q_2", "$(P)W6")
+alias("$(P)TRACE_DATA_I_3", "$(P)W7")
+alias("$(P)TRACE_DATA_Q_3", "$(P)W8")
+alias("$(P)TRACE_DATA_I_4", "$(P)W9")
+alias("$(P)TRACE_DATA_Q_4", "$(P)WA")
+alias("$(P)TRACE_DATA_I_5", "$(P)WB")
+alias("$(P)TRACE_DATA_Q_5", "$(P)WC")
+alias("$(P)TRACE_DATA_I_6", "$(P)WD")
+alias("$(P)TRACE_DATA_Q_6", "$(P)WE")
+alias("$(P)TRACE_DATA_I_7", "$(P)WF")
 
 #! Further lines contain data used by VisualDCT
 #! View(1074,190,1.6)
