@@ -50,7 +50,7 @@
 ,"adc_mmcm_psen":{"access":"w", "addr_width": 0,"base_addr":58,"data_width":2,"sign":"unsigned"}
 ,"mmcm_reset":{"access":"w", "addr_width": 0,"base_addr":59,"data_width":1,"sign":"unsigned"}
 ,"frequency_adc2": {"access": "r","addr_width": 0,"base_addr": 60,"data_width": 32,"sign": "unsigned"}
-,"phase_step_h":{"access":"w", "addr_width": 0,"base_addr":61,"data_width":20,"sign":"unsigned"}
+,"phase_step_h":{"access":"w", "addr_width": 0,"base_addr":61,"data_width":20,"sign":"signed"}
 ,"phase_step_l":{"access":"w", "addr_width": 0,"base_addr":62,"data_width":12,"sign":"unsigned"}
 ,"modulo":{"access":"w", "addr_width": 0,"base_addr":63,"data_width":12,"sign":"unsigned"}
 ,"ampi":{"access":"w", "addr_width": 0,"base_addr":64,"data_width":16,"sign":"unsigned"}
@@ -70,10 +70,10 @@
 ,"ddsa_phstep_l":{"access":"rw", "addr_width": 0,"base_addr":78,"data_width":12,"sign":"unsigned"}
 ,"rep_period":{"access":"w", "addr_width": 0,"base_addr":79,"data_width":28,"sign":"unsigned"}
 ,"pulse_length":{"access":"w", "addr_width": 0,"base_addr":80,"data_width":24,"sign":"unsigned"}
-,"source_re":{"access":"rw", "addr_width": 0,"base_addr":81,"data_width":16,"sign":"unsigned"}
-,"source_im":{"access":"rw", "addr_width": 0,"base_addr":82,"data_width":16,"sign":"unsigned"}
+,"source_re":{"access":"rw", "addr_width": 0,"base_addr":81,"data_width":16,"sign":"signed"}
+,"source_im":{"access":"rw", "addr_width": 0,"base_addr":82,"data_width":16,"sign":"signed"}
 ,"close_loop":{"access":"w", "addr_width": 0,"base_addr":83,"data_width":1,"sign":"unsigned"}
-,"monitor":{"access":"w", "addr_width": 0,"base_addr":84,"data_width":1,"sign":"unsigned"}
+,"chassis":{"access":"w", "addr_width": 0,"base_addr":84,"data_width":3,"sign":"unsigned"}
 ,"ab_coeff":{"access":"w", "addr_width": 0,"base_addr":85,"data_width":16,"sign":"unsigned"}
 ,"ext_trig_sel":{"access":"w", "addr_width": 0,"base_addr":86,"data_width":1,"sign":"unsigned"}
 ,"inlk_mode_1":{"access":"w", "addr_width": 0,"base_addr":87,"data_width":2,"sign":"unsigned"}
@@ -108,6 +108,15 @@
 ,"adc6_min":{"access":"r", "addr_width": 0,"base_addr":115,"data_width":16,"sign":"signed"}
 ,"adc7_min":{"access":"r", "addr_width": 0,"base_addr":116,"data_width":16,"sign":"signed"}
 ,"adc8_min":{"access":"r", "addr_width": 0,"base_addr":117,"data_width":16,"sign":"signed"}
+,"set_ploop_re":{"access":"w", "addr_width": 0,"base_addr":118,"data_width":16,"sign":"signed"}
+,"set_ploop_im":{"access":"w", "addr_width": 0,"base_addr":119,"data_width":16,"sign":"signed"}
+,"gainp_alpha":{"access":"w", "addr_width": 0,"base_addr":120,"data_width":16,"sign":"signed"}
+,"gainp_beta":{"access":"w", "addr_width": 0,"base_addr":121,"data_width":16,"sign":"signed"}
+,"xy_ctl":{"access":"w", "addr_width": 0,"base_addr":122,"data_width":18,"sign":"unsigned"}
+,"rfsuplox":{"access":"w", "addr_width": 0,"base_addr":123,"data_width":16,"sign":"unsigned"}
+,"rfsuploy":{"access":"w", "addr_width": 0,"base_addr":124,"data_width":16,"sign":"unsigned"}
+,"probechan":{"access":"w", "addr_width": 0,"base_addr":125,"data_width":16,"sign":"unsigned"}
+,"phdelay":{"access":"w", "addr_width": 0,"base_addr":126,"data_width":17,"sign":"unsigned"}
 ,"v_thresh":{"access":"w", "addr_width": 3,"base_addr":"0x5000","data_width":16,"sign":"unsigned"}
 ,"ramtest": {"access": "rw","addr_width": 3,"base_addr": "0x02000","data_width": 16,"sign": "unsigned"}
 ,"scanner_mirror_val":{"access":"r", "addr_width": 4,"base_addr":"0x3000","data_width":7,"sign":"unsigned"}

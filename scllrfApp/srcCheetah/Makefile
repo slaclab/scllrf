@@ -8,7 +8,7 @@ all: $(PY_FILES)
 		python deviceGeneration.py -d $$i ; \
 	done  ; \
 	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
-	python deviceGeneration.py -c GUNB -i regmapold.json
+	python deviceGeneration.py -c Gun -i regmapold.json
 
 % : %.py
 	python deviceGeneration.py -d $^
@@ -34,9 +34,9 @@ all_install: $(DIRS)
 	done  ; \
 
 #We don't want this to run every time we build the generated code etc., so make a dummy install target
-#install:
+install:
 # Or use this one if you want it to generate and copy code every time
-install: copy
+#install: copy
 
 
 %_install: %
