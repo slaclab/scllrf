@@ -1,4 +1,4 @@
-record(ai, "$(P)FULL_SCALE_dBm_$(N)")
+record(ao, "$(P)FULL_SCALE_dBm_$(N)")
 {
 	field(EGU, "dBm")
 	field(PINI, "YES")
@@ -7,31 +7,23 @@ record(ai, "$(P)FULL_SCALE_dBm_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
+	info(autosaveFields, "HOPR LOPR VAL")
 }
 
-record(ai, "$(P)FULL_SCALE_ADC_$(N)")
+record(ao, "$(P)FULL_SCALE_ADC_$(N)")
 {
-	field(EGU, "dBm")
+	field(EGU, "RAW")
 	field(PINI, "YES")
 	field(SCAN, "Passive")
 	field(PREC, "2")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
+	field(VAL, 0xFFFFFFFF)
+	info(autosaveFields, "HOPR LOPR VAL")
 }
 
-record(ai, "$(P)COUPLER_dB_$(N)")
-{
-	field(EGU, "dB")
-	field(PINI, "YES")
-	field(SCAN, "Passive")
-	field(PREC, "2")
-	field(SDIS, "$(P)CALIBRATION_ALLOWED")
-	field( DISV, "0")
-	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
-}
-
-record(ai, "$(P)CABLE_dB_$(N)")
+record(ao, "$(P)COUPLER_dB_$(N)")
 {
 	field(EGU, "dB")
 	field(PINI, "YES")
@@ -40,9 +32,10 @@ record(ai, "$(P)CABLE_dB_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
+	info(autosaveFields, "HOPR LOPR VAL")
 }
 
-record(ai, "$(P)ATTENUATOR_dB_$(N)")
+record(ao, "$(P)CABLE_dB_$(N)")
 {
 	field(EGU, "dB")
 	field(PINI, "YES")
@@ -51,9 +44,22 @@ record(ai, "$(P)ATTENUATOR_dB_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
+	info(autosaveFields, "HOPR LOPR VAL")
 }
 
-record(ai, "$(P)FUDGE_FACTOR_dB_$(N)")
+record(ao, "$(P)ATTENUATOR_dB_$(N)")
+{
+	field(EGU, "dB")
+	field(PINI, "YES")
+	field(SCAN, "Passive")
+	field(PREC, "2")
+	field(SDIS, "$(P)CALIBRATION_ALLOWED")
+	field( DISV, "0")
+	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
+	info(autosaveFields, "HOPR LOPR VAL")
+}
+
+record(ao, "$(P)FUDGE_FACTOR_dB_$(N)")
 {
 	field(EGU, "dB")
 	field(PINI, "YES")
@@ -62,6 +68,8 @@ record(ai, "$(P)FUDGE_FACTOR_dB_$(N)")
 	field(FLNK, "$(P)FUDGE_FACTOR_dB_TO_N_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
+	# Either autosave this or the proportionality factor equivalent below, don't make them fight.
+	#info(autosaveFields, "HOPR LOPR VAL")
 }
 
 record(calcout, "$(P)FUDGE_FACTOR_dB_TO_N_$(N)")
@@ -74,7 +82,7 @@ record(calcout, "$(P)FUDGE_FACTOR_dB_TO_N_$(N)")
 	field( OUT, "$(P)FUDGE_FACTOR_$(N) PP")
 }
 
-record(ai, "$(P)FUDGE_FACTOR_$(N)")
+record(ao, "$(P)FUDGE_FACTOR_$(N)")
 {
 	field(EGU, "Unitless")
 	field(PINI, "YES")
@@ -83,6 +91,7 @@ record(ai, "$(P)FUDGE_FACTOR_$(N)")
 	field(FLNK, "$(P)FUDGE_FACTOR_N_TO_dB_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
+	info(autosaveFields, "HOPR LOPR VAL")
 }
 
 record(calcout, "$(P)FUDGE_FACTOR_N_TO_dB_$(N)")
@@ -108,4 +117,5 @@ record(calcout, "$(P)SCALE_FACTOR_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field( PREC, 7)
+	info(autosaveFields, "HOPR LOPR VAL")
 }

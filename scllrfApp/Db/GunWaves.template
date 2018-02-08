@@ -42,6 +42,7 @@ record(ao, "$(P)TRACE_DATA_SCALE_$(N)") {
 field(DESC, "Scale factor for waveform $(N)")
 field(DTYP, "asynFloat64")
 field(OUT, "@asyn($(PORT),$(N),1)TRACE_DATA_SCALE")
+field(VAL, 1)
 }
 
 record(dfanout, "$(P)TRACE_DATA_A_$(N)_NUSE") {
