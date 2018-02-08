@@ -282,7 +282,7 @@ record(mbbiDirect, "\$(P)${p.name.upper()}_R")
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
 	field( DTYP, "asynUInt32Digital")
-	field( INP,  "@asyn(\$(PORT),0) ${p.name.upper()}_R")
+	field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
 	field( SCAN, "Passive")
 }
 
