@@ -1,6 +1,6 @@
 
-#ifndef GUNBEXTRA_DRIVER_H
-#define GUNBEXTRA_DRIVER_H
+#ifndef GunEXTRA_DRIVER_H
+#define GunEXTRA_DRIVER_H
 
 /**
  *-----------------------------------------------------------------------------
@@ -26,47 +26,50 @@
  * contained in the LICENSE.txt file.
  * ----------------------------------------------------------------------------
 **/
-#include "GUNB.h"
+#include "Gun.h"
 #include <math.h>
+#include <bitset>
 
 #include "newmat.h"
 #include "newmatap.h"
 #include "newmatio.h"
 using namespace NEWMAT;
 
-class GUNBextra;
+class GunExtra;
 
 class TraceData
 {
 public:
 
-	static const unsigned maxWavesCount = 32; // max channels, max number of waveforms interlaced in waveform buffer
+	static const unsigned maxWavesCount = 16; // max channels, max number of waveforms interlaced in waveform buffer
 	static const unsigned reqBufSegmentCount; // # of UDP requests, divide and round up
 	static const unsigned reqMsgSize; // All register addresses plus nonce space
-	static const unsigned TraceDataRegCount=GUNBDriver::TraceDataBufRegCount;  // This will be ok as long as register map has same size for shell 0 and 1
+	static const unsigned TraceDataRegCount=GunDriver::TraceDataBufRegCount;  // This will be ok as long as register map has same size for shell 0 and 1
 
 	static const unsigned CIC_PERIOD;
 	static const unsigned SHIFT_BASE;
 	static const float CLK_FREQ;
 	static const unsigned SLOW_OFFSET;
 
-	TraceData(GUNBextra *pDriver, unsigned int waveAddr,
+	TraceData(GunExtra *pDriver, unsigned int waveAddr,
 			int *rawParamIndex, int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
 			int *minsParamIndex, int *maxsParamIndex, epicsInt16 *readBuffer, FpgaReg *requestMsg);
 
 	void ReqTraceData();
 	int CalcWaveScale(int32_t wave_samp_per);
-
 	unsigned int nChan_;
-	epicsUInt32 chanKeep_;
+	bitset<maxWavesCount> chanKeep_;
+	unsigned int  relToAbsIdx[maxWavesCount]; // Index is relative index, value is equivalent absolute index
+	void updateRelToAbsIdx();
 	epicsInt16* waveReadback_;
 	uint32_t GetEndAddr(){return regEndAddr_;}
 	asynStatus ProcessTraceDataReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
 //	asynStatus ProcessSlowDataReadback(const FpgaReg *pFromFpga); // parse register data, write to various parameters
 //	unsigned int nextTag(){tag_ = ((tag_+1-4) % (unsigned int) pow(2,7))+4; return tag_;};
+	epicsFloat32 scaleFactor_[maxWavesCount];
 
 private:
-	GUNBextra *pDriver_;
+	GunExtra *pDriver_;
 	FpgaReg *pRequestMsg_; // Canned message to request data buffer
 	bool readInProgress_;
 	uint32_t regStartAddr_;
@@ -89,15 +92,15 @@ private:
 	epicsFloat32 pPBuf_[maxWavesCount/2][TraceDataRegCount]; // Phase data channels
 };
 
-class GUNBextra: public GUNBDriver
+class GunExtra: public GunDriver
 {
 public:
-	GUNBextra(const char *drvPortName, const char *netPortName);
+	GunExtra(const char *drvPortName, const char *netPortName);
 	static const unsigned maxChannel; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
-	virtual ~GUNBextra();
+	virtual ~GunExtra();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	virtual asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
-
+	virtual asynStatus writeFloat64(asynUser *pasynUser, epicsFloat64 value);
 
 	static const double LOfrequency;
 	static const double ADCfrequency;
@@ -112,6 +115,7 @@ public:
 	static const char *TraceDataQString;
 	static const char *TraceDataAString;
 	static const char *TraceDataPString;
+	static const char *TraceDataScaleString;
 	static const char *DecayConstantBString;
 	static const char *DecayStrengthString;
 	static const char *DecayFitStdDevString;
@@ -146,12 +150,13 @@ protected:
 	// parameters for reading I/Q waveforms
 	// Circle buffer I/Q data
 	int p_TraceDataNActive;
-#define FIRST_GUNBEXTRA_PARAM p_TraceDataNActive
+#define FIRST_GunEXTRA_PARAM p_TraceDataNActive
 	int p_TraceDataChanEnable;
 	int p_TraceDataI;
 	int p_TraceDataQ;
 	int p_TraceDataA;
 	int p_TraceDataP;
+	int p_TraceDataScale;
 	int p_TraceDataMinsR;
 	int p_TraceDataMaxsR;
 	int p_TraceDataTimeStep;
@@ -162,9 +167,9 @@ protected:
 
 	int p_IF; // intermediate frequency
 
-	#define LAST_GUNBEXTRA_PARAM p_IF
+	#define LAST_GunEXTRA_PARAM p_IF
 
-#define NUM_GUNBEXTRA_PARAMS (&LAST_GUNBEXTRA_PARAM - &FIRST_GUNBEXTRA_PARAM + 1)
+#define NUM_GunEXTRA_PARAMS (&LAST_GunEXTRA_PARAM - &FIRST_GunEXTRA_PARAM + 1)
 
 private:
 

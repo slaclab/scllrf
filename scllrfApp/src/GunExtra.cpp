@@ -24,14 +24,12 @@
  * ----------------------------------------------------------------------------
 **/
 
-#include "GUNBextra.h"
-
+#include "GunExtra.h"
 #include <asynOctetSyncIO.h>
 #include <asynCommonSyncIO.h>
 #include <limits>
 #include <netinet/in.h>
 #include <iostream>
-#include <bitset>
 #include <math.h>
 #include <stdio.h>
 #include "../../newmat10/newmat.h"
@@ -42,30 +40,31 @@
 using namespace std;
 using namespace NEWMAT;
 
-const unsigned GUNBextra::maxChannel = 1024; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
+const unsigned GunExtra::maxChannel = 1024; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
 
-const double GUNBextra::LOfrequency = 1.320e9;
-const double GUNBextra::ADCfrequency = LOfrequency/14;
+const double GunExtra::LOfrequency = 1.320e9;
+const double GunExtra::ADCfrequency = LOfrequency/14;
 
-const char *GUNBextra::IfFreqString = "IF_FREQ";
+const char *GunExtra::IfFreqString = "IF_FREQ";
 /* Registers */
 
 // Circle buffer I/Q data
-const char *GUNBextra::TraceDataChanEnableString = "TRACE_DATA_CHAN_ENABLE";
-const char *GUNBextra::TraceDataNActiveString = "TRACE_DATA_N_ACTIVE";
-const char *GUNBextra::TraceDataIString = "TRACE_DATA_I";
-const char *GUNBextra::TraceDataQString = "TRACE_DATA_Q";
-const char *GUNBextra::TraceDataAString = "TRACE_DATA_A";
-const char *GUNBextra::TraceDataPString = "TRACE_DATA_P";
-const char *GUNBextra::DecayConstantBString = "DECAY_CONSTANT_B";
-const char *GUNBextra::DecayStrengthString = "DECAY_STRENGTH";
-const char *GUNBextra::DecayFitStdDevString = "DECAY_FIT_STDDEV";
+const char *GunExtra::TraceDataChanEnableString = "TRACE_DATA_CHAN_ENABLE";
+const char *GunExtra::TraceDataNActiveString = "TRACE_DATA_N_ACTIVE";
+const char *GunExtra::TraceDataIString = "TRACE_DATA_I";
+const char *GunExtra::TraceDataQString = "TRACE_DATA_Q";
+const char *GunExtra::TraceDataAString = "TRACE_DATA_A";
+const char *GunExtra::TraceDataPString = "TRACE_DATA_P";
+const char *GunExtra::TraceDataScaleString = "TRACE_DATA_SCALE";
+const char *GunExtra::DecayConstantBString = "DECAY_CONSTANT_B";
+const char *GunExtra::DecayStrengthString = "DECAY_STRENGTH";
+const char *GunExtra::DecayFitStdDevString = "DECAY_FIT_STDDEV";
 
-const char *GUNBextra::TraceDataMinsRString = "TRACE_DATA_MINS_R";
-const char *GUNBextra::TraceDataMaxsRString = "TRACE_DATA_MAXS_R";
-const char* GUNBextra::TraceDataTimeStepString = "TRACE_DATA_TIME_STEP";
-const char* GUNBextra::TraceDataFastUpdateString = "TRACE_DATA_FAST_UPDATE";
+const char *GunExtra::TraceDataMinsRString = "TRACE_DATA_MINS_R";
+const char *GunExtra::TraceDataMaxsRString = "TRACE_DATA_MAXS_R";
+const char* GunExtra::TraceDataTimeStepString = "TRACE_DATA_TIME_STEP";
+const char* GunExtra::TraceDataFastUpdateString = "TRACE_DATA_FAST_UPDATE";
 
 #define TEST_MODE
 #define LEN 32
@@ -74,21 +73,22 @@ const char* GUNBextra::TraceDataFastUpdateString = "TRACE_DATA_FAST_UPDATE";
 //	cic_base_period = 33  # default parameter in llrf_dsp.v
 //	Tstep = 14./1320e6
 //	in_level_0 = 5000
-const unsigned TraceData::CIC_PERIOD = 33;
+// For the gun, CIC_PERIOD is a factor of 4 higher than other systems.
+const unsigned TraceData::CIC_PERIOD = 33*4;
 const unsigned TraceData::SHIFT_BASE = 4;
 const float TraceData::CLK_FREQ = 1320e6/14; // LCLS-II value from app.py
 
 const unsigned TraceData::SLOW_OFFSET = 17; // register address offset from start of slow buffer to the data we care about
-const unsigned GUNBextra::TraceDataRegCount = sizeof(bufTraceData)/sizeof(*bufTraceData);
+const unsigned GunExtra::TraceDataRegCount = sizeof(bufTraceData)/sizeof(*bufTraceData);
 
 
-//const unsigned TraceData::TraceDataRegCount = GUNBextra::TraceDataRegCount;
+//const unsigned TraceData::TraceDataRegCount = GunExtra::TraceDataRegCount;
 //const unsigned TraceData::maxWavesCount = 12; // max channels, max number of waveforms interlaced in waveform buffer
 const unsigned TraceData::reqBufSegmentCount = (TraceDataRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up, ~48
 const unsigned TraceData::reqMsgSize = TraceDataRegCount + reqBufSegmentCount; // All register addresses plus nonce space
 
 
-TraceData::TraceData(GUNBextra *pDriver, unsigned int waveAddr, int *rawParamIndex,
+TraceData::TraceData(GunExtra *pDriver, unsigned int waveAddr, int *rawParamIndex,
 		int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
 		int *minsParamIndex, int *maxsParamIndex, epicsInt16 *readBuffer, FpgaReg *requestMsg) :
 		nChan_(0), chanKeep_(0), waveReadback_(readBuffer), pDriver_(pDriver), pRequestMsg_(requestMsg),
@@ -108,7 +108,7 @@ TraceData::TraceData(GUNBextra *pDriver, unsigned int waveAddr, int *rawParamInd
 	}
 }
 
-/** Constructor for the GUNB class.
+/** Constructor for the Gun class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] portName The name of the asyn port driver to be created.
  * \param[in] path The path to the peripherial as built by the builder api
@@ -116,8 +116,8 @@ TraceData::TraceData(GUNBextra *pDriver, unsigned int waveAddr, int *rawParamInd
  * \paarm[in] nEntries The number of asyn params to be created for each device
  *
  * */
-GUNBextra::GUNBextra(const char *drvPortName, const char *netPortName)
-: GUNBDriver(drvPortName, netPortName, maxChannel, NUM_GUNBEXTRA_PARAMS),
+GunExtra::GunExtra(const char *drvPortName, const char *netPortName)
+: GunDriver(drvPortName, netPortName, maxChannel, NUM_GunEXTRA_PARAMS),
 	newTraceDataAvailable_(0), newTraceDataRead_ (0),
 	traceData_(this, TraceDataRAdr,  &p_TraceDataWav,
 			&p_TraceDataI, &p_TraceDataQ, &p_TraceDataA, &p_TraceDataP,
@@ -145,6 +145,7 @@ GUNBextra::GUNBextra(const char *drvPortName, const char *netPortName)
 	createParam(TraceDataQString, asynParamInt32Array, &p_TraceDataQ);
 	createParam(TraceDataAString, asynParamFloat32Array, &p_TraceDataA);
 	createParam(TraceDataPString, asynParamFloat32Array, &p_TraceDataP);
+	createParam(TraceDataScaleString,  asynParamFloat64, &p_TraceDataScale);
 	createParam(DecayConstantBString, asynParamFloat64, &p_DecayConstantB);
 	createParam(DecayStrengthString, asynParamFloat64, &p_DecayStrength);
 	createParam(DecayFitStdDevString, asynParamFloat64, &p_DecayFitStdDev);
@@ -164,7 +165,7 @@ GUNBextra::GUNBextra(const char *drvPortName, const char *netPortName)
 
 
 	epicsThreadSleep(defaultPollPeriod);
-	std::cout << __PRETTY_FUNCTION__ << " created " << NUM_GUNBEXTRA_PARAMS << " parameters." << std::endl;
+	std::cout << __PRETTY_FUNCTION__ << " created " << NUM_GunEXTRA_PARAMS << " parameters." << std::endl;
 
 	StartTraceDataRequester();
 
@@ -173,7 +174,7 @@ GUNBextra::GUNBextra(const char *drvPortName, const char *netPortName)
 	wakeupReader();
 }
 
-GUNBextra::~GUNBextra()
+GunExtra::~GunExtra()
 {
 	isShuttingDown_ = true;
 	epicsThreadSleep(0.1); // Allow threads to run and exit
@@ -191,7 +192,7 @@ GUNBextra::~GUNBextra()
 }
 
 // To test how the code handles responses from the FPGA, compose a simulated response here.
-void GUNBextra::testCannedResponse()
+void GunExtra::testCannedResponse()
 {
 	// set up fake chassis response in this file. It can be quite long.
 	// Note that data can be copied from Wireshark. Next time, note the
@@ -207,7 +208,7 @@ void GUNBextra::testCannedResponse()
 		std::cout << "<- " <<__PRETTY_FUNCTION__ << endl;
 }
 
-asynStatus GUNBextra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
+asynStatus GunExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
 asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRETTY_FUNCTION__, value, mask);
 	int function = pasynUser->reason;
@@ -246,13 +247,13 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
 		regSendBuf[1].addr = (uint32_t) KeepWAdr;
 		// Enable register has I and Q as their own bits, so set pairs of bits
 		regSendBuf[1].data = InterleaveEnableBits(value, value);
-// [UNCOMMENT IF KEEP BECOMES READABLE]		regSendBuf[2].addr = (uint32_t) KeepWAdr | flagReadMask;
-		// regSendBuf[3] is a read request, so leave "blankData" there.
+		regSendBuf[2].addr = (uint32_t) KeepRAdr | flagReadMask;
+		// regSendBuf[2] is a read request, so leave "blankData" there.
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]		regSendBuf[3].addr = (uint32_t) TraceDataDspTagWAdr;
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]		regSendBuf[3].data = (int32_t) traceData_.nextTag();
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]regSendBuf[4].addr = (uint32_t) TraceDataDspTagWAdr | flagReadMask;
 
-// [UNCOMMENT IF KEEP BECOMES READABLE]		status = (asynStatus) setUIntDigitalParam(0, p_KeepR, (epicsUInt32) regSendBuf[1].data, mask);
+		status = (asynStatus) setUIntDigitalParam(0, p_KeepW, (epicsUInt32) regSendBuf[1].data, mask);
 
 		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 		_singleMsgQ.send(regSendBuf, 4 * sizeof( FpgaReg ));
@@ -276,7 +277,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
 	}
 	else
 	{
-		GUNBDriver::writeUInt32Digital(pasynUser, value, mask);
+		GunDriver::writeUInt32Digital(pasynUser, value, mask);
 	}
 	return status;
 }
@@ -285,7 +286,7 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
 /** Called when asyn clients call pasynInt32->write().
  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
  * \param[in] value Pointer to the value to read. */
-asynStatus GUNBextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
+asynStatus GunExtra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
 	int function = pasynUser->reason;
 	asynStatus status = asynSuccess;
@@ -330,8 +331,7 @@ asynStatus GUNBextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 				regSendBuf[1].addr = WaveShiftWAdr;
 				regSendBuf[1].data = wave_shift & WaveShiftMask;
 
-				// For the gun, CIC_PERIOD is a factor of 4 higher than other systems.
-				wave_time_step = 4*positiveSampPer * TraceData::CIC_PERIOD / TraceData::CLK_FREQ;
+				wave_time_step = positiveSampPer * TraceData::CIC_PERIOD / TraceData::CLK_FREQ;
 				setDoubleParam(p_TraceDataTimeStep, wave_time_step);
 				printf("new wave_time_step: %e s\n", wave_time_step);
 
@@ -351,13 +351,13 @@ asynStatus GUNBextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 //	else
 //	if (function == p_TagNowW)
 //	{
-//		status = GUNBDriver::writeInt32(pasynUser, value);
+//		status = GunDriver::writeInt32(pasynUser, value);
 //
-//		status = GUNBDriver::writeInt32(pasynUser, value);
+//		status = GunDriver::writeInt32(pasynUser, value);
 //	}
 	else
 	{
-		status = GUNBDriver::writeInt32(pasynUser, value);
+		status = GunDriver::writeInt32(pasynUser, value);
 	}
 
 	if (status)
@@ -368,6 +368,25 @@ asynStatus GUNBextra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
 			"<-- %s: function=%d, name=%s, value=%d\n",
 			__PRETTY_FUNCTION__, function, paramName, value);
+	return status;
+}
+
+asynStatus GunExtra::writeFloat64(asynUser *pasynUser, epicsFloat64 value)
+{
+	int function = pasynUser->reason;
+	int chan;
+	asynStatus status = asynSuccess;
+
+	// Some registers have more than 1 "channel"
+	getAddress(pasynUser, &chan);
+
+	if(function == p_TraceDataScale)
+	{
+		traceData_.scaleFactor_[chan] = value;
+	}
+
+	status = GunDriver::writeFloat64(pasynUser, value);
+
 	return status;
 }
 
@@ -463,7 +482,7 @@ float* TraceData::CavityDecayConstantCompute(
 static void TraceDataRequesterC(void *drvPvt)
 {
 	//printf("%s: starting\n", __PRETTY_FUNCTION__);
-	GUNBextra *pllrfDriver = (GUNBextra*)drvPvt;
+	GunExtra *pllrfDriver = (GunExtra*)drvPvt;
 	pllrfDriver->TraceDataRequester();
 	//printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -473,7 +492,7 @@ static void TraceDataRequesterC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus GUNBextra::StartTraceDataRequester()
+asynStatus GunExtra::StartTraceDataRequester()
 {
 	epicsThreadCreate("waveformRequester",
 			epicsThreadPriorityMedium,
@@ -487,10 +506,8 @@ void TraceData::ReqTraceData()
 	pDriver_->sendBigBuffer(pRequestMsg_, reqMsgSize);
 }
 
-void GUNBextra::TraceDataRequester()
+void GunExtra::TraceDataRequester()
 {
-	epicsInt32 readyBits;
-
 	FpgaReg TraceDataAck[] =
 	{
 			{0,0},
@@ -538,49 +555,37 @@ void GUNBextra::TraceDataRequester()
 	}
 }
 
-/*
-def calc_xscale(self):
-	"""
-	Calculate monitor channel gain by combining LO, CIC and data
-	truncations. Called after time scale change.
-	Returns register for ccfilter.v, total gain and xscale
-	"""
-	cic_r = self.wave_samp_per * self.cic_period
-	self.time_step_mon = cic_r / self.clk_freq
-	cic_bit_growth = 2 * np.log2(cic_r)
-	cic_snr_bit_growth = .5 * np.log2(cic_r / 2)
-	total_bit_growth = (np.log2(self.lo_dds_gain) + cic_bit_growth)
-
-	full_shift = np.floor(total_bit_growth - cic_snr_bit_growth)
-	wave_shift = int(max(0, (full_shift - self.shift_base)/2))
-	self.cic_gain = 2**(total_bit_growth - (2*wave_shift + self.shift_base) + 1)
-*/
-
 int TraceData::CalcWaveScale(int32_t wave_samp_per)
 {
-	unsigned int cic_r;
-	float cic_bit_growth;
-	float cic_snr_bit_growth;
-	float total_bit_growth;
-	unsigned int full_shift;
 	unsigned int wave_shift;
-	float cic_gain;
 
-	cic_r =  wave_samp_per *CIC_PERIOD;
-	cic_bit_growth = 2 * log2(cic_r);
-	cic_snr_bit_growth = .5 * log2(cic_r / 2);
-	total_bit_growth = cic_bit_growth;
-//	printf("total_bit_growth: %f\n", total_bit_growth);
-	full_shift = (unsigned int)floor(total_bit_growth - cic_snr_bit_growth);
-//	printf("full_shift: %d\n", full_shift);
-	wave_shift = (full_shift > SHIFT_BASE) ? (unsigned int)((full_shift - SHIFT_BASE)/2) : 0;
-//	printf("wave_shift: %d\n", wave_shift);
-	cic_gain = pow(2.0, total_bit_growth - (2*wave_shift + SHIFT_BASE) + 1);
-//	printf("cic_gain: %f\n", cic_gain);
-
-	gain_ = cic_gain;
+	wave_shift=ceil(log2(wave_samp_per));
+	gain_ = pow((wave_samp_per/pow(2.0,wave_shift)),2.0);
 
 	return wave_shift;
+}
+
+
+void TraceData::updateRelToAbsIdx()
+{
+	unsigned int rel_chan_ix = 0;
+	int abs_chan_ix;
+	nChan_ = chanKeep_.count();
+
+	cout << __PRETTY_FUNCTION__ << " with " << chanKeep_ << "\n";
+	for (rel_chan_ix=0, abs_chan_ix=-1; rel_chan_ix<nChan_; ++rel_chan_ix)
+	{
+		while(! chanKeep_.test(++abs_chan_ix))
+		{
+		}
+		cout << "Relative channel " << rel_chan_ix << " maps to absolute channel " << abs_chan_ix/2 << endl;
+		relToAbsIdx[rel_chan_ix] = abs_chan_ix/2;
+	}
+	for(;rel_chan_ix< sizeof(relToAbsIdx)/sizeof(*relToAbsIdx); rel_chan_ix++)
+	{
+		cout << "Relative channel " << rel_chan_ix << " is not used." << endl;
+		relToAbsIdx[rel_chan_ix] = -1;
+	}
 }
 
 // parse register data, write to array PV
@@ -661,8 +666,8 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
 					{
 						try
 						{
-							pABuf_[abs_chan_ix/2][i] = (epicsFloat32) hypot(pIQBuf_[rel_chan_ix-1][i], pIQBuf_[rel_chan_ix][i])/gain_;
-							pPBuf_[abs_chan_ix/2][i] = (epicsFloat32) (atan2(pIQBuf_[rel_chan_ix-1][i], pIQBuf_[rel_chan_ix][i]));
+							pABuf_[abs_chan_ix/2][i] = (epicsFloat32) hypot(pIQBuf_[rel_chan_ix-1][i], pIQBuf_[rel_chan_ix][i])*scaleFactor_[abs_chan_ix/2]/gain_;
+							pPBuf_[abs_chan_ix/2][i] = (epicsFloat32) (atan2(pIQBuf_[rel_chan_ix-1][i], pIQBuf_[rel_chan_ix][i])) * 180.0/M_PI;
 //							cout << "relative waveform " << rel_chan_ix << ", physical channel " << abs_chan_ix/2 << ", I = " << pIQBuf_[rel_chan_ix-1][i] << ", Q = " << pIQBuf_[rel_chan_ix][i]<< ", A = " << pABuf_[abs_chan_ix/2][i] << ", P = " << pPBuf_[abs_chan_ix/2][i] << endl;
 						}
 						catch (std::exception& e)
@@ -724,7 +729,7 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 * \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus GUNBextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+asynStatus GunExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
 {
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
@@ -845,9 +850,9 @@ asynStatus GUNBextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		status = (asynStatus) setUIntDigitalParam(p_KeepW,
 				(pFromFpga->data & KeepMask) , KeepMask);
 
-		traceData_.chanKeep_ = tmpData;
+		traceData_.chanKeep_ = (uint16_t) tmpData;
 		status = (asynStatus) setUIntDigitalParam(p_TraceDataChanEnable,
-				DeInterleaveBits(traceData_.chanKeep_), KeepMask);
+				DeInterleaveBits(traceData_.chanKeep_.to_ulong()), KeepMask);
 
 		// Count the number of bits set
 		for (traceData_.nChan_ = 0; tmpData; traceData_.nChan_++)
@@ -867,7 +872,7 @@ asynStatus GUNBextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		}
 		else
 		{
-			status = GUNBDriver::processRegReadback(pFromFpga, waveIsReady);
+			status = GunDriver::processRegReadback(pFromFpga, waveIsReady);
 		}
 		break;
 	}
@@ -879,7 +884,7 @@ asynStatus GUNBextra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
  * asyn parameter.
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 */
-asynStatus GUNBextra::processRegWriteResponse(const FpgaReg *pFromFpga)
+asynStatus GunExtra::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
@@ -967,34 +972,18 @@ asynStatus GUNBextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		tmpData = pFromFpga->data & KeepMask;
 		status = (asynStatus) getUIntDigitalParam(p_KeepW, (epicsUInt32*) valueSet , KeepMask);
 
-		if( (valueSet[0] & KeepMask) == (pFromFpga->data & KeepMask))
-		{
-			traceData_.chanKeep_ = tmpData = (pFromFpga->data & KeepMask);;
-			status = (asynStatus) setUIntDigitalParam(p_TraceDataChanEnable,
-					DeInterleaveBits(traceData_.chanKeep_), KeepMask);
+		traceData_.chanKeep_ = tmpData = (pFromFpga->data & KeepMask);;
+		status = (asynStatus) setUIntDigitalParam(p_TraceDataChanEnable,
+				DeInterleaveBits(traceData_.chanKeep_.to_ulong()), KeepMask);
 
-			// Count the number of bits set
-			for (traceData_.nChan_ = 0; tmpData; traceData_.nChan_++)
-			{
-				tmpData &= tmpData - 1; // clear the least significant bit set
-			}
-			setIntegerParam(p_TraceDataNActive, traceData_.nChan_);
+		traceData_.updateRelToAbsIdx();
+		// Note: updateRelToAbsIdx also updates nChan_
+		setIntegerParam(p_TraceDataNActive, traceData_.nChan_);
 
-			printf("%s KeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,traceData_.nChan_);
-			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+		printf("%s KeepWAdr says %d active channels\n",__PRETTY_FUNCTION__,traceData_.nChan_);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				KeepWString, (unsigned int) (pFromFpga->data & KeepMask));
-		}
-		else
-		{
-			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-				"%s: value sent to %s, value=0x%x, doesn't match echoed value=0x%x\n", __PRETTY_FUNCTION__,
-				KeepWString, (unsigned int) (valueSet[0] & KeepMask), (unsigned int) (pFromFpga->data & KeepMask));
-			status = asynError;
-			setParamStatus(p_KeepW, status);
-			getIntegerParam(p_CommErrorCount, &errorCount);
-			setIntegerParam(p_CommErrorCount, ++errorCount);
-		}
 
 		break;
 
@@ -1002,7 +991,7 @@ asynStatus GUNBextra::processRegWriteResponse(const FpgaReg *pFromFpga)
 // TODO: Add checking for arrays. Until then, we'll hit "default" for array values, so not really an error. GWB 8-23-2016
 //		getIntegerParam(p_CommErrorCount, &errorCount);
 //		setIntegerParam(p_CommErrorCount, errorCount + 1);
-		status = GUNBDriver::processRegWriteResponse(pFromFpga);
+		status = GunDriver::processRegWriteResponse(pFromFpga);
 
 		break;
 	}
@@ -1018,12 +1007,12 @@ extern "C" {
 
 /* Configuration routine.  Called directly, or from the iocsh function below */
 
-/** EPICS iocsh callable function to call constructor for the GUNB class.
+/** EPICS iocsh callable function to call constructor for the Gun class.
  * \param[in] portName The name of the asyn port driver to be created.
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
-int GUNBextraConfigure(const char *drvPortName, const char *netPortName)
+int GunExtraConfigure(const char *drvPortName, const char *netPortName)
 {
-	new GUNBextra(drvPortName, netPortName);
+	new GunExtra(drvPortName, netPortName);
 	return asynSuccess;
 }
 
@@ -1035,18 +1024,18 @@ static const iocshArg initArg1 = { "IP port name",iocshArgString};
 static const iocshArg * const initArgs[] = {&initArg0,
 		&initArg1};
 
-static const iocshFuncDef initFuncDef = {"GUNBextraConfigure",2,initArgs};
+static const iocshFuncDef initFuncDef = {"GunExtraConfigure",2,initArgs};
 static void initCallFunc(const iocshArgBuf *args)
 {
-	GUNBextraConfigure(args[0].sval, args[1].sval);
+	GunExtraConfigure(args[0].sval, args[1].sval);
 }
 
-void GUNBextraRegister(void)
+void GunExtraRegister(void)
 {
 	iocshRegister(&initFuncDef,initCallFunc);
 }
 
-epicsExportRegistrar(GUNBextraRegister);
+epicsExportRegistrar(GunExtraRegister);
 
 }
 
