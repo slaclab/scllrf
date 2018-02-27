@@ -1,688 +1,690 @@
-# Load the chassis-specific database indicated by the TYPE macro
-include "db/$(SC=scllrf)$(TYPE)Registers.template"
+# Load the chassis-specific database indicated by the CHASSIS_TYPE macro
+include "db/$(SC=scllrf)$(CHASSIS_TYPE)Registers.template"
 
 record(ao, "$(P)POLL_PERIOD")
 {
-    field(PINI, "YES")
-    field(DTYP, "asynFloat64")
-    field(OUT,  "@asyn($(PORT),0) POLL_PERIOD")
-    field(SCAN, "Passive")
-    field(PREC, 2)
-    info(asyn:READBACK, "1")
-    info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	field(PINI, "YES")
+	field(DTYP, "asynFloat64")
+	field(OUT,  "@asyn($(PORT),0) POLL_PERIOD")
+	field(SCAN, "Passive")
+	field(PREC, 2)
+	info(asyn:READBACK, "1")
+	info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 record(bo, "$(P)RUN_STOP")
 {
-    field(PINI, "NO")
-    field(DTYP, "asynInt32")
-    field(OUT,  "@asyn($(PORT),0) RUN_STOP")
-    field(SCAN, "Passive")
-    field(ZNAM, "Stop")
-    field(ONAM, "Run")
-    info(autosaveFields, "VAL DESC HIGH")
+	field(PINI, "NO")
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),0) RUN_STOP")
+	field(SCAN, "Passive")
+	field(ZNAM, "Stop")
+	field(ONAM, "Run")
+	info(autosaveFields, "VAL DESC HIGH")
 }
 
 record(longout, "$(P)MAX_PARALLEL_REQUESTS")
 {
-    field(PINI, "YES")
-    field(DTYP, "asynInt32")
-    field(OUT,  "@asyn($(PORT),0) MAX_PARALLEL_REQUESTS")
-    field(SCAN, "Passive")
-    info(asyn:READBACK, "1")
-    info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),0) MAX_PARALLEL_REQUESTS")
+	field(SCAN, "Passive")
+	info(asyn:READBACK, "1")
+	info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 record(ai, "$(P)COMM_ERROR_COUNT")
 {
-    field(PINI, "YES")
-    field(DTYP, "asynInt32")
-    field(INP,  "@asyn($(PORT),0) COMM_ERROR_COUNT")
-    field(SCAN, "I/O Intr")
-    info(autosaveFields, "DESC EGUL EGUF SMOO HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	field(PINI, "YES")
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),0) COMM_ERROR_COUNT")
+	field(SCAN, "I/O Intr")
+	info(autosaveFields, "DESC EGUL EGUF SMOO HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 record( waveform, "$(P)READ_ONE_REG"){
-  field( DESC, "Simple single register access")
-  field( SCAN, "Passive")
-  field( DTYP, "asynInt32ArrayIn")
-  field( INP,  "@asyn($(PORT),0,1)READ_ONE_REG")
-  field( PREC, "1")
-  field( NELM, "2")
-  field( FTVL, "LONG")
+field( DESC, "Simple single register access")
+field( SCAN, "Passive")
+field( DTYP, "asynInt32ArrayIn")
+field( INP,  "@asyn($(PORT),0,1)READ_ONE_REG")
+field( PREC, "1")
+field( NELM, "2")
+field( FTVL, "LONG")
 }
 
 record( waveform, "$(P)WRITE_ONE_REG"){
-  field( DESC, "Simple single register access")
-  field( SCAN, "Passive")
-  field( DTYP, "asynInt32ArrayOut")
-  field( INP,  "@asyn($(PORT),0,1)WRITE_ONE_REG")
-  field( PREC, "1")
-  field( NELM, "2")
-  field( FTVL, "LONG")
+field( DESC, "Simple single register access")
+field( SCAN, "Passive")
+field( DTYP, "asynInt32ArrayOut")
+field( INP,  "@asyn($(PORT),0,1)WRITE_ONE_REG")
+field( PREC, "1")
+field( NELM, "2")
+field( FTVL, "LONG")
 }
 
-record(ai, "$(P)MAGIC_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) MAGIC_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_MAGIC_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) MAGIC_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)DSP_FLAVOR_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) DSP_FLAVOR_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_DSP_FLAVOR_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) DSP_FLAVOR_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)BUILD_YEAR_R")
-{
-	field( DESC, "Year firmware was built")
-	field( EGU, "Yr")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_YEAR_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_BUILD_YEAR_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_YEAR_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)BUILD_MONTH_R")
-{
-	field( DESC, "Month firmware was built")
-	field( EGU, "Mo")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_MONTH_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "12")
-	field( LOPR, "1")
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_BUILD_MONTH_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_MONTH_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)BUILD_DAY_R")
-{
-	field( DESC, "Day firmware was built")
-	field( EGU, "Dy")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_DAY_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "31")
-	field( LOPR, "1")
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_BUILD_DAY_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_DAY_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)BUILD_HOUR_R")
-{
-	field( DESC, "Hour firmware was built")
-	field( EGU, "Hr")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_HOUR_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "23")
-	field( LOPR, "0")
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_BUILD_HOUR_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_HOUR_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)BUILD_MINUTE_R")
-{
-	field( DESC, "Minute firmware was built")
-	field( EGU, "Min")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_MINUTE_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "59")
-	field( LOPR, "0")
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_BUILD_MINUTE_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BUILD_MINUTE_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)CODE_IS_CLEAN_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) CODE_IS_CLEAN_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_CODE_IS_CLEAN_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) CODE_IS_CLEAN_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)TOOL_REV_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) TOOL_REV_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_TOOL_REV_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) TOOL_REV_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)USER_R")
-{
-	field( DESC, "Name of person compiling firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) USER_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_USER_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) USER_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)BOARD_TYPE_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BOARD_TYPE_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_BOARD_TYPE_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) BOARD_TYPE_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)VERSION_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) VERSION_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_VERSION_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) VERSION_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_A_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_A_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_A_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_A_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_B_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_B_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_B_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_B_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_C_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_C_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_C_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_C_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_D_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_D_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_D_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_D_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_E_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_E_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_E_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_E_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_F_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_F_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_F_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_F_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_G_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_G_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_G_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_G_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_H_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_H_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_H_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_H_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_I_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_I_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_I_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_I_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_J_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_J_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_J_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_J_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_K_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_K_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_K_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_K_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_L_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_L_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_L_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_L_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_M_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_M_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_M_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_M_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_N_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_N_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_N_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_N_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_O_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_O_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_O_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_O_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_P_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_P_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_P_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_P_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_Q_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_Q_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_Q_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_Q_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_R_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_R_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_R_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_R_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_S_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_S_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_S_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_S_R")
-	field( SCAN, "Passive")
-}
-
-record(ai, "$(P)GIT_SHA1_T_R")
-{
-	field( DESC, "SHA1 sum of firmware")
-	field( PINI, "YES")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_T_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "0x000000FF")
-	field( LOPR, 0)
-	field(PREC, 3)
-	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-}
-record(bi, "$(P)GET_GIT_SHA1_T_R")
-{
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) GIT_SHA1_T_R")
-	field( SCAN, "Passive")
-}
-
-record(waveform, "$(P)GIT_SHA1")
-{
-  field( DESC, "SHA1 string from firmware git commit")
-  field( DTYP, "asynOctetRead")
-  field( NELM, 42)
-  field( INP,  "@asyn($(PORT),0,1) GIT_SHA1")
-	field( PINI, "YES")
-#	field( INP,  "@asyn($(PORT),0) GIT_SHA1")
-	field( SCAN, "I/O Intr")
-	field(FTVL, "CHAR")
-}
+####XXXX If the gun gets these, uncomment
+#record(ai, "$(P)MAGIC_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) MAGIC_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_MAGIC_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) MAGIC_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)DSP_FLAVOR_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) DSP_FLAVOR_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_DSP_FLAVOR_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) DSP_FLAVOR_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)BUILD_YEAR_R")
+#{
+#	field( DESC, "Year firmware was built")
+#	field( EGU, "Yr")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_YEAR_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_BUILD_YEAR_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_YEAR_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)BUILD_MONTH_R")
+#{
+#	field( DESC, "Month firmware was built")
+#	field( EGU, "Mo")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_MONTH_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "12")
+#	field( LOPR, "1")
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_BUILD_MONTH_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_MONTH_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)BUILD_DAY_R")
+#{
+#	field( DESC, "Day firmware was built")
+#	field( EGU, "Dy")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_DAY_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "31")
+#	field( LOPR, "1")
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_BUILD_DAY_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_DAY_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)BUILD_HOUR_R")
+#{
+#	field( DESC, "Hour firmware was built")
+#	field( EGU, "Hr")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_HOUR_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "23")
+#	field( LOPR, "0")
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_BUILD_HOUR_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_HOUR_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)BUILD_MINUTE_R")
+#{
+#	field( DESC, "Minute firmware was built")
+#	field( EGU, "Min")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_MINUTE_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "59")
+#	field( LOPR, "0")
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_BUILD_MINUTE_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BUILD_MINUTE_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)CODE_IS_CLEAN_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) CODE_IS_CLEAN_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_CODE_IS_CLEAN_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) CODE_IS_CLEAN_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)TOOL_REV_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) TOOL_REV_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_TOOL_REV_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) TOOL_REV_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)USER_R")
+#{
+#	field( DESC, "Name of person compiling firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) USER_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_USER_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) USER_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)BOARD_TYPE_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BOARD_TYPE_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_BOARD_TYPE_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) BOARD_TYPE_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)VERSION_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) VERSION_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_VERSION_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) VERSION_R")
+#	field( SCAN, "Passive")
+#}
+#
+#####XXXX If the gun gets these registers, uncomment.
+#record(ai, "$(P)GIT_SHA1_A_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_A_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_A_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_A_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_B_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_B_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_B_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_B_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_C_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_C_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_C_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_C_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_D_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_D_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_D_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_D_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_E_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_E_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_E_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_E_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_F_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_F_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_F_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_F_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_G_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_G_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_G_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_G_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_H_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_H_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_H_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_H_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_I_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_I_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_I_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_I_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_J_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_J_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_J_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_J_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_K_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_K_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_K_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_K_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_L_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_L_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_L_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_L_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_M_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_M_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_M_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_M_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_N_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_N_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_N_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_N_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_O_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_O_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_O_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_O_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_P_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_P_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_P_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_P_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_Q_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_Q_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_Q_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_Q_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_R_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_R_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_R_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_R_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_S_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_S_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_S_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_S_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(ai, "$(P)GIT_SHA1_T_R")
+#{
+#	field( DESC, "SHA1 sum of firmware")
+#	field( PINI, "YES")
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_T_R")
+#	field( SCAN, "I/O Intr")
+#	field( HOPR, "0x000000FF")
+#	field( LOPR, 0)
+#	field(PREC, 3)
+#	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+#}
+#record(bi, "$(P)GET_GIT_SHA1_T_R")
+#{
+#	field( DTYP, "asynInt32")
+#	field( INP,  "@asyn($(PORT),0) GIT_SHA1_T_R")
+#	field( SCAN, "Passive")
+#}
+#
+#record(waveform, "$(P)GIT_SHA1")
+#{
+#  field( DESC, "SHA1 string from firmware git commit")
+#  field( DTYP, "asynOctetRead")
+#  field( NELM, 42)
+#  field( INP,  "@asyn($(PORT),0,1) GIT_SHA1")
+#	field( PINI, "YES")
+##	field( INP,  "@asyn($(PORT),0) GIT_SHA1")
+#	field( SCAN, "I/O Intr")
+#	field(FTVL, "CHAR")
+#}

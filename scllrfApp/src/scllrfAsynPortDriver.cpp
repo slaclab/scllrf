@@ -16,7 +16,7 @@
  * This file is part of LCLS II. It is subject to
  * the license terms in the LICENSE.txt file found in the top-level directory
  * of this distribution and at:
-    * https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+	* https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
  * No part of LCLS II, including this file, may be
  * copied, modified, propagated, or distributed except according to the terms
  * contained in the LICENSE.txt file.
@@ -106,13 +106,13 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 {
 	asynStatus status = asynSuccess;
 
-    /* Create the epicsMutex for locking access to communications counters from other threads */
-    comCountersMutexId_ = epicsMutexCreate();
-    if (!comCountersMutexId_) {
-        printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
-        return;
-    }
-    epicsThreadSleep(defaultPollPeriod);
+	/* Create the epicsMutex for locking access to communications counters from other threads */
+	comCountersMutexId_ = epicsMutexCreate();
+	if (!comCountersMutexId_) {
+		printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
+		return;
+	}
+	epicsThreadSleep(defaultPollPeriod);
 
 	createParam(RunStopString, asynParamInt32, &p_RunStop);
 printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
@@ -120,54 +120,54 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 			&p_MaxParallelRequests);
 	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
 	createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
-    createParam(ReadOneRegString, asynParamInt32Array, &p_ReadOneReg);
-    createParam(WriteOneRegString, asynParamInt32Array, &p_WriteOneReg);
+	createParam(ReadOneRegString, asynParamInt32Array, &p_ReadOneReg);
+	createParam(WriteOneRegString, asynParamInt32Array, &p_WriteOneReg);
 
-    createParam(BoardTypeRString, asynParamInt32, &p_BoardTypeR);
-    createParam(BuildDayRString, asynParamInt32, &p_BuildDayR);
-    createParam(BuildHourRString, asynParamInt32, &p_BuildHourR);
-    createParam(BuildMinuteRString, asynParamInt32, &p_BuildMinuteR);
-    createParam(BuildMonthRString, asynParamInt32, &p_BuildMonthR);
-    createParam(BuildYearRString, asynParamInt32, &p_BuildYearR);
-    createParam(CodeIsCleanRString, asynParamInt32, &p_CodeIsCleanR);
-    createParam(DspFlavorRString, asynParamInt32, &p_DspFlavorR);
-    createParam(GitSha1ARString, asynParamInt32, &p_GitSha1AR);
-    createParam(GitSha1BRString, asynParamInt32, &p_GitSha1BR);
-    createParam(GitSha1CRString, asynParamInt32, &p_GitSha1CR);
-    createParam(GitSha1DRString, asynParamInt32, &p_GitSha1DR);
-    createParam(GitSha1ERString, asynParamInt32, &p_GitSha1ER);
-    createParam(GitSha1FRString, asynParamInt32, &p_GitSha1FR);
-    createParam(GitSha1GRString, asynParamInt32, &p_GitSha1GR);
-    createParam(GitSha1HRString, asynParamInt32, &p_GitSha1HR);
-    createParam(GitSha1IRString, asynParamInt32, &p_GitSha1IR);
-    createParam(GitSha1JRString, asynParamInt32, &p_GitSha1JR);
-    createParam(GitSha1KRString, asynParamInt32, &p_GitSha1KR);
-    createParam(GitSha1LRString, asynParamInt32, &p_GitSha1LR);
-    createParam(GitSha1MRString, asynParamInt32, &p_GitSha1MR);
-    createParam(GitSha1NRString, asynParamInt32, &p_GitSha1NR);
-    createParam(GitSha1ORString, asynParamInt32, &p_GitSha1OR);
-    createParam(GitSha1PRString, asynParamInt32, &p_GitSha1PR);
-    createParam(GitSha1QRString, asynParamInt32, &p_GitSha1QR);
-    createParam(GitSha1RRString, asynParamInt32, &p_GitSha1RR);
-    createParam(GitSha1SRString, asynParamInt32, &p_GitSha1SR);
-    createParam(GitSha1TRString, asynParamInt32, &p_GitSha1TR);
+	createParam(BoardTypeRString, asynParamInt32, &p_BoardTypeR);
+	createParam(BuildDayRString, asynParamInt32, &p_BuildDayR);
+	createParam(BuildHourRString, asynParamInt32, &p_BuildHourR);
+	createParam(BuildMinuteRString, asynParamInt32, &p_BuildMinuteR);
+	createParam(BuildMonthRString, asynParamInt32, &p_BuildMonthR);
+	createParam(BuildYearRString, asynParamInt32, &p_BuildYearR);
+	createParam(CodeIsCleanRString, asynParamInt32, &p_CodeIsCleanR);
+	createParam(DspFlavorRString, asynParamInt32, &p_DspFlavorR);
+	createParam(GitSha1ARString, asynParamInt32, &p_GitSha1AR);
+	createParam(GitSha1BRString, asynParamInt32, &p_GitSha1BR);
+	createParam(GitSha1CRString, asynParamInt32, &p_GitSha1CR);
+	createParam(GitSha1DRString, asynParamInt32, &p_GitSha1DR);
+	createParam(GitSha1ERString, asynParamInt32, &p_GitSha1ER);
+	createParam(GitSha1FRString, asynParamInt32, &p_GitSha1FR);
+	createParam(GitSha1GRString, asynParamInt32, &p_GitSha1GR);
+	createParam(GitSha1HRString, asynParamInt32, &p_GitSha1HR);
+	createParam(GitSha1IRString, asynParamInt32, &p_GitSha1IR);
+	createParam(GitSha1JRString, asynParamInt32, &p_GitSha1JR);
+	createParam(GitSha1KRString, asynParamInt32, &p_GitSha1KR);
+	createParam(GitSha1LRString, asynParamInt32, &p_GitSha1LR);
+	createParam(GitSha1MRString, asynParamInt32, &p_GitSha1MR);
+	createParam(GitSha1NRString, asynParamInt32, &p_GitSha1NR);
+	createParam(GitSha1ORString, asynParamInt32, &p_GitSha1OR);
+	createParam(GitSha1PRString, asynParamInt32, &p_GitSha1PR);
+	createParam(GitSha1QRString, asynParamInt32, &p_GitSha1QR);
+	createParam(GitSha1RRString, asynParamInt32, &p_GitSha1RR);
+	createParam(GitSha1SRString, asynParamInt32, &p_GitSha1SR);
+	createParam(GitSha1TRString, asynParamInt32, &p_GitSha1TR);
 	createParam(GitSHA1String, asynParamOctet, &p_GitSHA1);
-    createParam(MagicRString, asynParamInt32, &p_MagicR);
-    createParam(ToolRevRString, asynParamInt32, &p_ToolRevR);
-    createParam(UserRString, asynParamInt32, &p_UserR);
-    createParam(VersionRString, asynParamInt32, &p_VersionR);
-    
+	createParam(MagicRString, asynParamInt32, &p_MagicR);
+	createParam(ToolRevRString, asynParamInt32, &p_ToolRevR);
+	createParam(UserRString, asynParamInt32, &p_UserR);
+	createParam(VersionRString, asynParamInt32, &p_VersionR);
+
 	// Set these early, consider adding interlock for race condition with polling loop.
-    setIntegerParam(p_RunStop, stop);
+	setIntegerParam(p_RunStop, stop);
 printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
-    setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
-    setIntegerParam(p_CommErrorCount, 0);
-    setDoubleParam(p_PollPeriod, defaultPollPeriod);
+	setIntegerParam(p_MaxParallelRequests, defaultMaxParallelRequests);
+	setIntegerParam(p_CommErrorCount, 0);
+	setDoubleParam(p_PollPeriod, defaultPollPeriod);
 
-    pPolledRegMsg_ = new FpgaReg[1] { {flagReadMask,blankData}};
-    PolledRegMsgSize_ = 1;
+	pPolledRegMsg_ = new FpgaReg[1] { {flagReadMask,blankData}};
+	PolledRegMsgSize_ = 1;
 
-    epicsThreadSleep(defaultPollPeriod);
+	epicsThreadSleep(defaultPollPeriod);
 
 	printf("%s created %ld parameters.\n",__PRETTY_FUNCTION__,NUM_SCLLRF_PARAMS);
 
@@ -183,22 +183,22 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
 				__PRETTY_FUNCTION__,netPortName, status);
 	else  printf( "%s: connect: %s asynUser \"Octet\" connected to port %s\n",__PRETTY_FUNCTION__, drvPortName,netPortName);
 
-    // The createParam calls are queued up rather than executed right away, so
-    // give them a chance to be created before we start writing to them.
-    // TODO: Is there a way to check that the params were finished being created?
-    epicsThreadSleep(defaultPollPeriod);
+	// The createParam calls are queued up rather than executed right away, so
+	// give them a chance to be created before we start writing to them.
+	// TODO: Is there a way to check that the params were finished being created?
+	epicsThreadSleep(defaultPollPeriod);
 
 	readEventId_ = epicsEventMustCreate(epicsEventEmpty);
-	startResponseHandler();
+	startResponseHandler(netPortName);
 
-    epicsThreadSleep(defaultPollPeriod);
+	epicsThreadSleep(defaultPollPeriod);
 
-	startPoller(defaultPollPeriod);
+	startPoller(netPortName, defaultPollPeriod);
 
 	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
-	startSingleMessageQueuer();
+	startSingleMessageQueuer(netPortName);
 
-    printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
+	printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 }
 
 void scllrfAsynPortDriver::init()
@@ -275,9 +275,11 @@ static void singleMessageQueuerC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startSingleMessageQueuer()
+asynStatus scllrfAsynPortDriver::startSingleMessageQueuer(const char *netPortName)
 {
-	epicsThreadCreate("singleMessageQueuer",
+	std::string  strThreadName(netPortName);
+	strThreadName += "singleMessageQueuer";
+	epicsThreadCreate(strThreadName.c_str(),
 			epicsThreadPriorityMedium,
 			epicsThreadGetStackSize(epicsThreadStackMedium),
 			(EPICSTHREADFUNC)singleMessageQueuerC, (void *)this);
@@ -309,7 +311,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		if(sendBufByteCount%sizeof(FpgaReg) != 0)
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-					"%s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", __PRETTY_FUNCTION__, sendBufByteCount);
+					"%s %s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", portName, __PRETTY_FUNCTION__, sendBufByteCount);
 		}
 
 		if (isShuttingDown_)
@@ -339,11 +341,11 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		if(sendBufByteCount%sizeof(FpgaReg) != 0)
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-					"%s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", __PRETTY_FUNCTION__, sendBufByteCount);
+					"%s %s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", portName, __PRETTY_FUNCTION__, sendBufByteCount);
 		}
 
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-				"%s: found %d queued bytes\n", __PRETTY_FUNCTION__, sendBufRegCount);
+				"%s %s: found %d queued bytes\n", portName, __PRETTY_FUNCTION__, sendBufRegCount);
 
 		if(sendBufRegCount < minRegPerMsg)
 		{
@@ -352,7 +354,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 
 		sendRegRequest(pMsgBuff, sendBufRegCount);
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-				"%s: done sending %u queued requests\n", __PRETTY_FUNCTION__, sendBufRegCount);
+				"%s %s: done sending %u queued requests\n", portName, __PRETTY_FUNCTION__, sendBufRegCount);
 	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -363,74 +365,74 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
-    const char *paramName;
-    FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
-    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {flagReadMask,blankData} );
-    int chan;
+	const char *paramName;
+	FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
+	std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg) {flagReadMask,blankData} );
+	int chan;
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
-    // Some registers have more than 1 "channel"
-    getAddress(pasynUser, &chan);
+	// Some registers have more than 1 "channel"
+	getAddress(pasynUser, &chan);
 
-    /* Set the parameter in the parameter library. */
-    status = (asynStatus) setUIntDigitalParam(chan, function, value, mask);
+	/* Set the parameter in the parameter library. */
+	status = (asynStatus) setUIntDigitalParam(chan, function, value, mask);
 
-    /* Fetch the parameter string name for possible use in debugging */
-    getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, %s\n",
+	/* Fetch the parameter string name for possible use in debugging */
+	getParamName(function, &paramName);
+	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, %s\n",
 			__PRETTY_FUNCTION__, function, paramName);
 
-    if (function == p_RunStop) {
-    	printf("%s setting RunStop for polling loop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
-        if (value == run)
-        	pollEvent_.signal();
-    }
-    else {
-    	// Convert function to address & FpgaReg.
-    	status = functionToRegister(function, &regSendBuf[1]);
-    	if (status == asynSuccess) // Yes, this function is a register write
-    	{
-    		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-    				"%s: found function=%d, name=%s, at chan %d + %d\n",
+	if (function == p_RunStop) {
+		printf("%s %s setting RunStop for polling loop to %s\n", portName, __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
+		if (value == run)
+			pollEvent_.signal();
+	}
+	else {
+		// Convert function to address & FpgaReg.
+		status = functionToRegister(function, &regSendBuf[1]);
+		if (status == asynSuccess) // Yes, this function is a register write
+		{
+			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+					"%s: found function=%d, name=%s, at chan %d + %d\n",
 					__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
-    		regSendBuf[1].data = (uint32_t) value;
-    		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
-    		if(chan == 0)
-    		{
-    			regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
-    		}
-    		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+			regSendBuf[1].data = (uint32_t) value;
+			regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
+			if(chan == 0)
+			{
+				regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
+			}
+			htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 
-    		if(chan== 0)
-    		{
-    			_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
-    		}
-    		else
-    		{
-    			_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
-    		}
-    	}
-    	else
-    	{
-    		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: function=%d, name=%s not a register, skip network request\n",
-  			  __PRETTY_FUNCTION__, function, paramName);
-    	}
-    }
+			if(chan== 0)
+			{
+				_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
+			}
+			else
+			{
+				_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
+			}
+		}
+		else
+		{
+			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+				"%s: function=%d, name=%s not a register, skip network request\n",
+				__PRETTY_FUNCTION__, function, paramName);
+		}
+	}
 
 	/* Do callbacks so higher layers see any changes */
 	status = (asynStatus) callParamCallbacks(chan, chan);
 
-    if (status)
-        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                  "%s: status=%d, function=%d, name=%s, value=%u",
-				  __PRETTY_FUNCTION__, status, function, paramName, value);
-    else
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-              "<-- %s: function=%d, name=%s, value=%u\n",
-			  __PRETTY_FUNCTION__, function, paramName, value);
-    return status;
+	if (status)
+		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+				"%s: status=%d, function=%d, name=%s, value=%u",
+				__PRETTY_FUNCTION__, status, function, paramName, value);
+	else
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+			"<-- %s: function=%d, name=%s, value=%u\n",
+			__PRETTY_FUNCTION__, function, paramName, value);
+	return status;
 }
 
 /** Called when asyn clients call pasynInt32->write().
@@ -441,74 +443,74 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
-    const char *paramName;
-    FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
-    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
-    int chan;
+	const char *paramName;
+	FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
+	std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
+	int chan;
 
 	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
-    // Some registers have more than 1 "channel"
-    getAddress(pasynUser, &chan);
+	// Some registers have more than 1 "channel"
+	getAddress(pasynUser, &chan);
 
-    /* Fetch the parameter string name for possible use in debugging */
-    getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s channel %d, value %d\n",
+	/* Fetch the parameter string name for possible use in debugging */
+	getParamName(function, &paramName);
+	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s channel %d, value %d\n",
 			__PRETTY_FUNCTION__, function, paramName, chan, value);
 
-    if (function == p_RunStop) {
-printf("%s setting RunStop to %s\n", __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
-        if (value == run)
-        	pollEvent_.signal(); // wake up the polling thread
-    }
-    else {
-    	// Convert function to address & FpgaReg.
-    	status = functionToRegister(function, &regSendBuf[1]);
-    	if (status == asynSuccess) // Yes, this function is a register write
-    	{
-    		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: found function=%d, name=%s, at chan %d + %d\n",
-  			  __PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
-    		regSendBuf[1].data = (int32_t) value;
-    		regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
-    		// Writable arrays are not also readable.
-    		if(chan == 0) // If not a writable array, send along a readback request
-    		{
-    			regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
-    		}
-    		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+	if (function == p_RunStop) {
+printf("%s %s setting RunStop to %s\n", portName, __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
+		if (value == run)
+			pollEvent_.signal(); // wake up the polling thread
+	}
+	else {
+		// Convert function to address & FpgaReg.
+		status = functionToRegister(function, &regSendBuf[1]);
+		if (status == asynSuccess) // Yes, this function is a register write
+		{
+			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+				"%s: found function=%d, name=%s, at chan %d + %d\n",
+				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
+			regSendBuf[1].data = (int32_t) value;
+			regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
+			// Writable arrays are not also readable.
+			if(chan == 0) // If not a writable array, send along a readback request
+			{
+				regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
+			}
+			htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 
-    		if(chan== 0) // Probably not a writable array
-    		{
-    			_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
-    		}
-    		else
-    		{
-    			_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
-    		}
-    	}
-    	else
-    	{
-    		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-                "%s: function=%d, name=%s not a register, skip network request\n",
-  			  __PRETTY_FUNCTION__, function, paramName);
-    	}
-    }
+			if(chan== 0) // Probably not a writable array
+			{
+				_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
+			}
+			else
+			{
+				_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
+			}
+		}
+		else
+		{
+			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+				"%s: function=%d, name=%s not a register, skip network request\n",
+				__PRETTY_FUNCTION__, function, paramName);
+		}
+	}
 
-    /* Set the parameter in the parameter library. */
-    status = (asynStatus) setIntegerParam(chan, function, value);
+	/* Set the parameter in the parameter library. */
+	status = (asynStatus) setIntegerParam(chan, function, value);
 	/* Do callbacks so higher layers see any changes */
 	status = (asynStatus) callParamCallbacks(chan, chan);
 
-    if (status)
-        epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-                  "%s: status=%d, function=%d, name=%s, value=%d",
-				  __PRETTY_FUNCTION__, status, function, paramName, value);
-    else
-        asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-              "<-- %s: function=%d, name=%s, channel=%d, value=%d\n",
-			  __PRETTY_FUNCTION__, function, paramName, chan, value);
-    return status;
+	if (status)
+		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+				"%s: status=%d, function=%d, name=%s, value=%d",
+				__PRETTY_FUNCTION__, status, function, paramName, value);
+	else
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+			"<-- %s: function=%d, name=%s, channel=%d, value=%d\n",
+			__PRETTY_FUNCTION__, function, paramName, chan, value);
+	return status;
 }
 
 /** Called when asyn clients call pasynInt32->read().
@@ -519,45 +521,45 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
-    const char *paramName;
-    FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
-    std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
-    int address;
+	const char *paramName;
+	FpgaReg regSendBuf[minRegPerMsg]; // LBL reports problems when smaller requests are sent
+	std::fill( regSendBuf, regSendBuf + sizeof( regSendBuf )/sizeof( *regSendBuf), (FpgaReg)  {flagReadMask,blankData} );
+	int address;
 
-    epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
+	epicsTimeStamp timeStamp; getTimeStamp(&timeStamp);
 
-    // Some registers have more than 1 "channel"
-    getAddress(pasynUser, &address);
+	// Some registers have more than 1 "channel"
+	getAddress(pasynUser, &address);
 
-    /* Fetch the parameter string name for possible use in debugging */
-    getParamName(function, &paramName);
-    asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
-    		__PRETTY_FUNCTION__, function, paramName);
+	/* Fetch the parameter string name for possible use in debugging */
+	getParamName(function, &paramName);
+	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s\n",
+			__PRETTY_FUNCTION__, function, paramName);
 
-    // Convert function to address & FpgaReg.
-    status = functionToRegister(function, &regSendBuf[1]);
-    if ((status == asynSuccess) && (regSendBuf[1].addr & flagReadMask)) // Yes, this function is a register write
-    {
-    	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-    			"%s: found function=%d, name=%s, at address %d\n",
+	// Convert function to address & FpgaReg.
+	status = functionToRegister(function, &regSendBuf[1]);
+	if ((status == asynSuccess) && (regSendBuf[1].addr & flagReadMask)) // Yes, this function is a register write
+	{
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+				"%s: found function=%d, name=%s, at address %d\n",
 				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
-    	regSendBuf[1].data = (int32_t) *value;
+		regSendBuf[1].data = (int32_t) *value;
 		regSendBuf[1].addr += (uint32_t) address;
-    	htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
-    	sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
-    }
-    else
-    {
-    	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-    			"%s: function=%d, name=%s not a register read address, skip network request\n",
+		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+		sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+	}
+	else
+	{
+		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
+				"%s: function=%d, name=%s not a register read address, skip network request\n",
 				__PRETTY_FUNCTION__, function, paramName);
-        status=asynPortDriver::readInt32(pasynUser, value);
-    }
-    return status;
+		status=asynPortDriver::readInt32(pasynUser, value);
+	}
+	return status;
 }
 
 asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *value,
-                                size_t nElements, size_t *nIn)
+								size_t nElements, size_t *nIn)
 {
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
@@ -568,7 +570,7 @@ asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *v
 }
 
 asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 *value,
-                                size_t nElements, size_t *nIn)
+								size_t nElements, size_t *nIn)
 {
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
@@ -585,7 +587,7 @@ asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 
   * \param[in] value Pointer to the array to write.
   * \param[in] nElements Number of elements to write. */
 asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 *value,
-                                size_t nElements, size_t *nIn)
+								size_t nElements, size_t *nIn)
 {
 	int function = pasynUser->reason;
 	asynStatus status = asynSuccess;
@@ -593,14 +595,14 @@ asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 
 	FpgaReg regSendBuf[maxMsgSize/sizeof(FpgaReg)];
 	unsigned int i, uOutBuffIndex;
 	uint32_t uRegAddr;
-    const char *paramName;
+	const char *paramName;
 
 	//getIntegerParam(P_ArrayLength, &nCopy);
 	//if ((int) nElements < nCopy)
 	//	nCopy = (int) nElements;
 
-    /* Fetch the parameter string name for possible use in debugging */
-    getParamName(function, &paramName);
+	/* Fetch the parameter string name for possible use in debugging */
+	getParamName(function, &paramName);
 
 	if(nElements < 2)
 	{
@@ -612,57 +614,57 @@ asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 
 		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: array with %d elements, function=%d, %s\n",
 				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
 
-    if ( function == p_ReadOneReg )
-    {
-    	uOutBuffIndex = 1; // index of first register past the nonce
-    	regSendBuf[1].addr = uReadOneRegAddr = value[0] | flagReadMask;
-    	regSendBuf[1].data = value[1];
-    }
-    else if ( function == p_WriteOneReg  )
-    {
-    	uOutBuffIndex = 1; // index of first register past the nonce
-    	regSendBuf[1].addr = uWriteOneRegAddr = value[0];
-    	regSendBuf[1].data = value[1];
-    }
-    else
-    {
-    	status = functionToRegister(function, &regSendBuf[1]);
-    	if (status != asynSuccess)
-    		return status;
+	if ( function == p_ReadOneReg )
+	{
+		uOutBuffIndex = 1; // index of first register past the nonce
+		regSendBuf[1].addr = uReadOneRegAddr = value[0] | flagReadMask;
+		regSendBuf[1].data = value[1];
+	}
+	else if ( function == p_WriteOneReg  )
+	{
+		uOutBuffIndex = 1; // index of first register past the nonce
+		regSendBuf[1].addr = uWriteOneRegAddr = value[0];
+		regSendBuf[1].data = value[1];
+	}
+	else
+	{
+		status = functionToRegister(function, &regSendBuf[1]);
+		if (status != asynSuccess)
+			return status;
 
-    	uRegAddr = regSendBuf[1].addr;
-    	uOutBuffIndex = 1; // index of first register past the nonce
+		uRegAddr = regSendBuf[1].addr;
+		uOutBuffIndex = 1; // index of first register past the nonce
 
-    	for(i=0; i<nElements; ++i, ++uOutBuffIndex)
-    	{
-    		regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
-    		regSendBuf[uOutBuffIndex].addr = (uint32_t) (uRegAddr + i)|flagReadMask;
+		for(i=0; i<nElements; ++i, ++uOutBuffIndex)
+		{
+			regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
+			regSendBuf[uOutBuffIndex].addr = (uint32_t) (uRegAddr + i)|flagReadMask;
 
-    		// If there's more to send than will fit in the max message size, break
-    		// it up into chunks and send each chunk individually
-    		if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
-    		{
-    			htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
-    			status = sendRegRequest(regSendBuf, uOutBuffIndex+1);
+			// If there's more to send than will fit in the max message size, break
+			// it up into chunks and send each chunk individually
+			if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
+			{
+				htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
+				status = sendRegRequest(regSendBuf, uOutBuffIndex+1);
 
-    			if (status)
-    				epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-    						"%s: status=%d, function=%d, sending array segment %u of %s", __PRETTY_FUNCTION__,
+				if (status)
+					epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+							"%s %s: status=%d, function=%d, sending array segment %u of %s", portName, __PRETTY_FUNCTION__,
 							status, function, i/uOutBuffIndex +1, paramName);
-    			else
-    				asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sending array segment %u of %s\n",
-    						__PRETTY_FUNCTION__, function, i/uOutBuffIndex +1, paramName);
-    			uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
-    		}
-    	}
-    }
+				else
+					asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sending array segment %u of %s\n",
+							__PRETTY_FUNCTION__, function, i/uOutBuffIndex +1, paramName);
+				uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
+			}
+		}
+	}
 
 	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
 	sendRegRequest(regSendBuf, uOutBuffIndex);
 	*nIn = nElements;
 	if (status)
 		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-				"%s: status=%d, function=%d, sent %s", __PRETTY_FUNCTION__,
+				"%s %s: status=%d, function=%d, sent %s", portName, __PRETTY_FUNCTION__,
 				status, function, paramName);
 	else
 		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "<-- %s: function=%d, sent %s\n",
@@ -672,7 +674,7 @@ asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 
 }
 
 asynStatus scllrfAsynPortDriver::writeInt8Array(asynUser *pasynUser, epicsInt8 *value,
-                                size_t nElements)
+								size_t nElements)
 {
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
@@ -683,7 +685,7 @@ asynStatus scllrfAsynPortDriver::writeInt8Array(asynUser *pasynUser, epicsInt8 *
 }
 
 asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
-                                size_t nElements)
+								size_t nElements)
 {
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
@@ -700,7 +702,7 @@ asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16
   * \param[in] value Pointer to the array to write.
   * \param[in] nElements Number of elements to write. */
 asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
-                                size_t nElements)
+								size_t nElements)
 {
 	int function = pasynUser->reason;
 	asynStatus status = asynSuccess;
@@ -708,14 +710,14 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 	FpgaReg regSendBuf[maxMsgSize/sizeof(FpgaReg)];
 	unsigned int i, uOutBuffIndex;
 	uint32_t uRegAddr;
-    const char *paramName;
+	const char *paramName;
 
 	//getIntegerParam(P_ArrayLength, &nCopy);
 	//if ((int) nElements < nCopy)
 	//	nCopy = (int) nElements;
 
-    /* Fetch the parameter string name for possible use in debugging */
-    getParamName(function, &paramName);
+	/* Fetch the parameter string name for possible use in debugging */
+	getParamName(function, &paramName);
 
 	if(nElements < 2)
 	{
@@ -727,57 +729,57 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: array with %d elements, function=%d, %s\n",
 				__PRETTY_FUNCTION__, (int) nElements, function, paramName);
 
-    if ( function == p_ReadOneReg )
-    {
-    	uOutBuffIndex = 1; // index of first register past the nonce
-    	regSendBuf[1].addr = uReadOneRegAddr = value[0] | flagReadMask;
-    	regSendBuf[1].data = value[1];
-    }
-    else if ( function == p_WriteOneReg  )
-    {
-    	uOutBuffIndex = 1; // index of first register past the nonce
-    	regSendBuf[1].addr = uWriteOneRegAddr = value[0];
-    	regSendBuf[1].data = value[1];
-    }
-    else
-    {
-    	status = functionToRegister(function, &regSendBuf[1]);
-    	if (status != asynSuccess)
-    		return status;
+	if ( function == p_ReadOneReg )
+	{
+		uOutBuffIndex = 1; // index of first register past the nonce
+		regSendBuf[1].addr = uReadOneRegAddr = value[0] | flagReadMask;
+		regSendBuf[1].data = value[1];
+	}
+	else if ( function == p_WriteOneReg  )
+	{
+		uOutBuffIndex = 1; // index of first register past the nonce
+		regSendBuf[1].addr = uWriteOneRegAddr = value[0];
+		regSendBuf[1].data = value[1];
+	}
+	else
+	{
+		status = functionToRegister(function, &regSendBuf[1]);
+		if (status != asynSuccess)
+			return status;
 
-    	uRegAddr = addrMask & regSendBuf[1].addr;
-    	uOutBuffIndex = 1; // index of first register past the nonce
+		uRegAddr = addrMask & regSendBuf[1].addr;
+		uOutBuffIndex = 1; // index of first register past the nonce
 
-    	for(i=0; i<nElements; ++i, ++uOutBuffIndex)
-    	{
-    		regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
-    		regSendBuf[uOutBuffIndex].addr = (uint32_t) uRegAddr + i;
+		for(i=0; i<nElements; ++i, ++uOutBuffIndex)
+		{
+			regSendBuf[uOutBuffIndex].data = (int32_t) value[i];
+			regSendBuf[uOutBuffIndex].addr = (uint32_t) uRegAddr + i;
 
-    		// If there's more to send than will fit in the max message size, break
-    		// it up into chunks and send each chunk individually
-    		if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
-    		{
-    			htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
-    			status = sendRegRequest(regSendBuf, uOutBuffIndex+1);
+			// If there's more to send than will fit in the max message size, break
+			// it up into chunks and send each chunk individually
+			if(uOutBuffIndex == maxMsgSize/sizeof(FpgaReg)-1)
+			{
+				htonFpgaRegArray(regSendBuf, uOutBuffIndex+1);
+				status = sendRegRequest(regSendBuf, uOutBuffIndex+1);
 
-    			if (status)
-    				epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-    						"%s: status=%d, function=%d, sending array segment %u of %s", __PRETTY_FUNCTION__,
+				if (status)
+					epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
+							"%s %s: status=%d, function=%d, sending array segment %u of %s", portName, __PRETTY_FUNCTION__,
 							status, function, i/uOutBuffIndex +1, paramName);
-    			else
-    				asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sending array segment %u of %s\n",
-    						__PRETTY_FUNCTION__, function, i/uOutBuffIndex +1, paramName);
-    			uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
-    		}
-    	}
-    }
+				else
+					asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "%s: function=%d, sending array segment %u of %s\n",
+							__PRETTY_FUNCTION__, function, i/uOutBuffIndex +1, paramName);
+				uOutBuffIndex = 0; // loop will increment to index of first register past the nonce
+			}
+		}
+	}
 
 	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
 	sendRegRequest(regSendBuf, uOutBuffIndex);
 
 	if (status)
 		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
-				"%s: status=%d, function=%d, sent %s", __PRETTY_FUNCTION__,
+				"%s %s: status=%d, function=%d, sent %s", portName, __PRETTY_FUNCTION__,
 				status, function, paramName);
 	else
 		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "<-- %s: function=%d, sent %s\n",
@@ -805,10 +807,12 @@ static void regPollerC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startPoller(double pollPeriod)
+asynStatus scllrfAsynPortDriver::startPoller(const char *netPortName, double pollPeriod)
 {
+	std::string  strThreadName(netPortName);
+	strThreadName += "asynPoller";
 	pollPeriod_ = pollPeriod;
-	epicsThreadCreate("asynPoller",
+	epicsThreadCreate(strThreadName.c_str(),
 			epicsThreadPriorityMedium,
 			epicsThreadGetStackSize(epicsThreadStackMedium),
 			(EPICSTHREADFUNC)regPollerC, (void *)this);
@@ -818,11 +822,11 @@ asynStatus scllrfAsynPortDriver::startPoller(double pollPeriod)
 void scllrfAsynPortDriver::regPoller()
 {
 	bool status = (bool) epicsEventWaitOK;
-    int runStop;
-    unsigned int regBuffCount;
-    FpgaReg *pTempRegMsg = pPolledRegMsg_;
+	int runStop;
+	unsigned int regBuffCount;
+	FpgaReg *pTempRegMsg = pPolledRegMsg_;
 
-    pollEvent_.wait(); // Block when first created, to give subclass constructors a chance to finish
+	pollEvent_.wait(); // Block when first created, to give subclass constructors a chance to finish
 	while(1) {
 		getDoubleParam(p_PollPeriod, &pollPeriod_);
 		getIntegerParam(p_RunStop, &runStop);
@@ -919,8 +923,8 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 {
 	if(regBuffer == NULL || regBuffCount < 5)
 	{
-		  fprintf(stderr, "Problem with send request. regBuffCount = %d:\n", regBuffCount);
-		  epicsThreadSuspendSelf();
+		fprintf(stderr, "Problem with send request. regBuffCount = %d:\n", regBuffCount);
+		epicsThreadSuspendSelf();
 	}
 	size_t writtenCount;
 	epicsInt32 errorCount;
@@ -961,7 +965,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 
 	if (status != asynSuccess)
 	{
-		asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s: failed to write. %s\n", __PRETTY_FUNCTION__,
+		asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s %s: failed to write. %s\n", portName, __PRETTY_FUNCTION__,
 				pOctetAsynUser_->errorMessage);
 		getIntegerParam(p_CommErrorCount, &errorCount);
 		setIntegerParam(p_CommErrorCount, errorCount + 1);
@@ -993,10 +997,12 @@ static void responseHandlerC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startResponseHandler()
+asynStatus scllrfAsynPortDriver::startResponseHandler(const char *netPortName)
 {
+	std::string  strThreadName(netPortName);
+	strThreadName += "responseHandler";
 	readTimeout_ = readTimeout;
-	epicsThreadCreate("responseHandler",
+	epicsThreadCreate(strThreadName.c_str(),
 			epicsThreadPriorityMedium, epicsThreadGetStackSize(epicsThreadStackMedium),
 			(EPICSTHREADFUNC) responseHandlerC, (void *) this);
 	return asynSuccess;
@@ -1014,7 +1020,7 @@ void scllrfAsynPortDriver::responseHandler()
 {
 	epicsEventWaitStatus waitStatus;
 	epicsMutexLockStatus mutexStatus;
-	static char pReadBuffer[maxMsgSize];
+	char pReadBuffer[maxMsgSize];
 	FpgaReg *pRegReadback;
 	size_t readCount = 0; // Number of bytes to process from the network read
 	epicsInt32 errorCount;
@@ -1066,13 +1072,13 @@ void scllrfAsynPortDriver::responseHandler()
 					noDataCounter = 0;
 					if(ntohl(pRegReadback[0].data) <= (int) maxMsgSize)
 					{ // read in the number of bytes the nonce says to expect, starting with the second register location
-						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: read %u byte nonce, says sequence # %u with %d bytes.\n",
-								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
+						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: read %u byte nonce, says sequence # %u with %d bytes.\n",
+								portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
 						pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
 								ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
 						readCount += nonceSize*sizeof(FpgaReg);
-						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: got %u bytes total for response #%u\n",
-								__PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
+						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: got %u bytes total for response #%u\n",
+								portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
 					}
 					else
 					{
@@ -1080,8 +1086,8 @@ void scllrfAsynPortDriver::responseHandler()
 						pasynOctetSyncIO->flush(pOctetAsynUser_);
 						netWaitingRequests_--;
 						asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-							"%s: presumed nonce says sequence # %u with %d bytes.\n",
-							__PRETTY_FUNCTION__, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
+							"%s %s: presumed nonce says sequence # %u with %d bytes.\n",
+							portName, __PRETTY_FUNCTION__, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
 						epicsMutexUnlock(comCountersMutexId_); // protect netWaitingRequests from being modified by the write thread
 						getIntegerParam(p_CommErrorCount, &errorCount);
 						setIntegerParam(p_CommErrorCount, errorCount + 1);
@@ -1110,7 +1116,7 @@ void scllrfAsynPortDriver::responseHandler()
 			if(netWaitingRequests_>0)
 			{
 				asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-						"%s: receive thread timed out after %fs waiting for %d responses. Network losses?\n", __PRETTY_FUNCTION__, readTimeout_, netWaitingRequests_);
+						"%s %s: receive thread timed out after %fs waiting for %d responses. Network losses?\n", portName, __PRETTY_FUNCTION__, readTimeout_, netWaitingRequests_);
 				netWaitingRequests_--;
 			}
 		}
@@ -1150,11 +1156,11 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 			if(netWaitingRequests_ > 0)
 				netWaitingRequests_--;
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-					"%s: Read %u bytes from network, %d bytes left to process, but expected %u bytes\n",
-					__PRETTY_FUNCTION__, readCount, bytesLeft, (unsigned) pRegReadback[0].data);
+					"%s %s: Read %u bytes from network, %d bytes left to process, but expected %u bytes\n",
+					portName, __PRETTY_FUNCTION__, readCount, bytesLeft, (unsigned) pRegReadback[0].data);
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-					"%s: Response from request #%u, expected is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					"%s %s: Response from request #%u, expected is request #%u\n",
+					portName, __PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s: Discarding this message\n",
@@ -1167,8 +1173,8 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		if (pRegReadback[0].addr > lastResponseCount_ + 1)
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-					"%s: Missing response message, got response from request #%u, expected is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					"%s %s: Missing response message, got response from request #%u, expected is request #%u\n",
+					portName, __PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
 
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -1177,8 +1183,8 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		if (pRegReadback[0].addr < lastResponseCount_ + 1)
 		{// NOTE: In testing so far, it has only reached here from data problems other than true out-of-order data
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-					"%s: Out-of-order response message, got response from request #%u, expected is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					"%s %s: Out-of-order response message, got response from request #%u, expected is request #%u\n",
+					portName, __PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					lastResponseCount_ + 1);
 
 			getIntegerParam(p_CommErrorCount, &errorCount);
@@ -1202,13 +1208,13 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 			if (status)
 				epicsSnprintf(pOctetAsynUser_->errorMessage,
 						pOctetAsynUser_->errorMessageSize,
-						"%s: status=%d, couldn't process address=0x%x, value=%u",
-						__PRETTY_FUNCTION__, status,
+						"%s %s: status=%d, couldn't process address=0x%x, value=%u",
+						portName, __PRETTY_FUNCTION__, status,
 						(unsigned) pRegReadback[i].addr,
 						(unsigned) pRegReadback[i].data);
 			//		else
 			//			asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-			//					"%s: address=0x%x, value=%u\n", __PRETTY_FUNCTION__,
+			//					"%s %s: address=0x%x, value=%u\n", portName, __PRETTY_FUNCTION__,
 			//					(unsigned ) pRegReadback[i].addr,
 			//					(unsigned ) pRegReadback[i].data);
 		}
@@ -1217,8 +1223,8 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		if (pRegReadback[0].addr < netSendCount_ )
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-					"%s: processed response from request #%u, most recent is request #%u\n",
-					__PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
+					"%s %s: processed response from request #%u, most recent is request #%u\n",
+					portName, __PRETTY_FUNCTION__, (unsigned) pRegReadback[0].addr,
 					netSendCount_);
 			netWaitingRequests_ = netSendCount_ - pRegReadback[0].addr;
 		}
@@ -1297,7 +1303,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 	}
 
 	asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-		"%s: value read from unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+		"%s %s: value read from unmapped address 0x%X, value=0x%X\n", portName, __PRETTY_FUNCTION__,
 		pFromFpga->addr, (unsigned ) pFromFpga->data);
 	getIntegerParam(p_CommErrorCount, &errorCount);
 	setIntegerParam(p_CommErrorCount, ++errorCount);
@@ -1330,7 +1336,7 @@ asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpg
 	}
 
 	asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-		"%s: write response from FPGA for unmapped address 0x%X, value=0x%X\n", __PRETTY_FUNCTION__,
+		"%s %s: write response from FPGA for unmapped address 0x%X, value=0x%X\n", portName, __PRETTY_FUNCTION__,
 		pFromFpga->addr, (unsigned ) pFromFpga->data);
 	getIntegerParam(p_CommErrorCount, &errorCount);
 	setIntegerParam(p_CommErrorCount, ++errorCount);
@@ -1365,9 +1371,9 @@ void ntohFpgaRegArray(FpgaReg *buffer, unsigned int regCount)
 unsigned short InterleaveEnableBits(unsigned char i, unsigned char q)
 {
 	return (((i * 0x0101010101010101ULL & 0x8040201008040201ULL) *
-     0x0102040810204081ULL >> 49) & 0x5555) |
-    (((q * 0x0101010101010101ULL & 0x8040201008040201ULL) *
-     0x0102040810204081ULL >> 48) & 0xAAAA);
+	0x0102040810204081ULL >> 49) & 0x5555) |
+	(((q * 0x0101010101010101ULL & 0x8040201008040201ULL) *
+	0x0102040810204081ULL >> 48) & 0xAAAA);
 }
 
 // I and Q in the *keep registers alternate bits indicating active I or Q.
@@ -1375,12 +1381,12 @@ unsigned short InterleaveEnableBits(unsigned char i, unsigned char q)
 // Pinched from https://stackoverflow.com/questions/4909263/how-to-efficiently-de-interleave-bits-inverse-morton
 uint32_t DeInterleaveBits(uint32_t x)
 {
-    x = x & 0x55555555;
-    x = (x | (x >> 1)) & 0x33333333;
-    x = (x | (x >> 2)) & 0x0F0F0F0F;
-    x = (x | (x >> 4)) & 0x00FF00FF;
-    x = (x | (x >> 8)) & 0x0000FFFF;
-    return x;
+	x = x & 0x55555555;
+	x = (x | (x >> 1)) & 0x33333333;
+	x = (x | (x >> 2)) & 0x0F0F0F0F;
+	x = (x | (x >> 4)) & 0x00FF00FF;
+	x = (x | (x >> 8)) & 0x0000FFFF;
+	return x;
 }
 
 extern "C" {

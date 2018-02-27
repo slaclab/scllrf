@@ -1,6 +1,6 @@
 
-#ifndef GunEXTRA_DRIVER_H
-#define GunEXTRA_DRIVER_H
+#ifndef GUNBEXTRA_DRIVER_H
+#define GUNBEXTRA_DRIVER_H
 
 /**
  *-----------------------------------------------------------------------------
@@ -26,7 +26,7 @@
  * contained in the LICENSE.txt file.
  * ----------------------------------------------------------------------------
 **/
-#include "Gun.h"
+#include "GUNB.h"
 #include <math.h>
 #include <bitset>
 
@@ -35,7 +35,7 @@
 #include "newmatio.h"
 using namespace NEWMAT;
 
-class GunExtra;
+class GUNBExtra;
 
 class TraceData
 {
@@ -44,14 +44,14 @@ public:
 	static const unsigned maxWavesCount = 16; // max channels, max number of waveforms interlaced in waveform buffer
 	static const unsigned reqBufSegmentCount; // # of UDP requests, divide and round up
 	static const unsigned reqMsgSize; // All register addresses plus nonce space
-	static const unsigned TraceDataRegCount=GunDriver::TraceDataBufRegCount;  // This will be ok as long as register map has same size for shell 0 and 1
+	static const unsigned TraceDataRegCount=GUNBDriver::TraceDataBufRegCount;
 
 	static const unsigned CIC_PERIOD;
 	static const unsigned SHIFT_BASE;
 	static const float CLK_FREQ;
 	static const unsigned SLOW_OFFSET;
 
-	TraceData(GunExtra *pDriver, unsigned int waveAddr,
+	TraceData(GUNBExtra *pDriver, unsigned int waveAddr,
 			int *rawParamIndex, int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
 			int *minsParamIndex, int *maxsParamIndex, epicsInt16 *readBuffer, FpgaReg *requestMsg);
 
@@ -69,7 +69,7 @@ public:
 	epicsFloat32 scaleFactor_[maxWavesCount];
 
 private:
-	GunExtra *pDriver_;
+	GUNBExtra *pDriver_;
 	FpgaReg *pRequestMsg_; // Canned message to request data buffer
 	bool readInProgress_;
 	uint32_t regStartAddr_;
@@ -82,22 +82,23 @@ private:
 	int *minsParamIndex_;
 	int *maxsParamIndex_;
 	epicsFloat32 gain_;
+	epicsEvent gotNewWave_; /**< Event to signal the waveform requester */
 
-	float* CavityDecayConstantCompute(int *decay_real, int *decay_imag, unsigned int start);
+	float* CavityDecayConstantCompute(float *decay_real, float *decay_imag, unsigned int start);
 	Matrix PseudoInverse(const Matrix & m);
 	//	epicsInt32 bufTraceData[TraceDataRegCount]; from generated code
 	//	epicsInt32 bufShell1CircleData[TraceDataRegCount]; from generated code
-	epicsInt32 pIQBuf_[maxWavesCount][TraceDataRegCount]; // Data mapped into channels, I/Q separated
+	epicsFloat32 pIQBuf_[maxWavesCount][TraceDataRegCount]; // Data mapped into channels, I/Q separated
 	epicsFloat32 pABuf_[maxWavesCount/2][TraceDataRegCount]; // Amplitude data channels
 	epicsFloat32 pPBuf_[maxWavesCount/2][TraceDataRegCount]; // Phase data channels
 };
 
-class GunExtra: public GunDriver
+class GUNBExtra: public GUNBDriver
 {
 public:
-	GunExtra(const char *drvPortName, const char *netPortName);
+	GUNBExtra(const char *drvPortName, const char *netPortName);
 	static const unsigned maxChannel; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
-	virtual ~GunExtra();
+	virtual ~GUNBExtra();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	virtual asynStatus writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask);
 	virtual asynStatus writeFloat64(asynUser *pasynUser, epicsFloat64 value);
@@ -142,7 +143,7 @@ protected:
 	unsigned int phaseStepH, phaseStepL, phaseModulo;
 	double iFrequency;
 
-	virtual asynStatus StartTraceDataRequester(); // For system startup
+	virtual asynStatus StartTraceDataRequester(const char *netPortName); // For system startup
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
@@ -150,7 +151,7 @@ protected:
 	// parameters for reading I/Q waveforms
 	// Circle buffer I/Q data
 	int p_TraceDataNActive;
-#define FIRST_GunEXTRA_PARAM p_TraceDataNActive
+#define FIRST_GUNBEXTRA_PARAM p_TraceDataNActive
 	int p_TraceDataChanEnable;
 	int p_TraceDataI;
 	int p_TraceDataQ;
@@ -164,12 +165,11 @@ protected:
 	int p_DecayConstantB;
 	int p_DecayStrength;
 	int p_DecayFitStdDev;
-
 	int p_IF; // intermediate frequency
 
-	#define LAST_GunEXTRA_PARAM p_IF
+	#define LAST_GUNBEXTRA_PARAM p_IF
 
-#define NUM_GunEXTRA_PARAMS (&LAST_GunEXTRA_PARAM - &FIRST_GunEXTRA_PARAM + 1)
+#define NUM_GUNBEXTRA_PARAMS (&LAST_GUNBEXTRA_PARAM - &FIRST_GUNBEXTRA_PARAM + 1)
 
 private:
 

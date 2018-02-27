@@ -21,7 +21,7 @@ alias( "$(P)wave_samp_per_ao" )
 field(FLNK, "$(P)WAVE_SHIFT_CALC")
 }
 
-# We do this partly in firmware, partly in GunExtra.cpp
+# We do this partly in firmware, partly in GUNBExtra.cpp
 #record(calcout, "$(P)WAVE_SHIFT_CALC") {
 #alias( "$(P)wave_shift_calc" )
 #field(INPA, "$(P)WAVE_SAMP_PER_W")

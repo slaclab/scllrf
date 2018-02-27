@@ -63,8 +63,8 @@ scllrf_SRCS_vxWorks += -nil-
  scllrf_SRCS += scllrfPRCextra.cpp
  scllrf_SRCS += scllrfRES.cpp
  scllrf_SRCS += scllrfRESextra.cpp
- scllrf_SRCS += Gun.cpp
- scllrf_SRCS += GunExtra.cpp
+ scllrf_SRCS += GUNB.cpp
+ scllrf_SRCS += GUNBExtra.cpp
  scllrf_SRCS += PVramp.stt
  scllrf_SRCS += INTmbboCopy.st
  scllrf_SRCS += INTres2tmp.c
@@ -76,7 +76,7 @@ scllrf_SRCS_vxWorks += -nil-
  scllrf_SRCS += BMB7Sup.c
 # scllrf_SRCS += cavity_fit.cc
 #USR_CXXFLAGS += -std=c++0x
-USR_CXXFLAGS += -g -rdynamic -I$(TOP)/newmat10
+USR_CXXFLAGS += -g -I$(TOP)/newmat10
 # =====================================================
 # Link in the code from other libraries
 # =====================================================

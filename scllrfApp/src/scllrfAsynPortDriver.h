@@ -16,7 +16,7 @@
  * This file is part of LCLS II. It is subject to
  * the license terms in the LICENSE.txt file found in the top-level directory
  * of this distribution and at:
-    * https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+	* https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
  * No part of LCLS II, including this file, may be
  * copied, modified, propagated, or distributed except according to the terms
  * contained in the LICENSE.txt file.
@@ -47,6 +47,7 @@
 #include <epicsMessageQueue.h>
 
 #include <asynPortDriver.h>
+#include <asynDriver.h>
 
 #include <epicsExport.h>
 
@@ -121,15 +122,15 @@ public:
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	virtual asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
 	virtual asynStatus readInt8Array(asynUser *pasynUser, epicsInt8 *value,
-            size_t nElements, size_t *nIn);
+			size_t nElements, size_t *nIn);
 	virtual asynStatus readInt16Array(asynUser *pasynUser, epicsInt16 *value,
-            size_t nElements, size_t *nIn);
+			size_t nElements, size_t *nIn);
 	virtual asynStatus readInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements, size_t *nIn);
 	virtual asynStatus writeInt8Array(asynUser *pasynUser, epicsInt8 *value,
-            size_t nElements);
+			size_t nElements);
 	virtual asynStatus writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
-            size_t nElements);
+			size_t nElements);
 	virtual asynStatus writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 			size_t nElements);
 //	virtual asynStatus readInt32Array(asynUser *pasynUser, epicsInt32 *value,
@@ -207,11 +208,11 @@ protected:
 	// For readable registers that are polled together at the set polling rate
 	FpgaReg *pPolledRegMsg_; // Leave the first array element blank, for use as the nonce
 	size_t PolledRegMsgSize_; // number of registers plus one for the nonce
-	virtual asynStatus startPoller(double pollPeriod); // For system startup
+	virtual asynStatus startPoller(const char *netPortName, double pollPeriod); // For system startup
 
 	// Response handler, reads data sent back from FPGA and assigns it to
 	// the appropriate variables and pvs.
-	virtual asynStatus startResponseHandler(); // For system startup
+	virtual asynStatus startResponseHandler(const char *netPortName); // For system startup
 	asynStatus processReadbackBuffer(FpgaReg *pFromFpga,
 			unsigned int readCount);
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
@@ -221,7 +222,7 @@ protected:
 
 	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
 
-	virtual asynStatus startSingleMessageQueuer();
+	virtual asynStatus startSingleMessageQueuer(const char *netPortName);
 	epicsEventId singleMsgQueueEventId_; /**< Event ID to signal the write message queuer */
 	epicsMessageQueue _singleMsgQ;
 
@@ -263,41 +264,41 @@ protected:
 	int p_CommErrorCount;
 
 	// Registers relating to the firmware build
-    int p_BoardTypeR;
-    int p_BuildDayR;
-    int p_BuildHourR;
-    int p_BuildMinuteR;
-    int p_BuildMonthR;
-    int p_BuildYearR;
-    int p_CodeIsCleanR;
-    int p_DspFlavorR;
-    int p_GitSha1AR;
-    int p_GitSha1BR;
-    int p_GitSha1CR;
-    int p_GitSha1DR;
-    int p_GitSha1ER;
-    int p_GitSha1FR;
-    int p_GitSha1GR;
-    int p_GitSha1HR;
-    int p_GitSha1IR;
-    int p_GitSha1JR;
-    int p_GitSha1KR;
-    int p_GitSha1LR;
-    int p_GitSha1MR;
-    int p_GitSha1NR;
-    int p_GitSha1OR;
-    int p_GitSha1PR;
-    int p_GitSha1QR;
-    int p_GitSha1RR;
-    int p_GitSha1SR;
-    int p_GitSha1TR;
-    int p_GitSHA1;
-    int p_MagicR;
-    int p_ToolRevR;
-    int p_UserR;
-    int p_VersionR;
+	int p_BoardTypeR;
+	int p_BuildDayR;
+	int p_BuildHourR;
+	int p_BuildMinuteR;
+	int p_BuildMonthR;
+	int p_BuildYearR;
+	int p_CodeIsCleanR;
+	int p_DspFlavorR;
+	int p_GitSha1AR;
+	int p_GitSha1BR;
+	int p_GitSha1CR;
+	int p_GitSha1DR;
+	int p_GitSha1ER;
+	int p_GitSha1FR;
+	int p_GitSha1GR;
+	int p_GitSha1HR;
+	int p_GitSha1IR;
+	int p_GitSha1JR;
+	int p_GitSha1KR;
+	int p_GitSha1LR;
+	int p_GitSha1MR;
+	int p_GitSha1NR;
+	int p_GitSha1OR;
+	int p_GitSha1PR;
+	int p_GitSha1QR;
+	int p_GitSha1RR;
+	int p_GitSha1SR;
+	int p_GitSha1TR;
+	int p_GitSHA1;
+	int p_MagicR;
+	int p_ToolRevR;
+	int p_UserR;
+	int p_VersionR;
 /* Registers */
-    #define LAST_SCLLRF_PARAM p_VersionR
+	#define LAST_SCLLRF_PARAM p_VersionR
 
 	epicsUInt32 uReadOneRegAddr, uWriteOneRegAddr;
 
@@ -306,79 +307,79 @@ protected:
 #define NUM_SCLLRF_PARAMS (&LAST_SCLLRF_PARAM - &FIRST_SCLLRF_PARAM + 1)
 
 	// mapping of register names to addresses
-    enum ReadRegAddrs
-    {
-    	MagicRAdr = 0x00000800,
-    	DspFlavorRAdr = 0x00000801,
-    	BuildYearRAdr = 0x00000802,
-    	BuildMonthRAdr = 0x00000803,
-    	BuildDayRAdr = 0x00000804,
-    	BuildHourRAdr = 0x00000805,
-    	BuildMinuteRAdr = 0x00000806,
-    	CodeIsCleanRAdr = 0x00000807,
-    	ToolRevRAdr = 0x00000808,
-    	UserRAdr = 0x00000809,
-    	BoardTypeRAdr = 0x0000080A,
-    	VersionRAdr = 0x0000080B,
-    	GitSha1ARAdr = 0x0000080C,
-    	GitSha1BRAdr = 0x0000080D,
-    	GitSha1CRAdr = 0x0000080E,
-    	GitSha1DRAdr = 0x0000080F,
-    	GitSha1ERAdr = 0x00000810,
-    	GitSha1FRAdr = 0x00000811,
-    	GitSha1GRAdr = 0x00000812,
-    	GitSha1HRAdr = 0x00000813,
-    	GitSha1IRAdr = 0x00000814,
-    	GitSha1JRAdr = 0x00000815,
-    	GitSha1KRAdr = 0x00000816,
-    	GitSha1LRAdr = 0x00000817,
-    	GitSha1MRAdr = 0x00000818,
-    	GitSha1NRAdr = 0x00000819,
-    	GitSha1ORAdr = 0x0000081A,
-    	GitSha1PRAdr = 0x0000081B,
-    	GitSha1QRAdr = 0x0000081C,
-    	GitSha1RRAdr = 0x0000081D,
-    	GitSha1SRAdr = 0x0000081E,
-    	GitSha1TRAdr = 0x0000081F,
-    };
+	enum ReadRegAddrs
+	{
+		MagicRAdr = 0x00000800,
+		DspFlavorRAdr = 0x00000801,
+		BuildYearRAdr = 0x00000802,
+		BuildMonthRAdr = 0x00000803,
+		BuildDayRAdr = 0x00000804,
+		BuildHourRAdr = 0x00000805,
+		BuildMinuteRAdr = 0x00000806,
+		CodeIsCleanRAdr = 0x00000807,
+		ToolRevRAdr = 0x00000808,
+		UserRAdr = 0x00000809,
+		BoardTypeRAdr = 0x0000080A,
+		VersionRAdr = 0x0000080B,
+		GitSha1ARAdr = 0x0000080C,
+		GitSha1BRAdr = 0x0000080D,
+		GitSha1CRAdr = 0x0000080E,
+		GitSha1DRAdr = 0x0000080F,
+		GitSha1ERAdr = 0x00000810,
+		GitSha1FRAdr = 0x00000811,
+		GitSha1GRAdr = 0x00000812,
+		GitSha1HRAdr = 0x00000813,
+		GitSha1IRAdr = 0x00000814,
+		GitSha1JRAdr = 0x00000815,
+		GitSha1KRAdr = 0x00000816,
+		GitSha1LRAdr = 0x00000817,
+		GitSha1MRAdr = 0x00000818,
+		GitSha1NRAdr = 0x00000819,
+		GitSha1ORAdr = 0x0000081A,
+		GitSha1PRAdr = 0x0000081B,
+		GitSha1QRAdr = 0x0000081C,
+		GitSha1RRAdr = 0x0000081D,
+		GitSha1SRAdr = 0x0000081E,
+		GitSha1TRAdr = 0x0000081F,
+	};
 
-    // masks applied to returned register data
-    enum RegMasks
-    {
-    	MagicMask =  0x000000FF,
-    	DspFlavorMask =  0x000000FF,
-    	BuildYearMask =  0x000000FF,
-    	BuildMonthMask =  0x000000FF,
-    	BuildDayMask =  0x000000FF,
-    	BuildHourMask =  0x000000FF,
-    	BuildMinuteMask =  0x000000FF,
-    	CodeIsCleanMask =  0x000000FF,
-    	ToolRevMask =  0x000000FF,
-    	UserMask =  0x000000FF,
-    	BoardTypeMask =  0x000000FF,
-    	VersionMask =  0x000000FF,
-    	GitSha1AMask =  0x000000FF,
-    	GitSha1BMask =  0x000000FF,
-    	GitSha1CMask =  0x000000FF,
-    	GitSha1DMask =  0x000000FF,
-    	GitSha1EMask =  0x000000FF,
-    	GitSha1FMask =  0x000000FF,
-    	GitSha1GMask =  0x000000FF,
-    	GitSha1HMask =  0x000000FF,
-    	GitSha1IMask =  0x000000FF,
-    	GitSha1JMask =  0x000000FF,
-    	GitSha1KMask =  0x000000FF,
-    	GitSha1LMask =  0x000000FF,
-    	GitSha1MMask =  0x000000FF,
-    	GitSha1NMask =  0x000000FF,
-    	GitSha1OMask =  0x000000FF,
-    	GitSha1PMask =  0x000000FF,
-    	GitSha1QMask =  0x000000FF,
-    	GitSha1RMask =  0x000000FF,
-    	GitSha1SMask =  0x000000FF,
-    	GitSha1TMask =  0x000000FF,
+	// masks applied to returned register data
+	enum RegMasks
+	{
+		MagicMask =  0x000000FF,
+		DspFlavorMask =  0x000000FF,
+		BuildYearMask =  0x000000FF,
+		BuildMonthMask =  0x000000FF,
+		BuildDayMask =  0x000000FF,
+		BuildHourMask =  0x000000FF,
+		BuildMinuteMask =  0x000000FF,
+		CodeIsCleanMask =  0x000000FF,
+		ToolRevMask =  0x000000FF,
+		UserMask =  0x000000FF,
+		BoardTypeMask =  0x000000FF,
+		VersionMask =  0x000000FF,
+		GitSha1AMask =  0x000000FF,
+		GitSha1BMask =  0x000000FF,
+		GitSha1CMask =  0x000000FF,
+		GitSha1DMask =  0x000000FF,
+		GitSha1EMask =  0x000000FF,
+		GitSha1FMask =  0x000000FF,
+		GitSha1GMask =  0x000000FF,
+		GitSha1HMask =  0x000000FF,
+		GitSha1IMask =  0x000000FF,
+		GitSha1JMask =  0x000000FF,
+		GitSha1KMask =  0x000000FF,
+		GitSha1LMask =  0x000000FF,
+		GitSha1MMask =  0x000000FF,
+		GitSha1NMask =  0x000000FF,
+		GitSha1OMask =  0x000000FF,
+		GitSha1PMask =  0x000000FF,
+		GitSha1QMask =  0x000000FF,
+		GitSha1RMask =  0x000000FF,
+		GitSha1SMask =  0x000000FF,
+		GitSha1TMask =  0x000000FF,
 
-    };
+	};
 };
 
 #endif /* SCLLRFAPP_SRC_SCLLRFASYNPORTDRIVER_H_ */

@@ -8,7 +8,7 @@ all: $(PY_FILES)
 		python deviceGeneration.py -d $$i ; \
 	done  ; \
 	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
-	python deviceGeneration.py -c Gun -i regmapold.json
+	python deviceGeneration.py -c GUNB -i regmapold.json
 
 % : %.py
 	python deviceGeneration.py -d $^

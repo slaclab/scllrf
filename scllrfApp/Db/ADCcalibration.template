@@ -117,5 +117,6 @@ record(calcout, "$(P)SCALE_FACTOR_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field( PREC, 7)
+	field(PINI, "YES")
 	info(autosaveFields, "HOPR LOPR VAL")
 }

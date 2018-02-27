@@ -11,7 +11,7 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install)
 # databases, templates, substitutions like this
 DB += PRCextra.db
-DB += GunExtra.db
+DB += GUNBExtra.db
 DB += BMB7monitor.db
 DB += cryo-plc.db
 
@@ -43,7 +43,7 @@ DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfCommon.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfINTRegisters.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfPRCRegisters.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfRESRegisters.template
-DB_INSTALLS += $(TOP)/scllrfApp/Db/GunRegisters.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/GUNBRegisters.template
 DB_INSTALLS += $(TOP)/scllrfApp/Db/RESextra.db
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
 DB_INSTALLS += $(TOP)/scllrfApp/Db/ZZZextra.template
