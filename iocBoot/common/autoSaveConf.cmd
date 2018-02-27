@@ -1,7 +1,7 @@
 # =====================================================================
 # Load database for autosave status
 # =====================================================================
-dbLoadRecords("db/save_restoreStatus.db", "P=${IOC}:")
+dbLoadRecords("db/save_restoreStatus.db", "P=${IOC_PV}")
 
 # END: Loading the record databases
 ########################################################################
@@ -24,14 +24,14 @@ save_restoreSet_DatedBackupFiles(1)
 # ============================================================
 # Where to find the list of PVs to save
 # ============================================================
-# Where "/data" is an NFS mount point setup when linuxRT target 
+# Where "/data" is an NFS mount point setup when linuxRT target
 # boots up.
-set_requestfile_path("data/${IOC}/autosave-req")
+set_requestfile_path("/data/${IOC}/autosave-req")
 
 # ============================================================
 # Where to write the save files that will be used to restore
 # ============================================================
-set_savefile_path("data/${IOC}/autosave")
+set_savefile_path("/data/${IOC}/autosave")
 
 # ============================================================
 # Prefix that is use to update save/restore status database
@@ -39,8 +39,7 @@ set_savefile_path("data/${IOC}/autosave")
 # ============================================================
 save_restoreSet_UseStatusPVs(1)
 # Set IOC_PV as a prefix for autosave and iocAdmin PVs
-epicsEnvSet("IOC_PV", "SIOC:$(LOCA):$(TYPE)$(N)")
-save_restoreSet_status_prefix("${IOC_PV}:")
+save_restoreSet_status_prefix("${IOC_PV}")
 
 ## Restore datasets
 set_pass0_restoreFile("info_settings.sav")

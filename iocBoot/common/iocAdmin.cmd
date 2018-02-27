@@ -5,8 +5,6 @@
 #  found in $IOC/<iocName>/<viocName>/iocStartup.cmd
 # The name must according the SLAC ICD PV naming convention.
 
-# Set IOC_PV as a prefix for autosave and iocAdmin PVs
-epicsEnvSet("IOC_PV", "SIOC:$(LOCA):$(TYPE)$(N)")
 dbLoadRecords("db/iocAdminSoft.db","IOC=${IOC_PV}")
 dbLoadRecords("db/iocAdminScanMon.db","IOC=${IOC_PV}")
 

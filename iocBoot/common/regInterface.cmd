@@ -1,42 +1,8 @@
-# ====================================================================
-# Setup some additional environment variables
-# ====================================================================
-# Setup environment variables
-
-# tag log messages with IOC name
-# How to escape the "vioc-dev" as the PERL program
-# will try to replace it.
-# So, uncomment the following and remove the backslash
-epicsEnvSet("EPICS\_IOC\_LOG_CLIENT_INET","${IOC}")
-
-# Need this path to EPICS BASE so that caRepeater can be started:
-# Let's figure out a way to pass this one in via the IOC's
-# initial startup.cmd: another job for hookIOC.py :)
-# Not needed caRepeater is started up by laci for all IOCs at
-# CPU boot up.
-epicsEnvSet(PATH,"${EPICS_BASE}/bin/$(ARCH)")
-
-# ========================================================
-# Support Large Arrays/Waveforms; Number in Bytes
-# Please calculate the size of the largest waveform
-# that you support in your IOC.  Do not just copy numbers
-# from other apps.  This will only lead to an exhaustion
-# of resources and problems with your IOC.
-# The default maximum size for a channel access array is
-# 16K bytes.
-# ========================================================
-# Uncomment and set appropriate size for your application:
-#epicsEnvSet("EPICS_CA_MAX_ARRAY_BYTES", "800000")
-
-# END: Additional environment variables
-# ====================================================================
-
+# Do chassis configuration that is needed before PVs connect
+#The following line works for RHEL
+####XXXX It's a pain to do this every time while testing
+system("${GO_PY=} cd ${PY_INIT_DIR}; ${PY_PATH=}python gun.py -a ${FPGA_IP} -b ${BIT_FILE}  -r")
 cd ${TOP}
-# ====================================================
-## Register all support components
-dbLoadDatabase("dbd/scllrf.dbd",0,0)
-scllrf_registerRecordDeviceDriver(pdbbase)
-# ====================================================
 
 # =====================================================================
 # Set some facility specific MACROs for database instantiation below
@@ -49,13 +15,30 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 #epicsEnvSet(TOP,"${IOC_APP}")
 
 # Set up communication with FPGA
-drvAsynIPPortConfigure("myIP","$(FPGA_IP):$(PORT) UDP")
-dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=myIP,ADDR=0,IMAX=0,OMAX=0")
+drvAsynIPPortConfigure("$(CHASSIS_NAME)myIP","$(FPGA_IP):$(PORT) UDP")
+dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=$(CHASSIS_NAME)myIP,ADDR=0,IMAX=0,OMAX=0")
+
+# ======================================================================
+### Asyn Debugging #####################################################
+# ======================================================================
+## Asyn messages for DIGI_Serial16
+#asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,ASYN_TRACE_ERROR)
+asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,0xB)
+#asynSetTraceIOMask("$(CHASSIS_NAME)myIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("$(CHASSIS_NAME)myIP",-1,4)
 
 
 #epicsThreadSleep(1.0)
-$(SC=scllrf)$(TYPE)$(EXTRA=extra)Configure( "myReg","myIP")
-dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=myReg,ADDR=0,IMAX=0,OMAX=0")
+$(SC=scllrf)$(CHASSIS_TYPE)$(EXTRA=extra)Configure( "$(CHASSIS_NAME)myReg","$(CHASSIS_NAME)myIP")
+dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=$(CHASSIS_NAME)myReg,ADDR=0,IMAX=0,OMAX=0")
+
+# ======================================================================
+### Asyn Debugging #####################################################
+# ======================================================================
+## Asyn messages for DIGI_Serial16
+asynSetTraceMask("$(CHASSIS_NAME)myReg",-1,0xB)
+#asynSetTraceIOMask("$(CHASSIS_NAME)myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("$(CHASSIS_NAME)myReg",-1,4)
 
 epicsThreadSleep(0.2)
 
@@ -63,4 +46,4 @@ epicsThreadSleep(0.2)
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/scllrfCommon.template", "TYPE=$(TYPE),P=$(P),PORT=myReg,SC=$(SC=scllrf)")
+dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)myReg,SC=$(SC=scllrf)")
