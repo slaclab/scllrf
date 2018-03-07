@@ -144,13 +144,15 @@ if __name__ == "__main__":
 					v['nelm'] = 2**v['addr_width']
 					if 'sign' in v:
 						v['signed'] = v['sign']
-					if 'keep' in k:
+					if 'keep' in k and not v.has_key('bits'):
 						v['bits'] = {}
-					if 'trig' in k:
+					if 'trig' in k and not v.has_key('bits'):
 						v['bits'] = {}
-					if 'mask' in k:
+					if 'mask' in k and not v.has_key('bits'):
 						v['bits'] = {}
-					if 'reset' in k:
+					if 'reset' in k and not v.has_key('bits'):
+						v['bits'] = {}
+					if 'status' in k and not v.has_key('bits'):
 						v['bits'] = {}
 					if 'llrf_circle_ready' in k:
 						v['bits'] = { "c0_ready": 0, "c1_ready": 1 }

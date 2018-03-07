@@ -1,5 +1,5 @@
-# Load the chassis-specific database indicated by the TYPE macro
-# This could be a useful thing, or not. include "db/scllrf$(TYPE)Registers.template"
+# Load the chassis-specific database indicated by the CHASSIS_TYPE macro
+# This could be a useful thing, or not. include "db/scllrf$(CHASSIS_TYPE)Registers.template"
 
 record(ai, "$(P)0:LOOPBACK_GACT")
 {

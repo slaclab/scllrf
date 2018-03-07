@@ -4,7 +4,7 @@
 
 
 #record(calcout, "$(P)LASER_FREQ_Hz") {
-#alias( "$(P)laser_freq_Hz" )
+#alias( "llrf$(N):laser_freq_Hz" )
 #field(INPA, "$(P)LASER_FREQ")
 #field(INPB, "-13.6239")
 #field(CALC, "A*B")
@@ -17,13 +17,13 @@
 #    field(SCAN, "1 second")
 #}
 record(ao, "$(P)WAVE_SAMP_PER_W") {
-alias( "$(P)wave_samp_per_ao" )
+alias( "llrf$(N):wave_samp_per_ao" )
 field(FLNK, "$(P)WAVE_SHIFT_CALC")
 }
 
 # We do this partly in firmware, partly in GUNBExtra.cpp
 #record(calcout, "$(P)WAVE_SHIFT_CALC") {
-#alias( "$(P)wave_shift_calc" )
+#alias( "llrf$(N):wave_shift_calc" )
 #field(INPA, "$(P)WAVE_SAMP_PER_W")
 #field(INPB, "0.602059991327962")
 ##log10(4)
@@ -36,11 +36,11 @@ field(FLNK, "$(P)WAVE_SHIFT_CALC")
 #}
 
 record(ao, "$(P)PH2_4_STATIC") {
-alias( "$(P)ph2_4_static" )
+alias( "llrf$(N):ph2_4_static" )
 }
 
 record(calcout, "$(P)PHASE_DIFF") {
-alias( "$(P)phase_diff" )
+alias( "llrf$(N):phase_diff" )
 field(INPA, "$(P)PH2_4_MEAN_DEGREE")
 field(INPB, "$(P)PH2_4_STATIC PP")
 field(INPD, "360000")
@@ -50,7 +50,7 @@ field(SCAN, ".2 second")
 }
 
 record(bo, "$(P)FREQ_LOOP_CLOSE") {
-alias( "$(P)freq_loop_close" )
+alias( "llrf$(N):freq_loop_close" )
 }
 
 record(ao, "$(P)FREQ_LOOP_GAIN") {
@@ -60,7 +60,7 @@ field(VAL, "0.2")
 }
 
 record(calcout, "$(P)FREQ_SHIFT") {
-alias( "$(P)freq_shift" )
+alias( "llrf$(N):freq_shift" )
 field(INPA, "$(P)DDSA_PHSTEP_H_W")
 field(INPB, "$(P)PHASE_DIFF")
 field(INPC, "$(P)RF_MASTER")
@@ -73,7 +73,7 @@ field(OUT, "$(P)DDSA_PHSTEP_H_W PP")
 }
 
 record(calc, "$(P)FREQ_CAV") {
-alias( "$(P)freq_cav" )
+alias( "llrf$(N):freq_cav" )
 field(INPA, "$(P)DDSA_PHSTEP_H_W")
 field(INPB, "$(P)DDSA_PHSTEP_L_W")
 field(INPC, "$(P)DDSA_MODULO_W")
@@ -82,7 +82,7 @@ field(SCAN, "1 second")
 }
 
 record(calcout, "$(P)DETUNE_GOOD") {
-alias( "$(P)detune_good" )
+alias( "llrf$(N):detune_good" )
 field(INPA, "$(P)DECAY_STRENGTH")
 field(INPB, "$(P)DECAY_FIT_STDDEV")
 field(INPC, "10000")
@@ -92,7 +92,7 @@ field(SCAN, "1 second")
 }
 
 record(calcout, "$(P)CALC_NEW_PHSTEP_H") {
-alias( "$(P)calc_new_phstep_h" )
+alias( "llrf$(N):calc_new_phstep_h" )
 field(INPA, "$(P)DDSA_PHSTEP_H_W")
 field(INPB, "$(P)DECAY_CONSTANT_B")
 field(INPC, "1.0265779e-5")
@@ -101,12 +101,12 @@ field(CALC, "A-B*C")
 }
 
 record(ai, "$(P)PH2_4_MEAN") {
-alias( "$(P)ph2_4_mean" )
+alias( "llrf$(N):ph2_4_mean" )
 field(FLNK, "$(P)PH2_4_MEAN_DEGREE")
 }
 
 record(calcout, "$(P)PH2_4_MEAN_DEGREE") {
-alias( "$(P)ph2_4_mean_degree" )
+alias( "llrf$(N):ph2_4_mean_degree" )
 field(INPA, "$(P)PH2_4_MEAN")
 field(INPB, "8.38190317153931e-08")
 #360/2^32
@@ -114,21 +114,21 @@ field(CALC, "A*B")
 }
 
 record(calcout, "$(P)READY_TO_TUNE") {
-alias( "$(P)ready_to_tune" )
+alias( "llrf$(N):ready_to_tune" )
 field(INPA, "$(P)DETUNE_GOOD")
 field(INPB, "$(P)FREQ_LOOP_CLOSE")
 field(CALC, "(A==1)&(B==0)")
 }
 
 record(bo, "$(P)BT_DO_FREQ_CORRECTION") {
-alias( "$(P)bt_do_freq_correction" )
+alias( "llrf$(N):bt_do_freq_correction" )
 field(FLNK, "$(P)DO_FREQ_CORRECTION")
 field(ZNAM, "Off")
 field(ONAM, "On")
 }
 
 record(seq, "$(P)DO_FREQ_CORRECTION") {
-alias( "$(P)do_freq_correction" )
+alias( "llrf$(N):do_freq_correction" )
 field(SELL, "$(P)READY_TO_TUNE")
 field(SELM, "All")
 field(DOL1, "$(P)CALC_NEW_PHSTEP_H PP")
@@ -144,73 +144,6 @@ field(DLY2, "1")
 #    field(ESLO, "9.790209e-3")
 #    field(EGU,  "uS")
 #}
-record(ao, "$(P)SOURCE_AMP_W") {
-alias( "$(P)source_amp_ao" )
-field(FLNK, "$(P)CALC_SOURCE_RE PP")
-}
-
-record(ao, "$(P)SOURCE_PH_W") {
-alias( "$(P)source_ph_ao" )
-field(PREC, "4")
-field(FLNK, "$(P)CALC_SOURCE_RE PP")
-}
-
-record(calcout, "$(P)CALC_SOURCE_RE") {
-alias( "$(P)calc_source_re" )
-field(INPA, "$(P)SOURCE_AMP_W")
-field(INPB, "$(P)SOURCE_PH_W")
-field(CALC, "(A*COS(B))")
-#field(SCAN,".2 second")
-#field(TPRO,"1")
-field(OUT, "$(P)SOURCE_RE_W PP")
-field(FLNK, "$(P)CALC_SOURCE_IM PP")
-}
-
-record(calcout, "$(P)CALC_SOURCE_IM") {
-alias( "$(P)calc_source_im" )
-field(INPA, "$(P)SOURCE_AMP_W")
-field(INPB, "$(P)SOURCE_PH_W")
-field(CALC, "(A*SIN(B))")
-#field(SCAN,".2 second")
-#field(TPRO,"1")
-field(OUT, "$(P)SOURCE_IM_W PP")
-field(FLNK, "$(P)CALC_SET_PLOOP_RE PP")
-}
-
-record(calcout, "$(P)CALC_SOURCE_AMP") {
-alias( "$(P)calc_source_amp" )
-field(INPA, "$(P)SOURCE_RE_W")
-field(INPB, "$(P)SOURCE_IM_W")
-field(CALC, "(SQRT(A*A+B*B))")
-#field(SCAN,".2 second")
-#field(TPRO,"1")
-# Value pushed to source_amp_ao, but don't process it!
-# That would create an infinite processing loop.
-field(OUT, "$(P)SOURCE_AMP_W NPP")
-field(FLNK, "$(P)CALC_SOURCE_PH PP")
-field(PINI, "YES")
-}
-
-record(calcout, "$(P)CALC_SOURCE_PH") {
-alias( "$(P)calc_source_ph" )
-field(INPA, "$(P)SOURCE_RE_W")
-field(INPB, "$(P)SOURCE_IM_W")
-field(CALC, "(ATAN2(A,B))")
-#field(SCAN,".2 second")
-#field(TPRO,"1")
-field(OUT, "$(P)SOURCE_PH_W NPP")
-field(PINI, "YES")
-}
-
-record(ao, "$(P)SOURCE_RE_W") {
-alias( "$(P)source_re_ao" )
-field(FLNK, "$(P)CALC_SOURCE_AMP PP")
-}
-
-record(ao, "$(P)SOURCE_IM_W") {
-alias( "$(P)source_im_ao" )
-field(FLNK, "$(P)CALC_SOURCE_AMP PP")
-}
 
 #record(ao,"$(P)SET_PLOOP_AMP_W")
 #{
@@ -241,7 +174,7 @@ field(FLNK, "$(P)CALC_SOURCE_AMP PP")
 #field(OUT,"$(P)SET_PLOOP_IM_W PP")
 #}
 record(calcout, "$(P)CALC_SET_PLOOP_AMP") {
-alias( "$(P)calc_set_iloop_amp" )
+alias( "llrf$(N):calc_set_iloop_amp" )
 field(INPA, "$(P)SET_PLOOP_RE_W")
 field(INPB, "$(P)SET_PLOOP_IM_W")
 field(CALC, "(SQRT(A*A+B*B))")
@@ -253,7 +186,7 @@ field(PINI, "YES")
 }
 
 record(calcout, "$(P)CALC_SET_PLOOP_PH") {
-alias( "$(P)calc_set_iloop_ph" )
+alias( "llrf$(N):calc_set_iloop_ph" )
 field(INPA, "$(P)SET_PLOOP_RE_W")
 field(INPB, "$(P)SET_PLOOP_IM_W")
 field(CALC, "(ATAN2(A,B))")
@@ -265,28 +198,28 @@ field(PINI, "YES")
 }
 
 record(ao, "$(P)SET_PLOOP_RE_W") {
-alias( "$(P)set_iloop_re_ao" )
+alias( "llrf$(N):set_iloop_re_ao" )
 field(FLNK, "$(P)CALC_SET_PLOOP_AMP PP")
 }
 
 record(ao, "$(P)SET_PLOOP_IM_W") {
-alias( "$(P)set_iloop_im_ao" )
+alias( "llrf$(N):set_iloop_im_ao" )
 field(FLNK, "$(P)CALC_SET_PLOOP_AMP PP")
 }
 
 record(ao, "$(P)GAIN_ILOOP_AMP_W") {
-alias( "$(P)gain_iloop_amp_ao" )
+alias( "llrf$(N):gain_iloop_amp_ao" )
 field(FLNK, "$(P)CALC_GAIN_ILOOP_RE PP")
 }
 
 record(ao, "$(P)GAIN_ILOOP_PH_W") {
-alias( "$(P)gain_iloop_ph_ao" )
+alias( "llrf$(N):gain_iloop_ph_ao" )
 field(PREC, "4")
 field(FLNK, "$(P)CALC_GAIN_ILOOP_RE PP")
 }
 
 record(calcout, "$(P)CALC_GAIN_ILOOP_RE") {
-alias( "$(P)calc_gain_iloop_re" )
+alias( "llrf$(N):calc_gain_iloop_re" )
 # attached to hardware register
 field(INPA, "$(P)GAIN_ILOOP_AMP_W")
 field(INPB, "$(P)GAIN_ILOOP_PH_W")
@@ -298,7 +231,7 @@ field(FLNK, "$(P)CALC_GAIN_ILOOP_IM PP")
 }
 
 record(calcout, "$(P)CALC_GAIN_ILOOP_IM") {
-alias( "$(P)calc_gain_iloop_im" )
+alias( "llrf$(N):calc_gain_iloop_im" )
 # attached to hardware register
 field(INPA, "$(P)GAIN_ILOOP_AMP_W")
 field(INPB, "$(P)GAIN_ILOOP_PH_W")
@@ -310,7 +243,7 @@ field(FLNK, "$(P)CALC_GAINP_ALPHA PP")
 }
 
 record(calcout, "$(P)CALC_GAIN_ILOOP_AMP") {
-alias( "$(P)calc_gain_iloop_amp" )
+alias( "llrf$(N):calc_gain_iloop_amp" )
 field(INPA, "$(P)GAIN_ILOOP_RE_W")
 field(INPB, "$(P)GAIN_ILOOP_IM_W")
 field(CALC, "(SQRT(A*A+B*B))")
@@ -322,7 +255,7 @@ field(PINI, "YES")
 }
 
 record(calcout, "$(P)CALC_GAIN_ILOOP_PH") {
-alias( "$(P)calc_gain_iloop_ph" )
+alias( "llrf$(N):calc_gain_iloop_ph" )
 field(INPA, "$(P)GAIN_ILOOP_RE_W")
 field(INPB, "$(P)GAIN_ILOOP_IM_W")
 field(CALC, "(ATAN2(A,B))")
@@ -333,28 +266,28 @@ field(PINI, "YES")
 }
 
 record(ao, "$(P)GAIN_ILOOP_RE_W") {
-alias( "$(P)gain_iloop_re_ao" )
+alias( "llrf$(N):gain_iloop_re_ao" )
 field(FLNK, "$(P)CALC_GAIN_ILOOP_AMP PP")
 }
 
 record(ao, "$(P)GAIN_ILOOP_IM_W") {
-alias( "$(P)gain_iloop_im_ao" )
+alias( "llrf$(N):gain_iloop_im_ao" )
 field(FLNK, "$(P)CALC_GAIN_ILOOP_AMP PP")
 }
 
 record(ao, "$(P)GAINP_AMP_W") {
-alias( "$(P)gainp_amp_ao" )
+alias( "llrf$(N):gainp_amp_ao" )
 field(FLNK, "$(P)CALC_GAINP_ALPHA PP")
 }
 
 record(ao, "$(P)GAINP_PH_W") {
-alias( "$(P)gainp_ph_ao" )
+alias( "llrf$(N):gainp_ph_ao" )
 field(PREC, "4")
 field(FLNK, "$(P)CALC_GAINP_ALPHA PP")
 }
 
 record(ao, "$(P)GAINP_PH_OFFSET_W") {
-alias( "$(P)gainp_ph_offset_ao" )
+alias( "llrf$(N):gainp_ph_offset_ao" )
 field(PREC, "4")
 field(FLNK, "$(P)CALC_GAINP_ALPHA PP")
 field(VAL, "-0.772")
@@ -363,7 +296,7 @@ field(PINI, "YES")
 }
 
 record(ao, "$(P)DDSA_PHSTEP_H_W") {
-alias( "$(P)ddsa_phstep_h_ao" )
+alias( "llrf$(N):ddsa_phstep_h_ao" )
 	# round((2/11+[-0.3 -0.2 0.4 0.5]/102.14)*2^20)
 	field(HIHI,"195783.0")
 	field(HIGH,"194757.0")
@@ -377,7 +310,7 @@ field(FLNK, "$(P)THETA")
 }
 
 record(calc, "$(P)THETA") {
-alias( "$(P)theta" )
+alias( "llrf$(N):theta" )
 field(PREC, "4")
 field(INPA, "$(P)DDSA_PHSTEP_H_W CA")
 field(INPB, "1048576")
@@ -385,7 +318,7 @@ field(CALC, "A/B*2*PI")
 }
 
 record(calcout, "$(P)CALC_GAINP_ALPHA") {
-alias( "$(P)calc_gainp_alpha" )
+alias( "llrf$(N):calc_gainp_alpha" )
 field(PREC, "4")
 field(INPA, "$(P)GAINP_AMP_W PP")
 field(INPB, "$(P)GAIN_ILOOP_PH_W")
@@ -399,7 +332,7 @@ field(FLNK, "$(P)CALC_GAINP_BETA PP")
 }
 
 record(calcout, "$(P)CALC_GAINP_BETA") {
-alias( "$(P)calc_gainp_beta" )
+alias( "llrf$(N):calc_gainp_beta" )
 field(INPA, "$(P)GAINP_AMP_W")
 field(INPB, "$(P)GAIN_ILOOP_PH_W")
 field(INPC, "$(P)GAINP_PH_OFFSET_W")
@@ -440,7 +373,7 @@ field(OUT, "$(P)GAINP_BETA_W PP")
 #field(FLNK,"$(P)CALC_GAINP_AMP")
 #}
 record(calcout, "$(P)CALC_SET_PLOOP_RE") {
-alias( "$(P)calc_set_iloop_re" )
+alias( "llrf$(N):calc_set_iloop_re" )
 field(INPA, "$(P)SET_PLOOP_RE_W")
 field(INPB, "$(P)SET_PLOOP_IM_W")
 field(INPC, "-3.1018")
@@ -454,7 +387,7 @@ field(FLNK, "$(P)CALC_SET_PLOOP_IM PP")
 }
 
 record(calcout, "$(P)CALC_SET_PLOOP_IM") {
-alias( "$(P)calc_set_iloop_im" )
+alias( "llrf$(N):calc_set_iloop_im" )
 field(INPA, "$(P)SET_PLOOP_RE_W")
 field(INPB, "$(P)SET_PLOOP_IM_W")
 field(INPC, "-3.1018")
@@ -467,7 +400,7 @@ field(OUT, "$(P)SET_PLOOP_IM_W PP")
 }
 
 record(bo, "$(P)BT_CLOSELOOP") {
-alias( "$(P)bt_closeloop" )
+alias( "llrf$(N):bt_closeloop" )
 field(FLNK, "$(P)CALC_CLOSELOOP")
 field(ZNAM, "Off")
 field(ONAM, "On")
@@ -475,7 +408,7 @@ field(TPRO, "1")
 }
 
 record(calc, "$(P)CALC_CLOSELOOP") {
-alias( "$(P)calc_closeloop" )
+alias( "llrf$(N):calc_closeloop" )
 field(INPA, "$(P)BT_CLOSELOOP")
 field(FLNK, "$(P)SWITCH_CLOSELOOP")
 field(CALC, "A?2:1")
@@ -483,7 +416,7 @@ field(TPRO, "1")
 }
 
 record(seq, "$(P)SWITCH_CLOSELOOP") {
-alias( "$(P)switch_closeloop" )
+alias( "llrf$(N):switch_closeloop" )
 field(SELM, "Specified")
 #field(SELM,"All")
 field(SELL, "$(P)CALC_CLOSELOOP")
@@ -493,7 +426,7 @@ field(TPRO, "1")
 }
 
 record(seq, "$(P)DO_CLOSELOOP") {
-alias( "$(P)do_closeloop" )
+alias( "llrf$(N):do_closeloop" )
 field(SELM, "All")
 field(DOL1, "$(P)CALC_FDBK_CLIPV_W PP")
 #field(LNK1,"$(P)FDBK_CLIPV_W PP")
@@ -515,7 +448,7 @@ field(TPRO, "1")
 }
 
 record(calcout, "$(P)CALC_FDBK_CLIPV_W") {
-alias( "$(P)calc_fdbk_clipv_ao" )
+alias( "llrf$(N):calc_fdbk_clipv_ao" )
 field(INPA, "$(P)SOURCE_AMP_W PP")
 field(B, "32767")
 field(CALC, "max(-B,min(1.15*A,B))")
@@ -524,7 +457,7 @@ field(TPRO, "1")
 }
 
 record(calcout, "$(P)CALC_SET_PLOOP_RE") {
-alias( "$(P)calc_set_ploop_re" )
+alias( "llrf$(N):calc_set_ploop_re" )
 field(INPA, "$(P)SET_PLOOP_RE_W")
 field(INPB, "$(P)SET_PLOOP_IM_W")
 field(C, "-0.180174")
@@ -537,7 +470,7 @@ field(FLNK, "$(P)CALC_SET_PLOOP_IM")
 }
 
 record(calcout, "$(P)CALC_SET_PLOOP_IM") {
-alias( "$(P)calc_set_ploop_im" )
+alias( "llrf$(N):calc_set_ploop_im" )
 field(INPA, "$(P)SET_PLOOP_RE_W")
 field(INPB, "$(P)SET_PLOOP_IM_W")
 field(C, "-0.180174")
@@ -563,7 +496,7 @@ field(TPRO, "1")
 #field(TPRO,"1")
 #}
 record(calcout, "$(P)CALC_LOOP_SET_PLOOP_RE") {
-alias( "$(P)calc_loop_set_iloop_re" )
+alias( "llrf$(N):calc_loop_set_iloop_re" )
 field(INPA, "$(P)W7_MEAN PP")
 field(INPB, "$(P)YSCALE PP")
 field(C, "123904")
@@ -576,7 +509,7 @@ field(FLNK, "$(P)CALC_LOOP_SET_PLOOP_IM")
 }
 
 record(calcout, "$(P)CALC_LOOP_SET_PLOOP_IM") {
-alias( "$(P)calc_loop_set_iloop_im" )
+alias( "llrf$(N):calc_loop_set_iloop_im" )
 field(INPA, "$(P)W8_MEAN PP")
 field(INPB, "$(P)YSCALE PP")
 field(C, "123904")
@@ -588,7 +521,7 @@ field(TPRO, "1")
 }
 
 record(seq, "$(P)DO_OPENLOOP") {
-alias( "$(P)do_openloop" )
+alias( "llrf$(N):do_openloop" )
 field(SELM, "All")
 field(DO1, "0")
 field(LNK1, "$(P)FDBK_CLIPV_W PP")
@@ -610,14 +543,14 @@ field(TPRO, "1")
 }
 
 record(calc, "$(P)CALC_OPEN_SOURCE_RE") {
-alias( "$(P)calc_open_source_re_ao" )
+alias( "llrf$(N):calc_open_source_re_ao" )
 field(INPA, "$(P)FDBK_CLIPV_W")
 field(CALC, "floor(A/1.15+0.5)")
 field(TPRO, "1")
 }
 
 record(ai, "$(P)ADC1_MIN_R") {
-alias( "$(P)adc1_min" )
+alias( "llrf$(N):adc1_min" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -629,7 +562,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC2_MIN_R") {
-alias( "$(P)adc2_min" )
+alias( "llrf$(N):adc2_min" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -641,7 +574,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC3_MIN_R") {
-alias( "$(P)adc3_min" )
+alias( "llrf$(N):adc3_min" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -653,7 +586,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC4_MIN_R") {
-alias( "$(P)adc4_min" )
+alias( "llrf$(N):adc4_min" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -665,7 +598,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC1_MAX_R") {
-alias( "$(P)adc1_max" )
+alias( "llrf$(N):adc1_max" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -677,7 +610,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC2_MAX_R") {
-alias( "$(P)adc2_max" )
+alias( "llrf$(N):adc2_max" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -689,7 +622,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC3_MAX_R") {
-alias( "$(P)adc3_max" )
+alias( "llrf$(N):adc3_max" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -701,7 +634,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ai, "$(P)ADC4_MAX_R") {
-alias( "$(P)adc4_max" )
+alias( "llrf$(N):adc4_max" )
 field(HIHI, "32700")
 field(HIGH, "32500")
 field(LOW, "-32500")
@@ -713,7 +646,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ao, "$(P)DECAY_SAMP_PER_W") {
-alias( "$(P)decay_samp_per_ao" )
+alias( "llrf$(N):decay_samp_per_ao" )
 field(HIHI, "4")
 field(HIGH, "3")
 field(LOW, "1")
@@ -725,7 +658,7 @@ field(LLSV, "MAJOR")
 }
 
 record(ao, "$(P)CH_KEEP_W") {
-alias( "$(P)ch_keep_ao" )
+alias( "llrf$(N):ch_keep_ao" )
 field(HIHI, "4081")
 field(HIGH, "4081")
 field(LOW, "4079")
@@ -737,7 +670,7 @@ field(LLSV, "MAJOR")
 }
 
 record(calc, "$(P)SYSTEM_HEALTH_1") {
-alias( "$(P)system_health_1")
+alias( "llrf$(N):system_health_1")
 field(INPA, "$(P)ADC1_MAX_R CP MS")
 field(INPB, "$(P)ADC2_MAX_R CP MS")
 field(INPC, "$(P)ADC3_MAX_R CP MS")
@@ -756,18 +689,18 @@ field(INPK, "$(P)DDSA_PHSTEP_H_W CP MS")
 #field(INPA, "$(P)DECAY_SAMP_PER_W")
 #}
 record(ai, "$(P)RF_MASTER") {
-alias( "$(P)rf_master" )
+alias( "llrf$(N):rf_master" )
 #Garth adding the desrciption
 field(DESC, "Master control to enable/disable RF")
 field(FLNK, "$(P)BOUNDARY_RESET_CALC")
 }
 
 record(ao, "$(P)MASK_BOUNDARY_RESET") {
-alias( "$(P)mask_boundary_reset" )
+alias( "llrf$(N):mask_boundary_reset" )
 }
 
 record(calcout, "$(P)BOUNDARY_RESET_CALC") {
-alias( "$(P)boundary_reset_calc" )
+alias( "llrf$(N):boundary_reset_calc" )
 field(INPA, "llrf1:rf_master")
 field(INPB, "$(P)RF_GO_W")
 field(INPC, "$(P)MASK_BOUNDARY_RESET")

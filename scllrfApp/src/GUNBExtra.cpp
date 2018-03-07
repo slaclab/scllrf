@@ -175,6 +175,7 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 	epicsThreadSleep(defaultPollPeriod);
 	wakeupPoller();
 	wakeupReader();
+
 }
 
 GUNBExtra::~GUNBExtra()
@@ -392,7 +393,7 @@ asynStatus GUNBExtra::writeFloat64(asynUser *pasynUser, epicsFloat64 value)
 	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: function=%d, %s channel %d, set to %f\n",
 			__PRETTY_FUNCTION__, function, paramName, chan, value);
 
-	if(function == p_TraceDataScale && chan < sizeof(traceData_.scaleFactor_)/sizeof(*traceData_.scaleFactor_))
+	if(function == p_TraceDataScale && (size_t) chan < sizeof(traceData_.scaleFactor_)/sizeof(*traceData_.scaleFactor_))
 	{
 		traceData_.scaleFactor_[chan] = value;
 	}
@@ -784,8 +785,8 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 	break;
 
 	case TraceStatus1RAdr|flagReadMask:
-	status = (asynStatus) setIntegerParam(p_TraceStatus1R,
-			(pFromFpga->data & TraceStatus1Mask));
+	status = (asynStatus) setUIntDigitalParam(p_TraceStatus1R,
+			(pFromFpga->data & TraceStatus1Mask), TraceStatus1Mask);
 
 	// if the waveform poller is caught up, and there is at least one active channel
 	if((newTraceDataAvailable_ == newTraceDataRead_) && (traceData_.nChan_ > 0))
@@ -896,7 +897,6 @@ asynStatus GUNBExtra::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	epicsInt32 valueSet[maxMsgSize/sizeof(FpgaReg)]; // Put the value sent to the FPGA here for comparison
-	epicsInt32 tmpData;
 	epicsInt32 errorCount;
 
 	assert(!(pFromFpga->addr&flagReadMask)); // This function is only for read registers

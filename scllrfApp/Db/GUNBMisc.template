@@ -2,8 +2,9 @@
 #! DBDSTART
 #! DBDEND
 
-
-#Make PVs for pulse width in us, pulse frequency in MHz, and duty cycle in %, so that they calculate each other. Leave raw register values in raw counts.
+# Macros:
+# P - Prefix matching what the register
+#Make PVs for pulse width in ms, pulse frequency in Hz, and duty cycle in %, so that they calculate each other. Leave raw register values in raw counts.
 
 # Bit width of pulse parameters might change, but the math is easy and won't change.
 # ADC counts are a multiple of IF, which is 1320MHz/14 or 1320000kHz/14
@@ -217,28 +218,12 @@ record( ao, "$(P)ADES"){
 	field( LOPR, "0")
 }
 
-record(ai, "$(P)AACT")
-{
-	field( DESC, "RF Amplitude readback")
-	field( PREC, "3")
-	field( HOPR, "0xFFFF")
-	field( LOPR, "0")
-}
-
 record( ao, "$(P)PDES"){
 	field( DESC, "RF Phase Setpoint")
 	field( OUT,  "$(P)AP_TO_IQ PP")
 	field( PREC, "3")
-	field( HOPR, "3.141592654")
-	field( LOPR, "-3.141592654")
-}
-
-record(ai, "$(P)PACT")
-{
-	field( DESC, "RF Phase readback")
-	field( PREC, "3")
-	field( HOPR, "0xFFFF")
-	field( LOPR, "0")
+	field( HOPR, "180")
+	field( LOPR, "-180")
 }
 
 record( fanout,  "$(P)AP_TO_IQ")
@@ -251,6 +236,67 @@ record( calcout, "$(P)AP_TO_I")
 {
 	field( INPA, "$(P)ADES")
 	field( INPB, "$(P)PDES")
+	field( INPC, "$(SCALEPV)")
+	field( CALC, "A*COS(B*D2R)/C")
+	field( OUT, "$(P)SET_PLOOP_RE_W PP")
+}
+
+record( calcout, "$(P)AP_TO_Q")
+{
+	field( INPA, "$(P)ADES")
+	field( INPB, "$(P)PDES")
+	field( INPC, "$(SCALEPV)")
+	field( CALC, "A*SIN(B*D2R)/C")
+	field( OUT, "$(P)SET_PLOOP_IM_W PP")
+}
+
+record(ai, "$(P)DECAY_CONSTANT_B") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),0) DECAY_CONSTANT_B")
+	field(SCAN, "I/O Intr")
+}
+record(ai, "$(P)DECAY_STRENGTH") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),0) DECAY_STRENGTH")
+	field(SCAN, "I/O Intr")
+}
+record(ai, "$(P)DECAY_FIT_STDDEV") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),0) DECAY_FIT_STDDEV")
+	field(SCAN, "I/O Intr")
+}
+
+# Above is closed loop settings. Below are open loop, in A/D units
+
+record( ao, "$(P)AOPEN"){
+	field( DESC, "RF Amplitude Setpoint")
+	field( OUT,  "$(P)AP_OPEN_TO_IQ PP")
+	field( PREC, "3")
+	field( HOPR, "0xFFFF")
+	field( LOPR, "0")
+}
+
+record( ao, "$(P)POPEN"){
+	field( DESC, "RF Phase Setpoint")
+	field( OUT,  "$(P)AP_OPEN_TO_IQ PP")
+	field( PREC, "3")
+	field( HOPR, "3.141592654")
+	field( LOPR, "-3.141592654")
+}
+
+record( fanout,  "$(P)AP_OPEN_TO_IQ")
+{
+	field(LNK1, "$(P)AP_OPEN_TO_I PP")
+	field(LNK2, "$(P)AP_OPEN_TO_Q PP")
+}
+
+record( calcout, "$(P)AP_OPEN_TO_I")
+{
+	field( INPA, "$(P)AOPEN")
+	field( INPB, "$(P)POPEN")
 	field( CALC, "A*COS(B)")
 	field( OUT, "$(P)SOURCE_RE_W PP")
 }
@@ -264,10 +310,10 @@ record(ao, "$(P)OPEN_CLOSED_RE_Sync")
 }
 
 
-record( calcout, "$(P)AP_TO_Q")
+record( calcout, "$(P)AP_OPEN_TO_Q")
 {
-	field( INPA, "$(P)ADES")
-	field( INPB, "$(P)PDES")
+	field( INPA, "$(P)AOPEN")
+	field( INPB, "$(P)POPEN")
 	field( CALC, "A*SIN(B)")
 	field( OUT, "$(P)SOURCE_IM_W PP")
 }
@@ -291,7 +337,7 @@ record( ai, "$(P)SOURCE_RE_R"){
 record( ao, "$(P)SOURCE_RE_Sync"){
 	field( DOL,  "$(P)SOURCE_RE_R PP")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)IQ_TO_AP PP")
+	field( OUT,  "$(P)IQ_OPEN_TO_AP PP")
 }
 
 record( ao, "$(P)SOURCE_IM_W"){
@@ -305,103 +351,29 @@ record( ai, "$(P)SOURCE_IM_R"){
 record( ao, "$(P)SOURCE_IM_Sync"){
 	field( DOL,  "$(P)SOURCE_IM_R PP")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)IQ_TO_AP PP")
+	field( OUT,  "$(P)IQ_OPEN_TO_AP PP")
 }
 
-record( fanout,  "$(P)IQ_TO_AP")
+record( fanout,  "$(P)IQ_OPEN_TO_AP")
 {
-	field(LNK1, "$(P)IQ_TO_A PP")
-	field(LNK2, "$(P)IQ_TO_P PP")
+	field(LNK1, "$(P)IQ_OPEN_TO_A PP")
+	field(LNK2, "$(P)IQ_OPEN_TO_P PP")
 }
 
-record( calcout, "$(P)IQ_TO_A")
+record( calcout, "$(P)IQ_OPEN_TO_A")
 {
 	field( INPA, "$(P)SOURCE_RE_R")
 	field( INPB, "$(P)SOURCE_IM_R")
 	field(CALC, "(SQRT(A^2+B^2))")
-	field( OUT, "$(P)AACT PP")
+	field( OUT, "$(P)AOPEN PP")
 }
 
-record( calcout, "$(P)IQ_TO_P")
+record( calcout, "$(P)IQ_OPEN_TO_P")
 {
 	field( INPA, "$(P)SOURCE_RE_R")
 	field( INPB, "$(P)SOURCE_IM_R")
 	field(CALC, "(ATAN2(A,B))")
-	field( OUT, "$(P)PACT PP")
-}
-
-record( waveform, "$(P)RAMTEST"){
-	field( FLNK, "$(P)RAMTEST_Syncout")
-	field( FTVL, "SHORT")
-	field( NELM, "8")
-}
-
-record(acalcout, "$(P)RAMTEST_Syncout")
-{
-	field( OUT,  "$(P)RAMTEST_W PP")
-	field(INAA, "$(P)RAMTEST PP")
-	field(CALC, "AA")
-	field(NELM, "8")
-	field(NUSE, "8")
-	field( SDIS, "$(P)RAMTEST_Syncin.PACT")
-	field( DISV, "1")
-}
-
-record( waveform, "$(P)RAMTEST_W"){
-	field( SDIS, "$(P)RAMTEST_Syncin.PACT")
-	field( DISV, "1")
-	field( FLNK, "$(P)GET_RAMTEST_R")
-}
-
-record( waveform, "$(P)RAMTEST_R"){
-	field( FLNK, "$(P)RAMTEST_Syncin")
-	field( SDIS, "$(P)RAMTEST_Syncout.PACT")
-	field( DISV, "1")
-}
-
-record(acalcout, "$(P)RAMTEST_Syncin")
-{
-	field(INAA, "$(P)RAMTEST_R PP")
-	field(CALC, "AA")
-	field(NELM, "8")
-	field(NUSE, "8")
-	field(OUT, "$(P)RAMTEST PP")
-	field( SDIS, "$(P)RAMTEST_Syncout.PACT")
-	field( DISV, "1")
-}
-
-# Normally we want calibration disabled
-# TODO: Probalby we want access control on this record
-record(bo, "$(P)CALIBRATION_ALLOWED")
-{
-	field(ZNAM, "Disabled")
-	field(ONAM, "Enabled")
-}
-
-record(ai, "$(P)IFACT") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) IF_FREQ")
-	field(SCAN, "I/O Intr")
-}
-
-record(ai, "$(P)DECAY_CONSTANT_B") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) DECAY_CONSTANT_B")
-	field(SCAN, "I/O Intr")
-}
-record(ai, "$(P)DECAY_STRENGTH") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) DECAY_STRENGTH")
-	field(SCAN, "I/O Intr")
-}
-record(ai, "$(P)DECAY_FIT_STDDEV") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) DECAY_FIT_STDDEV")
-	field(SCAN, "I/O Intr")
+	field( OUT, "$(P)POPEN PP")
 }
 
 #record(calc, "$(P)IFDES2MODULO")
@@ -409,291 +381,6 @@ record(ai, "$(P)DECAY_FIT_STDDEV") {
 #field(INPA, "$(P)IFDES")
 #field(CALC, "
 #
-#record(ai, "$(P)DIG_DSP_DDSA_MODULO_R")
-#{
-#    field( PINI, "NO")
-#    field( DTYP, "asynInt32")
-#    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_MODULO_R")
-#    field( SCAN, "I/O Intr")
-#    field( HOPR, "0x00000FFF")
-#    field( LOPR, 0)
-#field(PREC, 3)
-#    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-#}
-#
-#record(ai, "$(P)DIG_DSP_DDSA_PHSTEP_H_R")
-#{
-#    field( PINI, "NO")
-#    field( DTYP, "asynInt32")
-#    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_PHSTEP_H_R")
-#    field( SCAN, "I/O Intr")
-#    field( HOPR, "0x000FFFFF")
-#    field( LOPR, 0)
-#field(PREC, 3)
-#    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-#}
-#
-#record(ai, "$(P)DIG_DSP_DDSA_PHSTEP_L_R")
-#{
-#    field( PINI, "NO")
-#    field( DTYP, "asynInt32")
-#    field( INP,  "@asyn($(PORT),0) DIG_DSP_DDSA_PHSTEP_L_R")
-#    field( SCAN, "I/O Intr")
-#    field( HOPR, "0x00000FFF")
-#    field( LOPR, 0)
-#field(PREC, 3)
-#    info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
-#}
-# Circle buffer "slow data"
-#record(longin, "$(P)TRACE_DATA_CIRCLE_COUNT_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_CIRCLE_COUNT_R")
-#  field(SCAN, "I/O Intr")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_CIRCLE_STAT_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_CIRCLE_STAT_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_TAG_NOW_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_TAG_NOW_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_TAG_OLD_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_TAG_OLD_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_MIN0_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_MINS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_MIN1_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),1) TRACE_DATA_MINS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_MIN2_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),2) TRACE_DATA_MINS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_MAX0_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_MAXS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_MAX1_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),1) TRACE_DATA_MAXS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_MAX2_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),2) TRACE_DATA_MAXS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_TIME_STAMP_HIGH_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_TIME_STAMP_HIGH_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)TRACE_DATA_TIME_STAMP_LOW_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) TRACE_DATA_TIME_STAMP_LOW_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(waveform, "$(P)TRACE_DATA_SLOW_DATA_R") {
-#  field(DESC, "Slow data for shell 0 circle buff")
-#  field(SCAN, "I/O Intr")
-#  field(DTYP, "asynInt8ArrayIn")
-#  field(EGU, "byte")
-#  field(FTVL, "UCHAR")
-#}
-
-
-# The PUSLE_BOUNDARY register sets the start of the waveform to:
-# Free running, not synchronized, when set to 0
-# Rising pulse edge at the start of the trace, when set to 2
-# Falling pulse edge at the start of the trace, when set to 3
-record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER")
-{
-	field(ZRST, "Free Run")
-	field(ZRVL, 0)
-	field(ONST, "Rising Edge")
-	field(ONVL, 2)
-	field(TWST, "Falling Edge")
-	field(TWVL, 3)
-	field(OUT, "$(P)PULSE_BOUNDARY_W PP")
-	field(DTYP, "Raw Soft Channel")
-
-}
-
-record(mbbo, "$(P)TRACE_DATA_EDGE_TRIGGER_Sync")
-{
-	field(OMSL, "closed_loop")
-	field(DOL, "$(P)PULSE_BOUNDARY_W")
-	field(OUT, "$(P)TRACE_DATA_EDGE_TRIGGER")
-}
-
-record(mbboDirect, "$(P)TRACE_DATA_CHAN_ENABLE")
-{
-	field( PINI, "YES")
-	field( DTYP, "asynUInt32Digital")
-	field( OUT,  "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
-	field( NOBT, "12")
-	field( SCAN, "Passive")
-	field( FLNK, "$(P)TRACE_DATA_CHAN_DISABLE")
-	info( autosaveFields, "DESC")
-	info( asyn:READBACK, "1")
-}
-
-# Needed by the X-Y graph EDM widget
-record(calc, "$(P)TRACE_DATA_CHAN_DISABLE")
-{
-	field( SCAN, "Passive")
-	field( INPA, "$(P)TRACE_DATA_CHAN_ENABLE")
-	field( CALC, "~A")
-}
-record(longin, "$(P)TRACE_DATA_N_ACTIVE") {
-	field(PINI, "NO")
-	field(DTYP, "asynInt32")
-	field(INP, "@asyn($(PORT),0) TRACE_DATA_N_ACTIVE")
-	field(SCAN, "I/O Intr")
-	field(FLNK, "$(P)TRACE_DATA_X_NUSE")
-}
-
-record(calcout, "$(P)TRACE_DATA_X_NUSE")
-{
-	field(DESC, "More channels = shorter waveforms")
-	field(INPA, "$(P)TRACE_DATA_N_ACTIVE")
-	field(CALC, "FLOOR(8192/A)")
-	field(OUT, "$(P)TRACE_DATA_CALCX.NUSE PP")
-}
-
-record(ai, "$(P)TRACE_DATA_TIME_STEP") {
-	field(DESC, "Time interval per data point")
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0)TRACE_DATA_TIME_STEP")
-	field(SCAN, "I/O Intr")
-	field(EGU, "s")
-	field(DESC, "Waveform time step")
-	field(FLNK, "$(P)TRACE_DATA_CALCX")
-}
-
-#record(calcout, "$(P)TRACE_DATA_X_HOPR")
-#{
-#	field(DESC, "More channels = shorter time")
-#	field(INPA, "$(P)TRACE_DATA_X_NUSE CPP")
-#	field(INPB, "$(P)TRACE_DATA_TIME_STEP")
-#	field(CALC, "A*B")
-#	field(OUT, "$(P)TRACE_DATA_X_AXIS.HOPR PP")
-#}
-
-record(bo, "$(P)TRACE_DATA_FAST_UPDATE")
-{
-	field( ZNAM, "Disabled")
-	field( ONAM, "Enabled")
-	field( PINI, "NO")
-	field( DTYP, "asynUInt32Digital")
-	field( OUT,  "@asynMask($(PORT),0, 1, 0.1)TRACE_DATA_FAST_UPDATE")
-}
-
-# Create an array of time coordinates in the specified units
-record(acalcout, "$(P)TRACE_DATA_CALCX") {
-	field(DESC, "x-axis times")
-	field(CALC, "IX*A")
-	field(LOPR, "0")
-	field(INPA, "$(P)TRACE_DATA_TIME_STEP")
-	field(NELM, "8192")
-	field(NUSE, "8192")
-	field(PINI, "YES")
-	field(SCAN, "Passive")
-	field(EGU, "s")
-	field(PREC, "5")
-	field(OUT, "$(P)TRACE_DATA_X_AXIS PP")
-}
-
-record(waveform, "$(P)TRACE_DATA_X_AXIS") {
-	field(DESC, "x-axis times")
-	field(SCAN, "Passive")
-	field(DTYP, "Soft Channel")
-	field(FTVL, "FLOAT")
-	field(NELM, "8192")
-	field(EGU, "s")
-	field(PREC, "5")
-	field(FLNK, "$(P)TRACE_DATA_UPDATE_PLOT_CALC")
-}
-
-
-# This record just writes a 1 to the bo record to make it go high,
-# then low, whenever the number of channels changes.
-record(calcout, "$(P)TRACE_DATA_UPDATE_PLOT_CALC") {
-	field(INPC, "$(P)TRACE_DATA_X_AXIS")
-	field(OUT, "$(P)TRACE_DATA_UPDATE_PLOT PP")
-	field(CALC, "1")
-}
-# The waveform displays use this record to know when to update parameters
-record(bo, "$(P)TRACE_DATA_UPDATE_PLOT") {
-	field(HIGH, "0.1")
-}
-
-# Aliases used by LBNL Matlab that don't lend themselves well to
-# macros, shell scripts, or other automation
-alias("$(P)TRACE_DATA_I_0", "$(P)W1")
-alias("$(P)TRACE_DATA_Q_0", "$(P)W2")
-alias("$(P)TRACE_DATA_I_1", "$(P)W3")
-alias("$(P)TRACE_DATA_Q_1", "$(P)W4")
-alias("$(P)TRACE_DATA_I_2", "$(P)W5")
-alias("$(P)TRACE_DATA_Q_2", "$(P)W6")
-alias("$(P)TRACE_DATA_I_3", "$(P)W7")
-alias("$(P)TRACE_DATA_Q_3", "$(P)W8")
-alias("$(P)TRACE_DATA_I_4", "$(P)W9")
-alias("$(P)TRACE_DATA_Q_4", "$(P)WA")
-alias("$(P)TRACE_DATA_I_5", "$(P)WB")
-alias("$(P)TRACE_DATA_Q_5", "$(P)WC")
-alias("$(P)TRACE_DATA_I_6", "$(P)WD")
-alias("$(P)TRACE_DATA_Q_6", "$(P)WE")
-alias("$(P)TRACE_DATA_I_7", "$(P)WF")
-
 #! Further lines contain data used by VisualDCT
 #! View(1074,190,1.6)
 #! Record("$(P)TRACE_DATA_N_ACTIVE",980,27,0,0,"$(P)TRACE_DATA_N_ACTIVE")
@@ -723,34 +410,5 @@ alias("$(P)TRACE_DATA_I_7", "$(P)WF")
 #! Record("$(P)TRACE_DATA_X_AXIS",740,385,0,0,"$(P)TRACE_DATA_X_AXIS")
 #! Field("$(P)TRACE_DATA_X_AXIS.VAL",16777215,1,"$(P)TRACE_DATA_X_AXIS.VAL")
 #! Record("$(P)TRACE_DATA_UPDATE_PLOT",980,370,0,0,"$(P)TRACE_DATA_UPDATE_PLOT")
-#! Record("$(P)SHELL_1_CIRCLE_COUNT_R",1220,387,0,0,"$(P)SHELL_1_CIRCLE_COUNT_R")
-#! Record("$(P)SHELL_1_CIRCLE_STAT_R",1460,387,0,0,"$(P)SHELL_1_CIRCLE_STAT_R")
-#! Record("$(P)SHELL_1_TAG_NOW_R",1700,387,0,0,"$(P)SHELL_1_TAG_NOW_R")
-#! Record("$(P)SHELL_1_TAG_OLD_R",1940,387,0,0,"$(P)SHELL_1_TAG_OLD_R")
-#! Record("$(P)SHELL_1_MIN0_R",2180,387,0,0,"$(P)SHELL_1_MIN0_R")
-#! Record("$(P)SHELL_1_MIN1_R",2420,387,0,0,"$(P)SHELL_1_MIN1_R")
-#! Record("$(P)SHELL_1_MIN2_R",2660,387,0,0,"$(P)SHELL_1_MIN2_R")
-#! Record("$(P)SHELL_1_MAX0_R",2900,387,0,0,"$(P)SHELL_1_MAX0_R")
-#! Record("$(P)SHELL_1_MAX1_R",3140,387,0,0,"$(P)SHELL_1_MAX1_R")
-#! Record("$(P)SHELL_1_MAX2_R",3380,387,0,0,"$(P)SHELL_1_MAX2_R")
-#! Record("$(P)SHELL_1_TIME_STAMP_HIGH_R",3620,387,0,0,"$(P)SHELL_1_TIME_STAMP_HIGH_R")
-#! Record("$(P)SHELL_1_TIME_STAMP_LOW_R",3860,387,0,0,"$(P)SHELL_1_TIME_STAMP_LOW_R")
-#! Record("$(P)SHELL_1_SLOW_DATA_R",4100,374,0,0,"$(P)SHELL_1_SLOW_DATA_R")
-#! Record("$(P)SHELL_1_TIME_STEP",4340,379,0,0,"$(P)SHELL_1_TIME_STEP")
-#! Field("$(P)SHELL_1_TIME_STEP.VAL",16777215,0,"$(P)SHELL_1_TIME_STEP.VAL")
-#! Record("$(P)SHELL_1_CALCX",4580,377,0,0,"$(P)SHELL_1_CALCX")
-#! Field("$(P)SHELL_1_CALCX.INPA",16777215,0,"$(P)SHELL_1_CALCX.INPA")
-#! Link("$(P)SHELL_1_CALCX.INPA","$(P)SHELL_1_TIME_STEP.VAL")
-#! Field("$(P)SHELL_1_CALCX.OUT",16777215,0,"$(P)SHELL_1_CALCX.OUT")
-#! Link("$(P)SHELL_1_CALCX.OUT","$(P)SHELL_1_X_AXIS.VAL")
-#! Record("$(P)SHELL_1_X_AXIS",20,745,0,0,"$(P)SHELL_1_X_AXIS")
-#! Field("$(P)SHELL_1_X_AXIS.VAL",16777215,1,"$(P)SHELL_1_X_AXIS.VAL")
-#! Record("$(P)SHELL_1_UPDATE_PLOT",260,744,0,0,"$(P)SHELL_1_UPDATE_PLOT")
-#! Field("$(P)SHELL_1_UPDATE_PLOT.VAL",16777215,1,"$(P)SHELL_1_UPDATE_PLOT.VAL")
 #! Record("$(P)TRACE_UPDATE_PLOT",500,735,0,0,"$(P)TRACE_UPDATE_PLOT")
 #! Field("$(P)TRACE_UPDATE_PLOT.DOL",16777215,1,"$(P)TRACE_UPDATE_PLOT.DOL")
-#! Record("$(P)SHELL_1_UPDATE_PLOT_CALC",0,4,0,1,"$(P)SHELL_1_UPDATE_PLOT_CALC")
-#! Record("$(P)SHELL_1_UPDATE_PLOT_CALC",960,235,0,1,"$(P)SHELL_1_UPDATE_PLOT_CALC")
-#! Field("$(P)SHELL_1_UPDATE_PLOT_CALC.DOL1",16777215,1,"$(P)SHELL_1_UPDATE_PLOT_CALC.DOL1")
-#! Field("$(P)SHELL_1_UPDATE_PLOT_CALC.LNK1",16777215,0,"$(P)SHELL_1_UPDATE_PLOT_CALC.LNK1")
-#! Link("$(P)SHELL_1_UPDATE_PLOT_CALC.LNK1","$(P)SHELL_1_UPDATE_PLOT.VAL")

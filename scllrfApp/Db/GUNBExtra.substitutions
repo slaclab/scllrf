@@ -1,52 +1,90 @@
-file GUNBWaves.template {
-pattern { N, EGU }
-		{ 0, V   }
-		{ 1, V   }
-		{ 2, V   }
-		{ 3, V   }
-		{ 4, V   }
-		{ 5, V   }
-		{ 6, V   }
-		{ 7, V   }
-		{ 8, V   }
-		{ 9, V   }
-		{ 10, V   }
-		{ 11, V   }
-		{ 12, V   }
-		{ 13, V   }
-		{ 14, V   }
-		{ 15, V   }
+file GUNBWaveCh.template {
+pattern { P				, CH,	 PORT,		 EGU	}
+	{ "GUN:GUNB:100:PRL:"	, "0",	"PRCReg",	"dBm"	}
+	{ "GUN:GUNB:100:CAV1:"	, "3",	"PRCReg",	"MV"	}
+	{ "GUN:GUNB:100:CAV2:"	, "4",	"PRCReg",	"MV"	}
+	{ "GUN:GUNB:100:LASR:"	, "7"	"PRCReg",	"  "	}
+
+	{ "GUN:GUNB:100:DRV1:"	, "0"	"RFS1Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:S100:FWD1:"	, "1"	"RFS1Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:S100:REV1:"	, "2"	"RFS1Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:100:FWD1:"	, "3"	"RFS1Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:100:REV1:"	, "4"	"RFS1Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:C100:FWD1:"	, "5"	"RFS1Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:C100:REV1:"	, "6"	"RFS1Reg",	"sqrt(W)"	}
+
+	{ "GUN:GUNB:100:DRV2:"	, "0"	"RFS2Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:S100:FWD2:"	, "1"	"RFS2Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:S100:REV2:"	, "2"	"RFS2Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:100:FWD2:"	, "3"	"RFS2Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:100:REV2:"	, "4"	"RFS2Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:C100:FWD2:"	, "5"	"RFS2Reg",	"sqrt(W)"	}
+	{ "GUN:GUNB:C100:REV2:"	, "6"	"RFS2Reg",	"sqrt(W)"	}
+}
+file GUNBWavePerChassis.template
+{
+pattern{ P,					PORT }
+	{ "GUN:GUNB:100:PRC:",	PRCReg }
+	{ "GUN:GUNB:100:RFS1:",	RFS1Reg }
+	{ "GUN:GUNB:100:RFS2:",	RFS2Reg }
+}
+file rfSigCalibCav.template {
+pattern { PREF }
+	{ "GUN:GUNB:100:CAV1:" }
+	{ "GUN:GUNB:100:CAV2:" }
+}
+file rfSigCalib.template {
+pattern { PREF,				 NORM,						CAVSCL }
+	{ "GUN:GUNB:100:CAV1:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR",	"$(PREF)CAL_SCALE_CAV" }
+	{ "GUN:GUNB:100:CAV2:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR",	"$(PREF)CAL_SCALE_CAV" }
+}
+file rfSigCalib.template {
+pattern { PREF,				 NORM }
+	{ "GUN:GUNB:100:PRL:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR"}
+	{ "GUN:GUNB:100:LASR:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR"}
+
+	{ "GUN:GUNB:100:DRV1:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:S100:FWD1:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:S100:REV1:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:100:FWD1:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:100:REV1:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:C100:FWD1:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:C100:REV1:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+
+	{ "GUN:GUNB:100:DRV2:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:S100:FWD2:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:S100:REV2:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:100:FWD2:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:100:REV2:",	"GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:C100:FWD2:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
+	{ "GUN:GUNB:C100:REV2:","GUN:GUNB:100:PRC:TRACE_DATA_R.HOPR" }
 }
 
-#file apexCalcs.db
+#file GUNBLoopCalcs.db
 #{
-#	{ NULL = NULL }
+#	{ P = "GUN:GUNB:100", N=1 }
 #}
 
 
 file GUNBMisc.template
 {
-	{ NULL = NULL }
+pattern{ P,					PORT,	 SCALEPV }
+	{ "GUN:GUNB:100:PRC:",	PRCReg,	"GUN:GUNB:100:CAV1:SCALE" }
+	{ "GUN:GUNB:100:RFS1:",	RFS1Reg,"GUN:GUNB:100:FWD1:SCALE" }
+	{ "GUN:GUNB:100:RFS2:",	RFS2Reg,"GUN:GUNB:100:FWD2:SCALE" }
 }
 
 file PVramp.template
 {
-	{PV0 = ADES, PV1 = PDES, PV3 = REP_PERIOD, PV4 = REP_FREQUENCY, PV5 = DUTY_CYCLE, PV2 = PULSE_LENGTH, PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
+	{ P = "GUN:GUNB:100:", PV0 = ADES, PV1 = PDES, PV3 = REP_PERIOD, PV4 = REP_FREQUENCY, PV5 = DUTY_CYCLE, PV2 = PULSE_LENGTH, PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
 }
 
 
 file GUNBRegisterAlias.template
 {
-	{ NULL = NULL }
+	{ P = "GUN:GUNB:100:PRC:", N=1 }
 }
-file ADCcalibration.template {
-pattern { N, EGU }
-		{ 0, V   }
-		{ 1, V   }
-		{ 2, V   }
-		{ 3, V   }
-		{ 4, V   }
-		{ 5, V   }
-		{ 6, V   }
-		{ 7, V   }
+file GUNB3ChassisAlias.template
+{
+	{ P = "GUN:GUNB:100:", N=1}
 }

@@ -1,0 +1,87 @@
+file GUNBWaveCh.template {
+pattern { P,					 CH,	 CH+1,	 PORT,		 EGU	}
+	{ "ACCL:GUNB:455:PRLFWD:",	"2",	"3",	"PRCReg",	"dBm"	}
+	{ "ACCL:GUNB:455:PRLREV:",	"3",	"4",	"PRCReg",	"dBm"	}
+	{ "ACCL:GUNB:455:CAV1:",	"4",	"5",	"PRCReg",	"MV"	}
+	{ "ACCL:GUNB:455:CAV2:",	"5",	"6",	"PRCReg",	"MV"	}
+
+	{ "ACCL:GUNB:455:DRV1:",	"0",	"1",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD1:",	"1",	"2",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV1:",	"2",	"3",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:DRV2:",	"3",	"4",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD2:",	"4",	"5",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV2:",	"5",	"6",	"RFS1Reg",	"sqrt(W)"	}
+
+	{ "ACCL:GUNB:455:DRV3:",	"0",	"1",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD3:",	"1",	"2",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV3:",	"2",	"3",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:DRV4:",	"3",	"4",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD4:",	"4",	"5",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV4:",	"5",	"6",	"RFS2Reg",	"sqrt(W)"	}
+}
+
+file GUNBWavePerChassis.template
+{
+	{ P = "ACCL:GUNB:455:PRC:", PORT = "PRCReg" }
+	{ P = "ACCL:GUNB:455:RFS1:", PORT = "RFS1Reg" }
+	{ P = "ACCL:GUNB:455:RFS2:", PORT = "RFS2Reg" }
+}
+
+file rfSigCalibCav.template {
+pattern { PREF }
+	{ "ACCL:GUNB:455:CAV1:" }
+	{ "ACCL:GUNB:455:CAV2:" }
+}
+file rfSigCalib.template {
+pattern { PREF,				 NORM,						CAVSCL }
+	{ "ACCL:GUNB:455:CAV1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR",	"$(PREF)CAL_SCALE_CAV" }
+	{ "ACCL:GUNB:455:CAV2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR",	"$(PREF)CAL_SCALE_CAV" }
+}
+file rfSigCalib.template {
+pattern { PREF,				 NORM }
+	{ "ACCL:GUNB:455:PRLFWD:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:PRLREV:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+
+	{ "ACCL:GUNB:455:DRV1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:FWD1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:REV1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:DRV2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:FWD2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:REV2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+
+	{ "ACCL:GUNB:455:DRV3:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:FWD3:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:REV3:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:DRV4:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:FWD4:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:REV4:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+}
+
+#file apexCalcs.db
+#{
+#	{ NULL = NULL }
+#}
+
+
+file GUNBMisc.template
+{
+pattern{ P,						PORT,	 SCALEPV }
+	{ "ACCL:GUNB:455:PRC:",		PRCReg,	"ACCL:GUNB:455:CAV1:SCALE" }
+	{ "ACCL:GUNB:455:RFS1:",	RFS1Reg,"ACCL:GUNB:455:FWD1:SCALE" }
+	{ "ACCL:GUNB:455:RFS2:",	RFS2Reg,"ACCL:GUNB:455:FWD2:SCALE" }
+}
+
+file PVramp.template
+{
+	{ P = "ACCL:GUNB:455:", PV0 = ADES, PV1 = PDES, PV3 = REP_PERIOD, PV4 = REP_FREQUENCY, PV5 = DUTY_CYCLE, PV2 = PULSE_LENGTH, PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
+}
+
+
+file GUNBRegisterAlias.template
+{
+	{ P = "ACCL:GUNB:455:PRC:", N=1 }
+}
+file GUNB3ChassisAlias.template
+{
+	{ P = "ACCL:GUNB:455:", N=1 }
+}

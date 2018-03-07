@@ -1,0 +1,62 @@
+#==============================================================================
+#
+# Abs:  LCLS-II RF cryomodule cavity records
+#
+# Name: rfCav.substitutions
+#
+# Associated Display:
+#
+# Input Macros:
+#       PREF    Signal prefix; device name followed by signal
+#               Example for cryomodule 2, cavity 1, cavity probe signal:
+#                 ACCL:L1B:0210:CAV:, or using output macros:
+#		  ACCL:GUNB:455:CAV:
+#
+#       CAVSCL	For cavity probe signal, database link to PV that hosts
+#		the value Qp*(R/Q) (probe Q * shunt impedance)
+#		For all other signals, set to 1.
+#		Macro default value is 1.
+#
+#       NORM    Optional factor for data normalization. To be used when raw data
+#		(to which calibration scale factor will be applied) is not in
+#		fraction of full scale.
+#		If not used, set value to 1.
+#		Macro default value is 1.
+#
+# Output Macros:
+#       CM      Cryomdule prefix; cryomodule name without final '00'
+#               Example for cryomodule 2:
+#                 ACCL:L1B:0200
+#
+#       CAV     Cavity number, 1-8
+#
+#==============================================================================
+#
+#
+#==============================================================================
+#
+file rfSigCalib.template {
+pattern { PREF			, CAVSCL			 }
+	{ "ACCL:GUNB:455:PRLFWD:"	, "1"				 }
+	{ "ACCL:GUNB:455:PRLREV:"	, "1"				 }
+	{ "ACCL:GUNB:455:CAV1:"	, ACCL:GUNB:455:CAV1:CAL_SCALE_CAV }
+	{ "ACCL:GUNB:455:CAV2:"	, ACCL:GUNB:455:CAV2:CAL_SCALE_CAV }
+	{ "ACCL:GUNB:455:DRV1:"	, "1"				 }
+	{ "ACCL:GUNB:455:FWD1:"	, "1"				 }
+	{ "ACCL:GUNB:455:REV1:"	, "1"				 }
+	{ "ACCL:GUNB:455:DRV2:"	, "1"				 }
+	{ "ACCL:GUNB:455:FWD2:"	, "1"				 }
+	{ "ACCL:GUNB:455:REV2:"	, "1"				 }
+	{ "ACCL:GUNB:455:DRV3:"	, "1"				 }
+	{ "ACCL:GUNB:455:FWD3:"	, "1"				 }
+	{ "ACCL:GUNB:455:REV3:"	, "1"				 }
+	{ "ACCL:GUNB:455:DRV4:"	, "1"				 }
+	{ "ACCL:GUNB:455:FWD4:"	, "1"				 }
+	{ "ACCL:GUNB:455:REV4:"	, "1"				 }
+}
+
+file rfSigCalibCav.template {
+pattern { PREF			}
+	{ "ACCL:GUNB:455:CAV1:"	}
+	{ "ACCL:GUNB:455:CAV2:"	}
+}

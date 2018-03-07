@@ -117,11 +117,20 @@
 ,"rfsuploy":{"access":"w", "addr_width": 0,"base_addr":124,"data_width":16,"sign":"unsigned"}
 ,"probechan":{"access":"w", "addr_width": 0,"base_addr":125,"data_width":16,"sign":"unsigned"}
 ,"phdelay":{"access":"w", "addr_width": 0,"base_addr":126,"data_width":17,"sign":"unsigned"}
+,"decay_reset": {"access": "w","addr_width": 0,"base_addr": 127,"data_width": 1,"sign": "unsigned"}
+,"decay_ro_enable":{"access":"r", "addr_width": 0,"base_addr":128,"data_width":1,"sign":"unsigned"}
+,"xsel":{"access":"w", "addr_width": 0,"base_addr":129,"data_width":3,"sign":"unsigned"}
+,"fiber_reset":{"access":"w", "addr_width": 0,"base_addr":130,"data_width":1,"sign":"unsigned"}
+,"updn":{"access":"w", "addr_width": 0,"base_addr":131,"data_width":1,"sign":"unsigned"}
+,"decay_ch_sel":{"access":"w", "addr_width": 0,"base_addr":132,"data_width":3,"sign":"unsigned"}
+,"decaykeep": {"access": "w","addr_width": 0,"base_addr": 133,"data_width": 32,"sign": "unsigned"}
+,"auxsel": {"access": "w","addr_width": 0,"base_addr": 134,"data_width": 3,"sign": "unsigned"}
 ,"v_thresh":{"access":"w", "addr_width": 3,"base_addr":"0x5000","data_width":16,"sign":"unsigned"}
 ,"ramtest": {"access": "rw","addr_width": 3,"base_addr": "0x02000","data_width": 16,"sign": "unsigned"}
 ,"scanner_mirror_val":{"access":"r", "addr_width": 4,"base_addr":"0x3000","data_width":7,"sign":"unsigned"}
 ,"scanner":{"access":"w", "addr_width": 4,"base_addr":"0x4000","data_width":5,"sign":"unsigned"}
 ,"banyan_data": {"access": "r","addr_width": 13,"base_addr": "0x10000","data_width": 32,"sign": "unsigned"}
 ,"trace_data": {"access": "r","addr_width": 13,"base_addr": "0x20000","data_width": 16,"sign": "signed"}
+,"decay_data": {"access": "r","addr_width": 8,"base_addr": "0x22000","data_width": 16,"sign": "signed"}
 ,"scanner_result_val":{"access":"r", "addr_width": 11,"base_addr":"0x130000","data_width":8,"sign":"unsigned"}
 }
