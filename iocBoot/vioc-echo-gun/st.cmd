@@ -7,13 +7,13 @@
 < envPaths
 
 # System Location:
-epicsEnvSet("LOCA","B34")
+epicsEnvSet("AREA","B34")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","GUNB")
+epicsEnvSet("CHASSIS_TYPE","GUNB")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "GUN$(N):$(LOCA):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "GUN$(N):$(AREA):")
 # IP address of hardware
 #epicsEnvSet( FPGA_IP, "134.79.216.36")  # cdlx11
 epicsEnvSet( FPGA_IP, "127.0.0.1")  # if running on cdlx11
@@ -21,12 +21,13 @@ epicsEnvSet( FPGA_IP, "127.0.0.1")  # if running on cdlx11
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "extra")
 # This will work for the gun, which is not sc.
 epicsEnvSet( SC, "")
 
-< ../common/regInterface.cmd
+< ../common/generalInit.cmd
+< iocBoot/common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
@@ -108,8 +109,8 @@ dbpr $(P)GET_HELL_R
 dbpf $(P)GET_HELL_R
 epicsThreadSleep(0.2)
 dbpr $(P)GET_HELL_R
-#dbpf $(TYPE)$(N):RUN_STOP.HIGH 0.11
-#dbpf $(TYPE)$(N):RUN_STOP 1
+#dbpf $(CHASSIS_TYPE)$(N):RUN_STOP.HIGH 0.11
+#dbpf $(CHASSIS_TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

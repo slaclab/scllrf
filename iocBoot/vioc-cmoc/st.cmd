@@ -17,19 +17,20 @@ drvAsynIPPortConfigure("cmocIP","$(FPGA_IP):3000 UDP")
 dbLoadRecords("db/cmocWaveforms.db","P=CMOC1,PORT=cmocReg")
 
 # System Location:
-epicsEnvSet("LOCA","B34")
+epicsEnvSet("AREA","B34")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","CMOC")
+epicsEnvSet("CHASSIS_TYPE","CMOC")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "$(TYPE)$(N):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "$(CHASSIS_TYPE)$(N):")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "192.168.1.2")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "3000")
 
-< ../common/regInterface.cmd
+< ../common/generalInit.cmd
+< iocBoot/common/regInterface.cmd
 
 ####XXXX Turn on heavy logging for development
 # ======================================================================
@@ -60,7 +61,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-#dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+#dbLoadRecords("db/$(CHASSIS_TYPE)extra.db","P=$(P),PORT=myReg")
 dbLoadRecords("db/cmocWaveforms.db","P=CMOC1,PORT=cmocReg")
 #
 # END: Loading the record databases

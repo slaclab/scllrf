@@ -4,7 +4,7 @@
 ## everywhere it appears in this file
 
 < envPaths
-# PV name prefix parts in naming convention
+# PV name prefix parts in naming convention for Buncher
 epicsEnvSet("DEVICE_TYPE", "ACCL")
 epicsEnvSet("AREA","GUNB")
 epicsEnvSet("POSITION", "455")
@@ -40,25 +40,25 @@ epicsEnvSet( SC, "")
 # regInterface.cmd leaves us in $(TOP) directory
 
 < iocBoot/common/regInterface.cmd
-dbLoadRecords("db/GUNBExtra.db","P=$(P),PORT=$(CHASSIS_NAME)myReg")
-asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,1)
-asynSetTraceMask("$(CHASSIS_NAME)myReg",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
-#epicsEnvSet("CHASSIS_NAME","RFS2")
-#epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-#epicsEnvSet( FPGA_IP, "192.168.0.202")
-#< iocBoot/common/regInterface.cmd
-#dbLoadRecords("db/GUNBExtra.db","P=$(P),PORT=$(CHASSIS_NAME)myReg")
-#asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,1)
-#asynSetTraceMask("$(CHASSIS_NAME)myReg",-1,1)
+epicsEnvSet("CHASSIS_NAME","RFS2")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+epicsEnvSet( FPGA_IP, "192.168.0.202")
+< iocBoot/common/regInterface.cmd
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
 epicsEnvSet("CHASSIS_NAME","PRC")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet( FPGA_IP, "192.168.0.203")
 < iocBoot/common/regInterface.cmd
-dbLoadRecords("db/GUNBExtra.db","P=$(P),PORT=$(CHASSIS_NAME)myReg")
-asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,1)
-asynSetTraceMask("$(CHASSIS_NAME)myReg",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
+
+dbLoadRecords("db/BuncherRfCalib.db")
+dbLoadRecords("db/BuncherExtra.db")
 
 ##############################################################################
 # BEGIN: Load the record databases
@@ -96,6 +96,7 @@ iocInit()
 
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
 seq PVramp, "PREFIX=$(P)"
 
 < iocBoot/common/autoSaveStart.cmd
@@ -113,8 +114,19 @@ seq PVramp, "PREFIX=$(P)"
 # An example of using the CEXP Shell:
 # cexpsh("-c",'printf("hello\n")')
 
-####XXXX Run a quick test, for dev only
-#dbpf $(P)RUN_STOP.HIGH 0.11
+epicsEnvSet("CHASSIS_NAME","RFS1")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)CHASSIS_W 3
+dbpf $(P)RUN_STOP 1
+
+#epicsEnvSet("CHASSIS_NAME","RFS2")
+#epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)CHASSIS_W 3
+#dbpf $(P)RUN_STOP 1
+
+epicsEnvSet("CHASSIS_NAME","PRC")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)CHASSIS_W 2
 dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 

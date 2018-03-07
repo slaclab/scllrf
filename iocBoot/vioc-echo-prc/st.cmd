@@ -7,13 +7,13 @@
 < envPaths
 
 # System Location:
-epicsEnvSet("LOCA","B34")
+epicsEnvSet("AREA","B34")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("CHASSIS_TYPE","PRC")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "$(TYPE)$(N):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "$(CHASSIS_TYPE)$(N):")
 # IP address of hardware
 #epicsEnvSet( FPGA_IP, "134.79.216.36")  # cdlx11
 epicsEnvSet( FPGA_IP, "127.0.0.1")  # if running on cdlx11
@@ -22,10 +22,11 @@ epicsEnvSet( FPGA_IP, "127.0.0.1")  # if running on cdlx11
 epicsEnvSet( PORT, "7")  # cdlx11
 #epicsEnvSet( PORT, "50000")  # BMB7 loopback
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "extra")
 
-< ../common/regInterface.cmd
+< ../common/generalInit.cmd
+< iocBoot/common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
@@ -56,7 +57,10 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/$(CHASSIS_TYPE)extra.db","P=$(P),PORT=myReg")
+
+dbLoadRecords("db/BMB7monitor.db", "P=$(P),R='',PORT=myBMB7")
+bmb7Configure("myBMB7", "127.0.0.1", "0")
 #
 # END: Loading the record databases
 ########################################################################
@@ -107,8 +111,8 @@ dbpr $(P)GET_HELL_R
 dbpf $(P)GET_HELL_R
 epicsThreadSleep(0.2)
 dbpr $(P)GET_HELL_R
-#dbpf $(TYPE)$(N):RUN_STOP.HIGH 0.11
-#dbpf $(TYPE)$(N):RUN_STOP 1
+#dbpf $(CHASSIS_TYPE)$(N):RUN_STOP.HIGH 0.11
+#dbpf $(CHASSIS_TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

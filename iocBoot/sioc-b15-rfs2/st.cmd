@@ -1,4 +1,4 @@
-#!../../bin/linuxRT-x86_64/scllrf
+#!../../bin/rhel6-x86_64/scllrf
 # Later will run as:
 #!../../bin/linuxRT-x86_64/scllrf
 ## You may have to change scllrf to something else
@@ -8,22 +8,23 @@
 
 epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
 # System Location:
-epicsEnvSet("LOCA","B15")
+epicsEnvSet("AREA","B15")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("CHASSIS_TYPE","PRC")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","2")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "RFS$(N):$(LOCA):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "RFS$(N):$(AREA):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.63")
+epicsEnvSet( FPGA_IP, "192.168.165.66")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "extra")
 
-< ../common/regInterface.cmd
+< ../common/generalInit.cmd
+< iocBoot/common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
@@ -49,15 +50,15 @@ asynSetTraceIOMask("myReg",-1,4)
 # BEGIN: Load the record databases
 ##############################################################################
 ####XXXX A bit of a hack to get the right iocAdmin PVs
-epicsEnvSet("TYPE","RFS")
+epicsEnvSet("CHASSIS_TYPE","RFS")
 < iocBoot/common/iocAdmin.cmd
 #< iocBoot/common/autoSaveConf.cmd
-epicsEnvSet("TYPE","PRC")
+epicsEnvSet("CHASSIS_TYPE","PRC")
 
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/$(CHASSIS_TYPE)extra.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################

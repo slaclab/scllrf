@@ -7,22 +7,23 @@
 < envPaths
 
 # System Location:
-epicsEnvSet("LOCA","B15")
+epicsEnvSet("AREA","B15")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","RES")
+epicsEnvSet("CHASSIS_TYPE","RES")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "$(TYPE)$(N):$(LOCA):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "$(CHASSIS_TYPE)$(N):$(AREA):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.70")
+epicsEnvSet( FPGA_IP, "ssa-b15-rf0130")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "extra")
 
-< ../common/regInterface.cmd
+< ../common/generalInit.cmd
+< iocBoot/common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
@@ -53,13 +54,14 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/$(CHASSIS_TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/STEPextra.template","P=$(P)")
 #
 # END: Loading the record databases
 ########################################################################
 
 # =====================================================================
-# Channel Access Security:  
+# Channel Access Security:
 # This is required if you use caPutLog.
 # Set access security file
 # Load common LCLS Access Configuration File
@@ -83,6 +85,10 @@ iocInit()
 
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
+seq(&RES_HiHwLink, "CM=1,CAV=1")
+seq(&RES_HiHwLink, "CM=1,CAV=2")
+seq(&RES_HiHwLink, "CM=1,CAV=3")
+seq(&RES_HiHwLink, "CM=1,CAV=4")
 
 #< iocBoot/common/autoSaveStart.cmd
 
@@ -100,11 +106,11 @@ iocInit()
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpf $(P)PIEZO_WAVE_KEEP_L 65535
-dbpf $(P)PIEZO_WAVE_KEEP_H 65535
-dbpf $(P)RUN_STOP.HIGH 0.10
+#dbpf $(P)PIEZO_WAVE_KEEP_L 65535
+#dbpf $(P)PIEZO_WAVE_KEEP_H 65535
+dbpf $(P)RUN_STOP.HIGH 0
 dbpf $(P)RUN_STOP 1
-dbpf $(P)MOTOR1_ACC 12.34
+#dbpf $(P)MOTOR1_ACC 12.34
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

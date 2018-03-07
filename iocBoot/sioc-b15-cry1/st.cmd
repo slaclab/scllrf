@@ -46,19 +46,19 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 # ====================================================
 
 # System Location:
-epicsEnvSet("LOCA","B15")
+epicsEnvSet("AREA","B15")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","GUNB")
+epicsEnvSet("CHASSIS_TYPE","GUNB")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","0101")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "GUN$(N):$(LOCA):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "GUN$(N):$(AREA):")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "192.168.165.69")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "")
 # This will work for the gun, which is not sc.
 epicsEnvSet( SC, "")
@@ -82,7 +82,7 @@ dbLoadRecords("db/cryo-plc.db","CM=01,area=B15,plc=PLC_B15")
 ########################################################################
 
 # =====================================================================
-# Channel Access Security:  
+# Channel Access Security:
 # This is required if you use caPutLog.
 # Set access security file
 # Load common LCLS Access Configuration File

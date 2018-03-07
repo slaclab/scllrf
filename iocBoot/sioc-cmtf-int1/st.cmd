@@ -10,9 +10,9 @@
 #epicsEnvSet("EPICS_ADDR_LIST","129.57.231.255 129.57.200.99")
 
 # System Location:
-epicsEnvSet("LOCA","CMTF")
+epicsEnvSet("AREA","CMTF")
 # Hardware type [PRC, RES, INT]
-epicsEnvSet("TYPE","INT")
+epicsEnvSet("CHASSIS_TYPE","INT")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
 # PV prefix name
@@ -23,10 +23,11 @@ epicsEnvSet( FPGA_IP, "129.57.231.89")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
 epicsEnvSet( PORT, "50006")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "")
 
-< ../common/regInterface.cmd
+< ../common/generalInit.cmd
+< iocBoot/common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
 
 ####XXXX Turn on heavy logging for development
@@ -98,7 +99,7 @@ dbLoadRecords("/usr/srfsite/op/prod_R3.14.12.3.J0/iocAdminLib/1-1/db/iocAdminLib
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-#dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+#dbLoadRecords("db/$(CHASSIS_TYPE)extra.db","P=$(P),PORT=myReg")
 #++++++++++++++ +++++++++ ++++++++++++ +++++++++++ +++++++++++++ ++++++++++++++
 dbLoadRecords("db/ZZZextra.template","P=$(P)")
 dbLoadRecords("db/STMPextra.template","P=$(P)")
@@ -158,8 +159,8 @@ seq &INTheLevel,"PREFC=INT1"
 # cexpsh("-c",'printf("hello\n")')
 
 ####XXXX Run a quick test, for dev only
-dbpf $(TYPE)$(N):RUN_STOP.HIGH 0
-dbpf $(TYPE)$(N):RUN_STOP 1
+dbpf $(CHASSIS_TYPE)$(N):RUN_STOP.HIGH 0
+dbpf $(CHASSIS_TYPE)$(N):RUN_STOP 1
 epicsThreadSleep(0.2)
 asynSetTraceMask("myIP",-1,1)
 asynSetTraceMask("myReg",-1,1)

@@ -8,7 +8,7 @@ epicsThreadSleep( 1.0)
 # and 'info_positions.req', from information (info nodes) contained in all of
 # the EPICS databases that have been loaded into this IOC.
 
-cd("/data/${IOC}/autosave-req")
+cd("/${IOC_DATA}/${IOC}/autosave-req")
 makeAutosaveFiles()
 cd("..")
 create_monitor_set("info_settings.req",60,"")

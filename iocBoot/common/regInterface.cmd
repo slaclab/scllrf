@@ -15,30 +15,30 @@ cd ${TOP}
 #epicsEnvSet(TOP,"${IOC_APP}")
 
 # Set up communication with FPGA
-drvAsynIPPortConfigure("$(CHASSIS_NAME)myIP","$(FPGA_IP):$(PORT) UDP")
-dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=$(CHASSIS_NAME)myIP,ADDR=0,IMAX=0,OMAX=0")
+drvAsynIPPortConfigure("$(CHASSIS_NAME)IP","$(FPGA_IP):$(PORT) UDP")
+dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=$(CHASSIS_NAME)IP,ADDR=0,IMAX=0,OMAX=0")
 
 # ======================================================================
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,ASYN_TRACE_ERROR)
-asynSetTraceMask("$(CHASSIS_NAME)myIP",-1,0xB)
-#asynSetTraceIOMask("$(CHASSIS_NAME)myIP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("$(CHASSIS_NAME)myIP",-1,4)
+#asynSetTraceMask("$(CHASSIS_NAME)IP",-1,ASYN_TRACE_ERROR)
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,0xB)
+#asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,4)
 
 
 #epicsThreadSleep(1.0)
-$(SC=scllrf)$(CHASSIS_TYPE)$(EXTRA=extra)Configure( "$(CHASSIS_NAME)myReg","$(CHASSIS_NAME)myIP")
-dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=$(CHASSIS_NAME)myReg,ADDR=0,IMAX=0,OMAX=0")
+$(SC=scllrf)$(CHASSIS_TYPE)$(EXTRA=extra)Configure( "$(CHASSIS_NAME)Reg","$(CHASSIS_NAME)IP")
+dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=$(CHASSIS_NAME)Reg,ADDR=0,IMAX=0,OMAX=0")
 
 # ======================================================================
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("$(CHASSIS_NAME)myReg",-1,0xB)
-#asynSetTraceIOMask("$(CHASSIS_NAME)myReg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("$(CHASSIS_NAME)myReg",-1,4)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,0xB)
+#asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
+asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,4)
 
 epicsThreadSleep(0.2)
 
@@ -46,4 +46,4 @@ epicsThreadSleep(0.2)
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)myReg,SC=$(SC=scllrf)")
+dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)Reg,SC=$(SC=scllrf)")

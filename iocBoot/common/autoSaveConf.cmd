@@ -24,14 +24,14 @@ save_restoreSet_DatedBackupFiles(1)
 # ============================================================
 # Where to find the list of PVs to save
 # ============================================================
-# Where "/data" is an NFS mount point setup when linuxRT target
+# Where "${IOC_DATA}" is an NFS mount point setup when linuxRT target
 # boots up.
-set_requestfile_path("/data/${IOC}/autosave-req")
+set_requestfile_path("${IOC_DATA}/${IOC}/autosave-req")
 
 # ============================================================
 # Where to write the save files that will be used to restore
 # ============================================================
-set_savefile_path("/data/${IOC}/autosave")
+set_savefile_path("${IOC_DATA}/${IOC}/autosave")
 
 # ============================================================
 # Prefix that is use to update save/restore status database

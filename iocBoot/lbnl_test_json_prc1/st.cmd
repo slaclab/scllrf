@@ -7,13 +7,13 @@
 < envPaths
 
 # System Location:
-epicsEnvSet("LOCA","")
+epicsEnvSet("AREA","")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("TYPE","foo")
+epicsEnvSet("CHASSIS_TYPE","foo")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(TYPE):$(LOCA):$(N):
-epicsEnvSet("P", "$(TYPE)$(N):")
+# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
+epicsEnvSet("P", "$(CHASSIS_TYPE)$(N):")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "192.168.1.127")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
@@ -50,7 +50,7 @@ asynSetTraceIOMask("myReg",-1,4)
 # =====================================================================
 #Load Additional databases:
 # =====================================================================
-dbLoadRecords("db/$(TYPE)extra.db","P=$(P),PORT=myReg")
+dbLoadRecords("db/$(CHASSIS_TYPE)extra.db","P=$(P),PORT=myReg")
 #
 # END: Loading the record databases
 ########################################################################

@@ -28,7 +28,7 @@ epicsEnvSet("EPICS\_IOC\_LOG_CLIENT_INET","${IOC}")
 #epicsEnvSet(TOP,"${IOC_APP}")
 
 # System Location:
-epicsEnvSet("LOCA","B34")
+epicsEnvSet("AREA","B34")
 
 # Need this path to EPICS BASE so that caRepeater can be started:
 # Let's figure out a way to pass this one in via the IOC's

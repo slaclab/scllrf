@@ -1,26 +1,21 @@
-#!../../bin/linuxRT-x86_64/scllrf
-# Used to run as:
 #!../../bin/rhel6-x86_64/scllrf
+#!../../bin/linuxRT-x86_64/scllrf
 ## You may have to change scllrf to something else
 ## everywhere it appears in this file
 
 < envPaths
-
-# System Location:
+# PV name prefix parts in naming convention for Gun
 epicsEnvSet("DEVICE_TYPE", "GUN")
 epicsEnvSet("AREA","GUNB")
 epicsEnvSet("POSITION", "100")
 # Hardware type [PRC, RFS, RES, INT]
 epicsEnvSet("CHASSIS_TYPE","GUNB")
-epicsEnvSet("CHASSIS_NAME","PRC")
 # Number within location and type: 1, 2, 3...
-epicsEnvSet("N","1")
-# PV prefix. SLAC standard is $(CHASSIS_TYPE):$(AREA):$(N):
-epicsEnvSet("P", "GUN$(N):$(AREA):")
+epicsEnvSet("CHASSIS_NAME","RFS1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-epicsEnvSet("IOC_PV", "SIOC:$(AREA):$(CHASSIS_TYPE)$(N):")
+epicsEnvSet("IOC_PV", "SIOC:$(AREA):$(CHASSIS_NAME):")
 # IP address of hardware
-epicsEnvSet( FPGA_IP, "192.168.165.68")
+epicsEnvSet( FPGA_IP, "192.168.0.101")
 # trying out feedsim
 #epicsEnvSet( FPGA_IP, "esd-pc80849")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc, 50000 BMB7 loopback
@@ -29,40 +24,41 @@ epicsEnvSet( PORT, "50006")
 #epicsEnvSet( GO_PY, "source ~/cpu-b15-rf01/GoPython.sh;") # for RT
 #epicsEnvSet( GO_PY, "") # for RHEL
 # RHEL needs the full path to the executable. LinuxRT doesn't, so PY_PATH can be blank
-epicsEnvSet( PY_PATH, "/afs/slac/g/lcls/package/python/python2.7.9/linux-x86_64/bin/") # for RHEL
 #epicsEnvSet( PY_PATH, "") # for RT
+epicsEnvSet( PY_PATH, "/afs/slac/g/lcls/package/python/python2.7.9/linux-x86_64/bin/") # for RHEL
 # Directory with python init script, and where it will be run from
 epicsEnvSet( PY_INIT_DIR, "/afs/slac/g/lcls/package/llrf_doolittle/b15/lcls2_llrf/firmware/gun/run")
 # Bit file name, as relative path from the above directory
 epicsEnvSet( BIT_FILE, "../gun.12-20-17.bit")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "$(CHASSIS_NAME)Reg","$(CHASSIS_NAME)IP") resolves correctly
+# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","$(P)myIP") resolves correctly
 epicsEnvSet( EXTRA, "Extra")
 # This will work for the gun, which is not sc.
 epicsEnvSet( SC, "")
 
-
 < ../common/generalInit.cmd
-< iocBoot/common/regInterface.cmd
 # regInterface.cmd leaves us in $(TOP) directory
-####XXXX Turn on heavy logging for development
-# ======================================================================
-### Asyn Debugging #####################################################
-# ======================================================================
-## Asyn messages for DIGI_Serial16
-#asynSetTraceMask("$(CHASSIS_NAME)IP",-1,ASYN_TRACE_ERROR)
-asynSetTraceMask("$(CHASSIS_NAME)IP",-1,0xB)
-#asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,4)
 
-# ======================================================================
-### Asyn Debugging #####################################################
-# ======================================================================
-## Asyn messages for DIGI_Serial16
-asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,0xB)
-#asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,4)
-####XXXX End Turn on heavy logging for development
+< iocBoot/common/regInterface.cmd
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
+
+epicsEnvSet("CHASSIS_NAME","RFS2")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+epicsEnvSet( FPGA_IP, "192.168.0.102")
+< iocBoot/common/regInterface.cmd
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
+
+epicsEnvSet("CHASSIS_NAME","PRC")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+epicsEnvSet( FPGA_IP, "192.168.0.103")
+< iocBoot/common/regInterface.cmd
+asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
+asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
+
+dbLoadRecords("db/GunRfCalib.db")
+dbLoadRecords("db/GUNBExtra.db")
 
 ##############################################################################
 # BEGIN: Load the record databases
@@ -72,11 +68,6 @@ asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,4)
 < iocBoot/common/iocAdmin.cmd
 < iocBoot/common/autoSaveConf.cmd
 
-# =====================================================================
-#Load Additional databases:
-# =====================================================================
-dbLoadRecords("db/GUNBExtra.db","P=$(P),PORT=$(CHASSIS_NAME)Reg")
-#
 # END: Loading the record databases
 ########################################################################
 
@@ -105,6 +96,7 @@ iocInit()
 
 ## Start any sequence programs
 #seq sncExample,"user=gwbrownHost"
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
 seq PVramp, "PREFIX=$(P)"
 
 < iocBoot/common/autoSaveStart.cmd
@@ -122,10 +114,19 @@ seq PVramp, "PREFIX=$(P)"
 # An example of using the CEXP Shell:
 # cexpsh("-c",'printf("hello\n")')
 
-####XXXX Run a quick test, for dev only
-#dbpf $(P)RUN_STOP.HIGH 0.11
+epicsEnvSet("CHASSIS_NAME","RFS1")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)CHASSIS_W 1
+dbpf $(P)RUN_STOP 1
+
+#epicsEnvSet("CHASSIS_NAME","RFS2")
+#epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+#dbpf $(P)CHASSIS_W 1
+#dbpf $(P)RUN_STOP 1
+
+epicsEnvSet("CHASSIS_NAME","PRC")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)CHASSIS_W 0
 dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
-asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
-asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
