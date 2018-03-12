@@ -7,18 +7,18 @@ x 0
 y 0
 #set $regcount = 0
 #for $p in $registers
-  #if $p.has_key('access') and ('w' in $p.access)
-    #set $regcount += 1
-  #end if
-  #if (not $p.has_key('access')) or ('r' in $p.access)
-    #set $regcount += 1
-  #end if
+#if $p.has_key('access') and ('w' in $p.access)
+	#set $regcount += 1
+#end if
+#if (not $p.has_key('access')) or ('r' in $p.access)
+	#set $regcount += 1
+#end if
 #end for
 #if $regcount < 8
-w 716
+w 724
 h ${150+$regcount*22}
 #else
-w ${8+716*($regcount//38)}
+w ${724+716*($regcount//38)}
 h 930
 #end if
 font "helvetica-medium-r-12.0"
@@ -27,14 +27,14 @@ ctlFontAlign "center"
 btnFont "helvetica-medium-r-12.0"
 btnFontAlign "center"
 fgColor index 14
-bgColor index 3
+bgColor index 5
 textColor index 14
 ctlFgColor1 index 14
-ctlFgColor2 index 0
-ctlBgColor1 index 0
+ctlFgColor2 index 14
+ctlBgColor1 index 4
 ctlBgColor2 index 14
-topShadowColor index 0
-botShadowColor index 14
+topShadowColor index 1
+botShadowColor index 11
 title "All ${name} Registers"
 showGrid
 snapToGrid
@@ -49,14 +49,14 @@ minor 1
 release 1
 x 0
 y 0
-w ${724+716*($regcount//38-1)}
+w ${724+716*($regcount//38)}
 h 40
 font "helvetica-bold-r-14.0"
 fontAlign "center"
 fgColor index 14
-bgColor index 55
+bgColor index 63
 value {
-  "\$(P)"
+"\$(P)"
 }
 endObjectProperties
 
@@ -66,7 +66,7 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x ${584+716*($regcount//38-1)}
+x ${584+716*($regcount//38)}
 y 4
 w 52
 h 28
@@ -79,19 +79,19 @@ buttonLabel "Debug"
 numPvs 4
 numDsps 3
 displayFileName {
-  0 "asynRecord.edl"
-  1 "asynRecord.edl"
-  2 "scllrfPollingControl.edl"
+0 "asynRecord.edl"
+1 "asynRecord.edl"
+2 "scllrfPollingControl.edl"
 }
 menuLabel {
-  0 "asyn IP"
-  1 "asyn Reg"
-  2 "Polling"
+0 "asyn IP"
+1 "asyn Reg"
+2 "Polling"
 }
 symbols {
-  0 "P=\$(P),R=ASYN_IP,PORT=myIP"
-  1 "P=\$(P),R=ASYN_REG,PORT=myReg"
-  2 "P=\$(P)"
+0 "P=\$(P),R=ASYN_IP,PORT=myIP"
+1 "P=\$(P),R=ASYN_REG,PORT=myReg"
+2 "P=\$(P)"
 }
 endObjectProperties
 
@@ -101,7 +101,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x ${656+716*($regcount//38-1)}
+x ${656+716*($regcount//38)}
 y 4
 w 52
 h 28
@@ -134,11 +134,11 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "\$(P)${p.name.upper()}..."
+"\$(P)${p.name.upper()}..."
 }
 endObjectProperties
 
-  #if $p.has_key('access') and ('w' in $p.access)
+#if $p.has_key('access') and ('w' in $p.access)
 \# (Text Control)
 object activeXTextDspClass
 beginObjectProperties
@@ -149,16 +149,15 @@ x ${xoffset + 292}
 y ${yoffset + 50}
 w 280
 h 18
-    #if $p.has_key('nelm') and $p.nelm > 1
+	#if $p.has_key('nelm') and $p.nelm > 1
 controlPv "\$(P)${p.name.upper()}_W0.DESC"
-    #else
+	#else
 controlPv "\$(P)${p.name.upper()}_W.DESC"
-    #end if
+	#end if
 font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
 editable
-motifWidget
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -173,35 +172,40 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x ${xoffset + 576}
+x ${xoffset + 692}
 y ${yoffset + 50}
-w 136
+w 18
 h 18
 fgColor index 14
-bgColor index 0
-topShadowColor index 0
-botShadowColor index 14
+bgColor index 6
+topShadowColor index 2
+botShadowColor index 11
 font "helvetica-medium-r-12.0"
-invisible
+xPosOffset 50
+yPosOffset 500
 numPvs 4
 numDsps 1
 displayFileName {
-  #if $p.has_key('nelm') and $p.nelm > 1
-  0 "wavLimits"
-  #else
-  0 "aoLimits"
-  #end if
+#if $p.has_key('nelm') and $p.nelm > 1
+0 "wavLimits"
+#else
+0 "aoLimits"
+#end if
+}
+setPosition {
+0 "parentWindow"
 }
 symbols {
-  #if $p.has_key('nelm') and $p.nelm > 1
-  0 "PV=\$(P)${p.name.upper()}_W0"
-  #else
-  0 "PV=\$(P)${p.name.upper()}_W"
-  #end if
+#if $p.has_key('nelm') and $p.nelm > 1
+0 "PV=\$(P)${p.name.upper()}_W0"
+#else
+0 "PV=\$(P)${p.name.upper()}_W"
+#end if
 }
+icon
 endObjectProperties
-  
-  \# (Text Control)
+
+\# (Text Control)
 object activeXTextDspClass
 beginObjectProperties
 major 4
@@ -209,15 +213,15 @@ minor 7
 release 0
 x ${xoffset + 576}
 y ${yoffset + 50}
-w 136
+w 112
 h 18
-  #if $p.has_key('nelm') and $p.nelm > 1
+#if $p.has_key('nelm') and $p.nelm > 1
 controlPv "\$(P)${p.name.upper()}_W0"
-  #else
+#else
 controlPv "\$(P)${p.name.upper()}_W"
-  #end if
+#end if
 font "helvetica-medium-r-12.0"
-fgColor index 26
+fgColor index 14
 bgColor index 5
 editable
 motifWidget
@@ -229,9 +233,9 @@ objType "controls"
 noExecuteClipMask
 endObjectProperties
 #set $yoffset = $yoffset + 22
-  #end if
-  
-  #if (not $p.has_key('access')) or ('r' in $p.access)
+#end if
+
+#if (not $p.has_key('access')) or ('r' in $p.access)
 \# (Text Control)
 object activeXTextDspClass
 beginObjectProperties
@@ -247,7 +251,6 @@ font "helvetica-medium-r-12.0"
 fgColor index 26
 bgColor index 5
 editable
-motifWidget
 nullColor index 40
 smartRefresh
 useHexPrefix
@@ -262,30 +265,35 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x ${xoffset + 576}
+x ${xoffset + 692}
 y ${yoffset + 50}
-w 136
+w 18
 h 18
 fgColor index 14
-bgColor index 0
-topShadowColor index 0
-botShadowColor index 14
+bgColor index 6
+topShadowColor index 2
+botShadowColor index 11
 font "helvetica-medium-r-12.0"
-invisible
+xPosOffset 50
+yPosOffset 500
 numPvs 4
 numDsps 1
 displayFileName {
-  #if $p.has_key('nelm') and $p.nelm > 1
-  0 "wavLimits"
-  #else
-  0 "aiLimits"
-  #end if
+#if $p.has_key('nelm') and $p.nelm > 1
+0 "wavLimits"
+#else
+0 "aiLimits"
+#end if
+}
+setPosition {
+0 "parentWindow"
 }
 symbols {
-  0 "PV=\$(P)${p.name.upper()}_R"
+0 "PV=\$(P)${p.name.upper()}_R"
 }
+icon
 endObjectProperties
-  
+
 \# (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
@@ -294,7 +302,7 @@ minor 7
 release 0
 x ${xoffset + 576}
 y ${yoffset + 50}
-w 136
+w 112
 h 18
 controlPv "\$(P)${p.name.upper()}_R.VAL"
 format "exponential"
@@ -311,11 +319,11 @@ newPos
 objType "monitors"
 endObjectProperties
 #set $yoffset = $yoffset + 22
-  #end if
+#end if
 
 #if $yoffset > 820
-  #set $yoffset = 0
-  #set $xoffset = $xoffset + 716
+#set $yoffset = 0
+#set $xoffset = $xoffset + 716
 #end if
 
 #end for
