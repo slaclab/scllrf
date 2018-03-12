@@ -144,8 +144,6 @@ if __name__ == "__main__":
 					v['nelm'] = 2**v['addr_width']
 					if 'sign' in v:
 						v['signed'] = v['sign']
-					if 'keep' in k and not v.has_key('bits'):
-						v['bits'] = {}
 					if 'trig' in k and not v.has_key('bits'):
 						v['bits'] = {}
 					if 'mask' in k and not v.has_key('bits'):
