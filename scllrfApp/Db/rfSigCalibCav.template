@@ -2,7 +2,7 @@
 #----------------------------------
 # rfSigCalibCav.template:
 #
-# Additional records related to 
+# Additional records related to
 # signal calibration (ADC->units)
 # for the cavity probe signal
 #----------------------------------
@@ -17,35 +17,35 @@
 #==================================
 
 record(ao, "$(PREF)QPROBE") {
-  field(SCAN, "Passive")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(VAL,  "4.1e7")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_SCALE_CAV")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(VAL,  "4.1e7")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_SCALE_CAV")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(PREF)SHUNT_IMPED") {
-  field(SCAN, "Passive")
-  field(EGU,  "ohms")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(VAL,  "1036")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_SCALE_CAV")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(EGU,  "ohms")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(VAL,  "1036")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_SCALE_CAV")
+info(autosaveFields, "VAL")
 }
 
 record(calc, "$(PREF)CAL_SCALE_CAV") {
-  field(SCAN, "Passive")
-  field(CALC, "SQRT(A*B)/(10^6)")
-  field(INPA, "$(PREF)QPROBE")
-  field(INPB, "$(PREF)SHUNT_IMPED")
-  field(EGU,  "sqrt(ohms)/10^6")
-  field(PREC, "2")
-  field(PINI, "YES")
+field(SCAN, "Passive")
+field(CALC, "SQRT(A*B)/(10^6)")
+field(INPA, "$(PREF)QPROBE")
+field(INPB, "$(PREF)SHUNT_IMPED")
+field(EGU,  "sqrt(ohms)/10^6")
+field(PREC, "6")
+field(PINI, "YES")
 # FLNK to calc record in rfSigCalib.template
-  field(FLNK, "$(PREF)CAL_SCALE_CALC")
-  info(autosaveFields, "VAL")
+field(FLNK, "$(PREF)CAL_SCALE_CALC")
+info(autosaveFields, "VAL")
 }

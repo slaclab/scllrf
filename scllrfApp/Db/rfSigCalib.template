@@ -10,20 +10,20 @@
 #==================================
 
 #==================================
-# In the lab, measure the RF input 
+# In the lab, measure the RF input
 # power at ADC full scale. (Actually,
 # measure just below and extrapolate.)
 #==================================
 
 record(ao, "$(PREF)CAL_REF_PWR") {
-  field(SCAN, "Passive")
-  field(EGU,  "dBm")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(VAL,  "10")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_SCALE_CALC")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(EGU,  "dBm")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(VAL,  "10")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_SCALE_CALC")
+info(autosaveFields, "VAL")
 }
 
 #==================================
@@ -33,7 +33,7 @@ record(ao, "$(PREF)CAL_REF_PWR") {
 #   fixed attenuator
 #   other - for losses not attributed
 #           to a particular component
-# Loss values should be entered as 
+# Loss values should be entered as
 # *positive* numbers.
 #
 # Not all of these are used for every
@@ -43,117 +43,117 @@ record(ao, "$(PREF)CAL_REF_PWR") {
 # Unused values should be set to 0.
 #==================================
 record(ao, "$(PREF)CAL_LOSS_COUPLER") {
-  field(EGU, "dB")
-  field(PINI, "YES")
-  field(SCAN, "Passive")
-  field(OMSL, "supervisory")
-  field(PREC, "2")
-  field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
-  info(autosaveFields, "VAL")
+field(EGU, "dB")
+field(PINI, "YES")
+field(SCAN, "Passive")
+field(OMSL, "supervisory")
+field(PREC, "6")
+field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(PREF)CAL_LOSS_CABLE") {
-  field(SCAN, "Passive")
-  field(EGU, "dB")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(EGU, "dB")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(PREF)CAL_LOSS_ATTEN") {
-  field(SCAN, "Passive")
-  field(EGU,  "dB")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(EGU,  "dB")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(PREF)CAL_LOSS_OTHER") {
-  field(SCAN, "Passive")
-  field(EGU,  "dB")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(EGU,  "dB")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+info(autosaveFields, "VAL")
 }
 
 record(calc, "$(PREF)CAL_LOSS_TOTAL") {
-  field(SCAN, "Passive")
-  field(CALC, "A+B+C+D")
-  field(INPA, "$(PREF)CAL_LOSS_COUPLER")
-  field(INPB, "$(PREF)CAL_LOSS_CABLE")
-  field(INPC, "$(PREF)CAL_LOSS_ATTEN")
-  field(INPD, "$(PREF)CAL_LOSS_OTHER")
-  field(EGU,  "dB")
-  field(PREC, "2")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)CAL_SCALE_CALC")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(CALC, "A+B+C+D")
+field(INPA, "$(PREF)CAL_LOSS_COUPLER")
+field(INPB, "$(PREF)CAL_LOSS_CABLE")
+field(INPC, "$(PREF)CAL_LOSS_ATTEN")
+field(INPD, "$(PREF)CAL_LOSS_OTHER")
+field(EGU,  "dB")
+field(PREC, "6")
+field(PINI, "YES")
+field(FLNK, "$(PREF)CAL_SCALE_CALC")
+info(autosaveFields, "VAL")
 }
 
 #==================================
 # Calculate calibration scale factor.
-# Note that for some signals, this 
+# Note that for some signals, this
 # calculation is not used and CAL_SCALE
 # is written to by external software.
 # For those, the .OUT field should be empty.
 #
 #    (c/d)*10^(referenceRfPower+losses-30)/20
 # (Note that 'losses' is added because it is
-#  a positive number. If we switch to using 
+#  a positive number. If we switch to using
 #  negative values, then 'losses' should be
 #  subtracted.)
 #    c = optional cavity-probe-signal scale factor:
-#        For cavity probe signal, INPC is 
-#	 link to additional scale factor 
-#	 sqrt(Qp*(R/Q))/10^6. For other signals, 
-#        C is unused (value of 1). 
+#        For cavity probe signal, INPC is
+#	 link to additional scale factor
+#	 sqrt(Qp*(R/Q))/10^6. For other signals,
+#        C is unused (value of 1).
 #	 See rfSigCalibCav.template.
 #    d = optional normalization factor:
 #        Value to divide by if raw signal
 #        (to which scale factor will be applied)
 #        is not in fraction of full scale
-#	 Can be link or static value. 
+#	 Can be link or static value.
 #	 If unused, set to 1.
 #==================================
 record(calcout, "$(PREF)CAL_SCALE_CALC") {
-  field(CALC, "(10^((A+B-30)/20))*C/D")
-  field(INPA, "$(PREF)CAL_REF_PWR")
-  field(INPB, "$(PREF)CAL_LOSS_TOTAL")
-  field(INPC, "$(CAVSCL=1.0)")
-  field(INPD, "$(NORM=1.0)")
-  field(OOPT, "Every Time")
-  field(OUT,  "$(CALCOUT=$(PREF)CAL_SCALE PP)")
-  info(autosaveFields, "VAL")
+field(CALC, "(10^((A+B-30)/20))*C/D")
+field(INPA, "$(PREF)CAL_REF_PWR")
+field(INPB, "$(PREF)CAL_LOSS_TOTAL")
+field(INPC, "$(CAVSCL=1.0)")
+field(INPD, "$(NORM=1.0)")
+field(OOPT, "Every Time")
+field(OUT,  "$(CALCOUT=$(PREF)CAL_SCALE PP)")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(PREF)CAL_SCALE") {
-  field(SCAN, "Passive")
-  field(OMSL, "supervisory")
-  field(PREC, "7")
-  field(VAL,  "1")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)SCALE_CALC")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(OMSL, "supervisory")
+field(PREC, "7")
+field(VAL,  "1")
+field(PINI, "YES")
+field(FLNK, "$(PREF)SCALE_CALC")
+info(autosaveFields, "VAL")
 }
 
 # Scale factor whose value is set
 # by beam-based measurement.
-# May only be needed for cavity 
-# measurement 
+# May only be needed for cavity
+# measurement
 record(ao, "$(PREF)FUDGE") {
-  field(SCAN, "Passive")
-  field(PREC, "2")
-  field(OMSL, "supervisory")
-  field(VAL,  "1")
-  field(PINI, "YES")
-  field(FLNK, "$(PREF)SCALE_CALC")
-  info(autosaveFields, "VAL")
+field(SCAN, "Passive")
+field(PREC, "6")
+field(OMSL, "supervisory")
+field(VAL,  "1")
+field(PINI, "YES")
+field(FLNK, "$(PREF)SCALE_CALC")
+info(autosaveFields, "VAL")
 }
 
 # Final calculated scale factor
@@ -161,8 +161,8 @@ record(ao, "$(PREF)FUDGE") {
 # "SCALE" PV resides in wfCav.template
 # or gun/buncher scllrfApp
 record(calc, "$(PREF)SCALE_CALC") {
-  field(CALC, "A*B")
-  field(INPA, "$(PREF)CAL_SCALE")
-  field(INPB, "$(PREF)FUDGE")
-  field(FLNK,  "$(PREF)SCALE")
+field(CALC, "A*B")
+field(INPA, "$(PREF)CAL_SCALE")
+field(INPB, "$(PREF)FUDGE")
+field(FLNK,  "$(PREF)SCALE")
 }

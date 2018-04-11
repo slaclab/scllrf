@@ -18,7 +18,7 @@
  * This file is part of LCLS II. It is subject to
  * the license terms in the LICENSE.txt file found in the top-level directory
  * of this distribution and at:
-    * https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+	* https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
  * No part of LCLS II, including this file, may be
  * copied, modified, propagated, or distributed except according to the terms
  * contained in the LICENSE.txt file.
@@ -26,62 +26,46 @@
 **/
 \#include "scllrfAsynPortDriver.h"
 
- /* This class implements the chassis type specific driver. */
+/* This class implements the chassis type specific driver. */
 class ${name}Driver : public scllrfAsynPortDriver {
 public:
 //    ${name}Driver(const char *drvPortName, const char *netPortName);
-    ${name}Driver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
-    virtual ~${name}Driver();
+	${name}Driver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
+	virtual ~${name}Driver();
 
 #if $varExists('commands')
-    virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
+	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 #end if
 
 /* Register names */
 #set $prevWAdrs = []
 #set $prevRAdrs =[]
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if $p.has_key('desc')
+#if $p.has_key('desc')
 // ${p.desc}
-  #end if
-  #if (not $p.has_key('access')) or ('r' in $p.access)
+#end if
+#if (not $p.has_key('access')) or ('r' in $p.access)
 	static const char *${p.name.title().replace("_", "")}RString;
-    #if $p.address not in $prevRAdrs
-      #if $p.has_key('nelm') and $p.nelm>1
+	#if $p.address not in $prevRAdrs
+		#if $p.has_key('nelm') and $p.nelm>1
 	static const char *${p.name.title().replace("_", "")}WavString;
-	static const unsigned int ${p.name.title().replace("_", "")}BufRegCount = $p.nelm;
-	static const unsigned int ${p.name.title().replace("_", "")}ReqSegmentCount = (${p.name.title().replace("_", "")}BufRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up;
-	static const unsigned int ${p.name.title().replace("_", "")}ReqMsgSize = ${p.name.title().replace("_", "")}BufRegCount + ${p.name.title().replace("_", "")}ReqSegmentCount; // All register addresses plus nonce space
-	FpgaReg req${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}ReqMsgSize]; // Canned message to request data buffer
-        #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
-	epicsInt8 buf${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}BufRegCount];
-        #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
-	epicsInt16 buf${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}BufRegCount];
-        #else
-	epicsInt32 buf${p.name.title().replace("_", "")}[${p.name.title().replace("_", "")}BufRegCount];
-        #end if
-      #end if
-      #silent $prevRAdrs.append($p.address)
-    #else
+	static const unsigned int ${p.name.title().replace("_", "")}RegCount = $p.nelm;
+		#end if
+	#silent $prevRAdrs.append($p.address)
+	#else
 // shared address $p.address for $p.name
-    #end if
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
+	#end if
+#end if
+#if $p.has_key('access') and ('w' in $p.access)
 	static const char *${p.name.title().replace("_", "")}WString;
-    #if $p.has_key('nelm') and $p.nelm>1 and (not('r' in $p.access))
+	#if $p.has_key('nelm') and $p.nelm>1 and (not('r' in $p.access))
 	static const char *${p.name.title().replace("_", "")}WavString;
-      #if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
-	epicsInt8 buf${p.name.title().replace("_", "")}[$p.nelm];
-      #else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
-	epicsInt16 buf${p.name.title().replace("_", "")}[$p.nelm];
-      #else
-	epicsInt32 buf${p.name.title().replace("_", "")}[$p.nelm];
-      #end if
-    #end if
-    #if $p.address not in $prevWAdrs
-      #silent $prevWAdrs.append($p.address)
-    #end if
-  #end if
+	static const unsigned int ${p.name.title().replace("_", "")}RegCount = $p.nelm;
+	#end if
+	#if $p.address not in $prevWAdrs
+	#silent $prevWAdrs.append($p.address)
+	#end if
+#end if
 #end for
 
 	static const unsigned int ${name}PolledRegCount;
@@ -95,7 +79,7 @@ public:
 
 
 protected:
-    virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
+	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
 			bool &waveIsReady); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
@@ -106,82 +90,98 @@ protected:
 #set $first = True
 /* Register handles */
 #for $p in sorted($registers, key=lambda k: k['name'])
-  #if (not $p.has_key('access')) or ('r' in $p.access)
-    int p_${p.name.title().replace("_", "")}R;
-    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "R"
-    #if $first == True
-    \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}R
-    #set $first = False
-    #end if
-  #end if
-  #if $p.has_key('access') and ('w' in $p.access)
-    int p_${p.name.title().replace("_", "")}W;
-    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "W"
-    #if $first == True
-    \#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}W
-    #set $first = False
-    #end if
-  #end if
-  #if ( $p.has_key('nelm') and $p.nelm > 1 )
-    int p_${p.name.title().replace("_", "")}Wav;
-    #set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "Wav"
-  #end if
+#if (not $p.has_key('access')) or ('r' in $p.access)
+	int p_${p.name.title().replace("_", "")}R;
+	#set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "R"
+	#if $first == True
+	\#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}R
+	#set $first = False
+	#end if
+#end if
+#if $p.has_key('access') and ('w' in $p.access)
+	int p_${p.name.title().replace("_", "")}W;
+	#set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "W"
+	#if $first == True
+	\#define FIRST_${name.upper()}_PARAM p_${p.name.title().replace("_", "")}W
+	#set $first = False
+	#end if
+#end if
+#if ( $p.has_key('nelm') and $p.nelm > 1 )
+	int p_${p.name.title().replace("_", "")}Wav;
+	#set $p_LastParam = "p_" + $p.name.title().replace("_", "") + "Wav"
+#end if
 #end for
 #if $varExists('commands')
 
 /* Commands */
 #for $c in $commands
-    int p_C_${c.name.title().replace("_", "")};
+	int p_C_${c.name.title().replace("_", "")};
 #end for
-    \#define LAST_${name.upper()}_PARAM p_C_${commands[-1].name.title().replace("_", "")}
+	\#define LAST_${name.upper()}_PARAM p_C_${commands[-1].name.title().replace("_", "")}
 #else
-  #set $sortedRegisters = sorted($registers, key=lambda k: k['name'])
-    \#define LAST_${name.upper()}_PARAM $p_LastParam
+#set $sortedRegisters = sorted($registers, key=lambda k: k['name'])
+	\#define LAST_${name.upper()}_PARAM $p_LastParam
 #end if
 
 \#define NUM_${name.upper()}_PARAMS (&LAST_${name.upper()}_PARAM - &FIRST_${name.upper()}_PARAM + NUM_SCLLRF_PARAMS + 1)
 
 #if $varExists('commands')
 #for $c in $commands
-    asynStatus ${c.name}();
+	asynStatus ${c.name}();
 #end for
 #end if
 
-    // mapping of register names to addresses
-    enum ReadRegAddrs
-    {
+	// mapping of register names to addresses
+	enum ReadRegAddrs
+	{
 #for $p in sorted($registers, key=lambda k: k['address'])
 #unless $p.has_key('access') and $p.access == 'w'
-    	${p.name.title().replace("_", "")}RAdr = 0x${format($p.address, '08X')},
+		${p.name.title().replace("_", "")}RAdr = 0x${format($p.address, '08X')},
 #end unless
 #end for
-    };
+	};
 
-    // mapping of register names to addresses
-    enum RegWriteAddrs
-    {
+	// mapping of register names to addresses
+	enum RegWriteAddrs
+	{
 #for $p in sorted($registers, key=lambda k: k['address'])
 #if $p.has_key('access') and ('w' in $p.access )
-    	${p.name.title().replace("_", "")}WAdr = 0x${format($p.address, '08X')},
+		${p.name.title().replace("_", "")}WAdr = 0x${format($p.address, '08X')},
 #end if
 #end for
-    };
+	};
 
-    // masks applied to returned register data
-    enum RegMasks
-    {
+	// masks applied to returned register data
+	enum RegMasks
+	{
 #for $p in sorted($registers, key=lambda k: k['address'])
-  #if $p.has_key('bit_width')
-    	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
-  #elif $p.has_key('data_width')
-    	${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.data_width - 1, '08X')},
-  #elif $p.has_key('bits')
-  ## Uint32Digital functions always need a mask
-    	${p.name.title().replace("_", "")}Mask =  0xFFFFFFFF, // bit fields
-  #end if
+#if $p.has_key('bit_width')
+		${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.bit_width - 1, '08X')},
+#elif $p.has_key('data_width')
+		${p.name.title().replace("_", "")}Mask =  0x${format(2**$p.data_width - 1, '08X')},
+#elif $p.has_key('bits')
+## Uint32Digital functions always need a mask
+		${p.name.title().replace("_", "")}Mask =  0xFFFFFFFF, // bit fields
+#end if
 #end for
 
-    };
+	};
+
+#for $p in sorted($registers, key=lambda k: k['name'])
+	#if $p.has_key('nelm') and $p.nelm>1
+		#if $p.has_key('desc')
+// ${p.desc}
+		#end if
+		#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	DataBuffer8 ${p.name.title().replace("_", "")}Buf;
+		#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	DataBuffer16 ${p.name.title().replace("_", "")}Buf;
+		#else
+	DataBuffer32 ${p.name.title().replace("_", "")}Buf;
+		#end if
+	#end if
+#end for
+
 };
 
 \#endif

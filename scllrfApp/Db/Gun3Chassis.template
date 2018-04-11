@@ -1,0 +1,76 @@
+record (calc, "GUN:GUNB:100:REV:AMEAN" )
+{
+	field( DESC, "Total reverse amplitude" )
+	field( INPA, "GUN:GUNB:100:REV1:AMEAN" )
+	field( INPB, "GUN:GUNB:100:REV2:AMEAN" )
+	field( CALC, "A+B")
+	field( SCAN, "1 second" )
+}
+
+record (calc, "GUN:GUNB:100:FWD:AMEAN" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "GUN:GUNB:100:FWD1:AMEAN" )
+	field( INPB, "GUN:GUNB:100:FWD2:AMEAN" )
+	field( CALC, "A+B")
+	field( SCAN, "1 second" )
+}
+
+record (calc, "GUN:GUNB:100:AACT" )
+{
+	field( DESC, "Average cavity amplitude" )
+	field( INPA, "GUN:GUNB:100:CAV1:AMEAN" )
+	field( INPB, "GUN:GUNB:100:CAV2:AMEAN" )
+	field( CALC, "(A+B)/2")
+	field( SCAN, "1 second" )
+}
+
+record (calc, "GUN:GUNB:100:PACT" )
+{
+	field( DESC, "Average cavity phase" )
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN" )
+	field( INPB, "GUN:GUNB:100:CAV2:PMEAN" )
+	field( CALC, "(A+B)/2")
+	field( SCAN, "1 second" )
+}
+
+record (calc, "GUN:GUNB:100:CW_DETUNE" )
+{
+	field( DESC, "Average cavity phase" )
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN" )
+	field( INPB, "GUN:GUNB:100:CAV2:PMEAN" )
+	field( INPC, "GUN:GUNB:100:FWD1:PMEAN" )
+	field( INPD, "GUN:GUNB:100:FWD2:PMEAN" )
+	field( CALC, "(A+B-C-D)/2")
+	field( SCAN, "1 second" )
+}
+
+record (calc, "GUN:GUNB:100:CW_DETUNE" )
+{
+	field( DESC, "Detuning in CW mode" )
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN" )
+	field( INPB, "GUN:GUNB:100:CAV2:PMEAN" )
+	field( INPC, "GUN:GUNB:100:FWD1:PMEAN" )
+	field( INPD, "GUN:GUNB:100:FWD2:PMEAN" )
+	field( CALC, "(A+B-C-D)/2")
+	field( SCAN, "1 second" )
+}
+
+record (calc, "GUN:GUNB:100:DFACT" )
+{
+	field( INPA, "GUN:GUNB:100:CW_DETUNE" )
+	field( INPB, "GUN:GUNB:100:CAV1:DECAY_CONSTANT_B")
+	field( INPC, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B")
+	field( INPD, "GUN:GUNB:100:DUTY_CYCLE")
+	field( CALC, "D>99.9?A:(B+C)/2")
+}
+
+record (bo, "GUN:GUNB:100:RFCTRL" )
+{
+	field( DESC, "Hook for RF control sequence" )
+}
+
+record (bo, "GUN:GUNB:100:RFMODE" )
+{
+	field( DESC, "Hook for RF control sequence" )
+}

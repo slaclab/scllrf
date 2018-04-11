@@ -10,15 +10,35 @@
 record(mbbo, "$(P)WF_EDGE_TRIGGER")
 {
 	field(ZRST, "Free Run")
-	field(ZRVL, 0)
+	field(ZRVL, "0")
 	field(ONST, "Rising Edge")
-	field(ONVL, 2)
+	field(ONVL, "2")
 	field(TWST, "Falling Edge")
-	field(TWVL, 3)
+	field(TWVL, "3")
 	field(OUT, "$(P)PULSE_BOUNDARY_W PP")
 	field(DTYP, "Raw Soft Channel")
 
 }
+
+# ADC min/max won't update unless this register is poked periodically
+# Testing this in with trace reset. Uncomment if that doesn't work out.
+#record(bo, "$(P)POKE_SLOW_RESET_POKER")
+#{
+#	field(VAL, "1")
+#	field(SCAN, "1 second")
+#	field(OUT, "$(P)POKE_SLOW_RESET PP")
+#}
+#record(bo, "$(P)POKE_SLOW_RESET")
+#{
+#	field(HIGH, "0.5")
+#	field(OUT, "$(P)SLOW_RESET_W.B0 PP")
+#}
+#record(mbboDirect, "$(P)SLOW_RESET_W")
+#{
+#	field(VAL, "1")
+#	field(B0, 1)
+#	field(SCAN, "1 second")
+#}
 
 record(mbboDirect, "$(P)WF_CHAN_ENABLE")
 {
@@ -75,11 +95,20 @@ record(ai, "$(P)WF_TIME_STEP") {
 #	field(OUT, "$(P)WF_X_AXIS.HOPR PP")
 #}
 
+record(bo, "$(P)WF_POLL_ENABLE")
+{
+	field( ZNAM, "Disabled")
+	field( ONAM, "Enabled")
+	field( PINI, "YES")
+	field( DTYP, "asynUInt32Digital")
+	field( OUT,  "@asynMask($(PORT),0, 1, 0.1)TRACE_DATA_POLL_ENABLE")
+}
+
 record(bo, "$(P)WF_FAST_UPDATE")
 {
 	field( ZNAM, "Disabled")
 	field( ONAM, "Enabled")
-	field( PINI, "NO")
+	field( PINI, "YES")
 	field( DTYP, "asynUInt32Digital")
 	field( OUT,  "@asynMask($(PORT),0, 1, 0.1)TRACE_DATA_FAST_UPDATE")
 }
@@ -121,6 +150,12 @@ record(calcout, "$(P)WF_UPDATE_PLOT_CALC") {
 # The waveform displays use this record to know when to update parameters
 record(bo, "$(P)WF_UPDATE_PLOT") {
 	field(HIGH, "0.1")
+}
+
+record(ao, "$(P)KEEP_W")
+{
+	field(VAL, "$(KEEP)")
+	field( PINI, "YES")
 }
 
 # Circle buffer "slow data"

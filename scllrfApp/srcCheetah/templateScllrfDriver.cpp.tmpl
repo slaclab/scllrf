@@ -45,26 +45,26 @@ const char *${name}Driver::regMapSha1String = "${sha1}";
 #if (not $p.has_key('access')) or ('r' in $p.access)
 const char *${name}Driver::${p.name.title().replace("_", "")}RString = "${p.name.upper()}_R";
 	#if $p.address not in $prevRAdrs
-	  #if ($p.has_key('nelm') and $p.nelm>32)
+	#if ($p.has_key('nelm') and $p.nelm>32)
 		## exclude arrays with > 32 elements from polling
 		#set $count_inc = 0
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
 //const unsigned int ${p.name.title().replace("_", "")}BufRegCount = $p.nelm;
 //const unsigned int ${p.name.title().replace("_", "")}ReqSegmentCount = (${p.name.title().replace("_", "")}BufRegCount + maxRegPerMsg -1)/maxRegPerMsg; // # of UDP requests, divide and round up;
 //const unsigned int ${p.name.title().replace("_", "")}ReqMsgSize = ${p.name.title().replace("_", "")}BufRegCount + ${p.name.title().replace("_", "")}ReqSegmentCount; // All register addresses plus nonce space
-	  #else if bool(re.search(r'U\d|lspi', $p.name))
+	#else if bool(re.search(r'U\d|lspi', $p.name))
 		## exclude registers with side effectes from polling
 		#set $count_inc = 0
-	  #else if $p.has_key('nelm') and $p.nelm<=32
+	#else if $p.has_key('nelm') and $p.nelm<=32
 		#set $count_inc = $p.nelm
 		#if $p.nelm>1
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
 		#end if
-	  #else if not $p.has_key('nelm')
+	#else if not $p.has_key('nelm')
 		#set $count_inc = 1
-	  #end if
-	  #set $polledRegCount += $count_inc
-	  #silent $prevRAdrs.append($p.address)
+	#end if
+	#set $polledRegCount += $count_inc
+	#silent $prevRAdrs.append($p.address)
 	#else
 // shared address $p.address for $p.name
 	#end if
@@ -72,22 +72,22 @@ const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.na
 #if $p.has_key('access') and ('w' in $p.access)
 const char *${name}Driver::${p.name.title().replace("_", "")}WString = "${p.name.upper()}_W";
 	#if $p.address not in $prevWAdrs
-	  #if $p.has_key('nelm') and $p.nelm<=32
+	#if $p.has_key('nelm') and $p.nelm<=32
 		#if ($p.nelm>1) and ($p.address not in $prevRAdrs)
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
 		#end if
 		#set $count_inc = $p.nelm
-	  #else if $p.has_key('nelm') and $p.nelm>32
+	#else if $p.has_key('nelm') and $p.nelm>32
 		#set $count_inc = 0
 		## WAV doesn't have R and W variations, skip if this was done in the R section above
 		#if $p.address not in $prevRAdrs
 const char *${name}Driver::${p.name.title().replace("_", "")}WavString = "${p.name.upper()}_WAV";
 		#end if
-	  #else
+	#else
 		#set $count_inc = 1
-	  #end if
-	  #set $writeRegCount += $count_inc
-	  #silent $prevWAdrs.append($p.address)
+	#end if
+	#set $writeRegCount += $count_inc
+	#silent $prevWAdrs.append($p.address)
 	#end if
 #end if
 #end for
@@ -116,6 +116,15 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 : scllrfAsynPortDriver(drvPortName, netPortName,
 		maxAddr, /* maxAddr, i.e. number of channels */
 		paramTableAdds + NUM_${name.upper()}_PARAMS)
+#for $p in sorted($registers, key=lambda k: k['name'])
+	#if $p.has_key('nelm') and $p.nelm>1
+		#if (not $p.has_key('access')) or ('r' in $p.access)
+	, ${p.name.title().replace("_", "")}Buf ( ${p.name.title().replace("_", "")}RegCount, ${p.name.title().replace("_", "")}RAdr )
+		#else
+	, ${p.name.title().replace("_", "")}Buf ( ${p.name.title().replace("_", "")}RegCount, ${p.name.title().replace("_", "")}WAdr )
+		#end if
+	#end if
+#end for
 {
 	epicsThreadSleep(defaultPollPeriod);
 #import re
@@ -171,16 +180,16 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 #end if
 #unless ($p.has_key('access') and $p.access == 'w') or ($prevAdr == $p.address) or ($p.has_key('nelm') and $p.nelm>32) or bool(re.search(r'U\d|lspi', $p.name))
 	#for $chan_num in range(0, $chan_count )
-	  #if msgRegCount % 174 == 0
+	#if msgRegCount % 174 == 0
 		{ 0, 0 },
-	  #end if
+	#end if
 		#if $chan_num == 0
 		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr), blankData },
 		#else
 		{ (flagReadMask | ${p.name.title().replace("_", "")}RAdr) + $chan_num, blankData },
 		#end if
-	  #set $prevAdr = $p.address
-	  #set $msgRegCount += 1
+	#set $prevAdr = $p.address
+	#set $msgRegCount += 1
 	#end for
 #end unless
 #end for
@@ -270,7 +279,7 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 #end for
 #for $p in sorted($registers, key=lambda k: k['name'])
 #if ((($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and ($p.has_key('nelm') and $p.nelm > 1))
-	int index;
+	unsigned int index;
 	#break
 #end if
 #end for
@@ -307,14 +316,14 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) $maskParam);
 	#end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s %s: readback for address=%s, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString,
 				(unsigned int) (pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
 #else
 		status = (asynStatus) set${paramType}Param(p_${p.name.title().replace("_", "")}R,
 				pFromFpga->data $maskParam);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s %s: readback for address=%s, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString, (unsigned ) pFromFpga->data);
 #end if
 #else if $p.has_key('access') and ( $p.access == "w" ) and (($p.has_key('nelm') and $p.nelm == 1) or not($p.has_key('nelm')))
@@ -332,32 +341,32 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 #for $p in sorted($registers, key=lambda k: k['address'])
 #if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 1 and $p.nelm <= 32
 		if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
-				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + ${p.name.title().replace("_", "")}BufRegCount)))
+				(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + ${p.name.title().replace("_", "")}Buf.RegCount)))
 		{
 			index = (pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask));
 	#if $p.has_key("bit_width") or $p.has_key("data_width")
-	  #if $p.has_key("signed") and $p.signed == "signed"
+	#if $p.has_key("signed") and $p.signed == "signed"
 			signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
 			status = (asynStatus) setIntegerParam(index,
 				p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits);
-			buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits;
-	  #else
+			${p.name.title().replace("_", "")}Buf.data[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits;
+	#else
 			status = (asynStatus) setIntegerParam(index,
 				p_${p.name.title().replace("_", "")}R,
 				(pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
-			buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
-	  #end if
+			${p.name.title().replace("_", "")}Buf.data[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+	#end if
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s %s: readback for address=%s, channel %u, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString,index,
 				(unsigned int) (pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
 	#else
 			status = (asynStatus) setIntegerParam(index,
 				p_${p.name.title().replace("_", "")}R, pFromFpga->data);
-			buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
+			${p.name.title().replace("_", "")}Buf.data[index] = pFromFpga->data;
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s %s: readback for address=%s, channel %u, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}RString, index, (unsigned ) pFromFpga->data);
 	#end if
 			if (index > 0)
@@ -365,48 +374,48 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 				callParamCallbacks(index, index);
 			}
 
-			if(index == ${p.name.title().replace("_", "")}BufRegCount - 1)
+			if(index == ${p.name.title().replace("_", "")}Buf.RegCount - 1)
 			{
 	#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
-				doCallbacksInt8Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
+				doCallbacksInt8Array( ${p.name.title().replace("_", "")}Buf.data.data(), ${p.name.title().replace("_", "")}Buf.RegCount, p_${p.name.title().replace("_", "")}Wav, 0);
 	#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
-				doCallbacksInt16Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
+				doCallbacksInt16Array( ${p.name.title().replace("_", "")}Buf.data.data(), ${p.name.title().replace("_", "")}Buf.RegCount, p_${p.name.title().replace("_", "")}Wav, 0);
 	#else
-				doCallbacksInt32Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
+				doCallbacksInt32Array( ${p.name.title().replace("_", "")}Buf.data.data(), ${p.name.title().replace("_", "")}Buf.RegCount, p_${p.name.title().replace("_", "")}Wav, 0);
 	#end if
 			}
 		}
 		else
 #else if (($p.has_key('access') and $p.access != "w") or (not $p.has_key('access'))) and $p.has_key('nelm') and $p.nelm > 32
 			if ((pFromFpga->addr >= (${p.name.title().replace("_", "")}RAdr|flagReadMask)) &&
-					(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + ${p.name.title().replace("_", "")}BufRegCount)))
+					(pFromFpga->addr < ((${p.name.title().replace("_", "")}RAdr|flagReadMask) + ${p.name.title().replace("_", "")}Buf.RegCount)))
 			{
 				index = (pFromFpga->addr - (${p.name.title().replace("_", "")}RAdr|flagReadMask));
 		#if $p.has_key("bit_width") or $p.has_key("data_width")
-		  #if $p.has_key("signed") and $p.signed == "signed"
+		#if $p.has_key("signed") and $p.signed == "signed"
 				signExtBits = (pFromFpga->data & ((${p.name.title().replace("_", "")}Mask + 1 ) >> 1))? ~${p.name.title().replace("_", "")}Mask : 0;
-				buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits;
-		  #else
-				buf${p.name.title().replace("_", "")}[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
-		  #end if
+				${p.name.title().replace("_", "")}Buf.data[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask) | signExtBits;
+		#else
+				${p.name.title().replace("_", "")}Buf.data[index] = (pFromFpga->data & ${p.name.title().replace("_", "")}Mask);
+		#end if
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-					"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+					"%s %s: readback for address=%s, channel %u, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 					${p.name.title().replace("_", "")}RString,index,
 					(unsigned int) (pFromFpga->data & ${p.name.title().replace("_", "")}Mask));
 		#else
-				buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
+				${p.name.title().replace("_", "")}Buf.data[index] = pFromFpga->data;
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-					"%s: readback for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+					"%s %s: readback for address=%s, channel %u, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 					${p.name.title().replace("_", "")}RString, index, (unsigned ) pFromFpga->data);
 		#end if
-				if(index == ${p.name.title().replace("_", "")}BufRegCount - 1)
+				if(index == ${p.name.title().replace("_", "")}Buf.RegCount - 1)
 				{
 		#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
-					doCallbacksInt8Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
+					doCallbacksInt8Array( ${p.name.title().replace("_", "")}Buf.data.data(), ${p.name.title().replace("_", "")}Buf.RegCount, p_${p.name.title().replace("_", "")}Wav, 0);
 		#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
-					doCallbacksInt16Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
+					doCallbacksInt16Array( ${p.name.title().replace("_", "")}Buf.data.data(), ${p.name.title().replace("_", "")}Buf.RegCount, p_${p.name.title().replace("_", "")}Wav, 0);
 		#else
-					doCallbacksInt32Array( buf${p.name.title().replace("_", "")}, ${p.name.title().replace("_", "")}BufRegCount, p_${p.name.title().replace("_", "")}Wav, 0);
+					doCallbacksInt32Array( ${p.name.title().replace("_", "")}Buf.data.data(), ${p.name.title().replace("_", "")}Buf.RegCount, p_${p.name.title().replace("_", "")}Wav, 0);
 		#end if
 				}
 			}
@@ -473,16 +482,16 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 	#end unless
 	#set $prevAdr = $p.address
 	#if ($p.has_key('bits'))
-	  #set $paramType = 'UIntDigital'
-	  #set $maskParam = ", " + $p.name.title().replace("_", "") + "Mask"
-	  #set $retVal = 'uValueSet'
+	#set $paramType = 'UIntDigital'
+	#set $maskParam = ", " + $p.name.title().replace("_", "") + "Mask"
+	#set $retVal = 'uValueSet'
 	#else
-	  #set $paramType = 'Integer'
-	  #set $maskParam = ''
-	  #set $retVal = 'valueSet'
+	#set $paramType = 'Integer'
+	#set $maskParam = ''
+	#set $retVal = 'valueSet'
 	#end if
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-			"%s: echo for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+			"%s %s: echo for address=%s, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 			${p.name.title().replace("_", "")}WString, (unsigned int) (pFromFpga->data $maskStr));
 
 		break;
@@ -496,9 +505,9 @@ asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 				(pFromFpga->addr < (${p.name.title().replace("_", "")}WAdr + $p.nelm)))
 		{
 			index = pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr;
-			buf${p.name.title().replace("_", "")}[index] = pFromFpga->data;
+			${p.name.title().replace("_", "")}Buf.data[index] = pFromFpga->data;
 			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: echo for address=%s, channel %u, value=0x%x\n", __PRETTY_FUNCTION__,
+				"%s %s: echo for address=%s, channel %u, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 				${p.name.title().replace("_", "")}WString, (pFromFpga->addr - ${p.name.title().replace("_", "")}WAdr), (unsigned int) (pFromFpga->data $maskStr));
 
 		}

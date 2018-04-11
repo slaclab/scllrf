@@ -8,24 +8,6 @@
 
 # Bit width of pulse parameters might change, but the math is easy and won't change.
 # ADC counts are a multiple of IF, which is 1320MHz/14 or 1320000kHz/14
-record( calcout, "$(P)REP_PERIOD_EGU_HOPR")
-{
-	field( DESC, "Use raw max to calculate units max")
-	field(INPA, "$(P)REP_PERIOD_W.HOPR")
-	field(CALC, "A*14/1320000")
-	field(EGU, "us")
-	field(OUT, "$(P)REP_PERIOD.HOPR")
-	field(PINI, "YES")
-}
-record( calcout, "$(P)REP_PERIOD_EGU_DRVH")
-{
-	field( DESC, "Use raw max to calculate units max")
-	field(INPA, "$(P)REP_PERIOD_W.DRVH")
-	field(CALC, "A*14/1320000")
-	field(EGU, "us")
-	field(OUT, "$(P)REP_PERIOD.DRVH")
-	field(PINI, "YES")
-}
 
 # User interface PV in us
 record(ao, "$(P)REP_PERIOD")
@@ -37,21 +19,13 @@ record(ao, "$(P)REP_PERIOD")
 	field( FLNK, "$(P)REP_PERIOD_U_TO_R")
 	field( PREC, "7")
 }
-
-record(ao, "$(P)RAMP_REP_PERIOD")
-{
-	field( DESC, "Ramp pulsed mode pulse period")
-	field( LOPR, "0")
-	field( DRVL, "0")
-	field( EGU, "ms")
-}
 # Using a calcout instead of ao because ao misbehaved with SDIS loop breaking
 record(calcout, "$(P)REP_PERIOD_U_TO_R")
 {
 	field( DESC, "Convert EGU to raw register value")
 	field( INPA, "$(P)REP_PERIOD PP")
-# 1/IF, or 14/1320 MHz. 1320000 is kHz, to go with ms
-	field( CALC, "A*1320000/14")
+# 1/IF, or 14/1320 MHz. 1320000 is kHz, to go with ms, round to multiples of 132*2
+	field( CALC, "FLOOR(0.5+(A*1320000/14)/132)")
 	field( EGU, "ms")
 	field( LOPR, "0")
 	field( OUT, "$(P)REP_PERIOD_W PP MS")
@@ -71,7 +45,7 @@ record( calcout, "$(P)REP_PERIOD_Sync"){
 	field( DISV, "1")
 	field( EGU, "ms")
 # time in us is 1320MHz/14, 1 IF cycle per ADC count
-	field( CALC, "A*14/1320000")
+	field( CALC, "A*132*14/1320000")
 	field(FLNK, "$(P)REP_P_TO_F")
 	field( PREC, "7")
 }
@@ -106,25 +80,6 @@ record(ao, "$(P)REP_FREQUENCY")
 	field( PREC, "7")
 }
 
-# Enforce pulse length can't be longer than pulse interval
-record( calcout, "$(P)PULSE_LENGTH_EGU_HOPR")
-{
-	field(INPA, "$(P)PULSE_LENGTH_W.HOPR")
-	field(CALC, "A*14/1320000")
-	field(EGU, "ms")
-	field(OUT, "$(P)PULSE_LENGTH.HOPR")
-	field(PINI, "YES")
-}
-
-record( calcout, "$(P)PULSE_LENGTH_EGU_DRVH")
-{
-	field(INPA, "$(P)PULSE_LENGTH_W.DRVH")
-	field(CALC, "A*14/1320000")
-	field(EGU, "ms")
-	field(OUT, "$(P)PULSE_LENGTH.DRVH")
-	field(PINI, "YES")
-}
-
 # User interface PV in us
 record(ao, "$(P)PULSE_LENGTH")
 {
@@ -135,12 +90,12 @@ record(ao, "$(P)PULSE_LENGTH")
 	field( PREC, "7")
 }
 
-# Using a calcout instead of ao because ao misbehaved with SDIS loop breaking
+
 record(calcout, "$(P)PULSE_LENGTH_U_TO_R")
 {
 # ASLO is 1/IF, or 14/1320 MHz
 	field( INPA, "$(P)PULSE_LENGTH PP")
-	field( CALC, "A*1320000/14")
+	field( CALC, "FLOOR(0.5+(A*1320000/14)/132)")
 	field(EGU, "ms")
 	field( LOPR, "0")
 	field( OUT, "$(P)PULSE_LENGTH_W PP MS")
@@ -158,7 +113,7 @@ record( calcout, "$(P)PULSE_LENGTH_Sync"){
 	field( DISV, "1")
 	field( EGU, "ms")
 # time in us is 1320MHz/14, 1 IF cycle per ADC count
-	field( CALC, "A*14/1320000")
+	field( CALC, "A*132*14/1320000")
 	field(FLNK, "$(P)REP_P_TO_F")
 	field( PREC, "7")
 }
@@ -212,168 +167,257 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_In")
 # On the FPGA side, they're I/Q
 record( ao, "$(P)ADES"){
 	field( DESC, "RF Amplitude Setpoint")
-	field( OUT,  "$(P)AP_TO_IQ PP")
+	field( OUT,  "$(P)SET_PLOOP_AP_TO_IQ PP")
 	field( PREC, "3")
-	field( HOPR, "0xFFFF")
+	field( HOPR, "0x7FFF")
 	field( LOPR, "0")
 }
 
 record( ao, "$(P)PDES"){
 	field( DESC, "RF Phase Setpoint")
-	field( OUT,  "$(P)AP_TO_IQ PP")
+	field( OUT,  "$(P)SET_PLOOP_AP_TO_IQ PP")
 	field( PREC, "3")
 	field( HOPR, "180")
 	field( LOPR, "-180")
 }
 
-record( fanout,  "$(P)AP_TO_IQ")
+record( fanout,  "$(P)SET_PLOOP_AP_TO_IQ")
 {
-	field(LNK1, "$(P)AP_TO_I PP")
-	field(LNK2, "$(P)AP_TO_Q PP")
+	field(LNK1, "$(P)SET_PLOOP_AP_TO_I PP")
+	field(LNK2, "$(P)SET_PLOOP_AP_TO_Q PP")
 }
 
-record( calcout, "$(P)AP_TO_I")
+record( calcout, "$(P)SET_PLOOP_AP_TO_I")
 {
 	field( INPA, "$(P)ADES")
 	field( INPB, "$(P)PDES")
 	field( INPC, "$(SCALEPV)")
 	field( CALC, "A*COS(B*D2R)/C")
 	field( OUT, "$(P)SET_PLOOP_RE_W PP")
+	field( OOPT, "On Change")
 }
 
-record( calcout, "$(P)AP_TO_Q")
+record( calcout, "$(P)SET_PLOOP_AP_TO_Q")
 {
 	field( INPA, "$(P)ADES")
 	field( INPB, "$(P)PDES")
 	field( INPC, "$(SCALEPV)")
 	field( CALC, "A*SIN(B*D2R)/C")
 	field( OUT, "$(P)SET_PLOOP_IM_W PP")
+	field( OOPT, "On Change")
 }
 
-record(ai, "$(P)DECAY_CONSTANT_B") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) DECAY_CONSTANT_B")
-	field(SCAN, "I/O Intr")
+record( ao, "$(P)PH_DELAY")
+{
+	field( DESC, "Initial phase on loop close")
+	field( EGU, "degrees")
+	field( HOPR, "360.0" )
+	field( LOPR, "0" )
+	field( FLNK, "$(P)PH_DELAY_Sync_Out")
 }
-record(ai, "$(P)DECAY_STRENGTH") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) DECAY_STRENGTH")
-	field(SCAN, "I/O Intr")
+
+record( calcout, "$(P)PH_DELAY_Sync_Out")
+{
+	field( DESC, "Initial phase on loop close")
+	field( INPA, "$(P)PH_DELAY")
+	field( INPB, "$(P)PHDELAY_W.HOPR")
+	field( CALC, "A*B/360")
+	field( OUT, "$(P)PHDELAY_W PP")
+	field( OOPT, "On Change")
+	field( SDIS, "$(P)PH_DELAY_Sync_In.PACT")
+	field( DISV, "1")
 }
-record(ai, "$(P)DECAY_FIT_STDDEV") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),0) DECAY_FIT_STDDEV")
-	field(SCAN, "I/O Intr")
+
+record( ao, "$(P)PHDELAY_W")
+{
+	field( FLNK, "$(P)PH_DELAY_Sync_In")
+}
+
+record( calcout, "$(P)PH_DELAY_Sync_In")
+{
+	field( DESC, "Initial phase on loop close")
+	field( INPA, "$(P)PHDELAY_W")
+	field( INPB, "$(P)PHDELAY_W.HOPR")
+	field( CALC, "A*360/B")
+	field( OUT, "$(P)PH_DELAY PP")
+	field( OOPT, "On Change")
+	field( SDIS, "$(P)PH_DELAY.PACT")
+	field( DISV, "1")
 }
 
 # Above is closed loop settings. Below are open loop, in A/D units
 
 record( ao, "$(P)AOPEN"){
 	field( DESC, "RF Amplitude Setpoint")
-	field( OUT,  "$(P)AP_OPEN_TO_IQ PP")
+	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
 	field( PREC, "3")
-	field( HOPR, "0xFFFF")
+	field( HOPR, "0x7FFF")
 	field( LOPR, "0")
 }
 
 record( ao, "$(P)POPEN"){
 	field( DESC, "RF Phase Setpoint")
-	field( OUT,  "$(P)AP_OPEN_TO_IQ PP")
+	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
 	field( PREC, "3")
-	field( HOPR, "3.141592654")
-	field( LOPR, "-3.141592654")
+	field( HOPR, "360")
+	field( LOPR, "-360")
 }
 
-record( fanout,  "$(P)AP_OPEN_TO_IQ")
+# Set DAC scale so AOPEN matches a measured amplitude.
+# Keep this passive, so it is only applied when a button is pushed.
+record( calcout, "$(P)SCALE_AOPEN" ) {
+	field( INPA, "$(P)CAV1:AMEAN") # Use this waveform mean to scale AOUT
+	field( INPB, "$(P)AOPEN")
+	field( INPC, "$(P)AOPEN.ASLO")
+	field( CALC, "C*A/B")
+	field( OUT, "$(P)AOPEN.ASLO")
+}
+
+# writing to open loop setpoints during closed loop
+# has no effect, so don't bother to disable
+record( fanout,  "$(P)SOURCE_AP_TO_IQ")
 {
-	field(LNK1, "$(P)AP_OPEN_TO_I PP")
-	field(LNK2, "$(P)AP_OPEN_TO_Q PP")
+	field(LNK1, "$(P)SOURCE_AP_TO_I PP")
+	field(LNK2, "$(P)SOURCE_AP_TO_Q PP")
 }
 
-record( calcout, "$(P)AP_OPEN_TO_I")
+record( calcout, "$(P)SOURCE_AP_TO_I")
 {
 	field( INPA, "$(P)AOPEN")
 	field( INPB, "$(P)POPEN")
-	field( CALC, "A*COS(B)")
+	field( CALC, "A*COS(B*D2R)")
 	field( OUT, "$(P)SOURCE_RE_W PP")
 }
 
-#XXXX This is a temporary hack, figure out correct behavior
-record(ao, "$(P)OPEN_CLOSED_RE_Sync")
-{
-	field( DOL,  "$(P)SOURCE_RE_W CP")
-	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)SET_PLOOP_RE_W PP")
-}
-
-
-record( calcout, "$(P)AP_OPEN_TO_Q")
+record( calcout, "$(P)SOURCE_AP_TO_Q")
 {
 	field( INPA, "$(P)AOPEN")
 	field( INPB, "$(P)POPEN")
-	field( CALC, "A*SIN(B)")
+	field( CALC, "A*SIN(B*D2R)")
 	field( OUT, "$(P)SOURCE_IM_W PP")
 }
 
-#XXXX This is a temporary hack, figure out correct behavior
-record(ao, "$(P)OPEN_CLOSED_IM_Sync")
-{
-	field( DOL,  "$(P)SOURCE_IM_W CP")
-	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)SET_PLOOP_IM_W PP")
-}
-
-record( ao, "$(P)SOURCE_RE_W"){
-	field( SDIS, "$(P)SOURCE_RE_Sync.PACT")
-	field( DISV, "1")
-}
-
-record( ai, "$(P)SOURCE_RE_R"){
+record( ai, "$(P)VOUTXFALL_R"){
 	field( FLNK, "$(P)SOURCE_RE_Sync")
-}####XXXX Do we really need this synchronization?
+}
+
 record( ao, "$(P)SOURCE_RE_Sync"){
-	field( DOL,  "$(P)SOURCE_RE_R PP")
+# This should be inactive when loop is closed
+	field( SDIS, "$(P)CLOSE_LOOP_W")
+	field( DISV, "0")
+	field( DOL,  "$(P)VOUTXFALL_R PP")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)IQ_OPEN_TO_AP PP")
+	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP")
 }
 
-record( ao, "$(P)SOURCE_IM_W"){
-	field( SDIS, "$(P)SOURCE_IM_Sync.PACT")
-	field( DISV, "1")
-}
-
-record( ai, "$(P)SOURCE_IM_R"){
+record( ai, "$(P)VOUTYFALL_R"){
 	field( FLNK, "$(P)SOURCE_IM_Sync")
 }
 record( ao, "$(P)SOURCE_IM_Sync"){
-	field( DOL,  "$(P)SOURCE_IM_R PP")
+# This should be inactive when loop is OPEN
+	field( SDIS, "$(P)CLOSE_LOOP_W")
+	field( DISV, "0")
+	field( DOL,  "$(P)VOUTYFALL_R PP")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)IQ_OPEN_TO_AP PP")
+	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP")
 }
 
-record( fanout,  "$(P)IQ_OPEN_TO_AP")
+record( fanout,  "$(P)SOURCE_IQ_TO_AP")
 {
-	field(LNK1, "$(P)IQ_OPEN_TO_A PP")
-	field(LNK2, "$(P)IQ_OPEN_TO_P PP")
+	field(LNK1, "$(P)SOURCE_IQ_TO_A PP")
+	field(LNK2, "$(P)SOURCE_IQ_TO_P PP")
 }
 
-record( calcout, "$(P)IQ_OPEN_TO_A")
+record( calcout, "$(P)SOURCE_IQ_TO_A")
 {
-	field( INPA, "$(P)SOURCE_RE_R")
-	field( INPB, "$(P)SOURCE_IM_R")
+	field( INPA, "$(P)VOUTXFALL_R")
+	field( INPB, "$(P)VOUTYFALL_R")
 	field(CALC, "(SQRT(A^2+B^2))")
 	field( OUT, "$(P)AOPEN PP")
+	field( OOPT, "On Change")
 }
 
-record( calcout, "$(P)IQ_OPEN_TO_P")
+record( calcout, "$(P)SOURCE_IQ_TO_P")
 {
-	field( INPA, "$(P)SOURCE_RE_R")
-	field( INPB, "$(P)SOURCE_IM_R")
-	field(CALC, "(ATAN2(A,B))")
+	field( INPA, "$(P)VOUTXFALL_R")
+	field( INPB, "$(P)VOUTYFALL_R")
+	field(CALC, "(ATAN2(B,A))")
 	field( OUT, "$(P)POPEN PP")
+	field( OOPT, "On Change")
+}
+
+# SSA drive balancing. raw 19898 = 100% amplitude.
+# Adjust phase and amplitude so RF is in phase and output is equal.
+record(ao, "$(P)DRV1_ADJ_A")
+{
+	field(EGU, "%")
+	field(HOPR, "100")
+	field(LOPR, "0")
+	field(VAL, "100")
+}
+
+record(ao, "$(P)DRV1_ADJ_P")
+{
+	field(EGU, "degrees")
+	field(HOPR, "180")
+	field(LOPR, "-180")
+}
+record( fanout,  "$(P)RFSUPLO1_AP_TO_IQ")
+{
+	field(LNK1, "$(P)RFSUPLO1_AP_TO_I PP")
+	field(LNK2, "$(P)RFSUPLO1_AP_TO_Q PP")
+}
+
+record( calcout, "$(P)RFSUPLO1_AP_TO_I")
+{
+	field( INPA, "$(P)DRV1_ADJ_A")
+	field( INPB, "$(P)DRV1_ADJ_P")
+	field( CALC, "A*COS(B*D2R)*19898/100")
+	field( OUT, "$(P)RFSUPLOX1_W PP")
+}
+
+record( calcout, "$(P)RFSUPLO1_AP_TO_Q")
+{
+	field( INPA, "$(P)DRV1_ADJ_A")
+	field( INPB, "$(P)DRV1_ADJ_P")
+	field( CALC, "A*SIN(B*D2R)*19898/100")
+	field( OUT, "$(P)RFSUPLOY1_W PP")
+}
+
+
+record(ao, "$(P)DRV2_ADJ_A")
+{
+	field(EGU, "%")
+	field(HOPR, "100")
+	field(LOPR, "0")
+}
+
+record(ao, "$(P)DRV2_ADJ_P")
+{
+	field(EGU, "degrees")
+	field(HOPR, "180")
+	field(LOPR, "-180")
+}
+record( fanout,  "$(P)RFSUPLO2_AP_TO_IQ")
+{
+	field(LNK1, "$(P)RFSUPLO2_AP_TO_I PP")
+	field(LNK2, "$(P)RFSUPLO2_AP_TO_Q PP")
+}
+
+record( calcout, "$(P)RFSUPLO2_AP_TO_I")
+{
+	field( INPA, "$(P)DRV2_ADJ_A")
+	field( INPB, "$(P)DRV2_ADJ_P")
+	field( CALC, "A*COS(B*D2R)*19898/100")
+	field( OUT, "$(P)RFSUPLOX2_W PP")
+}
+
+record( calcout, "$(P)RFSUPLO2_AP_TO_Q")
+{
+	field( INPA, "$(P)DRV2_ADJ_A")
+	field( INPB, "$(P)DRV2_ADJ_P")
+	field( CALC, "A*SIN(B*D2R)*19898/100")
+	field( OUT, "$(P)RFSUPLOY2_W PP")
 }
 
 #record(calc, "$(P)IFDES2MODULO")

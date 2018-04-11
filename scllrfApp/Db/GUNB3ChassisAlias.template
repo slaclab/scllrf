@@ -1,12 +1,10 @@
-alias( "$(P)PRC:ADES", "$(P)ADES")
-alias( "$(P)PRC:PDES", "$(P)PDES")
-alias( "$(P)PRC:REP_PERIOD", "$(P)REP_PERIOD")
-alias( "$(P)PRC:REP_FREQUENCY", "$(P)REP_FREQUENCY")
-alias( "$(P)PRC:PULSE_LENGTH", "$(P)PULSE_LENGTH")
-alias( "$(P)PRC:DUTY_CYCLE", "$(P)DUTY_CYCLE")
-alias( "$(P)CAV1:AMEAN", "$(P)AACT")
-alias( "$(P)CAV1:PMEAN", "$(P)PACT")
-alias( "$(P)CAV1:ITWAV", "llrf$(N):w7")
-alias( "$(P)CAV1:QTWAV", "llrf$(N):w8")
+# This is for the sake of the Apex Matlab scripts.
+alias( "$(P)CAV1:ITWF", "llrf$(N):w7")
+alias( "$(P)CAV1:QTWF", "llrf$(N):w8")
 alias( "$(P)AOPEN", "llrf$(N):source_amp_ao")
 alias( "$(P)POPEN", "llrf$(N):source_ph_ao")
+
+record( bo, "Screen1:Command" )
+{
+	field( OUT, "YAGS:GUNB:753:TGT_CTRL PP" )
+}

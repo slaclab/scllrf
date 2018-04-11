@@ -7,13 +7,13 @@ x 0
 y 0
 #set $regcount = 0
 #for $p in $registers
- #if $p.has_key('bits')
-  #if $p.has_key('access') and ('w' in $p.access)
-    #set $regcount += 1
-  #else ## We're not trying to handle write only registers. No current need.
-    #set $regcount += 1
-  #end if
- #end if
+#if $p.has_key('bits')
+#if $p.has_key('access') and ('w' in $p.access)
+	#set $regcount += 1
+#else ## We're not trying to handle write only registers. No current need.
+	#set $regcount += 1
+#end if
+#end if
 #end for
 #if $regcount < 5
 w ${30+236*$regcount}
@@ -60,7 +60,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 55
 value {
-  "\$(P)"
+"\$(P)"
 }
 endObjectProperties
 
@@ -87,19 +87,19 @@ buttonLabel "Debug"
 numPvs 4
 numDsps 3
 displayFileName {
-  0 "asynRecord.edl"
-  1 "asynRecord.edl"
-  2 "scllrfPollingControl.edl"
+0 "asynRecord.edl"
+1 "asynRecord.edl"
+2 "scllrfPollingControl.edl"
 }
 menuLabel {
-  0 "asyn IP"
-  1 "asyn Reg"
-  2 "Polling"
+0 "asyn IP"
+1 "asyn Reg"
+2 "Polling"
 }
 symbols {
-  0 "P=\$(P),R=ASYN_IP,PORT=myIP"
-  1 "P=\$(P),R=ASYN_REG,PORT=myReg"
-  2 "P=\$(P)"
+0 "P=\$(P),R=ASYN_IP,PORT=myIP"
+1 "P=\$(P),R=ASYN_REG,PORT=myReg"
+2 "P=\$(P)"
 }
 endObjectProperties
 
@@ -129,8 +129,8 @@ endObjectProperties
 #set $xoffset = 0
 #set $yoffset = 0
 #for $p in sorted($registers, key=lambda k: k['name'])
- #if $p.has_key('bits')
-  #if $p.has_key('access') and ('w' in $p.access)
+#if $p.has_key('bits')
+#if $p.has_key('access') and ('w' in $p.access)
 \# (Group)
 object activeGroupClass
 beginObjectProperties
@@ -159,7 +159,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "${p.name.upper()}"
+"${p.name.upper()}"
 }
 autoSize
 endObjectProperties
@@ -174,7 +174,7 @@ x ${xoffset + 185}
 y ${yoffset + 75}
 w 15
 h 288
-controlPv "\$(P)${p.name.upper()}_W"
+controlPv "\$(P)${p.name.upper()}_BITS_W"
 lineColor index 14
 onColor index 55
 offColor index 57
@@ -195,7 +195,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B0"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B0"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -219,7 +219,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B0"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B0"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -243,7 +243,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B1"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B1"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -267,7 +267,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B1"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B1"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -291,7 +291,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B2"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B2"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -315,7 +315,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B2"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B2"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -339,7 +339,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B3"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B3"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -363,7 +363,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B3"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B3"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -387,7 +387,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B4"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B4"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -411,7 +411,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B4"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B4"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -430,7 +430,7 @@ x ${xoffset + 205}
 y ${yoffset + 75}
 w 15
 h 288
-controlPv "\$(P)${p.name.upper()}_R"
+controlPv "\$(P)${p.name.upper()}_BITS_R"
 lineColor index 14
 onColor index 55
 offColor index 57
@@ -451,7 +451,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B5"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B5"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -475,7 +475,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B5"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B5"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -499,7 +499,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B6"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B6"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -523,7 +523,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B6"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B6"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -547,7 +547,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B7"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B7"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -571,7 +571,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B7"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B7"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -595,7 +595,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B8"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B8"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -619,7 +619,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B8"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B8"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -643,7 +643,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B9"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B9"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -667,7 +667,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.B9"
+controlPv "\$(P)${p.name.upper()}_BITS_W.B9"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -691,7 +691,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BA"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BA"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -715,7 +715,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BA"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BA"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -739,7 +739,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BB"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BB"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -763,7 +763,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BB"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BB"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -787,7 +787,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BC"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BC"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -811,7 +811,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BC"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BC"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -835,7 +835,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BD"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BD"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -859,7 +859,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BD"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BD"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -883,7 +883,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BE"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BE"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -907,7 +907,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BE"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BE"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -931,7 +931,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BF"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BF"
 pressValue "0"
 onLabel "0"
 offLabel "0"
@@ -955,7 +955,7 @@ onColor index 51
 offColor index 51
 topShadowColor index 0
 botShadowColor index 14
-controlPv "\$(P)${p.name.upper()}_W.BF"
+controlPv "\$(P)${p.name.upper()}_BITS_W.BF"
 pressValue "1"
 onLabel "1"
 offLabel "1"
@@ -982,13 +982,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 0
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 0
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 0"
+"bit 0"
 #end if
 }
 autoSize
@@ -1013,13 +1013,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 1
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 1
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 1"
+"bit 1"
 #end if
 }
 autoSize
@@ -1040,7 +1040,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  " 0"
+" 0"
 }
 autoSize
 endObjectProperties
@@ -1060,7 +1060,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "15"
+"15"
 }
 autoSize
 endObjectProperties
@@ -1083,13 +1083,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 2
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 2
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 2"
+"bit 2"
 #end if
 }
 autoSize
@@ -1113,13 +1113,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 3
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 3
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 3"
+"bit 3"
 #end if
 }
 autoSize
@@ -1143,13 +1143,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 4
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 4
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 4"
+"bit 4"
 #end if
 }
 autoSize
@@ -1173,13 +1173,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 5
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 5
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 5"
+"bit 5"
 #end if
 }
 autoSize
@@ -1203,13 +1203,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 6
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 6
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 6"
+"bit 6"
 #end if
 }
 autoSize
@@ -1232,13 +1232,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 7
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 7
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 7"
+"bit 7"
 #end if
 }
 autoSize
@@ -1259,7 +1259,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  " 7 "
+" 7 "
 }
 autoSize
 endObjectProperties
@@ -1279,7 +1279,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  " 8"
+" 8"
 }
 autoSize
 endObjectProperties
@@ -1302,14 +1302,14 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 8
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 8
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-       "bit 8"
-#end if 
+	   "bit 8"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1332,14 +1332,14 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 9
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 9
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-       "bit 9"
-#end if 
+	   "bit 9"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1362,14 +1362,14 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 10
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 10
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-       "bit 10"
-#end if 
+	   "bit 10"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1392,14 +1392,14 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 11
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 11
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-       "bit 11"
-#end if 
+	   "bit 11"
+#end if
 }
 autoSize
 endObjectProperties
@@ -1422,13 +1422,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 12
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 12
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-       "bit 12"
+	   "bit 12"
 #end if
 }
 autoSize
@@ -1452,13 +1452,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 13
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 13
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-       "bit 13"
+	   "bit 13"
 #end if
 }
 autoSize
@@ -1482,13 +1482,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 14
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 14
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-    "bit 14"
+	"bit 14"
 #end if
 }
 autoSize
@@ -1512,13 +1512,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 15
-  "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 15
+"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 15"
+"bit 15"
 #end if
 }
 autoSize
@@ -1542,8 +1542,8 @@ endGroup
 
 endObjectProperties
 
-  
-  #else
+
+#else
 \# (Group)
 object activeGroupClass
 beginObjectProperties
@@ -1572,7 +1572,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "${p.name.upper()}"
+"${p.name.upper()}"
 }
 autoSize
 endObjectProperties
@@ -1587,7 +1587,7 @@ x ${xoffset + 205}
 y ${yoffset + 75}
 w 15
 h 288
-controlPv "\$(P)${p.name.upper()}_R"
+controlPv "\$(P)${p.name.upper()}_BITS_R"
 lineColor index 14
 onColor index 55
 offColor index 47
@@ -1611,13 +1611,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 0
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 0
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 0"
+"bit 0"
 #end if
 }
 autoSize
@@ -1642,13 +1642,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 1
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 1
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 1"
+"bit 1"
 #end if
 }
 autoSize
@@ -1669,7 +1669,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  " 0"
+" 0"
 }
 autoSize
 endObjectProperties
@@ -1689,7 +1689,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "15"
+"15"
 }
 autoSize
 endObjectProperties
@@ -1712,13 +1712,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 2
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 2
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 2"
+"bit 2"
 #end if
 }
 autoSize
@@ -1742,13 +1742,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 3
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 3
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 3"
+"bit 3"
 #end if
 }
 autoSize
@@ -1772,13 +1772,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 4
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 4
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 4"
+"bit 4"
 #end if
 }
 autoSize
@@ -1802,13 +1802,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 5
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 5
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 5"
+"bit 5"
 #end if
 }
 autoSize
@@ -1832,13 +1832,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 6
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 6
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 6"
+"bit 6"
 #end if
 }
 autoSize
@@ -1861,13 +1861,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 7
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 7
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 7"
+"bit 7"
 #end if
 }
 autoSize
@@ -1888,7 +1888,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  " 7 "
+" 7 "
 }
 autoSize
 endObjectProperties
@@ -1908,7 +1908,7 @@ fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  " 8"
+" 8"
 }
 autoSize
 endObjectProperties
@@ -1931,13 +1931,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 8
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 8
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 8"
+"bit 8"
 #end if
 }
 autoSize
@@ -1961,13 +1961,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 9
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 9
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 9"
+"bit 9"
 #end if
 }
 autoSize
@@ -1991,13 +1991,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 10
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 10
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 10"
+"bit 10"
 #end if
 }
 autoSize
@@ -2021,13 +2021,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 11
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 11
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 11"
+"bit 11"
 #end if
 }
 autoSize
@@ -2051,13 +2051,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 12
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 12
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 12"
+"bit 12"
 #end if
 }
 autoSize
@@ -2081,13 +2081,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 13
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 13
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 13"
+"bit 13"
 #end if
 }
 autoSize
@@ -2111,13 +2111,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 14
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 14
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 14"
+"bit 14"
 #end if
 }
 autoSize
@@ -2141,13 +2141,13 @@ value {
 #set $bitsDict = $p.bits
 #set $bitFound = 0
 #for $thisBit in $bitsDict
-  #if  $bitsDict[thisBit] == 15
-    "$thisBit"
-    #set $bitFound = 1
-  #end if
+#if  $bitsDict[thisBit] == 15
+	"$thisBit"
+	#set $bitFound = 1
+#end if
 #end for
 #if $bitFound == 0
-  "bit 15"
+"bit 15"
 #end if
 }
 autoSize
@@ -2171,11 +2171,11 @@ endGroup
 
 endObjectProperties
 
-  #end if  
-  #set $xoffset = $xoffset + 236
- #end if
- #if $xoffset > 995
-  #set $xoffset = 0
-  #set $yoffset = $yoffset + 355
- #end if 
+#end if
+#set $xoffset = $xoffset + 236
+#end if
+#if $xoffset > 995
+#set $xoffset = 0
+#set $yoffset = $yoffset + 355
+#end if
 #end for

@@ -294,7 +294,28 @@ info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL"
 #if $p.has_key('bits')
 	## Check that: if access is specified it's 'read', and that this isn't a waveform.
 	#if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelm') and $p.nelm>1))
-record(mbbiDirect, "\$(P)${p.name.upper()}_R")
+record(longin, "\$(P)${p.name.upper()}_R")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+	field( PINI, "NO")
+	field( DTYP, "asynUInt32Digital")
+	#if $p.has_key('bit_width')
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
+	field( HOPR, "0x${2**$p.bit_width - 1}")
+	#else if $p.has_key('data_width')
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
+	field( HOPR, "0x${2**$p.data_width - 1}")
+	#else
+	field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
+	#end if
+	field( SCAN, "I/O Intr")
+}
+record(mbbiDirect, "\$(P)${p.name.upper()}_BITS_R")
 {
 	#if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")
@@ -330,7 +351,31 @@ record(bi, "\$(P)GET_${p.name.upper()}_R")
 #if $p.has_key('bits')
 	## Check that: this has write access, and isn't a waveofrm
 	#if $p.has_key('access') and ( 'w' in $p.access ) and not($p.has_key('nelm') and $p.nelm>1)
-record(mbboDirect, "\$(P)${p.name.upper()}_W")
+record(longout, "\$(P)${p.name.upper()}_W")
+{
+	#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+	#end if
+	#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+	#end if
+	field( PINI, "NO")
+	field( DTYP, "asynUInt32Digital")
+	#if $p.has_key('bit_width')
+	field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
+	field( HOPR, "0x${2**$p.bit_width - 1}")
+	field( DRVH, "0x${2**$p.bit_width - 1}")
+	#else if $p.has_key('data_width')
+	field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
+	field( HOPR, "0x${2**$p.data_width - 1}")
+	field( DRVH, "0x${2**$p.data_width - 1}")
+	#else
+	field( OUT,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_W")
+	#end if
+	field( SCAN, "Passive")
+	info( autosaveFields, "DESC")
+}
+record(mbboDirect, "\$(P)${p.name.upper()}_BITS_W")
 {
 	#if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")

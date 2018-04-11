@@ -13,6 +13,28 @@ record(waveform, "$(P)ITWF") {
 	field(EGU, "$(EGU)")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
+	field(FLNK, "$(P)IWF_NUSE")
+}
+
+# The number of points per waveform will be the same for all
+# waveform types (I, Q, Amp., Phase) so set calc nuse fields
+# from all at once. Amp and Ph might not exist if both I and Q
+# aren't enabled, but not vice versa.
+record(dfanout, "$(P)IWF_NUSE") {
+	field(OUTA, "$(P)AWF_SMOO.NUSE")
+	field(OUTB, "$(P)AMEAN.NUSE")
+	field(OUTC, "$(P)ASTD.NUSE")
+	field(OUTD, "$(P)ARSTD.NUSE")
+	field(OUTE, "$(P)ITMEAN.NUSE")
+	field(DOL, "$(P)ITWF.NORD")
+	field(OMSL, "closed_loop")
+}
+
+record(acalcout, "$(P)ITMEAN") {
+	field(INAA, "$(P)ITWF CPP")
+	field(CALC, "AVG(AA)")
+	field(NELM, "8192")
+	field(PREC, "7")
 }
 
 record(waveform, "$(P)QTWF") {
@@ -24,6 +46,24 @@ record(waveform, "$(P)QTWF") {
 	field(EGU, "$(EGU)")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
+	field(FLNK, "$(P)QWF_NUSE")
+}
+
+record(dfanout, "$(P)QWF_NUSE") {
+	field(OUTA, "$(P)PWF_SMOO.NUSE")
+	field(OUTB, "$(P)PMEAN.NUSE")
+	field(OUTC, "$(P)PSTD.NUSE")
+	field(OUTD, "$(P)PRSTD.NUSE")
+	field(OUTE, "$(P)QTMEAN.NUSE")
+	field(DOL, "$(P)QTWF.NORD")
+	field(OMSL, "closed_loop")
+}
+
+record(acalcout, "$(P)QTMEAN") {
+	field(INAA, "$(P)QTWF CPP")
+	field(CALC, "AVG(AA)")
+	field(NELM, "8192")
+	field(PREC, "7")
 }
 
 record(waveform, "$(P)AWF") {
@@ -35,25 +75,15 @@ record(waveform, "$(P)AWF") {
 	field(EGU, "$(EGU)")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
-	field(FLNK, "$(P)AWF_NUSE")
 }
 
 record(ao, "$(P)SCALE") {
 	field(DESC, "Scale factor for waveform $(CH)")
 	field(DTYP, "asynFloat64")
 	field(OUT, "@asyn($(PORT),$(CH),1)TRACE_DATA_SCALE")
-	field(VAL, 1)
+	field(VAL, "1")
 	field(OMSL, "closed_loop")
 	field(DOL, "$(P)SCALE_CALC")
-}
-
-record(dfanout, "$(P)AWF_NUSE") {
-	field(OUTA, "$(P)AWF_SMOO.NUSE")
-	field(OUTB, "$(P)AMEAN.NUSE")
-	field(OUTC, "$(P)ASTD.NUSE")
-	field(OUTD, "$(P)ARSTD.NUSE")
-	field(DOL, "$(P)AWF.NORD")
-	field(OMSL, "closed_loop")
 }
 
 record(acalcout, "$(P)AWF_SMOO") {
@@ -99,9 +129,20 @@ record(waveform, "$(P)PWF") {
 	field(FLNK, "$(P)PWF_NUSE")
 }
 
+record(ao, "$(P)GOLD") {
+	field(DESC, "Phase offset for waveform $(CH)")
+	field(DTYP, "asynFloat64")
+	field(OUT, "@asyn($(PORT),$(CH),1)TRACE_DATA_GOLD")
+	field(VAL, "0")
+	field(EGU, "degrees")
+	info( autosaveFields, "VAL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+}
+
 record(dfanout, "$(P)PWF_NUSE") {
 	field(OUTA, "$(P)PWF_SMOO.NUSE")
 	field(OUTB, "$(P)PMEAN.NUSE")
+	field(OUTC, "$(P)PSTD.NUSE")
+	field(OUTD, "$(P)PRSTD.NUSE")
 	field(DOL, "$(P)PWF.NORD")
 	field(OMSL, "closed_loop")
 }
@@ -137,28 +178,29 @@ record(acalcout, "$(P)PRSTD") {
 	field(PREC, "7")
 }
 
-record(ai, "$(P)AMAX")
-{
-	field( PINI, "NO")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) ADC$(CH+1)_MAX_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "65535")
-	field( LOPR, "-65535")
-	field(PREC, 3)
-	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+record(ai, "$(P)TD_DECAY_BW") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_BW")
+	field(SCAN, "I/O Intr")
 }
-
-record(ai, "$(P)AMIN")
-{
-	field( PINI, "NO")
-	field( DTYP, "asynInt32")
-	field( INP,  "@asyn($(PORT),0) ADC$(CH+1)_MIN_R")
-	field( SCAN, "I/O Intr")
-	field( HOPR, "65535")
-	field( LOPR, "-65535")
-	field(PREC, 3)
-	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+record(ai, "$(P)TD_DECAY_CONSTANT_B") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_CONSTANT_B")
+	field(SCAN, "I/O Intr")
+}
+record(ai, "$(P)TD_DECAY_STRENGTH") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_STRENGTH")
+	field(SCAN, "I/O Intr")
+}
+record(ai, "$(P)TD_DECAY_FIT_STDDEV") {
+	field(PINI, "NO")
+	field(DTYP, "asynFloat64")
+	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_FIT_STDDEV")
+	field(SCAN, "I/O Intr")
 }
 
 #! Further lines contain data used by VisualDCT

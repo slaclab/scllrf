@@ -130,13 +130,15 @@ if __name__ == "__main__":
 	# if the input is a json file
 	if args.input_j is not None:
 		regmap_dict = {'name': args.core, 'registers': []}
-		with open(args.input_j, 'r') as f:
+		with open(args.input_j, 'r') as f, open('wavegrp.json', 'r') as w:
 			sha = hashlib.sha1()
 			fv = open(args.input_j).read()
 			sha.update(fv)
 			print(sha.hexdigest())
 			regmap_dict['sha1'] = sha.hexdigest()
 			json_regmap = json.load(f)
+			json_wavegrp = json.load(w)
+			regmap_dict['wavegrp'] = json_wavegrp
 			for k, v in json_regmap.items():
 				if type(v) is dict:
 					v['name'] = k
@@ -151,6 +153,8 @@ if __name__ == "__main__":
 					if 'reset' in k and not v.has_key('bits'):
 						v['bits'] = {}
 					if 'status' in k and not v.has_key('bits'):
+						v['bits'] = {}
+					if 'enable' in k and not v.has_key('bits'):
 						v['bits'] = {}
 					if 'llrf_circle_ready' in k:
 						v['bits'] = { "c0_ready": 0, "c1_ready": 1 }

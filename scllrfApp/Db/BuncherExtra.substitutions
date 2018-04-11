@@ -1,9 +1,21 @@
 file GUNBWaveCh.template {
 pattern { P,					 CH,	 CH+1,	 PORT,		 EGU	}
+	{ "ACCL:GUNB:455:PRC:SPARE1:",	"0",	"1",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE2:",	"1",	"2",	"PRCReg",	""	}
 	{ "ACCL:GUNB:455:PRLFWD:",	"2",	"3",	"PRCReg",	"dBm"	}
 	{ "ACCL:GUNB:455:PRLREV:",	"3",	"4",	"PRCReg",	"dBm"	}
 	{ "ACCL:GUNB:455:CAV1:",	"4",	"5",	"PRCReg",	"MV"	}
 	{ "ACCL:GUNB:455:CAV2:",	"5",	"6",	"PRCReg",	"MV"	}
+	{ "ACCL:GUNB:455:PRC:SPARE3:",	"6",	"7",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE4:",	"7",	"8",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE5:",	"8",	"9",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE6:",	"9",	"10",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE7:",	"10",	"11",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE8:",	"11",	"12",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE9:",	"12",	"13",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE10:",	"13",	"14",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE11:",	"14",	"15",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE12:",	"15",	"16",	"PRCReg",	""	}
 
 	{ "ACCL:GUNB:455:DRV1:",	"0",	"1",	"RFS1Reg",	"sqrt(W)"	}
 	{ "ACCL:GUNB:455:FWD1:",	"1",	"2",	"RFS1Reg",	"sqrt(W)"	}
@@ -11,6 +23,16 @@ pattern { P,					 CH,	 CH+1,	 PORT,		 EGU	}
 	{ "ACCL:GUNB:455:DRV2:",	"3",	"4",	"RFS1Reg",	"sqrt(W)"	}
 	{ "ACCL:GUNB:455:FWD2:",	"4",	"5",	"RFS1Reg",	"sqrt(W)"	}
 	{ "ACCL:GUNB:455:REV2:",	"5",	"6",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE1:",	"6",	"7",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:DAC:",	"7",	"8",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE2:",	"8",	"9",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE3:",	"9",	"10",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE4:",	"10",	"11",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE5:",	"11",	"12",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE6:",	"12",	"13",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE7:",	"13",	"14",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE8:",	"14",	"15",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE9:",	"15",	"16",	"RFS1Reg",	"sqrt(W)"	}
 
 	{ "ACCL:GUNB:455:DRV3:",	"0",	"1",	"RFS2Reg",	"sqrt(W)"	}
 	{ "ACCL:GUNB:455:FWD3:",	"1",	"2",	"RFS2Reg",	"sqrt(W)"	}
@@ -18,13 +40,84 @@ pattern { P,					 CH,	 CH+1,	 PORT,		 EGU	}
 	{ "ACCL:GUNB:455:DRV4:",	"3",	"4",	"RFS2Reg",	"sqrt(W)"	}
 	{ "ACCL:GUNB:455:FWD4:",	"4",	"5",	"RFS2Reg",	"sqrt(W)"	}
 	{ "ACCL:GUNB:455:REV4:",	"5",	"6",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE1:",	"6",	"7",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:DAC:",	"7",	"8",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE2:",	"8",	"9",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE3:",	"9",	"10",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE4:",	"10",	"11",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE5:",	"11",	"12",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE6:",	"12",	"13",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE7:",	"13",	"14",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE8:",	"14",	"15",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE9:",	"15",	"16",	"RFS2Reg",	"sqrt(W)"	}
 }
 
 file GUNBWavePerChassis.template
 {
-	{ P = "ACCL:GUNB:455:PRC:", PORT = "PRCReg" }
-	{ P = "ACCL:GUNB:455:RFS1:", PORT = "RFS1Reg" }
-	{ P = "ACCL:GUNB:455:RFS2:", PORT = "RFS2Reg" }
+	{ P = "ACCL:GUNB:455:", 	KEEP = "0xF00",	PORT = "PRCReg" }
+	{ P = "ACCL:GUNB:455:RFS1:",	KEEP = "0xFFF",	PORT = "RFS1Reg" }
+	{ P = "ACCL:GUNB:455:RFS2:",	KEEP = "0xFFF",	PORT = "RFS2Reg" }
+}
+
+file GUNBDecayCh.template {
+pattern { P,					 CH,	 CH+1,	 PORT,		 EGU	}
+	{ "ACCL:GUNB:455:PRC:SPARE1:",	"0",	"1",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE2:",	"1",	"2",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRLFWD:",	"2",	"3",	"PRCReg",	"dBm"	}
+	{ "ACCL:GUNB:455:PRLREV:",	"3",	"4",	"PRCReg",	"dBm"	}
+	{ "ACCL:GUNB:455:CAV1:",	"4",	"5",	"PRCReg",	"MV"	}
+	{ "ACCL:GUNB:455:CAV2:",	"5",	"6",	"PRCReg",	"MV"	}
+	{ "ACCL:GUNB:455:PRC:SPARE3:",	"6",	"7",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE4:",	"7",	"8",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE5:",	"8",	"9",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE6:",	"9",	"10",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE7:",	"10",	"11",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE8:",	"11",	"12",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE9:",	"12",	"13",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE10:",	"13",	"14",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE11:",	"14",	"15",	"PRCReg",	""	}
+	{ "ACCL:GUNB:455:PRC:SPARE12:",	"15",	"16",	"PRCReg",	""	}
+
+	{ "ACCL:GUNB:455:DRV1:",	"0",	"1",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD1:",	"1",	"2",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV1:",	"2",	"3",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:DRV2:",	"3",	"4",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD2:",	"4",	"5",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV2:",	"5",	"6",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE1:",	"6",	"7",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:DAC:",	"7",	"8",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE2:",	"8",	"9",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE3:",	"9",	"10",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE4:",	"10",	"11",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE5:",	"11",	"12",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE6:",	"12",	"13",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE7:",	"13",	"14",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE8:",	"14",	"15",	"RFS1Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS1:SPARE9:",	"15",	"16",	"RFS1Reg",	"sqrt(W)"	}
+
+	{ "ACCL:GUNB:455:DRV3:",	"0",	"1",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD3:",	"1",	"2",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV3:",	"2",	"3",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:DRV4:",	"3",	"4",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:FWD4:",	"4",	"5",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:REV4:",	"5",	"6",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE1:",	"6",	"7",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:DAC:",	"7",	"8",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE2:",	"8",	"9",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE3:",	"9",	"10",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE4:",	"10",	"11",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE5:",	"11",	"12",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE6:",	"12",	"13",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE7:",	"13",	"14",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE8:",	"14",	"15",	"RFS2Reg",	"sqrt(W)"	}
+	{ "ACCL:GUNB:455:RFS2:SPARE9:",	"15",	"16",	"RFS2Reg",	"sqrt(W)"	}
+}
+
+file GUNBDecayPerChassis.template
+{
+	{ P = "ACCL:GUNB:455:", 	KEEP = "0x300",	PORT = "PRCReg" }
+	{ P = "ACCL:GUNB:455:RFS1:",	KEEP = "0xFFF",	PORT = "RFS1Reg" }
+	{ P = "ACCL:GUNB:455:RFS2:",	KEEP = "0xFFF",	PORT = "RFS2Reg" }
 }
 
 file rfSigCalibCav.template {
@@ -34,54 +127,90 @@ pattern { PREF }
 }
 file rfSigCalib.template {
 pattern { PREF,				 NORM,						CAVSCL }
-	{ "ACCL:GUNB:455:CAV1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR",	"$(PREF)CAL_SCALE_CAV" }
-	{ "ACCL:GUNB:455:CAV2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR",	"$(PREF)CAL_SCALE_CAV" }
+	{ "ACCL:GUNB:455:CAV1:",	"32767",	"$(PREF)CAL_SCALE_CAV" }
+	{ "ACCL:GUNB:455:CAV2:",	"32767",	"$(PREF)CAL_SCALE_CAV" }
 }
 file rfSigCalib.template {
 pattern { PREF,				 NORM }
-	{ "ACCL:GUNB:455:PRLFWD:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:PRLREV:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:PRLFWD:",	"32767" }
+	{ "ACCL:GUNB:455:PRLREV:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE1:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE2:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE3:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE4:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE5:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE6:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE7:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE8:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE9:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE10:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE11:",	"32767" }
+	{ "ACCL:GUNB:455:PRC:SPARE12:",	"32767" }
 
-	{ "ACCL:GUNB:455:DRV1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:FWD1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:REV1:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:DRV2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:FWD2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:REV2:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:DRV1:",	"32767" }
+	{ "ACCL:GUNB:455:FWD1:",	"32767" }
+	{ "ACCL:GUNB:455:REV1:",	"32767" }
+	{ "ACCL:GUNB:455:DRV2:",	"32767" }
+	{ "ACCL:GUNB:455:FWD2:",	"32767" }
+	{ "ACCL:GUNB:455:REV2:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE1:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:DAC:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE2:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE3:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE4:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE5:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE6:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE7:",	"32767" }
+	{ "ACCL:GUNB:455:RFS1:SPARE8:",	"32767" }
 
-	{ "ACCL:GUNB:455:DRV3:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:FWD3:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:REV3:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:DRV4:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:FWD4:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
-	{ "ACCL:GUNB:455:REV4:",	"ACCL:GUNB:455:PRC:TRACE_DATA_R.HOPR" }
+	{ "ACCL:GUNB:455:DRV3:",	"32767" }
+	{ "ACCL:GUNB:455:FWD3:",	"32767" }
+	{ "ACCL:GUNB:455:REV3:",	"32767" }
+	{ "ACCL:GUNB:455:DRV4:",	"32767" }
+	{ "ACCL:GUNB:455:FWD4:",	"32767" }
+	{ "ACCL:GUNB:455:REV4:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE1:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:DAC:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE2:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE3:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE4:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE5:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE6:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE7:",	"32767" }
+	{ "ACCL:GUNB:455:RFS2:SPARE8:",	"32767" }
 }
 
-#file apexCalcs.db
-#{
-#	{ NULL = NULL }
-#}
+file GUNBLoopCalcs.db
+{
+	{ P = "ACCL:GUNB:455:", N=2 }
+}
 
 
 file GUNBMisc.template
 {
 pattern{ P,						PORT,	 SCALEPV }
-	{ "ACCL:GUNB:455:PRC:",		PRCReg,	"ACCL:GUNB:455:CAV1:SCALE" }
+	{ "ACCL:GUNB:455:",		PRCReg,	"ACCL:GUNB:455:CAV1:SCALE" }
 	{ "ACCL:GUNB:455:RFS1:",	RFS1Reg,"ACCL:GUNB:455:FWD1:SCALE" }
 	{ "ACCL:GUNB:455:RFS2:",	RFS2Reg,"ACCL:GUNB:455:FWD2:SCALE" }
 }
 
 file PVramp.template
 {
-	{ P = "ACCL:GUNB:455:", PV0 = ADES, PV1 = PDES, PV3 = REP_PERIOD, PV4 = REP_FREQUENCY, PV5 = DUTY_CYCLE, PV2 = PULSE_LENGTH, PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
+	{ P = "ACCL:GUNB:455:", PV0 = AOPEN, PV1 = POPEN, PV3 =, PV4 =, PV5 =, PV2 = , PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
 }
 
 
 file GUNBRegisterAlias.template
 {
-	{ P = "ACCL:GUNB:455:PRC:", N=1 }
+	{ P = "ACCL:GUNB:455:", N=2 }
 }
+
 file GUNB3ChassisAlias.template
 {
-	{ P = "ACCL:GUNB:455:", N=1 }
+	{ P = "ACCL:GUNB:455:", N=2 }
+}
+
+file Buncher3Chassis.template
+{
+	{ P = "ACCL:GUNB:455:", N=2 }
 }

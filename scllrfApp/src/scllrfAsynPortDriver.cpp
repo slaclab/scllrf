@@ -82,6 +82,60 @@ const char *scllrfAsynPortDriver::ToolRevRString = "TOOL_REV_R";
 const char *scllrfAsynPortDriver::UserRString = "USER_R";
 const char *scllrfAsynPortDriver::VersionRString = "VERSION_R";
 
+DataBuffer::DataBuffer(unsigned int RegCount, unsigned int iStartAddr):
+	RegCount(RegCount), ReqSegmentCount( (RegCount + maxRegPerMsg -1)/maxRegPerMsg),
+		ReqMsgSize(RegCount + ReqSegmentCount), iStartAddr(iStartAddr)
+{
+	cout << "Making a DataBuffer with " << RegCount << " points at " << iStartAddr << endl;
+	reqData.reserve(ReqMsgSize);
+	fillWaveRequestMsg();
+}
+
+DataBuffer::~DataBuffer()
+{ //Nothing to do here
+
+}
+
+void DataBuffer::publish(asynPortDriver *driver, int *paramIndex)
+{ //Nothing to do here
+	cout << "DataBuffer::publish not defined by a subclass" << endl;
+	assert(0);
+}
+
+void DataBuffer8::publish(asynPortDriver *driver, int *paramIndex)
+{
+	driver->doCallbacksInt8Array(data.data(), RegCount, *paramIndex, 0);
+}
+
+void DataBuffer16::publish(asynPortDriver *driver, int *paramIndex)
+{
+	driver->doCallbacksInt16Array(data.data(), RegCount, *paramIndex, 0);
+}
+
+void DataBuffer32::publish(asynPortDriver *driver, int *paramIndex)
+{
+	driver->doCallbacksInt32Array(data.data(), RegCount, *paramIndex, 0);
+}
+
+void DataBuffer::fillWaveRequestMsg() /**< For requesting a waveform, fill canned message request with sequential addresses */
+{
+	unsigned int regAddr, msgOffset;
+	size_t buffSize = ReqMsgSize;
+cout << "Creating request message for 0x" << hex << iStartAddr << " with " << dec << buffSize << " points." << endl;
+	for(msgOffset=0, regAddr= iStartAddr; msgOffset < buffSize; regAddr++, msgOffset++)
+	{
+		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
+		{
+			reqData[msgOffset] = {0,blankData};
+			msgOffset++;
+		}
+
+		reqData[msgOffset].addr = regAddr | flagReadMask;
+		reqData[msgOffset].data = blankData;
+	}
+	cout << "Last point at 0x" << hex << msgOffset << ": 0x" << reqData[msgOffset-1].addr << ", 0x" << reqData[msgOffset-1].data << endl;
+	htonFpgaRegArray(reqData.data(), buffSize);
+}
 
 /** Constructor for the scllrfAsynPortDriver class.
  * Calls constructor for the asynPortDriver base class.
@@ -235,32 +289,6 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
 	// base class has no registers defined
 	return asynError;
 }
-
-/** For requesting a waveform, fill canned message request with sequential addresses
-  * \param[in/out] pMsgBuff An array of the right size to contain a request
-  * message for the waveform. The canned message includes the nonce per packet,
-  * so for an n element array, size should be N + N/maxRegPerMsg + 1.
-  * \param[in] buffSize The array length, N + N/maxRegPerMsg + 1 for an N register array
-  * \param[in] iStartAddr Address of the start of the array.
- */
-void scllrfAsynPortDriver::fillWaveRequestMsg(FpgaReg pMsgBuff[], const size_t buffSize, const unsigned int iStartAddr)
-{
-	unsigned int regAddr, msgOffset;
-
-	for(msgOffset=0, regAddr= iStartAddr; msgOffset < buffSize; regAddr++, msgOffset++)
-	{
-		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
-		{
-			pMsgBuff[msgOffset] = {0,blankData};
-			msgOffset++;
-		}
-
-		pMsgBuff[msgOffset].addr = regAddr | flagReadMask;
-		pMsgBuff[msgOffset].data = blankData;
-	}
-	htonFpgaRegArray(pMsgBuff, buffSize);
-}
-
 
 static void singleMessageQueuerC(void *drvPvt)
 {
@@ -459,7 +487,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 			__PRETTY_FUNCTION__, function, paramName, chan, value);
 
 	if (function == p_RunStop) {
-printf("%s %s setting RunStop to %s\n", portName, __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
+		printf("%s %s setting RunStop to %s\n", portName, __PRETTY_FUNCTION__, (value==run)?"RUN":"STOP");
 		if (value == run)
 			pollEvent_.signal(); // wake up the polling thread
 	}

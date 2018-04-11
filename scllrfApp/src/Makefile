@@ -43,6 +43,8 @@ scllrf_DBD += asyn.dbd
 scllrf_DBD += scllrfAsynPortDriver.dbd
 scllrf_DBD += calcSupport.dbd
 scllrf_DBD += ether_ip.dbd
+scllrf_DBD += PVAServerRegister.dbd
+scllrf_DBD += qsrv.dbd
 
 # ======================================================================
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
@@ -59,8 +61,8 @@ scllrf_SRCS_vxWorks += -nil-
 # ========================================================================
  scllrf_SRCS += scllrfAsynPortDriver.cpp
  scllrf_SRCS += scllrfINT.cpp
- scllrf_SRCS += scllrfPRC.cpp
- scllrf_SRCS += scllrfPRCextra.cpp
+# scllrf_SRCS += scllrfPRC.cpp
+# scllrf_SRCS += scllrfPRCextra.cpp
  scllrf_SRCS += scllrfRES.cpp
  scllrf_SRCS += scllrfRESextra.cpp
  scllrf_SRCS += GUNB.cpp
@@ -74,8 +76,7 @@ scllrf_SRCS_vxWorks += -nil-
  #scllrf_SRCS += INTdegkToVolt.st
  scllrf_SRCS += RES_HiHwLink.st
  scllrf_SRCS += BMB7Sup.c
-# scllrf_SRCS += cavity_fit.cc
-#USR_CXXFLAGS += -std=c++0x
+USR_CXXFLAGS += -std=c++0x
 USR_CXXFLAGS += -g -I$(TOP)/newmat10
 # =====================================================
 # Link in the code from other libraries
@@ -103,6 +104,10 @@ scllrf_LIBS += calc
 scllrf_LIBS += sscan
 scllrf_LIBS += ether_ip
 scllrf_LIBS += newmat
+scllrf_LIBS += qsrv
+# EPICS_BASE_PVA_CORE_LIBS comes from pvAccessCPP and is defined at <>/cfg/CONFIG_PVACCESS_MODULE
+scllrf_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
+scllrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 newmat_DIR = $(TOP)/newmat10/
 
 # =====================================================
