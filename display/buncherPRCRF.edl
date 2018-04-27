@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 2361
-y 121
+x 2015
+y 187
 w 1138
-h 831
+h 901
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -29,10 +29,10 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 410
-y 720
+x 400
+y 790
 w 120
-h 40
+h 30
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
@@ -52,10 +52,10 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 540
-y 720
-w 130
-h 40
+x 530
+y 790
+w 140
+h 30
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
@@ -76,7 +76,7 @@ major 4
 minor 1
 release 0
 x 690
-y 40
+y 110
 w 440
 h 780
 fgColor index 12
@@ -88,9 +88,9 @@ filePv "LOC\\$(!W)showIt=e:0,Waveforms,Sliders,State,Limits"
 sizeOfs 5
 numDsps 4
 displayFileName {
-  0 "gunRFwave.edl"
+  0 "buncherPRCRFWaveCtl.edl"
   1 "gunRFslider.edl"
-  2 "gunRFstate.edl"
+  2 "rf_gunb_loop_details.edl"
   3 "gunRFlimits.edl"
 }
 noScroll
@@ -103,7 +103,7 @@ major 4
 minor 0
 release 0
 x 690
-y 10
+y 80
 w 440
 h 30
 fgColor index 13
@@ -117,42 +117,16 @@ font "helvetica-medium-r-18.0"
 orientation "horizontal"
 endObjectProperties
 
-# (Button)
-object activeButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 10
-y 720
-w 110
-h 40
-fgColor index 14
-onColor index 15
-offColor index 35
-inconsistentColor index 14
-topShadowColor index 2
-botShadowColor index 12
-controlPv "$(P)WF_POLL_ENABLE"
-onLabel "Enabled"
-offLabel "Disabled"
-3d
-invisible
-font "helvetica-medium-r-18.0"
-objType "controls"
-controlBitPos 1
-endObjectProperties
-
 # (Related Display)
 object relatedDisplayClass
 beginObjectProperties
 major 4
 minor 4
 release 0
-x 290
-y 720
-w 110
-h 40
+x 270
+y 790
+w 120
+h 30
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
@@ -188,7 +162,7 @@ major 4
 minor 0
 release 0
 x 10
-y 10
+y 80
 w 660
 h 30
 fgColor index 13
@@ -198,35 +172,8 @@ inconsistentColor index 8
 topShadowColor index 4
 botShadowColor index 4
 controlPv "LOC\\$(!W)showGrph"
-font "helvetica-medium-r-18.0"
+font "helvetica-bold-r-14.0"
 orientation "horizontal"
-endObjectProperties
-
-# (Embedded Window)
-object activePipClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 10
-y 50
-w 660
-h 660
-fgColor index 12
-bgColor index 2
-topShadowColor index 1
-botShadowColor index 12
-displaySource "menu"
-filePv "LOC\\$(!W)showGrph=e:0,Amplitude and Phase,I and Q vs. t,I vs. Q"
-center
-sizeOfs 5
-numDsps 3
-displayFileName {
-  0 "gunAPgraph.edl"
-  1 "gunIQvstgraph.edl"
-  2 "gunIvsQgraph.edl"
-}
-noScroll
 endObjectProperties
 
 # (Text Monitor)
@@ -236,10 +183,11 @@ major 4
 minor 7
 release 0
 x 20
-y 800
+y 870
 w 140
-h 20
-controlPv "$(P)DECAY_CONSTANT_B"
+h 16
+controlPv "$(P)CAV1:DECAY_CONSTANT_B"
+format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 25
 bgColor index 0
@@ -259,7 +207,7 @@ major 4
 minor 1
 release 1
 x 20
-y 770
+y 840
 w 132
 h 21
 font "helvetica-medium-r-18.0"
@@ -279,7 +227,7 @@ major 4
 minor 1
 release 1
 x 180
-y 770
+y 840
 w 129
 h 21
 font "helvetica-medium-r-18.0"
@@ -299,10 +247,11 @@ major 4
 minor 7
 release 0
 x 180
-y 800
+y 870
 w 140
 h 16
-controlPv "$(P)DECAY_STRENGTH"
+controlPv "$(P)CAV1:DECAY_STRENGTH"
+format "gfloat"
 font "helvetica-medium-r-14.0"
 fgColor index 25
 bgColor index 0
@@ -322,7 +271,7 @@ major 4
 minor 1
 release 1
 x 360
-y 770
+y 840
 w 146
 h 21
 font "helvetica-medium-r-18.0"
@@ -342,10 +291,11 @@ major 4
 minor 7
 release 0
 x 360
-y 800
+y 870
 w 140
 h 16
-controlPv "$(P)DECAY_FIT_STDDEV"
+controlPv "$(P)CAV1:DECAY_FIT_STDDEV"
+format "gfloat"
 font "helvetica-medium-r-14.0"
 fgColor index 25
 bgColor index 0
@@ -358,25 +308,79 @@ newPos
 objType "monitors"
 endObjectProperties
 
-# (Shell Command)
-object shellCmdClass
+# (Related Display)
+object relatedDisplayClass
 beginObjectProperties
 major 4
-minor 3
+minor 4
 release 0
-x 150
-y 720
+x 130
+y 790
 w 130
-h 40
+h 30
 fgColor index 14
-bgColor index 0
-topShadowColor index 0
-botShadowColor index 14
-font "helvetica-medium-r-18.0"
-buttonLabel "Start IOC"
-numCmds 1
-command {
-  0 "iocConsole -d sioc-b15-gun1"
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-14.0"
+buttonLabel "Ramp Settings"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "PVramp.edl"
+}
+menuLabel {
+  0 "Ramp Settings"
+}
+symbols {
+  0 "P=GUN1:B15:"
+}
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 120
+w 660
+h 660
+fgColor index 12
+bgColor index 2
+topShadowColor index 1
+botShadowColor index 12
+displaySource "menu"
+filePv "LOC\\$(!W)showGrph=e:0,Amplitude/Phase,Smoothed Amp/Phase,I/Q vs. t,I vs. Q"
+center
+sizeOfs 5
+numDsps 4
+displayFileName {
+  0 "buncherPRCAPgraph.edl"
+  1 "buncherPRCAPsmoothedGraph.edl"
+  2 "buncherPRCIQvstgraph.edl"
+  3 "buncherPRCIvsQgraph.edl"
+}
+noScroll
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 0
+w 1140
+h 40
+font "helvetica-bold-r-24.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 51
+value {
+  "Chassis $(P)PRC"
 }
 endObjectProperties
 

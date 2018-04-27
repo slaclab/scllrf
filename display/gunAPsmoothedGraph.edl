@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1193
-y 127
-w 651
-h 646
+x 2162
+y 50
+w 665
+h 661
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -30,64 +30,69 @@ major 4
 minor 8
 release 0
 # Geometry
-x 0
-y 0
+x 10
+y 10
 w 640
 h 320
 # Appearance
 border
-graphTitle "I Waveforms"
+autoScaleBothDirections
+graphTitle "Amplitude Waveforms"
 xLabel "Time (s)"
-yLabel "I"
+yLabel "A"
 fgColor index 14
 bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-traceCtlPv "$(P)WF_CHAN_DISABLE"
-resetPv "$(P)WF_UPDATE_PLOT"
+nPts 0
+updateTimerMs 20
+traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
+resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
 xMax 1
+xShowLabelGrid
 # Y axis properties
 showYAxis
 yAxisSrc "AutoScale"
 yMax 1
+yShowLabelGrid
 # Y2 axis properties
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+  0 "$(P)TRACE_DATA_X_AXIS"
+  1 "$(P)TRACE_DATA_X_AXIS"
+  2 "$(P)TRACE_DATA_X_AXIS"
+  3 "$(P)TRACE_DATA_X_AXIS"
+  4 "$(P)TRACE_DATA_X_AXIS"
+  5 "$(P)TRACE_DATA_X_AXIS"
+  6 "$(P)TRACE_DATA_X_AXIS"
+  7 "$(P)TRACE_DATA_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_I_0"
-  1 "$(P)WF_I_1"
-  2 "$(P)WF_I_2"
-  3 "$(P)WF_I_3"
-  4 "$(P)WF_I_4"
-  5 "$(P)WF_I_5"
-  6 "$(P)WF_I_6"
-  7 "$(P)WF_I_7"
+  0 "$(P)TRACE_DATA_A_0_SMOO"
+  1 "$(P)TRACE_DATA_A_1_SMOO"
+  2 "$(P)TRACE_DATA_A_2_SMOO"
+  3 "$(P)TRACE_DATA_A_3_SMOO"
+  4 "$(P)TRACE_DATA_A_4_SMOO"
+  5 "$(P)TRACE_DATA_A_5_SMOO"
+  6 "$(P)TRACE_DATA_A_6_SMOO"
+  7 "$(P)TRACE_DATA_A_7_SMOO"
 }
 nPv {
-  0 "$(P)WF_I_0.NORD"
-  1 "$(P)WF_I_1.NORD"
-  2 "$(P)WF_I_2.NORD"
-  3 "$(P)WF_I_3.NORD"
-  4 "$(P)WF_I_4.NORD"
-  5 "$(P)WF_I_5.NORD"
-  6 "$(P)WF_I_6.NORD"
-  7 "$(P)WF_I_7.NORD"
+  0 "$(P)TRACE_DATA_A_0_SMOO.NORD"
+  1 "$(P)TRACE_DATA_A_1_SMOO.NORD"
+  2 "$(P)TRACE_DATA_A_2_SMOO.NORD"
+  3 "$(P)TRACE_DATA_A_3_SMOO.NORD"
+  4 "$(P)TRACE_DATA_A_4_SMOO.NORD"
+  5 "$(P)TRACE_DATA_A_5_SMOO.NORD"
+  6 "$(P)TRACE_DATA_A_6_SMOO.NORD"
+  7 "$(P)TRACE_DATA_A_7_SMOO.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -138,64 +143,68 @@ major 4
 minor 8
 release 0
 # Geometry
-x 0
-y 320
+x 10
+y 330
 w 640
 h 320
 # Appearance
 border
-graphTitle "Q Waveforms"
+autoScaleBothDirections
+graphTitle "Phase Waveforms"
 xLabel "Time (s)"
-yLabel "Q"
+yLabel "Phase"
 fgColor index 14
 bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-traceCtlPv "$(P)WF_CHAN_DISABLE"
-resetPv "$(P)WF_UPDATE_PLOT"
+traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
+resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
 xMax 1
+xShowLabelGrid
 # Y axis properties
 showYAxis
-yAxisSrc "AutoScale"
-yMax 1
+yAxisSrc "fromUser"
+yMin -3.2
+yMax 3.2
+yShowLabelGrid
 # Y2 axis properties
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+  0 "$(P)TRACE_DATA_X_AXIS"
+  1 "$(P)TRACE_DATA_X_AXIS"
+  2 "$(P)TRACE_DATA_X_AXIS"
+  3 "$(P)TRACE_DATA_X_AXIS"
+  4 "$(P)TRACE_DATA_X_AXIS"
+  5 "$(P)TRACE_DATA_X_AXIS"
+  6 "$(P)TRACE_DATA_X_AXIS"
+  7 "$(P)TRACE_DATA_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_Q_0"
-  1 "$(P)WF_Q_1"
-  2 "$(P)WF_Q_2"
-  3 "$(P)WF_Q_3"
-  4 "$(P)WF_Q_4"
-  5 "$(P)WF_Q_5"
-  6 "$(P)WF_Q_6"
-  7 "$(P)WF_Q_7"
+  0 "$(P)TRACE_DATA_P_0_SMOO"
+  1 "$(P)TRACE_DATA_P_1_SMOO"
+  2 "$(P)TRACE_DATA_P_2_SMOO"
+  3 "$(P)TRACE_DATA_P_3_SMOO"
+  4 "$(P)TRACE_DATA_P_4_SMOO"
+  5 "$(P)TRACE_DATA_P_5_SMOO"
+  6 "$(P)TRACE_DATA_P_6_SMOO"
+  7 "$(P)TRACE_DATA_P_7_SMOO"
 }
 nPv {
-  0 "$(P)WF_Q_0.NORD"
-  1 "$(P)WF_Q_1.NORD"
-  2 "$(P)WF_Q_2.NORD"
-  3 "$(P)WF_Q_3.NORD"
-  4 "$(P)WF_Q_4.NORD"
-  5 "$(P)WF_Q_5.NORD"
-  6 "$(P)WF_Q_6.NORD"
-  7 "$(P)WF_Q_7.NORD"
+  0 "$(P)TRACE_DATA_P_0_SMOO.NORD"
+  1 "$(P)TRACE_DATA_P_1_SMOO.NORD"
+  2 "$(P)TRACE_DATA_P_2_SMOO.NORD"
+  3 "$(P)TRACE_DATA_P_3_SMOO.NORD"
+  4 "$(P)TRACE_DATA_P_4_SMOO.NORD"
+  5 "$(P)TRACE_DATA_P_5_SMOO.NORD"
+  6 "$(P)TRACE_DATA_P_6_SMOO.NORD"
+  7 "$(P)TRACE_DATA_P_7_SMOO.NORD"
 }
 plotUpdateMode {
   0 "xOrY"

@@ -1,0 +1,1198 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1940
+y 61
+w 793
+h 647
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 7
+textColor index 14
+ctlFgColor1 index 16
+ctlFgColor2 index 14
+ctlBgColor1 index 4
+ctlBgColor2 index 12
+topShadowColor index 1
+botShadowColor index 11
+title "LLRF for $(CM)"
+showGrid
+gridSize 8
+endScreenProperties
+
+# (PNG Image)
+object activePngClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 4
+y 60
+w 774
+h 578
+file "LLRF_Block_DiagramGun.png"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x -2
+y -1
+w 1279
+h 54
+lineColor index 68
+fill
+fillColor index 68
+lineWidth 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 800
+h 40
+lineColor index 69
+fill
+fillColor index 69
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 0
+w 352
+h 40
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 68
+useDisplayBg
+value {
+  "LCLS LLRF Station: L1-S"
+  "$(P)"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 352
+y 536528
+w 54
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  " - 1 ) ) x  "
+}
+autoSize
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 724
+y 8
+w 48
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+label "Exit"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 619
+y 8
+w 96
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Home Screen..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "lcls_main"
+}
+setPosition {
+  0 "parentWindow"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 311
+y 302
+w 81
+h 29
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 311
+y 302
+w 81
+h 29
+lineColor index 15
+lineAlarm
+fillColor index 4
+lineWidth 2
+alarmPv "SSA1:B15:IN13"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 313
+y 304
+w 77
+h 25
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "SSA"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ssaControl"
+}
+symbols {
+  0 "NAM=SSA1:B15"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 426
+y 302
+w 81
+h 29
+
+beginGroup
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 426
+y 302
+w 81
+h 29
+lineColor index 15
+lineAlarm
+fillColor index 4
+lineWidth 2
+alarmPv "SSA2:B15:IN13"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 428
+y 304
+w 77
+h 25
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "SSA"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ssaControl"
+}
+symbols {
+  0 "NAM=SSA2:B15"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 306
+y 384
+w 56
+h 24
+controlPv "RFS1:$(LOCA)CIRC_IQ_BUF_0_A_4_AVG"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 240
+y 384
+w 56
+h 24
+controlPv "RFS1:$(LOCA)CIRC_IQ_BUF_0_A_3_AVG"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 89
+y 454
+w 56
+h 24
+controlPv "RES1:$(LOCA)MOTOR4_ABS_STEPS_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 678
+y 400
+w 56
+h 24
+controlPv "RFS1:$(LOCA)CIRC_IQ_BUF_1_A_2_AVG"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 678
+y 370
+w 56
+h 24
+controlPv "RFS1:$(LOCA)CIRC_IQ_BUF_0_A_2_AVG"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 444
+y 384
+w 56
+h 24
+controlPv "RFS1:$(LOCA)CIRC_IQ_BUF_1_A_4_AVG"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 378
+y 384
+w 56
+h 24
+controlPv "RFS1:$(LOCA)CIRC_IQ_BUF_1_A_3_AVG"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 88
+y 484
+w 56
+h 24
+controlPv "RES1:$(LOCA)MOTOR3_ABS_STEPS_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 88
+y 513
+w 56
+h 24
+controlPv "RES1:$(LOCA)MOTOR2_ABS_STEPS_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 88
+y 543
+w 56
+h 24
+controlPv "RES1:$(LOCA)MOTOR1_ABS_STEPS_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 504
+y 9
+w 96
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Beckhoff..."
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "bkh70.edl"
+}
+setPosition {
+  0 "parentWindow"
+}
+symbols {
+  0 "P=B015,A=70,M=70,D=bkh70,IOC=sioc-b015-bkh70"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 567
+y 126
+w 209
+h 83
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-24.0"
+buttonLabel "PRC 1"
+numPvs 4
+numDsps 11
+displayFileName {
+  0 "PRCoverview.edl"
+  1 "PRCIandQWaveforms.edl"
+  2 "PRCIQWaveforms.edl"
+  3 "PRCIvsQcirc.edl"
+  4 "PRCIvsQcirc.edl"
+  5 "PRCIQvstcirc.edl"
+  6 "PRCIQvstcirc.edl"
+  7 "PRCAPvstcirc.edl"
+  8 "PRCAPvstcirc.edl"
+  9 "scllrfPRCRegisters.edl"
+  10 "scllrfPRCBits.edl"
+}
+menuLabel {
+  0 "PRC 1"
+  1 "16 or 22 bit I vs. time, Q vs. time"
+  2 "16 or 22 bit I vs. Q"
+  3 "Circle buffer 0 I vs. Q"
+  4 "Circle buffer 1 I vs. Q"
+  5 "Circle buffer 0 I and Q vs. time"
+  6 "Circle buffer 1 I and Q vs. time"
+  7 "Circle buffer 0 Amplitude and Phase"
+  8 "Circle buffer 1 Amplitude and Phase"
+  9 "All raw registers"
+  10 "Registers with bit fields"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=PRC1:B15:"
+  1 "P=PRC1:B15:"
+  2 "P=PRC1:B15:"
+  3 "P=PRC1:B15:, N=0"
+  4 "P=PRC1:B15:, N=1"
+  5 "P=PRC1:B15:, N=0"
+  6 "P=PRC1:B15:, N=1"
+  7 "P=PRC1:B15:, N=0"
+  8 "P=PRC1:B15:, N=1"
+  9 "P=PRC1:B15:"
+  10 "P=PRC1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 424
+y 63
+w 217
+h 46
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-24.0"
+buttonLabel "Interlock"
+numPvs 4
+numDsps 13
+displayFileName {
+  0 "INTCaptain.edl"
+  1 "scllrfPollingControl.edl"
+  2 "INTarcTest.edl"
+  3 "INTheLev.edl"
+  4 "INTtemps.edl"
+  5 "scllrfINTRegisters.edl"
+  6 "asynRecord.edl"
+  7 "asynRecord.edl"
+  8 "scllrfINTBits.edl"
+  9 "scllrfINT1_MainExp.edl"
+  10 "scllrfINT1_MainExp.edl"
+  11 "scllrfINT1_MainExp.edl"
+  12 "scllrfINT1_MainExp.edl"
+}
+menuLabel {
+  0 "Interlock"
+  1 "Polling"
+  2 "Arc Test"
+  3 "Helium Level"
+  4 "Temperatures"
+  5 "Raw registers"
+  6 "asyn IP connection"
+  7 "asyn Drv connection"
+  8 "BITS"
+  9 "Cavity 1 raw"
+  10 "Cavity 2 raw"
+  11 "Cavity 3 raw"
+  12 "Cavity 4 raw"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=INT1:B15:"
+  1 "P=INT1:B15:"
+  2 "P=INT1:B15:"
+  3 "P=INT1:B15:"
+  4 "P=INT1:B15:"
+  5 "P=INT1:B15:"
+  6 "P=INT1:B15:,R=ASYN_IP,PORT=myIP"
+  7 "P=INT1:B15:,R=ASYN_REG,PORT=myReg"
+  8 "P=INT1:B15:"
+  9 "P=INT1:B15:, CAV=1"
+  10 "P=INT1:B15:,CAV=2"
+  11 "P=INT1:B15:, CAV=3"
+  12 "P=INT1:B15:, CAV=4"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 16
+y 213
+w 216
+h 85
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-12.0"
+buttonLabel "Tuner Motion Control"
+numPvs 4
+numDsps 5
+displayFileName {
+  0 "res4cavity.edl"
+  1 "RESwaveformsFrame"
+  2 "scllrfRESRegisters"
+  3 "scllrfRESBits"
+  4 "res4waveforms.edl"
+}
+menuLabel {
+  0 "Tuner Motion Control"
+  1 "Waveforms"
+  2 "All Registers"
+  3 "All bit fields"
+  4 "Waveforms"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=RES1:B15:"
+  1 "P=RES1:B15:,N=1"
+  2 "P=RES1:B15:"
+  3 "P=RES1:B15:"
+  4 "P=RES1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 91
+y 429
+w 51
+h 21
+font "helvetica-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "Steps"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 155
+y 407
+w 64
+h 42
+font "helvetica-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "Detune"
+  "Error"
+}
+autoSize
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 151
+y 453
+w 79
+h 24
+controlPv "RES1:$(LOCA)CAVITY4_DETUNE_ERR_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 151
+y 483
+w 79
+h 24
+controlPv "RES1:$(LOCA)CAVITY3_DETUNE_ERR_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 151
+y 512
+w 79
+h 24
+controlPv "RES1:$(LOCA)CAVITY2_DETUNE_ERR_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 151
+y 542
+w 79
+h 24
+controlPv "RES1:$(LOCA)CAVITY1_DETUNE_ERR_R"
+displayMode "decimal"
+precision 1
+fgColor index 16
+fgAlarm
+bgColor index 12
+fill
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+lineWidth 2
+lineAlarm
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 253
+y 126
+w 276
+h 38
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-24.0"
+buttonLabel "RFS 1"
+numPvs 4
+numDsps 11
+displayFileName {
+  0 "PRCoverview.edl"
+  1 "PRCIandQWaveforms.edl"
+  2 "PRCIQWaveforms.edl"
+  3 "PRCIvsQcirc.edl"
+  4 "PRCIvsQcirc.edl"
+  5 "PRCIQvstcirc.edl"
+  6 "PRCIQvstcirc.edl"
+  7 "PRCAPvstcirc.edl"
+  8 "PRCAPvstcirc.edl"
+  9 "scllrfPRCRegisters.edl"
+  10 "scllrfPRCBits.edl"
+}
+menuLabel {
+  0 "RFS 1"
+  1 "16 or 22 bit I vs. time, Q vs. time"
+  2 "16 or 22 bit I vs. Q"
+  3 "Circle buffer 0 I vs. Q"
+  4 "Circle buffer 1 I vs. Q"
+  5 "Circle buffer 0 I and Q vs. time"
+  6 "Circle buffer 1 I and Q vs. time"
+  7 "Circle buffer 0 Amplitude and Phase"
+  8 "Circle buffer 1 Amplitude and Phase"
+  9 "All raw registers"
+  10 "Registers with bit fields"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=RFS1:B15:"
+  1 "P=RFS1:B15:"
+  2 "P=RFS1:B15:"
+  3 "P=RFS1:B15:, N=0"
+  4 "P=RFS1:B15:, N=1"
+  5 "P=RFS1:B15:, N=0"
+  6 "P=RFS1:B15:, N=1"
+  7 "P=RFS1:B15:, N=0"
+  8 "P=RFS1:B15:, N=1"
+  9 "P=RFS1:B15:"
+  10 "P=RFS1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 244
+y 351
+w 41
+h 28
+font "helvetica-bold-r-18.0"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "Refl"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 378
+y 351
+w 41
+h 28
+font "helvetica-bold-r-18.0"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "Refl"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 310
+y 351
+w 41
+h 28
+font "helvetica-bold-r-18.0"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "Fwd"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 450
+y 351
+w 41
+h 28
+font "helvetica-bold-r-18.0"
+fgColor index 14
+bgColor index 4
+useDisplayBg
+value {
+  "Fwd"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 467
+y 184
+w 57
+h 24
+controlPv "$(P)_ADES"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 25
+bgColor index 4
+editable
+motifWidget
+limitsFromDb
+nullColor index 18
+nullCondition "disabled"
+autoSelect
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 394
+y 184
+w 69
+h 24
+controlPv "$(P)_PDES"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 25
+bgColor index 4
+editable
+motifWidget
+limitsFromDb
+nullColor index 18
+nullCondition "disabled"
+autoSelect
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 261
+y 184
+w 69
+h 24
+controlPv "$(P)_PDES"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 25
+bgColor index 4
+editable
+motifWidget
+limitsFromDb
+nullColor index 18
+nullCondition "disabled"
+autoSelect
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 335
+y 184
+w 55
+h 24
+controlPv "$(P)_ADES"
+format "decimal"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 25
+bgColor index 4
+editable
+motifWidget
+limitsFromDb
+nullColor index 18
+nullCondition "disabled"
+autoSelect
+useHexPrefix
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 462
+y 166
+w 60
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Amp 2 set"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 391
+y 166
+w 70
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Phase 2 set"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 331
+y 166
+w 60
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Amp 1 set"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 261
+y 166
+w 70
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Phase 1 set"
+}
+autoSize
+endObjectProperties
+

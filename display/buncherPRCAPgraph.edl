@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 52
-y 76
+x 2166
+y 102
 w 665
 h 661
 font "helvetica-medium-r-18.0"
@@ -65,74 +65,70 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+0 "$(P)WF_X_AXIS"
+1 "$(P)WF_X_AXIS"
+2 "$(P)WF_X_AXIS"
+3 "$(P)WF_X_AXIS"
+4 "$(P)WF_X_AXIS"
+5 "$(P)WF_X_AXIS"
+6 "$(P)WF_X_AXIS"
+7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_A_0"
-  1 "$(P)WF_A_1"
-  2 "$(P)WF_A_2"
-  3 "$(P)WF_A_3"
-  4 "$(P)WF_A_4"
-  5 "$(P)WF_A_5"
-  6 "$(P)WF_A_6"
-  7 "$(P)WF_A_7"
+2 "$(P)PRLFWD:AWF"
+3 "$(P)PRLREV:AWF"
+4 "$(P)CAV1:AWF"
+5 "$(P)CAV2:AWF"
 }
 nPv {
-  0 "$(P)WF_X_NUSE"
-  1 "$(P)WF_X_NUSE"
-  2 "$(P)WF_X_NUSE"
-  3 "$(P)WF_X_NUSE"
-  4 "$(P)WF_X_NUSE"
-  5 "$(P)WF_X_NUSE"
-  6 "$(P)WF_X_NUSE"
-  7 "$(P)WF_X_NUSE"
+0 "$(P)WF_X_NUSE"
+1 "$(P)WF_X_NUSE"
+2 "$(P)WF_X_NUSE"
+3 "$(P)WF_X_NUSE"
+4 "$(P)WF_X_NUSE"
+5 "$(P)WF_X_NUSE"
+6 "$(P)WF_X_NUSE"
+7 "$(P)WF_X_NUSE"
 }
 plotUpdateMode {
-  0 "xOrY"
-  1 "xOrY"
-  2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
+0 "xOrY"
+1 "xOrY"
+2 "xOrY"
+3 "xOrY"
+4 "xOrY"
+5 "xOrY"
+6 "xOrY"
+7 "xOrY"
 }
 opMode {
-  0 "plot"
-  1 "plot"
-  2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
+0 "plot"
+1 "plot"
+2 "plot"
+3 "plot"
+4 "plot"
+5 "plot"
+6 "plot"
+7 "plot"
 }
 ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
+0 1
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
+0 index 21
+1 index 26
+2 index 31
+3 index 36
+4 index 41
+5 index 45
+6 index 50
+7 index 55
 }
 endObjectProperties
 
@@ -169,8 +165,8 @@ xShowLabelGrid
 # Y axis properties
 showYAxis
 yAxisSrc "fromUser"
-yMin -3.15
-yMax 3.15
+yMin -180
+yMax 180
 yShowLabelGrid
 # Y2 axis properties
 y2AxisSrc "AutoScale"
@@ -178,74 +174,70 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+0 "$(P)WF_X_AXIS"
+1 "$(P)WF_X_AXIS"
+2 "$(P)WF_X_AXIS"
+3 "$(P)WF_X_AXIS"
+4 "$(P)WF_X_AXIS"
+5 "$(P)WF_X_AXIS"
+6 "$(P)WF_X_AXIS"
+7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_P_0"
-  1 "$(P)WF_P_1"
-  2 "$(P)WF_P_2"
-  3 "$(P)WF_P_3"
-  4 "$(P)WF_P_4"
-  5 "$(P)WF_P_5"
-  6 "$(P)WF_P_6"
-  7 "$(P)WF_P_7"
+2 "$(P)PRLFWD:PWF"
+3 "$(P)PRLREV:PWF"
+4 "$(P)CAV1:PWF"
+5 "$(P)CAV2:PWF"
 }
 nPv {
-  0 "$(P)WF_P_0.NORD"
-  1 "$(P)WF_P_1.NORD"
-  2 "$(P)WF_P_2.NORD"
-  3 "$(P)WF_P_3.NORD"
-  4 "$(P)WF_P_4.NORD"
-  5 "$(P)WF_P_5.NORD"
-  6 "$(P)WF_P_6.NORD"
-  7 "$(P)WF_P_7.NORD"
+0 "$(P)WF_X_NUSE"
+1 "$(P)WF_X_NUSE"
+2 "$(P)WF_X_NUSE"
+3 "$(P)WF_X_NUSE"
+4 "$(P)WF_X_NUSE"
+5 "$(P)WF_X_NUSE"
+6 "$(P)WF_X_NUSE"
+7 "$(P)WF_X_NUSE"
 }
 plotUpdateMode {
-  0 "xOrY"
-  1 "xOrY"
-  2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
+0 "xOrY"
+1 "xOrY"
+2 "xOrY"
+3 "xOrY"
+4 "xOrY"
+5 "xOrY"
+6 "xOrY"
+7 "xOrY"
 }
 opMode {
-  0 "plot"
-  1 "plot"
-  2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
+0 "plot"
+1 "plot"
+2 "plot"
+3 "plot"
+4 "plot"
+5 "plot"
+6 "plot"
+7 "plot"
 }
 ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
+0 1
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
+0 index 21
+1 index 26
+2 index 31
+3 index 36
+4 index 41
+5 index 45
+6 index 50
+7 index 55
 }
 endObjectProperties
 

@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 2361
-y 121
+x 526
+y 59
 w 1138
-h 831
+h 898
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -29,10 +29,10 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 410
-y 720
+x 400
+y 780
 w 120
-h 40
+h 30
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
@@ -52,10 +52,10 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 540
-y 720
-w 130
-h 40
+x 530
+y 780
+w 140
+h 30
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
@@ -76,7 +76,7 @@ major 4
 minor 1
 release 0
 x 690
-y 40
+y 100
 w 440
 h 780
 fgColor index 12
@@ -88,10 +88,16 @@ filePv "LOC\\$(!W)showIt=e:0,Waveforms,Sliders,State,Limits"
 sizeOfs 5
 numDsps 4
 displayFileName {
-  0 "gunRFwave.edl"
+  0 "gunRFSRFWaveCtl.edl"
   1 "gunRFslider.edl"
-  2 "gunRFstate.edl"
-  3 "gunRFlimits.edl"
+  2 "gunRFSRFstate.edl"
+  3 "gunRFSRFlimits.edl"
+}
+symbols {
+  1 "P=$(P)RFS$(N):"
+}
+replaceSymbols {
+  1 1
 }
 noScroll
 endObjectProperties
@@ -103,7 +109,7 @@ major 4
 minor 0
 release 0
 x 690
-y 10
+y 70
 w 440
 h 30
 fgColor index 13
@@ -124,7 +130,7 @@ major 4
 minor 1
 release 0
 x 10
-y 720
+y 780
 w 110
 h 40
 fgColor index 14
@@ -133,9 +139,11 @@ offColor index 35
 inconsistentColor index 14
 topShadowColor index 2
 botShadowColor index 12
-controlPv "$(P)WF_POLL_ENABLE"
+controlPv "$(P)INTERLOCKTEST_W"
 onLabel "Enabled"
 offLabel "Disabled"
+labelType "literal"
+buttonType "push"
 3d
 invisible
 font "helvetica-medium-r-18.0"
@@ -149,10 +157,10 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 290
-y 720
-w 110
-h 40
+x 270
+y 780
+w 120
+h 30
 fgColor index 14
 bgColor index 44
 topShadowColor index 2
@@ -174,10 +182,16 @@ menuLabel {
   3 "Calibration"
 }
 symbols {
-  0 "P=GUN1:B15:"
-  1 "P=GUN1:B15:"
-  2 "P=GUN1:B15:"
-  3 "P=GUN1:B15:"
+  0 "P=$(P)RFS$(N):"
+  1 "P=$(P)RFS$(N):"
+  2 "P=$(P)RFS$(N):"
+  3 "P=$(P)RFS$(N):"
+}
+replaceSymbols {
+  0 1
+  1 1
+  2 1
+  3 1
 }
 endObjectProperties
 
@@ -188,7 +202,7 @@ major 4
 minor 0
 release 0
 x 10
-y 10
+y 70
 w 660
 h 30
 fgColor index 13
@@ -198,35 +212,8 @@ inconsistentColor index 8
 topShadowColor index 4
 botShadowColor index 4
 controlPv "LOC\\$(!W)showGrph"
-font "helvetica-medium-r-18.0"
+font "helvetica-bold-r-14.0"
 orientation "horizontal"
-endObjectProperties
-
-# (Embedded Window)
-object activePipClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 10
-y 50
-w 660
-h 660
-fgColor index 12
-bgColor index 2
-topShadowColor index 1
-botShadowColor index 12
-displaySource "menu"
-filePv "LOC\\$(!W)showGrph=e:0,Amplitude and Phase,I and Q vs. t,I vs. Q"
-center
-sizeOfs 5
-numDsps 3
-displayFileName {
-  0 "gunAPgraph.edl"
-  1 "gunIQvstgraph.edl"
-  2 "gunIvsQgraph.edl"
-}
-noScroll
 endObjectProperties
 
 # (Text Monitor)
@@ -236,7 +223,7 @@ major 4
 minor 7
 release 0
 x 20
-y 800
+y 860
 w 140
 h 20
 controlPv "$(P)DECAY_CONSTANT_B"
@@ -259,9 +246,9 @@ major 4
 minor 1
 release 1
 x 20
-y 770
-w 132
-h 21
+y 830
+w 137
+h 20
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -279,9 +266,9 @@ major 4
 minor 1
 release 1
 x 180
-y 770
-w 129
-h 21
+y 830
+w 132
+h 20
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -299,7 +286,7 @@ major 4
 minor 7
 release 0
 x 180
-y 800
+y 860
 w 140
 h 16
 controlPv "$(P)DECAY_STRENGTH"
@@ -322,9 +309,9 @@ major 4
 minor 1
 release 1
 x 360
-y 770
-w 146
-h 21
+y 830
+w 151
+h 20
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -342,7 +329,7 @@ major 4
 minor 7
 release 0
 x 360
-y 800
+y 860
 w 140
 h 16
 controlPv "$(P)DECAY_FIT_STDDEV"
@@ -358,25 +345,159 @@ newPos
 objType "monitors"
 endObjectProperties
 
-# (Shell Command)
-object shellCmdClass
+# (Related Display)
+object relatedDisplayClass
 beginObjectProperties
 major 4
-minor 3
+minor 4
 release 0
-x 150
-y 720
+x 130
+y 780
 w 130
-h 40
+h 30
 fgColor index 14
-bgColor index 0
-topShadowColor index 0
-botShadowColor index 14
-font "helvetica-medium-r-18.0"
-buttonLabel "Start IOC"
-numCmds 1
-command {
-  0 "iocConsole -d sioc-b15-gun1"
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-14.0"
+buttonLabel "Ramp Settings"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "PVramp.edl"
 }
+menuLabel {
+  0 "Ramp Settings"
+}
+symbols {
+  0 "P=GUN1:B15:"
+}
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 110
+w 660
+h 660
+fgColor index 12
+bgColor index 2
+topShadowColor index 1
+botShadowColor index 12
+displaySource "menu"
+filePv "LOC\\$(!W)showGrph=e:0,Amplitude/Phase,Smoothed Amp/Phase,I/Q vs. t,I vs. Q"
+center
+sizeOfs 5
+numDsps 4
+displayFileName {
+  0 "gunRFSAPgraph.edl"
+  1 "gunRFSAPsmoothedGraph.edl"
+  2 "gunRFSIQvstgraph.edl"
+  3 "gunRFSIvsQgraph.edl"
+}
+symbols {
+  0 "P=$(P)RFS$(N):"
+  1 "P=$(P)RFS$(N):"
+  2 "P=$(P)RFS$(N):"
+  3 "P=$(P)RFS$(N):"
+}
+noScroll
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 0
+w 1140
+h 40
+font "helvetica-bold-r-24.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 51
+value {
+  "Chassis $(P)RFS$(N)"
+}
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 530
+y 820
+w 140
+h 30
+fgColor index 14
+onColor index 15
+offColor index 35
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)RFS$(N):INTERLOCKTEST_W"
+pressValue "1"
+releaseValue "0"
+onLabel "Interlock OK"
+offLabel "Interlock Tripped"
+toggle
+3d
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 510
+y 860
+w 70
+h 25
+fgColor index 14
+onColor index 9
+offColor index 2
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)RFS$(N):RF_GO_W"
+pressValue "1"
+releaseValue "0"
+onLabel "Reset"
+offLabel "Reset"
+3d
+font "helvetica-bold-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 590
+y 860
+w 100
+h 25
+fgColor index 14
+onColor index 35
+offColor index 15
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)RFS$(N):PERMIT2_MASK_W"
+pressValue "1"
+releaseValue "0"
+onLabel "Permit2 Masked"
+offLabel "Permit2 Unmasked"
+toggle
+3d
+font "helvetica-bold-r-12.0"
 endObjectProperties
 

@@ -1,0 +1,112 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 166
+y 723
+w 521
+h 341
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 10
+w 220
+h 50
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-18.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "GUNBRF"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 270
+y 10
+w 220
+h 50
+fgColor index 14
+bgColor index 44
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-18.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "BuncherRF"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 90
+y 60
+w 60
+h 130
+lineColor index 14
+fillColor index 0
+lineWidth 7
+visPv "GUNB:GUN:RF_ON_R"
+numPoints 11
+xPoints {
+  0 150
+  1 150
+  2 140
+  3 150
+  4 150
+  5 140
+  6 140
+  7 140
+  8 140
+  9 90
+  10 130
+}
+yPoints {
+  0 60
+  1 60
+  2 60
+  3 190
+  4 190
+  5 90
+  6 90
+  7 90
+  8 90
+  9 80
+  10 190
+}
+endObjectProperties
+

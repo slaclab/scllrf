@@ -1,0 +1,1867 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1930
+y 179
+w 717
+h 977
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 7
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 3
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 600
+y 420
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:REV4:,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 600
+y 490
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:FWD4:,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 600
+y 290
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:DRV4:,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 510
+y 420
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:REV3:,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 510
+y 490
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:FWD3:,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 510
+y 290
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:DRV3:,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 420
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:REV2:,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 490
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:FWD2:,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 290
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:DRV2:,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 330
+y 420
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:REV1:,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 330
+y 490
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:FWD1:,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 330
+y 290
+w 80
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:DRV1:,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 120
+y 340
+w 90
+h 120
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:CAV2:,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 400
+w 90
+h 120
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+symbols {
+0 "WF=ACCL:GUNB:455:CAV1:,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 10
+y 290
+w 150
+h 230
+lineColor index 14
+fillColor index 0
+lineWidth 7
+numPoints 6
+xPoints {
+0 150
+1 10
+2 10
+3 160
+4 160
+5 140
+}
+yPoints {
+0 290
+1 290
+2 500
+3 500
+4 520
+5 520
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 130
+y 290
+w 70
+h 200
+lineColor index 14
+fillColor index 0
+lineWidth 7
+numPoints 6
+xPoints {
+0 182
+1 130
+2 130
+3 200
+4 200
+5 182
+}
+yPoints {
+0 290
+1 290
+2 473
+3 473
+4 490
+5 490
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 330
+y 370
+w 80
+h 20
+fgColor index 14
+bgColor index 3
+topShadowColor index 2
+botShadowColor index 7
+font "helvetica-medium-r-14.0"
+buttonLabel "SSA 1..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "ssaControl"
+}
+symbols {
+0 "P=ACCL:GUNB:455:SSA1,IOC=SIOC:GUNB:SSA3"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 150
+y 270
+w 140
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-14.0"
+buttonLabel "Buncher LLRF..."
+numPvs 4
+numDsps 2
+displayFileName {
+0 "buncherPRCRF"
+1 "buncherRFSRF"
+}
+menuLabel {
+0 "PRC"
+1 "RFS"
+}
+symbols {
+0 "P=ACCL:GUNB:455:"
+1 "P=ACCL:GUNB:455:"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 270
+y 300
+w 20
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 7
+numPoints 2
+xPoints {
+0 280
+1 280
+}
+yPoints {
+0 300
+1 370
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 230
+y 370
+w 100
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 7
+numPoints 4
+xPoints {
+0 310
+1 250
+2 280
+3 310
+}
+yPoints {
+0 370
+1 370
+2 420
+3 370
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 220
+y 410
+w 60
+h 100
+lineColor index 14
+fillColor index 0
+lineWidth 7
+numPoints 4
+xPoints {
+0 280
+1 280
+2 280
+3 220
+}
+yPoints {
+0 410
+1 510
+2 510
+3 510
+}
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 510
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+startAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 180
+y 510
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+startAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 480
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+startAngle 360
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 180
+y 480
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+startAngle 360
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 90
+w 75
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Amplitude:"
+}
+autoSize
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 90
+w 90
+h 40
+controlPv "ACCL:GUNB:455:ADES"
+fgColor index 14
+fgAlarm
+bgColor index 1
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 140
+w 48
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Phase:"
+}
+autoSize
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 140
+w 90
+h 40
+controlPv "ACCL:GUNB:455:PDES"
+fgColor index 14
+fgAlarm
+bgColor index 1
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 10
+y 490
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CAV1:PMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 10
+y 410
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CAV1:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 450
+w 60
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Cavity"
+"Phase 1:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 370
+w 87
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Cavity"
+"Amplitude 1:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 420
+w 80
+h 20
+controlPv "ACCL:GUNB:455:REV1:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 330
+y 400
+w 62
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Reverse:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 490
+w 80
+h 20
+controlPv "ACCL:GUNB:455:FWD1:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 330
+y 470
+w 62
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Forward:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 210
+w 53
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Control"
+"Loop:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 90
+y 210
+w 90
+h 32
+controlPv "ACCL:GUNB:455:CLOSE_LOOP_W"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 90
+w 90
+h 40
+controlPv "ACCL:GUNB:455:AACT"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 200
+y 210
+w 90
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+buttonLabel "Control Loop..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "rf_gunb_loop_details.edl"
+}
+menuLabel {
+0 "Control Loop..."
+}
+symbols {
+0 "P=ACCL:GUNB:455:"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 100
+w 180
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-14.0"
+buttonLabel "Cavity Probe Calibration..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "rf_buncher_cavity_calibration.edl"
+}
+menuLabel {
+0 "SSAs"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 140
+w 90
+h 40
+controlPv "ACCL:GUNB:455:PACT"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 120
+y 430
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CAV2:PMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 120
+y 350
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CAV2:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 140
+y 390
+w 60
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Cavity"
+"Phase 2:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 140
+y 310
+w 87
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Cavity"
+"Amplitude 2:"
+}
+autoSize
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 370
+w 80
+h 20
+fgColor index 14
+bgColor index 3
+topShadowColor index 2
+botShadowColor index 7
+font "helvetica-medium-r-14.0"
+buttonLabel "SSA 2..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "ssaControl"
+}
+symbols {
+0 "P=ACCL:GUNB:455:SSA2,IOC=SIOC:GUNB:SSA4"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 510
+y 370
+w 80
+h 20
+fgColor index 14
+bgColor index 3
+topShadowColor index 2
+botShadowColor index 7
+font "helvetica-medium-r-14.0"
+buttonLabel "SSA 3..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "ssaControl"
+}
+symbols {
+0 "P=ACCL:GUNB:455:SSA3,IOC=SIOC:GUNB:SSA5"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 600
+y 370
+w 80
+h 20
+fgColor index 14
+bgColor index 3
+topShadowColor index 2
+botShadowColor index 7
+font "helvetica-medium-r-14.0"
+buttonLabel "SSA 4..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "ssaControl"
+}
+symbols {
+0 "P=ACCL:GUNB:455:SSA4,IOC=SIOC:GUNB:SSA6"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 330
+y 290
+w 80
+h 20
+controlPv "ACCL:GUNB:455:DRV1:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 330
+y 270
+w 82
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"LLRF Drive:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 420
+y 290
+w 80
+h 20
+controlPv "ACCL:GUNB:455:DRV2:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 510
+y 290
+w 80
+h 20
+controlPv "ACCL:GUNB:455:DRV3:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 600
+y 290
+w 80
+h 20
+controlPv "ACCL:GUNB:455:DRV4:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 420
+y 420
+w 80
+h 20
+controlPv "ACCL:GUNB:455:REV2:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 510
+y 420
+w 80
+h 20
+controlPv "ACCL:GUNB:455:REV3:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 600
+y 420
+w 80
+h 20
+controlPv "ACCL:GUNB:455:REV4:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 420
+y 490
+w 80
+h 20
+controlPv "ACCL:GUNB:455:FWD2:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 510
+y 490
+w 80
+h 20
+controlPv "ACCL:GUNB:455:FWD3:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 600
+y 490
+w 80
+h 20
+controlPv "ACCL:GUNB:455:FWD4:AMEAN"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 970
+h 40
+lineColor index 66
+fill
+fillColor index 66
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 0
+w 200
+h 40
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 53
+useDisplayBg
+value {
+"LCLS-II RF Buncher"
+"Details"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 560
+y 10
+w 40
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+label "Exit"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 610
+y 10
+w 90
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Home Screen..."
+numCmds 1
+command {
+0 "lclshome &"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 60
+w 180
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+buttonLabel "RF Output Calibration..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "rf_buncher_ssa_calibration.edl"
+}
+menuLabel {
+0 "SSAs"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 140
+w 180
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-14.0"
+buttonLabel "SSA Balance Calibration..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "rf_gunb_buncher_balance.edl"
+}
+menuLabel {
+0 "SSAs"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 330
+y 530
+w 140
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-bold-r-14.0"
+buttonLabel "Waveforms..."
+numPvs 4
+numDsps 13
+displayFileName {
+0 "buncherPRCRF"
+1 "buncherRFSRF"
+2 "buncherMainGridIvsQgraph"
+3 "buncherSSAGridIvsQgraph"
+4 "buncherAllAPgraph.edl"
+5 "buncherAllIvsQgraph.edl"
+6 "buncherAllIQgraph.edl"
+7 "buncherDecayAPgraph.edl"
+8 "buncherDecayIvsQgraph.edl"
+9 "buncherDecayIQgraph.edl"
+10 "rawWaveBuf.edl"
+11 "rawWaveBuf.edl"
+12 "rawWaveBuf.edl"
+}
+menuLabel {
+0 "PRC"
+1 "RFSs"
+2 "Main I vs. Q"
+3 "SSA I vs. Q"
+4 "All Amp & Phase"
+5 "All I vs. Q"
+6 "All I and Q"
+7 "Decay All Amp & Phase"
+8 "Decay All I vs. Q"
+9 "Decay All I and Q"
+10 "PRC Raw Trace Data"
+11 "RFS1 Raw Trace Data"
+12 "RFS2 Raw Trace Data"
+}
+symbols {
+0 "P=ACCL:GUNB:455:"
+1 "P=ACCL:GUNB:455:"
+10 "Y=ACCL:GUNB:455:TRACE_DATA_R"
+11 "Y=ACCL:GUNB:455:RFS1:TRACE_DATA_R"
+12 "Y=ACCL:GUNB:455:RFS2:TRACE_DATA_R"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 90
+y 630
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CAV1:DECAY_CONSTANT_B"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+precision 4
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 110
+y 590
+w 59
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Detune"
+"Probe 1:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 210
+y 590
+w 59
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Detune"
+"Probe 2:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 190
+y 630
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CAV2:DECAY_CONSTANT_B"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+precision 4
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 290
+y 590
+w 119
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Detune"
+"Cavity - Forward:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 290
+y 630
+w 90
+h 24
+controlPv "ACCL:GUNB:455:CW_DETUNE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+precision 4
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 410
+y 630
+w 90
+h 24
+controlPv "ACCL:GUNB:455:DFACT"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fgColor index 15
+bgColor index 9
+precision 4
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 410
+y 590
+w 112
+h 32
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Detune"
+"Mode Sensitive:"
+}
+autoSize
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 180
+w 180
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-14.0"
+buttonLabel "Open Loop Testing..."
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunRFslider.edl"
+}
+menuLabel {
+0 "Open Loop Testing"
+}
+symbols {
+0 "P=ACCL:GUNB:455:"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 420
+y 220
+w 180
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-14.0"
+buttonLabel "Ramp Any PV"
+numPvs 4
+numDsps 1
+displayFileName {
+0 "PVramp.edl"
+}
+menuLabel {
+0 "Ramp Settings"
+}
+symbols {
+0 "P=GUN1:B15:"
+}
+endObjectProperties
+

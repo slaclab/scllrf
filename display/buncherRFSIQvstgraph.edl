@@ -60,74 +60,64 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+0 "$(P)WF_X_AXIS"
+1 "$(P)WF_X_AXIS"
+2 "$(P)WF_X_AXIS"
+3 "$(P)WF_X_AXIS"
+4 "$(P)WF_X_AXIS"
+5 "$(P)WF_X_AXIS"
+6 "$(P)WF_X_AXIS"
+7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_I_0"
-  1 "$(P)WF_I_1"
-  2 "$(P)WF_I_2"
-  3 "$(P)WF_I_3"
-  4 "$(P)WF_I_4"
-  5 "$(P)WF_I_5"
-  6 "$(P)WF_I_6"
-  7 "$(P)WF_I_7"
+0 "$(P)DRV$(SSA):ITWF"
+1 "$(P)FWD$(SSA):ITWF"
+2 "$(P)REV$(SSA):ITWF"
 }
 nPv {
-  0 "$(P)WF_I_0.NORD"
-  1 "$(P)WF_I_1.NORD"
-  2 "$(P)WF_I_2.NORD"
-  3 "$(P)WF_I_3.NORD"
-  4 "$(P)WF_I_4.NORD"
-  5 "$(P)WF_I_5.NORD"
-  6 "$(P)WF_I_6.NORD"
-  7 "$(P)WF_I_7.NORD"
+0 "$(P)DRV$(SSA):ITWF.NORD"
+1 "$(P)FWD$(SSA):ITWF.NORD"
+2 "$(P)REV$(SSA):ITWF.NORD"
 }
 plotUpdateMode {
-  0 "xOrY"
-  1 "xOrY"
-  2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
+0 "xOrY"
+1 "xOrY"
+2 "xOrY"
+3 "xOrY"
+4 "xOrY"
+5 "xOrY"
+6 "xOrY"
+7 "xOrY"
 }
 opMode {
-  0 "plot"
-  1 "plot"
-  2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
+0 "plot"
+1 "plot"
+2 "plot"
+3 "plot"
+4 "plot"
+5 "plot"
+6 "plot"
+7 "plot"
 }
 ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
+0 1
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
+0 index 21
+1 index 26
+2 index 31
+3 index 36
+4 index 41
+5 index 45
+6 index 50
+7 index 55
 }
 endObjectProperties
 
@@ -168,74 +158,64 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+0 "$(P)WF_X_AXIS"
+1 "$(P)WF_X_AXIS"
+2 "$(P)WF_X_AXIS"
+3 "$(P)WF_X_AXIS"
+4 "$(P)WF_X_AXIS"
+5 "$(P)WF_X_AXIS"
+6 "$(P)WF_X_AXIS"
+7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_Q_0"
-  1 "$(P)WF_Q_1"
-  2 "$(P)WF_Q_2"
-  3 "$(P)WF_Q_3"
-  4 "$(P)WF_Q_4"
-  5 "$(P)WF_Q_5"
-  6 "$(P)WF_Q_6"
-  7 "$(P)WF_Q_7"
+0 "$(P)DRV$(SSA):QTWF"
+1 "$(P)FWD$(SSA):QTWF"
+2 "$(P)REV$(SSA):QTWF"
 }
 nPv {
-  0 "$(P)WF_Q_0.NORD"
-  1 "$(P)WF_Q_1.NORD"
-  2 "$(P)WF_Q_2.NORD"
-  3 "$(P)WF_Q_3.NORD"
-  4 "$(P)WF_Q_4.NORD"
-  5 "$(P)WF_Q_5.NORD"
-  6 "$(P)WF_Q_6.NORD"
-  7 "$(P)WF_Q_7.NORD"
+0 "$(P)DRV$(SSA):QTWF.NORD"
+1 "$(P)FWD$(SSA):QTWF.NORD"
+2 "$(P)REV$(SSA):QTWF.NORD"
 }
 plotUpdateMode {
-  0 "xOrY"
-  1 "xOrY"
-  2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
+0 "xOrY"
+1 "xOrY"
+2 "xOrY"
+3 "xOrY"
+4 "xOrY"
+5 "xOrY"
+6 "xOrY"
+7 "xOrY"
 }
 opMode {
-  0 "plot"
-  1 "plot"
-  2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
+0 "plot"
+1 "plot"
+2 "plot"
+3 "plot"
+4 "plot"
+5 "plot"
+6 "plot"
+7 "plot"
 }
 ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
+0 1
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
+0 index 21
+1 index 26
+2 index 31
+3 index 36
+4 index 41
+5 index 45
+6 index 50
+7 index 55
 }
 endObjectProperties
 

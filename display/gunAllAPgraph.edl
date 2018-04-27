@@ -1,0 +1,4572 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 2
+y 160
+w 2042
+h 726
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRL:AWF,PWF=GUN:GUNB:100:PRL:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRL"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRL:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRL:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRL:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRL:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 210
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRC:SPARE1:AWF,PWF=GUN:GUNB:100:PRC:SPARE1:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRC:SPARE1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 410
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRC:SPARE2:AWF,PWF=GUN:GUNB:100:PRC:SPARE2:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRC:SPARE2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 610
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:CAV1:AWF,PWF=GUN:GUNB:100:CAV1:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:CAV1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:CAV1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:CAV1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:CAV1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:CAV1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 810
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:CAV2:AWF,PWF=GUN:GUNB:100:CAV2:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:CAV2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:CAV2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:CAV2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:CAV2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:CAV2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1010
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRC:SPARE3:AWF,PWF=GUN:GUNB:100:PRC:SPARE3:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRC:SPARE3"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE3:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE3:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE3:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE3:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1210
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRC:SPARE4:AWF,PWF=GUN:GUNB:100:PRC:SPARE4:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRC:SPARE4"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE4:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE4:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE4:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE4:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1410
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:LASR:AWF,PWF=GUN:GUNB:100:LASR:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:LASR"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:LASR:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:LASR:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:LASR:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:LASR:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:DRV1:AWF,PWF=GUN:GUNB:100:DRV1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:DRV1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 210
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:DRV1A:AWF,PWF=GUN:GUNB:100:DRV1A:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:DRV1A"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV1A:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV1A:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV1A:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV1A:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 410
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:S100:FWD1:AWF,PWF=GUN:GUNB:S100:FWD1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:S100:FWD1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:FWD1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:FWD1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:FWD1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:FWD1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 610
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:S100:REV1:AWF,PWF=GUN:GUNB:S100:REV1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:S100:REV1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:REV1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:REV1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:REV1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:REV1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 810
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:FWD1:AWF,PWF=GUN:GUNB:100:FWD1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:FWD1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:FWD1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:FWD1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:FWD1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:FWD1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1010
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:REV1:AWF,PWF=GUN:GUNB:100:REV1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:REV1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:REV1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:REV1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:REV1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:REV1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1210
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:C100:FWD1:AWF,PWF=GUN:GUNB:C100:FWD1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:C100:FWD1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:FWD1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:FWD1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:FWD1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:FWD1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1410
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:C100:REV1:AWF,PWF=GUN:GUNB:C100:REV1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:C100:REV1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:REV1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:REV1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:REV1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:REV1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:DRV2:AWF,PWF=GUN:GUNB:100:DRV2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:DRV2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 210
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:DRV2A:AWF,PWF=GUN:GUNB:100:DRV2A:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:DRV2A"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV2A:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV2A:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:DRV2A:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:DRV2A:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 410
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:S100:FWD2:AWF,PWF=GUN:GUNB:S100:FWD2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:S100:FWD2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:FWD2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:FWD2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:FWD2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:FWD2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 610
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:S100:REV2:AWF,PWF=GUN:GUNB:S100:REV2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:S100:REV2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:REV2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:REV2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:S100:REV2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:S100:REV2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 810
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:FWD2:AWF,PWF=GUN:GUNB:100:FWD2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:FWD2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:FWD2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:FWD2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:FWD2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:FWD2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1010
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:REV2:AWF,PWF=GUN:GUNB:100:REV2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:REV2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:REV2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:REV2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:REV2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:REV2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1210
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:C100:FWD2:AWF,PWF=GUN:GUNB:C100:FWD2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:C100:FWD2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:FWD2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:FWD2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:FWD2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:FWD2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1410
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:C100:REV2:AWF,PWF=GUN:GUNB:C100:REV2:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:C100:REV2"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:REV2:AWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:REV2:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:C100:REV2:PWF"
+}
+nPv {
+  0 "GUN:GUNB:C100:REV2:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 2170
+h 40
+lineColor index 66
+fill
+fillColor index 66
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 0
+w 200
+h 40
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 53
+useDisplayBg
+value {
+  "LCLS-II RF Buncher"
+  "All Amplitude and Phase Waveforms, even spares"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 970
+y 10
+w 40
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+label "Exit"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 1020
+y 10
+w 90
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Home Screen..."
+numCmds 1
+command {
+  0 "lclshome &"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1610
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRC:SPARE5:AWF,PWF=GUN:GUNB:100:PRC:SPARE5:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRC:SPARE5"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE5:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE5:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE5:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE5:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1610
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:RFS1:SPARE1:AWF,PWF=GUN:GUNB:100:RFS1:SPARE1:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:RFS1:SPARE1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS1:SPARE1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS1:SPARE1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS1:SPARE1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS1:SPARE1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1610
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:RFS2:SPARE1:AWF,PWF=GUN:GUNB:100:RFS2:SPARE1:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:RFS2:SPARE1"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS2:SPARE1:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS2:SPARE1:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS2:SPARE1:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS2:SPARE1:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 610
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS2:DAC:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS2:DAC:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 510
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:RFS2:DAC"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS2:DAC:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS2:DAC:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1810
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:RFS2:DAC:AWF,PWF=GUN:GUNB:100:RFS2:DAC:PWF,T=ACCL:GUNB:455:RFS2:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 390
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS1:DAC:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS1:DAC:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 290
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:RFS1:DAC"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:RFS1:DAC:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:RFS1:DAC:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1810
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:RFS1:DAC:AWF,PWF=GUN:GUNB:100:RFS1:DAC:PWF,T=ACCL:GUNB:455:RFS1:WF_X_AXIS"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 170
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+xLabel "Time (s)"
+yLabel "Phase"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "fromUser"
+yMin -360
+yMax 360
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE6:PWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE6:PWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 70
+w 200
+h 100
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "GUN:GUNB:100:PRC:SPARE6"
+xLabel "Time (s)"
+yLabel "A"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:WF_X_AXIS"
+}
+yPv {
+  0 "GUN:GUNB:100:PRC:SPARE6:AWF"
+}
+nPv {
+  0 "GUN:GUNB:100:PRC:SPARE6:AWF.NORD"
+}
+plotUpdateMode {
+  0 "xOrY"
+}
+opMode {
+  0 "plot"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1810
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleAPgraph.edl"
+}
+symbols {
+  0 "AWF=GUN:GUNB:100:PRC:SPARE6:AWF,PWF=GUN:GUNB:100:PRC:SPARE6:PWF,T=ACCL:GUNB:455:WF_X_AXIS"
+}
+endObjectProperties
+

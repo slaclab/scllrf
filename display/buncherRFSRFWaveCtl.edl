@@ -1,0 +1,692 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1381
+y 122
+w 468
+h 664
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+gridSize 5
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 170
+h 460
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 165
+y 0
+w 280
+h 460
+lineColor index 14
+fillColor index 34
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 275
+y 270
+w 90
+h 25
+controlPv "$(P)REV$(SSA):AMEAN"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 10
+w 124
+h 42
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Active Channel"
+  "Mask"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 260
+w 60
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 31
+value {
+  "Reverse $(SSA)"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 300
+w 60
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 1
+bgColor index 26
+value {
+  "Forward $(SSA)"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 340
+w 60
+h 30
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 21
+value {
+  "Drive $(SSA)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 370
+y 270
+w 65
+h 25
+controlPv "$(P)REV$(SSA):PMEAN"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 4
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 70
+y 355
+w 30
+h 15
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE1)"
+pressValue "0"
+onLabel "Off"
+offLabel "Off"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 70
+y 340
+w 30
+h 15
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE1)"
+pressValue "1"
+onLabel "On"
+offLabel "On"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 70
+y 315
+w 30
+h 15
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE2)"
+pressValue "0"
+onLabel "Off"
+offLabel "Off"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 70
+y 300
+w 30
+h 15
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE2)"
+pressValue "1"
+onLabel "On"
+offLabel "On"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 70
+y 275
+w 30
+h 15
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE3)"
+pressValue "0"
+onLabel "Off"
+offLabel "Off"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 70
+y 260
+w 30
+h 15
+fgColor index 14
+onColor index 51
+offColor index 51
+topShadowColor index 0
+botShadowColor index 14
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE3)"
+pressValue "1"
+onLabel "On"
+offLabel "On"
+3d
+useEnumNumeric
+font "helvetica-medium-r-8.0"
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 105
+y 340
+w 40
+h 30
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE1)"
+lineColor index 14
+onColor index 20
+offColor index 24
+numBits 1
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 470
+w 430
+h 110
+fgColor index 15
+bgColor index 8
+2ndBgColor index 13
+controlColor index 25
+indicatorColor index 15
+font "helvetica-medium-r-18.0"
+controlPv "$(P)RFS$(N):WAVE_SAMP_PER_W"
+indicatorPv "$(P)RFS$(N):WAVE_SAMP_PER_R"
+controlLabel "Time Scale Multiplier"
+increment 1
+incMultiplier 1
+limitsFromDb
+displayFormat "FFloat"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 275
+y 350
+w 90
+h 25
+controlPv "$(P)DRV$(SSA):AMEAN"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 370
+y 350
+w 65
+h 25
+controlPv "$(P)DRV$(SSA):PMEAN"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 4
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 275
+y 310
+w 90
+h 25
+controlPv "$(P)FWD$(SSA):AMEAN"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 370
+y 310
+w 65
+h 25
+controlPv "$(P)FWD$(SSA):PMEAN"
+format "float"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 4
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 240
+y 10
+w 132
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Waveform Stats"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 275
+y 35
+w 64
+h 32
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Mean"
+  "Amplitude"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 385
+y 35
+w 41
+h 32
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Mean"
+  "Phase"
+}
+autoSize
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 600
+w 120
+h 30
+fgColor index 14
+bgColor index 4
+inconsistentColor index 36
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(P)RFS$(N):WF_EDGE_TRIGGER"
+font "helvetica-medium-r-14.0"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 270
+w 90
+h 25
+controlPv "$(P)REV$(SSA):ARSTD"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 350
+w 90
+h 25
+controlPv "$(P)DRV$(SSA):ARSTD"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 180
+y 310
+w 90
+h 25
+controlPv "$(P)FWD$(SSA):ARSTD"
+format "exponential"
+font "helvetica-medium-r-14.0"
+fgColor index 15
+bgColor index 12
+motifWidget
+precision 3
+nullColor index 40
+smartRefresh
+useHexPrefix
+newPos
+objType "controls"
+clipToDspLimits
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 190
+y 35
+w 64
+h 32
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Amplitude"
+  "Std/Mean"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 105
+y 300
+w 40
+h 30
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE2)"
+lineColor index 14
+onColor index 25
+offColor index 29
+numBits 1
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 105
+y 260
+w 40
+h 30
+controlPv "$(P)RFS$(N):WF_CHAN_ENABLE.$(WFENABLE3)"
+lineColor index 14
+onColor index 30
+offColor index 34
+numBits 1
+endObjectProperties
+

@@ -1,0 +1,2562 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 2
+y 451
+w 2045
+h 720
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRLFWD:ITWF_DECAY,Y=ACCL:GUNB:455:PRLFWD:QTWF_DECAY,P=ACCL:GUNB:455:PRLFWD"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRLFWD"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRLFWD:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRLFWD:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRLFWD:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 210
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRLREV:ITWF_DECAY,Y=ACCL:GUNB:455:PRLREV:QTWF_DECAY,P=ACCL:GUNB:455:PRLREV"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRLREV"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRLREV:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRLREV:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRLREV:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 410
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:CAV1:ITWF_DECAY,Y=ACCL:GUNB:455:CAV1:QTWF_DECAY,P=ACCL:GUNB:455:CAV1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:CAV1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:CAV1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:CAV1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:CAV1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 610
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:CAV2:ITWF_DECAY,Y=ACCL:GUNB:455:CAV2:QTWF_DECAY,P=ACCL:GUNB:455:CAV2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:CAV2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:CAV2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:CAV2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:CAV2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 810
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRC:SPARE1:ITWF_DECAY,Y=ACCL:GUNB:455:PRC:SPARE1:QTWF_DECAY,P=ACCL:GUNB:455:PRC:SPARE1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRC:SPARE1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRC:SPARE1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRC:SPARE1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRC:SPARE1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1010
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRC:SPARE2:ITWF_DECAY,Y=ACCL:GUNB:455:PRC:SPARE2:QTWF_DECAY,P=ACCL:GUNB:455:PRC:SPARE2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRC:SPARE2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRC:SPARE2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRC:SPARE2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRC:SPARE2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1210
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRC:SPARE3:ITWF_DECAY,Y=ACCL:GUNB:455:PRC:SPARE3:QTWF_DECAY,P=ACCL:GUNB:455:PRC:SPARE3"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRC:SPARE3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRC:SPARE3:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRC:SPARE3:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRC:SPARE3:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1410
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRC:SPARE4:ITWF_DECAY,Y=ACCL:GUNB:455:PRC:SPARE4:QTWF_DECAY,P=ACCL:GUNB:455:PRC:SPARE4"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRC:SPARE4"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRC:SPARE4:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRC:SPARE4:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRC:SPARE4:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:DRV1:ITWF_DECAY,Y=ACCL:GUNB:455:DRV1:QTWF_DECAY,P=ACCL:GUNB:455:DRV1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:DRV1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:DRV1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:DRV1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:DRV1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 210
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD1:ITWF_DECAY,Y=ACCL:GUNB:455:FWD1:QTWF_DECAY,P=ACCL:GUNB:455:FWD1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:FWD1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:FWD1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 410
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV1:ITWF_DECAY,Y=ACCL:GUNB:455:REV1:QTWF_DECAY,P=ACCL:GUNB:455:REV1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:REV1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:REV1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 610
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:DRV2:ITWF_DECAY,Y=ACCL:GUNB:455:DRV2:QTWF_DECAY,P=ACCL:GUNB:455:DRV2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:DRV2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:DRV2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:DRV2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:DRV2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 810
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD2:ITWF_DECAY,Y=ACCL:GUNB:455:FWD2:QTWF_DECAY,P=ACCL:GUNB:455:FWD2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:FWD2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:FWD2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1010
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV2:ITWF_DECAY,Y=ACCL:GUNB:455:REV2:QTWF_DECAY,P=ACCL:GUNB:455:REV2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:REV2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:REV2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1210
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS1:SPARE1:ITWF_DECAY,Y=ACCL:GUNB:455:RFS1:SPARE1:QTWF_DECAY,P=ACCL:GUNB:455:RFS1:SPARE1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS1:SPARE1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1410
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS1:DAC:ITWF_DECAY,Y=ACCL:GUNB:455:RFS1:DAC:QTWF_DECAY,P=ACCL:GUNB:455:RFS1:DAC"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS1:DAC"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:DAC:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS1:DAC:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS1:DAC:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:DRV3:ITWF_DECAY,Y=ACCL:GUNB:455:DRV3:QTWF_DECAY,P=ACCL:GUNB:455:DRV3"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 10
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:DRV3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:DRV3:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:DRV3:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:DRV3:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 210
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD3:ITWF_DECAY,Y=ACCL:GUNB:455:FWD3:QTWF_DECAY,P=ACCL:GUNB:455:FWD3"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 210
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:FWD3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD3:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD3:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:FWD3:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 410
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV3:ITWF_DECAY,Y=ACCL:GUNB:455:REV3:QTWF_DECAY,P=ACCL:GUNB:455:REV3"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 410
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:REV3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV3:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV3:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:REV3:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 610
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:DRV4:ITWF_DECAY,Y=ACCL:GUNB:455:DRV4:QTWF_DECAY,P=ACCL:GUNB:455:DRV4"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 610
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:DRV4"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:DRV4:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:DRV4:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:DRV4:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 810
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD4:ITWF_DECAY,Y=ACCL:GUNB:455:FWD4:QTWF_DECAY,P=ACCL:GUNB:455:FWD4"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 810
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:FWD4"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD4:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD4:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:FWD4:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1010
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV4:ITWF_DECAY,Y=ACCL:GUNB:455:REV4:QTWF_DECAY,P=ACCL:GUNB:455:REV4"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1010
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:REV4"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV4:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV4:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:REV4:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1210
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS2:SPARE1:ITWF_DECAY,Y=ACCL:GUNB:455:RFS2:SPARE1:QTWF_DECAY,P=ACCL:GUNB:455:RFS2:SPARE1"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1210
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS2:SPARE1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE1:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE1:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE1:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1410
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS2:DAC:ITWF_DECAY,Y=ACCL:GUNB:455:RFS2:DAC:QTWF_DECAY,P=ACCL:GUNB:455:RFS2:DAC"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1410
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS2:DAC"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:DAC:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS2:DAC:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS2:DAC:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 2080
+h 40
+lineColor index 66
+fill
+fillColor index 66
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 0
+w 200
+h 40
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 53
+useDisplayBg
+value {
+  "LCLS-II RF Buncher"
+  "All I vs. Q Decay Waveforms, even spares"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 730
+y 10
+w 40
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+label "Exit"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 780
+y 10
+w 90
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Home Screen..."
+numCmds 1
+command {
+  0 "lclshome &"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1610
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRC:SPARE5:ITWF_DECAY,Y=ACCL:GUNB:455:PRC:SPARE5:QTWF_DECAY,P=ACCL:GUNB:455:PRC:SPARE5"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRC:SPARE5"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRC:SPARE5:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRC:SPARE5:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRC:SPARE5:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1610
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS1:SPARE2:ITWF_DECAY,Y=ACCL:GUNB:455:RFS1:SPARE2:QTWF_DECAY,P=ACCL:GUNB:455:RFS1:SPARE2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS1:SPARE2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1610
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS2:SPARE2:ITWF_DECAY,Y=ACCL:GUNB:455:RFS2:SPARE2:QTWF_DECAY,P=ACCL:GUNB:455:RFS2:SPARE2"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1610
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS2:SPARE2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE2:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE2:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE2:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 510
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS2:SPARE3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE3:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE3:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS2:SPARE3:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1810
+y 510
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS2:SPARE3:ITWF_DECAY,Y=ACCL:GUNB:455:RFS2:SPARE3:QTWF_DECAY,P=ACCL:GUNB:455:RFS2:SPARE3"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 290
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:RFS1:SPARE3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE3:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE3:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:RFS1:SPARE3:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1810
+y 290
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:RFS1:SPARE3:ITWF_DECAY,Y=ACCL:GUNB:455:RFS1:SPARE3:QTWF_DECAY,P=ACCL:GUNB:455:RFS1:SPARE3"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 1810
+y 70
+w 200
+h 200
+# Appearance
+border
+autoScaleBothDirections
+graphTitle "ACCL:GUNB:455:PRC:SPARE6"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-10.0"
+# Operating Modes
+nPts 0
+updateTimerMs 20
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:PRC:SPARE6:ITWF_DECAY"
+}
+yPv {
+  0 "ACCL:GUNB:455:PRC:SPARE6:QTWF_DECAY"
+}
+nPv {
+  0 "ACCL:GUNB:455:PRC:SPARE6:QTWF_DECAY.NORD"
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 1810
+y 70
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:PRC:SPARE6:ITWF_DECAY,Y=ACCL:GUNB:455:PRC:SPARE6:QTWF_DECAY,P=ACCL:GUNB:455:PRC:SPARE6"
+}
+endObjectProperties
+

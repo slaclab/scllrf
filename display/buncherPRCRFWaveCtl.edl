@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1959
-y 123
+x 1973
+y 305
 w 460
 h 691
 font "helvetica-medium-r-18.0"
@@ -52,31 +52,6 @@ lineColor index 14
 fillColor index 34
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 100
-y 400
-w 40
-h 30
-controlPv "$(P)WF_N_ACTIVE"
-format "exponential"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-fgAlarm
-bgColor index 12
-nullColor index 0
-smartRefresh
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-endObjectProperties
-
 # (Text Control)
 object activeXTextDspClass
 beginObjectProperties
@@ -84,10 +59,10 @@ major 4
 minor 7
 release 0
 x 275
-y 270
+y 260
 w 90
-h 25
-controlPv "$(P)WF_A_2_AVG"
+h 30
+controlPv "$(P)PRLFWD:AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -101,26 +76,6 @@ newPos
 objType "controls"
 clipToDspLimits
 noExecuteClipMask
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 20
-y 400
-w 72
-h 21
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "# Active:"
-}
-autoSize
 endObjectProperties
 
 # (Static Text)
@@ -145,23 +100,6 @@ value {
 autoSize
 endObjectProperties
 
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 120
-y 140
-w 20
-h 240
-controlPv "$(P)KEEP_R"
-lineColor index 14
-onColor index 55
-offColor index 56
-numBits 12
-endObjectProperties
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
@@ -177,8 +115,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 45
 value {
-  "Cav In"
-  "Rev"
+  "Cav 2"
 }
 endObjectProperties
 
@@ -197,7 +134,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 41
 value {
-  "Cav In Fwd"
+  "Cav 1"
 }
 endObjectProperties
 
@@ -216,7 +153,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 36
 value {
-  "SSA Rev"
+  "PRL Rev"
 }
 endObjectProperties
 
@@ -235,69 +172,8 @@ fontAlign "center"
 fgColor index 14
 bgColor index 31
 value {
-  "SSA Fwd"
+  "PRL Fwd"
 }
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 300
-w 60
-h 30
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 1
-bgColor index 26
-value {
-  "RF2 Loop"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 340
-w 60
-h 30
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 14
-bgColor index 21
-value {
-  "RF1 Loop"
-}
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 80
-y 380
-w 60
-h 20
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 50
-botShadowColor index 52
-controlPv "$(P)WF_CHAN_ENABLE"
-pressValue "0"
-onLabel "All Off"
-offLabel "All Off"
-3d
-font "helvetica-medium-r-12.0"
 endObjectProperties
 
 # (Text Control)
@@ -307,10 +183,10 @@ major 4
 minor 7
 release 0
 x 370
-y 270
+y 260
 w 65
-h 25
-controlPv "$(P)WF_P_2_AVG"
+h 30
+controlPv "$(P)PRLFWD:PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -324,102 +200,6 @@ newPos
 objType "controls"
 clipToDspLimits
 noExecuteClipMask
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 355
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B0"
-pressValue "0"
-onLabel "Off"
-offLabel "Off"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 340
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B0"
-pressValue "1"
-onLabel "On"
-offLabel "On"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 315
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B1"
-pressValue "0"
-onLabel "Off"
-offLabel "Off"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 300
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B1"
-pressValue "1"
-onLabel "On"
-offLabel "On"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
 endObjectProperties
 
 # (Message Button)
@@ -620,15 +400,16 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 100
-y 60
+x 105
+y 260
 w 40
-h 320
+h 30
 controlPv "$(P)WF_CHAN_ENABLE"
 lineColor index 14
 onColor index 55
 offColor index 56
-numBits 8
+numBits 1
+shift 2
 endObjectProperties
 
 # (Slider)
@@ -663,10 +444,10 @@ major 4
 minor 7
 release 0
 x 275
-y 350
+y 220
 w 90
-h 25
-controlPv "$(P)WF_A_0_AVG"
+h 30
+controlPv "$(P)PRLREV:AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -689,10 +470,10 @@ major 4
 minor 7
 release 0
 x 370
-y 350
+y 220
 w 65
-h 25
-controlPv "$(P)WF_P_0_AVG"
+h 30
+controlPv "$(P)PRLREV:PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -715,10 +496,10 @@ major 4
 minor 7
 release 0
 x 275
-y 310
+y 180
 w 90
-h 25
-controlPv "$(P)WF_A_1_AVG"
+h 30
+controlPv "$(P)CAV1:AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -741,10 +522,10 @@ major 4
 minor 7
 release 0
 x 370
-y 310
+y 180
 w 65
-h 25
-controlPv "$(P)WF_P_1_AVG"
+h 30
+controlPv "$(P)CAV1:PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -767,10 +548,10 @@ major 4
 minor 7
 release 0
 x 275
-y 230
+y 140
 w 90
-h 25
-controlPv "$(P)WF_A_3_AVG"
+h 30
+controlPv "$(P)CAV2:AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -793,114 +574,10 @@ major 4
 minor 7
 release 0
 x 370
-y 230
+y 140
 w 65
-h 25
-controlPv "$(P)WF_P_3_AVG"
-format "float"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 4
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 275
-y 190
-w 90
-h 25
-controlPv "$(P)WF_A_3_AVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 370
-y 190
-w 65
-h 25
-controlPv "$(P)WF_P_3_AVG"
-format "float"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 4
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 275
-y 150
-w 90
-h 25
-controlPv "$(P)WF_A_5_AVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 370
-y 150
-w 65
-h 25
-controlPv "$(P)WF_P_5_AVG"
+h 30
+controlPv "$(P)CAV2:PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -944,8 +621,8 @@ minor 1
 release 1
 x 275
 y 35
-w 70
-h 30
+w 64
+h 32
 font "helvetica-medium-r-14.0"
 fontAlign "center"
 fgColor index 14
@@ -1304,269 +981,6 @@ showLabel
 showValue
 endObjectProperties
 
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 20
-y 380
-w 60
-h 20
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 50
-botShadowColor index 52
-controlPv "$(P)WF_CHAN_ENABLE"
-pressValue "0xC3"
-onLabel "Defaults"
-offLabel "Defaults"
-3d
-font "helvetica-medium-r-12.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 115
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B6"
-pressValue "0"
-onLabel "Off"
-offLabel "Off"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 100
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B6"
-pressValue "1"
-onLabel "On"
-offLabel "On"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 75
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B7"
-pressValue "0"
-onLabel "Off"
-offLabel "Off"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 70
-y 60
-w 30
-h 15
-fgColor index 14
-onColor index 51
-offColor index 51
-topShadowColor index 0
-botShadowColor index 14
-controlPv "$(P)WF_CHAN_ENABLE.B7"
-pressValue "1"
-onLabel "On"
-offLabel "On"
-3d
-useEnumNumeric
-font "helvetica-medium-r-8.0"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 60
-w 60
-h 30
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 14
-bgColor index 55
-value {
-  "Circ Load"
-  "Rev"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 100
-w 60
-h 30
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 14
-bgColor index 50
-value {
-  "Circ Load"
-  "Fwd"
-}
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 275
-y 110
-w 90
-h 25
-controlPv "$(P)WF_A_6_AVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 370
-y 110
-w 65
-h 25
-controlPv "$(P)WF_P_6_AVG"
-format "float"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 4
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 275
-y 70
-w 90
-h 25
-controlPv "$(P)WF_A_7_AVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 370
-y 70
-w 65
-h 25
-controlPv "$(P)WF_P_7_AVG"
-format "float"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 4
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
 # (Menu Button)
 object activeMenuButtonClass
 beginObjectProperties
@@ -1583,7 +997,6 @@ inconsistentColor index 36
 topShadowColor index 1
 botShadowColor index 11
 controlPv "$(P)WF_EDGE_TRIGGER"
-indicatorPv "$(P)PULSE_BOUNDARY_W"
 font "helvetica-medium-r-14.0"
 endObjectProperties
 
@@ -1594,10 +1007,10 @@ major 4
 minor 7
 release 0
 x 180
-y 270
+y 260
 w 90
-h 25
-controlPv "$(P)WF_A_2_STDAVG"
+h 30
+controlPv "$(P)PRLFWD:ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1620,10 +1033,10 @@ major 4
 minor 7
 release 0
 x 180
-y 350
+y 220
 w 90
-h 25
-controlPv "$(P)WF_A_0_STDAVG"
+h 30
+controlPv "$(P)PRLREV:ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1646,10 +1059,10 @@ major 4
 minor 7
 release 0
 x 180
-y 310
+y 180
 w 90
-h 25
-controlPv "$(P)WF_A_1_STDAVG"
+h 30
+controlPv "$(P)CAV1:ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1672,114 +1085,10 @@ major 4
 minor 7
 release 0
 x 180
-y 230
+y 140
 w 90
-h 25
-controlPv "$(P)WF_A_3_STDAVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 180
-y 190
-w 90
-h 25
-controlPv "$(P)WF_A_3_STDAVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 180
-y 150
-w 90
-h 25
-controlPv "$(P)WF_A_5_STDAVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 180
-y 110
-w 90
-h 25
-controlPv "$(P)WF_A_6_STDAVG"
-format "exponential"
-font "helvetica-medium-r-14.0"
-fgColor index 15
-bgColor index 12
-motifWidget
-precision 3
-nullColor index 40
-smartRefresh
-useHexPrefix
-newPos
-objType "controls"
-clipToDspLimits
-noExecuteClipMask
-endObjectProperties
-
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 180
-y 70
-w 90
-h 25
-controlPv "$(P)WF_A_7_STDAVG"
+h 30
+controlPv "$(P)CAV2:ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1803,8 +1112,8 @@ minor 1
 release 1
 x 190
 y 35
-w 70
-h 30
+w 64
+h 32
 font "helvetica-medium-r-14.0"
 fontAlign "center"
 fgColor index 14
@@ -1815,5 +1124,59 @@ value {
   "Std/Mean"
 }
 autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 105
+y 220
+w 40
+h 30
+controlPv "$(P)WF_CHAN_ENABLE"
+lineColor index 14
+onColor index 55
+offColor index 56
+numBits 1
+shift 3
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 105
+y 180
+w 40
+h 30
+controlPv "$(P)WF_CHAN_ENABLE"
+lineColor index 14
+onColor index 55
+offColor index 56
+numBits 1
+shift 4
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 105
+y 140
+w 40
+h 30
+controlPv "$(P)WF_CHAN_ENABLE"
+lineColor index 14
+onColor index 55
+offColor index 56
+numBits 1
+shift 5
 endObjectProperties
 

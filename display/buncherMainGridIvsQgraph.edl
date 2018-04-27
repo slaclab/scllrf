@@ -1,0 +1,1047 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1979
+y 218
+w 975
+h 978
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 60
+w 420
+h 890
+lineColor index 14
+fillColor index 0
+lineWidth 3
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 60
+w 420
+h 40
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 60
+w 220
+h 890
+lineColor index 14
+fillColor index 0
+lineWidth 3
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 60
+w 220
+h 40
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 40
+y 110
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD1:ITWF,Y=ACCL:GUNB:455:FWD1:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 40
+y 110
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD1:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD1:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 40
+y 320
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD2:ITWF,Y=ACCL:GUNB:455:FWD2:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 40
+y 320
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD2:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD2:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 540
+y 110
+w 400
+h 400
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:CAV1:ITWF,Y=ACCL:GUNB:455:CAV1:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 540
+y 110
+w 400
+h 400
+# Appearance
+graphTitle "Cavity Probe 1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:CAV1:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:CAV1:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 540
+y 530
+w 400
+h 400
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:CAV2:ITWF,Y=ACCL:GUNB:455:CAV2:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 540
+y 530
+w 400
+h 400
+# Appearance
+graphTitle "Cavity Probe 2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:CAV2:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:CAV2:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 1810
+h 40
+lineColor index 66
+fill
+fillColor index 66
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 0
+w 370
+h 40
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 53
+useDisplayBg
+value {
+  "LCLS-II RF Buncher"
+  "I vs. Q"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 750
+y 10
+w 60
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+label "Exit"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 840
+y 10
+w 110
+h 20
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Home Screen..."
+numCmds 1
+command {
+  0 "lclshome &"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 70
+w 220
+h 20
+font "helvetica-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Forward"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 540
+y 70
+w 400
+h 20
+font "helvetica-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Cavity"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 40
+y 530
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD3:ITWF,Y=ACCL:GUNB:455:FWD3:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 40
+y 530
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD3:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD3:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 40
+y 740
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:FWD4:ITWF,Y=ACCL:GUNB:455:FWD4:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 40
+y 740
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:FWD4:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:FWD4:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 280
+y 60
+w 220
+h 890
+lineColor index 14
+fillColor index 0
+lineWidth 3
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 280
+y 60
+w 220
+h 40
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 290
+y 110
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV1:ITWF,Y=ACCL:GUNB:455:REV1:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 290
+y 110
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 1"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV1:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV1:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 290
+y 320
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV2:ITWF,Y=ACCL:GUNB:455:REV2:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 290
+y 320
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV2:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV2:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 280
+y 70
+w 220
+h 20
+font "helvetica-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Reverse"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 290
+y 530
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV3:ITWF,Y=ACCL:GUNB:455:REV3:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 290
+y 530
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 3"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV3:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV3:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 290
+y 740
+w 200
+h 200
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "gunbSingleIvsQgraph.edl"
+}
+symbols {
+  0 "X=ACCL:GUNB:455:REV4:ITWF,Y=ACCL:GUNB:455:REV4:QTWF"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 8
+release 0
+# Geometry
+x 290
+y 740
+w 200
+h 200
+# Appearance
+autoScaleBothDirections
+graphTitle "SSA 2"
+xLabel "I"
+yLabel "Q"
+fgColor index 14
+bgColor index 12
+gridColor index 11
+font "helvetica-medium-r-12.0"
+# Operating Modes
+nPts 2
+# X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xMax 1
+xShowLabelGrid
+# Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+yMax 1
+yShowLabelGrid
+# Y2 axis properties
+y2AxisSrc "AutoScale"
+y2Max 1
+# Trace Properties
+numTraces 1
+xPv {
+  0 "ACCL:GUNB:455:REV4:ITWF"
+}
+yPv {
+  0 "ACCL:GUNB:455:REV4:QTWF"
+}
+xSigned {
+  0 1
+}
+ySigned {
+  0 1
+}
+plotColor {
+  0 index 15
+}
+endObjectProperties
+

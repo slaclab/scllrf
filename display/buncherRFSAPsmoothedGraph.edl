@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1193
-y 127
-w 651
-h 646
+x 54
+y 102
+w 665
+h 661
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -30,104 +30,73 @@ major 4
 minor 8
 release 0
 # Geometry
-x 0
-y 0
+x 10
+y 10
 w 640
 h 320
 # Appearance
 border
-graphTitle "I Waveforms"
+autoScaleBothDirections
+graphTitle "Amplitude Waveforms"
 xLabel "Time (s)"
-yLabel "I"
+yLabel "A"
 fgColor index 14
 bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-traceCtlPv "$(P)WF_CHAN_DISABLE"
-resetPv "$(P)WF_UPDATE_PLOT"
+nPts 0
+updateTimerMs 20
+resetPv "$(P)RFS$(N):WF_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
 xMax 1
+xShowLabelGrid
 # Y axis properties
 showYAxis
 yAxisSrc "AutoScale"
 yMax 1
+yShowLabelGrid
 # Y2 axis properties
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 8
+numTraces 3
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+  0 "$(P)RFS$(SSA):WF_X_AXIS"
+  1 "$(P)RFS$(SSA):WF_X_AXIS"
+  2 "$(P)RFS$(SSA):WF_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_I_0"
-  1 "$(P)WF_I_1"
-  2 "$(P)WF_I_2"
-  3 "$(P)WF_I_3"
-  4 "$(P)WF_I_4"
-  5 "$(P)WF_I_5"
-  6 "$(P)WF_I_6"
-  7 "$(P)WF_I_7"
+  0 "$(P)DRV$(SSA):AWF_SMOO.AVAL"
+  1 "$(P)FWD$(SSA):AWF_SMOO.AVAL"
+  2 "$(P)REV$(SSA):AWF_SMOO.AVAL"
 }
 nPv {
-  0 "$(P)WF_I_0.NORD"
-  1 "$(P)WF_I_1.NORD"
-  2 "$(P)WF_I_2.NORD"
-  3 "$(P)WF_I_3.NORD"
-  4 "$(P)WF_I_4.NORD"
-  5 "$(P)WF_I_5.NORD"
-  6 "$(P)WF_I_6.NORD"
-  7 "$(P)WF_I_7.NORD"
+  0 "$(P)DRV$(SSA):AWF_SMOO.AVAL.NORD"
+  1 "$(P)FWD$(SSA):AWF_SMOO.AVAL.NUSE"
+  2 "$(P)REV$(SSA):AWF_SMOO.AVAL.NUSE"
 }
 plotUpdateMode {
   0 "xOrY"
   1 "xOrY"
   2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
 }
 opMode {
   0 "plot"
   1 "plot"
   2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
 }
 ySigned {
   0 1
   1 1
   2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
 }
 plotColor {
   0 index 21
   1 index 26
   2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
 }
 endObjectProperties
 
@@ -138,104 +107,73 @@ major 4
 minor 8
 release 0
 # Geometry
-x 0
-y 320
+x 10
+y 330
 w 640
 h 320
 # Appearance
 border
-graphTitle "Q Waveforms"
+autoScaleBothDirections
+graphTitle "Phase Waveforms"
 xLabel "Time (s)"
-yLabel "Q"
+yLabel "Phase"
 fgColor index 14
 bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-traceCtlPv "$(P)WF_CHAN_DISABLE"
-resetPv "$(P)WF_UPDATE_PLOT"
+nPts 2
+resetPv "$(P)RFS$(N):WF_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
 xMax 1
+xShowLabelGrid
 # Y axis properties
 showYAxis
-yAxisSrc "AutoScale"
-yMax 1
+yAxisSrc "fromUser"
+yMin -180
+yMax 180
+yShowLabelGrid
 # Y2 axis properties
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 8
+numTraces 3
 xPv {
   0 "$(P)WF_X_AXIS"
   1 "$(P)WF_X_AXIS"
   2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)WF_Q_0"
-  1 "$(P)WF_Q_1"
-  2 "$(P)WF_Q_2"
-  3 "$(P)WF_Q_3"
-  4 "$(P)WF_Q_4"
-  5 "$(P)WF_Q_5"
-  6 "$(P)WF_Q_6"
-  7 "$(P)WF_Q_7"
+  0 "$(P)DRV$(SSA):PWF_SMOO.AVAL"
+  1 "$(P)FWD$(SSA):PWF_SMOO.AVAL"
+  2 "$(P)REV$(SSA):PWF_SMOO.AVAL"
 }
 nPv {
-  0 "$(P)WF_Q_0.NORD"
-  1 "$(P)WF_Q_1.NORD"
-  2 "$(P)WF_Q_2.NORD"
-  3 "$(P)WF_Q_3.NORD"
-  4 "$(P)WF_Q_4.NORD"
-  5 "$(P)WF_Q_5.NORD"
-  6 "$(P)WF_Q_6.NORD"
-  7 "$(P)WF_Q_7.NORD"
+  0 "$(P)DRV$(SSA):PWF_SMOO.AVAL.NORD"
+  1 "$(P)FWD$(SSA):PWF_SMOO.AVAL.NORD"
+  2 "$(P)REV$(SSA):PWF_SMOO.AVAL.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
   1 "xOrY"
   2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
 }
 opMode {
   0 "plot"
   1 "plot"
   2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
 }
 ySigned {
   0 1
   1 1
   2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
 }
 plotColor {
   0 index 21
   1 index 26
   2 index 31
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
 }
 endObjectProperties
 
