@@ -4,3 +4,10 @@
 /scllrfPRCRegisters.template
 /scllrfRESRegisters.template
 /scllrfRESwavRegisters.template
+/BMB7Registers.template
+/GUNBRegisters.template
+/GUNBWave.edl.template
+/example.template
+/prcJsonTestRegisters.template
+/scllrfPRCRegisterAsync.db
+/scllrfPRCThisAndThatRegisters.template

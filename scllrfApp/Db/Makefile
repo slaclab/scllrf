@@ -17,6 +17,7 @@ DB += cryo-plc.db
 #DB += GunRfCalib.db
 #DB += BuncherRfCalib.db
 DB += BuncherExtra.db
+DB += BuncherWaveScreenParts.db
 
 # Install Common databases needed by All IOCs
 # ========================================================

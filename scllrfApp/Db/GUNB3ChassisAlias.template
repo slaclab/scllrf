@@ -3,6 +3,10 @@ alias( "$(P)CAV1:ITWF", "llrf$(N):w7")
 alias( "$(P)CAV1:QTWF", "llrf$(N):w8")
 alias( "$(P)AOPEN", "llrf$(N):source_amp_ao")
 alias( "$(P)POPEN", "llrf$(N):source_ph_ao")
+alias( "$(P)CAV1:DECAY_STRENGTH", "$(P)DECAY_STRENGTH")
+alias( "$(P)CAV1:DECAY_FIT_STDDEV", "$(P)DECAY_FIT_STDDEV")
+alias( "$(P)CAV1:DECAY_CONSTANT_B", "$(P)DECAY_CONSTANT_B")
+alias( "$(P)CAV1:DECAY_BW", "$(P)DECAY_BW")
 
 record( bo, "Screen1:Command" )
 {

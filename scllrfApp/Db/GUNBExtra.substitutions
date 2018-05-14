@@ -54,7 +54,7 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU	}
 file GUNBWavePerChassis.template
 {
 pattern{ P,			KEEP,		PORT }
-	{ "GUN:GUNB:100:",	"0x3C3C",	PRCReg }
+	{ "GUN:GUNB:100:",	"0xC3C3",	PRCReg }
 	{ "GUN:GUNB:100:RFS1:",	"0xFFFF",	RFS1Reg }
 	{ "GUN:GUNB:100:RFS2:",	"0xFFFF",	RFS2Reg }
 }
@@ -115,7 +115,7 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU	}
 file GUNBDecayPerChassis.template
 {
 pattern{ P,			KEEP,		PORT }
-	{ "GUN:GUNB:100:",	"0x3c3c",	PRCReg }
+	{ "GUN:GUNB:100:",	"0xC3C3",	PRCReg }
 	{ "GUN:GUNB:100:RFS1:",	"0xFFFF",	RFS1Reg }
 	{ "GUN:GUNB:100:RFS2:",	"0xFFFF",	RFS2Reg }
 }
@@ -178,10 +178,10 @@ pattern { PREF,				 NORM }
 	{ "GUN:GUNB:100:RFS2:SPARE7:",	"32767" }
 }
 
-#file GUNBLoopCalcs.db
-#{
-#	{ P = "GUN:GUNB:100:", N=1 }
-#}
+file GUNBLoopCalcs.db
+{
+	{ P = "GUN:GUNB:100:", N=1 }
+}
 
 
 file GUNBMisc.template
@@ -210,4 +210,12 @@ file GUNB3ChassisAlias.template
 file Gun3Chassis.template
 {
 	{ P = "GUN:GUNB:100:", N=1 }
+}
+
+file gainScanRecorder.template
+{
+	{ P = "GUN:GUNB:100:", N=1 }
+	{ P = "GUN:GUNB:100:", N=2 }
+	{ P = "GUN:GUNB:100:", N=3 }
+	{ P = "GUN:GUNB:100:", N=4 }
 }

@@ -107,7 +107,7 @@ public:
 	TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer,
 			int *rawParamIndex, int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
 			int *decayBWParamIndex, int *decayConstantBParamIndex, int *decayStrengthParamIndex, int *decayFitStddevParamIndex);
-	FpgaReg traceDataAck[6];
+	FpgaReg traceDataAck[5];
 	FpgaReg statusRequest;
 	void ReqTraceData();
 	int CalcWaveScale(int32_t wave_samp_per);

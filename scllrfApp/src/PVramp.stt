@@ -27,10 +27,14 @@ string     facility;
 /* Complete ramp in this much time */
 double     ramp_time;
 assign     ramp_time           to "{PREFIX}RAMP_TIME";
+double     ramp_time_left;
+assign     ramp_time_left      to "{PREFIX}RAMP_TIME_LEFT";
 
 /* Ramp the specified PV to this value */
 double     ramp_to;
 assign     ramp_to           to "{PREFIX}RAMP_TO";
+double     ramp_last_val;
+assign     ramp_last_val           to "{PREFIX}RAMP_LAST_VAL";
 
 /* Initial value of the PV to ramp */
 double     ramp_from;
@@ -45,6 +49,9 @@ assign     ramp_exp_lin    to "{PREFIX}RAMP_EXP_LIN";
 /* PV name to be ramped */
 string     ramping_pv_name;
 assign     ramping_pv_name          to "{PREFIX}RAMPING_PV_NAME";
+monitor ramping_pv_name;
+evflag name_change;
+sync ramping_pv_name to name_change;
 
 /* Assign the PV being ramped to this variable before ramping.
  * use: pvAssign( ramping_pv, ramping_pv_name);
@@ -103,11 +110,24 @@ ss ramp
 
 			ramp_abort = FALSE;
 			pvPut(ramp_abort);
+
+			ramp_time_left = 0;
+			pvPut(ramp_time_left);
 		}
 
 		/* Do nothing until the go button is pushed */
 		when(ramp_go != FALSE) {
 		} state ready_ramp
+
+		when(efTestAndClear(name_change)) {
+			pvGet(ramping_pv_name);
+			pvAssign( ramping_pv, ramping_pv_name);
+			if(pvConnected(ramping_pv)) {
+				pvGet(ramping_pv);
+				ramp_last_val = ramping_pv;
+				pvPut(ramp_last_val);
+			}
+		} state wait
 
 	} /* state wait */
 
@@ -124,6 +144,7 @@ ss ramp
 		{
 			pvGet(ramping_pv);
 			ramp_from = ramping_pv;
+			ramp_last_val = ramping_pv;
 			printf("PV ramper connected to %s = %f\n", ramping_pv_name, ramp_from);
 			ramp_steps_expected = ramp_time/RATE;
 			ramp_step_counter = 0;
@@ -179,6 +200,10 @@ ss ramp
 		exit
 		{
 			ramp_step_counter++;
+			ramp_time_left = (ramp_steps_expected - ramp_step_counter) * RATE;
+			pvPut(ramp_time_left);
+			ramp_last_val = ramping_pv;
+			pvPut(ramp_last_val);
 		}
 	} /* state ramp */
 } /* ss ramp */

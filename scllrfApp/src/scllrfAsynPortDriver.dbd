@@ -1,5 +1,5 @@
 registrar("scllrfAsynPortDriverRegister")
-registrar("scllrfPRCextraRegister")
+#registrar("scllrfPRCextraRegister")
 registrar("scllrfRESextraRegister")
 registrar("GUNBExtraRegister")
 registrar("scllrfRESRegister")

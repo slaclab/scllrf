@@ -1,0 +1,1053 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 2012
+y 137
+w 1826
+h 904
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 7
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 3
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
+title "Buncher RFS$(N) SSA$(SSA) Testing"
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 40
+y 300
+w 220
+h 30
+fgColor index 14
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "dummy Launch Matlab Freq. Loop"
+numCmds 1
+commandLabel {
+0 "dummy Launch Matlab Freq. Loop"
+}
+command {
+0 "ls"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 440
+w 300
+h 120
+lineColor index 14
+fill
+fillColor index 3
+endObjectProperties
+
+# (Choice Button)
+object activeChoiceButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 510
+w 280
+h 30
+fgColor index 13
+bgColor index 2
+selectColor index 4
+inconsistentColor index 8
+topShadowColor index 4
+botShadowColor index 4
+controlPv "LOC\\$(!W)showGrph"
+font "helvetica-bold-r-12.0"
+orientation "horizontal"
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 340
+y 50
+w 1470
+h 840
+fgColor index 12
+bgColor index 2
+topShadowColor index 1
+botShadowColor index 12
+displaySource "menu"
+filePv "LOC\\$(!W)showGrph=e:0,PRC,RFS1,RFS2"
+center
+sizeOfs 5
+numDsps 3
+displayFileName {
+0 "gunb_ApexClone_8APgraph.edl"
+1 "gunb_ApexClone_8APgraph.edl"
+2 "gunb_ApexClone_8APgraph.edl"
+}
+symbols {
+0 "X=ACCL:GUNB:455:WF_X_AXIS,WF1=ACCL:GUNB:455:PRC:SPARE1:,WF2=ACCL:GUNB:455:PRC:SPARE2:,WF3=ACCL:GUNB:455:PRLFWD:,WF4=ACCL:GUNB:455:PRLREV:,WF5=ACCL:GUNB:455:CAV1:,WF6=ACCL:GUNB:455:CAV2:,WF7=ACCL:GUNB:455:PRC:SPARE3:,WF8=ACCL:GUNB:455:PRC:SPARE4:"
+1 "X=ACCL:GUNB:455:RFS1:WF_X_AXIS,WF1=ACCL:GUNB:455:RFS1:SPARE1:,WF2=ACCL:GUNB:455:RFS1:SPARE2:,WF3=ACCL:GUNB:455:DRV1:,WF4=ACCL:GUNB:455:FWD1:,WF5=ACCL:GUNB:455:REV1:,WF6=ACCL:GUNB:455:DRV2:,WF7=ACCL:GUNB:455:FWD2:,WF8=ACCL:GUNB:455:REV2:"
+2 "X=ACCL:GUNB:455:RFS2:WF_X_AXIS,WF1=ACCL:GUNB:455:RFS2:SPARE1:,WF2=ACCL:GUNB:455:RFS2:SPARE2:,WF3=ACCL:GUNB:455:DRV3:,WF4=ACCL:GUNB:455:FWD3:,WF5=ACCL:GUNB:455:REV3:,WF6=ACCL:GUNB:455:DRV4:,WF7=ACCL:GUNB:455:FWD4:,WF8=ACCL:GUNB:455:REV4:"
+}
+noScroll
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 0
+w 1830
+h 40
+font "helvetica-bold-r-24.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 51
+value {
+"Buncher Apex-Like Controls"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 460
+w 70
+h 30
+fgColor index 14
+bgColor index 4
+inconsistentColor index 4
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P)WF_TIME_PER_POINT"
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 80
+w 300
+h 340
+lineColor index 14
+fill
+fillColor index 3
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 70
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+"Basic Settings"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 40
+y 240
+w 120
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Pulse Interval (ms)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 170
+y 240
+w 120
+h 20
+controlPv "$(P)REP_PERIOD"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 40
+y 270
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Duty Cycle (%)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 170
+y 270
+w 120
+h 20
+controlPv "$(P)DUTY_CYCLE"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 340
+w 140
+h 30
+fgColor index 14
+onColor index 9
+offColor index 4
+topShadowColor index 2
+botShadowColor index 12
+controlPv "$(P):RF_GO_W"
+pressValue "1"
+releaseValue "0"
+onLabel "Reset Interlock"
+offLabel "Reset Interlock"
+3d
+font "helvetica-bold-r-12.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 110
+w 62
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Amplitude:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 160
+w 40
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Phase:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 210
+y 110
+w 90
+h 20
+controlPv "ACCL:GUNB:455:AACT"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+precision 5
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 210
+y 160
+w 90
+h 20
+controlPv "ACCL:GUNB:455:PACT"
+font "helvetica-medium-r-12.0"
+fgColor index 16
+bgColor index 12
+precision 5
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+id "5"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 230
+y 90
+w 37
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Actual"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 130
+y 90
+w 45
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Desired"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 40
+y 210
+w 110
+h 18
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Pulse Width (ms)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 170
+y 210
+w 120
+h 20
+controlPv "$(P)PULSE_LENGTH"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 2
+editable
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 110
+y 110
+w 90
+h 90
+
+beginGroup
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 110
+y 160
+w 90
+h 33
+controlPv "ACCL:GUNB:455:POPEN"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 110
+y 110
+w 90
+h 33
+controlPv "ACCL:GUNB:455:AOPEN"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "ACCL:GUNB:455:CLOSE_LOOP_W"
+visMin "-1"
+visMax "1"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 110
+y 110
+w 90
+h 90
+
+beginGroup
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 110
+y 110
+w 90
+h 33
+controlPv "ACCL:GUNB:455:ADES"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 110
+y 160
+w 90
+h 33
+controlPv "ACCL:GUNB:455:PDES"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "ACCL:GUNB:455:CLOSE_LOOP_W"
+visMin "1"
+visMax "9999"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 430
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+"Graphs"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 590
+w 300
+h 300
+lineColor index 14
+fill
+fillColor index 3
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 580
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+value {
+"Basic Settings"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 620
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 620
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 650
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA2 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 650
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 680
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 680
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 710
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 710
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 740
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 740
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 770
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 770
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 800
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 800
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 830
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 830
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 50
+y 860
+w 134
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"SSA1 Fwd Power (W):"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 200
+y 860
+w 90
+h 20
+controlPv "ACCL:GUNB:455:FWD1:PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 390
+w 194
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Close Loop (with other automation)"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 230
+y 390
+w 80
+h 20
+fgColor index 14
+onColor index 11
+offColor index 4
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)BT_CLOSELOOP"
+3d
+font "helvetica-bold-r-12.0"
+objType "controls"
+endObjectProperties
+

@@ -72,6 +72,7 @@ record(ai, "$(P)DECAY_BW") {
 	field(INP, "@asyn($(PORT),$(CH),1) DECAY_BW")
 	field(SCAN, "I/O Intr")
 	field(EGU, "Hz")
+	info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 record(ai, "$(P)DECAY_CONSTANT_B") {
 	field(PINI, "NO")
@@ -79,18 +80,21 @@ record(ai, "$(P)DECAY_CONSTANT_B") {
 	field(INP, "@asyn($(PORT),$(CH),1) DECAY_CONSTANT_B")
 	field(SCAN, "I/O Intr")
 	field(EGU, "Hz")
+	info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 record(ai, "$(P)DECAY_STRENGTH") {
 	field(PINI, "NO")
 	field(DTYP, "asynFloat64")
 	field(INP, "@asyn($(PORT),$(CH),1) DECAY_STRENGTH")
 	field(SCAN, "I/O Intr")
+	info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 record(ai, "$(P)DECAY_FIT_STDDEV") {
 	field(PINI, "NO")
 	field(DTYP, "asynFloat64")
 	field(INP, "@asyn($(PORT),$(CH),1) DECAY_FIT_STDDEV")
 	field(SCAN, "I/O Intr")
+	info( autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 #! Further lines contain data used by VisualDCT

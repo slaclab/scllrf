@@ -1,3 +1,27 @@
+# Deal with all the things that are different between Gun and Buncher,
+# and bringing the 3 chassis and 4 SSAs together as a system
+
+record (calc, "ACCL:GUNB:455:FWD:AMEAN" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "ACCL:GUNB:455:FWD1:AMEAN" )
+	field( INPB, "ACCL:GUNB:455:FWD2:AMEAN" )
+	field( INPC, "ACCL:GUNB:455:FWD3:AMEAN" )
+	field( INPD, "ACCL:GUNB:455:FWD4:AMEAN" )
+	field( CALC, "A+B+C+D")
+	field( SCAN, ".2 second" )
+}
+record (calc, "ACCL:GUNB:455:FWD:PWR" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "ACCL:GUNB:455:FWD1:PWR" )
+	field( INPB, "ACCL:GUNB:455:FWD2:PWR" )
+	field( INPC, "ACCL:GUNB:455:FWD3:PWR" )
+	field( INPD, "ACCL:GUNB:455:FWD4:PWR" )
+	field( CALC, "A+B+C+D")
+	field( SCAN, ".2 second" )
+}
+
 record (calc, "ACCL:GUNB:455:REV:AMEAN" )
 {
 	field( DESC, "Total reverse amplitude" )
@@ -8,15 +32,38 @@ record (calc, "ACCL:GUNB:455:REV:AMEAN" )
 	field( CALC, "A+B+C+D")
 	field( SCAN, ".2 second" )
 }
+record (calc, "ACCL:GUNB:455:REV:PWR" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "ACCL:GUNB:455:REV1:PWR" )
+	field( INPB, "ACCL:GUNB:455:REV2:PWR" )
+	field( INPC, "ACCL:GUNB:455:REV3:PWR" )
+	field( INPD, "ACCL:GUNB:455:REV4:PWR" )
+	field( CALC, "A+B+C+D")
+	field( SCAN, ".2 second" )
+}
 
-record (calc, "ACCL:GUNB:455:FWD:AMEAN" )
+# Useful for setting max fwd pwr limit
+record (calc, "ACCL:GUNB:455:FWD:AMEAN_MAX" )
 {
 	field( DESC, "Total forward amplitude" )
 	field( INPA, "ACCL:GUNB:455:FWD1:AMEAN" )
 	field( INPB, "ACCL:GUNB:455:FWD2:AMEAN" )
 	field( INPC, "ACCL:GUNB:455:FWD3:AMEAN" )
 	field( INPD, "ACCL:GUNB:455:FWD4:AMEAN" )
-	field( CALC, "A+B+C+D")
+	field( CALC, "MAX(A,B,C,D)")
+	field( SCAN, ".2 second" )
+}
+
+# Useful for SSA balancing
+record (calc, "ACCL:GUNB:455:FWD:AMEAN_MIN" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "ACCL:GUNB:455:FWD1:AMEAN" )
+	field( INPB, "ACCL:GUNB:455:FWD2:AMEAN" )
+	field( INPC, "ACCL:GUNB:455:FWD3:AMEAN" )
+	field( INPD, "ACCL:GUNB:455:FWD4:AMEAN" )
+	field( CALC, "MIN(A,B,C,D)")
 	field( SCAN, ".2 second" )
 }
 
@@ -47,65 +94,30 @@ record (calc, "ACCL:GUNB:455:CW_DETUNE" )
 	field( INPC, "ACCL:GUNB:455:FWD2:PMEAN" )
 	field( INPD, "ACCL:GUNB:455:FWD3:PMEAN" )
 	field( INPE, "ACCL:GUNB:455:FWD4:PMEAN" )
-	field( CALC, "A -((B+C+D+E)/4)")
+	#XXXXX
+	field( INPF, "$(P)SMOOTHED_BW")
+	field( CALC, "F*TAN(A -((B+C+D+E)/4))")
 	field( FLNK, "ACCL:GUNB:455:DFACT" )
 }
 
-record (calc, "ACCL:GUNB:455:DFACT" )
+# We expect no slope, this is just experimental.
+# Only works when digitizer and output frequencies are separated
+# find the derivative of phse dt,
+# then get the median to kick out those ugly phase wraps
+record( acalcout, "ACCL:GUNB:455:FWD:DPDT" )
 {
-	field( INPA, "ACCL:GUNB:455:CW_DETUNE" )
-	field( INPB, "ACCL:GUNB:455:CAV1:DECAY_STRENGTH")
-	field( INPC, "ACCL:GUNB:455:CAV2:DECAY_STRENGTH")
-	field( INPD, "ACCL:GUNB:455:CAV1:DECAY_CONSTANT_B")
-	field( INPE, "ACCL:GUNB:455:CAV2:DECAY_CONSTANT_B")
-	field( INPF, "ACCL:GUNB:455:DUTY_CYCLE")
-	field( CALC, "F>98.22?A:B>C?D:E")
+	field( INAA, "ACCL:GUNB:455:FWD1:PWF CP")
+	field( INPA, "ACCL:GUNB:455:WF_TIME_STEP")
+	field( CALC, "(AA-(AA<<1))/A")
+	field( FLNK, "ACCL:GUNB:455:DPDT_DETUNE")
+	field( NELM, "512")
+	field( NUSE, "512")
+}
+record( compress, "ACCL:GUNB:455:DPDT_DETUNE")
+{
+	field( ALG, "N to 1 Median")
+	field( N, "512")
+	field( NSAM, "1")
+	field( INP, "ACCL:GUNB:455:FWD:DPDT.AVAL")
 }
 
-
-record ( acalcout, "ACCL:GUNB:455:AACT_DECAY" )
-{
-	field( INAA, "ACCL:GUNB:455:CAV1:AWF_DECAY" )
-	field( INBB, "ACCL:GUNB:455:CAV2:AWF_DECAY" )
-# The equation is odd because the record wasn't working with AA[0]
-	field( CALC, "MAX(AMAX(AA[0,1]),AMAX(BB[0,1]))" )
-	field( OUT, "ACCL:GUNB:455:ADES PP")
-	field( OOPT, "On Change")
-	field( SCAN, ".2 second" )
-	field( PINI, "YES" )
-# This should be inactive when loop is CLOSED
-	field( SDIS, "ACCL:GUNB:455:CLOSE_LOOP_W")
-	field( DISV, "1")
-	field( NELM, "1")
-	field( NUSE, "1")
-}
-
-
-record ( acalcout, "ACCL:GUNB:455:PACT_DECAY" )
-{
-	field( INAA, "ACCL:GUNB:455:CAV1:PWF_DECAY" )
-	field( INBB, "ACCL:GUNB:455:CAV2:PWF_DECAY" )
-	field( CALC, "MAX(AMAX(AA[0,1]),AMAX(BB[0,1]))" )
-	field( OUT, "ACCL:GUNB:455:PDES PP")
-	field( OOPT, "On Change")
-	field( SCAN, ".2 second" )
-	field( PINI, "YES" )
-# This should be inactive when loop is CLOSED
-# The equation is odd because the record wasn't working with AA[0]
-	field( SDIS, "ACCL:GUNB:455:CLOSE_LOOP_W")
-	field( DISV, "1")
-	field( NELM, "1")
-	field( NUSE, "1")
-}
-
-record (bo, "ACCL:GUNB:455:RFCTRL" )
-{
-	field( DESC, "Hook for RF control sequence" )
-	field( ONAM, "On" )
-	field( ZNAM, "OFF" )
-}
-
-record (mbbi, "ACCL:GUNB:455:RFMODE" )
-{
-	field( DESC, "Hook for RF control sequence" )
-}

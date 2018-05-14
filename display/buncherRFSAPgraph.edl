@@ -94,9 +94,9 @@ ySigned {
   2 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
+  0 index 16
+  1 index 30
+  2 index 25
 }
 endObjectProperties
 
@@ -171,9 +171,9 @@ ySigned {
   2 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
+  0 index 16
+  1 index 30
+  2 index 25
 }
 endObjectProperties
 

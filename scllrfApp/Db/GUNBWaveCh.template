@@ -34,7 +34,7 @@ record(acalcout, "$(P)ITMEAN") {
 	field(INAA, "$(P)ITWF CPP")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
 }
 
 record(waveform, "$(P)QTWF") {
@@ -63,7 +63,7 @@ record(acalcout, "$(P)QTMEAN") {
 	field(INAA, "$(P)QTWF CPP")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
 }
 
 record(waveform, "$(P)AWF") {
@@ -87,17 +87,27 @@ record(ao, "$(P)SCALE") {
 }
 
 record(acalcout, "$(P)AWF_SMOO") {
-	field(INAA, "$(P)AWF CPP")
+	field(INAA, "$(P)AWF CP")
 	field(A, "50")
 	field(CALC, "(AA/A)+(AVAL*(1-1/A))")
 	field(NELM, "8192")
+	info( autosaveFields, "A")
+	field(EGU, "$(EGU)")
 }
 
 record(acalcout, "$(P)AMEAN") {
 	field(INAA, "$(P)AWF CPP")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(calc, "$(P)PWR") {
+	field(INPA, "$(P)AMEAN CPP")
+	field(CALC, "A^2")
+	field(PREC, "5")
+	field(EGU, "W")
 }
 
 record(acalcout, "$(P)ASTD") {
@@ -105,7 +115,8 @@ record(acalcout, "$(P)ASTD") {
 	field(INAA, "$(P)AWF CPP")
 	field(CALC, "STD(AA)")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
 }
 
 record(acalcout, "$(P)ARSTD") {
@@ -114,7 +125,8 @@ record(acalcout, "$(P)ARSTD") {
 	field(INPB, "$(P)AMEAN CPP")
 	field(CALC, "A/B")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
 }
 
 record(waveform, "$(P)PWF") {
@@ -123,7 +135,7 @@ record(waveform, "$(P)PWF") {
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_P")
 	field(PREC, "1")
-	field(EGU, "deg")
+	field(EGU, "degrees")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
 	field(FLNK, "$(P)PWF_NUSE")
@@ -152,13 +164,16 @@ record(acalcout, "$(P)PWF_SMOO") {
 	field(A, "50")
 	field(CALC, "(AA/A)+(AVAL*(1-1/A))")
 	field(NELM, "8192")
+	info( autosaveFields, "A")
+	field(EGU, "degrees")
 }
 
 record(acalcout, "$(P)PMEAN") {
 	field(INAA, "$(P)PWF CPP")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
+	field(EGU, "degrees")
 }
 
 record(acalcout, "$(P)PSTD") {
@@ -166,7 +181,8 @@ record(acalcout, "$(P)PSTD") {
 	field(INAA, "$(P)PWF CPP")
 	field(CALC, "STD(AA)")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
+	field(EGU, "degrees")
 }
 
 record(acalcout, "$(P)PRSTD") {
@@ -175,7 +191,8 @@ record(acalcout, "$(P)PRSTD") {
 	field(INPB, "$(P)PMEAN CPP")
 	field(CALC, "A/B")
 	field(NELM, "8192")
-	field(PREC, "7")
+	field(PREC, "5")
+	field(EGU, "degrees")
 }
 
 record(ai, "$(P)TD_DECAY_BW") {
@@ -183,12 +200,14 @@ record(ai, "$(P)TD_DECAY_BW") {
 	field(DTYP, "asynFloat64")
 	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_BW")
 	field(SCAN, "I/O Intr")
+	field(EGU, "Hz")
 }
 record(ai, "$(P)TD_DECAY_CONSTANT_B") {
 	field(PINI, "NO")
 	field(DTYP, "asynFloat64")
 	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_CONSTANT_B")
 	field(SCAN, "I/O Intr")
+	field(EGU, "s")
 }
 record(ai, "$(P)TD_DECAY_STRENGTH") {
 	field(PINI, "NO")
@@ -201,6 +220,7 @@ record(ai, "$(P)TD_DECAY_FIT_STDDEV") {
 	field(DTYP, "asynFloat64")
 	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_FIT_STDDEV")
 	field(SCAN, "I/O Intr")
+	field(EGU, "$(EGU)")
 }
 
 #! Further lines contain data used by VisualDCT

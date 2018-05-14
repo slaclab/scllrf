@@ -28,9 +28,6 @@
 #include <asynCommonSyncIO.h>
 #include <limits>
 #include <netinet/in.h>
-#include <iostream>
-#include <initializer_list>
-using namespace std;
 #include <math.h>
 #include <execinfo.h>
 
@@ -262,8 +259,9 @@ void scllrfAsynPortDriver::init()
 scllrfAsynPortDriver::~scllrfAsynPortDriver()
 {
 	isShuttingDown_ = true;
-	FpgaReg lastMsg = {0,blankData};
-	_singleMsgQ.send(&lastMsg, sizeof(FpgaReg));
+	FpgaReg finalMsg = {0,blankData};
+	htonFpgaRegArray(&finalMsg, sizeof(FpgaReg));
+	_singleMsgQ.send(&finalMsg, sizeof(FpgaReg));
 	epicsThreadSleep(0.1); // Allow threads to run and exit
 	wakeupPoller();
 	wakeupReader();
@@ -314,16 +312,21 @@ asynStatus scllrfAsynPortDriver::startSingleMessageQueuer(const char *netPortNam
 	return asynSuccess;
 }
 
-
+// This will queue messages as the requests are received, and aggregate
+// them into UDP packets. They will be sent out in the order queued.
+//
+// To send messages through the single message queuer, use _singleMsgQ.send(&message, messageSize)
+// where:
+// message is an FpgaReg or array of them
+// messageSize is sizeof(message), the size in bytes not array elements.
 void scllrfAsynPortDriver::singleMessageQueuer()
 {
 	FpgaReg pMsgBuff[maxRegPerMsg + nonceSize]; // buffer big enough for one packet
 	unsigned int sendBufByteCount;
 	unsigned int sendBufRegCount;
 	printf("\n%s \n", __PRETTY_FUNCTION__);
-//    htonFpgaRegArray(traceAck, sizeof(traceAck)/sizeof(FpgaReg));
-//
-//	// Main polling loop
+
+// Main polling loop
 	while (1)
 	{
 
@@ -418,27 +421,27 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
 	}
 	else {
 		// Convert function to address & FpgaReg.
-		status = functionToRegister(function, &regSendBuf[1]);
+		status = functionToRegister(function, &regSendBuf[0]);
 		if (status == asynSuccess) // Yes, this function is a register write
 		{
 			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
 					"%s: found function=%d, name=%s, at chan %d + %d\n",
-					__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
-			regSendBuf[1].data = (uint32_t) value;
-			regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
+					__PRETTY_FUNCTION__, function, paramName, regSendBuf[0].addr, chan);
+			regSendBuf[0].data = (uint32_t) value;
+			regSendBuf[0].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
 			if(chan == 0)
 			{
-				regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
+				regSendBuf[1].addr = (uint32_t) (regSendBuf[0].addr | flagReadMask); // Request readback value for the same register
 			}
 			htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 
 			if(chan== 0)
 			{
-				_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
+				_singleMsgQ.send(&regSendBuf[0], 2*sizeof( FpgaReg ));
 			}
 			else
 			{
-				_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
+				_singleMsgQ.send(&regSendBuf[0], sizeof( FpgaReg ));
 			}
 		}
 		else
@@ -493,28 +496,28 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 	}
 	else {
 		// Convert function to address & FpgaReg.
-		status = functionToRegister(function, &regSendBuf[1]);
+		status = functionToRegister(function, &regSendBuf[0]);
 		if (status == asynSuccess) // Yes, this function is a register write
 		{
 			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
 				"%s: found function=%d, name=%s, at chan %d + %d\n",
-				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr, chan);
-			regSendBuf[1].data = (int32_t) value;
-			regSendBuf[1].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
+				__PRETTY_FUNCTION__, function, paramName, regSendBuf[0].addr, chan);
+			regSendBuf[0].data = (int32_t) value;
+			regSendBuf[0].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
 			// Writable arrays are not also readable.
 			if(chan == 0) // If not a writable array, send along a readback request
 			{
-				regSendBuf[2].addr = (uint32_t) (regSendBuf[1].addr | flagReadMask); // Request readback value for the same register
+				regSendBuf[1].addr = (uint32_t) (regSendBuf[0].addr | flagReadMask); // Request readback value for the same register
 			}
 			htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 
 			if(chan== 0) // Probably not a writable array
 			{
-				_singleMsgQ.send(&regSendBuf[1], 2*sizeof( FpgaReg ));
+				_singleMsgQ.send(&regSendBuf[0], 2*sizeof( FpgaReg ));
 			}
 			else
 			{
-				_singleMsgQ.send(&regSendBuf[1], sizeof( FpgaReg ));
+				_singleMsgQ.send(&regSendBuf[0], sizeof( FpgaReg ));
 			}
 		}
 		else
@@ -565,16 +568,16 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 			__PRETTY_FUNCTION__, function, paramName);
 
 	// Convert function to address & FpgaReg.
-	status = functionToRegister(function, &regSendBuf[1]);
-	if ((status == asynSuccess) && (regSendBuf[1].addr & flagReadMask)) // Yes, this function is a register write
+	status = functionToRegister(function, &regSendBuf[0]);
+	if ((status == asynSuccess) && (regSendBuf[0].addr & flagReadMask)) // Yes, this function is a register write
 	{
 		asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
 				"%s: found function=%d, name=%s, at address %d\n",
 				__PRETTY_FUNCTION__, function, paramName, regSendBuf[1].addr);
-		regSendBuf[1].data = (int32_t) *value;
-		regSendBuf[1].addr += (uint32_t) address;
+		regSendBuf[0].data = (int32_t) *value;
+		regSendBuf[0].addr += (uint32_t) address;
 		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
-		sendRegRequest(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
+		_singleMsgQ.send(&regSendBuf[0], sizeof( FpgaReg ));
 	}
 	else
 	{
@@ -1303,7 +1306,7 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
 	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
 	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
 
-	return asynSuccess;
+	return status;
 }
 
 /**  Extract register address and data from the received message and set the appropriate
@@ -1319,6 +1322,341 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 {
 	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
+	asynStatus status = asynSuccess;
+
+	/* Map address to parameter, set the parameter in the parameter library. */
+	switch (pFromFpga->addr)
+	{
+	case MagicRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_MagicR,
+				(pFromFpga->data & MagicMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				MagicRString,
+				(unsigned int) (pFromFpga->data & MagicMask));
+	break;
+
+	case DspFlavorRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_DspFlavorR,
+				(pFromFpga->data & DspFlavorMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				DspFlavorRString,
+				(unsigned int) (pFromFpga->data & DspFlavorMask));
+	break;
+
+	case BuildYearRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildYearR,
+				(pFromFpga->data & BuildYearMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildYearRString,
+				(unsigned int) (pFromFpga->data & BuildYearMask));
+	break;
+
+	case BuildMonthRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildMonthR,
+				(pFromFpga->data & BuildMonthMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildMonthRString,
+				(unsigned int) (pFromFpga->data & BuildMonthMask));
+	break;
+
+	case BuildDayRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildDayR,
+				(pFromFpga->data & BuildDayMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildDayRString,
+				(unsigned int) (pFromFpga->data & BuildDayMask));
+	break;
+
+	case BuildHourRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildHourR,
+				(pFromFpga->data & BuildHourMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildHourRString,
+				(unsigned int) (pFromFpga->data & BuildHourMask));
+	break;
+
+	case BuildMinuteRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BuildMinuteR,
+				(pFromFpga->data & BuildMinuteMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BuildMinuteRString,
+				(unsigned int) (pFromFpga->data & BuildMinuteMask));
+	break;
+
+	case CodeIsCleanRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_CodeIsCleanR,
+				(pFromFpga->data & CodeIsCleanMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				CodeIsCleanRString,
+				(unsigned int) (pFromFpga->data & CodeIsCleanMask));
+	break;
+
+	case ToolRevRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_ToolRevR,
+				(pFromFpga->data & ToolRevMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				ToolRevRString,
+				(unsigned int) (pFromFpga->data & ToolRevMask));
+	break;
+
+	case UserRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_UserR,
+				(pFromFpga->data & UserMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				UserRString,
+				(unsigned int) (pFromFpga->data & UserMask));
+	break;
+
+	case BoardTypeRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_BoardTypeR,
+				(pFromFpga->data & BoardTypeMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				BoardTypeRString,
+				(unsigned int) (pFromFpga->data & BoardTypeMask));
+	break;
+
+	case VersionRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_VersionR,
+				(pFromFpga->data & VersionMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				VersionRString,
+				(unsigned int) (pFromFpga->data & VersionMask));
+	break;
+
+	case GitSha1ARAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1AR,
+				(pFromFpga->data & GitSha1AMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1ARString,
+				(unsigned int) (pFromFpga->data & GitSha1AMask));
+	break;
+
+	case GitSha1BRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1BR,
+				(pFromFpga->data & GitSha1BMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1BRString,
+				(unsigned int) (pFromFpga->data & GitSha1BMask));
+	break;
+
+	case GitSha1CRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1CR,
+				(pFromFpga->data & GitSha1CMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1CRString,
+				(unsigned int) (pFromFpga->data & GitSha1CMask));
+	break;
+
+	case GitSha1DRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1DR,
+				(pFromFpga->data & GitSha1DMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1DRString,
+				(unsigned int) (pFromFpga->data & GitSha1DMask));
+	break;
+
+	case GitSha1ERAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1ER,
+				(pFromFpga->data & GitSha1EMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1ERString,
+				(unsigned int) (pFromFpga->data & GitSha1EMask));
+	break;
+
+	case GitSha1FRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1FR,
+				(pFromFpga->data & GitSha1FMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1FRString,
+				(unsigned int) (pFromFpga->data & GitSha1FMask));
+	break;
+
+	case GitSha1GRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1GR,
+				(pFromFpga->data & GitSha1GMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1GRString,
+				(unsigned int) (pFromFpga->data & GitSha1GMask));
+	break;
+
+	case GitSha1HRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1HR,
+				(pFromFpga->data & GitSha1HMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1HRString,
+				(unsigned int) (pFromFpga->data & GitSha1HMask));
+	break;
+
+	case GitSha1IRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1IR,
+				(pFromFpga->data & GitSha1IMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1IRString,
+				(unsigned int) (pFromFpga->data & GitSha1IMask));
+	break;
+
+	case GitSha1JRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1JR,
+				(pFromFpga->data & GitSha1JMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1JRString,
+				(unsigned int) (pFromFpga->data & GitSha1JMask));
+	break;
+
+	case GitSha1KRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1KR,
+				(pFromFpga->data & GitSha1KMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1KRString,
+				(unsigned int) (pFromFpga->data & GitSha1KMask));
+	break;
+
+	case GitSha1LRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1LR,
+				(pFromFpga->data & GitSha1LMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1LRString,
+				(unsigned int) (pFromFpga->data & GitSha1LMask));
+	break;
+
+	case GitSha1MRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1MR,
+				(pFromFpga->data & GitSha1MMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1MRString,
+				(unsigned int) (pFromFpga->data & GitSha1MMask));
+	break;
+
+	case GitSha1NRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1NR,
+				(pFromFpga->data & GitSha1NMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1NRString,
+				(unsigned int) (pFromFpga->data & GitSha1NMask));
+	break;
+
+	case GitSha1ORAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1OR,
+				(pFromFpga->data & GitSha1OMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1ORString,
+				(unsigned int) (pFromFpga->data & GitSha1OMask));
+	break;
+
+	case GitSha1PRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1PR,
+				(pFromFpga->data & GitSha1PMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1PRString,
+				(unsigned int) (pFromFpga->data & GitSha1PMask));
+	break;
+
+	case GitSha1QRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1QR,
+				(pFromFpga->data & GitSha1QMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1QRString,
+				(unsigned int) (pFromFpga->data & GitSha1QMask));
+	break;
+
+	case GitSha1RRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1RR,
+				(pFromFpga->data & GitSha1RMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1RRString,
+				(unsigned int) (pFromFpga->data & GitSha1RMask));
+	break;
+
+	case GitSha1SRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1SR,
+				(pFromFpga->data & GitSha1SMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1SRString,
+				(unsigned int) (pFromFpga->data & GitSha1SMask));
+	break;
+
+	case GitSha1TRAdr|flagReadMask:
+
+		status = (asynStatus) setIntegerParam(p_GitSha1TR,
+				(pFromFpga->data & GitSha1TMask) );
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
+				GitSha1TRString,
+				(unsigned int) (pFromFpga->data & GitSha1TMask));
+		catGitSHA1();
+		break;
+
+	default:
+		asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+			"%s %s: value read from unmapped address 0x%X, value=0x%X\n", portName, __PRETTY_FUNCTION__,
+			pFromFpga->addr, (unsigned ) pFromFpga->data);
+		getIntegerParam(p_CommErrorCount, &errorCount);
+		setIntegerParam(p_CommErrorCount, ++errorCount);
+		status = asynError;
+	}
+
 	// Base class only has a generic register. Decode if appropriate
 	if(pFromFpga->addr == (uReadOneRegAddr|flagReadMask))
 	{
@@ -1330,12 +1668,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bo
 		return asynSuccess;
 	}
 
-	asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-		"%s %s: value read from unmapped address 0x%X, value=0x%X\n", portName, __PRETTY_FUNCTION__,
-		pFromFpga->addr, (unsigned ) pFromFpga->data);
-	getIntegerParam(p_CommErrorCount, &errorCount);
-	setIntegerParam(p_CommErrorCount, ++errorCount);
-	return asynError;
+	return status;
 }
 
 /**  Extract register address and data from the received message and set the appropriate

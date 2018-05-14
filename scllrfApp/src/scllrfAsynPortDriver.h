@@ -38,6 +38,8 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <initializer_list>
+using namespace std;
 
 
 #include <epicsTypes.h>

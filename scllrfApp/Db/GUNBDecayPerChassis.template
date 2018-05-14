@@ -16,6 +16,7 @@ record(bo, "$(P)DECAY_POLL_ENABLE")
 	field( PINI, "YES")
 	field( DTYP, "asynUInt32Digital")
 	field( OUT,  "@asynMask($(PORT),0, 1, 0.1)DECAY_POLL_ENABLE")
+	info(autosaveFields, "VAL")
 }
 
 record(bo, "$(P)DECAY_FAST_UPDATE")
@@ -25,6 +26,7 @@ record(bo, "$(P)DECAY_FAST_UPDATE")
 	field( PINI, "YES")
 	field( DTYP, "asynUInt32Digital")
 	field( OUT,  "@asynMask($(PORT),0, 1, 0.1)DECAY_FAST_UPDATE")
+	info(autosaveFields, "VAL")
 }
 
 # Create an array of time coordinates in the specified units
