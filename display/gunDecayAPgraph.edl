@@ -4,7 +4,7 @@ major 4
 minor 0
 release 1
 x 2
-y 216
+y 198
 w 2031
 h 853
 font "helvetica-medium-r-18.0"
@@ -54,7 +54,7 @@ fgColor index 14
 bgColor index 53
 useDisplayBg
 value {
-  "LCLS-II RF Buncher"
+  "LCLS-II RF Gun"
   "All Amplitude and Phase Decay Waveforms, even spares"
 }
 endObjectProperties
@@ -197,7 +197,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -258,7 +258,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -455,7 +455,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -516,7 +516,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -713,7 +713,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -774,7 +774,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -971,7 +971,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1032,7 +1032,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1229,7 +1229,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1290,7 +1290,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1487,7 +1487,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1548,7 +1548,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1745,7 +1745,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -1806,7 +1806,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2003,7 +2003,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2064,7 +2064,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2261,7 +2261,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2322,7 +2322,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2518,7 +2518,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2580,7 +2580,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2777,7 +2777,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -2838,7 +2838,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3035,7 +3035,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3096,7 +3096,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3293,7 +3293,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3354,7 +3354,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3551,7 +3551,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3612,7 +3612,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3809,7 +3809,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -3870,7 +3870,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4067,7 +4067,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4128,7 +4128,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4325,7 +4325,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4386,7 +4386,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4583,7 +4583,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4644,7 +4644,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4841,7 +4841,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -4902,7 +4902,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5098,7 +5098,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5160,7 +5160,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5357,7 +5357,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5418,7 +5418,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5615,7 +5615,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5676,7 +5676,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5873,7 +5873,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -5934,7 +5934,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6131,7 +6131,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6192,7 +6192,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6389,7 +6389,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6450,7 +6450,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6647,7 +6647,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6708,7 +6708,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6905,7 +6905,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -6966,7 +6966,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7163,7 +7163,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7224,7 +7224,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7421,7 +7421,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7482,7 +7482,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7678,7 +7678,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7740,7 +7740,7 @@ ySigned {
   0 1
 }
 plotColor {
-  0 index 15
+  0 index 16
 }
 endObjectProperties
 
@@ -7848,8 +7848,8 @@ minor 1
 release 1
 x 610
 y 10
-w 197
-h 28
+w 196
+h 26
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 0

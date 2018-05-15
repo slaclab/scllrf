@@ -1,0 +1,732 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 2944
+y 415
+w 457
+h 719
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 7
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 3
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 10
+w 430
+h 700
+lineColor index 14
+fill
+fillColor index 3
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 250
+w 410
+h 450
+lineColor index 14
+fillColor index 3
+lineWidth 2
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 50
+w 410
+h 110
+lineColor index 14
+fillColor index 3
+lineWidth 2
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 170
+y 80
+w 20
+h 20
+controlPv "$(P)DETUNE_GOOD"
+lineColor index 14
+onColor index 15
+offColor index 20
+numBits 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 40
+y 80
+w 111
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Detune Good"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 360
+y 80
+w 20
+h 20
+controlPv "$(P)READY_TO_TUNE"
+lineColor index 14
+onColor index 15
+offColor index 20
+numBits 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 230
+y 80
+w 121
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Ready to Tune"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 340
+y 640
+w 80
+h 20
+fgColor index 14
+onColor index 11
+offColor index 4
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)BT_CLOSELOOP"
+3d
+font "helvetica-bold-r-14.0"
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 640
+w 290
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Close Loop (with other automation)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 20
+w 41
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "State:"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 80
+y 20
+w 110
+h 16
+controlPv "$(P)RFMODE"
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 280
+w 49
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "P gain:"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 400
+w 43
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "I gain:"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 90
+y 280
+w 90
+h 20
+controlPv "$(P)AP_KP"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+fastUpdate
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 90
+y 400
+w 90
+h 20
+controlPv "$(P)AP_KI"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+fastUpdate
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 520
+w 93
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Phase Offset:"
+}
+autoSize
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 130
+y 520
+w 90
+h 20
+controlPv "$(P)PH_DELAY"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+fastUpdate
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 550
+w 390
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 14
+font "helvetica-medium-r-12.0"
+controlPv "$(P)PH_DELAY"
+controlLabel "Phase Offset"
+readLabelType "pvName"
+incMultiplier 1
+limitsFromDb
+displayFormat "FFloat"
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 430
+w 390
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 14
+font "helvetica-medium-r-12.0"
+controlPv "$(P)AP_KI"
+controlLabel "Integral Gain"
+readLabelType "pvName"
+incMultiplier 1
+limitsFromDb
+displayFormat "FFloat"
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 310
+w 390
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 14
+font "helvetica-medium-r-12.0"
+controlPv "$(P)AP_KP"
+controlLabel "Proportional Gain"
+readLabelType "pvName"
+incMultiplier 1
+limitsFromDb
+displayFormat "FFloat"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 670
+w 209
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Raw Close Loop Register"
+}
+autoSize
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 670
+w 50
+h 20
+fgColor index 14
+onColor index 3
+offColor index 3
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(P)CLOSE_LOOP_W"
+pressValue "1"
+releaseValue "1"
+onLabel "Close"
+offLabel "Close"
+3d
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 330
+y 670
+w 50
+h 20
+fgColor index 14
+onColor index 3
+offColor index 3
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(P)CLOSE_LOOP_W"
+pressValue "0"
+releaseValue "0"
+onLabel "Open"
+offLabel "Open"
+3d
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 50
+w 240
+h 20
+font "helvetica-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulsed Mode Frequency Tracking"
+}
+border
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 170
+w 410
+h 70
+lineColor index 14
+fillColor index 3
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 170
+w 240
+h 20
+font "helvetica-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "CW Frequency Tracking"
+}
+border
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 100
+y 110
+w 151
+h 42
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Set Output to"
+  "Cavity Frequency:"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 120
+w 100
+h 20
+fgColor index 14
+onColor index 8
+offColor index 4
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)BT_DO_FREQ_CORRECTION"
+buttonType "push"
+3d
+font "helvetica-bold-r-14.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 60
+y 200
+w 330
+h 21
+
+beginGroup
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 290
+y 200
+w 100
+h 20
+fgColor index 14
+onColor index 8
+offColor index 4
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)FREQ_LOOP_CLOSE"
+3d
+font "helvetica-bold-r-14.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 60
+y 200
+w 211
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Follow Cavity Frequency:"
+}
+autoSize
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 100
+y 110
+w 151
+h 42
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Set Output to"
+  "Cavity Frequency:"
+}
+autoSize
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 120
+w 100
+h 20
+fgColor index 14
+onColor index 8
+offColor index 4
+inconsistentColor index 14
+topShadowColor index 2
+botShadowColor index 11
+controlPv "$(P)BT_DO_FREQ_CORRECTION"
+buttonType "push"
+3d
+font "helvetica-bold-r-14.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 250
+w 240
+h 20
+font "helvetica-bold-r-14.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Amplitude and Phase Loop"
+}
+border
+endObjectProperties
+

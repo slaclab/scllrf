@@ -1,0 +1,404 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1281
+y 394
+w 449
+h 605
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 7
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 3
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
+showGrid
+snapToGrid
+orthoLineDraw
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 20
+w 430
+h 570
+lineColor index 14
+fill
+fillColor index 3
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 10
+w 136
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 3
+value {
+  "$(P) Pulse Controls"
+}
+autoSize
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 80
+w 410
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 0
+font "helvetica-medium-r-12.0"
+controlPv "$(P)PULSE_LENGTH"
+controlLabel "Pulse Length (ms)"
+readLabelType "pvName"
+incMultiplier 1
+precision 5
+scaleMin 0.01
+scaleMax 10
+displayFormat "FFloat"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 50
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse Width (ms)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 170
+y 50
+w 120
+h 18
+controlPv "$(P)PULSE_LENGTH"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+editable
+autoHeight
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 220
+w 410
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 0
+font "helvetica-medium-r-12.0"
+controlPv "$(P)REP_PERIOD"
+controlLabel "Pulse Interval (ms)"
+readLabelType "pvName"
+increment 1
+incMultiplier 1
+precision 5
+scaleMin 1
+scaleMax 100
+displayFormat "FFloat"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 190
+w 120
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse Interval (ms)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 170
+y 190
+w 120
+h 18
+controlPv "$(P)REP_PERIOD"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+editable
+autoHeight
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 360
+w 410
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 0
+font "helvetica-medium-r-12.0"
+controlPv "$(P)REP_FREQUENCY"
+controlLabel "Pulse Freq. (Hz)"
+readLabelType "pvName"
+increment 10
+incMultiplier 1
+precision 5
+scaleMin 10
+scaleMax 1000
+displayFormat "FFloat"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 330
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Pulse Freq. (Hz)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 330
+w 120
+h 18
+controlPv "$(P)REP_FREQUENCY"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+editable
+autoHeight
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 180
+w 410
+h 120
+lineColor index 14
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 320
+w 410
+h 120
+lineColor index 14
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Slider)
+object activeSliderClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 500
+w 410
+h 80
+fgColor index 14
+bgColor index 5
+2ndBgColor index 10
+controlColor index 14
+indicatorColor index 0
+font "helvetica-medium-r-12.0"
+controlPv "$(P)DUTY_CYCLE"
+controlLabel "Duty Cycle (%)"
+readLabelType "pvName"
+increment 1
+incMultiplier 1
+precision 5
+scaleMin 0
+scaleMax 100
+displayFormat "FFloat"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 470
+w 110
+h 20
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Duty Cycle (%)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 160
+y 470
+w 120
+h 18
+controlPv "$(P)DUTY_CYCLE"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+editable
+autoHeight
+motifWidget
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "controls"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 460
+w 410
+h 120
+lineColor index 14
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 20
+y 40
+w 410
+h 120
+lineColor index 14
+fillColor index 0
+lineWidth 2
+endObjectProperties
+

@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 2162
-y 50
+x 52
+y 76
 w 665
 h 661
 font "helvetica-medium-r-18.0"
@@ -47,8 +47,8 @@ font "helvetica-medium-r-14.0"
 # Operating Modes
 nPts 0
 updateTimerMs 20
-traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
-resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
+traceCtlPv "$(P)WF_CHAN_DISABLE"
+resetPv "$(P)WF_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -65,34 +65,34 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)TRACE_DATA_X_AXIS"
-  1 "$(P)TRACE_DATA_X_AXIS"
-  2 "$(P)TRACE_DATA_X_AXIS"
-  3 "$(P)TRACE_DATA_X_AXIS"
-  4 "$(P)TRACE_DATA_X_AXIS"
-  5 "$(P)TRACE_DATA_X_AXIS"
-  6 "$(P)TRACE_DATA_X_AXIS"
-  7 "$(P)TRACE_DATA_X_AXIS"
+  0 "$(P)WF_X_AXIS"
+  1 "$(P)WF_X_AXIS"
+  2 "$(P)WF_X_AXIS"
+  3 "$(P)WF_X_AXIS"
+  4 "$(P)WF_X_AXIS"
+  5 "$(P)WF_X_AXIS"
+  6 "$(P)WF_X_AXIS"
+  7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)TRACE_DATA_A_0_SMOO"
-  1 "$(P)TRACE_DATA_A_1_SMOO"
-  2 "$(P)TRACE_DATA_A_2_SMOO"
-  3 "$(P)TRACE_DATA_A_3_SMOO"
-  4 "$(P)TRACE_DATA_A_4_SMOO"
-  5 "$(P)TRACE_DATA_A_5_SMOO"
-  6 "$(P)TRACE_DATA_A_6_SMOO"
-  7 "$(P)TRACE_DATA_A_7_SMOO"
+  0 "$(P)WF_A_0"
+  1 "$(P)WF_A_1"
+  2 "$(P)WF_A_2"
+  3 "$(P)WF_A_3"
+  4 "$(P)WF_A_4"
+  5 "$(P)WF_A_5"
+  6 "$(P)WF_A_6"
+  7 "$(P)WF_A_7"
 }
 nPv {
-  0 "$(P)TRACE_DATA_A_0_SMOO.NORD"
-  1 "$(P)TRACE_DATA_A_1_SMOO.NORD"
-  2 "$(P)TRACE_DATA_A_2_SMOO.NORD"
-  3 "$(P)TRACE_DATA_A_3_SMOO.NORD"
-  4 "$(P)TRACE_DATA_A_4_SMOO.NORD"
-  5 "$(P)TRACE_DATA_A_5_SMOO.NORD"
-  6 "$(P)TRACE_DATA_A_6_SMOO.NORD"
-  7 "$(P)TRACE_DATA_A_7_SMOO.NORD"
+  0 "$(P)WF_X_NUSE"
+  1 "$(P)WF_X_NUSE"
+  2 "$(P)WF_X_NUSE"
+  3 "$(P)WF_X_NUSE"
+  4 "$(P)WF_X_NUSE"
+  5 "$(P)WF_X_NUSE"
+  6 "$(P)WF_X_NUSE"
+  7 "$(P)WF_X_NUSE"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -125,9 +125,9 @@ ySigned {
   7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
+  0 index 16
+  1 index 30
+  2 index 25
   3 index 36
   4 index 41
   5 index 45
@@ -158,8 +158,9 @@ bgColor index 12
 gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
-traceCtlPv "$(P)TRACE_DATA_CHAN_DISABLE"
-resetPv "$(P)TRACE_DATA_UPDATE_PLOT"
+nPts 2
+traceCtlPv "$(P)WF_CHAN_DISABLE"
+resetPv "$(P)WF_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -168,8 +169,8 @@ xShowLabelGrid
 # Y axis properties
 showYAxis
 yAxisSrc "fromUser"
-yMin -3.2
-yMax 3.2
+yMin -3.15
+yMax 3.15
 yShowLabelGrid
 # Y2 axis properties
 y2AxisSrc "AutoScale"
@@ -177,34 +178,34 @@ y2Max 1
 # Trace Properties
 numTraces 8
 xPv {
-  0 "$(P)TRACE_DATA_X_AXIS"
-  1 "$(P)TRACE_DATA_X_AXIS"
-  2 "$(P)TRACE_DATA_X_AXIS"
-  3 "$(P)TRACE_DATA_X_AXIS"
-  4 "$(P)TRACE_DATA_X_AXIS"
-  5 "$(P)TRACE_DATA_X_AXIS"
-  6 "$(P)TRACE_DATA_X_AXIS"
-  7 "$(P)TRACE_DATA_X_AXIS"
+  0 "$(P)WF_X_AXIS"
+  1 "$(P)WF_X_AXIS"
+  2 "$(P)WF_X_AXIS"
+  3 "$(P)WF_X_AXIS"
+  4 "$(P)WF_X_AXIS"
+  5 "$(P)WF_X_AXIS"
+  6 "$(P)WF_X_AXIS"
+  7 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "$(P)TRACE_DATA_P_0_SMOO"
-  1 "$(P)TRACE_DATA_P_1_SMOO"
-  2 "$(P)TRACE_DATA_P_2_SMOO"
-  3 "$(P)TRACE_DATA_P_3_SMOO"
-  4 "$(P)TRACE_DATA_P_4_SMOO"
-  5 "$(P)TRACE_DATA_P_5_SMOO"
-  6 "$(P)TRACE_DATA_P_6_SMOO"
-  7 "$(P)TRACE_DATA_P_7_SMOO"
+  0 "$(P)WF_P_0"
+  1 "$(P)WF_P_1"
+  2 "$(P)WF_P_2"
+  3 "$(P)WF_P_3"
+  4 "$(P)WF_P_4"
+  5 "$(P)WF_P_5"
+  6 "$(P)WF_P_6"
+  7 "$(P)WF_P_7"
 }
 nPv {
-  0 "$(P)TRACE_DATA_P_0_SMOO.NORD"
-  1 "$(P)TRACE_DATA_P_1_SMOO.NORD"
-  2 "$(P)TRACE_DATA_P_2_SMOO.NORD"
-  3 "$(P)TRACE_DATA_P_3_SMOO.NORD"
-  4 "$(P)TRACE_DATA_P_4_SMOO.NORD"
-  5 "$(P)TRACE_DATA_P_5_SMOO.NORD"
-  6 "$(P)TRACE_DATA_P_6_SMOO.NORD"
-  7 "$(P)TRACE_DATA_P_7_SMOO.NORD"
+  0 "$(P)WF_P_0.NORD"
+  1 "$(P)WF_P_1.NORD"
+  2 "$(P)WF_P_2.NORD"
+  3 "$(P)WF_P_3.NORD"
+  4 "$(P)WF_P_4.NORD"
+  5 "$(P)WF_P_5.NORD"
+  6 "$(P)WF_P_6.NORD"
+  7 "$(P)WF_P_7.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -237,9 +238,9 @@ ySigned {
   7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
+  0 index 16
+  1 index 30
+  2 index 25
   3 index 36
   4 index 41
   5 index 45

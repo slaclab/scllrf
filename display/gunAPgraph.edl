@@ -125,9 +125,9 @@ ySigned {
   7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
+  0 index 16
+  1 index 30
+  2 index 25
   3 index 36
   4 index 41
   5 index 45
@@ -238,9 +238,9 @@ ySigned {
   7 1
 }
 plotColor {
-  0 index 21
-  1 index 26
-  2 index 31
+  0 index 16
+  1 index 30
+  2 index 25
   3 index 36
   4 index 41
   5 index 45

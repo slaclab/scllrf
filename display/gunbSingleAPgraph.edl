@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1209
-y 121
-w 665
-h 661
+x 1187
+y 212
+w 658
+h 789
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -33,11 +33,11 @@ release 0
 x 10
 y 10
 w 640
-h 320
+h 340
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "Amplitude Waveform $(AWF)"
+graphTitle "Amplitude Waveform $(WF)"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -61,27 +61,48 @@ yShowLabelGrid
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 1
+numTraces 4
 xPv {
   0 "$(T)"
+  1 "$(T)"
+  2 "$(T)"
+  3 "$(T)"
 }
 yPv {
-  0 "$(AWF)"
+  0 "$(WF)AWF"
+  1 "$(WF2)AWF"
+  2 "$(WF3)AWF"
+  3 "$(WF4)AWF"
 }
 nPv {
-  0 "$(AWF).NORD"
+  0 "$(WF)AWF.NORD"
+  1 "$(WF2)AWF.NORD"
+  2 "$(WF3)AWF.NORD"
+  3 "$(WF4)AWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
+  1 "xOrY"
+  2 "xOrY"
+  3 "xOrY"
 }
 opMode {
   0 "plot"
+  1 "plot"
+  2 "plot"
+  3 "plot"
 }
 ySigned {
   0 1
+  1 1
+  2 1
+  3 1
 }
 plotColor {
-  0 index 15
+  0 index 16
+  1 index 30
+  2 index 25
+  3 index 36
 }
 endObjectProperties
 
@@ -93,13 +114,13 @@ minor 8
 release 0
 # Geometry
 x 10
-y 330
+y 400
 w 640
-h 320
+h 340
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "Phase Waveform $(PWF)"
+graphTitle "Phase Waveform $(WF)"
 xLabel "Time (s)"
 yLabel "Phase"
 fgColor index 14
@@ -123,27 +144,48 @@ yShowLabelGrid
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 1
+numTraces 4
 xPv {
   0 "$(T)"
+  1 "$(T)"
+  2 "$(T)"
+  3 "$(T)"
 }
 yPv {
-  0 "$(PWF)"
+  0 "$(WF)PWF"
+  1 "$(WF2)PWF"
+  2 "$(WF3)PWF"
+  3 "$(WF4)PWF"
 }
 nPv {
-  0 "$(PWF).NORD"
+  0 "$(WF)PWF.NORD"
+  1 "$(WF2)PWF.NORD"
+  2 "$(WF3)PWF.NORD"
+  3 "$(WF4)PWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
+  1 "xOrY"
+  2 "xOrY"
+  3 "xOrY"
 }
 opMode {
   0 "plot"
+  1 "plot"
+  2 "plot"
+  3 "plot"
 }
 ySigned {
   0 1
+  1 1
+  2 1
+  3 1
 }
 plotColor {
-  0 index 15
+  0 index 16
+  1 index 30
+  2 index 25
+  3 index 36
 }
 endObjectProperties
 

@@ -1,0 +1,2472 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 6
+y 220
+w 969
+h 926
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 7
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 3
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
+title "Gun RF Signal Calibration"
+snapToGrid
+gridSize 4
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 764
+w 936
+h 140
+lineColor index 3
+fill
+fillColor index 3
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 16
+y 56
+w 936
+h 692
+lineColor index 3
+fill
+fillColor index 3
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 1192
+h 40
+lineColor index 63
+fill
+fillColor index 63
+lineWidth 0
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 884
+y 8
+w 48
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+label "Exit"
+font "helvetica-medium-r-12.0"
+3d
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 0
+w 396
+h 40
+font "helvetica-medium-r-12.0"
+fgColor index 14
+bgColor index 66
+useDisplayBg
+value {
+  "RF Signal Calibration - Expert Screen"
+  "Gun Cavity, PRL, Laser"
+}
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 764
+y 8
+w 96
+h 24
+fgColor index 14
+bgColor index 4
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-12.0"
+buttonLabel "Home Screen..."
+numCmds 1
+command {
+  0 "lcls2home &"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 284
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_CABLE"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 236
+y 84
+w 96
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Cavity"
+  "Probe 1"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 316
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_COUPLER"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 348
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_ATTEN"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 104
+y 316
+w 116
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Coupler"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 104
+y 284
+w 116
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Cable"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 104
+y 348
+w 116
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Fixed Attenuator"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 428
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_TOTAL"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 4
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 100
+y 428
+w 116
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Total"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 224
+y 416
+w 120
+h 0
+lineColor index 14
+fillColor index 4
+numPoints 2
+xPoints {
+  0 224
+  1 344
+}
+yPoints {
+  0 416
+  1 416
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 380
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_OTHER"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 104
+y 380
+w 116
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "right"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Other"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 116
+y 264
+w 60
+h 204
+lineColor index 8
+fillColor index 3
+lineWidth 3
+numPoints 6
+xPoints {
+  0 176
+  1 116
+  2 116
+  3 176
+  4 176
+  5 176
+}
+yPoints {
+  0 264
+  1 264
+  2 468
+  3 468
+  4 468
+  5 468
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 236
+y 136
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_REF_PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 120
+w 88
+h 56
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "RF Power "
+  "At ADC"
+  "Full Scale"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 116
+y 124
+w 60
+h 48
+lineColor index 8
+fillColor index 3
+lineWidth 3
+numPoints 6
+xPoints {
+  0 176
+  1 116
+  2 116
+  3 176
+  4 176
+  5 176
+}
+yPoints {
+  0 124
+  1 124
+  2 172
+  3 172
+  4 172
+  5 172
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 320
+w 88
+h 80
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Losses "
+  "In"
+  "POSITIVE"
+  "Values"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 344
+y 136
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_REF_PWR.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 340
+y 284
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_CABLE.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 340
+y 316
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_COUPLER.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 340
+y 348
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_ATTEN.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 340
+y 380
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_OTHER.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 340
+y 428
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_LOSS_TOTAL.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 116
+y 576
+w 60
+h 60
+lineColor index 8
+fillColor index 3
+lineWidth 3
+numPoints 6
+xPoints {
+  0 176
+  1 116
+  2 116
+  3 176
+  4 176
+  5 176
+}
+yPoints {
+  0 576
+  1 576
+  2 636
+  3 636
+  4 636
+  5 636
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 564
+w 88
+h 80
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Beam-Based "
+  "\"Fudge\" "
+  "Scale Factor "
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 592
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:FUDGE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 228
+y 684
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_SCALE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+precision 2
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 84
+y 652
+w 88
+h 80
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Final "
+  "Calibration "
+  "Scale Factor "
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 232
+y 508
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:QPROBE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 116
+y 492
+w 60
+h 60
+lineColor index 8
+fillColor index 3
+lineWidth 3
+numPoints 6
+xPoints {
+  0 176
+  1 116
+  2 116
+  3 176
+  4 176
+  5 176
+}
+yPoints {
+  0 492
+  1 492
+  2 552
+  3 552
+  4 552
+  5 552
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 480
+w 88
+h 80
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Cavity "
+  "Probe Q "
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 228
+y 112
+w 652
+h 0
+lineColor index 7
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 228
+  1 880
+}
+yPoints {
+  0 112
+  1 112
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 804
+y 84
+w 80
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Laser"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 788
+y 348
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_LOSS_ATTEN"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 788
+y 428
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_LOSS_TOTAL"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 4
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 788
+y 380
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_LOSS_OTHER"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 792
+y 136
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_REF_PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 900
+y 136
+w 36
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_REF_PWR.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 896
+y 348
+w 36
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_LOSS_ATTEN.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 896
+y 380
+w 36
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_LOSS_OTHER.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 896
+y 428
+w 36
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_LOSS_TOTAL.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 788
+y 684
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_SCALE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+precision 2
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 780
+y 416
+w 116
+h 0
+lineColor index 14
+fillColor index 4
+numPoints 2
+xPoints {
+  0 780
+  1 894
+}
+yPoints {
+  0 416
+  1 416
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 220
+y 660
+w 656
+h 0
+lineColor index 7
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 220
+  1 876
+}
+yPoints {
+  0 660
+  1 660
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 610
+y 84
+w 100
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Phase Reference"
+  "Line (PRL)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 604
+y 348
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_LOSS_ATTEN"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 604
+y 428
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_LOSS_TOTAL"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 4
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 604
+y 380
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_LOSS_OTHER"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 608
+y 136
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_REF_PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 716
+y 136
+w 36
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_REF_PWR.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 712
+y 348
+w 36
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_LOSS_ATTEN.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 712
+y 380
+w 36
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_LOSS_OTHER.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 712
+y 428
+w 36
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_LOSS_TOTAL.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 604
+y 684
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_SCALE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+precision 2
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 596
+y 416
+w 116
+h 0
+lineColor index 14
+fillColor index 4
+numPoints 2
+xPoints {
+  0 596
+  1 710
+}
+yPoints {
+  0 416
+  1 416
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 284
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_CABLE"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 408
+y 84
+w 96
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Cavity"
+  "Probe 2"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 316
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_COUPLER"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 348
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_ATTEN"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 428
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_TOTAL"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 4
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 396
+y 416
+w 120
+h 0
+lineColor index 14
+fillColor index 4
+numPoints 2
+xPoints {
+  0 397
+  1 516
+}
+yPoints {
+  0 416
+  1 416
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 380
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_OTHER"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 408
+y 136
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_REF_PWR"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 516
+y 136
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_REF_PWR.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 512
+y 284
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_CABLE.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 512
+y 316
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_COUPLER.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 512
+y 348
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_ATTEN.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 512
+y 380
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_OTHER.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 512
+y 428
+w 36
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_LOSS_TOTAL.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 592
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:FUDGE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 400
+y 684
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_SCALE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+precision 2
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 404
+y 508
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:QPROBE"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+limitsFromDb
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 168
+w 88
+h 56
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "RF Power "
+  "At ADC"
+  "Full Scale"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 236
+y 184
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:CAL_SCALE_CALC.D"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 792
+y 184
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:CAL_SCALE_CALC.D"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 608
+y 184
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:CAL_SCALE_CALC.D"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 408
+y 184
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:CAL_SCALE_CALC.D"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 116
+y 172
+w 60
+h 48
+lineColor index 8
+fillColor index 3
+lineWidth 3
+numPoints 6
+xPoints {
+  0 176
+  1 116
+  2 116
+  3 176
+  4 176
+  5 176
+}
+yPoints {
+  0 172
+  1 172
+  2 220
+  3 220
+  4 220
+  5 220
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 228
+y 788
+w 96
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Cavity"
+  "Probe 1"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 228
+y 840
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV1:GOLD"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 824
+w 88
+h 56
+font "helvetica-medium-i-12.0"
+fontAlign "right"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "\"Gold\""
+  "Phase Offset"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 108
+y 828
+w 60
+h 48
+lineColor index 8
+fillColor index 3
+lineWidth 3
+numPoints 6
+xPoints {
+  0 168
+  1 108
+  2 108
+  3 168
+  4 168
+  5 168
+}
+yPoints {
+  0 826
+  1 826
+  2 874
+  3 874
+  4 874
+  5 874
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 336
+y 840
+w 54
+h 24
+controlPv "GUN:GUNB:100:CAV1:GOLD.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 220
+y 816
+w 652
+h 0
+lineColor index 7
+fillColor index 4
+lineWidth 2
+numPoints 2
+xPoints {
+  0 220
+  1 872
+}
+yPoints {
+  0 814
+  1 814
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 796
+y 788
+w 80
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Laser"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 784
+y 840
+w 104
+h 24
+controlPv "GUN:GUNB:100:LASR:GOLD"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 892
+y 840
+w 54
+h 24
+controlPv "GUN:GUNB:100:LASR:GOLD.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 604
+y 788
+w 100
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Phase Reference"
+  "Line (PRL)"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 600
+y 840
+w 104
+h 24
+controlPv "GUN:GUNB:100:PRL:GOLD"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 708
+y 840
+w 54
+h 24
+controlPv "GUN:GUNB:100:PRL:GOLD.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 400
+y 788
+w 96
+h 24
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Cavity"
+  "Probe 2"
+}
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 400
+y 840
+w 104
+h 24
+controlPv "GUN:GUNB:100:CAV2:GOLD"
+font "helvetica-medium-r-12.0"
+fontAlign "center"
+fgColor index 14
+fgAlarm
+bgColor index 5
+editable
+motifWidget
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Control)
+object activeXTextDspClass
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 508
+y 840
+w 54
+h 24
+controlPv "GUN:GUNB:100:CAV2:GOLD.EGU"
+font "helvetica-medium-r-12.0"
+fgColor index 14
+fgAlarm
+bgColor index 4
+useDisplayBg
+precision 3
+nullColor index 14
+useHexPrefix
+useAlarmBorder
+newPos
+objType "controls"
+noExecuteClipMask
+endObjectProperties
+

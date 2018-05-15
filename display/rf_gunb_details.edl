@@ -3,147 +3,25 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1929
-y 447
+x 1246
+y 188
 w 602
-h 457
-font "helvetica-medium-r-18.0"
-ctlFont "helvetica-medium-r-18.0"
-btnFont "helvetica-medium-r-18.0"
+h 442
+font "helvetica-medium-r-12.0"
+ctlFont "helvetica-medium-r-12.0"
+btnFont "helvetica-medium-r-12.0"
 fgColor index 14
-bgColor index 3
+bgColor index 7
 textColor index 14
 ctlFgColor1 index 14
-ctlFgColor2 index 0
-ctlBgColor1 index 0
-ctlBgColor2 index 14
-topShadowColor index 0
-botShadowColor index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 3
+ctlBgColor2 index 5
+topShadowColor index 1
+botShadowColor index 11
 showGrid
 snapToGrid
 endScreenProperties
-
-# (Arc)
-object activeArcClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 400
-y 330
-w 40
-h 70
-lineColor index 42
-fill
-fillColor index 41
-lineWidth 6
-endObjectProperties
-
-# (Arc)
-object activeArcClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 440
-y 330
-w 40
-h 70
-lineColor index 42
-fill
-fillColor index 41
-lineWidth 6
-endObjectProperties
-
-# (Arc)
-object activeArcClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 400
-y 350
-w 40
-h 70
-lineColor index 42
-fill
-fillColor index 41
-lineWidth 6
-startAngle 180
-endObjectProperties
-
-# (Arc)
-object activeArcClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 440
-y 350
-w 40
-h 70
-lineColor index 42
-fill
-fillColor index 41
-lineWidth 6
-startAngle 180
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 410
-y 10
-w 110
-h 80
-lineColor index 14
-fillColor index 0
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 300
-y 10
-w 110
-h 80
-lineColor index 14
-fillColor index 0
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 10
-y 10
-w 110
-h 80
-lineColor index 14
-fillColor index 0
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 120
-y 10
-w 110
-h 80
-lineColor index 14
-fillColor index 0
-endObjectProperties
 
 # (Related Display)
 object relatedDisplayClass
@@ -152,25 +30,22 @@ major 4
 minor 4
 release 0
 x 50
-y 140
-w 110
-h 30
+y 110
+w 150
+h 40
 fgColor index 14
 bgColor index 4
 topShadowColor index 2
 botShadowColor index 12
-font "helvetica-bold-r-14.0"
+font "helvetica-medium-r-18.0"
 buttonLabel "Gun LLRF..."
 numPvs 4
 numDsps 1
 displayFileName {
-  0 "rf_gunb_gun.edl"
-}
-setPosition {
-  0 "button"
+  0 "gunRF"
 }
 symbols {
-  0 "P=GUN:GUNB:100:"
+  0 "P=GUN1:B15:"
 }
 endObjectProperties
 
@@ -180,23 +55,20 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 330
-y 140
-w 140
-h 30
+x 320
+y 110
+w 150
+h 40
 fgColor index 14
 bgColor index 4
 topShadowColor index 2
 botShadowColor index 12
-font "helvetica-bold-r-14.0"
-buttonLabel "Buncher LLRF"
+font "helvetica-medium-r-18.0"
+buttonLabel "Buncher LLRF..."
 numPvs 4
 numDsps 1
 displayFileName {
-  0 "rf_gunb_buncher.edl"
-}
-setPosition {
-  0 "button"
+  0 "buncherRF"
 }
 endObjectProperties
 
@@ -207,9 +79,9 @@ major 4
 minor 0
 release 1
 x 110
-y 170
+y 150
 w 20
-h 50
+h 70
 lineColor index 14
 fillColor index 0
 lineWidth 7
@@ -219,7 +91,7 @@ xPoints {
   1 120
 }
 yPoints {
-  0 170
+  0 150
   1 220
 }
 endObjectProperties
@@ -259,9 +131,9 @@ major 4
 minor 0
 release 1
 x 390
-y 170
+y 150
 w 20
-h 50
+h 70
 lineColor index 14
 fillColor index 0
 lineWidth 7
@@ -271,7 +143,7 @@ xPoints {
   1 400
 }
 yPoints {
-  0 170
+  0 150
   1 220
 }
 endObjectProperties
@@ -362,9 +234,9 @@ x 80
 y 330
 w 90
 h 90
-lineColor index 62
+lineColor index 42
 fill
-fillColor index 2
+fillColor index 41
 lineWidth 4
 endObjectProperties
 
@@ -375,9 +247,9 @@ major 4
 minor 0
 release 1
 x 20
-y 150
+y 130
 w 70
-h 250
+h 270
 lineColor index 14
 fillColor index 0
 lineWidth 7
@@ -391,12 +263,12 @@ xPoints {
   5 80
 }
 yPoints {
-  0 149
-  1 149
-  2 363
-  3 363
-  4 381
-  5 381
+  0 130
+  1 130
+  2 360
+  3 360
+  4 380
+  5 380
 }
 endObjectProperties
 
@@ -406,14 +278,76 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 98
-y 348
-w 54
-h 54
+x 110
+y 360
+w 30
+h 30
 lineColor index 42
 fill
 fillColor index 41
 lineWidth 4
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 400
+y 330
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 440
+y 330
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 400
+y 350
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+startAngle 180
+endObjectProperties
+
+# (Arc)
+object activeArcClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 440
+y 350
+w 40
+h 70
+lineColor index 14
+fillColor index 0
+lineWidth 6
+startAngle 180
 endObjectProperties
 
 # (Lines)
@@ -423,9 +357,9 @@ major 4
 minor 0
 release 1
 x 430
-y 150
+y 130
 w 70
-h 250
+h 270
 lineColor index 14
 fillColor index 0
 lineWidth 7
@@ -439,12 +373,12 @@ xPoints {
   5 470
 }
 yPoints {
-  0 150
-  1 150
-  2 344
-  3 344
-  4 363
-  5 363
+  0 130
+  1 130
+  2 340
+  3 340
+  4 360
+  5 360
 }
 endObjectProperties
 
@@ -454,18 +388,36 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 30
-y 20
-w 70
+x 10
+y 10
+w 75
 h 16
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Amplitude"
+  "Amplitude:"
 }
 autoSize
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 10
+w 90
+h 40
+controlPv "GUN1:B15:ADES"
+fgColor index 25
+fgAlarm
+bgColor index 1
+fill
+font "helvetica-medium-r-12.0"
 endObjectProperties
 
 # (Static Text)
@@ -474,18 +426,36 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 320
-y 20
-w 70
+x 310
+y 10
+w 75
 h 16
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Amplitude"
+  "Amplitude:"
 }
 autoSize
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 390
+y 10
+w 90
+h 40
+controlPv "GUN1:B15:ADES"
+fgColor index 25
+fgAlarm
+bgColor index 1
+fill
+font "helvetica-medium-r-12.0"
 endObjectProperties
 
 # (Static Text)
@@ -494,18 +464,36 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 440
-y 20
-w 43
+x 310
+y 60
+w 48
 h 16
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Phase"
+  "Phase:"
 }
 autoSize
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 390
+y 60
+w 90
+h 40
+controlPv "GUN1:B15:PDES"
+fgColor index 25
+fgAlarm
+bgColor index 1
+fill
+font "helvetica-medium-r-12.0"
 endObjectProperties
 
 # (Text Monitor)
@@ -517,10 +505,9 @@ release 0
 x 10
 y 280
 w 90
-h 24
-controlPv "GUN:GUNB:100:AACT"
+h 40
+controlPv "GUN1:B15:AACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -540,10 +527,9 @@ release 0
 x 490
 y 290
 w 90
-h 24
-controlPv "ACCL:GUNB:455:PACT"
+h 40
+controlPv "GUN1:B15:PACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -563,10 +549,9 @@ release 0
 x 490
 y 200
 w 90
-h 24
-controlPv "ACCL:GUNB:455:AACT"
+h 40
+controlPv "GUN1:B15:AACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -575,6 +560,72 @@ useHexPrefix
 showUnits
 newPos
 objType "monitors"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 80
+y 180
+w 80
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 7
+font "helvetica-medium-r-18.0"
+buttonLabel "SSAs..."
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "ssaControl_RK_CA186"
+  1 "ssaControl_RK_CA186"
+}
+menuLabel {
+  0 "SSA1"
+  1 "SSA2"
+}
+symbols {
+  0 "P=SSA3:B15"
+  1 "P=SSA2:B15"
+}
+colorPv "SSA1:B15:IN13"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 360
+y 180
+w 80
+h 30
+fgColor index 14
+bgColor index 4
+topShadowColor index 2
+botShadowColor index 7
+font "helvetica-medium-r-18.0"
+buttonLabel "SSAs..."
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "ssaControl"
+  1 "ssaControl"
+}
+menuLabel {
+  0 "SSA1"
+  1 "SSA2"
+}
+symbols {
+  0 "NAM=SSA1:B15"
+  1 "NAM=SSA2:B15"
+}
+colorPv "SSA1:B15:IN13"
 endObjectProperties
 
 # (Static Text)
@@ -648,10 +699,9 @@ release 0
 x 180
 y 290
 w 90
-h 24
-controlPv "GUN:GUNB:100:REV:AMEAN"
+h 40
+controlPv "GUN1:B15:AACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -670,14 +720,14 @@ minor 1
 release 1
 x 200
 y 270
-w 62
+w 70
 h 16
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Reverse:"
+  "Reflected:"
 }
 autoSize
 endObjectProperties
@@ -691,10 +741,9 @@ release 0
 x 180
 y 370
 w 90
-h 24
-controlPv "GUN:GUNB:100:FWD:AMEAN"
+h 40
+controlPv "GUN1:B15:AACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -734,10 +783,9 @@ release 0
 x 300
 y 290
 w 90
-h 24
-controlPv "ACCL:GUNB:455:REV:AMEAN"
+h 40
+controlPv "GUN1:B15:AACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -756,14 +804,14 @@ minor 1
 release 1
 x 320
 y 270
-w 62
+w 70
 h 16
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Reverse:"
+  "Reflected:"
 }
 autoSize
 endObjectProperties
@@ -777,10 +825,9 @@ release 0
 x 300
 y 370
 w 90
-h 24
-controlPv "ACCL:GUNB:455:FWD:AMEAN"
+h 40
+controlPv "GUN1:B15:AACT"
 font "helvetica-medium-r-12.0"
-fontAlign "center"
 fgColor index 15
 bgColor index 9
 limitsFromDb
@@ -817,94 +864,23 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 20
-y 100
-w 70
-h 25
-fgColor index 14
+x 90
+y 60
+w 90
+h 30
+fgColor index 15
 onColor index 9
-offColor index 4
-topShadowColor index 2
-botShadowColor index 12
-controlPv "GUN:GUNB:100:RFCTRL"
+offColor index 5
+topShadowColor index 7
+botShadowColor index 11
+controlPv "GUN1:B15:CLOSE_LOOP_W"
 pressValue "1"
-releaseValue "1"
-onLabel "RF On"
-offLabel "RF On"
-3d
-font "helvetica-bold-r-14.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 100
-y 100
-w 70
-h 25
-fgColor index 14
-onColor index 9
-offColor index 4
-topShadowColor index 2
-botShadowColor index 12
-controlPv "GUN:GUNB:100:RFCTRL"
-pressValue "0"
 releaseValue "0"
-onLabel "RF Off"
-offLabel "RF Off"
+onLabel "Closed"
+offLabel "Open"
+toggle
 3d
-font "helvetica-bold-r-14.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 400
-y 100
-w 70
-h 25
-fgColor index 14
-onColor index 9
-offColor index 4
-topShadowColor index 2
-botShadowColor index 12
-controlPv "ACCL:GUNB:455:RFCTRL"
-pressValue "Off"
-releaseValue "Off"
-onLabel "RF Off"
-offLabel "RF Off"
-3d
-font "helvetica-bold-r-14.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 320
-y 100
-w 70
-h 25
-fgColor index 14
-onColor index 9
-offColor index 4
-topShadowColor index 2
-botShadowColor index 12
-controlPv "ACCL:GUNB:455:RFCTRL"
-pressValue "On"
-releaseValue "On"
-onLabel "RF On"
-offLabel "RF On"
-3d
-font "helvetica-bold-r-14.0"
+font "helvetica-medium-r-18.0"
 endObjectProperties
 
 # (Static Text)
@@ -913,109 +889,18 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 154
-y 20
-w 43
-h 16
+x 10
+y 60
+w 53
+h 32
 font "helvetica-bold-r-14.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Phase"
+  "Control"
+  "Loop:"
 }
 autoSize
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 20
-y 40
-w 90
-h 40
-controlPv "GUN:GUNB:100:AACT"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-bgColor index 9
-limitsFromDb
-nullColor index 0
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 130
-y 40
-w 90
-h 40
-controlPv "GUN:GUNB:100:PACT"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-bgColor index 9
-limitsFromDb
-nullColor index 0
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 310
-y 40
-w 90
-h 40
-controlPv "ACCL:GUNB:455:AACT"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-bgColor index 9
-limitsFromDb
-nullColor index 0
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 420
-y 40
-w 90
-h 40
-controlPv "ACCL:GUNB:455:PACT"
-font "helvetica-medium-r-12.0"
-fontAlign "center"
-fgColor index 15
-bgColor index 9
-limitsFromDb
-nullColor index 0
-useHexPrefix
-showUnits
-newPos
-objType "monitors"
 endObjectProperties
 
