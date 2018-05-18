@@ -1,0 +1,244 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 1139
+y 421
+w 700
+h 250
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-8.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 30
+ctlFgColor2 index 32
+ctlBgColor1 index 34
+ctlBgColor2 index 35
+topShadowColor index 37
+botShadowColor index 44
+gridSize 5
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 700
+h 25
+lineColor index 38
+fill
+fillColor index 38
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 27
+y 5
+w 420
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 0
+bgColor index 0
+useDisplayBg
+value {
+  "SLAC Resonance #$(PNUM) Main - (macro P is set to \"$(P)\")"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 486
+y 6
+w 103
+h 14
+font "helvetica-medium-r-12.0"
+fgColor index 0
+bgColor index 0
+useDisplayBg
+value {
+  "G.Lahti 25apr2017"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 68
+w 278
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "scllrf  = Super Conducting Low Level RF"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 38
+w 498
+h 27
+font "helvetica-bold-r-24.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "SLAC SCLLRF Resonance #$(PNUM) Main"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 89
+w 312
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 1
+value {
+  " (a)  /usr/devuser/lahti/RF_SLAC.2/scllrf/display/ "
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 109
+w 434
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 1
+value {
+  " (b)  /usr/devsite/csite7/it/llapp_R3.14/SLAC_scllrf/1-2/scllrf/display/ "
+}
+autoSize
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 20
+y 191
+w 240
+h 48
+fgColor index 14
+bgColor index 51
+topShadowColor index 37
+botShadowColor index 44
+font "helvetica-medium-r-18.0"
+buttonLabel "(c) RESONANCE #$(PNUM)"
+numPvs 4
+numDsps 7
+displayFileName {
+  0 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/scllrfRESRegisters.edl"
+  1 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/res4cavity.edl"
+  2 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/scllrfRESBits.edl"
+  3 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/RES_RF_E_stpCav.edl"
+  4 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/RES_RF_E_stpCav.edl"
+  5 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/RES_RF_E_stpCav.edl"
+  6 "/usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display/RES_RF_E_stpCav.edl"
+}
+menuLabel {
+  0 "RES Registers"
+  1 "Scanning"
+  2 "RES Bits"
+  3 "Step 1"
+  4 "Step 2"
+  5 "Step 3"
+  6 "Step 4"
+}
+symbols {
+  0 "P=RES$(PNUM)"
+  1 "P=RES$(PNUM)"
+  2 "P=RES$(PNUM):"
+  3 "P=RES$(PNUM):,CAV=1"
+  4 "P=RES$(PNUM):,CAV=2"
+  5 "P=RES$(PNUM):,CAV=3"
+  6 "P=RES$(PNUM):,CAV=4"
+}
+icon
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 163
+w 491
+h 21
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+value {
+  " (c)  /usr/srfuser/opshome/edm/srfCapt/SLAC_scllrf_display "
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 131
+w 302
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 1
+value {
+  " (d)  ~gwbrown/w/3-1-2017merge/scllrf/display/ "
+}
+autoSize
+endObjectProperties
+
