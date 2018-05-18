@@ -1,0 +1,534 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 740
+y 50
+w 501
+h 655
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 8
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 51
+ctlBgColor2 index 8
+topShadowColor index 50
+botShadowColor index 10
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 60
+y 490
+w 310
+h 80
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-24.0"
+buttonLabel "PRC 1"
+numPvs 4
+numDsps 11
+displayFileName {
+  0 "PRCoverview.edl"
+  1 "PRCIandQWaveforms.edl"
+  2 "PRCIQWaveforms.edl"
+  3 "PRCIvsQcirc.edl"
+  4 "PRCIvsQcirc.edl"
+  5 "PRCIQvstcirc.edl"
+  6 "PRCIQvstcirc.edl"
+  7 "PRCAPvstcirc.edl"
+  8 "PRCAPvstcirc.edl"
+  9 "scllrfPRCRegisters.edl"
+  10 "scllrfPRCBits.edl"
+}
+menuLabel {
+  0 "PRC 1"
+  1 "16 or 22 bit I vs. time, Q vs. time"
+  2 "16 or 22 bit I vs. Q"
+  3 "Circle buffer 0 I vs. Q"
+  4 "Circle buffer 1 I vs. Q"
+  5 "Circle buffer 0 I and Q vs. time"
+  6 "Circle buffer 1 I and Q vs. time"
+  7 "Circle buffer 0 Amplitude and Phase"
+  8 "Circle buffer 1 Amplitude and Phase"
+  9 "All raw registers"
+  10 "Registers with bit fields"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=PRC1:B15:"
+  1 "P=PRC1:B15:"
+  2 "P=PRC1:B15:"
+  3 "P=PRC1:B15:, N=0"
+  4 "P=PRC1:B15:, N=1"
+  5 "P=PRC1:B15:, N=0"
+  6 "P=PRC1:B15:, N=1"
+  7 "P=PRC1:B15:, N=0"
+  8 "P=PRC1:B15:, N=1"
+  9 "P=PRC1:B15:"
+  10 "P=PRC1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 50
+y 50
+w 310
+h 80
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-24.0"
+buttonLabel "Interlock"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "INTCaptain.edl"
+}
+menuLabel {
+  0 "Interlock"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=INT1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 50
+y 140
+w 310
+h 80
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-24.0"
+buttonLabel "Resonance Control"
+numPvs 4
+numDsps 5
+displayFileName {
+  0 "res4cavity.edl"
+  1 "RESwaveformsFrame"
+  2 "scllrfRESRegisters"
+  3 "scllrfRESBits"
+  4 "res4waveforms.edl"
+}
+menuLabel {
+  0 "Resonance Control"
+  1 "Waveforms"
+  2 "All Registers"
+  3 "All bit fields"
+  4 "Waveforms"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=RES1:B15:"
+  1 "P=RES1:B15:,N=1"
+  2 "P=RES1:B15:"
+  3 "P=RES1:B15:"
+  4 "P=RES1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 50
+y 230
+w 310
+h 80
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-24.0"
+buttonLabel "RFS 2"
+numPvs 4
+numDsps 11
+displayFileName {
+  0 "PRCoverview.edl"
+  1 "PRCIandQWaveforms.edl"
+  2 "PRCIQWaveforms.edl"
+  3 "PRCIvsQcirc.edl"
+  4 "PRCIvsQcirc.edl"
+  5 "PRCIQvstcirc.edl"
+  6 "PRCIQvstcirc.edl"
+  7 "PRCAPvstcirc.edl"
+  8 "PRCAPvstcirc.edl"
+  9 "scllrfPRCRegisters.edl"
+  10 "scllrfPRCBits.edl"
+}
+menuLabel {
+  0 "RFS 2"
+  1 "16 or 22 bit I vs. time, Q vs. time"
+  2 "16 or 22 bit I vs. Q"
+  3 "Circle buffer 0 I vs. Q"
+  4 "Circle buffer 1 I vs. Q"
+  5 "Circle buffer 0 I and Q vs. time"
+  6 "Circle buffer 1 I and Q vs. time"
+  7 "Circle buffer 0 Amplitude and Phase"
+  8 "Circle buffer 1 Amplitude and Phase"
+  9 "All raw registers"
+  10 "Registers with bit fields"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=RFS2:B15:"
+  1 "P=RFS2:B15:"
+  2 "P=RFS2:B15:"
+  3 "P=RFS2:B15:, N=0"
+  4 "P=RFS2:B15:, N=1"
+  5 "P=RFS2:B15:, N=0"
+  6 "P=RFS2:B15:, N=1"
+  7 "P=RFS2:B15:, N=0"
+  8 "P=RFS2:B15:, N=1"
+  9 "P=RFS2:B15:"
+  10 "P=RFS2:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 50
+y 330
+w 310
+h 80
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-24.0"
+buttonLabel "RFS 1"
+numPvs 4
+numDsps 11
+displayFileName {
+  0 "PRCoverview.edl"
+  1 "PRCIandQWaveforms.edl"
+  2 "PRCIQWaveforms.edl"
+  3 "PRCIvsQcirc.edl"
+  4 "PRCIvsQcirc.edl"
+  5 "PRCIQvstcirc.edl"
+  6 "PRCIQvstcirc.edl"
+  7 "PRCAPvstcirc.edl"
+  8 "PRCAPvstcirc.edl"
+  9 "scllrfPRCRegisters.edl"
+  10 "scllrfPRCBits.edl"
+}
+menuLabel {
+  0 "RFS 1"
+  1 "16 or 22 bit I vs. time, Q vs. time"
+  2 "16 or 22 bit I vs. Q"
+  3 "Circle buffer 0 I vs. Q"
+  4 "Circle buffer 1 I vs. Q"
+  5 "Circle buffer 0 I and Q vs. time"
+  6 "Circle buffer 1 I and Q vs. time"
+  7 "Circle buffer 0 Amplitude and Phase"
+  8 "Circle buffer 1 Amplitude and Phase"
+  9 "All raw registers"
+  10 "Registers with bit fields"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "P=RFS1:B15:"
+  1 "P=RFS1:B15:"
+  2 "P=RFS1:B15:"
+  3 "P=RFS1:B15:, N=0"
+  4 "P=RFS1:B15:, N=1"
+  5 "P=RFS1:B15:, N=0"
+  6 "P=RFS1:B15:, N=1"
+  7 "P=RFS1:B15:, N=0"
+  8 "P=RFS1:B15:, N=1"
+  9 "P=RFS1:B15:"
+  10 "P=RFS1:B15:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 510
+h 50
+lineColor index 19
+fill
+fillColor index 19
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 16
+w 452
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor index 55
+bgColor index 0
+useDisplayBg
+value {
+  "LLRF CHASSIS CONTROL MENU"
+}
+endObjectProperties
+
+# (PNG Image)
+object activePngClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 50
+w 396
+h 601
+file "LCLS2_LLRF_Rack_Profile.png"
+uniformSize
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 390
+y 80
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "Interlock IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "Interlock IOC"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:INT1"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 390
+y 160
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+buttonLabel "Resonance IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "Resonance IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:RES1"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 390
+y 360
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "RFS1 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "RFS1 IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:RFS1"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 390
+y 260
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "RFS2 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "RFS2 IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:RFS2"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 390
+y 520
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "PRC1 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "PRC IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:PRC1"
+}
+endObjectProperties
+

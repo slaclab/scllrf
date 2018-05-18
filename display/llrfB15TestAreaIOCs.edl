@@ -1,0 +1,384 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 2225
+y 31
+w 261
+h 256
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-medium-r-18.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor index 8
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 14
+ctlBgColor1 index 51
+ctlBgColor2 index 8
+topShadowColor index 50
+botShadowColor index 10
+title "B15 RF IOCs"
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 510
+h 50
+lineColor index 19
+fill
+fillColor index 19
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 20
+y 10
+w 220
+h 30
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor index 55
+bgColor index 0
+useDisplayBg
+value {
+  "B15 RF Test Area IOCs"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 60
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+buttonLabel "Interlock IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ioc_linuxrt_cpu.edl"
+}
+menuLabel {
+  0 "Interlock IOC"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:INT1,crat=CPU:B15:RF01,iochost=sioc-b15-int1,cpuhost=cpu-b15-rf01"
+}
+colorPv "SIOC:B15:INT1:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 100
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+buttonLabel "Resonance IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ioc_linuxrt_cpu.edl"
+}
+menuLabel {
+  0 "Resonance IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:RES1,crat=CPU:B15:RF01,iochost=sioc-b15-res1,cpuhost=cpu-b15-rf01"
+}
+colorPv "SIOC:B15:RES1:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 180
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "RFS1 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ioc_linuxrt_cpu.edl"
+}
+menuLabel {
+  0 "RFS1 IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:RFS1,crat=CPU:B15:RF01,iochost=sioc-b15-rfs1,cpuhost=cpu-b15-rf01"
+}
+colorPv "SIOC:B15:RFS1:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 140
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "RFS2 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ioc_linuxrt_cpu.edl"
+}
+menuLabel {
+  0 "RFS2 IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:RFS2,crat=CPU:B15:RF01,iochost=sioc-b15-rfs2,cpuhost=cpu-b15-rf01"
+}
+colorPv "SIOC:B15:RFS2:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 10
+y 220
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "PRC1 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ioc_linuxrt_cpu.edl"
+}
+menuLabel {
+  0 "PRC IOC"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:PRC1,crat=CPU:B15:RF01,iochost=sioc-b15-prc1,cpuhost=cpu-b15-rf01"
+}
+colorPv "SIOC:B15:PRC1:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 140
+y 140
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "SSA3 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "RF AMP 3"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:SSA3"
+}
+colorPv "SIOC:B15:SSA3:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 140
+y 180
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "SSA4 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "RF AMP 4"
+}
+setPosition {
+  0 "parentWindow"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:SSA4"
+}
+colorPv "SIOC:B15:SSA4:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 140
+y 60
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "SSA1 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "RF AMP 1"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:SSA1"
+}
+colorPv "SIOC:B15:SSA1:HEARTBEAT"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 140
+y 100
+w 110
+h 25
+fgColor index 14
+bgColor index 31
+topShadowColor index 2
+botShadowColor index 12
+font "helvetica-medium-r-12.0"
+noEdit
+buttonLabel "SSA2 IOC"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "autosave_ioc_soft.edl"
+}
+menuLabel {
+  0 "RF AMP 2"
+}
+allowDups {
+  0 1
+}
+symbols {
+  0 "ioc=SIOC:B15:SSA2"
+}
+colorPv "SIOC:B15:SSA2:HEARTBEAT"
+endObjectProperties
+

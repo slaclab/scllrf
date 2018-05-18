@@ -14,7 +14,7 @@
 # How to escape the "vioc-dev" as the PERL program
 # will try to replace it.
 # So, uncomment the following and remove the backslash
-epicsEnvSet("EPICS\_IOC\_LOG_CLIENT_INET","${IOC}")
+epicsEnvSet("EPICS_IOC_LOG_CLIENT_INET","${IOC}")
 
 # Need this path to EPICS BASE so that caRepeater can be started:
 # Let's figure out a way to pass this one in via the IOC's

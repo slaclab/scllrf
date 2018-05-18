@@ -1,21 +1,22 @@
-
         record(mbboDirect,"$(P)RXHLLFLTb") {
-                field(DESC,"word to bits record")
+                field(DESC,"bits to word record")
                 field(SCAN,"Passive")
                 field(PINI,"NO")
+                field(FLNK,"0.000000000000000e+00")
                 field(PHAS,"0")
                 field(EVNT,"0")
                 field(DTYP,"Soft Channel")
                 field(DISV,"1")
-                field(FLNK,"0.000000000000000e+00")
                 field(SDIS,"0.000000000000000e+00")
                 field(DISS,"NO_ALARM")
                 field(PRIO,"LOW")
-                field(NOBT,"0")
-                field(INP,"")
+                field(NOBT,"16")
                 field(SIML,"0.000000000000000e+00")
                 field(SIMS,"NO_ALARM")
-                field(SIMM,"NO")
+                field(DOL,"")
+                field(OUT,"0.000000000000000e+00")
+                field(IVOA,"Continue normally")
+                field(IVOV,"0")
                 field(ASG,"DEFAULT")
         }
 

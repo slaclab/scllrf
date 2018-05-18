@@ -121,3 +121,17 @@ record( compress, "ACCL:GUNB:455:DPDT_DETUNE")
 	field( INP, "ACCL:GUNB:455:FWD:DPDT.AVAL")
 }
 
+record( ao, "ACCL:GUNB:455:RF_GO")
+{
+	field(FLNK, "ACCL:GUNB:455:RF_GO_3CH PP")
+}
+
+record( dfanout, "ACCL:GUNB:455:RF_GO_3CH")
+{
+	field(OMSL, "closed_loop")
+	field(DOL, "ACCL:GUNB:455:RF_GO")
+	field(OUTA, "ACCL:GUNB:455:RF_GO_W PP")
+	field(OUTB, "ACCL:GUNB:455:RFS1:RF_GO_W PP")
+	field(OUTC, "ACCL:GUNB:455:RFS2:RF_GO_W PP")
+}
+

@@ -19,7 +19,7 @@ record(ao, "$(P)FULL_SCALE_ADC_$(N)")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
 	field(FLNK, "$(P)SCALE_FACTOR_$(N)")
-	field(VAL, 0xFFFFFFFF)
+	field(VAL, "0xFFFFFFFF")
 	info(autosaveFields, "HOPR LOPR VAL")
 }
 
@@ -116,7 +116,7 @@ record(calcout, "$(P)SCALE_FACTOR_$(N)")
 	field(CALC, "(10^((D-B-C-E-F-30)/20))/A")
 	field(SDIS, "$(P)CALIBRATION_ALLOWED")
 	field( DISV, "0")
-	field( PREC, 7)
+	field( PREC, "7")
 	field(PINI, "YES")
 	info(autosaveFields, "HOPR LOPR VAL")
 }

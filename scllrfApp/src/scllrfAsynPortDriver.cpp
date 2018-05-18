@@ -1301,7 +1301,7 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
 	for (i=p_GitSha1AR; i<=p_GitSha1TR; i++)
 	{
 		status = (asynStatus) getIntegerParam(i, &oneByte);
-		strGitSHA1<< std::setw(2) << oneByte;
+		strGitSHA1<< std::hex << std::setw(2) << oneByte;
 	}
 	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
 	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());

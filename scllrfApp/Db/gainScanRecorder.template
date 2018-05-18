@@ -18,9 +18,9 @@ field(FLNK, "$(P)TRACK_SSA$(N)_GAIN")
 }
 
 record(fanout, "$(P)TRACK_SSA$(N)_GAIN") {
-field(LNK0, "$(P)DRV$(N):AMEAN_LOG")
-field(LNK1, "$(P)FWD$(N):AMEAN_LOG")
-field(LNK2, "$(P)SSA$(N)_GAIN_LOG")
+field(LNK0, "$(P)DRV$(N):AMEAN_LOG PP")
+field(LNK1, "$(P)FWD$(N):AMEAN_LOG PP")
+field(LNK2, "$(P)SSA$(N)_GAIN_LOG PP")
 }
 
 record(compress, "$(P)DRV$(N):AMEAN_LOG") {

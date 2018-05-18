@@ -188,7 +188,7 @@ record( calc, "$(P)SMOOTHED_BW")
 	field( INPA, "$(P)CAV1:DECAY_BW")
 	field( INPB, "$(P)CAV2:DECAY_BW")
 	field( INPC, "0.9") # Smoothing factor
-	field( CALC, "C*VAL+(1-C)*(A+B)/2")
+	field( CALC, "C*(ISNAN(VAL)?0:VAL)+(1-C)*(A+B)/2")
 	field( SDIS, "$(P)PULSE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 }
@@ -320,15 +320,16 @@ record( calc, "$(P)POPEN_RAW" )
 record( calc, "$(P)AOPEN_SCALE_CALC" ) {
 	field( INPA, "$(P)AOPEN_RAW")
 	field( INPB, "$(P)CAV1:AMEAN CP") # Use this waveform mean to scale AOUT
-	field( INPC, "0.95") # Equivalent of SMOO field in ai records
-	field( CALC, "(1-C)*A/B + VAL*C")
+	field( INPC, "$(P)CAV2:AMEAN CP") # Use this waveform mean to scale AOUT
+	field( INPD, "0.95") # Equivalent of SMOO field in ai records
+	field( CALC, "(1-D)*A/MAX(B,C) + (ISNAN(VAL)?0:VAL)*D")
 }
 record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when
 # the "PROC" field is written. It's a suggestion, not a feedback loop.
 	field( DOL,  "$(P)AOPEN_SCALE_CALC")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)AOPEN_SCALE")
+	field( OUT,  "$(P)AOPEN_SCALE PP")
 }
 record( ao, "$(P)AOPEN_SCALE" ) {
 	field( FLNK, "$(P)AOPEN_MAX_CALC" )
@@ -355,7 +356,7 @@ record( calc, "$(P)POPEN_SCALE_CALC" ) {
 	field( INPA, "$(P)POPEN_RAW")
 	field( INPB, "$(P)CAV1:PMEAN CP") # Use this waveform mean to scale AOUT
 	field( INPC, "0.95") # Equivalent of SMOO field in ai records
-	field( CALC, "(1-C)*(A-B) + C*VAL")
+	field( CALC, "(1-C)*(A-B) + C*(ISNAN(VAL)?0:VAL)")
 }
 record(ao, "$(P)USE_POPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when
@@ -447,6 +448,7 @@ record(ao, "$(P)DRV1_ADJ_A")
 	field(HOPR, "100")
 	field(LOPR, "0")
 	field(VAL, "100")
+	field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
 	info( autosaveFields, "VAL")
 }
 
@@ -455,6 +457,7 @@ record(ao, "$(P)DRV1_ADJ_P")
 	field(EGU, "degrees")
 	field(HOPR, "180")
 	field(LOPR, "-180")
+		field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
 	info( autosaveFields, "VAL")
 }
 record( fanout,  "$(P)RFSUPLO1_AP_TO_IQ")
@@ -485,6 +488,7 @@ record(ao, "$(P)DRV2_ADJ_A")
 	field(EGU, "%")
 	field(HOPR, "100")
 	field(LOPR, "0")
+		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
 	info( autosaveFields, "VAL")
 }
 
@@ -493,6 +497,7 @@ record(ao, "$(P)DRV2_ADJ_P")
 	field(EGU, "degrees")
 	field(HOPR, "180")
 	field(LOPR, "-180")
+		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
 	info( autosaveFields, "VAL")
 }
 record( fanout,  "$(P)RFSUPLO2_AP_TO_IQ")

@@ -2,6 +2,7 @@
 #! DBDSTART
 #! DBDEND
 
+include "GUNBDecayCh.template"
 # Note on FFTs: Interesting frequencies are generally from 3kHz to sub Hz
 
 record(waveform, "$(P)ITWF") {

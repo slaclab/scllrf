@@ -153,7 +153,7 @@ field(PINI, "YES")
 }
 
 record(mbbo, "$(P)WF_TIME_PER_POINT") {
-field(OUT, "$(P)WAVE_SAMP_PER_W")
+field(OUT, "$(P)WAVE_SAMP_PER_W PP")
 field(ZRVL, "1")
 field(ONVL, "2")
 field(TWVL, "4")
@@ -172,6 +172,7 @@ field(FVST, "44.8 us")
 field(SXST, "89.6 us")
 field(SVST, "179.2 us")
 field(EIST, "0.357 ms")
+field(DTYP, "Raw Soft Channel")
 }
 
 #! Further lines contain data used by VisualDCT

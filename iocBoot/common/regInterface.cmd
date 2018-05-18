@@ -1,7 +1,7 @@
 # Do chassis configuration that is needed before PVs connect
 #The following line works for RHEL
 ####XXXX It's a pain to do this every time while testing
-system("${GO_PY=} cd ${PY_INIT_DIR}; ${PY_PATH=}python gun.py -a ${FPGA_IP} -b ${BIT_FILE}  -r")
+#system("${GO_PY=} cd ${PY_INIT_DIR}; ${PY_PATH=}python gun.py -a ${FPGA_IP} -b ${BIT_FILE}  -r -c ${CHASSIS_REG}")
 cd ${TOP}
 
 # =====================================================================
@@ -23,9 +23,9 @@ dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=$(CHASSIS_NAME)IP,ADDR=0
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
 #asynSetTraceMask("$(CHASSIS_NAME)IP",-1,ASYN_TRACE_ERROR)
-asynSetTraceMask("$(CHASSIS_NAME)IP",-1,0xB)
+#asynSetTraceMask("$(CHASSIS_NAME)IP",-1,0xB)
 #asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,4)
+#asynSetTraceIOMask("$(CHASSIS_NAME)IP",-1,4)
 
 
 #epicsThreadSleep(1.0)
@@ -36,9 +36,9 @@ dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=$(CHASSIS_NAME)Reg,ADDR
 ### Asyn Debugging #####################################################
 # ======================================================================
 ## Asyn messages for DIGI_Serial16
-asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,0xB)
+#asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,0xB)
 #asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,ASYN_TRACEIO_HEX) ASYN_TRACEIO_HEX = 4
-asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,4)
+#asynSetTraceIOMask("$(CHASSIS_NAME)Reg",-1,4)
 
 epicsThreadSleep(0.2)
 
@@ -47,3 +47,6 @@ epicsThreadSleep(0.2)
 # =====================================================================
 ## Load record instances
 dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)Reg,SC=$(SC=scllrf)")
+
+bmb7Configure("$(CHASSIS_NAME)BMB7", "$(FPGA_IP)", "0")
+dbLoadRecords("db/BMB7monitor.db", "PORT=$(CHASSIS_NAME)BMB7,P=$(P),R=$(CHASSIS_NAME):")

@@ -86,3 +86,18 @@ record (calc, "GUN:GUNB:100:CW_DETUNE" )
 	field( CALC, "A-(B+C)/2")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 }
+
+record( ao, "GUN:GUNB:100:RF_GO")
+{
+	field(FLNK, "GUN:GUNB:100:RF_GO_3CH PP")
+}
+
+record( dfanout, "GUN:GUNB:100:RF_GO_3CH")
+{
+	field(OMSL, "closed_loop")
+	field(DOL, "GUN:GUNB:100:RF_GO")
+	field(OUTA, "GUN:GUNB:100:RF_GO_W PP")
+	field(OUTB, "GUN:GUNB:100:RFS1:RF_GO_W PP")
+	field(OUTC, "GUN:GUNB:100:RFS2:RF_GO_W PP")
+}
+

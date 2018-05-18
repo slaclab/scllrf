@@ -7,7 +7,7 @@ all: $(PY_FILES)
 	for i in $^ ; do \
 		python deviceGeneration.py -d $$i ; \
 	done  ; \
-	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
+#	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
 	python deviceGeneration.py -c GUNB -i regmapold.json
 
 % : %.py

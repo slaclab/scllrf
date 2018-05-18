@@ -1,0 +1,28 @@
+#==================================
+#----------------------------------
+# rfSigCalibSimple.template:
+#
+# Scale factor to convert waveform
+# fraction-of-full-scale readout 
+# to engineering units: MV for cavity 
+# signal; sqrt(Watts) for others
+#----------------------------------
+#==================================
+
+record(ao, "$(PREF)CAL_SCALE") {
+  field(SCAN, "Passive")
+  field(OMSL, "supervisory")
+  field(PREC, "7")
+  field(VAL,  "1")
+  field(PINI, "YES")
+  field(FLNK, "$(PREF)SCALE_CALC")
+  info(autosaveFields, "VAL")
+}
+
+# Unnecessary intermediate PV 
+# to be compatible with wfCav.template
+record(ao, "$(PREF)SCALE_CALC") {
+  field(OMSL, "closed_loop")
+  field(DOL,  "$(PREF)CAL_SCALE")
+  field(FLNK, "$(PREF)SCALE")
+}

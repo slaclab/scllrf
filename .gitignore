@@ -10,3 +10,8 @@ iocBoot/*/envPaths
 O.*
 /info_positions.req
 /info_settings.req
+/.cproject
+/AllAandP
+/AllIandQ
+/AllIvsQ
+/bpmcc*

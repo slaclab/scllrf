@@ -1025,6 +1025,16 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		{
 			decayData_.ProcessTraceDataReadback(pFromFpga);
 		}
+		else if ((pFromFpga->addr >= (ConfigRomOutRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((ConfigRomOutRAdr|flagReadMask) + ConfigRomOutBuf.RegCount)))
+		{
+			// This one is also processed by grandparent class scllrfAsynPortDriver
+			GUNBDriver::processRegReadback(pFromFpga, waveIsReady);
+			if(pFromFpga->addr<= (GitSha1TRAdr|flagReadMask))
+			{ ////XXXX This is all that is implemented at the moment, remove "if" later
+				scllrfAsynPortDriver::processRegReadback(pFromFpga, waveIsReady);
+			}
+		}
 		else
 		{
 			status = GUNBDriver::processRegReadback(pFromFpga, waveIsReady);

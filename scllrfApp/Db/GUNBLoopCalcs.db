@@ -85,8 +85,8 @@ record(calcout, "$(P)CALC_NEW_PHSTEP_H") {
 field(INPA, "$(P)DDSA_PHSTEP_H_W")
 field(INPB, "$(P)DECAY_CONSTANT_B")
 # Check # with Gang
-# 2^20/(1300e6/7*11/20)
-field(INPC, "1.0265779e-2")
+# 2^20/(1300e6/7)
+field(INPC, "0.0011121")
 field(CALC, "A-B*C")
 }
 
@@ -301,35 +301,36 @@ record (calc, "$(P)DFACT" )
 	# If pulsed, use the signal with greater decay strength (cleaner)
 	# Otherwise, use the CW calculation.
 	field( CALC, "F?(B>C?D:E):A")
+	field( CALC, "E")
 }
 
 # This record keeps ADES, the closed loop setpoint,
 # synchronized with the cavity amplitude, during open loop operation
-#record ( acalcout, "$(P)AACT_DECAY" )
-#{
-#	field( INAA, "$(P)CAV1:AWF_DECAY CP" )
-#	field( INBB, "$(P)CAV2:AWF_DECAY" )
-#	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
+record ( acalcout, "$(P)AACT_DECAY" )
+{
+	field( INAA, "$(P)CAV1:AWF_DECAY CP" )
+	field( INBB, "$(P)CAV2:AWF_DECAY" )
+	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
 ## The equation is odd because the record wasn't working with AA[0]
-#	field( CALC, "VAL*A+(1-A)*MAX(AMAX(AA[0,1]),AMAX(BB[0,1]))" ) # Use this if we want 2 probe max.
-##	field( CALC, "VAL*A+(1-A)*AMAX(AA[0,1])" )
+	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*MAX(AMAX(AA[0,1]),AMAX(BB[0,1]))" ) # Use this if we want 2 probe max.
+#	field( CALC, "VAL*A+(1-A)*AMAX(AA[0,1])" )
 #	field( OUT, "$(P)ADES PP")
 #	field( OOPT, "On Change")
 #	field( PINI, "YES" )
 ## This should be inactive when loop is CLOSED
 #	field( SDIS, "$(P)CLOSE_LOOP_W")
 #	field( DISV, "1")
-#	field( NELM, "1")
-#	field( NUSE, "1")
-#}
-#
-#
-#record ( acalcout, "$(P)PACT_DECAY" )
-#{
-#	field( INAA, "$(P)CAV1:PWF_DECAY CP" )
-#	field( INBB, "$(P)CAV2:PWF_DECAY" )
-#	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
-#	field( CALC, "VAL*A+(1-A)*AMAX(AA[0,1])" )
+	field( NELM, "1")
+	field( NUSE, "1")
+}
+
+
+record ( acalcout, "$(P)PACT_DECAY" )
+{
+	field( INAA, "$(P)CAV1:PWF_DECAY CP" )
+	field( INBB, "$(P)CAV2:PWF_DECAY" )
+	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
+	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*AMAX(AA[0,1])" )
 #	field( OUT, "$(P)PDES PP")
 #	field( OOPT, "On Change")
 #	field( PINI, "YES" )
@@ -337,9 +338,9 @@ record (calc, "$(P)DFACT" )
 ## The equation is odd because the record wasn't working with AA[0]
 #	field( SDIS, "$(P)CLOSE_LOOP_W")
 #	field( DISV, "1")
-#	field( NELM, "1")
-#	field( NUSE, "1")
-#}
+	field( NELM, "1")
+	field( NUSE, "1")
+}
 
 record (bo, "$(P)RFCTRL" )
 {
@@ -390,24 +391,28 @@ field(LNK2, "$(P)DO_CLOSELOOP PP")
 record(seq, "$(P)DO_CLOSELOOP") {
 field(SELM, "All")
 # Set gains to 0 so there's no jump
-field(DO1, "0")
-field(LNK1, "$(P)GAINP_BETA_W")
-field(DO2, "0")
-field(LNK2, "$(P)GAINP_ALPHA_W")
-# Enable Interlocks
-field(DO3, "1")
-field(LNK3, "$(P)INT_ENA_W PP")
-field(DLY3, "0.2")
+field(LNK1, "$(P)AP_KP")
+field(DOL1, "$(P)GAINP_BETA_W")
+field(LNK2, "$(P)AP_KI")
+field(DOL2, "$(P)GAINP_ALPHA_W")
+field(DO3, "0")
+field(LNK3, "$(P)GAINP_BETA_W PP")
+field(DO4, "0")
+field(LNK4, "$(P)GAINP_ALPHA_W PP")
+field(DOL5, "$(P)AACT_DECAY")
+field(LNK5, "$(P)ADES PP")
+field(DOL6, "$(P)PACT_DECAY")
+field(LNK6, "$(P)PDES PP")
 # Close the loop
-field(DO4, "1")
-field(LNK4, "$(P)CLOSE_LOOP_W PP")
-field(DLY4, "0.2")
+field(DO7, "1")
+field(LNK7, "$(P)CLOSE_LOOP_W PP")
+field(DLY7, "0.5")
 # Set proportional, then integral gain
-field(DO5, "0")
-field(LNK5, "$(P)GAINP_BETA_W")
-field(DO6, "0")
-field(LNK6, "$(P)GAINP_ALPHA_W")
-field(DLY6, "0.4")
+field(DOL8, "$(P)AP_KP")
+field(LNK8, "$(P)GAINP_BETA_W PP")
+field(DOL9, "$(P)AP_KI")
+field(LNK9, "$(P)GAINP_ALPHA_W PP")
+field(DLY8, "0.2")
 }
 
 ######xxxxx tHIS MAY BE CAUSING PROBLEMS
@@ -418,28 +423,35 @@ field(DLY6, "0.4")
 #field(OUT, "$(P)FDBK_CLIPV_W PP")
 #}
 
-
 record(seq, "$(P)DO_OPENLOOP") {
 field(SELM, "All")
 # Set gains to 0 to stop output from changing
-field(DO1, "0")
-field(LNK1, "GAINP_ALPHA_W")
-field(DO2, "0")
-field(LNK2, "GAINP_BETA_W")
+field(LNK1, "$(P)AP_KP")
+field(DOL1, "$(P)GAINP_BETA_W")
+field(LNK2, "$(P)AP_KI")
+field(DOL2, "$(P)GAINP_ALPHA_W")
+field(DO3, "0")
+field(LNK3, "GAINP_ALPHA_W PP")
+field(DO4, "0")
+field(LNK4, "GAINP_BETA_W PP")
 # Allow 0.2s for VOUT*FALL stable value readbacks
-field(DO3, "1")
-field(LNK3, "$(P)SOURCE_RE_Sync.PROC")
-field(DLY3, "0.2")
-field(DO4, "1")
-field(LNK4, "$(P)SOURCE_IM_Sync.PROC")
-field(DO5, "0")
-#field(LNK5, "$(P)FDBK_CLIPV_W PP")
+field(DO5, "1")
+field(LNK5, "$(P)SOURCE_RE_Sync.PROC")
 field(DLY5, "0.2")
-field(DO6, "0")
-field(LNK6, "$(P)CLOSE_LOOP_W PP")
-field(DLY6, "0.2")
-field(DO7, "0")
-field(LNK7, "$(P)INT_ENA_W PP")
+field(DO6, "1")
+field(LNK6, "$(P)SOURCE_IM_Sync.PROC")
+#field(DO7, "0")
+#field(LNK7, "$(P)FDBK_CLIPV_W PP")
+#field(DLY7, "0.2")
+field(DO8, "0")
+field(LNK8, "$(P)CLOSE_LOOP_W PP")
+field(DLY8, "0.2")
+# Restore proportional, then integral gain
+field(DOL9, "$(P)AP_KP")
+field(LNK9, "$(P)GAINP_BETA_W PP")
+field(DOLA, "$(P)AP_KI")
+field(LNKA, "$(P)GAINP_ALPHA_W PP")
+field(DLY9, "0.2")
 }
 
 record(calc, "$(P)CALC_OPEN_SOURCE_RE") {

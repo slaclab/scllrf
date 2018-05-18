@@ -1,4 +1,4 @@
-{  ( flagReadMask|KeepWAdr),3 },
+{  KeepWAdr,61581 },
 { ( flagReadMask|TraceDataRAdr ) +0,40000 },
 { ( flagReadMask|TraceDataRAdr ) +1,40000 },
 { ( flagReadMask|TraceDataRAdr ) +2,36193 },

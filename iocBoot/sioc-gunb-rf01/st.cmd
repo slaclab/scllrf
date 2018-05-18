@@ -13,7 +13,7 @@ epicsEnvSet("CHASSIS_TYPE","GUNB")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("CHASSIS_NAME","RFS1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-epicsEnvSet("IOC_PV", "SIOC:$(AREA):$(CHASSIS_NAME):")
+epicsEnvSet("IOC_PV", "SIOC:$(AREA):RF01")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "192.168.0.101")
 # trying out feedsim
@@ -27,9 +27,11 @@ epicsEnvSet( PORT, "50006")
 #epicsEnvSet( PY_PATH, "") # for RT
 epicsEnvSet( PY_PATH, "/afs/slac/g/lcls/package/python/python2.7.9/linux-x86_64/bin/") # for RHEL
 # Directory with python init script, and where it will be run from
-epicsEnvSet( PY_INIT_DIR, "/afs/slac/g/lcls/package/llrf_doolittle/b15/lcls2_llrf/firmware/gun/run")
+epicsEnvSet( PY_INIT_DIR, "/afs/slac.stanford.edu/u/re/gwbrown/w/lcls2_llrf/firmware/gun/run")
 # Bit file name, as relative path from the above directory
-epicsEnvSet( BIT_FILE, "../gun.12-20-17.bit")
+epicsEnvSet( BIT_FILE, "../gun.bit")
+# The "chassis" register sets the type of chassis: 0:gun prc,1:gun rfs,2:buncher prc,3:buncher rfs
+epicsEnvSet(CHASSIS_REG, "1")
 # If this chassis has a subclass, by convention called extra, set its name
 # here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","$(P)myIP") resolves correctly
 epicsEnvSet( EXTRA, "Extra")
@@ -44,6 +46,7 @@ asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
 epicsEnvSet("CHASSIS_NAME","RFS2")
+epicsEnvSet(CHASSIS_REG, "1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet( FPGA_IP, "192.168.0.102")
 < iocBoot/common/regInterface.cmd
@@ -51,13 +54,14 @@ asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
 epicsEnvSet("CHASSIS_NAME","PRC")
-epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+epicsEnvSet(CHASSIS_REG, "0")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
 epicsEnvSet( FPGA_IP, "192.168.0.103")
 < iocBoot/common/regInterface.cmd
 asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
-dbLoadRecords("db/GunRfCalib.db")
+#dbLoadRecords("db/GunRfCalib.db")
 dbLoadRecords("db/GUNBExtra.db")
 
 ##############################################################################
@@ -117,16 +121,26 @@ seq PVramp, "PREFIX=$(P)"
 epicsEnvSet("CHASSIS_NAME","RFS1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 dbpf $(P)CHASSIS_W 1
+dbpf $(P)EXT_TRIG_SEL_W 1
+dbpf $(P)WAVE_SAMP_PER_W 32
+dbpf $(P)POLL_PERIOD 0.4
 dbpf $(P)RUN_STOP 1
 
-#epicsEnvSet("CHASSIS_NAME","RFS2")
-#epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-#dbpf $(P)CHASSIS_W 1
-#dbpf $(P)RUN_STOP 1
+
+epicsEnvSet("CHASSIS_NAME","RFS2")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)CHASSIS_W 1
+dbpf $(P)EXT_TRIG_SEL_W 1
+dbpf $(P)WAVE_SAMP_PER_W 32
+dbpf $(P)POLL_PERIOD 0.4
+dbpf $(P)RUN_STOP 1
 
 epicsEnvSet("CHASSIS_NAME","PRC")
-epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
 dbpf $(P)CHASSIS_W 0
+dbpf $(P)WAVE_SAMP_PER_W 32
+dbpf $(P)POLL_PERIOD 0.4
 dbpf $(P)RUN_STOP 1
+seq PVramp, "PREFIX=$(P)"
 epicsThreadSleep(0.2)
 
