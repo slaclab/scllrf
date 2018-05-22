@@ -42,11 +42,11 @@ yLabel "Q"
 fgColor index 14
 bgColor index 12
 gridColor index 11
-font "helvetica-medium-r-18.0"
+font "helvetica-medium-r-14.0"
 # Operating Modes
 nPts 2
-traceCtlPv "$(P)WF_CHAN_DISABLE"
-resetPv "$(P)WF_UPDATE_PLOT"
+traceCtlPv "$(P)RFS$(N):WF_CHAN_DISABLE"
+resetPv "$(P)RFS$(N):WF_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -61,33 +61,42 @@ yShowLabelGrid
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 8
+numTraces 10
 xPv {
 0 "GUN:GUNB:100:DRV$(N):ITWF"
-1 "GUN:GUNB:S100:FWD$(N):ITWF"
-2 "GUN:GUNB:S100:REV$(N):ITWF"
-3 "GUN:GUNB:100:FWD$(N):ITWF"
-4 "GUN:GUNB:100:REV$(N):ITWF"
-5 "GUN:GUNB:C100:FWD$(N):ITWF"
-6 "GUN:GUNB:C100:REV$(N):ITWF"
+1 "GUN:GUNB:100:DRV$(N)A:ITWF"
+2 "GUN:GUNB:S100:FWD$(N):ITWF"
+3 "GUN:GUNB:S100:REV$(N):ITWF"
+4 "GUN:GUNB:100:FWD$(N):ITWF"
+5 "GUN:GUNB:100:REV$(N):ITWF"
+6 "GUN:GUNB:C100:FWD$(N):ITWF"
+7 "GUN:GUNB:C100:REV$(N):ITWF"
+8 "$(P)RFS$(N):SPARE1:ITWF"
+9 "GUN:GUNB:100:RFS1:DAC:ITWF"
 }
 yPv {
 0 "GUN:GUNB:100:DRV$(N):QTWF"
-1 "GUN:GUNB:S100:FWD$(N):QTWF"
-2 "GUN:GUNB:S100:REV$(N):QTWF"
-3 "GUN:GUNB:100:FWD$(N):QTWF"
-4 "GUN:GUNB:100:REV$(N):QTWF"
-5 "GUN:GUNB:C100:FWD$(N):QTWF"
-6 "GUN:GUNB:C100:REV$(N):QTWF"
+1 "GUN:GUNB:100:DRV$(N)A:QTWF"
+2 "GUN:GUNB:S100:FWD$(N):QTWF"
+3 "GUN:GUNB:S100:REV$(N):QTWF"
+4 "GUN:GUNB:100:FWD$(N):QTWF"
+5 "GUN:GUNB:100:REV$(N):QTWF"
+6 "GUN:GUNB:C100:FWD$(N):QTWF"
+7 "GUN:GUNB:C100:REV$(N):QTWF"
+8 "$(P)RFS$(N):SPARE1:QTWF"
+9 "GUN:GUNB:100:RFS1:DAC:QTWF"
 }
 nPv {
 0 "GUN:GUNB:100:DRV$(N):ITWF.NORD"
-1 "GUN:GUNB:S100:FWD$(N):ITWF.NORD"
-2 "GUN:GUNB:S100:REV$(N):ITWF.NORD"
-3 "GUN:GUNB:100:FWD$(N):ITWF.NORD"
-4 "GUN:GUNB:100:REV$(N):ITWF.NORD"
-5 "GUN:GUNB:C100:FWD$(N):ITWF.NORD"
-6 "GUN:GUNB:C100:REV$(N):ITWF.NORD"
+1 "GUN:GUNB:100:DRV$(N)A:ITWF.NORD"
+2 "GUN:GUNB:S100:FWD$(N):ITWF.NORD"
+3 "GUN:GUNB:S100:REV$(N):ITWF.NORD"
+4 "GUN:GUNB:100:FWD$(N):ITWF.NORD"
+5 "GUN:GUNB:100:REV$(N):ITWF.NORD"
+6 "GUN:GUNB:C100:FWD$(N):ITWF.NORD"
+7 "GUN:GUNB:C100:REV$(N):ITWF.NORD"
+8 "$(P)RFS$(N):SPARE1:ITWF.NORD"
+9 "GUN:GUNB:100:RFS1:DAC:ITWF.NORD"
 }
 xSigned {
 0 1
@@ -98,6 +107,8 @@ xSigned {
 5 1
 6 1
 7 1
+8 1
+9 1
 }
 ySigned {
 0 1
@@ -108,16 +119,20 @@ ySigned {
 5 1
 6 1
 7 1
+8 1
+9 1
 }
 plotColor {
-0 index 21
-1 index 26
-2 index 31
+0 index 16
+1 index 30
+2 index 25
 3 index 36
 4 index 41
 5 index 45
 6 index 50
 7 index 55
+8 index 21
+9 index 46
 }
 endObjectProperties
 

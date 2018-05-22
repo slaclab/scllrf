@@ -63,76 +63,88 @@ yShowLabelGrid
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 8
+numTraces 10
 xPv {
-  0 "$(P)RFS$(N):WF_X_AXIS"
-  1 "$(P)RFS$(N):WF_X_AXIS"
-  2 "$(P)RFS$(N):WF_X_AXIS"
-  3 "$(P)RFS$(N):WF_X_AXIS"
-  4 "$(P)RFS$(N):WF_X_AXIS"
-  5 "$(P)RFS$(N):WF_X_AXIS"
-  6 "$(P)RFS$(N):WF_X_AXIS"
-  7 "$(P)RFS$(N):WF_X_AXIS"
+0 "$(P)RFS$(N):WF_X_AXIS"
+1 "$(P)RFS$(N):WF_X_AXIS"
+2 "$(P)RFS$(N):WF_X_AXIS"
+3 "$(P)RFS$(N):WF_X_AXIS"
+4 "$(P)RFS$(N):WF_X_AXIS"
+5 "$(P)RFS$(N):WF_X_AXIS"
+6 "$(P)RFS$(N):WF_X_AXIS"
+7 "$(P)RFS$(N):WF_X_AXIS"
+8 "$(P)RFS$(N):WF_X_AXIS"
+9 "$(P)RFS$(N):WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:100:DRV$(N):AWF"
-  1 "GUN:GUNB:S100:FWD$(N):AWF"
-  2 "GUN:GUNB:S100:REV$(N):AWF"
-  3 "GUN:GUNB:100:FWD$(N):AWF"
-  4 "GUN:GUNB:100:REV$(N):AWF"
-  5 "GUN:GUNB:C100:FWD$(N):AWF"
-  6 "GUN:GUNB:C100:REV$(N):AWF"
-  7 "$(P)RFS$(N):SPARE1"
+0 "GUN:GUNB:100:DRV$(N):AWF"
+1 "GUN:GUNB:100:DRV$(N)A:AWF"
+2 "GUN:GUNB:S100:FWD$(N):AWF"
+3 "GUN:GUNB:S100:REV$(N):AWF"
+4 "GUN:GUNB:100:FWD$(N):AWF"
+5 "GUN:GUNB:100:REV$(N):AWF"
+6 "GUN:GUNB:C100:FWD$(N):AWF"
+7 "GUN:GUNB:C100:REV$(N):AWF"
+8 "$(P)RFS$(N):SPARE1:AWF"
+9 "GUN:GUNB:100:RFS1:DAC:AWF"
 }
 nPv {
-  0 "$(P)RFS$(N):WF_X_NUSE"
-  1 "$(P)RFS$(N):WF_X_NUSE"
-  2 "$(P)RFS$(N):WF_X_NUSE"
-  3 "$(P)RFS$(N):WF_X_NUSE"
-  4 "$(P)RFS$(N):WF_X_NUSE"
-  5 "$(P)RFS$(N):WF_X_NUSE"
-  6 "$(P)RFS$(N):WF_X_NUSE"
-  7 "$(P)RFS$(N):WF_X_NUSE"
+0 "GUN:GUNB:100:DRV$(N):AWF.NORD"
+1 "GUN:GUNB:100:DRV$(N)A:AWF.NORD"
+2 "GUN:GUNB:S100:FWD$(N):AWF.NORD"
+3 "GUN:GUNB:S100:REV$(N):AWF.NORD"
+4 "GUN:GUNB:100:FWD$(N):AWF.NORD"
+5 "GUN:GUNB:100:REV$(N):AWF.NORD"
+6 "GUN:GUNB:C100:FWD$(N):AWF.NORD"
+7 "GUN:GUNB:C100:REV$(N):AWF.NORD"
+8 "$(P)RFS$(N):SPARE1:AWF.NORD"
+9 "GUN:GUNB:100:RFS1:DAC:AWF.NORD"
 }
 plotUpdateMode {
-  0 "xOrY"
-  1 "xOrY"
-  2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
+0 "xOrY"
+1 "xOrY"
+2 "xOrY"
+3 "xOrY"
+4 "xOrY"
+5 "xOrY"
+6 "xOrY"
+7 "xOrY"
+8 "xOrY"
+9 "xOrY"
 }
 opMode {
-  0 "plot"
-  1 "plot"
-  2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
+0 "plot"
+1 "plot"
+2 "plot"
+3 "plot"
+4 "plot"
+5 "plot"
+6 "plot"
+7 "plot"
+8 "plot"
+9 "plot"
 }
 ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
+0 1
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
 }
 plotColor {
-  0 index 16
-  1 index 30
-  2 index 25
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
+0 index 16
+1 index 30
+2 index 25
+3 index 36
+4 index 41
+5 index 45
+6 index 50
+7 index 55
+8 index 21
+9 index 46
 }
 endObjectProperties
 
@@ -159,8 +171,8 @@ gridColor index 11
 font "helvetica-medium-r-14.0"
 # Operating Modes
 nPts 2
-traceCtlPv "$(P)WF_CHAN_DISABLE"
-resetPv "$(P)WF_UPDATE_PLOT"
+traceCtlPv "$(P)RFS$(N):WF_CHAN_DISABLE"
+resetPv "$(P)RFS$(N):WF_UPDATE_PLOT"
 # X axis properties
 showXAxis
 xAxisSrc "AutoScale"
@@ -176,74 +188,90 @@ yShowLabelGrid
 y2AxisSrc "AutoScale"
 y2Max 1
 # Trace Properties
-numTraces 8
+numTraces 10
 xPv {
-  0 "$(P)WF_X_AXIS"
-  1 "$(P)WF_X_AXIS"
-  2 "$(P)WF_X_AXIS"
-  3 "$(P)WF_X_AXIS"
-  4 "$(P)WF_X_AXIS"
-  5 "$(P)WF_X_AXIS"
-  6 "$(P)WF_X_AXIS"
-  7 "$(P)WF_X_AXIS"
+0 "$(P)WF_X_AXIS"
+1 "$(P)WF_X_AXIS"
+2 "$(P)WF_X_AXIS"
+3 "$(P)WF_X_AXIS"
+4 "$(P)WF_X_AXIS"
+5 "$(P)WF_X_AXIS"
+6 "$(P)WF_X_AXIS"
+7 "$(P)WF_X_AXIS"
+8 "$(P)WF_X_AXIS"
+9 "$(P)WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:100:DRV$(N):PWF"
-  1 "GUN:GUNB:S100:FWD$(N):PWF"
-  2 "GUN:GUNB:S100:REV$(N):PWF"
-  3 "GUN:GUNB:100:FWD$(N):PWF"
-  4 "GUN:GUNB:100:REV$(N):PWF"
-  5 "GUN:GUNB:C100:FWD$(N):PWF"
-  6 "GUN:GUNB:C100:REV$(N):PWF"
+0 "GUN:GUNB:100:DRV$(N):PWF"
+1 "GUN:GUNB:100:DRV$(N)A:PWF"
+2 "GUN:GUNB:S100:FWD$(N):PWF"
+3 "GUN:GUNB:S100:REV$(N):PWF"
+4 "GUN:GUNB:100:FWD$(N):PWF"
+5 "GUN:GUNB:100:REV$(N):PWF"
+6 "GUN:GUNB:C100:FWD$(N):PWF"
+7 "GUN:GUNB:C100:REV$(N):PWF"
+8 "$(P)RFS$(N):SPARE1:PWF"
+9 "GUN:GUNB:100:RFS1:DAC:PWF"
 }
 nPv {
-  0 "GUN:GUNB:100:DRV$(N):PWF.NORD"
-  1 "GUN:GUNB:S100:FWD$(N):PWF.NORD"
-  2 "GUN:GUNB:S100:REV$(N):PWF.NORD"
-  3 "GUN:GUNB:100:FWD$(N):PWF.NORD"
-  4 "GUN:GUNB:100:REV$(N):PWF.NORD"
-  5 "GUN:GUNB:C100:FWD$(N):PWF.NORD"
-  6 "GUN:GUNB:C100:REV$(N):PWF.NORD"
+0 "GUN:GUNB:100:DRV$(N):PWF.NORD"
+1 "GUN:GUNB:100:DRV$(N)A:PWF.NORD"
+2 "GUN:GUNB:S100:FWD$(N):PWF.NORD"
+3 "GUN:GUNB:S100:REV$(N):PWF.NORD"
+4 "GUN:GUNB:100:FWD$(N):PWF.NORD"
+5 "GUN:GUNB:100:REV$(N):PWF.NORD"
+6 "GUN:GUNB:C100:FWD$(N):PWF.NORD"
+7 "GUN:GUNB:C100:REV$(N):PWF.NORD"
+8 "$(P)RFS$(N):SPARE1:PWF.NORD"
+9 "GUN:GUNB:100:RFS1:DAC:PWF.NORD"
 }
 plotUpdateMode {
-  0 "xOrY"
-  1 "xOrY"
-  2 "xOrY"
-  3 "xOrY"
-  4 "xOrY"
-  5 "xOrY"
-  6 "xOrY"
-  7 "xOrY"
+0 "xOrY"
+1 "xOrY"
+2 "xOrY"
+3 "xOrY"
+4 "xOrY"
+5 "xOrY"
+6 "xOrY"
+7 "xOrY"
+8 "xOrY"
+9 "xOrY"
 }
 opMode {
-  0 "plot"
-  1 "plot"
-  2 "plot"
-  3 "plot"
-  4 "plot"
-  5 "plot"
-  6 "plot"
-  7 "plot"
+0 "plot"
+1 "plot"
+2 "plot"
+3 "plot"
+4 "plot"
+5 "plot"
+6 "plot"
+7 "plot"
+8 "plot"
+9 "plot"
 }
 ySigned {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
+0 1
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
+8 1
+9 1
 }
 plotColor {
-  0 index 16
-  1 index 30
-  2 index 25
-  3 index 36
-  4 index 41
-  5 index 45
-  6 index 50
-  7 index 55
+0 index 16
+1 index 30
+2 index 25
+3 index 36
+4 index 41
+5 index 45
+6 index 50
+7 index 55
+8 index 21
+9 index 46
 }
 endObjectProperties
 
