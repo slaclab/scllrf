@@ -60,21 +60,20 @@ scllrf_SRCS_vxWorks += -nil-
 # For example, subroutines
 # ========================================================================
  scllrf_SRCS += scllrfAsynPortDriver.cpp
- scllrf_SRCS += scllrfINT.cpp
+# scllrf_SRCS += scllrfINT.cpp
 # scllrf_SRCS += scllrfPRC.cpp
 # scllrf_SRCS += scllrfPRCextra.cpp
- scllrf_SRCS += scllrfRES.cpp
- scllrf_SRCS += scllrfRESextra.cpp
+# scllrf_SRCS += scllrfRES.cpp
+# scllrf_SRCS += scllrfRESextra.cpp
  scllrf_SRCS += GUNB.cpp
  scllrf_SRCS += GUNBExtra.cpp
  scllrf_SRCS += PVramp.stt
- scllrf_SRCS += INTmbboCopy.st
- scllrf_SRCS += INTres2tmp.c
- scllrf_SRCS += INTarcTest.st
- scllrf_SRCS += INTheLevel.st
- #scllrf_SRCS += INTssaRfKill.st
- #scllrf_SRCS += INTdegkToVolt.st
- scllrf_SRCS += RES_HiHwLink.st
+# scllrf_SRCS += INTmbboCopy.st
+# scllrf_SRCS += INTres2tmp.c
+# scllrf_SRCS += INTarcTest.st
+# scllrf_SRCS += INTheLevel.st
+# scllrf_SRCS += INTssaRfKill.st
+# scllrf_SRCS += INTdegkToVolt.st# scllrf_SRCS += RES_HiHwLink.st
  scllrf_SRCS += BMB7Sup.c
 USR_CXXFLAGS += -std=c++0x
 USR_CXXFLAGS += -g -I$(TOP)/newmat10
