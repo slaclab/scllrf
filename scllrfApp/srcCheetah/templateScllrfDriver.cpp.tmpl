@@ -262,12 +262,9 @@ asynStatus ${name}Driver::functionToRegister(const int function, FpgaReg *pToFpg
  * asyn parameter.
  * Some registers have a "new waveform data ready" flag. If they have this and it is set,
  * set weveIsReady to true.
- * Note: This function should not set waveIsReady to false. That is done by a loop in the
- * calling function.
 * \param[in] pFromFpga Data returned from the FPGA for a single register
-* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
@@ -423,7 +420,7 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
 #end if
 #end for
 		{
-			status = scllrfAsynPortDriver::processRegReadback(pFromFpga, waveIsReady);
+			status = scllrfAsynPortDriver::processRegReadback(pFromFpga);
 		}
 
 		break;
@@ -437,10 +434,7 @@ asynStatus ${name}Driver::processRegReadback(const FpgaReg *pFromFpga, bool &wav
  * asyn parameter.
  * Some registers have a "new waveform data ready" flag. If they have this and it is set,
  * set weveIsReady to true.
- * Note: This function should not set waveIsReady to false. That is done by a loop in the
- * calling function.
 * \param[in] pFromFpga Data returned from the FPGA for a single register
-* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
 asynStatus ${name}Driver::processRegWriteResponse(const FpgaReg *pFromFpga)
 {

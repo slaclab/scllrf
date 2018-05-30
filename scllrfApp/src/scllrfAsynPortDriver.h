@@ -218,8 +218,7 @@ protected:
 	asynStatus processReadbackBuffer(FpgaReg *pFromFpga,
 			unsigned int readCount);
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
-	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
-			bool &waveIsReady); // parse register data, write to PVs
+	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga); // parse register data, write to PVs
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
 	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string

@@ -165,14 +165,14 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 	}
 	epicsThreadSleep(defaultPollPeriod);
 
+	createParam(ReadOneRegString, asynParamInt32Array, &p_ReadOneReg);
+	createParam(WriteOneRegString, asynParamInt32Array, &p_WriteOneReg);
 	createParam(RunStopString, asynParamInt32, &p_RunStop);
 printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(MaxParallelRequestsString, asynParamInt32,
 			&p_MaxParallelRequests);
 	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
 	createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
-	createParam(ReadOneRegString, asynParamInt32Array, &p_ReadOneReg);
-	createParam(WriteOneRegString, asynParamInt32Array, &p_WriteOneReg);
 
 	createParam(BoardTypeRString, asynParamInt32, &p_BoardTypeR);
 	createParam(BuildDayRString, asynParamInt32, &p_BuildDayR);
@@ -500,7 +500,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 		if (status == asynSuccess) // Yes, this function is a register write
 		{
 			asynPrint(pasynUser, ASYN_TRACEIO_DRIVER,
-				"%s: found function=%d, name=%s, at chan %d + %d\n",
+				"%s: found function=%d, name=%s, at addr %d + %d\n",
 				__PRETTY_FUNCTION__, function, paramName, regSendBuf[0].addr, chan);
 			regSendBuf[0].data = (int32_t) value;
 			regSendBuf[0].addr += (uint32_t) chan; // Add offset for multi-element short arrays/channels
@@ -1160,7 +1160,6 @@ void scllrfAsynPortDriver::responseHandler()
 asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, unsigned int readCount)
 {
 	unsigned i;
-	bool waveIsReady = false; // Made this local rather than member because of concurrency concerns
 	asynStatus status = asynSuccess;
 	int bytesLeft = readCount; // signed to make error detection easier
 	epicsInt32 errorCount;
@@ -1230,7 +1229,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		{
 			if(pRegReadback[i].addr & flagReadMask)
 			{
-				status = processRegReadback(&pRegReadback[i], waveIsReady);
+				status = processRegReadback(&pRegReadback[i]);
 			}
 			else
 			{
@@ -1272,18 +1271,19 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		pRegReadback = & pRegReadback[pRegReadback[0].data/sizeof(FpgaReg)];
 	} // while(bytesLeft > 0)
 
-	// If the waveIsReady flag is set,
-	if (waveIsReady &&
-			// and there isn't a pending waveform read
-			(newWaveAvailable_ == newWaveRead_))
-	{
-		// Set the message counter with a "new waveform" notification
-		// to the message counter value for the message we just received
-		newWaveAvailable_ = pRegReadback[0].addr;
-		epicsEventSignal(reqWaveEventId_);
-		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
-				__PRETTY_FUNCTION__);
-	}
+//	////XXXX Testing to be sure this section is obsolete
+//	// If the waveIsReady flag is set,
+//	if (waveIsReady &&
+//			// and there isn't a pending waveform read
+//			(newWaveAvailable_ == newWaveRead_))
+//	{
+//		// Set the message counter with a "new waveform" notification
+//		// to the message counter value for the message we just received
+//		newWaveAvailable_ = pRegReadback[0].addr;
+//		epicsEventSignal(reqWaveEventId_);
+//		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
+//				__PRETTY_FUNCTION__);
+//	}
 
 	return asynSuccess;
 }
@@ -1301,7 +1301,7 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
 	for (i=p_GitSha1AR; i<=p_GitSha1TR; i++)
 	{
 		status = (asynStatus) getIntegerParam(i, &oneByte);
-		strGitSHA1<< std::hex << std::setw(2) << oneByte;
+		strGitSHA1 << std::setw(4) << std::hex << oneByte;
 	}
 	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
 	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
@@ -1316,9 +1316,8 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
  * Note: This function should not set waveIsReady to false. That is done by a loop in the
  * calling function.
 * \param[in] pFromFpga Data returned from the FPGA for a single register
-* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 {
 	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
