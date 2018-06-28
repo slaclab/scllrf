@@ -127,41 +127,65 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 #end for
 {
 	epicsThreadSleep(defaultPollPeriod);
+	regInterface tmpRegIf;
 #import re
 #for $p in sorted($registers, key=lambda k: k['name'])
 #if $p.has_key('nelm') and $p.nelm>1
-#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
+	#if ($p.has_key('bit_width') and ($p.bit_width <= 8)) or ($p.has_key('data_width') and ($p.data_width <= 8))
 	createParam(${p.name.title().replace("_", "")}WavString, asynParamInt8Array, &p_${p.name.title().replace("_", "")}Wav);
-#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
+	#else if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
 	createParam(${p.name.title().replace("_", "")}WavString, asynParamInt16Array, &p_${p.name.title().replace("_", "")}Wav);
-#else
+	#else
 	createParam(${p.name.title().replace("_", "")}WavString, asynParamInt32Array, &p_${p.name.title().replace("_", "")}Wav);
-#end if
-#if (not $p.has_key('access')) or ('r' in $p.access)
-	createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
-#end if
-#if $p.has_key('access') and ('w' in $p.access)
-	#if $p.has_key('nelm') and $p.nelm>512
-	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
-	#else
-	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
 	#end if
-#end if
+	#if (not $p.has_key('access')) or ('r' in $p.access)
+	createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
+	#end if
+	#if $p.has_key('access') and ('w' in $p.access)
+		#if $p.has_key('nelm') and $p.nelm>512
+	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+		#else
+	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+		#end if
+	#end if
 #else
-#if (not $p.has_key('access')) or ('r' in $p.access)
-	#if ($p.has_key('bits'))
+	#if (not $p.has_key('access')) or ('r' in $p.access)
+		#if ($p.has_key('bits'))
 	createParam(${p.name.title().replace("_", "")}RString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}R);
-	#else
+	tmpRegIf.paramType = asynParamUInt32Digital;
+		#else
 	createParam(${p.name.title().replace("_", "")}RString, asynParamInt32, &p_${p.name.title().replace("_", "")}R);
-	#end if
-#end if
-#if $p.has_key('access') and ('w' in $p.access)
-	#if ($p.has_key('bits'))
-	createParam(${p.name.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}W);
+	tmpRegIf.paramType = asynParamInt32;
+		#end if
+	tmpRegIf.paramNum = p_${p.name.title().replace("_", "")}R;
+	tmpRegIf.isReadable = true;
+	tmpRegIf.readAddr = ${p.name.title().replace("_", "")}RAdr;
 	#else
-	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+	tmpRegIf.isReadable = false;
+	tmpRegIf.readAddr = 0;
 	#end if
-#end if
+	#if $p.has_key('access') and ('w' in $p.access)
+		#if ($p.has_key('bits'))
+	createParam(${p.name.title().replace("_", "")}WString, asynParamUInt32Digital, &p_${p.name.title().replace("_", "")}W);
+	tmpRegIf.paramType = asynParamUInt32Digital;
+		#else
+	createParam(${p.name.title().replace("_", "")}WString, asynParamInt32, &p_${p.name.title().replace("_", "")}W);
+	tmpRegIf.paramType = asynParamInt32;
+		#end if
+	tmpRegIf.paramNum = p_${p.name.title().replace("_", "")}W;
+	tmpRegIf.isWritable = true;
+	tmpRegIf.writeAddr = ${p.name.title().replace("_", "")}WAdr;
+	#else
+	tmpRegIf.isWritable = false;
+	tmpRegIf.writeAddr = 0;
+	#end if
+	#if $p.has_key('access') and ('w' in $p.access)
+	paramToReg[p_${p.name.title().replace("_", "")}W] = tmpRegIf;
+	addrToReg[${p.name.title().replace("_", "")}WAdr] = tmpRegIf;
+	#else
+	paramToReg[p_${p.name.title().replace("_", "")}R] = tmpRegIf;
+	addrToReg[${p.name.title().replace("_", "")}RAdr] = tmpRegIf;
+	#end if
 #end if
 #end for
 
@@ -200,6 +224,7 @@ ${name}Driver::${name}Driver(const char *drvPortName, const char *netPortName, i
 	epicsThreadSleep(defaultPollPeriod);
 	printf("%s created %ld of %ld parameters.\n",__PRETTY_FUNCTION__,NUM_${name.upper()}_PARAMS, paramTableAdds+NUM_${name.upper()}_PARAMS);
 
+	setStringParam(p_JsonSha1Des, regMapSha1String);
 	wakeupPoller();
 	wakeupReader();
 }

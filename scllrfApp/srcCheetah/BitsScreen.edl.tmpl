@@ -1064,6 +1064,28 @@ value {
 }
 autoSize
 endObjectProperties
+#if ($p.has_key('bit_width') and $p.bit_width > 16) or ($p.has_key('data_width') and $p.data_width > 16)
+
+\# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x ${xoffset + 180}
+y ${yoffset + 77}
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"31"
+}
+autoSize
+endObjectProperties
+#end if
 
 \# (Static Text)
 object activeXTextClass
@@ -1308,7 +1330,7 @@ value {
 #end if
 #end for
 #if $bitFound == 0
-	   "bit 8"
+	"bit 8"
 #end if
 }
 autoSize
@@ -1338,7 +1360,7 @@ value {
 #end if
 #end for
 #if $bitFound == 0
-	   "bit 9"
+	"bit 9"
 #end if
 }
 autoSize
@@ -1368,7 +1390,7 @@ value {
 #end if
 #end for
 #if $bitFound == 0
-	   "bit 10"
+	"bit 10"
 #end if
 }
 autoSize
@@ -1398,7 +1420,7 @@ value {
 #end if
 #end for
 #if $bitFound == 0
-	   "bit 11"
+	"bit 11"
 #end if
 }
 autoSize
@@ -1428,7 +1450,7 @@ value {
 #end if
 #end for
 #if $bitFound == 0
-	   "bit 12"
+	"bit 12"
 #end if
 }
 autoSize
@@ -1458,7 +1480,7 @@ value {
 #end if
 #end for
 #if $bitFound == 0
-	   "bit 13"
+	"bit 13"
 #end if
 }
 autoSize
@@ -1577,6 +1599,39 @@ value {
 autoSize
 endObjectProperties
 
+#if ($p.has_key('bit_width') and $p.bit_width > 16) or ($p.has_key('data_width') and $p.data_width > 16)
+\# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x ${xoffset + 205}
+y ${yoffset + 75}
+w 15
+h 288
+controlPv "\$(P)${p.name.upper()}_LSBITS_R"
+lineColor index 14
+onColor index 55
+offColor index 57
+endObjectProperties
+
+\# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x ${xoffset + 185}
+y ${yoffset + 75}
+w 15
+h 288
+controlPv "\$(P)${p.name.upper()}_MSBITS_R"
+lineColor index 14
+onColor index 55
+offColor index 57
+endObjectProperties
+#else
 \# (Byte)
 object ByteClass
 beginObjectProperties
@@ -1590,8 +1645,9 @@ h 288
 controlPv "\$(P)${p.name.upper()}_BITS_R"
 lineColor index 14
 onColor index 55
-offColor index 47
+offColor index 57
 endObjectProperties
+#end if
 
 \# (Static Text)
 object activeXTextClass
@@ -1673,6 +1729,89 @@ value {
 }
 autoSize
 endObjectProperties
+#if ($p.has_key('bit_width') and $p.bit_width > 16) or ($p.has_key('data_width') and $p.data_width > 16)
+
+\# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x ${xoffset + 165}
+y ${yoffset + 347}
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+" 16"
+}
+autoSize
+endObjectProperties
+
+\# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x ${xoffset + 165}
+y ${yoffset + 77}
+w 14
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"31"
+}
+autoSize
+endObjectProperties
+
+\# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x ${xoffset + 165}
+y ${yoffset + 221}
+w 15
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+" 23"
+}
+autoSize
+endObjectProperties
+
+\# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x ${xoffset + 165}
+y ${yoffset + 203}
+w 11
+h 14
+font "helvetica-bold-r-12.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+" 24"
+}
+autoSize
+endObjectProperties
+
+#end if
 
 \# (Static Text)
 object activeXTextClass
