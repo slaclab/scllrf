@@ -1,0 +1,60 @@
+#! /bin/bash
+# To make an equivalent gun screen from Buncher...edl:
+# cp Buncher...edl Gun...edl
+# BuncherWFtoGunWF.sh Gun...edl
+
+sed -i +s|455:PRLFWD|$(PRC1)|g+ $1
+sed -i +s|455:PRLREV|$(PRC2)|g+ $1
+sed -i +s|455:CAV1|$(PRC3)|g+ $1
+sed -i +s|455:CAV2|$(PRC4)|g+ $1
+sed -i +s|455:PRC:SPARE1|$(PRC5)|g+ $1
+sed -i +s|455:PRC:SPARE2|$(PRC6)|g+ $1
+sed -i +s|455:PRC:SPARE3|$(PRC7)|g+ $1
+sed -i +s|455:PRC:SPARE4|$(PRC8)|g+ $1
+sed -i +s|455:PRC:SPARE5|$(PRC9)|g+ $1
+sed -i +s|455:PRC:SPARE6|$(PRC10)|g+ $1
+sed -i +s|455:PRC:SPARE7|$(PRC11)|g+ $1
+sed -i +s|455:PRC:SPARE8|$(PRC12)|g+ $1
+sed -i +s|455:PRC:SPARE9|$(PRC13)|g+ $1
+sed -i +s|455:PRC:SPARE10|$(PRC14)|g+ $1
+sed -i +s|455:PRC:SPARE11|$(PRC15)|g+ $1
+sed -i +s|455:PRC:SPARE12|$(PRC16)|g+ $1
+
+sed -i +s|455:DRV1|$(RFS11)|g+ $1
+sed -i +s|455:FWD1|$(RFS12)|g+ $1
+sed -i +s|455:REV1|$(RFS13)|g+ $1
+sed -i +s|455:DRV2|$(RFS14)|g+ $1
+sed -i +s|455:FWD2|$(RFS15)|g+ $1
+sed -i +s|455:REV2|$(RFS16)|g+ $1
+sed -i +s|455:RFS1:SPARE1|$(RFS17)|g+ $1
+sed -i +s|455:RFS1:DAC|$(RFS18)|g+ $1
+sed -i +s|455:RFS1:SPARE2|$(RFS19)|g+ $1
+sed -i +s|455:RFS1:SPARE3|$(RFS110)|g+ $1
+sed -i +s|455:RFS1:SPARE4|$(RFS111)|g+ $1
+sed -i +s|455:RFS1:SPARE5|$(RFS112)|g+ $1
+sed -i +s|455:RFS1:SPARE6|$(RFS113)|g+ $1
+sed -i +s|455:RFS1:SPARE7|$(RFS114)|g+ $1
+sed -i +s|455:RFS1:SPARE8|$(RFS115)|g+ $1
+sed -i +s|455:RFS1:SPARE9|$(RFS116)|g+ $1
+
+sed -i +s|455:DRV3|$(RFS21)|g+ $1
+sed -i +s|455:FWD3|$(RFS22)|g+ $1
+sed -i +s|455:REV3|$(RFS23)|g+ $1
+sed -i +s|455:DRV4|$(RFS24)|g+ $1
+sed -i +s|455:FWD4|$(RFS25)|g+ $1
+sed -i +s|455:REV4|$(RFS26)|g+ $1
+sed -i +s|455:RFS2:SPARE1|$(RFS27)|g+ $1
+sed -i +s|455:RFS2:DAC|$(RFS28)|g+ $1
+sed -i +s|455:RFS2:SPARE2|$(RFS29)|g+ $1
+sed -i +s|455:RFS2:SPARE3|$(RFS210)|g+ $1
+sed -i +s|455:RFS2:SPARE4|$(RFS211)|g+ $1
+sed -i +s|455:RFS2:SPARE5|$(RFS212)|g+ $1
+sed -i +s|455:RFS2:SPARE6|$(RFS213)|g+ $1
+sed -i +s|455:RFS2:SPARE7|$(RFS214)|g+ $1
+sed -i +s|455:RFS2:SPARE8|$(RFS215)|g+ $1
+sed -i +s|455:RFS2:SPARE9|$(RFS216)|g+ $1
+
+sed -i +s|ACCL|GUN|g+ $1
+sed -i +s|:455|:100|g+ $1
+sed -i +s|Buncher|Gun|g+ $1
+sed -i +s|BUNCHER|GUN|g+ $1

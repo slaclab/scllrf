@@ -17,7 +17,9 @@ DB += BMB7monitor.db
 #DB += GunRfCalib.db
 #DB += BuncherRfCalib.db
 DB += BuncherExtra.db
-DB += BuncherWFtoGunWF.db
+
+# To generate a script that renames buncher channels to gun channels, uncomment this.
+#DB += BuncherWFtoGunWF.db
 
 # Install Common databases needed by All IOCs
 # ========================================================
