@@ -68,11 +68,12 @@ record(bo, "$(P)DECAY_UPDATE_PLOT") {
 	field(HIGH, "0.1")
 }
 
-record(ao, "$(P)DECAYKEEP_W")
-{
-	field(VAL, "$(KEEP)")
-	field( PINI, "YES")
-}
+# This keeps writing 0 instead of the assigned VAL during startup. huh.
+#record(ao, "$(P)DECAYKEEP_W")
+#{
+#	field(VAL, "$(KEEP)")
+#	field( PINI, "YES")
+#}
 
 # Circle buffer "slow data"
 #record(longin, "$(P)DECAY_CIRCLE_COUNT_R") {
@@ -102,54 +103,6 @@ record(ao, "$(P)DECAYKEEP_W")
 #  field(PINI, "NO")
 #  field(DTYP, "asynInt32")
 #  field(INP, "@asyn($(PORT),0) DECAY_TAG_OLD_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)DECAY_MIN0_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) DECAY_MINS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)DECAY_MIN1_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),1) DECAY_MINS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)DECAY_MIN2_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),2) DECAY_MINS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)DECAY_MAX0_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),0) DECAY_MAXS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)DECAY_MAX1_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),1) DECAY_MAXS_R")
-#  field(SCAN, "I/O Intr")
-#  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-#}
-#
-#record(longin, "$(P)DECAY_MAX2_R") {
-#  field(PINI, "NO")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT),2) DECAY_MAXS_R")
 #  field(SCAN, "I/O Intr")
 #  info(autosaveFields, "HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 #}

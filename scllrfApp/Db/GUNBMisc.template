@@ -17,7 +17,7 @@ record(ao, "$(P)REP_PERIOD")
 	field( DRVL, "0")
 	field( EGU, "ms")
 	field( FLNK, "$(P)REP_PERIOD_U_TO_R")
-	field( PREC, "7")
+	field( PREC, "5")
 }
 # Using a calcout instead of ao because ao misbehaved with SDIS loop breaking
 record(calcout, "$(P)REP_PERIOD_U_TO_R")
@@ -28,17 +28,17 @@ record(calcout, "$(P)REP_PERIOD_U_TO_R")
 	field( CALC, "FLOOR(0.5+(A*1320000/14)/132)")
 	field( EGU, "ms")
 	field( LOPR, "0")
-	field( OUT, "$(P)REP_PERIOD_W PP MS")
-	field( PREC, "7")
+	field( OUT, "$(P)$(CHASSIS)REP_PERIOD_W PP MS")
+	field( PREC, "5")
 }
 
-record( ao, "$(P)REP_PERIOD_W"){
+record( ao, "$(P)$(CHASSIS)REP_PERIOD_W"){
 	field( FLNK, "$(P)REP_PERIOD_Sync")
 	field( EGU, "IF counts")
 }
 
 record( calcout, "$(P)REP_PERIOD_Sync"){
-	field( INPA,  "$(P)REP_PERIOD_W PP MS")
+	field( INPA,  "$(P)$(CHASSIS)REP_PERIOD_W PP MS")
 #	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)REP_PERIOD PP MS")
 	field( SDIS, "$(P)REP_PERIOD_U_TO_R.PACT")
@@ -47,7 +47,8 @@ record( calcout, "$(P)REP_PERIOD_Sync"){
 # time in us is 1320MHz/14, 1 IF cycle per ADC count
 	field( CALC, "A*132*14/1320000")
 	field(FLNK, "$(P)REP_P_TO_F")
-	field( PREC, "7")
+	field( PREC, "5")
+####xxxx iS THIS CAUSING A WRITE OF 0 ON STARTUP?	field( PINI, "YES")
 }
 
 record(calcout, "$(P)REP_P_TO_F")
@@ -57,7 +58,7 @@ record(calcout, "$(P)REP_P_TO_F")
 	field(OUT, "$(P)REP_FREQUENCY PP")
 	field( SDIS, "$(P)REP_F_TO_P.PACT")
 	field( DISV, "1")
-	field( PREC, "7")
+	field( PREC, "5")
 }
 
 record(calcout, "$(P)REP_F_TO_P")
@@ -67,7 +68,7 @@ record(calcout, "$(P)REP_F_TO_P")
 	field(OUT, "$(P)REP_PERIOD PP")
 	field( SDIS, "$(P)REP_P_TO_F.PACT")
 	field( DISV, "1")
-	field( PREC, "7")
+	field( PREC, "5")
 }
 
 record(ao, "$(P)REP_FREQUENCY")
@@ -77,7 +78,7 @@ record(ao, "$(P)REP_FREQUENCY")
 	field( DRVH, "94285714.286")
 	field( EGU, "Hz")
 	field(FLNK, "$(P)REP_F_TO_P")
-	field( PREC, "7")
+	field( PREC, "5")
 }
 
 # User interface PV in ms
@@ -87,8 +88,7 @@ record(ao, "$(P)PULSE_LENGTH")
 	field( DRVL, "0")
 	field( EGU, "ms")
 	field( FLNK, "$(P)PULSE_LENGTH_U_TO_R")
-	field( PREC, "7")
-	info( autosaveFields, "VAL")
+	field( PREC, "5")
 }
 
 
@@ -99,16 +99,16 @@ record(calcout, "$(P)PULSE_LENGTH_U_TO_R")
 	field( CALC, "FLOOR(0.5+(A*1320000/14)/132)")
 	field(EGU, "ms")
 	field( LOPR, "0")
-	field( OUT, "$(P)PULSE_LENGTH_W PP MS")
-	field( PREC, "7")
+	field( OUT, "$(P)$(CHASSIS)PULSE_LENGTH_W PP MS")
+	field( PREC, "5")
 }
 
-record( ao, "$(P)PULSE_LENGTH_W"){
+record( ao, "$(P)$(CHASSIS)PULSE_LENGTH_W"){
 	field( FLNK, "$(P)PULSE_LENGTH_Sync")
 }
 
 record( calcout, "$(P)PULSE_LENGTH_Sync"){
-	field( INPA,  "$(P)PULSE_LENGTH_W PP MS")
+	field( INPA,  "$(P)$(CHASSIS)PULSE_LENGTH_W PP MS")
 	field( OUT,  "$(P)PULSE_LENGTH PP MS")
 	field( SDIS, "$(P)PULSE_LENGTH_U_TO_R.PACT")
 	field( DISV, "1")
@@ -116,7 +116,8 @@ record( calcout, "$(P)PULSE_LENGTH_Sync"){
 # time in us is 1320MHz/14, 1 IF cycle per ADC count
 	field( CALC, "A*132*14/1320000")
 	field(FLNK, "$(P)REP_P_TO_F")
-	field( PREC, "7")
+	field( PREC, "5")
+####xxxx iS THIS CAUSING A WRITE OF 0 ON STARTUP?	field( PINI, "YES")
 }
 
 # When ramping duty cycle, increase the frequency, not the pulse length
@@ -128,8 +129,7 @@ record( ao, "$(P)DUTY_CYCLE")
 	field( DRVH, "100")
 	field( EGU, "%")
 	field( FLNK, "$(P)DUTY_CYCLE_Sync_Out PP")
-	field( PREC, "7")
-	info( autosaveFields, "VAL")
+	field( PREC, "5")
 }
 
 record( calcout, "$(P)DUTY_CYCLE_Sync_Out")
@@ -148,7 +148,7 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_Out")
 	field( DISV, "1")
 	field( EGU, "%")
 #	field( FLNK, "$(P)REP_PERIOD")
-	field( PREC, "7")
+	field( PREC, "5")
 }
 
 record( calcout, "$(P)DUTY_CYCLE_Sync_In")
@@ -161,7 +161,7 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_In")
 	field( SDIS, "$(P)DUTY_CYCLE_Sync_Out.PACT")
 	field( DISV, "1")
 	field( EGU, "%")
-	field( PREC, "7")
+	field( PREC, "5")
 }
 
 record( calcout, "$(P)PULSE_MODE_CALC")
@@ -185,12 +185,15 @@ record( bi, "$(P)PULSE_MODE")
 
 record( calc, "$(P)SMOOTHED_BW")
 {
-	field( INPA, "$(P)CAV1:DECAY_BW")
-	field( INPB, "$(P)CAV2:DECAY_BW")
+	field( INPA, "$(P)CAV1:DECAY_BW CP")
+	####XXXX Using just one input for now
+####	field( INPB, "$(P)CAV2:DECAY_BW")
+	field( INPB, "$(P)CAV1:DECAY_BW CP")
 	field( INPC, "0.9") # Smoothing factor
 	field( CALC, "C*(ISNAN(VAL)?0:VAL)+(1-C)*(A+B)/2")
 	field( SDIS, "$(P)PULSE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
+	info( autosaveFields, "VAL")
 }
 
 # On the user side, setpoints are amplitude/phase.
@@ -198,19 +201,34 @@ record( calc, "$(P)SMOOTHED_BW")
 record( ao, "$(P)ADES"){
 	field( DESC, "RF Amplitude Setpoint")
 	field( OUT,  "$(P)SET_PLOOP_AP_TO_IQ PP")
-	field( PREC, "3")
+	field( PREC, "5")
 	field( HOPR, "0x7FFF")
 	field( LOPR, "0")
-	info( autosaveFields, "VAL DRVH DRVL")
+	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW")
+}
+
+record( ao, "$(P)AMAX")
+{
+	field(DESC, "Limit on requested output")
+	info( autosaveFields, "VAL")
+
+}
+record(dfanout, "$(P)AMAX_SYNC") {
+	field(OUTA, "$(P)ADES.HOPR")
+	field(OUTB, "$(P)ADES.DRVH")
+	field(OUTA, "$(P)AOPEN.HOPR")
+	field(OUTB, "$(P)AOPEN.DRVH")
+	field(DOL, "$(P)AMAX")
+	field(OMSL, "closed_loop")
 }
 
 record( ao, "$(P)PDES"){
 	field( DESC, "RF Phase Setpoint")
 	field( OUT,  "$(P)SET_PLOOP_AP_TO_IQ PP")
-	field( PREC, "3")
+	field( PREC, "5")
 	field( HOPR, "180")
 	field( LOPR, "-180")
-	info( autosaveFields, "VAL")
+	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW LOLO")
 }
 
 record( fanout,  "$(P)SET_PLOOP_AP_TO_IQ")
@@ -223,10 +241,10 @@ record( calcout, "$(P)SET_PLOOP_AP_TO_I")
 {
 	field( INPA, "$(P)ADES")
 	field( INPB, "$(P)PDES")
-	field( INPC, "$(SCALEPV)SCALE")
-	field( INPD, "$(SCALEPV)GOLD")
+	field( INPC, "$(SCALEP)SCALE")
+	field( INPD, "$(SCALEP)GOLD")
 	field( CALC, "A*COS((B-D)*D2R)/C")
-	field( OUT, "$(P)SET_PLOOP_RE_W PP")
+	field( OUT, "$(P)$(CHASSIS)SET_PLOOP_RE_W PP")
 	field( OOPT, "On Change")
 }
 
@@ -234,10 +252,10 @@ record( calcout, "$(P)SET_PLOOP_AP_TO_Q")
 {
 	field( INPA, "$(P)ADES")
 	field( INPB, "$(P)PDES")
-	field( INPC, "$(SCALEPV)SCALE")
-	field( INPD, "$(SCALEPV)GOLD")
+	field( INPC, "$(SCALEP)SCALE")
+	field( INPD, "$(SCALEP)GOLD")
 	field( CALC, "A*SIN((B-D)*D2R)/C")
-	field( OUT, "$(P)SET_PLOOP_IM_W PP")
+	field( OUT, "$(P)$(CHASSIS)SET_PLOOP_IM_W PP")
 	field( OOPT, "On Change")
 }
 
@@ -255,15 +273,15 @@ record( calcout, "$(P)PH_DELAY_Sync_Out")
 {
 	field( DESC, "Initial phase on loop close")
 	field( INPA, "$(P)PH_DELAY")
-	field( INPB, "$(P)PHDELAY_W.HOPR")
+	field( INPB, "$(P)$(CHASSIS)PHDELAY_W.HOPR")
 	field( CALC, "A*B/360")
-	field( OUT, "$(P)PHDELAY_W PP")
+	field( OUT, "$(P)$(CHASSIS)PHDELAY_W PP")
 	field( OOPT, "On Change")
 	field( SDIS, "$(P)PH_DELAY_Sync_In.PACT")
 	field( DISV, "1")
 }
 
-record( ao, "$(P)PHDELAY_W")
+record( ao, "$(P)$(CHASSIS)PHDELAY_W")
 {
 	field( FLNK, "$(P)PH_DELAY_Sync_In")
 }
@@ -271,8 +289,8 @@ record( ao, "$(P)PHDELAY_W")
 record( calcout, "$(P)PH_DELAY_Sync_In")
 {
 	field( DESC, "Initial phase on loop close")
-	field( INPA, "$(P)PHDELAY_W")
-	field( INPB, "$(P)PHDELAY_W.HOPR")
+	field( INPA, "$(P)$(CHASSIS)PHDELAY_W")
+	field( INPB, "$(P)$(CHASSIS)PHDELAY_W.HOPR")
 	field( CALC, "A*360/B")
 	field( OUT, "$(P)PH_DELAY PP")
 	field( OOPT, "On Change")
@@ -285,33 +303,33 @@ record( calcout, "$(P)PH_DELAY_Sync_In")
 record( ao, "$(P)AOPEN"){
 	field( DESC, "RF Amplitude Setpoint")
 	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
-	field( PREC, "3")
+	field( PREC, "5")
 	field( LOPR, "0")
-	info( autosaveFields, "VAL DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
+	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
 record( calc, "$(P)AOPEN_RAW" )
 {
 	field( DESC, "Open loop output in DAC counts")
-	field( INPA, "$(P)SOURCE_RE_W CP")
-	field( INPB, "$(P)SOURCE_IM_W CP")
+	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W CP")
+	field( INPB, "$(P)$(CHASSIS)SOURCE_IM_W CP")
 	field(CALC, "SQRT(A^2+B^2)")
 }
 
 record( ao, "$(P)POPEN"){
 	field( DESC, "RF Phase Setpoint")
 	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
-	field( PREC, "3")
+	field( PREC, "5")
 	field( HOPR, "360")
 	field( LOPR, "-360")
-	info( autosaveFields, "VAL")
+	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
 record( calc, "$(P)POPEN_RAW" )
 {
 	field( DESC, "Phase of raw DAC values")
-	field( INPA, "$(P)SOURCE_RE_W CP")
-	field( INPB, "$(P)SOURCE_IM_W CP")
+	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W CP")
+	field( INPB, "$(P)$(CHASSIS)SOURCE_IM_W CP")
 	field(CALC, "ATAN2(B,A)*R2D")
 }
 
@@ -319,8 +337,8 @@ record( calc, "$(P)POPEN_RAW" )
 # Keep this passive, so it is only applied when a button is pushed.
 record( calc, "$(P)AOPEN_SCALE_CALC" ) {
 	field( INPA, "$(P)AOPEN_RAW")
-	field( INPB, "$(P)CAV1:AMEAN CP") # Use this waveform mean to scale AOUT
-	field( INPC, "$(P)CAV2:AMEAN CP") # Use this waveform mean to scale AOUT
+	field( INPB, "$(P)CAV1:AMEAN CP") # Use this waveform mean to scale AOPEN
+	field( INPC, "$(P)CAV2:AMEAN CP") # Use this waveform mean to scale AOPEN
 	field( INPD, "0.95") # Equivalent of SMOO field in ai records
 	field( CALC, "(1-D)*A/MAX(B,C) + (ISNAN(VAL)?0:VAL)*D")
 }
@@ -338,7 +356,7 @@ record( ao, "$(P)AOPEN_SCALE" ) {
 }
 
 record( calcout, "$(P)AOPEN_MAX_CALC" ) {
-	field( INPA, "$(P)SOURCE_RE_W.HOPR") # Use register max
+	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W.HOPR") # Use register max
 	field( INPB, "$(P)AOPEN_SCALE")
 	field( CALC, "A/B")
 	field( OUT, "$(P)SET_AOPEN_LIMITS PP" )
@@ -354,7 +372,7 @@ record( dfanout, "$(P)SET_AOPEN_LIMITS") {
 # Keep this passive, so it is only applied when a button is pushed.
 record( calc, "$(P)POPEN_SCALE_CALC" ) {
 	field( INPA, "$(P)POPEN_RAW")
-	field( INPB, "$(P)CAV1:PMEAN CP") # Use this waveform mean to scale AOUT
+	field( INPB, "$(P)PACT CP") # Use this waveform mean to scale POPEN
 	field( INPC, "0.95") # Equivalent of SMOO field in ai records
 	field( CALC, "(1-C)*(A-B) + C*(ISNAN(VAL)?0:VAL)")
 }
@@ -385,7 +403,7 @@ record( calcout, "$(P)SOURCE_AP_TO_I")
 	field( INPC, "$(P)AOPEN_SCALE" )
 	field( INPD, "$(P)POPEN_SCALE" )
 	field( CALC, "A*C*COS((B-D)*D2R)")
-	field( OUT, "$(P)SOURCE_RE_W PP")
+	field( OUT, "$(P)$(CHASSIS)SOURCE_RE_W PP")
 }
 
 record( calcout, "$(P)SOURCE_AP_TO_Q")
@@ -395,21 +413,21 @@ record( calcout, "$(P)SOURCE_AP_TO_Q")
 	field( INPC, "$(P)AOPEN_SCALE" )
 	field( INPD, "$(P)POPEN_SCALE" )
 	field( CALC, "A*C*SIN((B-D)*D2R)")
-	field( OUT, "$(P)SOURCE_IM_W PP")
+	field( OUT, "$(P)$(CHASSIS)SOURCE_IM_W PP")
 }
 
 record( ao, "$(P)SOURCE_RE_Sync"){
 # This should be processed right before opening I/Q loop
-	field( SDIS, "$(P)CLOSE_LOOP_W")
+	field( SDIS, "$(P)$(CHASSIS)CLOSE_LOOP_W")
 	field( DISV, "0")
-	field( DOL,  "$(P)VOUTXFALL_R")
+	field( DOL,  "$(P)$(CHASSIS)VOUTXFALL_R")
 	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP")
 }
 
 record( ao, "$(P)SOURCE_IM_Sync"){
 # This should be processed right before opening I/Q loop
-	field( DOL,  "$(P)VOUTYFALL_R")
+	field( DOL,  "$(P)$(CHASSIS)VOUTYFALL_R")
 	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP")
 }
@@ -422,8 +440,8 @@ record( fanout,  "$(P)SOURCE_IQ_TO_AP")
 
 record( calcout, "$(P)SOURCE_IQ_TO_A")
 {
-	field( INPA, "$(P)VOUTXFALL_R")
-	field( INPB, "$(P)VOUTYFALL_R")
+	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R")
+	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R")
 	field( INPC, "$(P)AOPEN_SCALE" )
 	field(CALC, "SQRT(A^2+B^2)/C")
 	field( OUT, "$(P)AOPEN PP")
@@ -432,184 +450,96 @@ record( calcout, "$(P)SOURCE_IQ_TO_A")
 
 record( calcout, "$(P)SOURCE_IQ_TO_P")
 {
-	field( INPA, "$(P)VOUTXFALL_R")
-	field( INPB, "$(P)VOUTYFALL_R")
+	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R")
+	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R")
 	field( INPD, "$(P)POPEN_SCALE" )
-	field(CALC, "ATAN2(B,A)*R2D+D")
+	field(CALC, "ATAN2(A,B)*R2D+D")
 	field( OUT, "$(P)POPEN PP")
 	field( OOPT, "On Change")
 }
 
-# SSA drive balancing. raw 19898 = 100% amplitude.
-# Adjust phase and amplitude so RF is in phase and output is equal.
-record(ao, "$(P)DRV1_ADJ_A")
-{
-	field(EGU, "%")
-	field(HOPR, "100")
-	field(LOPR, "0")
-	field(VAL, "100")
-	field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
-	info( autosaveFields, "VAL")
-}
-
-record(ao, "$(P)DRV1_ADJ_P")
-{
-	field(EGU, "degrees")
-	field(HOPR, "180")
-	field(LOPR, "-180")
-		field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
-	info( autosaveFields, "VAL")
-}
-record( fanout,  "$(P)RFSUPLO1_AP_TO_IQ")
-{
-	field(LNK1, "$(P)RFSUPLO1_AP_TO_I PP")
-	field(LNK2, "$(P)RFSUPLO1_AP_TO_Q PP")
-}
-
-record( calcout, "$(P)RFSUPLO1_AP_TO_I")
-{
-	field( INPA, "$(P)DRV1_ADJ_A")
-	field( INPB, "$(P)DRV1_ADJ_P")
-	field( CALC, "A*COS(B*D2R)*19898/100")
-	field( OUT, "$(P)RFSUPLOX1_W PP")
-}
-
-record( calcout, "$(P)RFSUPLO1_AP_TO_Q")
-{
-	field( INPA, "$(P)DRV1_ADJ_A")
-	field( INPB, "$(P)DRV1_ADJ_P")
-	field( CALC, "A*SIN(B*D2R)*19898/100")
-	field( OUT, "$(P)RFSUPLOY1_W PP")
-}
-
-
-record(ao, "$(P)DRV2_ADJ_A")
-{
-	field(EGU, "%")
-	field(HOPR, "100")
-	field(LOPR, "0")
-		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
-	info( autosaveFields, "VAL")
-}
-
-record(ao, "$(P)DRV2_ADJ_P")
-{
-	field(EGU, "degrees")
-	field(HOPR, "180")
-	field(LOPR, "-180")
-		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
-	info( autosaveFields, "VAL")
-}
-record( fanout,  "$(P)RFSUPLO2_AP_TO_IQ")
-{
-	field(LNK1, "$(P)RFSUPLO2_AP_TO_I PP")
-	field(LNK2, "$(P)RFSUPLO2_AP_TO_Q PP")
-}
-
-record( calcout, "$(P)RFSUPLO2_AP_TO_I")
-{
-	field( INPA, "$(P)DRV2_ADJ_A")
-	field( INPB, "$(P)DRV2_ADJ_P")
-	field( CALC, "A*COS(B*D2R)*19898/100")
-	field( OUT, "$(P)RFSUPLOX2_W PP")
-}
-
-record( calcout, "$(P)RFSUPLO2_AP_TO_Q")
-{
-	field( INPA, "$(P)DRV2_ADJ_A")
-	field( INPB, "$(P)DRV2_ADJ_P")
-	field( CALC, "A*SIN(B*D2R)*19898/100")
-	field( OUT, "$(P)RFSUPLOY2_W PP")
-}
-
-# Interlocks
-record( mbbo, "$(P)INTERLOCK_MODE_1")
-{
-	field( DESC, "Trip when signal is...")
-	field( ZRST, "BELOW")
-	field( ONST, "ABOVE")
-	field( TWST, "BETWEEN")
-	field( THST, "OUTSIDE")
-	field( OUT, "$(P)INLK_MODE_1_W")
-	info( autosaveFields, "VAL")
-}
-
-record( mbbo, "$(P)INTERLOCK_MODE_2")
-{
-	field( DESC, "Trip when signal is...")
-	field( ZRST, "BELOW")
-	field( ONST, "ABOVE")
-	field( TWST, "BETWEEN")
-	field( THST, "OUTSIDE")
-	field( OUT, "$(P)INLK_MODE_2_W")
-	info( autosaveFields, "VAL")
-}
-
-record( mbbo, "$(P)INTERLOCK_MODE_3")
-{
-	field( DESC, "Trip when signal is...")
-	field( ZRST, "BELOW")
-	field( ONST, "ABOVE")
-	field( TWST, "BETWEEN")
-	field( THST, "OUTSIDE")
-	field( OUT, "$(P)INLK_MODE_3_W")
-	info( autosaveFields, "VAL")
-}
-
-record( mbbo, "$(P)INTERLOCK_MODE_4")
-{
-	field( DESC, "Trip when signal is...")
-	field( ZRST, "BELOW")
-	field( ONST, "ABOVE")
-	field( TWST, "BETWEEN")
-	field( THST, "OUTSIDE")
-	field( OUT, "$(P)INLK_MODE_4_W")
-	info( autosaveFields, "VAL")
-}
-
-record( mbbo, "$(P)SELECT_SET_LIMIT")
-{
-	field( DESC, "Set trip level for...")
-	field( ZRST, "1 Lower")
-	field( ONST, "1 Upper")
-	field( TWST, "2 Lower")
-	field( THST, "2 Upper")
-	field( FRST, "3 Lower")
-	field( FVST, "3 Upper")
-	field( SXST, "4 Lower")
-	field( SVST, "4 Upper")
-	field( OUT, "$(P)A_THRESH_W")
-}
-
-record( ao, "$(P)THRESH_INIT_W")
+record( ao, "$(P)$(CHASSIS)THRESH_INIT_W")
 {
 	info( autosaveFields, "VAL")
 }
-record( ao, "$(P)THRESH_NOISE_W")
+record( ao, "$(P)$(CHASSIS)THRESH_NOISE_W")
 {
 	info( autosaveFields, "VAL")
 }
-record( ao, "$(P)DECAY_COEF_W")
+record( ao, "$(P)$(CHASSIS)DECAY_COEF_W")
 {
 	info( autosaveFields, "VAL")
 }
 record( acalcout, "$(P)REV:AWF_LIMIT")
 {
-	field( INPA, "$(P)THRESH_INIT_W CP")
-	field( INPB, "$(P)DECAY_COEF_W CP")
-	field( INPC, "$(P)THRESH_NOISE_W CP")
-	field( INAA, "$(P)DECAY_X_AXIS")
+	field( INPA, "$(P)$(CHASSIS)THRESH_INIT_W CP")
+	field( INPB, "$(P)$(CHASSIS)DECAY_COEF_W CP")
+	field( INPC, "$(P)$(CHASSIS)THRESH_NOISE_W CP")
+	field( INAA, "$(P)$(CHASSIS)DECAY_X_AXIS")
 	field( CALC, "A/EXP(B*AA)+C")
 	field( NELM, "256")
 	field( NUSE, "256")
 
 }
 
+# Dummy waveforms, because sometime they make the x-y graph wiget happy
+record(waveform, "$(P)NULL:ITWF") {
+	field(DESC, "Dummy phase Waveform")
+	field(NELM, "0")
+	field(FTVL, "FLOAT")
+}
+record(waveform, "$(P)NULL:QTWF") {
+	field(DESC, "Dummy phase Waveform")
+	field(NELM, "0")
+	field(FTVL, "FLOAT")
+}
+record(waveform, "$(P)NULL:AWF") {
+	field(DESC, "Dummy phase Waveform")
+	field(NELM, "0")
+	field(FTVL, "FLOAT")
+}
+record(waveform, "$(P)NULL:PWF") {
+	field(DESC, "Dummy phase Waveform")
+	field(NELM, "0")
+	field(FTVL, "FLOAT")
+}
+
+record(mbbo, "$(P)WF_TIME_PER_POINT") {
+field(OUT, "$(P)WAVE_SAMP_PER_FAN PP")
+field(ZRVL, "1")
+field(ONVL, "2")
+field(TWVL, "4")
+field(THVL, "8")
+field(FRVL, "16")
+field(FVVL, "32")
+field(SXVL, "64")
+field(SVVL, "128")
+field(EIVL, "255")
+field(ZRST, "1.4 us")
+field(ONST, "2.8 us")
+field(TWST, "5.6 us")
+field(THST, "11.2 us")
+field(FRST, "22.4 us")
+field(FVST, "44.8 us")
+field(SXST, "89.6 us")
+field(SVST, "179.2 us")
+field(EIST, "0.357 ms")
+field(DTYP, "Raw Soft Channel")
+}
+
+record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
+{
+	field(OUTA, "$(P)PRC:WAVE_SAMP_PER_W PP")
+	field(OUTB, "$(P)RFS1:WAVE_SAMP_PER_W PP")
+	field(OUTC, "$(P)RFS2:WAVE_SAMP_PER_W PP")
+	field(DOL, "$(P)WF_TIME_PER_POINT")
+	field(OMSL, "closed_loop")
+}
 #record(calc, "$(P)IFDES2MODULO")
 #{
 #field(INPA, "$(P)IFDES")
 #field(CALC, "
-#
+
 #! Further lines contain data used by VisualDCT
 #! View(1074,190,1.6)
 #! Record("$(P)TRACE_DATA_N_ACTIVE",980,27,0,0,"$(P)TRACE_DATA_N_ACTIVE")

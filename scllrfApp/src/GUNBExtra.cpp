@@ -34,6 +34,7 @@
 #include <cmath>
 #include <ctgmath>
 #include <stdio.h>
+#include <stdexcept>
 #include "../../newmat10/newmat.h"
 #include "../../newmat10/newmatap.h"
 #include "../../newmat10/newmatio.h"
@@ -54,19 +55,17 @@ const char *GUNBExtra::IfFreqString = "IF_FREQ";
 // Trace Data buffer I/Q data
 const char *GUNBExtra::TraceDataChanEnableString = "TRACE_DATA_CHAN_ENABLE";
 const char *GUNBExtra::TraceDataNActiveString = "TRACE_DATA_N_ACTIVE";
+const char *GUNBExtra::TraceDataRawIString = "TRACE_DATA_RAW_I";
+const char *GUNBExtra::TraceDataRawQString = "TRACE_DATA_RAW_Q";
+const char *GUNBExtra::TraceDataRawAString = "TRACE_DATA_RAW_A";
+const char *GUNBExtra::TraceDataRawPString = "TRACE_DATA_RAW_P";
 const char *GUNBExtra::TraceDataIString = "TRACE_DATA_I";
 const char *GUNBExtra::TraceDataQString = "TRACE_DATA_Q";
 const char *GUNBExtra::TraceDataAString = "TRACE_DATA_A";
 const char *GUNBExtra::TraceDataPString = "TRACE_DATA_P";
 const char *GUNBExtra::TraceDataScaleString = "TRACE_DATA_SCALE";
 const char *GUNBExtra::TraceDataGoldString = "TRACE_DATA_GOLD";
-const char *GUNBExtra::TDDecayConstantBString = "TD_DECAY_CONSTANT_B";
-const char *GUNBExtra::TDDecayBWString = "TD_DECAY_BW";
-const char *GUNBExtra::TDDecayStrengthString = "TD_DECAY_STRENGTH";
-const char *GUNBExtra::TDDecayFitStdDevString = "TD_DECAY_FIT_STDDEV";
 
-const char *GUNBExtra::TraceDataMinsRString = "TRACE_DATA_MINS_R";
-const char *GUNBExtra::TraceDataMaxsRString = "TRACE_DATA_MAXS_R";
 const char* GUNBExtra::TraceDataTimeStepString = "TRACE_DATA_TIME_STEP";
 const char* GUNBExtra::TraceDataPollEnableString = "TRACE_DATA_POLL_ENABLE";
 const char* GUNBExtra::TraceDataFastUpdateString = "TRACE_DATA_FAST_UPDATE";
@@ -74,6 +73,10 @@ const char* GUNBExtra::TraceDataFastUpdateString = "TRACE_DATA_FAST_UPDATE";
 // Decay buffer I/Q data
 const char *GUNBExtra::DecayChanEnableString = "DECAY_CHAN_ENABLE";
 const char *GUNBExtra::DecayNActiveString = "DECAY_N_ACTIVE";
+const char *GUNBExtra::DecayRawIString = "DECAY_RAW_I";
+const char *GUNBExtra::DecayRawQString = "DECAY_RAW_Q";
+const char *GUNBExtra::DecayRawAString = "DECAY_RAW_A";
+const char *GUNBExtra::DecayRawPString = "DECAY_RAW_P";
 const char *GUNBExtra::DecayIString = "DECAY_I";
 const char *GUNBExtra::DecayQString = "DECAY_Q";
 const char *GUNBExtra::DecayAString = "DECAY_A";
@@ -103,12 +106,14 @@ const float TraceData::CLK_FREQ = 1320e6/14; // LCLS-II value from app.py
 const unsigned TraceData::SLOW_OFFSET = 17; // register address offset from start of slow buffer to the data we care about
 
 TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex,
+		int *iRawParamIndex, int *qRawParamIndex, int *aRawParamIndex, int *pRawParamIndex,
 		int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
 		int *decayBWParamIndex, int *decayConstantBParamIndex, int *decayStrengthParamIndex, int *decayFitStddevParamIndex):
-		nChan(0), chanKeep(0), newTraceDataAvailable(0), newTraceDataRead(0), pollEnable(true), pollTimeout (0.25),
-		pDriver_(pDriver),regBuffer_(pBuffer), regStartAddr_((uint32_t) pBuffer->iStartAddr),
-		regEndAddr_((uint32_t) pBuffer->iStartAddr + pBuffer->RegCount -1), iParamIndex_(iParamIndex),
-		qParamIndex_(qParamIndex), aParamIndex_(aParamIndex), pParamIndex_(pParamIndex),
+		nChan(0), chanKeep(0), newTraceDataAvailable(0), newTraceDataRead(0), pollEnable(true), fastUpdate(false),pollTimeout (0.25),
+		doDecayComp(false),pDriver_(pDriver),regBuffer_(pBuffer), regStartAddr_((uint32_t) pBuffer->iStartAddr),
+		regEndAddr_((uint32_t) pBuffer->iStartAddr + pBuffer->RegCount -1), iRawParamIndex_(iRawParamIndex),
+		qRawParamIndex_(qRawParamIndex), aRawParamIndex_(aRawParamIndex), pRawParamIndex_(pRawParamIndex),
+		iParamIndex_(iParamIndex), qParamIndex_(qParamIndex), aParamIndex_(aParamIndex), pParamIndex_(pParamIndex),
 		rawParamIndex_(rawParamIndex), decayBWParamIndex_(decayBWParamIndex),
 		decayConstantBParamIndex_(decayConstantBParamIndex), decayStrengthParamIndex_(decayStrengthParamIndex),
 		decayFitStddevParamIndex_(decayFitStddevParamIndex), gain_(1)
@@ -121,10 +126,13 @@ TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex
 	for (i = 0; i < maxWavesCount; i++)
 	{
 		std::fill(pIQBuf_[i], pIQBuf_[i] + pBuffer->RegCount, 0);
+		std::fill(pRawIQBuf_[i], pRawIQBuf_[i] + pBuffer->RegCount, 0);
 		scaleFactor_[i]=1;
 	}
 	for (i = 0; i < maxWavesCount / 2; i++)
 	{
+		std::fill(pRawABuf_[i], pRawABuf_[i] + pBuffer->RegCount, 0);
+		std::fill(pRawPBuf_[i], pRawPBuf_[i] + pBuffer->RegCount, 0);
 		std::fill(pABuf_[i], pABuf_[i] + pBuffer->RegCount, 0);
 		std::fill(pPBuf_[i], pPBuf_[i] + pBuffer->RegCount, 0);
 		phaseOffset_[i] = 0;
@@ -144,17 +152,20 @@ TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex
 GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 : GUNBDriver(drvPortName, netPortName, maxChannel, NUM_GUNBEXTRA_PARAMS),
 	traceData_(this, &TraceDataBuf,  &p_TraceDataWav,
+			&p_TraceDataRawI, &p_TraceDataRawQ, &p_TraceDataRawA, &p_TraceDataRawP,
 			&p_TraceDataI, &p_TraceDataQ, &p_TraceDataA, &p_TraceDataP,
 			&p_TDDecayBW, &p_TDDecayConstantB, &p_TDDecayStrength, &p_TDDecayFitStdDev),
-			decayData_(this, &DecayDataBuf,  &p_DecayDataWav,
-					&p_DecayI, &p_DecayQ, &p_DecayA, &p_DecayP,
-					&p_DecayBW, &p_DecayConstantB, &p_DecayStrength, &p_DecayFitStdDev),
-					phaseStepH(0), phaseStepL(0), phaseModulo(0),
+	decayData_(this, &DecayDataBuf,  &p_DecayDataWav,
+			&p_DecayRawI, &p_DecayRawQ, &p_DecayRawA, &p_DecayRawP,
+			&p_DecayI, &p_DecayQ, &p_DecayA, &p_DecayP,
+			&p_DecayBW, &p_DecayConstantB, &p_DecayStrength, &p_DecayFitStdDev),
+			phaseStepH(0), phaseStepL(0), phaseModulo(0),
 			iFrequency((phaseStepH +(phaseStepL/(4096-phaseModulo)))/2e20)
 
 {
 //	bool waveIsReady;
 
+	// Set up message for TraceData acknowledge and trigger data read
 	traceData_.traceDataAck[0] = {TraceResetWAdr,1};
 	traceData_.traceDataAck[1] = {SlowResetWAdr,0};
 	traceData_.traceDataAck[2] = {SlowResetWAdr,1};
@@ -164,6 +175,7 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 	traceData_.statusRequest = {TraceStatus1RAdr | flagReadMask,blankData};
 	htonFpgaRegArray(&traceData_.statusRequest, 1);
 
+	// Set up message for Decay acknowledge and trigger data read
 	decayData_.traceDataAck[0] = {DecayResetWAdr,1};
 	decayData_.traceDataAck[1] = {flagReadMask,blankData};
 	decayData_.traceDataAck[2] = {flagReadMask,blankData};
@@ -172,6 +184,7 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 	htonFpgaRegArray(decayData_.traceDataAck, sizeof(decayData_.traceDataAck)/sizeof(FpgaReg));
 	decayData_.statusRequest = {DecayRoEnableRAdr | flagReadMask,blankData};
 	htonFpgaRegArray(&decayData_.statusRequest, 1);
+	decayData_.doDecayComp = true;
 
 	// Uncomment the next 2 lines for verbose init logging
 //	pasynTrace->setTraceMask((pasynUserSelf), 0xb);
@@ -184,25 +197,27 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 
 	createParam(TraceDataChanEnableString, asynParamUInt32Digital, &p_TraceDataChanEnable);
 	createParam(TraceDataNActiveString, asynParamInt32, &p_TraceDataNActive);
+	createParam(TraceDataRawIString, asynParamInt32Array, &p_TraceDataRawI);
+	createParam(TraceDataRawQString, asynParamInt32Array, &p_TraceDataRawQ);
+	createParam(TraceDataRawAString, asynParamFloat32Array, &p_TraceDataRawA);
+	createParam(TraceDataRawPString, asynParamFloat32Array, &p_TraceDataRawP);
 	createParam(TraceDataIString, asynParamFloat32Array, &p_TraceDataI);
 	createParam(TraceDataQString, asynParamFloat32Array, &p_TraceDataQ);
 	createParam(TraceDataAString, asynParamFloat32Array, &p_TraceDataA);
 	createParam(TraceDataPString, asynParamFloat32Array, &p_TraceDataP);
 	createParam(TraceDataScaleString,  asynParamFloat64, &p_TraceDataScale);
 	createParam(TraceDataGoldString,  asynParamFloat64, &p_TraceDataGold);
-	createParam(TDDecayBWString, asynParamFloat64, &p_TDDecayBW);
-	createParam(TDDecayConstantBString, asynParamFloat64, &p_TDDecayConstantB);
-	createParam(TDDecayStrengthString, asynParamFloat64, &p_TDDecayStrength);
-	createParam(TDDecayFitStdDevString, asynParamFloat64, &p_TDDecayFitStdDev);
 
-	createParam(TraceDataMinsRString, asynParamInt32, &p_TraceDataMinsR);
-	createParam(TraceDataMaxsRString, asynParamInt32, &p_TraceDataMaxsR);
 	createParam(TraceDataTimeStepString, asynParamFloat64, &p_TraceDataTimeStep);
 	createParam(TraceDataPollEnableString, asynParamUInt32Digital, &p_TraceDataPollEnable);
 	createParam(TraceDataFastUpdateString, asynParamUInt32Digital, &p_TraceDataFastUpdate);
 
 	createParam(DecayChanEnableString, asynParamUInt32Digital, &p_DecayChanEnable);
 	createParam(DecayNActiveString, asynParamInt32, &p_DecayNActive);
+	createParam(DecayRawIString, asynParamInt32Array, &p_DecayRawI);
+	createParam(DecayRawQString, asynParamInt32Array, &p_DecayRawQ);
+	createParam(DecayRawAString, asynParamFloat32Array, &p_DecayRawA);
+	createParam(DecayRawPString, asynParamFloat32Array, &p_DecayRawP);
 	createParam(DecayIString, asynParamFloat32Array, &p_DecayI);
 	createParam(DecayQString, asynParamFloat32Array, &p_DecayQ);
 	createParam(DecayAString, asynParamFloat32Array, &p_DecayA);
@@ -230,6 +245,9 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 	epicsThreadSleep(defaultPollPeriod);
 	wakeupPoller();
 	wakeupReader();
+
+	// Initialize write register values without writing the registers
+	sendBigBuffer(RegmirrorBuf.reqData.data(), RegmirrorBuf.ReqMsgSize);
 
 }
 
@@ -271,7 +289,8 @@ void GUNBExtra::testCannedResponse()
 asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
 	asynPrint(pasynUser, ASYN_TRACEIO_DEVICE, "--> %s %s: value: %d, mask: %x\n", portName, __PRETTY_FUNCTION__, value, mask);
-	int function = pasynUser->reason;
+	unsigned int function = pasynUser->reason;
+	int chan;
 	asynStatus status = asynSuccess;
 	const char *paramName;
 	FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
@@ -279,8 +298,10 @@ asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value,
 
 	/* Fetch the parameter string name for possible use in debugging */
 	getParamName(function, &paramName);
-	asynPrint(pasynUser, ASYN_TRACEIO_DEVICE, "%s %s: function=%d, %s\n",
-			portName, __PRETTY_FUNCTION__, function, paramName);
+	// Some registers have more than 1 "channel"
+	getAddress(pasynUser, &chan);
+	asynPrint(pasynUser, ASYN_TRACEIO_DEVICE, "%s %s: function=%d, ch. %u, %s, setting to 0x%x\n",
+			portName, __PRETTY_FUNCTION__, function, chan, paramName, value);
 	// For settings that change the waveform scale,
 	// increment tag so inconsistent data is dropped.
 	// Numbering convention, to keep consistent with beg0.py:
@@ -292,7 +313,7 @@ asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value,
 	//# I use 4 bits here, even though the hardware is capable of 8
 		// TODO: if this works as expected, add other settings that change waveform scale
 
-	if (function == p_TraceDataChanEnable) // Enable I/Q pairs
+	if (function == (unsigned int) p_TraceDataChanEnable) // Enable I/Q pairs
 	{
 		/* Set the parameter in the parameter library. */
 		status = (asynStatus) setUIntDigitalParam(0, function, value, mask);
@@ -312,13 +333,15 @@ asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value,
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]		regSendBuf[3].data = (int32_t) traceData_.nextTag();
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]regSendBuf[4].addr = (uint32_t) TraceDataDspTagWAdr | flagReadMask;
 
-		status = (asynStatus) setIntegerParam(0, p_KeepW, (epicsUInt32) regSendBuf[1].data);
+		status = (asynStatus) setIntegerParam(0, p_KeepW, (epicsUInt32) regSendBuf[0].data);
+		traceData_.chanKeep = (uint16_t) regSendBuf[0].data;
+		traceData_.updateRelToAbsIdx();
 
 		htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 		_singleMsgQ.send(regSendBuf, 2 * sizeof( FpgaReg ));
 		callParamCallbacks();
 	}
-	else if (function == p_TraceDataPollEnable)
+	else if (function == (unsigned int) p_TraceDataPollEnable)
 	{
 		status = (asynStatus) setUIntDigitalParam(0, p_TraceDataPollEnable, value, mask);
 		traceData_.pollEnable = value;
@@ -327,10 +350,28 @@ asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value,
 			_singleMsgQ.send(traceData_.traceDataAck, sizeof(traceData_.traceDataAck));
 		}
 	}
-	else if (function == p_DecayPollEnable)
+	else if (function == (unsigned int) p_DecayPollEnable)
 	{
 		status = (asynStatus) setUIntDigitalParam(0, p_DecayPollEnable, value, mask);
 		decayData_.pollEnable = value;
+		if(value != 0)
+		{
+			_singleMsgQ.send(decayData_.traceDataAck, sizeof(decayData_.traceDataAck));
+		}
+	}
+	else if (function == (unsigned int) p_TraceDataFastUpdate)
+	{
+		status = (asynStatus) setUIntDigitalParam(0, p_TraceDataFastUpdate, value, mask);
+		traceData_.fastUpdate = value;
+		if(value != 0)
+		{
+			_singleMsgQ.send(traceData_.traceDataAck, sizeof(traceData_.traceDataAck));
+		}
+	}
+	else if (function == (unsigned int) p_DecayFastUpdate)
+	{
+		status = (asynStatus) setUIntDigitalParam(0, p_DecayFastUpdate, value, mask);
+		decayData_.fastUpdate = value;
 		if(value != 0)
 		{
 			_singleMsgQ.send(decayData_.traceDataAck, sizeof(decayData_.traceDataAck));
@@ -351,7 +392,8 @@ asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value,
  * \param[in] value Pointer to the value to read. */
 asynStatus GUNBExtra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
-	int function = pasynUser->reason;
+	unsigned int function = pasynUser->reason;
+	int chan;
 	asynStatus status = asynSuccess;
 	const char *paramName;
 	FpgaReg regSendBuf[5]; // LBL reports problems when smaller requests are sent
@@ -359,8 +401,10 @@ asynStatus GUNBExtra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 
 	/* Fetch the parameter string name for possible use in debugging */
 	getParamName(function, &paramName);
-	asynPrint(pasynUser, ASYN_TRACEIO_DEVICE, "--> %s %s: function=%d, %s, set to %d\n",
-			portName, __PRETTY_FUNCTION__, function, paramName, value);
+	// Some registers have more than 1 "channel"
+	getAddress(pasynUser, &chan);
+	asynPrint(pasynUser, ASYN_TRACEIO_DEVICE, "--> %s %s: function=%d, ch. %u, %s, set to %d\n",
+			portName, __PRETTY_FUNCTION__, function, chan, paramName, value);
 	// For settings that change the waveform scale,
 	// increment tag so inconsistent data is dropped.
 	// Numbering convention, to keep consistent with beg0.py:
@@ -371,7 +415,7 @@ asynStatus GUNBExtra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 	//#  4-11 rotated through [well, 4-123 here, slight change from beg0.py]
 	//# I use 4 bits here, even though the hardware is capable of 8
 	// TODO: if this works as expected, add other settings that change waveform scale
-	if (function == p_WaveSampPerW)
+	if (function == (unsigned int) p_WaveSampPerW)
 	{
 			epicsInt32 last_wave_samp_per;
 			unsigned int wave_shift, positiveSampPer;
@@ -537,7 +581,7 @@ Matrix TraceData::PseudoInverse(const Matrix & m)
 }
 
 float* TraceData::CavityDecayConstantCompute(
-		float *decay_real, float *decay_imag, unsigned int start, unsigned int ch
+		int *decay_real, int *decay_imag, unsigned int start, unsigned int ch
 #define D_REAL(i) (decay_real[i])
 #define D_IMAG(i) (decay_imag[i])
 )
@@ -616,13 +660,11 @@ void TraceData::ReqTraceData()
 //statusMask =
 void TraceData::TraceDataRequester()
 {
-	unsigned int fastUpdate;
 
 	// Main polling loop
 	while (1)
 	{
 		newTraceDataRead = newTraceDataAvailable; // Indicate that we got the previous signal
-		pDriver_->getUIntDigitalParam(pDriver_->p_TraceDataFastUpdate, &fastUpdate, 1);
 
 		if (!reqTraceDataEvent.wait(pollTimeout))
 		{
@@ -676,24 +718,32 @@ void TraceData::TraceDataRequester()
 				unsigned int rel_chan_ix = 0;
 				unsigned int nPoints = nChan>0? regBuffer_->RegCount/nChan: 0;
 				unsigned int i;
+				float Irot, Qrot; // temporary place to hold rotated I & Q values.
 				for (rel_chan_ix=0; rel_chan_ix<nChan; ++rel_chan_ix)
 				{
-					if(relToAbsIdx[rel_chan_ix]%2 == 0) // if this is a Q channel
+					if(relToAbsIdx[rel_chan_ix]%2 == 1) // if this is a I channel
 					{
 						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
-								"%s %s publishing Q waveform %d, from relative channel %d\n",
+								"%s %s publishing I waveform %d, from relative channel %d\n",
 								pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[rel_chan_ix]/2, rel_chan_ix);
+						pDriver_->doCallbacksInt32Array(pRawIQBuf_[rel_chan_ix], nPoints, *iRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
 
-						pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *qParamIndex_, relToAbsIdx[rel_chan_ix]/2);
 						if((rel_chan_ix > 0) && (relToAbsIdx[rel_chan_ix]/2 == relToAbsIdx[rel_chan_ix-1]/2)) // if the corresponding I is also active
 						{
 							for (i=0; i<nPoints; i++)
 							{
 								try
 								{
-									pABuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) hypot(pIQBuf_[rel_chan_ix-1][i], pIQBuf_[rel_chan_ix][i]);
-									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) (atan2(pIQBuf_[rel_chan_ix][i], pIQBuf_[rel_chan_ix-1][i])) * 180.0/M_PI
-											+ phaseOffset_[relToAbsIdx[rel_chan_ix]/2];
+									pRawABuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) hypot(pRawIQBuf_[rel_chan_ix-1][i], pRawIQBuf_[rel_chan_ix][i]);
+									pRawPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) (atan2(pRawIQBuf_[rel_chan_ix-1][i], pRawIQBuf_[rel_chan_ix][i])) * 180.0/M_PI;
+									Irot = pIQBuf_[rel_chan_ix][i] * cos((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0)
+											- pIQBuf_[rel_chan_ix-1][i] * sin((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0);
+									Qrot = pIQBuf_[rel_chan_ix][i] * sin((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0)
+											+ pIQBuf_[rel_chan_ix-1][i] * cos((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0);
+									pIQBuf_[rel_chan_ix][i] = Irot;
+									pIQBuf_[rel_chan_ix-1][i] = Qrot;
+									pABuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) hypot(Qrot, Irot);
+									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) (atan2(Qrot, Irot)) * 180.0/M_PI;
 									// make it wrap arround so that going past 360 wraps around to -360
 									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = fmod(pPBuf_[relToAbsIdx[rel_chan_ix]/2][i]+360.0,720.0);
 									if (pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] < 0)
@@ -701,8 +751,8 @@ void TraceData::TraceDataRequester()
 										pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] += 720.0;
 									}
 									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] -= 360.0;
-									//cout << "Applying phase offset " << phaseOffset_[relToAbsIdx[rel_chan_ix]/2] << " to channel " << relToAbsIdx[rel_chan_ix]/2 << ", I = " << pIQBuf_[rel_chan_ix-1][i] << ", Q = " << pIQBuf_[rel_chan_ix][i]<< ", A = " << pABuf_[relToAbsIdx[rel_chan_ix]/2][i] << ", P = " << pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] << endl;
-								}
+									//cout << "Applying phase offset " << phaseOffset_[relToAbsIdx[rel_chan_ix]/2] << " to channel " << relToAbsIdx[rel_chan_ix]/2 << ", I = " << Qrot << ", I = " << Irot<< ", A = " << pABuf_[relToAbsIdx[rel_chan_ix]/2][i] << ", P = " << pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] << endl;
+									}
 								catch (std::exception& e)
 								{
 									printf("pIQBufI_[%u][%u] = %f, ", rel_chan_ix, i, pIQBuf_[rel_chan_ix][i]);
@@ -714,11 +764,18 @@ void TraceData::TraceDataRequester()
 									"%s %s publishing amplitude and phase waveforms %d, from relative channels %d/%d\n",
 									pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[rel_chan_ix]/2, rel_chan_ix-1, rel_chan_ix);
 
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *iParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix-1], nPoints, *qParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+							pDriver_->doCallbacksFloat32Array(pRawABuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *aRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+							pDriver_->doCallbacksFloat32Array(pRawPBuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *pRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
 							pDriver_->doCallbacksFloat32Array(pABuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *aParamIndex_, relToAbsIdx[rel_chan_ix]/2);
 							pDriver_->doCallbacksFloat32Array(pPBuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *pParamIndex_, relToAbsIdx[rel_chan_ix]/2);
 
 							// TODO: add "if" to select the right channel for this analysis. Cavity? Also, "if" pulsed mode.
-							CavityDecayConstantCompute(pIQBuf_[rel_chan_ix], pIQBuf_[rel_chan_ix-1], 3, relToAbsIdx[rel_chan_ix]/2);
+							if(doDecayComp)
+							{
+								CavityDecayConstantCompute(pRawIQBuf_[rel_chan_ix], pRawIQBuf_[rel_chan_ix-1], 3, relToAbsIdx[rel_chan_ix]/2);
+							}
 
 							std::fill( pABuf_[relToAbsIdx[rel_chan_ix]/2],
 									pABuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pABuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pABuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
@@ -726,7 +783,7 @@ void TraceData::TraceDataRequester()
 									pPBuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pPBuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pPBuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
 
 						}
-						else // This is an I waveform, but the corresponding Q isn't active, so clear A and P
+						else // This is a I waveform, but the corresponding Q isn't active, so clear A and P
 						{
 							std::fill( pABuf_[relToAbsIdx[rel_chan_ix]/2],
 									pABuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pABuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pABuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
@@ -739,10 +796,17 @@ void TraceData::TraceDataRequester()
 					}
 					else
 					{
-						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE, "%s %s publishing I waveform %d, from relative channel %d\n",
+						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE, "%s %s publishing Q waveform %d, from relative channel %d\n",
 								pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[rel_chan_ix]/2, rel_chan_ix);
 						//				cout << "publishing I waveform " << relToAbsIdx[rel_chan_ix]/2 << ", from relative channel" << rel_chan_ix << endl;
-						pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *iParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+						pDriver_->doCallbacksInt32Array(pRawIQBuf_[rel_chan_ix], nPoints, *qRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+
+						// Only publish Q waveform here if the corresponding I isn't enabled.
+						// If the corresponding I is enabled, wait until phase offset correction is calculated
+						if(relToAbsIdx[rel_chan_ix]/2 != relToAbsIdx[rel_chan_ix+1]/2)
+						{
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *qParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+						}
 					}
 					// TODO: fill with 0 after publishing, change size of unused channels to 0
 				}
@@ -769,9 +833,9 @@ void TraceData::updateRelToAbsIdx()
 
 	asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE, "--> %s %s with %lu\n",
 			pDriver_->portName, __PRETTY_FUNCTION__, chanKeep.to_ulong() );
-	for (rel_chan_ix=0, abs_chan_ix=maxWavesCount; rel_chan_ix<nChan; ++rel_chan_ix)
+	for (rel_chan_ix=0, abs_chan_ix=-1; rel_chan_ix<nChan; ++rel_chan_ix)
 	{
-		while(! chanKeep.test(--abs_chan_ix))
+		while(! chanKeep.test(++abs_chan_ix))
 		{
 		}
 		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
@@ -826,6 +890,7 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
 				portName, __PRETTY_FUNCTION__);
 	}*/
 	assert(bufNumber < maxWavesCount);
+	pRawIQBuf_[bufNumber][bufIndex] = regBuffer_->getDataAt(regOffset);
 	pIQBuf_[bufNumber][bufIndex] = regBuffer_->getDataAt(regOffset) * scaleFactor_[relToAbsIdx[bufNumber]]/gain_;
 
 	if (regOffset == (regEndAddr_ - regStartAddr_)) // if this is the last point of the buffer
@@ -844,9 +909,8 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
  * Note: This function should not set waveIsReady to false. That is done by a loop in the
  * calling function.
 * \param[in] pFromFpga Data returned from the FPGA for a single register
-* \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsReady)
+asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga)
 {
 	asynStatus status = asynSuccess;
 	assert(pFromFpga->addr&flagReadMask); // This function is only for read registers
@@ -909,11 +973,8 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		}
 		else
 		{
-			unsigned int fastUpdate;
-			getUIntDigitalParam(p_TraceDataFastUpdate, &fastUpdate, 1);
-
 			// When fast waveform updates are enabled, poll the flag again as soon as we get a response
-			if (fastUpdate == true)
+			if (traceData_.fastUpdate == true)
 			{
 				_singleMsgQ.send(&traceData_.statusRequest, sizeof( FpgaReg ));
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DEVICE,"%s %s: waveform data not yet available, polling again....\n",
@@ -948,11 +1009,8 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 		}
 		else
 		{
-			unsigned int fastUpdate;
-			getUIntDigitalParam(p_DecayFastUpdate, &fastUpdate, 1);
-
 			// When fast waveform updates are enabled, poll the flag again as soon as we get a response
-			if (fastUpdate == true)
+			if (decayData_.fastUpdate == true)
 			{
 				_singleMsgQ.send(&decayData_.statusRequest, sizeof( FpgaReg ));
 				asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DEVICE,"%s %s: waveform data not yet available, polling again....\n",
@@ -1001,9 +1059,9 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 	status = (asynStatus) setIntegerParam(p_KeepR,
 			(pFromFpga->data & KeepMask));
 
-	if(traceData_.chanKeep != (uint16_t) tmpData)
+	if(traceData_.chanKeep != (uint32_t) tmpData)
 	{
-		traceData_.chanKeep = (uint16_t) (pFromFpga->data & KeepMask);
+		traceData_.chanKeep = (uint32_t) (pFromFpga->data & KeepMask);
 		status = (asynStatus) setUIntDigitalParam(p_TraceDataChanEnable,
 				DeInterleaveBits(traceData_.chanKeep.to_ulong()), KeepMask);
 
@@ -1029,15 +1087,63 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga, bool &waveIsR
 				(pFromFpga->addr < ((ConfigRomOutRAdr|flagReadMask) + ConfigRomOutBuf.RegCount)))
 		{
 			// This one is also processed by grandparent class scllrfAsynPortDriver
-			GUNBDriver::processRegReadback(pFromFpga, waveIsReady);
-			if(pFromFpga->addr<= (GitSha1TRAdr|flagReadMask))
+			GUNBDriver::processRegReadback(pFromFpga);
+			if(pFromFpga->addr<= (GitSha1JRAdr|flagReadMask)+1)
 			{ ////XXXX This is all that is implemented at the moment, remove "if" later
-				scllrfAsynPortDriver::processRegReadback(pFromFpga, waveIsReady);
+				scllrfAsynPortDriver::processRegReadback(pFromFpga);
+			}
+		}
+		else if ((pFromFpga->addr >= (RegmirrorRAdr|flagReadMask)) &&
+				(pFromFpga->addr < ((RegmirrorRAdr|flagReadMask) + RegmirrorBuf.RegCount)))
+		{	// Used for initialization of write-only registers
+			FpgaReg tmpReg = *pFromFpga;
+			tmpReg.addr -= (RegmirrorRAdr|flagReadMask);
+			try
+			{
+				regInterface tmpRegIf = addrToReg.at(tmpReg.addr);
+				if(tmpRegIf.isWritable)
+				{
+					switch(tmpRegIf.paramType)
+					{
+					case asynParamInt32:
+						status = (asynStatus) setIntegerParam(tmpRegIf.paramNum, pFromFpga->data );
+						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
+								"%s %s: Initializing writable int32 parameter %d, address=0x%x, to value=%d\n", portName, __PRETTY_FUNCTION__,
+								tmpRegIf.paramNum, (unsigned int) (pFromFpga->addr), pFromFpga->data);
+						break;
+
+					case asynParamUInt32Digital:
+						status = (asynStatus) setUIntDigitalParam(tmpRegIf.paramNum, pFromFpga->data, 0xFFFFFFFF);
+						asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
+								"%s %s: Initializing writable digital parameter %d, address=0x%x, to value=0x%x\n", portName, __PRETTY_FUNCTION__,
+								tmpRegIf.paramNum, (unsigned int) (pFromFpga->addr), (unsigned int) pFromFpga->data);
+						break;
+
+					case asynParamFloat64:
+					case asynParamOctet:
+					case asynParamInt8Array:
+					case asynParamInt16Array:
+					case asynParamInt32Array:
+					case asynParamFloat32Array:
+					case asynParamFloat64Array:
+					case asynParamGenericPointer:
+					case asynParamNotDefined:     /**< Undefined */
+					default:
+						asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+								"%s %s: readback for address=0x%x, value=0x%x, maps to invalid param type %u\n", portName, __PRETTY_FUNCTION__,
+								(unsigned int) (pFromFpga->addr), (unsigned int) (pFromFpga->data), tmpRegIf.paramType);
+					}
+				}
+			}
+			catch (std::out_of_range& e)
+			{
+				// Not all addresses have registers defined, so this is expected and normal.
+				// std::cerr << "No write parameter defined at address " << tmpReg.addr << ", exception caught: " << e.what() << endl;
 			}
 		}
 		else
 		{
-			status = GUNBDriver::processRegReadback(pFromFpga, waveIsReady);
+			status = GUNBDriver::processRegReadback(pFromFpga);
 		}
 		break;
 	}
@@ -1141,7 +1247,8 @@ asynStatus GUNBExtra::processRegWriteResponse(const FpgaReg *pFromFpga)
 		// Note: updateRelToAbsIdx also updates nChan
 		setIntegerParam(p_TraceDataNActive, traceData_.nChan);
 
-		printf("%s %s KeepWAdr says %d active channels\n",portName, __PRETTY_FUNCTION__,traceData_.nChan);
+		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
+				"%s %s KeepWAdr says %d active channels\n",portName, __PRETTY_FUNCTION__,traceData_.nChan);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
 				"%s %s: echo for address=%s, value=0x%x\n", portName, __PRETTY_FUNCTION__,
 				KeepWString, (unsigned int) (pFromFpga->data & KeepMask));

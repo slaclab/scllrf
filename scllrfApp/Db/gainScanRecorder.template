@@ -14,6 +14,7 @@ field(INPB, "$(P)FWD$(N):AMEAN")
 field(INPC, "$(P)AOPEN CP")
 # Update when ADES changes
 field(CALC, "B/A")
+field(PREC, "5")
 field(FLNK, "$(P)TRACK_SSA$(N)_GAIN")
 }
 
@@ -28,6 +29,7 @@ field(DESC, "Record of the last 1024 AMEAN values")
 field(INP, "$(P)DRV$(N):AMEAN")
 field(ALG, "Circular Buffer")
 field(NSAM, "1024")
+field(PREC, "5")
 }
 
 record(compress, "$(P)FWD$(N):AMEAN_LOG") {
@@ -35,6 +37,7 @@ field(DESC, "Record of the last 1024 AMEAN values")
 field(INP, "$(P)FWD$(N):AMEAN")
 field(ALG, "Circular Buffer")
 field(NSAM, "1024")
+field(PREC, "5")
 }
 
 record(compress, "$(P)SSA$(N)_GAIN_LOG") {
@@ -42,6 +45,7 @@ field(DESC, "Record of the last 1024 AMEAN values")
 field(INP, "$(P)SSA$(N)_GAIN")
 field(ALG, "Circular Buffer")
 field(NSAM, "1024")
+field(PREC, "5")
 }
 
 #! Further lines contain data used by VisualDCT

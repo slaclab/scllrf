@@ -7,18 +7,18 @@
 # Free running, not synchronized, when set to 0
 # Rising pulse edge at the start of the trace, when set to 2
 # Falling pulse edge at the start of the trace, when set to 3
-record(mbbo, "$(P)WF_EDGE_TRIGGER") {
-field(ZRST, "Free Run")
-field(ZRVL, "0")
-field(ONST, "Rising Edge")
-field(ONVL, "2")
-field(TWST, "Falling Edge")
-field(TWVL, "3")
-field(DTYP, "Raw Soft Channel")
-field(OUT, "$(P)PULSE_BOUNDARY_W PP")
-field(PINI, "YES")
-info(autosaveFields, "VAL")
-}
+#record(mbbo, "$(P)WF_EDGE_TRIGGER") {
+#field(ZRST, "Free Run")
+#field(ZRVL, "0")
+#field(ONST, "Rising Edge")
+#field(ONVL, "2")
+#field(TWST, "Falling Edge")
+#field(TWVL, "3")
+#field(DTYP, "Raw Soft Channel")
+#field(OUT, "$(P)PULSE_BOUNDARY_W PP")
+#field(PINI, "YES")
+#info(autosaveFields, "VAL")
+#} tHIS MAY BE WRITING A 0 TO THE REGISTER AT STARTUP. NOW IT'S AUTOMATED BASED ON PULSED VS. CW
 
 # ADC min/max won't update unless this register is poked periodically
 # Testing this in with trace reset. Uncomment if that doesn't work out.
@@ -43,7 +43,7 @@ record(mbboDirect, "$(P)WF_CHAN_ENABLE") {
 field(PINI, "YES")
 field(DTYP, "asynUInt32Digital")
 field(OUT, "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
-field(NOBT, "12")
+field(NOBT, "16")
 field(SCAN, "Passive")
 field(FLNK, "$(P)WF_CHAN_DISABLE")
 info(autosaveFields, "DESC")
@@ -70,6 +70,7 @@ field(DESC, "More channels = shorter waveforms")
 field(INPA, "$(P)WF_N_ACTIVE")
 field(CALC, "FLOOR(8192/A)")
 field(OUT, "$(P)WF_CALCX.NUSE PP")
+field(PINI, "NO")
 }
 
 record(ai, "$(P)WF_TIME_STEP") {
@@ -147,33 +148,11 @@ record(bo, "$(P)WF_UPDATE_PLOT") {
 field(HIGH, "0.1")
 }
 
-record(ao, "$(P)KEEP_W") {
-field(VAL, "$(KEEP)")
-field(PINI, "YES")
-}
-
-record(mbbo, "$(P)WF_TIME_PER_POINT") {
-field(OUT, "$(P)WAVE_SAMP_PER_W PP")
-field(ZRVL, "1")
-field(ONVL, "2")
-field(TWVL, "4")
-field(THVL, "8")
-field(FRVL, "16")
-field(FVVL, "32")
-field(SXVL, "64")
-field(SVVL, "128")
-field(EIVL, "255")
-field(ZRST, "1.4 us")
-field(ONST, "2.8 us")
-field(TWST, "5.6 us")
-field(THST, "11.2 us")
-field(FRST, "22.4 us")
-field(FVST, "44.8 us")
-field(SXST, "89.6 us")
-field(SVST, "179.2 us")
-field(EIST, "0.357 ms")
-field(DTYP, "Raw Soft Channel")
-}
+## This keeps writing 0 instead of the assigned VAL during startup. huh.
+#record(ao, "$(P)KEEP_W") {
+#field(VAL, "$(KEEP)")
+#field(PINI, "YES")
+#}
 
 #! Further lines contain data used by VisualDCT
 #! View(-54,-4,0.8)

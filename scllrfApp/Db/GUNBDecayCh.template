@@ -4,34 +4,67 @@
 
 # Note on FFTs: Interesting frequencies are generally from 3kHz to sub Hz
 
-record(waveform, "$(P)ITWF_DECAY") {
+record(waveform, "$(P)DECAY_ITWF") {
 	field(DESC, "Ch $(CH) I Waveform")
 	field(SCAN, "I/O Intr")
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)DECAY_I")
-	field(PREC, "1")
+	field(PREC, "5")
 	field(EGU, "$(EGU)")
 	field(NELM, "256")
 	field(FTVL, "FLOAT")
 }
 
-record(waveform, "$(P)QTWF_DECAY") {
+record(waveform, "$(P)DECAY_ITWF_RAW") {
+	field(DESC, "Ch $(CH) I Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynInt32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)DECAY_RAW_I")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+	field(NELM, "256")
+	field(FTVL, "LONG")
+}
+
+record(waveform, "$(P)DECAY_QTWF") {
 	field(DESC, "Ch $(CH) Q Waveform")
 	field(SCAN, "I/O Intr")
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)DECAY_Q")
-	field(PREC, "1")
+	field(PREC, "5")
 	field(EGU, "$(EGU)")
 	field(NELM, "256")
 	field(FTVL, "FLOAT")
 }
 
-record(waveform, "$(P)AWF_DECAY") {
+record(waveform, "$(P)DECAY_QTWF_RAW") {
+	field(DESC, "Ch $(CH) Q Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynInt32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)DECAY_RAW_Q")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+	field(NELM, "256")
+	field(FTVL, "LONG")
+}
+
+record(waveform, "$(P)DECAY_AWF") {
 	field(DESC, "Ch $(CH) amplitude Waveform")
 	field(SCAN, "I/O Intr")
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)DECAY_A")
-	field(PREC, "1")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+	field(NELM, "256")
+	field(FTVL, "FLOAT")
+}
+
+record(waveform, "$(P)DECAY_AWF_RAW") {
+	field(DESC, "Ch $(CH) amplitude raw Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynFloat32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)DECAY_RAW_A")
+	field(PREC, "5")
 	field(EGU, "$(EGU)")
 	field(NELM, "256")
 	field(FTVL, "FLOAT")
@@ -46,12 +79,34 @@ record(ao, "$(P)SCALE_DECAY") {
 	field(DOL, "$(P)SCALE_CALC")
 }
 
-record(waveform, "$(P)PWF_DECAY") {
+record(waveform, "$(P)DECAY_PWF") {
 	field(DESC, "Ch $(CH) phase Waveform")
 	field(SCAN, "I/O Intr")
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)DECAY_P")
-	field(PREC, "1")
+	field(PREC, "5")
+	field(EGU, "deg")
+	field(NELM, "256")
+	field(FTVL, "FLOAT")
+}
+
+record(waveform, "$(P)DECAY_PWF") {
+	field(DESC, "Ch $(CH) phase Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynFloat32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)DECAY_P")
+	field(PREC, "5")
+	field(EGU, "deg")
+	field(NELM, "256")
+	field(FTVL, "FLOAT")
+}
+
+record(waveform, "$(P)DECAY_PWF_RAW") {
+	field(DESC, "Ch $(CH) phase Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynFloat32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)DECAY_RAW_P")
+	field(PREC, "5")
 	field(EGU, "deg")
 	field(NELM, "256")
 	field(FTVL, "FLOAT")

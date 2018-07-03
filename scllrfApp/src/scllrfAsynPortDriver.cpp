@@ -38,19 +38,8 @@ const char *scllrfAsynPortDriver::WriteOneRegString = "WRITE_ONE_REG"; /* asynIn
 const char *scllrfAsynPortDriver::MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
 const char *scllrfAsynPortDriver::PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
 const char *scllrfAsynPortDriver::CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
-const char *scllrfAsynPortDriver::BoardTypeRString = "BOARD_TYPE_R";
-// Day firmware was built
-const char *scllrfAsynPortDriver::BuildDayRString = "BUILD_DAY_R";
-// Hour firmware was built
-const char *scllrfAsynPortDriver::BuildHourRString = "BUILD_HOUR_R";
-// Minute firmware was built
-const char *scllrfAsynPortDriver::BuildMinuteRString = "BUILD_MINUTE_R";
-// Month firmware was built
-const char *scllrfAsynPortDriver::BuildMonthRString = "BUILD_MONTH_R";
-// Year firmware was built
-const char *scllrfAsynPortDriver::BuildYearRString = "BUILD_YEAR_R";
-const char *scllrfAsynPortDriver::CodeIsCleanRString = "CODE_IS_CLEAN_R";
-const char *scllrfAsynPortDriver::DspFlavorRString = "DSP_FLAVOR_R";
+const char *scllrfAsynPortDriver::JsonSha1DesString = "JSON_SHA1_DES";
+const char *scllrfAsynPortDriver::JsonSha1ActString = "JSON_SHA1_ACT";
 // Git SHA1 sum as individual characters
 const char *scllrfAsynPortDriver::GitSha1ARString = "GIT_SHA1_A_R";
 const char *scllrfAsynPortDriver::GitSha1BRString = "GIT_SHA1_B_R";
@@ -73,11 +62,7 @@ const char *scllrfAsynPortDriver::GitSha1RRString = "GIT_SHA1_R_R";
 const char *scllrfAsynPortDriver::GitSha1SRString = "GIT_SHA1_S_R";
 const char *scllrfAsynPortDriver::GitSha1TRString = "GIT_SHA1_T_R";
 const char *scllrfAsynPortDriver::GitSHA1String = "GIT_SHA1";  /* asynOctet,    r */
-const char *scllrfAsynPortDriver::MagicRString = "MAGIC_R";
-const char *scllrfAsynPortDriver::ToolRevRString = "TOOL_REV_R";
-// Name of person compiling firmware
-const char *scllrfAsynPortDriver::UserRString = "USER_R";
-const char *scllrfAsynPortDriver::VersionRString = "VERSION_R";
+const char *scllrfAsynPortDriver::FwDescString = "FW_DESC";  /* asynOctet,    r */
 
 DataBuffer::DataBuffer(unsigned int RegCount, unsigned int iStartAddr):
 	RegCount(RegCount), ReqSegmentCount( (RegCount + maxRegPerMsg -1)/maxRegPerMsg),
@@ -174,14 +159,8 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
 	createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
 
-	createParam(BoardTypeRString, asynParamInt32, &p_BoardTypeR);
-	createParam(BuildDayRString, asynParamInt32, &p_BuildDayR);
-	createParam(BuildHourRString, asynParamInt32, &p_BuildHourR);
-	createParam(BuildMinuteRString, asynParamInt32, &p_BuildMinuteR);
-	createParam(BuildMonthRString, asynParamInt32, &p_BuildMonthR);
-	createParam(BuildYearRString, asynParamInt32, &p_BuildYearR);
-	createParam(CodeIsCleanRString, asynParamInt32, &p_CodeIsCleanR);
-	createParam(DspFlavorRString, asynParamInt32, &p_DspFlavorR);
+	createParam(JsonSha1DesString, asynParamOctet, &p_JsonSha1Des);
+	createParam(JsonSha1ActString, asynParamOctet, &p_JsonSha1Act);
 	createParam(GitSha1ARString, asynParamInt32, &p_GitSha1AR);
 	createParam(GitSha1BRString, asynParamInt32, &p_GitSha1BR);
 	createParam(GitSha1CRString, asynParamInt32, &p_GitSha1CR);
@@ -203,10 +182,7 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(GitSha1SRString, asynParamInt32, &p_GitSha1SR);
 	createParam(GitSha1TRString, asynParamInt32, &p_GitSha1TR);
 	createParam(GitSHA1String, asynParamOctet, &p_GitSHA1);
-	createParam(MagicRString, asynParamInt32, &p_MagicR);
-	createParam(ToolRevRString, asynParamInt32, &p_ToolRevR);
-	createParam(UserRString, asynParamInt32, &p_UserR);
-	createParam(VersionRString, asynParamInt32, &p_VersionR);
+	createParam(FwDescString, asynParamOctet, &p_FwDesc);
 
 	// Set these early, consider adding interlock for race condition with polling loop.
 	setIntegerParam(p_RunStop, stop);
@@ -248,7 +224,6 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
 
 	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startSingleMessageQueuer(netPortName);
-
 	printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 }
 
@@ -1290,21 +1265,25 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 
 asynStatus scllrfAsynPortDriver::catGitSHA1()
 {
-	int oneByte;
+	int twoByte;
 	int i;
 	asynStatus status;
+	char pGitSHA1[42];
 
 	strGitSHA1.str("");
 	strGitSHA1.clear();
-	strGitSHA1<<std::hex;
-
-	for (i=p_GitSha1AR; i<=p_GitSha1TR; i++)
+	strGitSHA1 << setfill('0') << std::setw(4) << std::hex;
+	cout << "Git SHA1: ";
+	for (i=p_GitSha1AR; i<=p_GitSha1JR; i++)
 	{
-		status = (asynStatus) getIntegerParam(i, &oneByte);
-		strGitSHA1 << std::setw(4) << std::hex << oneByte;
+		status = (asynStatus) getIntegerParam(i, &twoByte);
+		strGitSHA1 << twoByte;
 	}
-	// used with stringin reccord, which unfortunately can only handle 19 of the 20 characters
-	status = setStringParam(p_GitSHA1, strGitSHA1.str().c_str());
+	strcpy(pGitSHA1, strGitSHA1.str().c_str());
+	printf("%s", pGitSHA1);
+	cout << endl;
+	// when used with stringin reccord, it unfortunately can only handle 19 of the 20 characters
+	status = setStringParam(p_GitSHA1, pGitSHA1);
 
 	return status;
 }
@@ -1326,124 +1305,21 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
 	{
-	case MagicRAdr|flagReadMask:
+	case JsonSha1RAdr|flagReadMask:
 
-		status = (asynStatus) setIntegerParam(p_MagicR,
-				(pFromFpga->data & MagicMask) );
+	strJsonSha1.str("");
+	strJsonSha1.clear();
+	strJsonSha1 << setfill('0') << std::setw(4) << std::hex;
+		for(unsigned int i = 0;
+				(pFromFpga[i].addr - flagReadMask) < (GitSha1ARAdr - 1) &&
+						(pFromFpga[i].addr - flagReadMask) >= JsonSha1RAdr; i++)
+		{
+			strJsonSha1 << setfill('0') << std::setw(4) << std::hex << (unsigned int) (pFromFpga[i].data & JsonSha1Mask);
+		}
+		status = (asynStatus) setStringParam(p_JsonSha1Act, strJsonSha1.str().c_str());
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				MagicRString,
-				(unsigned int) (pFromFpga->data & MagicMask));
-	break;
-
-	case DspFlavorRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_DspFlavorR,
-				(pFromFpga->data & DspFlavorMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				DspFlavorRString,
-				(unsigned int) (pFromFpga->data & DspFlavorMask));
-	break;
-
-	case BuildYearRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_BuildYearR,
-				(pFromFpga->data & BuildYearMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BuildYearRString,
-				(unsigned int) (pFromFpga->data & BuildYearMask));
-	break;
-
-	case BuildMonthRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_BuildMonthR,
-				(pFromFpga->data & BuildMonthMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BuildMonthRString,
-				(unsigned int) (pFromFpga->data & BuildMonthMask));
-	break;
-
-	case BuildDayRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_BuildDayR,
-				(pFromFpga->data & BuildDayMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BuildDayRString,
-				(unsigned int) (pFromFpga->data & BuildDayMask));
-	break;
-
-	case BuildHourRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_BuildHourR,
-				(pFromFpga->data & BuildHourMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BuildHourRString,
-				(unsigned int) (pFromFpga->data & BuildHourMask));
-	break;
-
-	case BuildMinuteRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_BuildMinuteR,
-				(pFromFpga->data & BuildMinuteMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BuildMinuteRString,
-				(unsigned int) (pFromFpga->data & BuildMinuteMask));
-	break;
-
-	case CodeIsCleanRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_CodeIsCleanR,
-				(pFromFpga->data & CodeIsCleanMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				CodeIsCleanRString,
-				(unsigned int) (pFromFpga->data & CodeIsCleanMask));
-	break;
-
-	case ToolRevRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_ToolRevR,
-				(pFromFpga->data & ToolRevMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				ToolRevRString,
-				(unsigned int) (pFromFpga->data & ToolRevMask));
-	break;
-
-	case UserRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_UserR,
-				(pFromFpga->data & UserMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				UserRString,
-				(unsigned int) (pFromFpga->data & UserMask));
-	break;
-
-	case BoardTypeRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_BoardTypeR,
-				(pFromFpga->data & BoardTypeMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				BoardTypeRString,
-				(unsigned int) (pFromFpga->data & BoardTypeMask));
-	break;
-
-	case VersionRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_VersionR,
-				(pFromFpga->data & VersionMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				VersionRString,
-				(unsigned int) (pFromFpga->data & VersionMask));
+				"%s: readback for JsonSha1 sum: %s\n", __PRETTY_FUNCTION__,
+				strJsonSha1.str().c_str());
 	break;
 
 	case GitSha1ARAdr|flagReadMask:
@@ -1544,116 +1420,23 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
 				GitSha1JRString,
 				(unsigned int) (pFromFpga->data & GitSha1JMask));
-	break;
-
-	case GitSha1KRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1KR,
-				(pFromFpga->data & GitSha1KMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1KRString,
-				(unsigned int) (pFromFpga->data & GitSha1KMask));
-	break;
-
-	case GitSha1LRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1LR,
-				(pFromFpga->data & GitSha1LMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1LRString,
-				(unsigned int) (pFromFpga->data & GitSha1LMask));
-	break;
-
-	case GitSha1MRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1MR,
-				(pFromFpga->data & GitSha1MMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1MRString,
-				(unsigned int) (pFromFpga->data & GitSha1MMask));
-	break;
-
-	case GitSha1NRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1NR,
-				(pFromFpga->data & GitSha1NMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1NRString,
-				(unsigned int) (pFromFpga->data & GitSha1NMask));
-	break;
-
-	case GitSha1ORAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1OR,
-				(pFromFpga->data & GitSha1OMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1ORString,
-				(unsigned int) (pFromFpga->data & GitSha1OMask));
-	break;
-
-	case GitSha1PRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1PR,
-				(pFromFpga->data & GitSha1PMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1PRString,
-				(unsigned int) (pFromFpga->data & GitSha1PMask));
-	break;
-
-	case GitSha1QRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1QR,
-				(pFromFpga->data & GitSha1QMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1QRString,
-				(unsigned int) (pFromFpga->data & GitSha1QMask));
-	break;
-
-	case GitSha1RRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1RR,
-				(pFromFpga->data & GitSha1RMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1RRString,
-				(unsigned int) (pFromFpga->data & GitSha1RMask));
-	break;
-
-	case GitSha1SRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1SR,
-				(pFromFpga->data & GitSha1SMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1SRString,
-				(unsigned int) (pFromFpga->data & GitSha1SMask));
-	break;
-
-	case GitSha1TRAdr|flagReadMask:
-
-		status = (asynStatus) setIntegerParam(p_GitSha1TR,
-				(pFromFpga->data & GitSha1TMask) );
-		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
-				"%s: readback for address=%s, value=0x%x\n", __PRETTY_FUNCTION__,
-				GitSha1TRString,
-				(unsigned int) (pFromFpga->data & GitSha1TMask));
 		catGitSHA1();
-		break;
+	break;
 
 	default:
-		asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
-			"%s %s: value read from unmapped address 0x%X, value=0x%X\n", portName, __PRETTY_FUNCTION__,
-			pFromFpga->addr, (unsigned ) pFromFpga->data);
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, ++errorCount);
-		status = asynError;
+		if ((pFromFpga->addr - flagReadMask) < JsonSha1RAdr + 0x7FF && (pFromFpga->addr - flagReadMask) >= JsonSha1RAdr)
+		{
+			// Firmware rom, ignore
+		}
+		else
+		{
+			asynPrint(pOctetAsynUser_, ASYN_TRACE_ERROR,
+					"%s %s: value read from unmapped address 0x%X, value=0x%X\n", portName, __PRETTY_FUNCTION__,
+					pFromFpga->addr, (unsigned ) pFromFpga->data);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, ++errorCount);
+			status = asynError;
+		}
 	}
 
 	// Base class only has a generic register. Decode if appropriate

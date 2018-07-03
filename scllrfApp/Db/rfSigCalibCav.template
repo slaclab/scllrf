@@ -49,3 +49,15 @@ field(PINI, "YES")
 field(FLNK, "$(PREF)CAL_SCALE_CALC")
 info(autosaveFields, "VAL")
 }
+
+# When reference is in sqrt(Watts)
+record(calcout, "$(PREF)SCALETOREF") {
+field(CALC, "B*A/C")
+field(INPA, "$(PREF)CAL_SCALE") # current scaling
+field(INPB, "1")# B = known reference, in power
+field(INPC, "$(PREF)AMEAN") # current amplitude mean
+field(OOPT, "Every Time")
+field(OUT,  "$(PREF)CAL_SCALE PP") # new scaling
+field(PINI, "NO") # do not overwrite cal on startup
+info(autosaveFields, "B")
+}

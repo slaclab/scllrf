@@ -56,7 +56,7 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#else
 	field(PREC, 5)
 	#end if
-	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
@@ -136,7 +136,7 @@ record(ao, "\$(P)${p.name.upper()}_W")
 			#else
 	field(PREC, 5)
 			#end if
-	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 
 		#end if
@@ -201,7 +201,7 @@ record(ai, "\$(P)${p.name.upper()}_R${i}")
 	#else
 	field(PREC, 5)
 	#end if
-info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R${i}")
 {
@@ -281,7 +281,7 @@ record(ao, "\$(P)${p.name.upper()}_W${i}")
 	#else
 	field(PREC, 5)
 	#end if
-info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 
 	#end for
@@ -502,7 +502,7 @@ record(waveform, "\$(P)${p.name.upper()}_R")
 	field( LOPR, "${-(2**($p.data_width - 1) - 1)}")
 	#end if
 	#end if
-	info( autosaveFields, "DESC EGU PREC")
+	info( autosaveFields, "DESC")
 }
 record(waveform, "\$(P)GET_${p.name.upper()}_R")
 {
@@ -619,7 +619,7 @@ record(waveform, "\$(P)${p.name.upper()}_W")
 	field( LOPR, "${-(2**($p.data_width - 1) - 1)}")
 	#end if
 	#end if
-	info( autosaveFields, "DESC EGU PREC")
+	info( autosaveFields, "DESC")
 }
 
 #end if

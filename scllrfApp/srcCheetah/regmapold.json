@@ -60,8 +60,7 @@
 ,"inlk_status":{"access":"r", "addr_width": 0,"base_addr":68,"data_width":32,"sign":"unsigned"}
 ,"pulse_boundary":{"access":"w", "addr_width": 0,"base_addr":69,"data_width":2,"sign":"unsigned"}
 ,"mon_laser_sel":{"access":"w", "addr_width": 0,"base_addr":70,"data_width":1,"sign":"unsigned"}
-,"ch_keep":{"access":"w", "addr_width": 0,"base_addr":71,"data_width":12,"sign":"unsigned"}
-,"wave_samp_per":{"access":"w", "addr_width": 0,"base_addr":72,"data_width":8,"sign":"unsigned"}
+,"wave_samp_per":{"access":"w", "addr_width": 0,"base_addr":72,"data_width":15,"sign":"unsigned"}
 ,"wave_shift":{"access":"w", "addr_width": 0,"base_addr":73,"data_width":4,"sign":"unsigned"}
 ,"decay_samp_per":{"access":"w", "addr_width": 0,"base_addr":74,"data_width":8,"sign":"unsigned"}
 ,"laser_samp_per":{"access":"w", "addr_width": 0,"base_addr":75,"data_width":8,"sign":"unsigned"}
@@ -117,9 +116,9 @@
 ,"phdelay":{"access":"rw", "addr_width": 0,"base_addr":126,"data_width":17,"sign":"unsigned"}
 ,"decay_reset": {"access": "w","addr_width": 0,"base_addr": 127,"data_width": 1,"sign": "unsigned"}
 ,"decay_ro_enable":{"access":"r", "addr_width": 0,"base_addr":128,"data_width":1,"sign":"unsigned"}
-,"xsel":{"access":"w", "addr_width": 0,"base_addr":129,"data_width":3,"sign":"unsigned"}
+,"xsel":{"access":"w", "addr_width": 0,"base_addr":129,"data_width":4,"sign":"unsigned"}
 ,"fiber_reset":{"access":"w", "addr_width": 0,"base_addr":130,"data_width":1,"sign":"unsigned"}
-,"permitstatus":{"access":"r", "addr_width": 0,"base_addr":131,"data_width":13,"sign":"unsigned"}
+,"permitstatus":{"access":"r", "addr_width": 0,"base_addr":131,"data_width":17,"sign":"unsigned"}
 ,"decay_ch_sel":{"access":"w", "addr_width": 0,"base_addr":132,"data_width":3,"sign":"unsigned"}
 ,"decaykeep": {"access": "w","addr_width": 0,"base_addr": 133,"data_width": 32,"sign": "unsigned"}
 ,"auxsel": {"access": "w","addr_width": 0,"base_addr": 134,"data_width": 3,"sign": "unsigned"}
@@ -140,22 +139,35 @@
 ,"interlocktest": {"access": "w","addr_width": 0,"base_addr": 149,"data_width": 1,"sign": "unsigned"}
 ,"status":{"access":"r", "addr_width": 0,"base_addr":150,"data_width":5,"sign":"unsigned"}
 ,"synctx":{"access":"r", "addr_width": 0,"base_addr":151,"data_width":1,"sign":"unsigned"}
-,"phref":{"access":"r", "addr_width": 0,"base_addr":152,"data_width":16,"sign":"unsigned"}
+,"phref":{"access":"r", "addr_width": 0,"base_addr":152,"data_width":17,"sign":"unsigned"}
 ,"repremainder":{"access":"r", "addr_width": 0,"base_addr":153,"data_width":16,"sign":"unsigned"}
 ,"fdbk_clipv":{"access":"w", "addr_width": 0,"base_addr":154,"data_width":16,"sign":"signed"}
 ,"crcerrcntreset": {"access": "w","addr_width": 0,"base_addr": 155,"data_width": 1,"sign": "unsigned"}
 ,"crcerrorcnt":{"access":"r", "addr_width": 0,"base_addr":156,"data_width":32,"sign":"unsigned"}
 ,"crcpass":{"access":"r", "addr_width": 0,"base_addr":157,"data_width":8,"sign":"unsigned"}
-,"rfsonly": {"access": "w","addr_width": 0,"base_addr": 158,"data_width": 1,"sign": "unsigned"}
-,"fwdsel": {"access": "w","addr_width": 0,"base_addr": 159,"data_width": 3,"sign": "unsigned"}
+,"fwdsel": {"access": "w","addr_width": 0,"base_addr": 159,"data_width": 6,"sign": "unsigned"}
 ,"gtstatus": {"access": "r","addr_width": 0,"base_addr": 160,"data_width": 32,"sign": "unsigned"}
+,"outk1_max":{"access":"r", "addr_width": 0,"base_addr":161,"data_width":16,"sign":"signed"}
+,"outk2_max":{"access":"r", "addr_width": 0,"base_addr":162,"data_width":16,"sign":"signed"}
+,"outk1_min":{"access":"r", "addr_width": 0,"base_addr":163,"data_width":16,"sign":"signed"}
+,"outk2_min":{"access":"r", "addr_width": 0,"base_addr":164,"data_width":16,"sign":"signed"}
+,"refsel": {"access": "w","addr_width": 0,"base_addr": 165,"data_width": 10,"sign": "unsigned"}
+,"adcpowerdown": {"access": "w","addr_width": 0,"base_addr": 166,"data_width": 1,"sign": "unsigned"}
+,"dspreset": {"access": "w","addr_width": 0,"base_addr": 167,"data_width": 1,"sign": "unsigned"}
+,"cycleloopdiff":{"access":"r", "addr_width": 0,"base_addr":168,"data_width":64,"sign":"unsigned"}
+,"cycle_diff1":{"access":"r", "addr_width": 0,"base_addr":170,"data_width":64,"sign":"signed"}
+,"cycle_diff_change_cnt1":{"access":"r", "addr_width": 0,"base_addr":172,"data_width":4,"sign":"unsigned"}
+,"cycle_diff2":{"access":"r", "addr_width": 0,"base_addr":173,"data_width":64,"sign":"signed"}
+,"cycle_diff_change_cnt2":{"access":"r", "addr_width": 0,"base_addr":175,"data_width":4,"sign":"unsigned"}
+,"ampref":{"access":"r", "addr_width": 0,"base_addr":176,"data_width":16,"sign":"unsigned"}
+,"rfswitch": {"access": "w","addr_width": 0,"base_addr": 177,"data_width": 2,"sign": "unsigned"}
 ,"v_thresh":{"access":"w", "addr_width": 3,"base_addr":"0x5000","data_width":32,"sign":"unsigned"}
 ,"ramtest": {"access": "rw","addr_width": 3,"base_addr": "0x02000","data_width": 16,"sign": "unsigned"}
 ,"scanner_mirror_val":{"access":"r", "addr_width": 4,"base_addr":"0x3000","data_width":7,"sign":"unsigned"}
 ,"scanner":{"access":"w", "addr_width": 4,"base_addr":"0x4000","data_width":5,"sign":"unsigned"}
 ,"banyan_data": {"access": "r","addr_width": 13,"base_addr": "0x10000","data_width": 32,"sign": "unsigned"}
 ,"trace_data": {"access": "r","addr_width": 13,"base_addr": "0x20000","data_width": 16,"sign": "signed"}
-,"decay_data": {"access": "r","addr_width": 8,"base_addr": "0x22000","data_width": 16,"sign": "signed"}
+,"decay_data": {"access": "r","addr_width": 13,"base_addr": "0x22000","data_width": 16,"sign": "signed"}
 ,"abuf_data": {"access": "r","addr_width": 13,"base_addr": "0x24000","data_width": 32,"sign": "unsigned"}
 ,"scanner_result_val":{"access":"r", "addr_width": 11,"base_addr":"0x130000","data_width":8,"sign":"unsigned"}
 ,"config_rom_out":{"access":"r", "addr_width": 11,"base_addr":"0x800","data_width":16,"sign":"unsigned"}

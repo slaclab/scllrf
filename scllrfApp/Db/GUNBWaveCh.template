@@ -3,6 +3,7 @@
 #! DBDEND
 
 include "GUNBDecayCh.template"
+include "GUNBInterlockADCCh.template"
 # Note on FFTs: Interesting frequencies are generally from 3kHz to sub Hz
 
 record(waveform, "$(P)ITWF") {
@@ -16,6 +17,16 @@ record(waveform, "$(P)ITWF") {
 	field(FTVL, "FLOAT")
 	field(FLNK, "$(P)IWF_NUSE")
 }
+record(waveform, "$(P)ITWF_RAW") {
+	field(DESC, "Ch $(CH) raw ADC I Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynInt32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_RAW_I")
+	field(PREC, "1")
+	field(EGU, "$(EGU)")
+	field(NELM, "8192")
+	field(FTVL, "LONG")
+}
 
 # The number of points per waveform will be the same for all
 # waveform types (I, Q, Amp., Phase) so set calc nuse fields
@@ -27,6 +38,7 @@ record(dfanout, "$(P)IWF_NUSE") {
 	field(OUTC, "$(P)ASTD.NUSE")
 	field(OUTD, "$(P)ARSTD.NUSE")
 	field(OUTE, "$(P)ITMEAN.NUSE")
+	field(OUTF, "$(P)A_CALC.NUSE")
 	field(DOL, "$(P)ITWF.NORD")
 	field(OMSL, "closed_loop")
 }
@@ -49,9 +61,19 @@ record(waveform, "$(P)QTWF") {
 	field(FTVL, "FLOAT")
 	field(FLNK, "$(P)QWF_NUSE")
 }
+record(waveform, "$(P)QTWF_RAW") {
+	field(DESC, "Ch $(CH) raw ADC Q Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynInt32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_RAW_Q")
+	field(PREC, "1")
+	field(EGU, "$(EGU)")
+	field(NELM, "8192")
+	field(FTVL, "LONG")
+}
 
 record(dfanout, "$(P)QWF_NUSE") {
-	field(OUTA, "$(P)PWF_SMOO.NUSE")
+#	field(OUTA, "$(P)PWF_SMOO.NUSE")
 	field(OUTB, "$(P)PMEAN.NUSE")
 	field(OUTC, "$(P)PSTD.NUSE")
 	field(OUTD, "$(P)PRSTD.NUSE")
@@ -78,6 +100,41 @@ record(waveform, "$(P)AWF") {
 	field(FTVL, "FLOAT")
 }
 
+record(acalcout, "$(P)A_CALC") {
+	field(DESC, "Ch $(CH) user defined Waveform")
+	field(INAA, "$(P)AWF_RAW CP")
+# 100*sqrt(50ohms)
+	field(INPA, "707.1067811")
+# full-scale ADC counts
+	field(INPB, "$(P)CAL_ADC_10DBM")
+# 50 ohms
+	field(INPD, "50")
+# Other losses
+	field(INPE, "$(P)CAL_LOSS_TOTAL")
+	field(CALC, "10*LOG((AA*A/B)**2*1e-3/D) + E")
+	field(PREC, "1")
+	field(EGU, "$(EGU)")
+	field(NELM, "8192")
+	field(OUT, "$(P)AWF_ENG PP")
+}
+record(waveform, "$(P)AWF_ENG")
+{
+		field(NELM, "8192")
+		field(FTVL, "FLOAT")
+		field(DESC, "Ch $(CH) engineering Waveform")
+		field(EGU, "dBm")
+}
+record(waveform, "$(P)AWF_RAW") {
+	field(DESC, "Ch $(CH) raw ADC amplitude Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynFloat32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_RAW_A")
+	field(PREC, "1")
+	field(EGU, "$(EGU)")
+	field(NELM, "8192")
+		field(FTVL, "FLOAT")
+}
+
 record(ao, "$(P)SCALE") {
 	field(DESC, "Scale factor for waveform $(CH)")
 	field(DTYP, "asynFloat64")
@@ -87,6 +144,7 @@ record(ao, "$(P)SCALE") {
 	field(DOL, "$(P)SCALE_CALC")
 }
 
+# Souned useful, but nobody's using it currently. GWB 5-30-2018
 record(acalcout, "$(P)AWF_SMOO") {
 	field(INAA, "$(P)AWF CP")
 	field(A, "50")
@@ -135,11 +193,46 @@ record(waveform, "$(P)PWF") {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_P")
+	field(PREC, "2")
+	field(EGU, "degrees")
+	field(NELM, "8192")
+	field(FTVL, "FLOAT")
+}
+
+record(acalcout, "$(P)P_CALC") {
+		field(DESC, "Ch $(CH) user defined Waveform")
+		field(INAA, "$(P)PWF CP")
+# 100*sqrt(50ohms)
+#         field(INPA, "707.1067811")
+#         # full-scale ADC counts
+#                 field(INPB, "$(P)CAL_ADC_10DBM")
+#                 # 50 ohms
+#                         field(INPD, "50")
+#                         # Other losses
+#                                 field(INPE, "$(P)CAL_LOSS_TOTAL")
+field(CALC, "AA")
+field(PREC, "2")
+field(EGU, "degrees")
+field(NELM, "8192")
+field(OUT, "$(P)PWF_ENG PP")
+}
+record(waveform, "$(P)PWF_ENG")
+{
+field(NELM, "8192")
+field(FTVL, "FLOAT")
+field(DESC, "Ch $(CH) engineering Waveform")
+field(EGU, "degrees")
+}
+
+record(waveform, "$(P)PWF_RAW") {
+	field(DESC, "Ch $(CH) phase Waveform")
+	field(SCAN, "I/O Intr")
+	field(DTYP, "asynFloat32ArrayIn")
+	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_RAW_P")
 	field(PREC, "1")
 	field(EGU, "degrees")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
-	field(FLNK, "$(P)PWF_NUSE")
 }
 
 record(ao, "$(P)GOLD") {
@@ -151,23 +244,15 @@ record(ao, "$(P)GOLD") {
 	info( autosaveFields, "VAL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
-record(dfanout, "$(P)PWF_NUSE") {
-	field(OUTA, "$(P)PWF_SMOO.NUSE")
-	field(OUTB, "$(P)PMEAN.NUSE")
-	field(OUTC, "$(P)PSTD.NUSE")
-	field(OUTD, "$(P)PRSTD.NUSE")
-	field(DOL, "$(P)PWF.NORD")
-	field(OMSL, "closed_loop")
-}
-
-record(acalcout, "$(P)PWF_SMOO") {
-	field(INAA, "$(P)PWF CPP")
-	field(A, "50")
-	field(CALC, "(AA/A)+(AVAL*(1-1/A))")
-	field(NELM, "8192")
-	info( autosaveFields, "A")
-	field(EGU, "degrees")
-}
+# Souned useful, but nobody's using it currently. GWB 5-30-2018
+#record(acalcout, "$(P)PWF_SMOO") {
+#	field(INAA, "$(P)PWF CPP")
+#	field(A, "50")
+#	field(CALC, "(AA/A)+(AVAL*(1-1/A))")
+#	field(NELM, "8192")
+#	info( autosaveFields, "A")
+#	field(EGU, "degrees")
+#}
 
 record(acalcout, "$(P)PMEAN") {
 	field(INAA, "$(P)PWF CPP")
@@ -196,33 +281,10 @@ record(acalcout, "$(P)PRSTD") {
 	field(EGU, "degrees")
 }
 
-record(ai, "$(P)TD_DECAY_BW") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_BW")
-	field(SCAN, "I/O Intr")
-	field(EGU, "Hz")
-}
-record(ai, "$(P)TD_DECAY_CONSTANT_B") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_CONSTANT_B")
-	field(SCAN, "I/O Intr")
-	field(EGU, "s")
-}
-record(ai, "$(P)TD_DECAY_STRENGTH") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_STRENGTH")
-	field(SCAN, "I/O Intr")
-}
-record(ai, "$(P)TD_DECAY_FIT_STDDEV") {
-	field(PINI, "NO")
-	field(DTYP, "asynFloat64")
-	field(INP, "@asyn($(PORT),$(CH),1) TD_DECAY_FIT_STDDEV")
-	field(SCAN, "I/O Intr")
-	field(EGU, "$(EGU)")
-}
+# For checking ADC saturation
+# Mind bending macro trick makes sure that undefined MIN/MAX registers aren't aliased
+alias( "$(CHASSIS)ADC$(IN$(CH)=1,IN0=1,IN1=2,IN2=3,IN3=4,IN4=5,IN5=6,IN6=7,IN7=8)_MIN_R", "$(P)ADC_MIN")
+alias( "$(CHASSIS)ADC$(IN$(CH)=1,IN0=1,IN1=2,IN2=3,IN3=4,IN4=5,IN5=6,IN6=7,IN7=8)_MAX_R", "$(P)ADC_MAX")
 
 #! Further lines contain data used by VisualDCT
 #! View(2639,16,1.0)
@@ -241,13 +303,13 @@ record(ai, "$(P)TD_DECAY_FIT_STDDEV") {
 #! Field("$(P)AWF_NUSE.DOL",16777215,0,"$(P)AWF_NUSE.DOL")
 #! Link("$(P)AWF_NUSE.DOL","$(P)AWF.NORD")
 #! Field("$(P)AWF_NUSE.OUTA",16777215,0,"$(P)AWF_NUSE.OUTA")
-#! Link("$(P)AWF_NUSE.OUTA","$(P)AWF_SMOO.NUSE")
+#! Link("$(P)AWF_NUSE.OUTA","$(P)AWF_RAW.NUSE")
 #! Field("$(P)AWF_NUSE.OUTB",16777215,1,"$(P)AWF_NUSE.OUTB")
 #! Link("$(P)AWF_NUSE.OUTB","$(P)AMEAN.NUSE")
 #! Record("$(P)AWF_SMOO",740,28,0,0,"$(P)AWF_SMOO")
 #! Field("$(P)AWF_SMOO.INAA",16777215,0,"$(P)AWF_SMOO.INAA")
 #! Link("$(P)AWF_SMOO.INAA","$(P)AWF.VAL")
-#! Field("$(P)AWF_SMOO.NUSE",16777215,0,"$(P)AWF_SMOO.NUSE")
+#! Field("$(P)AWF_RAW.NUSE",16777215,0,"$(P)AWF_RAW.NUSE")
 #! Record("$(P)AMEAN",980,22,0,0,"$(P)AMEAN")
 #! Field("$(P)AMEAN.INAA",16777215,0,"$(P)AMEAN.INAA")
 #! Link("$(P)AMEAN.INAA","$(P)AWF.VAL")
@@ -259,7 +321,7 @@ record(ai, "$(P)TD_DECAY_FIT_STDDEV") {
 #! Field("$(P)TRACE_DATA_P_$(CH).NORD",16777215,0,"$(P)TRACE_DATA_P_$(CH).NORD")
 #! Record("$(P)TRACE_DATA_P_$(CH)_NUSE",1460,202,0,0,"$(P)TRACE_DATA_P_$(CH)_NUSE")
 #! Field("$(P)TRACE_DATA_P_$(CH)_NUSE.OUTA",16777215,0,"$(P)TRACE_DATA_P_$(CH)_NUSE.OUTA")
-#! Link("$(P)TRACE_DATA_P_$(CH)_NUSE.OUTA","$(P)TRACE_DATA_P_$(CH)_SMOO.NUSE")
+#! Link("$(P)TRACE_DATA_P_$(CH)_NUSE.OUTA","$(P)TRACE_DATA_P_$(CH)_RAW.NUSE")
 #! Field("$(P)TRACE_DATA_P_$(CH)_NUSE.OUTB",16777215,1,"$(P)TRACE_DATA_P_$(CH)_NUSE.OUTB")
 #! Link("$(P)TRACE_DATA_P_$(CH)_NUSE.OUTB","$(P)PMEAN.NUSE")
 #! Field("$(P)TRACE_DATA_P_$(CH)_NUSE.DOL",16777215,0,"$(P)TRACE_DATA_P_$(CH)_NUSE.DOL")
@@ -267,7 +329,7 @@ record(ai, "$(P)TD_DECAY_FIT_STDDEV") {
 #! Record("$(P)TRACE_DATA_P_$(CH)_SMOO",1460,28,0,0,"$(P)TRACE_DATA_P_$(CH)_SMOO")
 #! Field("$(P)TRACE_DATA_P_$(CH)_SMOO.INAA",16777215,0,"$(P)TRACE_DATA_P_$(CH)_SMOO.INAA")
 #! Link("$(P)TRACE_DATA_P_$(CH)_SMOO.INAA","$(P)TRACE_DATA_P_$(CH).VAL")
-#! Field("$(P)TRACE_DATA_P_$(CH)_SMOO.NUSE",16777215,0,"$(P)TRACE_DATA_P_$(CH)_SMOO.NUSE")
+#! Field("$(P)TRACE_DATA_P_$(CH)_RAW.NUSE",16777215,0,"$(P)TRACE_DATA_P_$(CH)_RAW.NUSE")
 #! Record("$(P)PMEAN",1700,22,0,0,"$(P)PMEAN")
 #! Field("$(P)PMEAN.INAA",16777215,0,"$(P)PMEAN.INAA")
 #! Link("$(P)PMEAN.INAA","$(P)TRACE_DATA_P_$(CH).VAL")
