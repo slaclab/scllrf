@@ -8,6 +8,8 @@
 epicsEnvSet("DEVICE_TYPE", "ACCL")
 epicsEnvSet("AREA","GUNB")
 epicsEnvSet("POSITION", "455")
+iocLogInit()
+iocLogPrefix("fac=${DEVICE_TYPE} proc=${IOC} ")
 # Hardware type [PRC, RFS, RES, INT]
 epicsEnvSet("CHASSIS_TYPE","GUNB")
 # Number within location and type: 1, 2, 3...
@@ -16,8 +18,6 @@ epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet("IOC_PV", "SIOC:$(AREA):RF02")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "192.168.0.201")
-# trying out feedsim
-#epicsEnvSet( FPGA_IP, "esd-pc80849")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc, 50000 BMB7 loopback
 epicsEnvSet( PORT, "50006")
 # Command to set up python environment, only used in LinuxRT
@@ -55,13 +55,12 @@ asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
 epicsEnvSet("CHASSIS_NAME","PRC")
 epicsEnvSet(CHASSIS_REG, "2")
-epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet( FPGA_IP, "192.168.0.203")
 < iocBoot/common/regInterface.cmd
 asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
-#dbLoadRecords("db/BuncherRfCalib.db")
 dbLoadRecords("db/BuncherExtra.db")
 
 ##############################################################################
@@ -118,33 +117,38 @@ seq PVramp, "PREFIX=$(P)"
 # An example of using the CEXP Shell:
 # cexpsh("-c",'printf("hello\n")')
 
+# Register initialization doesn't seem to play well with autosave or PINI, so init here.
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","RFS1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-#dbpf $(P)CHASSIS_W 3
-dbpf $(P)WAVE_SAMP_PER_W 32
-#dbpf $(P)EXT_TRIG_SEL_W 1
-dbpf $(P)POLL_PERIOD 0.4
+dbpf $(P)KEEP_W 0xCFFFF
+dbpf $(P)DECAYKEEP_W 0xFFFF
+# The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
+dbpf $(P)INLK_STATUS_R.HIHI 0x10000
+dbpf $(P)EXT_TRIG_SEL_W 1
+dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
-#seq PVramp, "PREFIX=$(P)"
 
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","RFS2")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-#dbpf $(P)CHASSIS_W 3
-dbpf $(P)WAVE_SAMP_PER_W 32
-#dbpf $(P)EXT_TRIG_SEL_W 1
-dbpf $(P)POLL_PERIOD 0.4
+dbpf $(P)KEEP_W 0xCFFFF
+dbpf $(P)DECAYKEEP_W 0xFFFF
+# The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
+dbpf $(P)INLK_STATUS_R.HIHI 0x10000
+dbpf $(P)EXT_TRIG_SEL_W 1
+dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
 
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","PRC")
-epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
-#dbpf $(P)CHASSIS_W 2
-dbpf $(P)WAVE_SAMP_PER_W 32
-#dbpf $(P)EXT_TRIG_SEL_W 0
-dbpf $(P)POLL_PERIOD 0.4
+epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
+dbpf $(P)KEEP_W 0xFFF00FF
+dbpf $(P)DECAYKEEP_W 0x00FF
+# The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
+dbpf $(P)INLK_STATUS_R.HIHI 0x10000
+dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
-seq PVramp, "PREFIX=$(P)"
-epicsThreadSleep(0.2)
+epicsThreadSleep(1)
 
+dbpf ACCL:GUNB:455:WF_TIME_PER_POINT 4

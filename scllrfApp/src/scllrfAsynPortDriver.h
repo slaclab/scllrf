@@ -39,6 +39,7 @@
 #include <sstream>
 #include <iomanip>
 #include <initializer_list>
+#include <unordered_map>
 using namespace std;
 
 
@@ -114,6 +115,18 @@ static const unsigned int defaultMaxParallelRequests = 1; // throttle requests w
 
 
 /* Registers */
+typedef struct
+{
+	// NOTE: unless we merge read/write params, this is inconsistent.
+	// Motivation for creating this is restoring write values, so default to write param
+	int paramNum; // The parameter number asyn uses
+	asynParamType paramType;
+	bool isReadable;
+	unsigned int readAddr;
+	bool isWritable;
+	unsigned int writeAddr;
+}
+regInterface;
 
 
 class scllrfAsynPortDriver: public asynPortDriver
@@ -164,21 +177,13 @@ protected:
 	static const char *PollPeriodString; /* asynInt32,    r/w */
 	static const char *CommErrorCountString;  /* asynInt32,    r */
 
+	std::unordered_map<int, regInterface> paramToReg;
+	std::unordered_map<unsigned int, regInterface> addrToReg;
+
 
 	// Registers relating to the firmware build
-	static const char *BoardTypeRString;
-	// Day firmware was built
-	static const char *BuildDayRString;
-	// Hour firmware was built
-	static const char *BuildHourRString;
-	// Minute firmware was built
-	static const char *BuildMinuteRString;
-	// Month firmware was built
-	static const char *BuildMonthRString;
-	// Year firmware was built
-	static const char *BuildYearRString;
-	static const char *CodeIsCleanRString;
-	static const char *DspFlavorRString;
+	static const char *JsonSha1DesString;  /* asynOctet,    r */
+	static const char *JsonSha1ActString;  /* asynOctet,    r */
 	static const char *GitSha1ARString;
 	static const char *GitSha1BRString;
 	static const char *GitSha1CRString;
@@ -200,11 +205,7 @@ protected:
 	static const char *GitSha1SRString;
 	static const char *GitSha1TRString;
 	static const char *GitSHA1String;  /* asynOctet,    r */
-	static const char *MagicRString;
-	static const char *ToolRevRString;
-	// Name of person compiling firmware
-	static const char *UserRString;
-	static const char *VersionRString;
+	static const char *FwDescString;  /* asynOctet,    r */
 
 
 	// For readable registers that are polled together at the set polling rate
@@ -218,8 +219,7 @@ protected:
 	asynStatus processReadbackBuffer(FpgaReg *pFromFpga,
 			unsigned int readCount);
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
-	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
-			bool &waveIsReady); // parse register data, write to PVs
+	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga); // parse register data, write to PVs
 	virtual asynStatus functionToRegister(const int function, FpgaReg *pToFpga); /**< Translate asyn function number/reason to a register address */
 
 	virtual asynStatus catGitSHA1(); // Once the individual bytes are all read into registers, concatenate them into a string
@@ -251,8 +251,10 @@ protected:
 	};
 
 	/* SHA1 hash of register map */
-	static const char *regMapSha1String;
-	std::ostringstream strGitSHA1;
+	static const char *regMapSha1String; // Compiled in to a subclass, from the SHA1 sum of the register map a used to generate the subclass
+	std::ostringstream strJsonSha1; // Read back from a live system
+	std::ostringstream strGitSHA1; // SHA1 from the git commit used to generate firmware on the live system
+	std::ostringstream strFwDesc; // Firmware description string
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
@@ -265,14 +267,8 @@ protected:
 	int p_CommErrorCount;
 
 	// Registers relating to the firmware build
-	int p_BoardTypeR;
-	int p_BuildDayR;
-	int p_BuildHourR;
-	int p_BuildMinuteR;
-	int p_BuildMonthR;
-	int p_BuildYearR;
-	int p_CodeIsCleanR;
-	int p_DspFlavorR;
+	int p_JsonSha1Des;
+	int p_JsonSha1Act;
 	int p_GitSha1AR;
 	int p_GitSha1BR;
 	int p_GitSha1CR;
@@ -294,12 +290,9 @@ protected:
 	int p_GitSha1SR;
 	int p_GitSha1TR;
 	int p_GitSHA1;
-	int p_MagicR;
-	int p_ToolRevR;
-	int p_UserR;
-	int p_VersionR;
+	int p_FwDesc;
 /* Registers */
-	#define LAST_SCLLRF_PARAM p_VersionR
+	#define LAST_SCLLRF_PARAM p_FwDesc
 
 	epicsUInt32 uReadOneRegAddr, uWriteOneRegAddr;
 
@@ -310,18 +303,18 @@ protected:
 	// mapping of register names to addresses
 	enum ReadRegAddrs
 	{
-		MagicRAdr = 0x00000800,
-		DspFlavorRAdr = 0x00000801,
-		BuildYearRAdr = 0x00000802,
-		BuildMonthRAdr = 0x00000803,
-		BuildDayRAdr = 0x00000804,
-		BuildHourRAdr = 0x00000805,
-		BuildMinuteRAdr = 0x00000806,
-		CodeIsCleanRAdr = 0x00000807,
-		ToolRevRAdr = 0x00000808,
-		UserRAdr = 0x00000809,
-		BoardTypeRAdr = 0x0000080A,
-		VersionRAdr = 0x0000080B,
+		JsonSha1RAdr = 0x00000801,
+//		DspFlavorRAdr = 0x00000801,
+//		BuildYearRAdr = 0x00000802,
+//		BuildMonthRAdr = 0x00000803,
+//		BuildDayRAdr = 0x00000804,
+//		BuildHourRAdr = 0x00000805,
+//		BuildMinuteRAdr = 0x00000806,
+//		CodeIsCleanRAdr = 0x00000807,
+//		ToolRevRAdr = 0x00000808,
+//		UserRAdr = 0x00000809,
+//		BoardTypeRAdr = 0x0000080A,
+//		VersionRAdr = 0x0000080B,
 		GitSha1ARAdr = 0x0000080C,
 		GitSha1BRAdr = 0x0000080D,
 		GitSha1CRAdr = 0x0000080E,
@@ -332,54 +325,35 @@ protected:
 		GitSha1HRAdr = 0x00000813,
 		GitSha1IRAdr = 0x00000814,
 		GitSha1JRAdr = 0x00000815,
-		GitSha1KRAdr = 0x00000816,
-		GitSha1LRAdr = 0x00000817,
-		GitSha1MRAdr = 0x00000818,
-		GitSha1NRAdr = 0x00000819,
-		GitSha1ORAdr = 0x0000081A,
-		GitSha1PRAdr = 0x0000081B,
-		GitSha1QRAdr = 0x0000081C,
-		GitSha1RRAdr = 0x0000081D,
-		GitSha1SRAdr = 0x0000081E,
-		GitSha1TRAdr = 0x0000081F,
+		FwDescLengthRAdr = 0x00000816,
+		FwDescRAdr = 0x00000817
 	};
 
 	// masks applied to returned register data
 	enum RegMasks
 	{
-		MagicMask =  0x000000FF,
-		DspFlavorMask =  0x000000FF,
-		BuildYearMask =  0x000000FF,
-		BuildMonthMask =  0x000000FF,
-		BuildDayMask =  0x000000FF,
-		BuildHourMask =  0x000000FF,
-		BuildMinuteMask =  0x000000FF,
-		CodeIsCleanMask =  0x000000FF,
-		ToolRevMask =  0x000000FF,
-		UserMask =  0x000000FF,
-		BoardTypeMask =  0x000000FF,
-		VersionMask =  0x000000FF,
-		GitSha1AMask =  0x000000FF,
-		GitSha1BMask =  0x000000FF,
-		GitSha1CMask =  0x000000FF,
-		GitSha1DMask =  0x000000FF,
-		GitSha1EMask =  0x000000FF,
-		GitSha1FMask =  0x000000FF,
-		GitSha1GMask =  0x000000FF,
-		GitSha1HMask =  0x000000FF,
-		GitSha1IMask =  0x000000FF,
-		GitSha1JMask =  0x000000FF,
-		GitSha1KMask =  0x000000FF,
-		GitSha1LMask =  0x000000FF,
-		GitSha1MMask =  0x000000FF,
-		GitSha1NMask =  0x000000FF,
-		GitSha1OMask =  0x000000FF,
-		GitSha1PMask =  0x000000FF,
-		GitSha1QMask =  0x000000FF,
-		GitSha1RMask =  0x000000FF,
-		GitSha1SMask =  0x000000FF,
-		GitSha1TMask =  0x000000FF,
-
+		JsonSha1Mask =  0x0000FFFF,
+		GitSha1AMask =  0x0000FFFF,
+		GitSha1BMask =  0x0000FFFF,
+		GitSha1CMask =  0x0000FFFF,
+		GitSha1DMask =  0x0000FFFF,
+		GitSha1EMask =  0x0000FFFF,
+		GitSha1FMask =  0x0000FFFF,
+		GitSha1GMask =  0x0000FFFF,
+		GitSha1HMask =  0x0000FFFF,
+		GitSha1IMask =  0x0000FFFF,
+		GitSha1JMask =  0x0000FFFF,
+		GitSha1KMask =  0x0000FFFF,
+		GitSha1LMask =  0x0000FFFF,
+		GitSha1MMask =  0x0000FFFF,
+		GitSha1NMask =  0x0000FFFF,
+		GitSha1OMask =  0x0000FFFF,
+		GitSha1PMask =  0x0000FFFF,
+		GitSha1QMask =  0x0000FFFF,
+		GitSha1RMask =  0x0000FFFF,
+		GitSha1SMask =  0x0000FFFF,
+		GitSha1TMask =  0x0000FFFF,
+		DescLengthMask = 0xC000
 	};
 };
 

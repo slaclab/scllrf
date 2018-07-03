@@ -18,6 +18,16 @@ record (calc, "GUN:GUNB:100:FWD:PWR" )
 	field( CALC, "A+B")
 	field( SCAN, ".2 second" )
 }
+record (calc, "GUN:GUNB:100:FWD:PMEAN" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "GUN:GUNB:100:FWD1:ITMEAN" )
+	field( INPB, "GUN:GUNB:100:FWD2:ITMEAN" )
+	field( INPC, "GUN:GUNB:100:FWD1:QTMEAN" )
+	field( INPD, "GUN:GUNB:100:FWD2:QTMEAN" )
+	field( CALC, "ATAN2((C+D),(A+B))")
+	field( SCAN, ".2 second" )
+}
 
 record (calc, "GUN:GUNB:100:REV:AMEAN" )
 {
@@ -61,18 +71,21 @@ record (calc, "GUN:GUNB:100:AACT" )
 	field( DESC, "Average cavity amplitude" )
 	field( INPA, "GUN:GUNB:100:CAV1:AMEAN" )
 	field( INPB, "GUN:GUNB:100:CAV2:AMEAN" )
-#	field( CALC, "(A+B)/2")
-	field( CALC, "A")
+	field( CALC, "MAX(A,B)")
+#	field( CALC, "(A+B)/2") # Something like this once we have both probes
 	field( SCAN, ".2 second" )
 }
 
 record (calc, "GUN:GUNB:100:PACT" )
 {
 	field( DESC, "Average cavity phase" )
-	field( INPA, "GUN:GUNB:100:CAV1:PMEAN" )
-	field( INPB, "GUN:GUNB:100:CAV2:PMEAN" )
-#	field( CALC, "(A+B)/2")
-	field( CALC, "A")
+	field( INPA, "GUN:GUNB:100:CAV1:ITMEAN" )
+	field( INPB, "GUN:GUNB:100:CAV2:ITMEAN" )
+	field( INPC, "GUN:GUNB:100:CAV1:QTMEAN" )
+	field( INPD, "GUN:GUNB:100:CAV2:QTMEAN" )
+	field( INPE, "GUN:GUNB:100:CAV1:PMEAN" )
+	field( CALC, "ATAN2(C+D,A+B)")
+	field( CALC, "E")
 	field( SCAN, ".2 second" )
 	field( FLNK, "GUN:GUNB:100:CW_DETUNE" )
 }
@@ -80,10 +93,10 @@ record (calc, "GUN:GUNB:100:PACT" )
 record (calc, "GUN:GUNB:100:CW_DETUNE" )
 {
 	field( DESC, "Detuning in CW mode" )
-	field( INPA, "GUN:GUNB:100:PACT" )
-	field( INPB, "GUN:GUNB:100:FWD1:PMEAN" )
-	field( INPC, "GUN:GUNB:100:FWD2:PMEAN" )
-	field( CALC, "A-(B+C)/2")
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN" )
+	field( INPB, "GUN:GUNB:100:FWD2:PMEAN" )
+	field( INPC, "$(P)SMOOTHED_BW")
+	field( CALC, "C*TAN(A - B)")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 }
 
@@ -96,8 +109,89 @@ record( dfanout, "GUN:GUNB:100:RF_GO_3CH")
 {
 	field(OMSL, "closed_loop")
 	field(DOL, "GUN:GUNB:100:RF_GO")
-	field(OUTA, "GUN:GUNB:100:RF_GO_W PP")
+	field(OUTA, "GUN:GUNB:100:PRC:RF_GO_W PP")
 	field(OUTB, "GUN:GUNB:100:RFS1:RF_GO_W PP")
 	field(OUTC, "GUN:GUNB:100:RFS2:RF_GO_W PP")
 }
 
+# SSA drive balancing. raw 19898 = 100% amplitude.
+# Adjust phase and amplitude so RF is in phase and output is equal.
+record(ao, "$(P)DRV1_ADJ_A")
+{
+	field(EGU, "%")
+	field(HOPR, "100")
+	field(LOPR, "0")
+	field(VAL, "100")
+	field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
+	info( autosaveFields, "VAL")
+}
+
+record(ao, "$(P)DRV1_ADJ_P")
+{
+	field(EGU, "degrees")
+	field(HOPR, "180")
+	field(LOPR, "-180")
+		field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
+	info( autosaveFields, "VAL")
+}
+record( fanout,  "$(P)RFSUPLO1_AP_TO_IQ")
+{
+	field(LNK1, "$(P)RFSUPLO1_AP_TO_I PP")
+	field(LNK2, "$(P)RFSUPLO1_AP_TO_Q PP")
+}
+
+record( calcout, "$(P)RFSUPLO1_AP_TO_I")
+{
+	field( INPA, "$(P)DRV1_ADJ_A")
+	field( INPB, "$(P)DRV1_ADJ_P")
+	field( CALC, "A*COS(B*D2R)*19898/100")
+	field( OUT, "$(P)RFS1:RFSUPLOX1_W PP")
+}
+
+record( calcout, "$(P)RFSUPLO1_AP_TO_Q")
+{
+	field( INPA, "$(P)DRV1_ADJ_A")
+	field( INPB, "$(P)DRV1_ADJ_P")
+	field( CALC, "A*SIN(B*D2R)*19898/100")
+	field( OUT, "$(P)RFS1:RFSUPLOY1_W PP")
+}
+
+
+record(ao, "$(P)DRV2_ADJ_A")
+{
+	field(EGU, "%")
+	field(HOPR, "100")
+	field(LOPR, "0")
+		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
+	info( autosaveFields, "VAL")
+}
+
+record(ao, "$(P)DRV2_ADJ_P")
+{
+	field(EGU, "degrees")
+	field(HOPR, "180")
+	field(LOPR, "-180")
+		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
+	info( autosaveFields, "VAL")
+}
+record( fanout,  "$(P)RFSUPLO2_AP_TO_IQ")
+{
+	field(LNK1, "$(P)RFSUPLO2_AP_TO_I PP")
+	field(LNK2, "$(P)RFSUPLO2_AP_TO_Q PP")
+}
+
+record( calcout, "$(P)RFSUPLO2_AP_TO_I")
+{
+	field( INPA, "$(P)DRV2_ADJ_A")
+	field( INPB, "$(P)DRV2_ADJ_P")
+	field( CALC, "A*COS(B*D2R)*19898/100")
+	field( OUT, "$(P)RFS2:RFSUPLOX1_W PP")
+}
+
+record( calcout, "$(P)RFSUPLO2_AP_TO_Q")
+{
+	field( INPA, "$(P)DRV2_ADJ_A")
+	field( INPB, "$(P)DRV2_ADJ_P")
+	field( CALC, "A*SIN(B*D2R)*19898/100")
+	field( OUT, "$(P)RFS2:RFSUPLOY1_W PP")
+}

@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 444
-y 234
+x 635
+y 46
 w 634
 h 817
 font "helvetica-medium-r-12.0"
@@ -59,9 +59,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 20
+x 10
 y 560
-w 100
+w 110
 h 70
 fgColor index 14
 bgColor index 0
@@ -78,7 +78,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:100:CAV2:,T=GUN:GUNB:100:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:CAV2:,T=GUN:GUNB:100:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -88,9 +88,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 20
+x 10
 y 400
-w 100
+w 110
 h 80
 fgColor index 14
 bgColor index 0
@@ -107,7 +107,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:100:CAV1:,T=GUN:GUNB:100:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:CAV1:,T=GUN:GUNB:100:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -117,9 +117,67 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
+x 440
+y 640
+w 160
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+setPosition {
+0 "button"
+}
+symbols {
+0 "WF=GUN:GUNB:C100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 270
+y 640
+w 160
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "helvetica-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+0 "gunbSingleAPgraph.edl"
+}
+setPosition {
+0 "button"
+}
+symbols {
+0 "WF=GUN:GUNB:C100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 4
+release 0
+x 440
 y 610
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -136,7 +194,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:C100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
+0 "WF=GUN:GUNB:C100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -148,7 +206,7 @@ minor 4
 release 0
 x 270
 y 610
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -165,7 +223,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:C100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
+0 "WF=GUN:GUNB:C100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -175,9 +233,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
-y 580
-w 100
+x 440
+y 540
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -194,7 +252,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:C100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -205,8 +263,8 @@ major 4
 minor 4
 release 0
 x 270
-y 580
-w 100
+y 540
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -223,7 +281,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:C100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -233,9 +291,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
+x 440
 y 510
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -252,7 +310,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -264,7 +322,7 @@ minor 4
 release 0
 x 270
 y 510
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -281,7 +339,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -291,9 +349,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
-y 480
-w 100
+x 440
+y 440
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -310,7 +368,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
+0 "WF=GUN:GUNB:S100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -321,8 +379,8 @@ major 4
 minor 4
 release 0
 x 270
-y 480
-w 100
+y 440
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -339,7 +397,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
+0 "WF=GUN:GUNB:S100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -349,9 +407,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
+x 440
 y 410
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -368,7 +426,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:S100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
+0 "WF=GUN:GUNB:S100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -380,7 +438,7 @@ minor 4
 release 0
 x 270
 y 410
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -397,7 +455,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 WF=GUN:GUNB:S100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
+0 "WF=GUN:GUNB:S100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -407,67 +465,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
-y 380
-w 100
-h 20
-fgColor index 14
-bgColor index 0
-topShadowColor index 0
-botShadowColor index 14
-font "helvetica-medium-r-18.0"
-invisible
-numPvs 4
-numDsps 1
-displayFileName {
-0 "gunbSingleAPgraph.edl"
-}
-setPosition {
-0 "button"
-}
-symbols {
-0 WF=GUN:GUNB:S100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
-}
-endObjectProperties
-
-# (Related Display)
-object relatedDisplayClass
-beginObjectProperties
-major 4
-minor 4
-release 0
-x 270
-y 380
-w 100
-h 20
-fgColor index 14
-bgColor index 0
-topShadowColor index 0
-botShadowColor index 14
-font "helvetica-medium-r-18.0"
-invisible
-numPvs 4
-numDsps 1
-displayFileName {
-0 "gunbSingleAPgraph.edl"
-}
-setPosition {
-0 "button"
-}
-symbols {
-0 WF=GUN:GUNB:S100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
-}
-endObjectProperties
-
-# (Related Display)
-object relatedDisplayClass
-beginObjectProperties
-major 4
-minor 4
-release 0
-x 380
+x 440
 y 270
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -481,7 +481,7 @@ displayFileName {
 0 "gunbSingleAPgraph.edl"
 }
 symbols {
-0 WF=GUN:GUNB:100:DRV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:DRV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -493,7 +493,7 @@ minor 4
 release 0
 x 270
 y 270
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 0
@@ -507,7 +507,7 @@ displayFileName {
 0 "gunbSingleAPgraph.edl"
 }
 symbols {
-0 WF=GUN:GUNB:100:DRV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS"
+0 "WF=GUN:GUNB:100:DRV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -517,9 +517,9 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 380
+x 440
 y 310
-w 100
+w 160
 h 20
 lineColor index 14
 lineAlarm
@@ -536,7 +536,7 @@ minor 0
 release 0
 x 270
 y 310
-w 100
+w 160
 h 20
 lineColor index 14
 lineAlarm
@@ -552,8 +552,8 @@ major 4
 minor 0
 release 0
 x 190
-y 360
-w 300
+y 390
+w 430
 h 80
 lineColor index 13
 fill
@@ -569,7 +569,7 @@ minor 4
 release 0
 x 270
 y 310
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 4
@@ -610,7 +610,7 @@ botShadowColor index 12
 font "helvetica-bold-r-14.0"
 buttonLabel "Gun LLRF..."
 numPvs 4
-numDsps 6
+numDsps 7
 displayFileName {
 0 "BMB7Registers.edl"
 1 "BMB7Registers.edl"
@@ -618,6 +618,7 @@ displayFileName {
 3 "gunPRCRF.edl"
 4 "gunRFSRF.edl"
 5 "gunRFSRF.edl"
+6 "gunApexClone.edl"
 }
 menuLabel {
 0 "PRC Health"
@@ -626,6 +627,7 @@ menuLabel {
 3 "PRC Testing"
 4 "RFS1 Testing"
 5 "RFS2 Testing"
+6 "Apex-like screen"
 }
 setPosition {
 0 "button"
@@ -803,40 +805,22 @@ value {
 autoSize
 endObjectProperties
 
-# (Text Entry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 90
-y 90
-w 90
-h 35
-controlPv "GUN:GUNB:100:ADES"
-fgColor index 14
-fgAlarm
-bgColor index 2
-fill
-font "helvetica-medium-r-12.0"
-endObjectProperties
-
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 20
+x 10
 y 400
-w 90
-h 24
+w 110
+h 20
 controlPv "GUN:GUNB:100:CAV1:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
 bgColor index 12
-limitsFromDb
+precision 2
 nullColor index 0
 useHexPrefix
 showUnits
@@ -914,9 +898,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 380
+x 440
 y 310
-w 100
+w 160
 h 20
 fgColor index 14
 bgColor index 4
@@ -948,7 +932,7 @@ minor 7
 release 0
 x 270
 y 270
-w 100
+w 160
 h 20
 controlPv "GUN:GUNB:100:DRV1:AMEAN"
 font "helvetica-medium-r-12.0"
@@ -989,9 +973,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
+x 440
 y 270
-w 100
+w 160
 h 20
 controlPv "GUN:GUNB:100:DRV2:AMEAN"
 font "helvetica-medium-r-12.0"
@@ -1012,16 +996,16 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 20
+x 10
 y 560
-w 90
+w 110
 h 20
 controlPv "GUN:GUNB:100:CAV2:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
 bgColor index 12
-limitsFromDb
+precision 2
 nullColor index 0
 useHexPrefix
 showUnits
@@ -1052,8 +1036,8 @@ major 4
 minor 7
 release 0
 x 270
-y 380
-w 100
+y 410
+w 160
 h 20
 controlPv "GUN:GUNB:S100:FWD1:AMEAN"
 format "gfloat"
@@ -1076,9 +1060,9 @@ major 4
 minor 1
 release 1
 x 200
-y 350
-w 127
-h 16
+y 380
+w 180
+h 20
 font "helvetica-bold-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -1094,9 +1078,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
-y 380
-w 100
+x 440
+y 410
+w 160
 h 20
 controlPv "GUN:GUNB:S100:FWD2:AMEAN"
 format "gfloat"
@@ -1123,6 +1107,7 @@ y 90
 w 90
 h 35
 controlPv "GUN:GUNB:100:AACT"
+format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1142,8 +1127,8 @@ major 4
 minor 7
 release 0
 x 270
-y 410
-w 100
+y 440
+w 160
 h 20
 controlPv "GUN:GUNB:S100:REV1:AMEAN"
 format "gfloat"
@@ -1166,7 +1151,7 @@ major 4
 minor 1
 release 1
 x 200
-y 380
+y 410
 w 57
 h 16
 font "helvetica-bold-r-14.0"
@@ -1185,9 +1170,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
-y 410
-w 100
+x 440
+y 440
+w 160
 h 20
 controlPv "GUN:GUNB:S100:REV2:AMEAN"
 format "gfloat"
@@ -1210,7 +1195,7 @@ major 4
 minor 1
 release 1
 x 200
-y 410
+y 440
 w 57
 h 16
 font "helvetica-bold-r-14.0"
@@ -1230,8 +1215,8 @@ major 4
 minor 0
 release 0
 x 190
-y 460
-w 300
+y 490
+w 430
 h 80
 lineColor index 13
 fill
@@ -1246,8 +1231,8 @@ major 4
 minor 7
 release 0
 x 270
-y 480
-w 100
+y 510
+w 160
 h 20
 controlPv "GUN:GUNB:C100:FWD1:AMEAN"
 format "gfloat"
@@ -1270,7 +1255,7 @@ major 4
 minor 1
 release 1
 x 200
-y 450
+y 480
 w 90
 h 20
 font "helvetica-bold-r-12.0"
@@ -1288,9 +1273,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
-y 480
-w 100
+x 440
+y 510
+w 160
 h 20
 controlPv "GUN:GUNB:C100:FWD2:AMEAN"
 format "gfloat"
@@ -1313,8 +1298,8 @@ major 4
 minor 7
 release 0
 x 270
-y 510
-w 100
+y 540
+w 160
 h 20
 controlPv "GUN:GUNB:C100:REV1:AMEAN"
 format "gfloat"
@@ -1337,7 +1322,7 @@ major 4
 minor 1
 release 1
 x 200
-y 480
+y 510
 w 57
 h 16
 font "helvetica-bold-r-14.0"
@@ -1356,9 +1341,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
-y 510
-w 100
+x 440
+y 540
+w 160
 h 20
 controlPv "GUN:GUNB:C100:REV2:AMEAN"
 format "gfloat"
@@ -1381,7 +1366,7 @@ major 4
 minor 1
 release 1
 x 200
-y 510
+y 540
 w 57
 h 16
 font "helvetica-bold-r-14.0"
@@ -1401,8 +1386,8 @@ major 4
 minor 0
 release 0
 x 190
-y 560
-w 300
+y 590
+w 430
 h 80
 lineColor index 13
 fill
@@ -1417,8 +1402,8 @@ major 4
 minor 7
 release 0
 x 270
-y 580
-w 100
+y 610
+w 160
 h 20
 controlPv "GUN:GUNB:100:FWD1:AMEAN"
 format "gfloat"
@@ -1441,7 +1426,7 @@ major 4
 minor 1
 release 1
 x 200
-y 550
+y 580
 w 140
 h 20
 font "helvetica-bold-r-12.0"
@@ -1459,9 +1444,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
-y 580
-w 100
+x 440
+y 610
+w 160
 h 20
 controlPv "GUN:GUNB:100:FWD2:AMEAN"
 format "gfloat"
@@ -1484,8 +1469,8 @@ major 4
 minor 7
 release 0
 x 270
-y 610
-w 100
+y 640
+w 160
 h 20
 controlPv "GUN:GUNB:100:REV1:AMEAN"
 format "gfloat"
@@ -1508,7 +1493,7 @@ major 4
 minor 1
 release 1
 x 200
-y 580
+y 610
 w 57
 h 16
 font "helvetica-bold-r-14.0"
@@ -1527,9 +1512,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 380
-y 610
-w 100
+x 440
+y 640
+w 160
 h 20
 controlPv "GUN:GUNB:100:REV2:AMEAN"
 font "helvetica-medium-r-12.0"
@@ -1551,7 +1536,7 @@ major 4
 minor 1
 release 1
 x 200
-y 610
+y 640
 w 57
 h 16
 font "helvetica-bold-r-14.0"
@@ -1814,16 +1799,16 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 20
+x 10
 y 450
-w 90
-h 24
+w 110
+h 20
 controlPv "GUN:GUNB:100:CAV1:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
 bgColor index 12
-limitsFromDb
+precision 5
 nullColor index 0
 useHexPrefix
 showUnits
@@ -1877,9 +1862,9 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 20
+x 10
 y 610
-w 90
+w 110
 h 20
 controlPv "GUN:GUNB:100:CAV2:PMEAN"
 font "helvetica-medium-r-12.0"
@@ -1955,9 +1940,9 @@ beginObjectProperties
 major 4
 minor 4
 release 0
-x 220
-y 670
-w 120
+x 190
+y 210
+w 100
 h 30
 fgColor index 14
 bgColor index 4
@@ -1966,7 +1951,7 @@ botShadowColor index 12
 font "helvetica-bold-r-14.0"
 buttonLabel "Waveforms..."
 numPvs 4
-numDsps 13
+numDsps 19
 displayFileName {
 0 "gunSSAGridAPgraph.edl"
 1 "GUNBCavityAPgraph.edl"
@@ -1981,6 +1966,12 @@ displayFileName {
 10 "rawWaveBuf.edl"
 11 "rawWaveBuf.edl"
 12 "rawWaveBuf.edl"
+13 "rawWaveBuf.edl"
+14 "rawWaveBuf.edl"
+15 "rawWaveBuf.edl"
+16 "rawWaveBuf.edl"
+17 "rawWaveBuf.edl"
+18 "rawWaveBuf.edl"
 }
 menuLabel {
 0 "SSA Waveguides Grid"
@@ -1996,6 +1987,12 @@ menuLabel {
 10 "PRC Raw Trace Data"
 11 "RFS1 Raw Trace Data"
 12 "RFS2 Raw Trace Data"
+13 "PRC Raw Banyan"
+14 "RFS1 Raw Banyan"
+15 "RFS2 Raw Banyan"
+16 "PRC Raw Abuf"
+17 "RFS1 Raw Abuf"
+18 "RFS2 Raw Abuf"
 }
 setPosition {
 0 "button"
@@ -2003,9 +2000,15 @@ setPosition {
 symbols {
 0 "P=GUN:GUNB:100:,N=1"
 1 "P=GUN:GUNB:100:"
-10 "Y=GUN:GUNB:100:TRACE_DATA_R"
-11 "Y=GUN:GUNB:100:RFS1:TRACE_DATA_R"
-12 "Y=GUN:GUNB:100:RFS2:TRACE_DATA_R"
+10 "Y=GUN:GUNB:100:TRACE_DATA_R,GET=GUN:GUNB:100:GET_TRACE_DATA_R,RST=GUN:GUNB:100:TRACE_RESET_W"
+11 "Y=GUN:GUNB:100:RFS1:TRACE_DATA_R,RST=GUN:GUNB:100:RFS1:TRACE_RESET_W"
+12 "Y=GUN:GUNB:100:RFS2:TRACE_DATA_R,RST=GUN:GUNB:100:RFS2:TRACE_RESET_W"
+13 "Y=GUN:GUNB:100:BANYAN_DATA_R,GET=GUN:GUNB:100:GET_BANYAN_DATA_R,RST=GUN:GUNB:100:BANYAN_RESET_W"
+14 "Y=GUN:GUNB:100:RFS1:BANYAN_DATA_R,GET=GUN:GUNB:100:RFS1:GET_BANYAN_DATA_R,RST=GUN:GUNB:100:RFS1:BANYAN_RESET_W"
+15 "Y=GUN:GUNB:100:RFS2:BANYAN_DATA_R,GET=GUN:GUNB:100:RFS2:GET_BANYAN_DATA_R,RST=GUN:GUNB:100:RFS2:BANYAN_RESET_W"
+16 "Y=GUN:GUNB:100:ABUF_DATA_R,GET=GUN:GUNB:100:GET_ABUF_DATA_R,RST=GUN:GUNB:100:ABUF_RESET_W"
+17 "Y=GUN:GUNB:100:RFS1:ABUF_DATA_R,GET=GUN:GUNB:100:RFS1:GET_ABUF_DATA_R,RST=GUN:GUNB:100:RFS1:ABUF_RESET_W"
+18 "Y=GUN:GUNB:100:RFS2:ABUF_DATA_R,GET=GUN:GUNB:100:RFS2:GET_ABUF_DATA_R,RST=GUN:GUNB:100:RFS2:ABUF_RESET_W"
 }
 endObjectProperties
 
@@ -2027,24 +2030,6 @@ value {
 "Phase:"
 }
 autoSize
-endObjectProperties
-
-# (Text Entry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 90
-y 140
-w 90
-h 35
-controlPv "GUN:GUNB:100:PDES"
-fgColor index 14
-fgAlarm
-bgColor index 2
-fill
-font "helvetica-medium-r-12.0"
 endObjectProperties
 
 # (Text Monitor)
@@ -2189,7 +2174,7 @@ minor 1
 release 1
 x 250
 y 720
-w 118
+w 119
 h 32
 font "helvetica-bold-r-14.0"
 fgColor index 14
@@ -2442,5 +2427,183 @@ bgColor index 3
 value {
 "Basic Settings"
 }
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 90
+y 90
+w 90
+h 85
+
+beginGroup
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 140
+w 90
+h 35
+controlPv "GUN:GUNB:100:PDES"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 90
+w 90
+h 35
+controlPv "GUN:GUNB:100:ADES"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "GUN:GUNB:100:CLOSE_LOOP_W"
+visMin "1"
+visMax "9999"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 90
+y 90
+w 90
+h 85
+
+beginGroup
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 140
+w 90
+h 35
+controlPv "GUN:GUNB:100:POPEN"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Text Entry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 90
+y 90
+w 90
+h 35
+controlPv "GUN:GUNB:100:AOPEN"
+fgColor index 14
+fgAlarm
+bgColor index 2
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+visPv "GUN:GUNB:100:CLOSE_LOOP_W"
+visMin "-1"
+visMax "1"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 440
+y 340
+w 160
+h 20
+controlPv "GUN:GUNB:100:SSA2_GAIN"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 270
+y 340
+w 160
+h 20
+controlPv "GUN:GUNB:100:SSA1_GAIN"
+format "gfloat"
+font "helvetica-medium-r-12.0"
+fgColor index 16
+bgColor index 12
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 210
+y 340
+w 37
+h 16
+font "helvetica-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+"Gain:"
+}
+autoSize
 endObjectProperties
 

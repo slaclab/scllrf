@@ -56,7 +56,7 @@ record(ai, "\$(P)${p.name.upper()}_R")
 	#else
 	field(PREC, 5)
 	#end if
-	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
@@ -136,7 +136,7 @@ record(ao, "\$(P)${p.name.upper()}_W")
 			#else
 	field(PREC, 5)
 			#end if
-	info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 
 		#end if
@@ -164,9 +164,9 @@ record(ai, "\$(P)${p.name.upper()}_R${i}")
 	field( HOPR, "${p.range_top}")
 	#else if $p.has_key('signed') and ( $p.signed == 'unsigned')
 		#if $p.has_key('bit_width')
-	field( HOPR, "0x${2**$p.bit_width - 1}")
+	field( HOPR, "${2**$p.bit_width - 1}")
 		#else if $p.has_key('data_width')
-	field( HOPR, "0x${2**$p.data_width - 1}")
+	field( HOPR, "${2**$p.data_width - 1}")
 		#end if
 	#else ## signed number, take sign bit into account
 		#if $p.has_key('bit_width')
@@ -201,7 +201,7 @@ record(ai, "\$(P)${p.name.upper()}_R${i}")
 	#else
 	field(PREC, 5)
 	#end if
-info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 record(bi, "\$(P)GET_${p.name.upper()}_R${i}")
 {
@@ -235,11 +235,11 @@ record(ao, "\$(P)${p.name.upper()}_W${i}")
 	field( DRVH, "${p.range_top}")
 	#else if $p.has_key('signed') and ( $p.signed == 'unsigned')
 		#if $p.has_key('bit_width')
-	field( HOPR, "0x${2**$p.bit_width - 1}")
-	field( DRVH, "0x${2**$p.bit_width - 1}")
+	field( HOPR, "${2**$p.bit_width - 1}")
+	field( DRVH, "${2**$p.bit_width - 1}")
 		#else if $p.has_key('data_width')
-	field( HOPR, "0x${2**$p.data_width - 1}")
-	field( DRVH, "0x${2**$p.data_width - 1}")
+	field( HOPR, "${2**$p.data_width}")
+	field( DRVH, "${2**$p.data_width}")
 		#end if
 	#else ## signed number, take sign bit into account
 		#if $p.has_key('bit_width')
@@ -281,7 +281,7 @@ record(ao, "\$(P)${p.name.upper()}_W${i}")
 	#else
 	field(PREC, 5)
 	#end if
-info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
+	info( autosaveFields, "DESC")
 }
 
 	#end for
@@ -296,46 +296,74 @@ info( autosaveFields, "DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL"
 	#if (not($p.has_key('access')) or ('r' in $p.access )) and not(($p.has_key('nelm') and $p.nelm>1))
 record(longin, "\$(P)${p.name.upper()}_R")
 {
-	#if $p.has_key('desc')
+		#if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")
-	#end if
-	#if $p.has_key('egu')
+		#end if
+		#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
-	#end if
+		#end if
 	field( PINI, "NO")
 	field( DTYP, "asynUInt32Digital")
-	#if $p.has_key('bit_width')
+		#if $p.has_key('bit_width')
 	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
-	field( HOPR, "0x${2**$p.bit_width - 1}")
-	#else if $p.has_key('data_width')
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
+		#else if $p.has_key('data_width')
 	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
-	field( HOPR, "0x${2**$p.data_width - 1}")
-	#else
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+		#else
 	field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
-	#end if
+		#end if
 	field( SCAN, "I/O Intr")
 }
+		#if ($p.has_key('bit_width') and ($p.bit_width <= 16)) or ($p.has_key('data_width') and ($p.data_width <= 16))
 record(mbbiDirect, "\$(P)${p.name.upper()}_BITS_R")
+		#else
+record(mbbiDirect, "\$(P)${p.name.upper()}_LSBITS_R")
+		#end if
 {
-	#if $p.has_key('desc')
+		#if $p.has_key('desc')
 	field( DESC, "${p.desc[:38]}")
-	#end if
-	#if $p.has_key('egu')
+		#end if
+		#if $p.has_key('egu')
 	field( EGU, "${p.egu}")
-	#end if
+		#end if
 	field( PINI, "NO")
 	field( DTYP, "asynUInt32Digital")
-	#if $p.has_key('bit_width')
-	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
-	field( NOBT, "$p.bit_width")
-	#else if $p.has_key('data_width')
-	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_R")
-	field( NOBT, "$p.data_width")
-	#else
-	field( INP,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_R")
-	#end if
+		#if $p.has_key('bit_width')
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(0xFFFF & 2**$p.bit_width - 1, '04X')}, 0.1) ${p.name.upper()}_R")
+	field( NOBT, "${p.bit_width if $p.bit_width <= 16 else 16}")
+		#else if $p.has_key('data_width')
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(0xFFFF & 2**$p.data_width - 1, '04X')}, 0.1) ${p.name.upper()}_R")
+	field( NOBT, "${p.data_width if $p.data_width <= 16 else 16}")
+		#else
+	field( INP,  "@asynMask(\$(PORT),0, 0xFFFF, 0.1) ${p.name.upper()}_R")
+		#end if
 	field( SCAN, "I/O Intr")
 }
+		#if ($p.has_key('bit_width') and $p.bit_width > 16) or ($p.has_key('data_width') and $p.data_width > 16)
+record(mbbiDirect, "\$(P)${p.name.upper()}_MSBITS_R")
+{
+		#if $p.has_key('desc')
+	field( DESC, "${p.desc[:38]}")
+		#end if
+		#if $p.has_key('egu')
+	field( EGU, "${p.egu}")
+		#end if
+	field( PINI, "NO")
+	field( DTYP, "asynUInt32Digital")
+		#if $p.has_key('bit_width')
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**($p.bit_width - 16) - 1, '04X')}0000, 0.1) ${p.name.upper()}_R")
+	field( NOBT, "${p.bit_width-16}")
+		#else if $p.has_key('data_width')
+	field( INP,  "@asynMask(\$(PORT),0, 0x${format(2**($p.data_width - 16) - 1, '04X')}0000, 0.1) ${p.name.upper()}_R")
+	field( NOBT, "${p.data_width-16}")
+		#else
+	field( INP,  "@asynMask(\$(PORT),0, 0xFFFF0000, 0.1) ${p.name.upper()}_R")
+		#end if
+	field( SHFT, "16")
+	field( SCAN, "I/O Intr")
+}
+		#end if
 record(bi, "\$(P)GET_${p.name.upper()}_R")
 {
 	field( DTYP, "asynUInt32Digital")
@@ -363,12 +391,11 @@ record(longout, "\$(P)${p.name.upper()}_W")
 	field( DTYP, "asynUInt32Digital")
 	#if $p.has_key('bit_width')
 	field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.bit_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
-	field( HOPR, "0x${2**$p.bit_width - 1}")
-	field( DRVH, "0x${2**$p.bit_width - 1}")
+	field( DRVH, "0x${format(2**$p.bit_width - 1, '08X')}")
 	#else if $p.has_key('data_width')
 	field( OUT,  "@asynMask(\$(PORT),0, 0x${format(2**$p.data_width - 1, '08X')}, 0.1) ${p.name.upper()}_W")
-	field( HOPR, "0x${2**$p.data_width - 1}")
-	field( DRVH, "0x${2**$p.data_width - 1}")
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
+	field( DRVH, "0x${format(2**$p.data_width - 1, '08X')}")
 	#else
 	field( OUT,  "@asynMask(\$(PORT),0, 0xFFFFFFFF, 0.1) ${p.name.upper()}_W")
 	#end if
@@ -475,7 +502,7 @@ record(waveform, "\$(P)${p.name.upper()}_R")
 	field( LOPR, "${-(2**($p.data_width - 1) - 1)}")
 	#end if
 	#end if
-	info( autosaveFields, "DESC EGU PREC")
+	info( autosaveFields, "DESC")
 }
 record(waveform, "\$(P)GET_${p.name.upper()}_R")
 {
@@ -566,15 +593,15 @@ record(waveform, "\$(P)${p.name.upper()}_W")
 	field( HOPR, "${p.range_top}")
 	#else if $p.has_key('signed') and ( $p.signed == 'unsigned')
 		#if $p.has_key('bit_width')
-	field( HOPR, "0x${2**$p.bit_width - 1}")
+	field( HOPR, "0x${format(2**$p.bit_width - 1, '08X')}")
 		#else if $p.has_key('data_width')
-	field( HOPR, "0x${2**$p.data_width - 1}")
+	field( HOPR, "0x${format(2**$p.data_width - 1, '08X')}")
 		#end if
 	#else ## signed number, take sign bit into account
 		#if $p.has_key('bit_width')
-	field( HOPR, "${2**($p.bit_width - 1) - 1}")
+	field( HOPR, "0x${format(2**($p.bit_width - 1) - 1, '08X')}")
 		#else if $p.has_key('data_width')
-	field( HOPR, "${2**($p.data_width - 1) - 1}")
+	field( HOPR, "0x${format(2**($p.data_width - 1) - 1, '08X')}")
 		#end if
 	#end if
 	#if $p.has_key('range_bottom')
@@ -592,7 +619,7 @@ record(waveform, "\$(P)${p.name.upper()}_W")
 	field( LOPR, "${-(2**($p.data_width - 1) - 1)}")
 	#end if
 	#end if
-	info( autosaveFields, "DESC EGU PREC")
+	info( autosaveFields, "DESC")
 }
 
 #end if

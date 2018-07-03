@@ -10,20 +10,44 @@
 #==================================
 
 #==================================
-# In the lab, measure the RF input
-# power at ADC full scale. (Actually,
-# measure just below and extrapolate.)
+# In the lab, measure the ADC counts
+# at 10 dBm RF input power and then
+# extrapolate to calculate RF power
+# at ADC full scale
+#
+# P[dBm] = 10*log10(((V^2/R)*1e-3)/1mW)
+#    V in volts
+#    R = 50 ohms
+# assumes ADC counts linear with voltage
 #==================================
+
+record(longin, "$(PREF)CAL_ADC_10DBM") {
+field(VAL, "0")
+field(FLNK, "$(PREF)CAL_REF_CALC")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
+}
+
+record(calc, "$(PREF)CAL_REF_CALC") {
+field(CALC, "10*LOG((C*A/B)**2*1e-3/D)")
+# 100*sqrt(50ohms)
+field(INPA, "707.1067811")
+field(INPB, "$(PREF)CAL_ADC_10DBM")
+# full-scale ADC counts
+# for signed 16-bit ADC, = 2^15
+field(INPC, "32768")
+# 50 ohms
+field(INPD, "50")
+field(FLNK, "$(PREF)CAL_REF_PWR")
+}
 
 record(ao, "$(PREF)CAL_REF_PWR") {
 field(SCAN, "Passive")
 field(EGU,  "dBm")
-field(PREC, "6")
-field(OMSL, "supervisory")
-field(VAL,  "10")
-field(PINI, "YES")
+field(PREC, "5")
+field(DOL,  "$(PREF)CAL_REF_CALC")
+field(OMSL, "closed_loop")
 field(FLNK, "$(PREF)CAL_SCALE_CALC")
-info(autosaveFields, "VAL")
 }
 
 #==================================

@@ -1,0 +1,144 @@
+# In situations where an occasional glitch can be ignored but a persistent
+# error state should be alarmed, use this.
+# Status is checked every 2 sedconds, with a 20 second history. 2 errors
+# in the last 20 seconds is MINOR, 3 is MAJOR.
+#
+# Macros:
+#	P - Prefix for this monitor. The PV with enumerated status and severity is $(P)ALIVESUM
+#	PV2CHECK - The PV implementing heartbeat or error counting type functionality
+#	FAIL_IF - Failure condition test equation with A as new value, B as previous value, e.g. "A=B" for a counter failure
+
+record(calc, "$(P)ALIVECALC") {
+field(FLNK, "$(P)ALIVEERR")
+field(CALC, "A")
+field(INPA, "$(PV2CHECK) CA MS")
+field(INPB, "$(P)ALIVECALC.VAL")
+field(SCAN, "2 second")
+}
+
+record(bi, "$(P)ALIVEOK") {
+field(FLNK, "$(P)ALIVEE01")
+field(INP, "$(P)ALIVEERR.VAL")
+field(ZSV, "NO_ALARM")
+field(OSV, "MAJOR")
+field(ZNAM, "OK")
+field(ONAM, "FAULT")
+}
+
+record(calc, "$(P)ALIVEECT") {
+field(FLNK, "$(P)ALIVESUM")
+field(CALC, "A+B+C+D+E+F+G+H+I+J")
+field(INPA, "$(P)ALIVEE01.VAL")
+field(INPB, "$(P)ALIVEE02.VAL")
+field(INPC, "$(P)ALIVEE03.VAL")
+field(INPD, "$(P)ALIVEE04.VAL")
+field(INPE, "$(P)ALIVEE05.VAL")
+field(INPF, "$(P)ALIVEE06.VAL")
+field(INPG, "$(P)ALIVEE07.VAL")
+field(INPH, "$(P)ALIVEE08.VAL")
+field(INPI, "$(P)ALIVEE09.VAL")
+field(INPJ, "$(P)ALIVEE10.VAL")
+field(HIHI, "3")
+field(LOLO, "-1")
+field(HIGH, "2")
+field(LOW, "-1")
+field(HHSV, "MAJOR")
+field(LLSV, "MAJOR")
+field(HSV, "MINOR")
+field(LSV, "MAJOR")
+}
+
+record(calc, "$(P)ALIVEE09") {
+field(FLNK, "$(P)ALIVEE10")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE08.B")
+field(INPB, "$(P)ALIVEE09.VAL")
+}
+
+record(calc, "$(P)ALIVEE08") {
+field(FLNK, "$(P)ALIVEE09")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE07.B")
+field(INPB, "$(P)ALIVEE08.VAL")
+}
+
+record(calc, "$(P)ALIVEE07") {
+field(FLNK, "$(P)ALIVEE08")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE06.B")
+field(INPB, "$(P)ALIVEE07.VAL")
+}
+
+record(calc, "$(P)ALIVEE06") {
+field(FLNK, "$(P)ALIVEE07")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE05.B")
+field(INPB, "$(P)ALIVEE06.VAL")
+}
+
+record(calc, "$(P)ALIVEE05") {
+field(FLNK, "$(P)ALIVEE06")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE04.B")
+field(INPB, "$(P)ALIVEE05.VAL")
+}
+
+record(calc, "$(P)ALIVEE04") {
+field(FLNK, "$(P)ALIVEE05")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE03.B")
+field(INPB, "$(P)ALIVEE04.VAL")
+}
+
+record(calc, "$(P)ALIVEE03") {
+field(FLNK, "$(P)ALIVEE04")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE02.B")
+field(INPB, "$(P)ALIVEE03.VAL")
+}
+
+record(calc, "$(P)ALIVEE02") {
+field(FLNK, "$(P)ALIVEE03")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE01.B")
+field(INPB, "$(P)ALIVEE02.VAL")
+}
+
+record(calc, "$(P)ALIVEE01") {
+field(FLNK, "$(P)ALIVEE02")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEERR.VAL")
+field(INPB, "$(P)ALIVEE01.VAL")
+}
+
+record(calc, "$(P)ALIVECLC") {
+field(CALC, "A=0?0:A=1?0:A-2?3:A=3?3:4")
+field(INPA, "$(P)ALIVEECT.SEVR")
+field(HIHI, "4")
+field(HHSV, "INVALID")
+}
+
+record(mbbi, "$(P)ALIVESUM") {
+field(FLNK, "$(P)ALIVECLC")
+field(INP, "$(P)ALIVEECT.SEVR")
+field(ZRSV, "NO_ALARM")
+field(ONSV, "MINOR")
+field(TWSV, "MAJOR")
+field(ZRST, "PRESENT")
+field(ONST, "INTERMITTENT")
+field(TWST, "ABSENT")
+}
+
+record(calc, "$(P)ALIVEE10") {
+field(FLNK, "$(P)ALIVEECT")
+field(CALC, "A")
+field(INPA, "$(P)ALIVEE09.B")
+field(INPB, "$(P)ALIVEE10.VAL")
+}
+
+record(calc, "$(P)ALIVEERR") {
+field(FLNK, "$(P)ALIVEOK")
+field(CALC, "$(FAIL_IF)?1:0")
+field(INPA, "$(P)ALIVECALC.A")
+field(INPB, "$(P)ALIVECALC.B")
+}

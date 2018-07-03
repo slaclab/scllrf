@@ -134,8 +134,9 @@ if __name__ == "__main__":
 			sha = hashlib.sha1()
 			fv = open(args.input_j).read()
 			sha.update(fv)
-			print(sha.hexdigest())
-			regmap_dict['sha1'] = sha.hexdigest()
+			sha1sum = sha.hexdigest().zfill(2)
+			regmap_dict['sha1'] = sha1sum
+			print(regmap_dict['sha1'])
 			json_regmap = json.load(f)
 			json_wavegrp = json.load(w)
 			regmap_dict['wavegrp'] = json_wavegrp

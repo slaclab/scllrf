@@ -37,62 +37,6 @@ using namespace NEWMAT;
 
 class GUNBExtra;
 
-
-// Given more time, this and TraceData should have a common base class.
-//class DecayData
-//{
-//public:
-//
-//	static const unsigned maxWavesCount = 32; // max channels, max number of waveforms interlaced in waveform buffer
-//
-//	static const unsigned CIC_PERIOD;
-//	static const unsigned SHIFT_BASE;
-//	static const float CLK_FREQ;
-//	static const unsigned SLOW_OFFSET;
-//
-//	DecayData(GUNBExtra *pDriver, DataBuffer *pBuffer,
-//			int *rawParamIndex, int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
-//			int *decayBWParamIndex, int *decayConstantBParamIndex, int *decayStrengthParamIndex, int *decayFitStddevParamIndex);
-//
-//	void ReqDecayData();
-//	int CalcWaveScale(int32_t wave_samp_per);
-//	unsigned int nChan_;
-//	bitset<maxWavesCount> chanKeep_;
-//	unsigned int  relToAbsIdx[maxWavesCount]; // Index is relative index, value is equivalent absolute index
-//	void updateRelToAbsIdx();
-//	uint32_t GetEndAddr(){return regEndAddr_;}
-//	asynStatus ProcessDecayDataReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
-////	asynStatus ProcessSlowDataReadback(const FpgaReg *pFromFpga); // parse register data, write to various parameters
-////	unsigned int nextTag(){tag_ = ((tag_+1-4) % (unsigned int) pow(2,7))+4; return tag_;};
-//	epicsFloat32 scaleFactor_[maxWavesCount]; // Separate scale factors for I and Q
-//	epicsFloat32 phaseOffset_[maxWavesCount/2]; // Phase is meaningless without an I/Q pair, so one "gold" phase offset per pair
-//
-//private:
-//	GUNBExtra *pDriver_;
-//	const DataBuffer *regBuffer_;
-//	bool readInProgress_;
-//	uint32_t regStartAddr_;
-//	uint32_t regEndAddr_;
-//	int *iParamIndex_;
-//	int *qParamIndex_;
-//	int *aParamIndex_;
-//	int *pParamIndex_;
-//	int *rawParamIndex_;
-//	int *decayBWParamIndex_;
-//	int *decayConstantBParamIndex_;
-//	int *decayStrengthParamIndex_;
-//	int *decayFitStddevParamIndex_;
-//	epicsFloat32 gain_;
-//	epicsEvent gotNewWave_; /**< Event to signal the waveform requester */
-//
-//	float* CavityDecayConstantCompute(float *decay_real, float *decay_imag, unsigned int start, unsigned int ch);
-//	Matrix PseudoInverse(const Matrix & m);
-//	//	epicsInt32 bufShell1CircleData[GUNBDriver::DecayDataRegCount]; from generated code
-//	epicsFloat32 pIQBuf_[maxWavesCount][GUNBDriver::DecayDataRegCount]; // Data mapped into channels, I/Q separated
-//	epicsFloat32 pABuf_[maxWavesCount/2][GUNBDriver::DecayDataRegCount]; // Amplitude data channels
-//	epicsFloat32 pPBuf_[maxWavesCount/2][GUNBDriver::DecayDataRegCount]; // Phase data channels
-//};
-
 class TraceData
 {
 public:
@@ -105,7 +49,8 @@ public:
 	static const unsigned SLOW_OFFSET;
 
 	TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer,
-			int *rawParamIndex, int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
+			int *rawParamIndex, int *iRawParamIndex, int *qRawParamIndex, int *aRawParamIndex, int *pRawParamIndex,
+			int *iParamIndex, int *qParamIndex, int *aParamIndex,int *pParamIndex,
 			int *decayBWParamIndex, int *decayConstantBParamIndex, int *decayStrengthParamIndex, int *decayFitStddevParamIndex);
 	FpgaReg traceDataAck[5];
 	FpgaReg statusRequest;
@@ -127,14 +72,20 @@ public:
 	epicsEvent reqTraceDataEvent; /**< Event to signal the waveform requester */
 	unsigned int newTraceDataAvailable; /**< netSendCount value of the latest response with the "new waveform" flag set */
 	unsigned int newTraceDataRead; /**< netSendCount for the most recent waveform */
-	bool pollEnable;
+	bool pollEnable; // If false, stop reading waveforms
+	bool fastUpdate; // Read waveforms in a tight loop, rather than at the polling rate
 	float pollTimeout;
+	bool doDecayComp;
 
 private:
 	GUNBExtra *pDriver_;
 	DataBuffer *regBuffer_;
 	uint32_t regStartAddr_;
 	uint32_t regEndAddr_;
+	int *iRawParamIndex_;
+	int *qRawParamIndex_;
+	int *aRawParamIndex_;
+	int *pRawParamIndex_;
 	int *iParamIndex_;
 	int *qParamIndex_;
 	int *aParamIndex_;
@@ -148,12 +99,15 @@ private:
 	epicsEvent waveDataReady_; /**< Event to signal the waveform requester */
 	epicsEvent rawWaveRead_; /**< Event to signal the waveform requester */
 
-	float* CavityDecayConstantCompute(float *decay_real, float *decay_imag, unsigned int start, unsigned int ch);
+	float* CavityDecayConstantCompute(int *decay_real, int *decay_imag, unsigned int start, unsigned int ch);
 	Matrix PseudoInverse(const Matrix & m);
 
 	epicsFloat32 pIQBuf_[maxWavesCount][GUNBDriver::TraceDataRegCount]; // Data mapped into channels, I/Q separated
+	epicsInt32 pRawIQBuf_[maxWavesCount][GUNBDriver::TraceDataRegCount]; // Data mapped into channels, I/Q separated
 	epicsFloat32 pABuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Amplitude data channels
+	epicsFloat32 pRawABuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Amplitude data channels
 	epicsFloat32 pPBuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Phase data channels
+	epicsFloat32 pRawPBuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Phase data channels
 };
 
 class GUNBExtra: public GUNBDriver
@@ -175,18 +129,16 @@ public:
 	// I/Q data
 	static const char *TraceDataNActiveString;
 	static const char *TraceDataChanEnableString;
+	static const char *TraceDataRawIString;
+	static const char *TraceDataRawQString;
+	static const char *TraceDataRawAString;
+	static const char *TraceDataRawPString;
 	static const char *TraceDataIString;
 	static const char *TraceDataQString;
 	static const char *TraceDataAString;
 	static const char *TraceDataPString;
 	static const char *TraceDataScaleString;
 	static const char *TraceDataGoldString;
-	static const char *TDDecayBWString;
-	static const char *TDDecayConstantBString;
-	static const char *TDDecayStrengthString;
-	static const char *TDDecayFitStdDevString;
-	static const char *TraceDataMinsRString;
-	static const char *TraceDataMaxsRString;
 	static const char* TraceDataTimeStepString;
 	static const char* TraceDataPollEnableString;
 	static const char* TraceDataFastUpdateString;
@@ -194,6 +146,10 @@ public:
 	// Cavity decay data
 	static const char *DecayNActiveString;
 	static const char *DecayChanEnableString;
+	static const char *DecayRawIString;
+	static const char *DecayRawQString;
+	static const char *DecayRawAString;
+	static const char *DecayRawPString;
 	static const char *DecayIString;
 	static const char *DecayQString;
 	static const char *DecayAString;
@@ -204,8 +160,6 @@ public:
 	static const char *DecayConstantBString;
 	static const char *DecayStrengthString;
 	static const char *DecayFitSDevString;
-	static const char *DecayMinsRString;
-	static const char *DecayMaxsRString;
 	static const char* DecayTimeStepString;
 	static const char* DecayPollEnableString;
 	static const char* DecayFastUpdateString;
@@ -214,8 +168,7 @@ public:
 	friend class ::TraceData;
 
 protected:
-	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga,
-			bool &waveIsReady); // parse register data, write to PVs
+	virtual asynStatus processRegReadback(const FpgaReg *pFromFpga); // parse register data, write to PVs
 	virtual asynStatus processRegWriteResponse(const FpgaReg *pFromFpga);
 	void testCannedResponse();
 
@@ -232,14 +185,16 @@ protected:
 	int p_TraceDataNActive;
 #define FIRST_GUNBEXTRA_PARAM p_TraceDataNActive
 	int p_TraceDataChanEnable;
+	int p_TraceDataRawI;
+	int p_TraceDataRawQ;
+	int p_TraceDataRawA;
+	int p_TraceDataRawP;
 	int p_TraceDataI;
 	int p_TraceDataQ;
 	int p_TraceDataA;
 	int p_TraceDataP;
 	int p_TraceDataScale;
 	int p_TraceDataGold;
-	int p_TraceDataMinsR;
-	int p_TraceDataMaxsR;
 	int p_TraceDataTimeStep;
 	int p_TraceDataPollEnable;
 	int p_TraceDataFastUpdate;
@@ -250,14 +205,16 @@ protected:
 
 	int p_DecayNActive;
 	int p_DecayChanEnable;
+	int p_DecayRawI;
+	int p_DecayRawQ;
+	int p_DecayRawA;
+	int p_DecayRawP;
 	int p_DecayI;
 	int p_DecayQ;
 	int p_DecayA;
 	int p_DecayP;
 	int p_DecayScale;
 	int p_DecayGold;
-	int p_DecayMinsR;
-	int p_DecayMaxsR;
 	int p_DecayTimeStep;
 	int p_DecayPollEnable;
 	int p_DecayFastUpdate;
