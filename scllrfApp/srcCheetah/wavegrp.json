@@ -1,0 +1,14 @@
+{
+	"banyan_data":{
+		"reset":{"name":"banyan_reset","bit": 0}
+		,"status":{"name":"banyan_status","bit": 30	}
+	}
+	,"trace_data":{
+		"reset":{"name":"trace_reset","bit":0}
+		,"status":{"name":"trace_status1","bit": 30}
+	}
+	,"decay_data":{
+		"reset":{"name":"decay_reset","bit":0}
+		,"status":{"name":"decay_ro_enable","bit": 0}
+	}
+}
