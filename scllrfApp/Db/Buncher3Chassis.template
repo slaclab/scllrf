@@ -97,6 +97,7 @@ record (calc, "ACCL:GUNB:455:AACT" )
 	field( CALC, "MAX(A,B)")
 #	field( CALC, "(A+B)/2") # Something like this once we have both probes
 	field( SCAN, ".2 second" )
+	field(EGU, "MV")
 }
 
 record (calc, "ACCL:GUNB:455:PACT" )
@@ -109,6 +110,7 @@ record (calc, "ACCL:GUNB:455:PACT" )
 	field( CALC, "ATAN2(C+D,A+B)")
 	field( SCAN, ".2 second" )
 	field( FLNK, "ACCL:GUNB:455:CW_DETUNE" )
+	field(EGU, "deg")
 }
 
 record (calc, "ACCL:GUNB:455:CW_DETUNE" )

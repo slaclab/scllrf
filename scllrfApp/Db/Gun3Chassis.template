@@ -17,6 +17,7 @@ record (calc, "GUN:GUNB:100:FWD:PWR" )
 	field( INPB, "GUN:GUNB:100:FWD2:PWR" )
 	field( CALC, "A+B")
 	field( SCAN, ".2 second" )
+	field(EGU, "W")
 }
 record (calc, "GUN:GUNB:100:FWD:PMEAN" )
 {
@@ -27,6 +28,7 @@ record (calc, "GUN:GUNB:100:FWD:PMEAN" )
 	field( INPD, "GUN:GUNB:100:FWD2:QTMEAN" )
 	field( CALC, "ATAN2((C+D),(A+B))")
 	field( SCAN, ".2 second" )
+	field(EGU, "deg")
 }
 
 record (calc, "GUN:GUNB:100:REV:AMEAN" )
@@ -44,6 +46,7 @@ record (calc, "GUN:GUNB:100:REV:PWR" )
 	field( INPB, "GUN:GUNB:100:REV2:PWR" )
 	field( CALC, "A+B")
 	field( SCAN, ".2 second" )
+	field(EGU, "W")
 }
 
 # Useful for setting max fwd pwr limit
@@ -54,6 +57,7 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN_MAX" )
 	field( INPB, "GUN:GUNB:100:FWD2:AMEAN" )
 	field( CALC, "MAX(A,B)")
 	field( SCAN, ".2 second" )
+	field(EGU, "sqrt(Watts)")
 }
 
 # Useful for SSA balancing
@@ -64,6 +68,7 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN_MIN" )
 	field( INPB, "GUN:GUNB:100:FWD2:AMEAN" )
 	field( CALC, "MIN(A,B)")
 	field( SCAN, ".2 second" )
+	field(EGU, "sqrt(Watts)")
 }
 
 record (calc, "GUN:GUNB:100:AACT" )
@@ -74,6 +79,7 @@ record (calc, "GUN:GUNB:100:AACT" )
 	field( CALC, "MAX(A,B)")
 #	field( CALC, "(A+B)/2") # Something like this once we have both probes
 	field( SCAN, ".2 second" )
+	field(EGU, "MV")
 }
 
 record (calc, "GUN:GUNB:100:PACT" )
@@ -88,6 +94,7 @@ record (calc, "GUN:GUNB:100:PACT" )
 	field( CALC, "E")
 	field( SCAN, ".2 second" )
 	field( FLNK, "GUN:GUNB:100:CW_DETUNE" )
+	field(EGU, "deg")
 }
 
 record (calc, "GUN:GUNB:100:CW_DETUNE" )
