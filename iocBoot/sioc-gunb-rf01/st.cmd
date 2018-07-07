@@ -1,4 +1,3 @@
-#!../../bin/rhel6-x86_64/scllrf
 #!../../bin/linuxRT-x86_64/scllrf
 ## You may have to change scllrf to something else
 ## everywhere it appears in this file
@@ -18,16 +17,18 @@ epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet("IOC_PV", "SIOC:$(AREA):RF01")
 # IP address of hardware
 epicsEnvSet( FPGA_IP, "192.168.0.101")
+epicsEnvSet( FPGA_IP, "127.0.0.1")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc, 50000 BMB7 loopback
 epicsEnvSet( PORT, "50006")
+epicsEnvSet( PORT, "7")
 # Command to set up python environment, only used in LinuxRT
-#epicsEnvSet( GO_PY, "source ~/cpu-b15-rf01/GoPython.sh;") # for RT
+epicsEnvSet( GO_PY, "source ~/cpu-b15-rf01/GoPython.sh;") # for RT
 #epicsEnvSet( GO_PY, "") # for RHEL
 # RHEL needs the full path to the executable. LinuxRT doesn't, so PY_PATH can be blank
-#epicsEnvSet( PY_PATH, "") # for RT
-epicsEnvSet( PY_PATH, "/afs/slac/g/lcls/package/python/python2.7.9/linux-x86_64/bin/") # for RHEL
+epicsEnvSet( PY_PATH, "") # for RT
+#epicsEnvSet( PY_PATH, "/usr/local/lcls/package/python/python2.7.9/linux-x86_64/bin/") # for RHEL
 # Directory with python init script, and where it will be run from
-epicsEnvSet( PY_INIT_DIR, "/afs/slac.stanford.edu/u/re/gwbrown/w/lcls2_llrf/firmware/gun/run")
+epicsEnvSet( PY_INIT_DIR, "/usr/local/lcls/package/lcls2_llrf/firmware/gun/run")
 # Bit file name, as relative path from the above directory
 epicsEnvSet( BIT_FILE, "../gun.bit")
 # The "chassis" register sets the type of chassis: 0:gun prc,1:gun rfs,2:buncher prc,3:buncher rfs
@@ -49,6 +50,7 @@ epicsEnvSet("CHASSIS_NAME","RFS2")
 epicsEnvSet(CHASSIS_REG, "1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet( FPGA_IP, "192.168.0.102")
+epicsEnvSet( FPGA_IP, "127.0.0.1")
 < iocBoot/common/regInterface.cmd
 asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
@@ -57,6 +59,7 @@ epicsEnvSet("CHASSIS_NAME","PRC")
 epicsEnvSet(CHASSIS_REG, "0")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
 epicsEnvSet( FPGA_IP, "192.168.0.103")
+epicsEnvSet( FPGA_IP, "127.0.0.1")
 < iocBoot/common/regInterface.cmd
 asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
