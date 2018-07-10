@@ -21,7 +21,7 @@ epicsEnvSet( FPGA_IP, "192.168.0.201")
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc, 50000 BMB7 loopback
 epicsEnvSet( PORT, "50006")
 # Command to set up python environment, only used in LinuxRT
-epicsEnvSet( GO_PY, "source ~/cpu-b15-rf01/GoPython.sh;") # for RT
+epicsEnvSet( GO_PY, "source ~/cpu-gunb-rf01/GoPython.sh;") # for RT
 #epicsEnvSet( GO_PY, "") # for RHEL
 # RHEL needs the full path to the executable. LinuxRT doesn't, so PY_PATH can be blank
 epicsEnvSet( PY_PATH, "") # for RT

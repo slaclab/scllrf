@@ -200,7 +200,7 @@ file PVramp.template
 
 file GUNBRegisterAlias.template
 {
-	{ P = "GUN:GUNB:100:", N=1 }
+	{ P = "GUN:GUNB:100:PRC:", N=1 }
 }
 
 file GUNB3ChassisAlias.template

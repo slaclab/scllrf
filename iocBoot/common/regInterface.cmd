@@ -1,7 +1,7 @@
 # Do chassis configuration that is needed before PVs connect
 #The following line works for RHEL
 ####XXXX It's a pain to do this every time while testing
-#system("${GO_PY=} cd ${PY_INIT_DIR}; ${PY_PATH=}python gun.py -a ${FPGA_IP} -b ${BIT_FILE}  -r -c ${CHASSIS_REG}")
+system("${GO_PY=} cd ${PY_INIT_DIR}; ${PY_PATH=}python gun.py -a ${FPGA_IP} -b ${BIT_FILE}  -r -c ${CHASSIS_REG}")
 cd ${TOP}
 
 # =====================================================================
@@ -49,4 +49,4 @@ epicsThreadSleep(0.2)
 dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)Reg,SC=$(SC=scllrf)")
 
 bmb7Configure("$(CHASSIS_NAME)BMB7", "$(FPGA_IP)", "0")
-dbLoadRecords("db/BMB7monitor.db", "PORT=$(CHASSIS_NAME)BMB7,P=$(P),R=$(CHASSIS_NAME):")
+dbLoadRecords("db/BMB7monitor.db", "PORT=$(CHASSIS_NAME)BMB7,P=$(DEVICE_TYPE):$(AREA):$(POSITION),R=$(CHASSIS_NAME):")

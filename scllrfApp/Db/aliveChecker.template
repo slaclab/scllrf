@@ -3,6 +3,8 @@
 # Status is checked every 2 sedconds, with a 20 second history. 2 errors
 # in the last 20 seconds is MINOR, 3 is MAJOR.
 #
+# The main status PV is $(P)ALIVEOK.
+#
 # Macros:
 #	P - Prefix for this monitor. The PV with enumerated status and severity is $(P)ALIVESUM
 #	PV2CHECK - The PV implementing heartbeat or error counting type functionality

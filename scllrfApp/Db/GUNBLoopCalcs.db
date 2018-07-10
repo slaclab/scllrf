@@ -622,16 +622,16 @@ record(calcout, "$(P)BOUNDARY_RESET_CALC") {
 	field(INPB, "$(P)PRC:RF_GO_W")
 	field(INPE, "$(P)PRC:REP_PERIOD_W CP")
 	field(INPF, "$(P)PRC:PULSE_LENGTH_W CP")
-	field(CALC, "(F<E)?1:0")
+	field(CALC, "(F<E)?2:0")
 	field(OUT, "$(P)SET_BOUNDARY_RESETS PP")
 	field(SDIS, "$(P)MASK_BOUNDARY_RESET")
 	field( DISV, "1")
 }
 record( dfanout, "$(P)SET_BOUNDARY_RESETS") {
 
-	field( OUTA, "$(P)PRC:WF_EDGE_TRIGGER PP" )
-	field( OUTB, "$(P)RFS1:WF_EDGE_TRIGGER PP" )
-	field( OUTC, "$(P)RFS2:WF_EDGE_TRIGGER PP" )
+	field( OUTA, "$(P)PRC:PULSE_BOUNDARY_W PP" )
+	field( OUTB, "$(P)RFS1:PULSE_BOUNDARY_W PP" )
+	field( OUTC, "$(P)RFS2:PULSE_BOUNDARY_W PP" )
 }
 
 #! Further lines contain data used by VisualDCT
