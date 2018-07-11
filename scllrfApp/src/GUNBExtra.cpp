@@ -333,7 +333,6 @@ asynStatus GUNBExtra::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value,
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]		regSendBuf[3].data = (int32_t) traceData_.nextTag();
 //[UNCOMMENT WHEN THERE'S A TAG REGISTER]regSendBuf[4].addr = (uint32_t) TraceDataDspTagWAdr | flagReadMask;
 
-		status = (asynStatus) setIntegerParam(0, p_KeepW, (epicsUInt32) regSendBuf[0].data);
 		traceData_.chanKeep = (uint16_t) regSendBuf[0].data;
 		traceData_.updateRelToAbsIdx();
 
