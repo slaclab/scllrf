@@ -10,8 +10,12 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-5: Fixed status and processing settings in links.
+
+scllrf-R1-0-4: Gun and buncher deployment
+
 scllrf-R1-0-3: RFS waveforms scale with number of samples per point.
-               Calculating average of amplitude and phase waveforms, and
-               offering waveforms which average N previous waveforms.
-               I/Q waveforms are now enabled in pairs, no reason to enable
-               just one or the other.
+			Calculating average of amplitude and phase waveforms, and
+			offering waveforms which average N previous waveforms.
+			I/Q waveforms are now enabled in pairs, no reason to enable
+			just one or the other.
