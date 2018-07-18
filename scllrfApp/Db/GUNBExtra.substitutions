@@ -53,65 +53,12 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 }
 file GUNBWavePerChassis.template
 {
-pattern{ P,			KEEP,		PORT }
-	{ "GUN:GUNB:100:PRC:",	"0xC3C3",	PRCReg }
-	{ "GUN:GUNB:100:RFS1:",	"0xFFFF",	RFS1Reg }
-	{ "GUN:GUNB:100:RFS2:",	"0xFFFF",	RFS2Reg }
+pattern{ P,				CHASSIS,	KEEP,		PORT }
+	{ "GUN:GUNB:100:",	"PRC:",	"0xC3C3",	PRCReg }
+	{ "GUN:GUNB:100:",	"RFS1:",	"0xFFFF",	RFS1Reg }
+	{ "GUN:GUNB:100:",	"RFS2:",	"0xFFFF",	RFS2Reg }
 }
 
-#file GUNBDecayCh.template {
-#pattern { P,						 CH,	 CH+1,	 PORT,		 EGU	}
-#	{ "GUN:GUNB:100:PRL:",			"0",	"1",	"PRCReg",	"dBm"	}
-#	{ "GUN:GUNB:100:PRC:SPARE1:",	"1",	"2",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE2:",	"2",	"3",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:CAV1:",			"3",	"4",	"PRCReg",	"MV"	}
-#	{ "GUN:GUNB:100:CAV2:",			"4",	"5",	"PRCReg",	"MV"	}
-#	{ "GUN:GUNB:100:PRC:SPARE3:",	"5",	"6",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE4:",	"6",	"7",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:LASR:",			"7",	"8",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE5:",	"8",	"9",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE6:",	"9",	"10",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE7:",	"10",	"11",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE8:",	"11",	"12",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE9:",	"12",	"13",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE10:",	"13",	"14",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE11:",	"14",	"15",	"PRCReg",	"N/A"	}
-#	{ "GUN:GUNB:100:PRC:SPARE12:",	"15",	"16",	"PRCReg",	"N/A"	}
-#
-#	{ "GUN:GUNB:100:DRV1:",			"0",	"1",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:DRV1A:",		"1",	"2",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:S100:FWD1:",		"2",	"3",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:S100:REV1:",		"3",	"4",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:FWD1:",			"4",	"5",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:REV1:",			"5",	"6",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:C100:FWD1:",		"6",	"7",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:C100:REV1:",		"7",	"8",	"RFS1Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE1:",	"8",	"9",	"RFS1Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS1:DAC:",		"9",	"10",	"RFS1Reg",	"DAC counts"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE2:",	"10",	"11",	"RFS1Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE3:",	"11",	"12",	"RFS1Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE4:",	"12",	"13",	"RFS1Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE5:",	"13",	"14",	"RFS1Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE6:",	"14",	"15",	"RFS1Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS1:SPARE7:",	"15",	"16",	"RFS1Reg",	"N/A"	}
-#
-#	{ "GUN:GUNB:100:DRV2:",			"0",	"1",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:DRV2A:",		"1",	"2",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:S100:FWD2:",		"2",	"3",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:S100:REV2:",		"3",	"4",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:FWD2:",			"4",	"5",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:REV2:",			"5",	"6",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:C100:FWD2:",		"6",	"7",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:C100:REV2:",		"7",	"8",	"RFS2Reg",	"sqrt(W)"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE1:",	"8",	"9",	"RFS2Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS2:DAC:",		"9",	"10",	"RFS2Reg",	"DAC counts"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE2:",	"10",	"11",	"RFS2Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE3:",	"11",	"12",	"RFS2Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE4:",	"12",	"13",	"RFS2Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE5:",	"13",	"14",	"RFS2Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE6:",	"14",	"15",	"RFS2Reg",	"N/A"	}
-#	{ "GUN:GUNB:100:RFS2:SPARE7:",	"15",	"16",	"RFS2Reg",	"N/A"	}
-#}
 file GUNBDecayPerChassis.template
 {
 pattern{ P,			KEEP,		PORT }

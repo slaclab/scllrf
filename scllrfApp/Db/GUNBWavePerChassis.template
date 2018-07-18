@@ -7,7 +7,7 @@
 # Free running, not synchronized, when set to 0
 # Rising pulse edge at the start of the trace, when set to 2
 # Falling pulse edge at the start of the trace, when set to 3
-#record(mbbo, "$(P)WF_EDGE_TRIGGER") {
+#record(mbbo, "$(P)$(CHASSIS)WF_EDGE_TRIGGER") {
 #field(ZRST, "Free Run")
 #field(ZRVL, "0")
 #field(ONST, "Rising Edge")
@@ -15,83 +15,92 @@
 #field(TWST, "Falling Edge")
 #field(TWVL, "3")
 #field(DTYP, "Raw Soft Channel")
-#field(OUT, "$(P)PULSE_BOUNDARY_W PP")
+#field(OUT, "$(P)$(CHASSIS)PULSE_BOUNDARY_W PP")
 #field(PINI, "YES")
 #info(autosaveFields, "VAL")
 #} tHIS MAY BE WRITING A 0 TO THE REGISTER AT STARTUP. NOW IT'S AUTOMATED BASED ON PULSED VS. CW
 
 # ADC min/max won't update unless this register is poked periodically
 # Testing this in with trace reset. Uncomment if that doesn't work out.
-#record(bo, "$(P)POKE_SLOW_RESET_POKER")
+#record(bo, "$(P)$(CHASSIS)POKE_SLOW_RESET_POKER")
 #{
 #field(VAL, "1")
 #field(SCAN, "1 second")
-#field(OUT, "$(P)POKE_SLOW_RESET PP")
+#field(OUT, "$(P)$(CHASSIS)POKE_SLOW_RESET PP")
 #}
-#record(bo, "$(P)POKE_SLOW_RESET")
+#record(bo, "$(P)$(CHASSIS)POKE_SLOW_RESET")
 #{
 #field(HIGH, "0.5")
-#field(OUT, "$(P)SLOW_RESET_W.B0 PP")
+#field(OUT, "$(P)$(CHASSIS)SLOW_RESET_W.B0 PP")
 #}
-#record(mbboDirect, "$(P)SLOW_RESET_W")
+#record(mbboDirect, "$(P)$(CHASSIS)SLOW_RESET_W")
 #{
 #field(VAL, "1")
 #field(B0, 1)
 #field(SCAN, "1 second")
 #}
-record(mbboDirect, "$(P)WF_CHAN_ENABLE") {
+record(mbboDirect, "$(P)$(CHASSIS)WF_CHAN_ENABLE") {
 field(PINI, "YES")
 field(DTYP, "asynUInt32Digital")
 field(OUT, "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
 field(NOBT, "16")
 field(SCAN, "Passive")
-field(FLNK, "$(P)WF_CHAN_DISABLE")
+field(FLNK, "$(P)$(CHASSIS)WF_CHAN_DISABLE")
 info(autosaveFields, "DESC")
 info(asyn:READBACK, "1")
 }
 
 # Needed by the X-Y graph EDM widget
-record(calc, "$(P)WF_CHAN_DISABLE") {
+record(calc, "$(P)$(CHASSIS)WF_CHAN_DISABLE") {
 field(SCAN, "Passive")
-field(INPA, "$(P)WF_CHAN_ENABLE")
+field(INPA, "$(P)$(CHASSIS)WF_CHAN_ENABLE")
 field(CALC, "~A")
 }
 
-record(longin, "$(P)WF_N_ACTIVE") {
+record(longin, "$(P)$(CHASSIS)WF_N_ACTIVE") {
 field(PINI, "NO")
 field(DTYP, "asynInt32")
 field(INP, "@asyn($(PORT),0) TRACE_DATA_N_ACTIVE")
 field(SCAN, "I/O Intr")
-field(FLNK, "$(P)WF_X_NUSE")
+field(FLNK, "$(P)$(CHASSIS)WF_X_NUSE")
 }
 
-record(calcout, "$(P)WF_X_NUSE") {
+record(calcout, "$(P)$(CHASSIS)WF_X_NUSE") {
 field(DESC, "More channels = shorter waveforms")
-field(INPA, "$(P)WF_N_ACTIVE")
+field(INPA, "$(P)$(CHASSIS)WF_N_ACTIVE")
 field(CALC, "FLOOR(8192/A)")
-field(OUT, "$(P)WF_CALCX.NUSE PP")
+field(OUT, "$(P)$(CHASSIS)WF_CALCX.NUSE PP")
 field(PINI, "NO")
 }
 
-record(ai, "$(P)WF_TIME_STEP") {
+record(ai, "$(P)$(CHASSIS)WF_TIME_STEP") {
 field(DESC, "Time interval per data point")
 field(PINI, "NO")
 field(DTYP, "asynFloat64")
 field(INP, "@asyn($(PORT),0)TRACE_DATA_TIME_STEP")
 field(SCAN, "I/O Intr")
 field(EGU, "s")
-field(FLNK, "$(P)WF_CALCX")
+field(FLNK, "$(P)$(CHASSIS)WF_CALCX")
 }
 
-#record(calcout, "$(P)WF_X_HOPR")
+record(calcout, "$(P)$(CHASSIS)PULSE_POINTS")
+{
+field(DESC, "Points where pulse is active")
+field(INPA, "$(P)$(CHASSIS)WF_TIME_STEP CP")
+field(INPB, "$(P)$(CHASSIS)WF_X_NUSE CP")
+field(INPC, "$(P)PULSE_LENGTH CP")
+field(CALC, "C/A < B? C/A: B")
+}
+
+#record(calcout, "$(P)$(CHASSIS)WF_X_HOPR")
 #{
 #field(DESC, "More channels = shorter time")
-#field(INPA, "$(P)WF_X_NUSE CPP")
-#field(INPB, "$(P)WF_TIME_STEP")
+#field(INPA, "$(P)$(CHASSIS)WF_X_NUSE CPP")
+#field(INPB, "$(P)$(CHASSIS)WF_TIME_STEP")
 #field(CALC, "A*B")
-#field(OUT, "$(P)WF_X_AXIS.HOPR PP")
+#field(OUT, "$(P)$(CHASSIS)WF_X_AXIS.HOPR PP")
 #}
-record(bo, "$(P)WF_POLL_ENABLE") {
+record(bo, "$(P)$(CHASSIS)WF_POLL_ENABLE") {
 field(ZNAM, "Disabled")
 field(ONAM, "Enabled")
 field(PINI, "YES")
@@ -100,7 +109,7 @@ field(OUT, "@asynMask($(PORT),0, 1, 0.1)TRACE_DATA_POLL_ENABLE")
 info(autosaveFields, "VAL")
 }
 
-record(bo, "$(P)WF_FAST_UPDATE") {
+record(bo, "$(P)$(CHASSIS)WF_FAST_UPDATE") {
 field(ZNAM, "Disabled")
 field(ONAM, "Enabled")
 field(PINI, "YES")
@@ -110,21 +119,21 @@ info(autosaveFields, "VAL")
 }
 
 # Create an array of time coordinates in the specified units
-record(acalcout, "$(P)WF_CALCX") {
+record(acalcout, "$(P)$(CHASSIS)WF_CALCX") {
 field(DESC, "x-axis times")
 field(CALC, "IX*A")
 field(LOPR, "0")
-field(INPA, "$(P)WF_TIME_STEP")
+field(INPA, "$(P)$(CHASSIS)WF_TIME_STEP")
 field(NELM, "8192")
 field(NUSE, "8192")
 field(PINI, "YES")
 field(SCAN, "Passive")
 field(EGU, "s")
 field(PREC, "5")
-field(OUT, "$(P)WF_X_AXIS PP")
+field(OUT, "$(P)$(CHASSIS)WF_X_AXIS PP")
 }
 
-record(waveform, "$(P)WF_X_AXIS") {
+record(waveform, "$(P)$(CHASSIS)WF_X_AXIS") {
 field(DESC, "x-axis times")
 field(SCAN, "Passive")
 field(DTYP, "Soft Channel")
@@ -132,71 +141,71 @@ field(FTVL, "FLOAT")
 field(NELM, "8192")
 field(EGU, "s")
 field(PREC, "5")
-field(FLNK, "$(P)WF_UPDATE_PLOT_CALC")
+field(FLNK, "$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC")
 }
 
 # This record just writes a 1 to the bo record to make it go high,
 # then low, whenever the number of channels changes.
-record(calcout, "$(P)WF_UPDATE_PLOT_CALC") {
-field(INPC, "$(P)WF_X_AXIS")
-field(OUT, "$(P)WF_UPDATE_PLOT PP")
+record(calcout, "$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC") {
+field(INPC, "$(P)$(CHASSIS)WF_X_AXIS")
+field(OUT, "$(P)$(CHASSIS)WF_UPDATE_PLOT PP")
 field(CALC, "1")
 }
 
 # The waveform displays use this record to know when to update parameters
-record(bo, "$(P)WF_UPDATE_PLOT") {
+record(bo, "$(P)$(CHASSIS)WF_UPDATE_PLOT") {
 field(HIGH, "0.1")
 }
 
 ## This keeps writing 0 instead of the assigned VAL during startup. huh.
-#record(ao, "$(P)KEEP_W") {
+#record(ao, "$(P)$(CHASSIS)KEEP_W") {
 #field(VAL, "$(KEEP)")
 #field(PINI, "YES")
 #}
 
 #! Further lines contain data used by VisualDCT
 #! View(-54,-4,0.8)
-#! Record("$(P)WF_EDGE_TRIGGER",18,18,0,0,"$(P)WF_EDGE_TRIGGER")
-#! Field("$(P)WF_EDGE_TRIGGER.OUT",16777215,1,"$(P)WF_EDGE_TRIGGER.OUT")
-#! Record("$(P)WF_CHAN_ENABLE",289,18,0,0,"$(P)WF_CHAN_ENABLE")
-#! Field("$(P)WF_CHAN_ENABLE.FLNK",16777215,0,"$(P)WF_CHAN_ENABLE.FLNK")
-#! Link("$(P)WF_CHAN_ENABLE.FLNK","$(P)WF_CHAN_DISABLE")
-#! Field("$(P)WF_CHAN_ENABLE.VAL",16777215,1,"$(P)WF_CHAN_ENABLE.VAL")
-#! Record("$(P)WF_CHAN_DISABLE",254,218,0,0,"$(P)WF_CHAN_DISABLE")
-#! Field("$(P)WF_CHAN_DISABLE.INPA",16777215,1,"$(P)WF_CHAN_DISABLE.INPA")
-#! Link("$(P)WF_CHAN_DISABLE.INPA","$(P)WF_CHAN_ENABLE.VAL")
-#! Record("$(P)WF_N_ACTIVE",661,24,0,0,"$(P)WF_N_ACTIVE")
-#! Field("$(P)WF_N_ACTIVE.FLNK",16777215,1,"$(P)WF_N_ACTIVE.FLNK")
-#! Link("$(P)WF_N_ACTIVE.FLNK","$(P)WF_X_NUSE")
-#! Field("$(P)WF_N_ACTIVE.VAL",16777215,1,"$(P)WF_N_ACTIVE.VAL")
-#! Record("$(P)WF_X_NUSE",960,47,0,0,"$(P)WF_X_NUSE")
-#! Field("$(P)WF_X_NUSE.INPA",16777215,0,"$(P)WF_X_NUSE.INPA")
-#! Link("$(P)WF_X_NUSE.INPA","$(P)WF_N_ACTIVE.VAL")
-#! Field("$(P)WF_X_NUSE.OUT",16777215,0,"$(P)WF_X_NUSE.OUT")
-#! Link("$(P)WF_X_NUSE.OUT","$(P)WF_CALCX.NUSE")
-#! Record("$(P)WF_TIME_STEP",660,343,0,0,"$(P)WF_TIME_STEP")
-#! Field("$(P)WF_TIME_STEP.VAL",16777215,1,"$(P)WF_TIME_STEP.VAL")
-#! Field("$(P)WF_TIME_STEP.FLNK",16777215,1,"$(P)WF_TIME_STEP.FLNK")
-#! Link("$(P)WF_TIME_STEP.FLNK","$(P)WF_CALCX")
-#! Record("$(P)WF_POLL_ENABLE",250,355,0,0,"$(P)WF_POLL_ENABLE")
-#! Record("$(P)WF_FAST_UPDATE",254,503,0,0,"$(P)WF_FAST_UPDATE")
-#! Record("$(P)WF_CALCX",958,229,0,0,"$(P)WF_CALCX")
-#! Field("$(P)WF_CALCX.INPA",16777215,0,"$(P)WF_CALCX.INPA")
-#! Link("$(P)WF_CALCX.INPA","$(P)WF_TIME_STEP.VAL")
-#! Field("$(P)WF_CALCX.OUT",16777215,1,"$(P)WF_CALCX.OUT")
-#! Link("$(P)WF_CALCX.OUT","$(P)WF_X_AXIS.VAL")
-#! Field("$(P)WF_CALCX.NUSE",16777215,0,"$(P)WF_CALCX.NUSE")
-#! Record("$(P)WF_X_AXIS",1229,350,0,0,"$(P)WF_X_AXIS")
-#! Field("$(P)WF_X_AXIS.VAL",16777215,0,"$(P)WF_X_AXIS.VAL")
-#! Field("$(P)WF_X_AXIS.FLNK",16777215,1,"$(P)WF_X_AXIS.FLNK")
-#! Link("$(P)WF_X_AXIS.FLNK","$(P)WF_UPDATE_PLOT_CALC")
-#! Record("$(P)WF_UPDATE_PLOT_CALC",1292,171,0,1,"$(P)WF_UPDATE_PLOT_CALC")
-#! Field("$(P)WF_UPDATE_PLOT_CALC.INPC",16777215,0,"$(P)WF_UPDATE_PLOT_CALC.INPC")
-#! Link("$(P)WF_UPDATE_PLOT_CALC.INPC","$(P)WF_X_AXIS.VAL")
-#! Field("$(P)WF_UPDATE_PLOT_CALC.OUT",16777215,0,"$(P)WF_UPDATE_PLOT_CALC.OUT")
-#! Link("$(P)WF_UPDATE_PLOT_CALC.OUT","$(P)WF_UPDATE_PLOT.VAL")
-#! Record("$(P)WF_UPDATE_PLOT",1282,64,0,0,"$(P)WF_UPDATE_PLOT")
-#! Field("$(P)WF_UPDATE_PLOT.VAL",16777215,0,"$(P)WF_UPDATE_PLOT.VAL")
-#! Record("$(P)KEEP_W",473,32,0,0,"$(P)KEEP_W")
-#! Record("$(P)WF_TIME_PER_POINT",16,273,0,1,"$(P)WF_TIME_PER_POINT")
-#! Field("$(P)WF_TIME_PER_POINT.OUT",16777215,1,"$(P)WF_TIME_PER_POINT.OUT")
+#! Record("$(P)$(CHASSIS)WF_EDGE_TRIGGER",18,18,0,0,"$(P)$(CHASSIS)WF_EDGE_TRIGGER")
+#! Field("$(P)$(CHASSIS)WF_EDGE_TRIGGER.OUT",16777215,1,"$(P)$(CHASSIS)WF_EDGE_TRIGGER.OUT")
+#! Record("$(P)$(CHASSIS)WF_CHAN_ENABLE",289,18,0,0,"$(P)$(CHASSIS)WF_CHAN_ENABLE")
+#! Field("$(P)$(CHASSIS)WF_CHAN_ENABLE.FLNK",16777215,0,"$(P)$(CHASSIS)WF_CHAN_ENABLE.FLNK")
+#! Link("$(P)$(CHASSIS)WF_CHAN_ENABLE.FLNK","$(P)$(CHASSIS)WF_CHAN_DISABLE")
+#! Field("$(P)$(CHASSIS)WF_CHAN_ENABLE.VAL",16777215,1,"$(P)$(CHASSIS)WF_CHAN_ENABLE.VAL")
+#! Record("$(P)$(CHASSIS)WF_CHAN_DISABLE",254,218,0,0,"$(P)$(CHASSIS)WF_CHAN_DISABLE")
+#! Field("$(P)$(CHASSIS)WF_CHAN_DISABLE.INPA",16777215,1,"$(P)$(CHASSIS)WF_CHAN_DISABLE.INPA")
+#! Link("$(P)$(CHASSIS)WF_CHAN_DISABLE.INPA","$(P)$(CHASSIS)WF_CHAN_ENABLE.VAL")
+#! Record("$(P)$(CHASSIS)WF_N_ACTIVE",661,24,0,0,"$(P)$(CHASSIS)WF_N_ACTIVE")
+#! Field("$(P)$(CHASSIS)WF_N_ACTIVE.FLNK",16777215,1,"$(P)$(CHASSIS)WF_N_ACTIVE.FLNK")
+#! Link("$(P)$(CHASSIS)WF_N_ACTIVE.FLNK","$(P)$(CHASSIS)WF_X_NUSE")
+#! Field("$(P)$(CHASSIS)WF_N_ACTIVE.VAL",16777215,1,"$(P)$(CHASSIS)WF_N_ACTIVE.VAL")
+#! Record("$(P)$(CHASSIS)WF_X_NUSE",960,47,0,0,"$(P)$(CHASSIS)WF_X_NUSE")
+#! Field("$(P)$(CHASSIS)WF_X_NUSE.INPA",16777215,0,"$(P)$(CHASSIS)WF_X_NUSE.INPA")
+#! Link("$(P)$(CHASSIS)WF_X_NUSE.INPA","$(P)$(CHASSIS)WF_N_ACTIVE.VAL")
+#! Field("$(P)$(CHASSIS)WF_X_NUSE.OUT",16777215,0,"$(P)$(CHASSIS)WF_X_NUSE.OUT")
+#! Link("$(P)$(CHASSIS)WF_X_NUSE.OUT","$(P)$(CHASSIS)WF_CALCX.NUSE")
+#! Record("$(P)$(CHASSIS)WF_TIME_STEP",660,343,0,0,"$(P)$(CHASSIS)WF_TIME_STEP")
+#! Field("$(P)$(CHASSIS)WF_TIME_STEP.VAL",16777215,1,"$(P)$(CHASSIS)WF_TIME_STEP.VAL")
+#! Field("$(P)$(CHASSIS)WF_TIME_STEP.FLNK",16777215,1,"$(P)$(CHASSIS)WF_TIME_STEP.FLNK")
+#! Link("$(P)$(CHASSIS)WF_TIME_STEP.FLNK","$(P)$(CHASSIS)WF_CALCX")
+#! Record("$(P)$(CHASSIS)WF_POLL_ENABLE",250,355,0,0,"$(P)$(CHASSIS)WF_POLL_ENABLE")
+#! Record("$(P)$(CHASSIS)WF_FAST_UPDATE",254,503,0,0,"$(P)$(CHASSIS)WF_FAST_UPDATE")
+#! Record("$(P)$(CHASSIS)WF_CALCX",958,229,0,0,"$(P)$(CHASSIS)WF_CALCX")
+#! Field("$(P)$(CHASSIS)WF_CALCX.INPA",16777215,0,"$(P)$(CHASSIS)WF_CALCX.INPA")
+#! Link("$(P)$(CHASSIS)WF_CALCX.INPA","$(P)$(CHASSIS)WF_TIME_STEP.VAL")
+#! Field("$(P)$(CHASSIS)WF_CALCX.OUT",16777215,1,"$(P)$(CHASSIS)WF_CALCX.OUT")
+#! Link("$(P)$(CHASSIS)WF_CALCX.OUT","$(P)$(CHASSIS)WF_X_AXIS.VAL")
+#! Field("$(P)$(CHASSIS)WF_CALCX.NUSE",16777215,0,"$(P)$(CHASSIS)WF_CALCX.NUSE")
+#! Record("$(P)$(CHASSIS)WF_X_AXIS",1229,350,0,0,"$(P)$(CHASSIS)WF_X_AXIS")
+#! Field("$(P)$(CHASSIS)WF_X_AXIS.VAL",16777215,0,"$(P)$(CHASSIS)WF_X_AXIS.VAL")
+#! Field("$(P)$(CHASSIS)WF_X_AXIS.FLNK",16777215,1,"$(P)$(CHASSIS)WF_X_AXIS.FLNK")
+#! Link("$(P)$(CHASSIS)WF_X_AXIS.FLNK","$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC")
+#! Record("$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC",1292,171,0,1,"$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC")
+#! Field("$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC.INPC",16777215,0,"$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC.INPC")
+#! Link("$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC.INPC","$(P)$(CHASSIS)WF_X_AXIS.VAL")
+#! Field("$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC.OUT",16777215,0,"$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC.OUT")
+#! Link("$(P)$(CHASSIS)WF_UPDATE_PLOT_CALC.OUT","$(P)$(CHASSIS)WF_UPDATE_PLOT.VAL")
+#! Record("$(P)$(CHASSIS)WF_UPDATE_PLOT",1282,64,0,0,"$(P)$(CHASSIS)WF_UPDATE_PLOT")
+#! Field("$(P)$(CHASSIS)WF_UPDATE_PLOT.VAL",16777215,0,"$(P)$(CHASSIS)WF_UPDATE_PLOT.VAL")
+#! Record("$(P)$(CHASSIS)KEEP_W",473,32,0,0,"$(P)$(CHASSIS)KEEP_W")
+#! Record("$(P)$(CHASSIS)WF_TIME_PER_POINT",16,273,0,1,"$(P)$(CHASSIS)WF_TIME_PER_POINT")
+#! Field("$(P)$(CHASSIS)WF_TIME_PER_POINT.OUT",16777215,1,"$(P)$(CHASSIS)WF_TIME_PER_POINT.OUT")

@@ -55,7 +55,7 @@ record(calcout, "$(P)REP_P_TO_F")
 {
 	field(INPA, "$(P)REP_PERIOD")
 	field(CALC, "1000/A")
-	field(OUT, "$(P)REP_FREQUENCY PP")
+	field(OUT, "$(P)REP_FREQUENCY PP MS")
 	field( SDIS, "$(P)REP_F_TO_P.PACT")
 	field( DISV, "1")
 	field( PREC, "5")
@@ -65,7 +65,7 @@ record(calcout, "$(P)REP_F_TO_P")
 {
 	field(INPA, "$(P)REP_FREQUENCY")
 	field(CALC, "1000/A")
-	field(OUT, "$(P)REP_PERIOD PP")
+	field(OUT, "$(P)REP_PERIOD PP MS")
 	field( SDIS, "$(P)REP_P_TO_F.PACT")
 	field( DISV, "1")
 	field( PREC, "5")
@@ -154,10 +154,10 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_Out")
 record( calcout, "$(P)DUTY_CYCLE_Sync_In")
 {
 	field( INPA, "$(P)REP_PERIOD CP")
-	field( INPB, "$(P)PULSE_LENGTH CP")
+	field( INPB, "$(P)PULSE_LENGTH CP MS")
 	field( CALC, "A==0?0:B>=A?100:100*B/A")
 	field( OOPT, "On Change")
-	field( OUT, "$(P)DUTY_CYCLE PP")
+	field( OUT, "$(P)DUTY_CYCLE PP MS")
 	field( SDIS, "$(P)DUTY_CYCLE_Sync_Out.PACT")
 	field( DISV, "1")
 	field( EGU, "%")
@@ -166,14 +166,14 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_In")
 
 record( calcout, "$(P)PULSE_MODE_CALC")
 {
-	field( INPA, "$(P)REP_PERIOD CP")
-	field( INPB, "$(P)PULSE_LENGTH CP")
+	field( INPA, "$(P)REP_PERIOD CP MS")
+	field( INPB, "$(P)PULSE_LENGTH CP MS")
 	# The number of ms between pulses that marks the transition from pulsed
 	# to CW. Determined by observation, and where pulse mode calculation
 	# results are as bad as CW mode calculations.
 	field( INPC, "0.05")
 	field( CALC, "A-B > C")
-	field( OUT, "$(P)PULSE_MODE PP")
+	field( OUT, "$(P)PULSE_MODE PP MS")
 	info( autosaveFields, "INPC")
 }
 
@@ -185,10 +185,10 @@ record( bi, "$(P)PULSE_MODE")
 
 record( calc, "$(P)SMOOTHED_BW")
 {
-	field( INPA, "$(P)CAV1:DECAY_BW CP")
+	field( INPA, "$(P)CAV1:DECAY_BW CP MS")
 	####XXXX Using just one input for now
 ####	field( INPB, "$(P)CAV2:DECAY_BW")
-	field( INPB, "$(P)CAV1:DECAY_BW CP")
+	field( INPB, "$(P)CAV1:DECAY_BW CP MS")
 	field( INPC, "0.9") # Smoothing factor
 	field( CALC, "C*(ISNAN(VAL)?0:VAL)+(1-C)*(A+B)/2")
 	field( SDIS, "$(P)PULSE_MODE")
@@ -337,17 +337,17 @@ record( calc, "$(P)POPEN_RAW" )
 # Keep this passive, so it is only applied when a button is pushed.
 record( calc, "$(P)AOPEN_SCALE_CALC" ) {
 	field( INPA, "$(P)AOPEN_RAW")
-	field( INPB, "$(P)CAV1:AMEAN CP") # Use this waveform mean to scale AOPEN
-	field( INPC, "$(P)CAV2:AMEAN CP") # Use this waveform mean to scale AOPEN
+	field( INPB, "$(P)CAV1:AMEAN CP MS") # Use this waveform mean to scale AOPEN
+	field( INPC, "$(P)CAV2:AMEAN CP MS") # Use this waveform mean to scale AOPEN
 	field( INPD, "0.95") # Equivalent of SMOO field in ai records
 	field( CALC, "(1-D)*A/MAX(B,C) + (ISNAN(VAL)?0:VAL)*D")
 }
 record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when
 # the "PROC" field is written. It's a suggestion, not a feedback loop.
-	field( DOL,  "$(P)AOPEN_SCALE_CALC")
+	field( DOL,  "$(P)AOPEN_SCALE_CALC NPP MS")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)AOPEN_SCALE PP")
+	field( OUT,  "$(P)AOPEN_SCALE PP MS")
 }
 record( ao, "$(P)AOPEN_SCALE" ) {
 	field( FLNK, "$(P)AOPEN_MAX_CALC" )
@@ -371,20 +371,20 @@ record( dfanout, "$(P)SET_AOPEN_LIMITS") {
 # Offset DAC phase so POPEN matches measured cavity phase.
 # Keep this passive, so it is only applied when a button is pushed.
 record( calc, "$(P)POPEN_SCALE_CALC" ) {
-	field( INPA, "$(P)POPEN_RAW")
-	field( INPB, "$(P)PACT CP") # Use this waveform mean to scale POPEN
+	field( INPA, "$(P)POPEN_RAW NPP MS")
+	field( INPB, "$(P)PACT CP MS") # Use this waveform mean to scale POPEN
 	field( INPC, "0.95") # Equivalent of SMOO field in ai records
 	field( CALC, "(1-C)*(A-B) + C*(ISNAN(VAL)?0:VAL)")
 }
 record(ao, "$(P)USE_POPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when
 # the "PROC" field is written. It's a suggestion, not a feedback loop.
-	field( DOL,  "$(P)POPEN_SCALE_CALC")
+	field( DOL,  "$(P)POPEN_SCALE_CALC NPP MS")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)POPEN_SCALE")
+	field( OUT,  "$(P)POPEN_SCALE PP MS")
 }
 record( ao, "$(P)POPEN_SCALE" ) {
-	field( VAL, "1")
+	field( VAL, "0")
 	info( autosaveFields, "VAL")
 }
 
@@ -420,28 +420,28 @@ record( ao, "$(P)SOURCE_RE_Sync"){
 # This should be processed right before opening I/Q loop
 	field( SDIS, "$(P)$(CHASSIS)CLOSE_LOOP_W")
 	field( DISV, "0")
-	field( DOL,  "$(P)$(CHASSIS)VOUTXFALL_R")
+	field( DOL,  "$(P)$(CHASSIS)VOUTXFALL_R NPP MS")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP")
+	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP MS")
 }
 
 record( ao, "$(P)SOURCE_IM_Sync"){
 # This should be processed right before opening I/Q loop
-	field( DOL,  "$(P)$(CHASSIS)VOUTYFALL_R")
+	field( DOL,  "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
 	field( OMSL, "closed_loop")
-	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP")
+	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP MS")
 }
 
 record( fanout,  "$(P)SOURCE_IQ_TO_AP")
 {
-	field(LNK1, "$(P)SOURCE_IQ_TO_A PP")
-	field(LNK2, "$(P)SOURCE_IQ_TO_P PP")
+	field(LNK1, "$(P)SOURCE_IQ_TO_A PP MS")
+	field(LNK2, "$(P)SOURCE_IQ_TO_P PP MS")
 }
 
 record( calcout, "$(P)SOURCE_IQ_TO_A")
 {
-	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R")
-	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R")
+	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R NPP MS")
+	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
 	field( INPC, "$(P)AOPEN_SCALE" )
 	field(CALC, "SQRT(A^2+B^2)/C")
 	field( OUT, "$(P)AOPEN PP")
@@ -450,8 +450,8 @@ record( calcout, "$(P)SOURCE_IQ_TO_A")
 
 record( calcout, "$(P)SOURCE_IQ_TO_P")
 {
-	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R")
-	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R")
+	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R NPP MS")
+	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
 	field( INPD, "$(P)POPEN_SCALE" )
 	field(CALC, "ATAN2(A,B)*R2D+D")
 	field( OUT, "$(P)POPEN PP")
@@ -472,10 +472,10 @@ record( ao, "$(P)$(CHASSIS)DECAY_COEF_W")
 }
 record( acalcout, "$(P)REV:AWF_LIMIT")
 {
-	field( INPA, "$(P)$(CHASSIS)THRESH_INIT_W CP")
-	field( INPB, "$(P)$(CHASSIS)DECAY_COEF_W CP")
-	field( INPC, "$(P)$(CHASSIS)THRESH_NOISE_W CP")
-	field( INAA, "$(P)$(CHASSIS)DECAY_X_AXIS")
+	field( INPA, "$(P)$(CHASSIS)THRESH_INIT_W CP MS")
+	field( INPB, "$(P)$(CHASSIS)DECAY_COEF_W CP MS")
+	field( INPC, "$(P)$(CHASSIS)THRESH_NOISE_W CP MS")
+	field( INAA, "$(P)$(CHASSIS)DECAY_X_AXIS NPP MS")
 	field( CALC, "A/EXP(B*AA)+C")
 	field( NELM, "256")
 	field( NUSE, "256")
@@ -534,6 +534,13 @@ record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
 	field(OUTC, "$(P)RFS2:WAVE_SAMP_PER_W PP")
 	field(DOL, "$(P)WF_TIME_PER_POINT")
 	field(OMSL, "closed_loop")
+}
+
+
+record(mbbiDirect, "$(P)INLK_STATUS_MSBITS_R")
+{
+	field(HIHI, "1")
+	field(HHSV, "MAJOR")
 }
 #record(calc, "$(P)IFDES2MODULO")
 #{

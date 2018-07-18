@@ -9,8 +9,8 @@
 #	N - The SSA number
 
 record(calc, "$(P)SSA$(N)_GAIN") {
-field(INPA, "$(P)DRV$(N):AMEAN")
-field(INPB, "$(P)FWD$(N):AMEAN")
+field(INPA, "$(P)DRV$(N):AMEAN NPP MS")
+field(INPB, "$(P)FWD$(N):AMEAN NPP MS")
 field(INPC, "$(P)AOPEN CP")
 # Update when ADES changes
 field(CALC, "B/A")
@@ -26,7 +26,7 @@ field(LNK2, "$(P)SSA$(N)_GAIN_LOG PP")
 
 record(compress, "$(P)DRV$(N):AMEAN_LOG") {
 field(DESC, "Record of the last 1024 AMEAN values")
-field(INP, "$(P)DRV$(N):AMEAN")
+field(INP, "$(P)DRV$(N):AMEAN  NPP MS")
 field(ALG, "Circular Buffer")
 field(NSAM, "1024")
 field(PREC, "5")
@@ -34,7 +34,7 @@ field(PREC, "5")
 
 record(compress, "$(P)FWD$(N):AMEAN_LOG") {
 field(DESC, "Record of the last 1024 AMEAN values")
-field(INP, "$(P)FWD$(N):AMEAN")
+field(INP, "$(P)FWD$(N):AMEAN NPP MS")
 field(ALG, "Circular Buffer")
 field(NSAM, "1024")
 field(PREC, "5")

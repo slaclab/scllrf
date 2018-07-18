@@ -43,7 +43,7 @@
 using namespace std;
 using namespace NEWMAT;
 
-const unsigned GUNBExtra::maxChannel = 1024; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
+const unsigned GUNBExtra::maxChannel = 32; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
 
 const double GUNBExtra::LOfrequency = 1.320e9;

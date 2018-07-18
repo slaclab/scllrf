@@ -62,7 +62,7 @@ field(VAL, "0.2")
 }
 
 record(calcout, "$(P)FREQ_SHIFT") {
-field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R")
+field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R NPP MS")
 field(INPB, "$(P)PHASE_DIFF")
 field(INPC, "$(P)RF_MASTER")
 field(INPE, "$(P)FREQ_LOOP_GAIN PP")
@@ -71,6 +71,7 @@ field(CALC, "(A+(ABS(B)<40?B:0)*E*C)")
 	field( DISV, "0")
 field(SCAN, ".2 second")
 field(OUT, "$(P)PRC:DDSA_PHSTEP_H_W PP")
+	field(EGU, "Hz")
 }
 
 record(calc, "$(P)FREQ_NOMINAL")
@@ -83,7 +84,7 @@ field(EGU, "Hz")
 
 record(calc, "$(P)FREQ_OFFSET")
 {
-field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP")
+field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP MS")
 # The 13xx is good for the gun, not buncher. Use freq divider macro.
 field(CALC, "A*1320e6/(7*2^20)")
 field(EGU, "Hz")
@@ -91,7 +92,7 @@ field(EGU, "Hz")
 
 record(calc, "$(P)FREQ_CAV") {
 alias("llrf$(ALIAS_N):freq_cav")
-field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP")
+field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP MS")
 field(INPB, "$(1300RATIO)")
 # The 13xx is good for the gun, not buncher. Use freq divider macro.
 field(CALC, "1300e6/B+A*1320e6/(7*2^20)")
@@ -108,7 +109,7 @@ field(SCAN, ".2 second")
 }
 
 record(calcout, "$(P)CALC_NEW_PHSTEP_H") {
-field(INPA, "$(P)PRC:DDSA_PHSTEP_H_W")
+field(INPA, "$(P)PRC:DDSA_PHSTEP_H_W MS")
 field(INPB, "$(P)DECAY_CONSTANT_B")
 # Check # with Gang
 # 2^20/(1300e6/7)
@@ -129,6 +130,7 @@ field(INPB, "8.38190317153931e-08")
 field(INPC, "$(P)PACT")
 field(INPD, "$(P)FWD:PMEAN")
 field(CALC, "A-B")
+field(EGU, "deg")
 }
 
 record(calcout, "$(P)READY_TO_TUNE") {
@@ -319,23 +321,24 @@ field(LLSV, "MAJOR")
 
 record (calc, "$(P)DFACT" )
 {
-	field( INPA, "$(P)CW_DETUNE" )
-	field( INPB, "$(P)CAV1:DECAY_STRENGTH")
-	field( INPC, "$(P)CAV2:DECAY_STRENGTH")
-	field( INPD, "$(P)CAV1:DECAY_CONSTANT_B")
-	field( INPE, "$(P)CAV2:DECAY_CONSTANT_B")
-	field( INPF, "$(P)PULSE_MODE")
+	field( INPA, "$(P)CW_DETUNE NPP MS" )
+	field( INPB, "$(P)CAV1:DECAY_STRENGTH NPP MS")
+	field( INPC, "$(P)CAV2:DECAY_STRENGTH NPP MS")
+	field( INPD, "$(P)CAV1:DECAY_CONSTANT_B NPP MS")
+	field( INPE, "$(P)CAV2:DECAY_CONSTANT_B NPP MS")
+	field( INPF, "$(P)PULSE_MODE NPP MS")
 	# If pulsed, use the signal with greater decay strength (cleaner)
 	# Otherwise, use the CW calculation.
 	field( CALC, "F?(B>C?D:E):A")
+	field(EGU, "Hz")
 }
 
 # This record keeps ADES, the closed loop setpoint,
 # synchronized with the cavity amplitude, during open loop operation
 record ( acalcout, "$(P)AACT_DECAY" )
 {
-	field( INAA, "$(P)CAV1:DECAY_AWF CP" )
-	field( INBB, "$(P)CAV2:DECAY_AWF" )
+	field( INAA, "$(P)CAV1:DECAY_AWF CP MS" )
+	field( INBB, "$(P)CAV2:DECAY_AWF NPP MS" )
 	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
 ## The equation is odd because the record wasn't working with AA[0]
 	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*MAX(AMAX(AA[0,1]),AMAX(BB[0,1]))" ) # Use this if we want 2 probe max.
@@ -348,13 +351,14 @@ record ( acalcout, "$(P)AACT_DECAY" )
 #	field( DISV, "1")
 	field( NELM, "1")
 	field( NUSE, "1")
+field(EGU, "sqrt(W)")
 }
 
 
 record ( acalcout, "$(P)PACT_DECAY" )
 {
-	field( INAA, "$(P)CAV1:DECAY_PWF CP" )
-	field( INBB, "$(P)CAV2:DECAY_PWF" )
+	field( INAA, "$(P)CAV1:DECAY_PWF CP MS" )
+	field( INBB, "$(P)CAV2:DECAY_PWF NPP MS" )
 	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
 	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*AMAX(AA[0,1])" )
 #	field( OUT, "$(P)PDES PP")
@@ -366,6 +370,7 @@ record ( acalcout, "$(P)PACT_DECAY" )
 #	field( DISV, "1")
 	field( NELM, "1")
 	field( NUSE, "1")
+field(EGU, "deg")
 }
 
 record (bo, "$(P)RFCTRL" )
@@ -446,9 +451,9 @@ field(LNK5, "$(P)PRC:CLOSE_LOOP_W PP")
 # Set proportional, then integral gain
 field(DLY6, "0.2")
 field(DOL6, "$(P)AP_KP")
-field(LNK6, "$(P)PRC:GAINP_BETA_W PP")
+field(LNK6, "$(P)PRC:GAINP_BETA_W PP MS")
 field(DOL7, "$(P)AP_KI")
-field(LNK7, "$(P)PRC:GAINP_ALPHA_W PP")
+field(LNK7, "$(P)PRC:GAINP_ALPHA_W PP MS")
 }
 
 ######xxxxx tHIS MAY BE CAUSING PROBLEMS
@@ -620,8 +625,8 @@ record(ao, "$(P)MASK_BOUNDARY_RESET") {
 record(calcout, "$(P)BOUNDARY_RESET_CALC") {
 	field(INPA, "$(P)RF_MASTER")
 	field(INPB, "$(P)PRC:RF_GO_W")
-	field(INPE, "$(P)PRC:REP_PERIOD_W CP")
-	field(INPF, "$(P)PRC:PULSE_LENGTH_W CP")
+	field(INPE, "$(P)PRC:REP_PERIOD_W CP MS")
+	field(INPF, "$(P)PRC:PULSE_LENGTH_W CP MS")
 	field(CALC, "(F<E)?2:0")
 	field(OUT, "$(P)SET_BOUNDARY_RESETS PP")
 	field(SDIS, "$(P)MASK_BOUNDARY_RESET")

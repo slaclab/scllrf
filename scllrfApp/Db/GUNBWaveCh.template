@@ -34,17 +34,35 @@ record(waveform, "$(P)ITWF_RAW") {
 # aren't enabled, but not vice versa.
 record(dfanout, "$(P)IWF_NUSE") {
 	field(OUTA, "$(P)AWF_SMOO.NUSE")
-	field(OUTB, "$(P)AMEAN.NUSE")
-	field(OUTC, "$(P)ASTD.NUSE")
-	field(OUTD, "$(P)ARSTD.NUSE")
-	field(OUTE, "$(P)ITMEAN.NUSE")
-	field(OUTF, "$(P)A_CALC.NUSE")
+	field(OUTB, "$(P)PWF_SMOO.NUSE")
+	field(OUTC, "$(P)A_CALC.NUSE")
+	field(OUTD, "$(P)P_CALC.NUSE")
 	field(DOL, "$(P)ITWF.NORD")
 	field(OMSL, "closed_loop")
 }
 
+record(dfanout, "$(P)STAT_NUSE") {
+	field(OUTA, "$(P)ITMEAN.NUSE")
+	field(OUTB, "$(P)QTMEAN.NUSE")
+	field(OUTC, "$(P)AMEAN.NUSE")
+	field(OUTD, "$(P)ASTD.NUSE")
+	field(OUTE, "$(P)ARSTD.NUSE")
+	field(OUTF, "$(P)PMEAN.NUSE")
+	field(OUTG, "$(P)PSTD.NUSE")
+	field(OUTH, "$(P)PRSTD.NUSE")
+	field(DOL, "$(CHASSIS)PULSE_POINTS CP")
+	field(OMSL, "closed_loop")
+}
+
+record(dfanout, "$(P)STAT_NUSE2") {
+	field(OUTA, "$(P)AMEAN_RAW.NUSE")
+	field(OUTB, "$(P)AMEAN_ENG.NUSE")
+	field(DOL, "$(CHASSIS)PULSE_POINTS CP")
+	field(OMSL, "closed_loop")
+}
+
 record(acalcout, "$(P)ITMEAN") {
-	field(INAA, "$(P)ITWF CPP")
+	field(INAA, "$(P)ITWF CPP MS")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -72,18 +90,8 @@ record(waveform, "$(P)QTWF_RAW") {
 	field(FTVL, "LONG")
 }
 
-record(dfanout, "$(P)QWF_NUSE") {
-#	field(OUTA, "$(P)PWF_SMOO.NUSE")
-	field(OUTB, "$(P)PMEAN.NUSE")
-	field(OUTC, "$(P)PSTD.NUSE")
-	field(OUTD, "$(P)PRSTD.NUSE")
-	field(OUTE, "$(P)QTMEAN.NUSE")
-	field(DOL, "$(P)QTWF.NORD")
-	field(OMSL, "closed_loop")
-}
-
 record(acalcout, "$(P)QTMEAN") {
-	field(INAA, "$(P)QTWF CPP")
+	field(INAA, "$(P)QTWF CPP MS")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -102,7 +110,7 @@ record(waveform, "$(P)AWF") {
 
 record(acalcout, "$(P)A_CALC") {
 	field(DESC, "Ch $(CH) user defined Waveform")
-	field(INAA, "$(P)AWF_RAW CP")
+	field(INAA, "$(P)AWF_RAW CP MS")
 # 100*sqrt(50ohms)
 	field(INPA, "707.1067811")
 # full-scale ADC counts
@@ -130,7 +138,7 @@ record(waveform, "$(P)AWF_RAW") {
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_RAW_A")
 	field(PREC, "1")
-	field(EGU, "$(EGU)")
+	field(EGU, "counts")
 	field(NELM, "8192")
 		field(FTVL, "FLOAT")
 }
@@ -146,7 +154,7 @@ record(ao, "$(P)SCALE") {
 
 # Souned useful, but nobody's using it currently. GWB 5-30-2018
 record(acalcout, "$(P)AWF_SMOO") {
-	field(INAA, "$(P)AWF CP")
+	field(INAA, "$(P)AWF CP MS")
 	field(A, "50")
 	field(CALC, "(AA/A)+(AVAL*(1-1/A))")
 	field(NELM, "8192")
@@ -155,15 +163,31 @@ record(acalcout, "$(P)AWF_SMOO") {
 }
 
 record(acalcout, "$(P)AMEAN") {
-	field(INAA, "$(P)AWF CPP")
+	field(INAA, "$(P)AWF CPP MS")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
 }
 
+record(acalcout, "$(P)AMEAN_RAW") {
+	field(INAA, "$(P)AWF_RAW CPP MS")
+	field(CALC, "AVG(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "counts")
+}
+
+record(acalcout, "$(P)AMEAN_ENG") {
+	field(INAA, "$(P)AWF_ENG CPP MS")
+	field(CALC, "AVG(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "dBm")
+}
+
 record(calc, "$(P)PWR") {
-	field(INPA, "$(P)AMEAN CPP")
+	field(INPA, "$(P)AMEAN CPP MS")
 	field(CALC, "A^2")
 	field(PREC, "5")
 	field(EGU, "W")
@@ -171,7 +195,7 @@ record(calc, "$(P)PWR") {
 
 record(acalcout, "$(P)ASTD") {
 	field(DESC, "Normalized standard deviation")
-	field(INAA, "$(P)AWF CPP")
+	field(INAA, "$(P)AWF CPP MS")
 	field(CALC, "STD(AA)")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -181,7 +205,7 @@ record(acalcout, "$(P)ASTD") {
 record(acalcout, "$(P)ARSTD") {
 	field(DESC, "Normalized standard deviation")
 	field(INPA, "$(P)ASTD CPP")
-	field(INPB, "$(P)AMEAN CPP")
+	field(INPB, "$(P)AMEAN CPP MS")
 	field(CALC, "A/B")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -201,15 +225,15 @@ record(waveform, "$(P)PWF") {
 
 record(acalcout, "$(P)P_CALC") {
 		field(DESC, "Ch $(CH) user defined Waveform")
-		field(INAA, "$(P)PWF CP")
+		field(INAA, "$(P)PWF CP MS")
 # 100*sqrt(50ohms)
-#         field(INPA, "707.1067811")
-#         # full-scale ADC counts
-#                 field(INPB, "$(P)CAL_ADC_10DBM")
-#                 # 50 ohms
-#                         field(INPD, "50")
-#                         # Other losses
-#                                 field(INPE, "$(P)CAL_LOSS_TOTAL")
+# field(INPA, "707.1067811")
+# # full-scale ADC counts
+# field(INPB, "$(P)CAL_ADC_10DBM")
+# # 50 ohms
+# field(INPD, "50")
+# # Other losses
+# field(INPE, "$(P)CAL_LOSS_TOTAL")
 field(CALC, "AA")
 field(PREC, "2")
 field(EGU, "degrees")
@@ -255,7 +279,7 @@ record(ao, "$(P)GOLD") {
 #}
 
 record(acalcout, "$(P)PMEAN") {
-	field(INAA, "$(P)PWF CPP")
+	field(INAA, "$(P)PWF CPP MS")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -264,7 +288,7 @@ record(acalcout, "$(P)PMEAN") {
 
 record(acalcout, "$(P)PSTD") {
 	field(DESC, "Normalized standard deviation")
-	field(INAA, "$(P)PWF CPP")
+	field(INAA, "$(P)PWF CPP MS")
 	field(CALC, "STD(AA)")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -273,8 +297,8 @@ record(acalcout, "$(P)PSTD") {
 
 record(acalcout, "$(P)PRSTD") {
 	field(DESC, "Normalized standard deviation")
-	field(INPA, "$(P)PSTD CPP")
-	field(INPB, "$(P)PMEAN CPP")
+	field(INPA, "$(P)PSTD CPP MS")
+	field(INPB, "$(P)PMEAN CPP MS")
 	field(CALC, "A/B")
 	field(NELM, "8192")
 	field(PREC, "5")
@@ -285,6 +309,17 @@ record(acalcout, "$(P)PRSTD") {
 # Mind bending macro trick makes sure that undefined MIN/MAX registers aren't aliased
 alias( "$(CHASSIS)ADC$(IN$(CH)=1,IN0=1,IN1=2,IN2=3,IN3=4,IN4=5,IN5=6,IN6=7,IN7=8)_MIN_R", "$(P)ADC_MIN")
 alias( "$(CHASSIS)ADC$(IN$(CH)=1,IN0=1,IN1=2,IN2=3,IN3=4,IN4=5,IN5=6,IN6=7,IN7=8)_MAX_R", "$(P)ADC_MAX")
+
+record(calc, "$(P)ADC_MAX-MIN")
+{
+	field(DESC, "Range covered by ADC channel")
+	field(INPA, "$(P)ADC_MAX CPP MS")
+	field(INPB, "$(P)ADC_MIN CPP MS")
+	field(CALC, "A-B")
+# This is raw ADC counts, an integer
+	field(PREC, 0)
+	field(EGU, "counts")
+}
 
 #! Further lines contain data used by VisualDCT
 #! View(2639,16,1.0)

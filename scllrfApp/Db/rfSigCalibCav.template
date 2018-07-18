@@ -55,7 +55,7 @@ record(calcout, "$(PREF)SCALETOREF") {
 field(CALC, "B*A/C")
 field(INPA, "$(PREF)CAL_SCALE") # current scaling
 field(INPB, "1")# B = known reference, in power
-field(INPC, "$(PREF)AMEAN") # current amplitude mean
+field(INPC, "$(PREF)AMEAN NPP MS") # current amplitude mean
 field(OOPT, "Every Time")
 field(OUT,  "$(PREF)CAL_SCALE PP") # new scaling
 field(PINI, "NO") # do not overwrite cal on startup
