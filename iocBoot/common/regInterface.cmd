@@ -49,4 +49,4 @@ epicsThreadSleep(0.2)
 dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)Reg,SC=$(SC=scllrf)")
 
 bmb7Configure("$(CHASSIS_NAME)BMB7", "$(FPGA_IP)", "0")
-dbLoadRecords("db/BMB7monitor.db", "PORT=$(CHASSIS_NAME)BMB7,P=$(DEVICE_TYPE):$(AREA):$(POSITION),R=$(CHASSIS_NAME):")
+dbLoadRecords("db/BMB7monitor.db", "PORT=$(CHASSIS_NAME)BMB7,P=$(DEVICE_TYPE):$(AREA):$(POSITION):,R=$(CHASSIS_NAME):")

@@ -97,13 +97,35 @@ record (calc, "GUN:GUNB:100:PACT" )
 	field(EGU, "deg")
 }
 
+record (calc "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
+{
+	field( DESC, "Fwd - cav phase when detune is small")
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD1:PMEAN CP MS" )
+	field( INPC, "GUN:GUNB:100:CAV1:DECAY_CONSTANT_B CP MS")
+	field( INPD, "GUN:GUNB:100:PULSE_MODE CP")
+	field( CALC, "(C<1000)&&D?0.9*VAL+0.1*(A-B):VAL")
+}
+
+record (calc "GUN:GUNB:100:FWD2:PMEAN_OFFSET")
+{
+	field( DESC, "Fwd - cav phase when detune is small")
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:PMEAN CP MS" )
+	field( INPC, "GUN:GUNB:100:CAV1:DECAY_CONSTANT_B CP MS")
+	field( INPD, "GUN:GUNB:100:PULSE_MODE CP")
+	field( CALC, "(C<1000)&&D?0.9*VAL+0.1*(A-B):VAL")
+}
+	
+
 record (calc, "GUN:GUNB:100:CW_DETUNE" )
 {
 	field( DESC, "Detuning in CW mode" )
 	field( INPA, "GUN:GUNB:100:CAV1:PMEAN NPP MS" )
 	field( INPB, "GUN:GUNB:100:FWD2:PMEAN NPP MS" )
-	field( INPC, "$(P)SMOOTHED_BW")
-	field( CALC, "C*TAN(A - B)")
+	filed( INPC, "GUN:GUNB:100:FWD2:PMEAN_OFFSET")
+	field( INPD, "$(P)SMOOTHED_BW")
+	field( CALC, "C*TAN(A - B - C)")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 }
 
