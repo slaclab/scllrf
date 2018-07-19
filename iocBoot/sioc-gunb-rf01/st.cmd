@@ -120,7 +120,7 @@ seq PVramp, "PREFIX=$(P)"
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","RFS1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-dbpf $(P)KEEP_W 0xCFFFF
+dbpf $(P)KEEP_W 0xFFFF
 dbpf $(P)DECAYKEEP_W 0xFFFF
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
@@ -131,7 +131,7 @@ dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","RFS2")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-dbpf $(P)KEEP_W 0xCFFFF
+dbpf $(P)KEEP_W 0xFFFF
 dbpf $(P)DECAYKEEP_W 0xFFFF
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
@@ -142,7 +142,7 @@ dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","PRC")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-dbpf $(P)KEEP_W 0xFFFC3C3
+dbpf $(P)KEEP_W 0xFFFF
 dbpf $(P)DECAYKEEP_W 0xC3C3
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
