@@ -77,7 +77,6 @@ record(waveform, "$(P)QTWF") {
 	field(EGU, "$(EGU)")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
-	field(FLNK, "$(P)QWF_NUSE")
 }
 record(waveform, "$(P)QTWF_RAW") {
 	field(DESC, "Ch $(CH) raw ADC Q Waveform")
