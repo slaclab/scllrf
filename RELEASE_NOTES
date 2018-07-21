@@ -10,6 +10,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-6: Fixing CW detune calculations.
+
 scllrf-R1-0-5: Fixed status and processing settings in links.
 
 scllrf-R1-0-4: Gun and buncher deployment
