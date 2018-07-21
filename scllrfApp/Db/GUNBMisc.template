@@ -171,7 +171,7 @@ record( calcout, "$(P)PULSE_MODE_CALC")
 	# The number of ms between pulses that marks the transition from pulsed
 	# to CW. Determined by observation, and where pulse mode calculation
 	# results are as bad as CW mode calculations.
-	field( INPC, "0.05")
+	field( INPC, "0.04")
 	field( CALC, "A-B > C")
 	field( OUT, "$(P)PULSE_MODE PP MS")
 	info( autosaveFields, "INPC")

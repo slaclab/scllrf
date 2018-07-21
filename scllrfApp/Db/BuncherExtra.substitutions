@@ -9,12 +9,12 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 	{	"ACCL:GUNB:455:PRC:SPARE2:",	"5",	"6",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:SPARE3:",	"6",	"7",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:SPARE4:",	"7",	"8",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE5:",	"8",	"9",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE6:",	"9",	"10",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE7:",	"10",	"11",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE8:",	"11",	"12",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE9:",	"12",	"13",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE10:",	"13",	"14",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:DAC1:",	"8",	"9",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:DAC2:",	"9",	"10",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:RFS1A:",	"10",	"11",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:RFS1B:",	"11",	"12",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:RFS2A:",	"12",	"13",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:RFS2B:",	"13",	"14",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:SPARE11:",	"14",	"15",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:SPARE12:",	"15",	"16",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 #RFS1 signals
