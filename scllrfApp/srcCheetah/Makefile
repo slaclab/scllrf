@@ -34,9 +34,9 @@ all_install: $(DIRS)
 	done  ; \
 
 #We don't want this to run every time we build the generated code etc., so make a dummy install target
-install:
+#install:
 # Or use this one if you want it to generate and copy code every time
-#install: copy
+install: copy
 
 
 %_install: %

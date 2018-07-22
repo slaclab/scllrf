@@ -102,7 +102,7 @@ record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 	field( DESC, "Detuning in CW mode" )
 	field( INPA, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS")
 	field( INPB, "$(P)SMOOTHED_BW")
-	field( CALC, "ATAN(A/C)")
+	field( CALC, "R2D*ATAN(A/C)")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 }
 

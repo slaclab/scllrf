@@ -89,7 +89,7 @@ field(DESC, "Points where pulse is active")
 field(INPA, "$(P)$(CHASSIS)WF_TIME_STEP CP")
 field(INPB, "$(P)$(CHASSIS)WF_X_NUSE CP")
 field(INPC, "$(P)PULSE_LENGTH CP")
-field(CALC, "C/A < B? C/A: B")
+field(CALC, "0.001*C/A<B?0.001*C/A:B")
 }
 
 #record(calcout, "$(P)$(CHASSIS)WF_X_HOPR")
