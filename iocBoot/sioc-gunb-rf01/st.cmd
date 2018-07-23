@@ -142,7 +142,7 @@ dbpf $(P)RUN_STOP 1
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","PRC")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-dbpf $(P)KEEP_W 0xFFFF
+dbpf $(P)KEEP_W 0x0FF0C3C3
 dbpf $(P)DECAYKEEP_W 0xC3C3
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
