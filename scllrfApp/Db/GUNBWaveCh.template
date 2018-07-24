@@ -68,20 +68,20 @@ record(ao, "$(P)PULSE_START_TIME")
 	info(autosaveFields, "VAL")
 }
 
-record(calcout, "$(P)PULSE_START_POINT")
+record(calcout, "$(P)PULSE_START_POINT CP")
 {
 field(DESC, "Points of rise time to drop from calcs")
 field(INPA, "$(CHASSIS)WF_TIME_STEP CP")
-field(INPB, "$(P)$(CHASSIS)PULSE_START_TIME CP")
+field(INPB, "$(P)PULSE_START_TIME CP")
 field(CALC, "B/A")
 	field(EGU, "points")
 }
 
 record(acalcout, "$(P)ITMEAN") {
 	field(INAA, "$(P)ITWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "AVG(AA[B,C])")
+	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
 }
@@ -109,9 +109,9 @@ record(waveform, "$(P)QTWF_RAW") {
 
 record(acalcout, "$(P)QTMEAN") {
 	field(INAA, "$(P)QTWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "AVG(AA[B,C])")
+	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
 }
@@ -183,9 +183,9 @@ record(acalcout, "$(P)AWF_SMOO") {
 
 record(acalcout, "$(P)AMEAN") {
 	field(INAA, "$(P)AWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "AVG(AA[B,C])")
+	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
@@ -201,9 +201,9 @@ record(acalcout, "$(P)AMEAN_RAW") {
 
 record(acalcout, "$(P)AMEAN_ENG") {
 	field(INAA, "$(P)AWF_ENG CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "AVG(AA[B,C])")
+	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "dBm")
@@ -219,7 +219,7 @@ record(calc, "$(P)PWR") {
 record(acalcout, "$(P)ASTD") {
 	field(DESC, "Normalized standard deviation")
 	field(INAA, "$(P)AWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
 	field(CALC, "STD(AA)")
 	field(NELM, "8192")
@@ -305,9 +305,9 @@ record(acalcout, "$(P)PWF_SMOO") {
 
 record(acalcout, "$(P)PMEAN") {
 	field(INAA, "$(P)PWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "AVG(AA[B,C])")
+	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "degrees")
@@ -316,9 +316,9 @@ record(acalcout, "$(P)PMEAN") {
 record(acalcout, "$(P)PSTD") {
 	field(DESC, "Normalized standard deviation")
 	field(INAA, "$(P)PWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT")
+	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "STD(AA[B,C])")
+	field(CALC, "STD(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "degrees")
