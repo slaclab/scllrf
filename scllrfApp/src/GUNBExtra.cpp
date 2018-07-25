@@ -720,91 +720,94 @@ void TraceData::TraceDataRequester()
 				float Irot, Qrot; // temporary place to hold rotated I & Q values.
 				for (rel_chan_ix=0; rel_chan_ix<nChan; ++rel_chan_ix)
 				{
-					if(relToAbsIdx[rel_chan_ix]%2 == 1) // if this is a I channel
+					unsigned int chIndex = relToAbsIdx[rel_chan_ix]/2;
+					if(relToAbsIdx[rel_chan_ix]%2 == 1) // if this is a Q channel
 					{
+						unsigned int Iindex = rel_chan_ix-1;
+						unsigned int Qindex = rel_chan_ix;
 						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
-								"%s %s publishing I waveform %d, from relative channel %d\n",
-								pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[rel_chan_ix]/2, rel_chan_ix);
-						pDriver_->doCallbacksInt32Array(pRawIQBuf_[rel_chan_ix], nPoints, *iRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+								"%s %s publishing  waveform %d, from relative channel %d\n",
+								pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[Qindex]/2, Qindex);
+						pDriver_->doCallbacksInt32Array(pRawIQBuf_[Qindex], nPoints, *qRawParamIndex_, relToAbsIdx[Qindex]/2);
 
-						if((rel_chan_ix > 0) && (relToAbsIdx[rel_chan_ix]/2 == relToAbsIdx[rel_chan_ix-1]/2)) // if the corresponding I is also active
+						if((rel_chan_ix > 0) && (relToAbsIdx[Qindex]/2 == relToAbsIdx[Iindex]/2)) // if the corresponding I is also active
 						{
 							for (i=0; i<nPoints; i++)
 							{
 								try
 								{
-									pRawABuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) hypot(pRawIQBuf_[rel_chan_ix-1][i], pRawIQBuf_[rel_chan_ix][i]);
-									pRawPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) (atan2(pRawIQBuf_[rel_chan_ix-1][i], pRawIQBuf_[rel_chan_ix][i])) * 180.0/M_PI;
-									Irot = pIQBuf_[rel_chan_ix][i] * cos((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0)
-											- pIQBuf_[rel_chan_ix-1][i] * sin((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0);
-									Qrot = pIQBuf_[rel_chan_ix][i] * sin((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0)
-											+ pIQBuf_[rel_chan_ix-1][i] * cos((float)(phaseOffset_[relToAbsIdx[rel_chan_ix]/2]*M_PI)/180.0);
-									pIQBuf_[rel_chan_ix][i] = Irot;
-									pIQBuf_[rel_chan_ix-1][i] = Qrot;
-									pABuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) hypot(Qrot, Irot);
-									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = (epicsFloat32) (atan2(Qrot, Irot)) * 180.0/M_PI;
+									pRawABuf_[chIndex][i] = (epicsFloat32) hypot(pRawIQBuf_[Qindex][i], pRawIQBuf_[Iindex][i]);
+									pRawPBuf_[chIndex][i] = (epicsFloat32) (atan2(pRawIQBuf_[Qindex][i], pRawIQBuf_[Iindex][i])) * 180.0/M_PI;
+									Irot = pIQBuf_[Iindex][i] * cos((float)(phaseOffset_[chIndex]*M_PI)/180.0)
+											- pIQBuf_[Qindex][i] * sin((float)(phaseOffset_[chIndex]*M_PI)/180.0);
+									Qrot = pIQBuf_[Iindex][i] * sin((float)(phaseOffset_[chIndex]*M_PI)/180.0)
+											+ pIQBuf_[Qindex][i] * cos((float)(phaseOffset_[chIndex]*M_PI)/180.0);
+									pIQBuf_[Iindex][i] = Irot;
+									pIQBuf_[Qindex][i] = Qrot;
+									pABuf_[chIndex][i] = (epicsFloat32) hypot(Qrot, Irot);
+									pPBuf_[chIndex][i] = (epicsFloat32) (atan2(Qrot, Irot)) * 180.0/M_PI;
 									// make it wrap arround so that going past 360 wraps around to -360
-									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] = fmod(pPBuf_[relToAbsIdx[rel_chan_ix]/2][i]+360.0,720.0);
-									if (pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] < 0)
+									pPBuf_[chIndex][i] = fmod(pPBuf_[chIndex][i]+360.0,720.0);
+									if (pPBuf_[chIndex][i] < 0)
 									{
-										pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] += 720.0;
+										pPBuf_[chIndex][i] += 720.0;
 									}
-									pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] -= 360.0;
-									//cout << "Applying phase offset " << phaseOffset_[relToAbsIdx[rel_chan_ix]/2] << " to channel " << relToAbsIdx[rel_chan_ix]/2 << ", I = " << Qrot << ", I = " << Irot<< ", A = " << pABuf_[relToAbsIdx[rel_chan_ix]/2][i] << ", P = " << pPBuf_[relToAbsIdx[rel_chan_ix]/2][i] << endl;
+									pPBuf_[chIndex][i] -= 360.0;
+									//cout << "Applying phase offset " << phaseOffset_[chIndex] << " to channel " << chIndex << ", I = " << Qrot << ", I = " << Irot<< ", A = " << pABuf_[chIndex][i] << ", P = " << pPBuf_[chIndex][i] << endl;
 									}
 								catch (std::exception& e)
 								{
-									printf("pIQBufI_[%u][%u] = %f, ", rel_chan_ix, i, pIQBuf_[rel_chan_ix][i]);
-									printf("pIQBufQ_[%u][%u] = %f, ", rel_chan_ix-1, i, pIQBuf_[rel_chan_ix-1][i]);
+									printf("pIQBufI_[%u][%u] = %f, ", rel_chan_ix, i, pIQBuf_[Iindex][i]);
+									printf("pIQBufQ_[%u][%u] = %f, ", Qindex, i, pIQBuf_[Qindex][i]);
 									std::cerr << "exception caught: " << e.what() << endl;
 								}
 							}
 							asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
 									"%s %s publishing amplitude and phase waveforms %d, from relative channels %d/%d\n",
-									pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[rel_chan_ix]/2, rel_chan_ix-1, rel_chan_ix);
+									pDriver_->portName, __PRETTY_FUNCTION__ , chIndex, Qindex, Iindex);
 
-							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *iParamIndex_, relToAbsIdx[rel_chan_ix]/2);
-							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix-1], nPoints, *qParamIndex_, relToAbsIdx[rel_chan_ix]/2);
-							pDriver_->doCallbacksFloat32Array(pRawABuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *aRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
-							pDriver_->doCallbacksFloat32Array(pRawPBuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *pRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
-							pDriver_->doCallbacksFloat32Array(pABuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *aParamIndex_, relToAbsIdx[rel_chan_ix]/2);
-							pDriver_->doCallbacksFloat32Array(pPBuf_[relToAbsIdx[rel_chan_ix]/2], nPoints, *pParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[Iindex], nPoints, *iParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[Qindex], nPoints, *qParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pRawABuf_[chIndex], nPoints, *aRawParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pRawPBuf_[chIndex], nPoints, *pRawParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], nPoints, *aParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], nPoints, *pParamIndex_, chIndex);
 
 							// TODO: add "if" to select the right channel for this analysis. Cavity? Also, "if" pulsed mode.
 							if(doDecayComp)
 							{
-								CavityDecayConstantCompute(pRawIQBuf_[rel_chan_ix], pRawIQBuf_[rel_chan_ix-1], 3, relToAbsIdx[rel_chan_ix]/2);
+								CavityDecayConstantCompute(pRawIQBuf_[Iindex], pRawIQBuf_[Qindex], 3, chIndex);
 							}
 
-							std::fill( pABuf_[relToAbsIdx[rel_chan_ix]/2],
-									pABuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pABuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pABuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
-							std::fill( pPBuf_[relToAbsIdx[rel_chan_ix]/2],
-									pPBuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pPBuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pPBuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
+							std::fill( pABuf_[chIndex],
+									pABuf_[chIndex] + sizeof( pABuf_[chIndex] )/sizeof( *pABuf_[chIndex]), 0 );
+							std::fill( pPBuf_[chIndex],
+									pPBuf_[chIndex] + sizeof( pPBuf_[chIndex] )/sizeof( *pPBuf_[chIndex]), 0 );
 
 						}
-						else // This is a I waveform, but the corresponding Q isn't active, so clear A and P
+						else // This is a Q waveform, but the corresponding I isn't active, so clear A and P
 						{
-							std::fill( pABuf_[relToAbsIdx[rel_chan_ix]/2],
-									pABuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pABuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pABuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
-							std::fill( pPBuf_[relToAbsIdx[rel_chan_ix]/2],
-									pPBuf_[relToAbsIdx[rel_chan_ix]/2] + sizeof( pPBuf_[relToAbsIdx[rel_chan_ix]/2] )/sizeof( *pPBuf_[relToAbsIdx[rel_chan_ix]/2]), 0 );
-							pDriver_->doCallbacksFloat32Array(pABuf_[relToAbsIdx[rel_chan_ix]/2], 1, *aParamIndex_, relToAbsIdx[rel_chan_ix]/2);
-							pDriver_->doCallbacksFloat32Array(pPBuf_[relToAbsIdx[rel_chan_ix]/2], 1, *pParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+							std::fill( pABuf_[chIndex],
+									pABuf_[chIndex] + sizeof( pABuf_[chIndex] )/sizeof( *pABuf_[chIndex]), 0 );
+							std::fill( pPBuf_[chIndex],
+									pPBuf_[chIndex] + sizeof( pPBuf_[chIndex] )/sizeof( *pPBuf_[chIndex]), 0 );
+							pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], 1, *aParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], 1, *pParamIndex_, chIndex);
 						}
 
 					}
 					else
 					{
-						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE, "%s %s publishing Q waveform %d, from relative channel %d\n",
-								pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[rel_chan_ix]/2, rel_chan_ix);
-						//				cout << "publishing I waveform " << relToAbsIdx[rel_chan_ix]/2 << ", from relative channel" << rel_chan_ix << endl;
-						pDriver_->doCallbacksInt32Array(pRawIQBuf_[rel_chan_ix], nPoints, *qRawParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE, "%s %s publishing I waveform %d, from relative channel %d\n",
+								pDriver_->portName, __PRETTY_FUNCTION__ , chIndex, rel_chan_ix);
+						//				cout << "publishing I waveform " << chIndex << ", from relative channel" << rel_chan_ix << endl;
+						pDriver_->doCallbacksInt32Array(pRawIQBuf_[rel_chan_ix], nPoints, *iRawParamIndex_, chIndex);
 
 						// Only publish Q waveform here if the corresponding I isn't enabled.
 						// If the corresponding I is enabled, wait until phase offset correction is calculated
 						if(relToAbsIdx[rel_chan_ix]/2 != relToAbsIdx[rel_chan_ix+1]/2)
 						{
-							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *qParamIndex_, relToAbsIdx[rel_chan_ix]/2);
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[rel_chan_ix], nPoints, *iParamIndex_, chIndex);
 						}
 					}
 					// TODO: fill with 0 after publishing, change size of unused channels to 0
