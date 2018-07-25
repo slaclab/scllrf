@@ -1,56 +1,56 @@
 file GUNBWaveCh.template {
 pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 #PRC signals
-	{	"ACCL:GUNB:455:PRLFWD:",	"0",	"1",	"PRCReg",	"dBm",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRLREV:",	"1",	"2",	"PRCReg",	"dBm",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRC:SPARE1:",	"0",	"1",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRC:SPARE2:",	"1",	"2",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:CAV1:",	"2",	"3",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:CAV2:",	"3",	"4",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE1:",	"4",	"5",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE2:",	"5",	"6",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE3:",	"6",	"7",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE4:",	"7",	"8",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:DAC1:",	"8",	"9",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:DAC2:",	"9",	"10",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:CAV3:",	"4",	"5",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:CAV4:",	"5",	"6",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRLFWD:",	"6",	"7",	"PRCReg",	"dBm",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRLREV:",	"7",	"8",	"PRCReg",	"dBm",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:DAC1:",	"8",	"9",	"PRCReg",	"Counts",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:DAC2:",	"9",	"10",	"PRCReg",	"Counts",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:RFS1A:",	"10",	"11",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:RFS1B:",	"11",	"12",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:RFS2A:",	"12",	"13",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:RFS2B:",	"13",	"14",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE11:",	"14",	"15",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRC:SPARE12:",	"15",	"16",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRC:SPARE3:",	"14",	"15",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRC:SPARE4:",	"15",	"16",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 #RFS1 signals
-	{	"ACCL:GUNB:455:DRV1:",	"0",	"1",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:FWD1:",	"1",	"2",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:REV1:",	"2",	"3",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:DRV2:",	"3",	"4",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:FWD2:",	"4",	"5",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:REV2:",	"5",	"6",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE1:",	"6",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:DAC:",	"7",	"8",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE2:",	"8",	"9",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE3:",	"9",	"10",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE4:",	"10",	"11",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE5:",	"11",	"12",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE6:",	"12",	"13",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE7:",	"13",	"14",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE8:",	"14",	"15",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE9:",	"15",	"16",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE1:",	"1",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE2:",	"2",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:DRV1:",	"2",	"3",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:FWD1:",	"3",	"4",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:REV1:",	"4",	"5",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:DRV2:",	"5",	"6",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:FWD2:",	"6",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:REV2:",	"7",	"8",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:DAC1:",	"8",	"9",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:DAC2:",	"9",	"10",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE3:",	"10",	"11",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE4:",	"11",	"12",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE5:",	"12",	"13",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE6:",	"13",	"14",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE7:",	"14",	"15",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE8:",	"15",	"16",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
 #RFS2 signals
-	{	"ACCL:GUNB:455:DRV3:",	"0",	"1",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:FWD3:",	"1",	"2",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:REV3:",	"2",	"3",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:DRV4:",	"3",	"4",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:FWD4:",	"4",	"5",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:REV4:",	"5",	"6",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE1:",	"6",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:DAC:",	"7",	"8",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE2:",	"8",	"9",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE3:",	"9",	"10",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE4:",	"10",	"11",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE5:",	"11",	"12"	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE6:",	"12",	"13",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE7:",	"13",	"14",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE8:",	"14",	"15",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE9:",	"15",	"16",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE1:",	"1",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE2:",	"2",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:DRV3:",	"2",	"3",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:FWD3:",	"3",	"4",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:REV3:",	"4",	"5",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:DRV4:",	"5",	"6",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:FWD4:",	"6",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:REV4:",	"7",	"8",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:DAC1:",	"8",	"9",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:DAC2:",	"9",	"10",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE3:",	"10",	"11",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE4:",	"11",	"12",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE5:",	"12",	"13",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE6:",	"13",	"14",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE7:",	"14",	"15",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE8:",	"15",	"16",	"RFS2Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS2:" }
 }
 
 file GUNBWavePerChassis.template
