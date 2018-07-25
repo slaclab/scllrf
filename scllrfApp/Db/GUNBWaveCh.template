@@ -68,7 +68,7 @@ record(ao, "$(P)PULSE_START_TIME")
 	info(autosaveFields, "VAL")
 }
 
-record(calcout, "$(P)PULSE_START_POINT CP")
+record(calcout, "$(P)PULSE_START_POINT")
 {
 field(DESC, "Points of rise time to drop from calcs")
 field(INPA, "$(CHASSIS)WF_TIME_STEP CP")
