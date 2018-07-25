@@ -108,6 +108,8 @@ private:
 	epicsFloat32 pRawABuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Amplitude data channels
 	epicsFloat32 pPBuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Phase data channels
 	epicsFloat32 pRawPBuf_[maxWavesCount/2][GUNBDriver::TraceDataRegCount]; // Phase data channels
+
+	bool doOnce = true;
 };
 
 class GUNBExtra: public GUNBDriver

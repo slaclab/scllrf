@@ -738,7 +738,10 @@ void TraceData::TraceDataRequester()
 								{
 									pRawABuf_[chIndex][i] = (epicsFloat32) hypot(pRawIQBuf_[Qindex][i], pRawIQBuf_[Iindex][i]);
 									pRawPBuf_[chIndex][i] = (epicsFloat32) (atan2(pRawIQBuf_[Qindex][i], pRawIQBuf_[Iindex][i])) * 180.0/M_PI;
-									cout << "A = " << pRawABuf_[chIndex][i] << ", P = " << pRawPBuf_[chIndex][i] << ", I = " << pRawIQBuf_[Iindex][i] << ", Q = " << pRawIQBuf_[Qindex][i];
+									if (doOnce)
+									{
+										cout << "A = " << pRawABuf_[chIndex][i] << ", P = " << pRawPBuf_[chIndex][i] << ", I = " << pRawIQBuf_[Iindex][i] << ", Q = " << pRawIQBuf_[Qindex][i];
+									}
 									Irot = pIQBuf_[Iindex][i] * cos((float)(phaseOffset_[chIndex]*M_PI)/180.0)
 											- pIQBuf_[Qindex][i] * sin((float)(phaseOffset_[chIndex]*M_PI)/180.0);
 									Qrot = pIQBuf_[Iindex][i] * sin((float)(phaseOffset_[chIndex]*M_PI)/180.0)
@@ -754,8 +757,12 @@ void TraceData::TraceDataRequester()
 										pPBuf_[chIndex][i] += 720.0;
 									}
 									pPBuf_[chIndex][i] -= 360.0;
-									cout << ", P offset " << phaseOffset_[chIndex] << ", Irot = " << Irot << ", Qrot = " << Qrot<< ", Ascl = " << pABuf_[chIndex][i] << ", Pscl = " << pPBuf_[chIndex][i] << endl;
+									if (doOnce)
+									{
+										cout << ", P offset " << phaseOffset_[chIndex] << ", Irot = " << Irot << ", Qrot = " << Qrot<< ", Ascl = " << pABuf_[chIndex][i] << ", Pscl = " << pPBuf_[chIndex][i] << endl;
+										doOnce = false;
 									}
+								}
 								catch (std::exception& e)
 								{
 									printf("pIQBufI_[%u][%u] = %f, ", rel_chan_ix, i, pIQBuf_[Iindex][i]);
@@ -869,6 +876,16 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
 	{
 		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
 				"%s %s: got last waveform datapoint. Publishing.\n", pDriver_->portName, __PRETTY_FUNCTION__);
+		if (doOnce)
+		{
+			cout << "First raw trace data buffer: ";
+			for( int i = 0; i< regOffset; i++)
+			{
+				cout << setw(8) <<regBuffer_->getDataAt(i);
+			}
+			cout << endl;
+		}
+
 
 		regBuffer_->publish(pDriver_, rawParamIndex_);
 	}
