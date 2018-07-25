@@ -118,6 +118,8 @@ TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex
 		decayConstantBParamIndex_(decayConstantBParamIndex), decayStrengthParamIndex_(decayStrengthParamIndex),
 		decayFitStddevParamIndex_(decayFitStddevParamIndex), gain_(1)
 {
+
+	doOnce = true;
 	unsigned int i;
 	std::stringstream strStmThreadName;
 	strStmThreadName << pDriver->portName << hex << regStartAddr_;
