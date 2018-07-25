@@ -86,6 +86,57 @@ record(acalcout, "$(P)ITMEAN") {
 	field(PREC, "5")
 }
 
+record(acalcout, "$(P)ITSTD") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)ITWF CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)ITRSTD") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)ITSTD CPP")
+	field(INPB, "$(P)ITMEAN CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)ITMEAN_RAW") {
+	field(INAA, "$(P)ITWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "AVG(AA[B,-1])")
+	field(NELM, "8192")
+	field(PREC, "5")
+}
+
+record(acalcout, "$(P)ITSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)ITWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)ITRSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)ITSTD_RAW CPP")
+	field(INPB, "$(P)ITMEAN_RAW CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
 record(waveform, "$(P)QTWF") {
 	field(DESC, "Ch $(CH) Q Waveform")
 	field(SCAN, "I/O Intr")
@@ -114,6 +165,57 @@ record(acalcout, "$(P)QTMEAN") {
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
+}
+
+record(acalcout, "$(P)QTSTD") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)QTWF CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)QTRSTD") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)QTSTD CPP")
+	field(INPB, "$(P)QTMEAN CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)QTMEAN_RAW") {
+	field(INAA, "$(P)QTWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "AVG(AA[B,-1])")
+	field(NELM, "8192")
+	field(PREC, "5")
+}
+
+record(acalcout, "$(P)QTSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)QTWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)QTRSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)QTSTD_RAW CPP")
+	field(INPB, "$(P)QTMEAN_RAW CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
 }
 
 record(waveform, "$(P)AWF") {
@@ -191,31 +293,6 @@ record(acalcout, "$(P)AMEAN") {
 	field(EGU, "$(EGU)")
 }
 
-record(acalcout, "$(P)AMEAN_RAW") {
-	field(INAA, "$(P)AWF_RAW CPP MS")
-	field(CALC, "AVG(AA)")
-	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "counts")
-}
-
-record(acalcout, "$(P)AMEAN_ENG") {
-	field(INAA, "$(P)AWF_ENG CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT CP")
-	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "AVG(AA[B,-1])")
-	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "dBm")
-}
-
-record(calc, "$(P)PWR") {
-	field(INPA, "$(P)AMEAN CPP MS")
-	field(CALC, "A^2")
-	field(PREC, "5")
-	field(EGU, "W")
-}
-
 record(acalcout, "$(P)ASTD") {
 	field(DESC, "Normalized standard deviation")
 	field(INAA, "$(P)AWF CPP MS")
@@ -235,6 +312,52 @@ record(acalcout, "$(P)ARSTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)AMEAN_RAW") {
+	field(INAA, "$(P)AWF_RAW CPP MS")
+	field(CALC, "AVG(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "counts")
+}
+
+record(acalcout, "$(P)ASTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)AWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)ARSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)ASTD_RAW CPP")
+	field(INPB, "$(P)AMEAN_RAW CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)AMEAN_ENG") {
+	field(INAA, "$(P)AWF_ENG CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "AVG(AA[B,-1])")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "dBm")
+}
+
+record(calc, "$(P)PWR") {
+	field(INPA, "$(P)AMEAN CPP MS")
+	field(CALC, "A^2")
+	field(PREC, "5")
+	field(EGU, "W")
 }
 
 record(waveform, "$(P)PWF") {
@@ -328,6 +451,37 @@ record(acalcout, "$(P)PRSTD") {
 	field(DESC, "Normalized standard deviation")
 	field(INPA, "$(P)PSTD CPP MS")
 	field(INPB, "$(P)PMEAN CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "degrees")
+}
+
+record(acalcout, "$(P)PMEAN_RAW") {
+	field(INAA, "$(P)PWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT_RAW CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS_RAW CP")
+	field(CALC, "AVG(AA[B,-1])")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "degrees")
+}
+
+record(acalcout, "$(P)PSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)PWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT_RAW CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS_RAW CP")
+	field(CALC, "STD(AA[B,-1])")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "degrees")
+}
+
+record(acalcout, "$(P)PRSTD_RAW") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)PSTD_RAW CPP MS")
+	field(INPB, "$(P)PMEAN_RAW CPP MS")
 	field(CALC, "A/B")
 	field(NELM, "8192")
 	field(PREC, "5")
