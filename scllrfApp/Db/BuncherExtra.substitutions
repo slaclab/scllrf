@@ -18,8 +18,8 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 	{	"ACCL:GUNB:455:PRC:SPARE3:",	"14",	"15",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:SPARE4:",	"15",	"16",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }
 #RFS1 signals
-	{	"ACCL:GUNB:455:RFS1:SPARE1:",	"1",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
-	{	"ACCL:GUNB:455:RFS1:SPARE2:",	"2",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE1:",	"0",	"1",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
+	{	"ACCL:GUNB:455:RFS1:SPARE2:",	"1",	"2",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
 	{	"ACCL:GUNB:455:DRV1:",	"2",	"3",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
 	{	"ACCL:GUNB:455:FWD1:",	"3",	"4",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
 	{	"ACCL:GUNB:455:REV1:",	"4",	"5",	"RFS1Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS1:" }
@@ -35,8 +35,8 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 	{	"ACCL:GUNB:455:RFS1:SPARE7:",	"14",	"15",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
 	{	"ACCL:GUNB:455:RFS1:SPARE8:",	"15",	"16",	"RFS1Reg",	"Counts",	"32767",	"ACCL:GUNB:455:RFS1:" }
 #RFS2 signals
-	{	"ACCL:GUNB:455:RFS2:SPARE1:",	"1",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
-	{	"ACCL:GUNB:455:RFS2:SPARE2:",	"2",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE1:",	"0",	"1",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
+	{	"ACCL:GUNB:455:RFS2:SPARE2:",	"1",	"2",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
 	{	"ACCL:GUNB:455:DRV3:",	"2",	"3",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
 	{	"ACCL:GUNB:455:FWD3:",	"3",	"4",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
 	{	"ACCL:GUNB:455:REV3:",	"4",	"5",	"RFS2Reg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:RFS2:" }
