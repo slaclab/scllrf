@@ -38,3 +38,7 @@ cd ${TOP}
 dbLoadDatabase("dbd/scllrf.dbd",0,0)
 scllrf_registerRecordDeviceDriver(pdbbase)
 # ====================================================
+
+# Increase queue sizes
+callbackSetQueueSize(16000)
+scanOnceSetQueueSize(8000)
