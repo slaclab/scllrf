@@ -68,7 +68,9 @@ DataBuffer::DataBuffer(unsigned int RegCount, unsigned int iStartAddr):
 	RegCount(RegCount), ReqSegmentCount( (RegCount + maxRegPerMsg -1)/maxRegPerMsg),
 		ReqMsgSize(RegCount + ReqSegmentCount), iStartAddr(iStartAddr)
 {
-	cout << "Making a DataBuffer with " << RegCount << " points at " << iStartAddr << endl;
+	cout << "Making a waveform buffer with " << dec << RegCount << " points at " << iStartAddr;
+	cout << hex << " ( 0x" << iStartAddr << " - 0x" << iStartAddr + RegCount << " )"<< endl;
+
 	reqData.reserve(ReqMsgSize);
 	fillWaveRequestMsg();
 }
@@ -103,7 +105,6 @@ void DataBuffer::fillWaveRequestMsg() /**< For requesting a waveform, fill canne
 {
 	unsigned int regAddr, msgOffset;
 	size_t buffSize = ReqMsgSize;
-cout << "Creating request message for 0x" << hex << iStartAddr << " with " << dec << buffSize << " points." << endl;
 	for(msgOffset=0, regAddr= iStartAddr; msgOffset < buffSize; regAddr++, msgOffset++)
 	{
 		if ( msgOffset % (maxRegPerMsg + nonceSize) == 0)
@@ -115,7 +116,6 @@ cout << "Creating request message for 0x" << hex << iStartAddr << " with " << de
 		reqData[msgOffset].addr = regAddr | flagReadMask;
 		reqData[msgOffset].data = blankData;
 	}
-	cout << "Last point at 0x" << hex << msgOffset << ": 0x" << reqData[msgOffset-1].addr << ", 0x" << reqData[msgOffset-1].data << endl;
 	htonFpgaRegArray(reqData.data(), buffSize);
 }
 

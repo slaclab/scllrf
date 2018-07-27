@@ -142,6 +142,11 @@ TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex
 
 	StartTraceDataRequester(strThreadName.c_str());
 }
+TraceData::~TraceData()
+{
+	reqTraceDataEvent.signal();
+	rawWaveRead_.signal();
+}
 
 /** Constructor for the GUNB class.
  * Calls constructor for the asynPortDriver base class.
@@ -256,18 +261,17 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 GUNBExtra::~GUNBExtra()
 {
 	isShuttingDown_ = true;
-	epicsThreadSleep(0.1); // Allow threads to run and exit
 	epicsEventSignal(reqWaveEventId_);
 	wakeupPoller();
 	wakeupReader();
-	epicsThreadSleep(0.1); // Allow threads to run and exit
+	epicsThreadSleep(0.3); // Allow threads to run and exit
 	wakeupPoller(); // call this twice in case the poller was never set to run
 	wakeupReader();
-	epicsThreadSleep(0.1); // Allow threads to run and exit
+	epicsThreadSleep(0.3); // Allow threads to run and exit
 	wakeupReader();
-	pasynOctetSyncIO->disconnect(pOctetAsynUser_);
-	pasynCommonSyncIO->disconnectDevice(pCommonAsynUser_);
-	pasynCommonSyncIO->disconnect(pCommonAsynUser_);
+//	pasynOctetSyncIO->disconnect(pOctetAsynUser_);
+//	pasynCommonSyncIO->disconnectDevice(pCommonAsynUser_);
+//	pasynCommonSyncIO->disconnect(pCommonAsynUser_);
 }
 
 // To test how the code handles responses from the FPGA, compose a simulated response here.
@@ -677,14 +681,14 @@ void TraceData::TraceDataRequester()
 					"%s %s: timed out waiting for data ready flag\n", pDriver_->portName, __PRETTY_FUNCTION__);
 			if (pDriver_->isShuttingDown_)
 			{
-				break;
+				return;
 			}
 			continue;
 		}
 
 		if (pDriver_->isShuttingDown_)
 		{
-			break;
+			return;
 		}
 
 		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
@@ -700,6 +704,11 @@ void TraceData::TraceDataRequester()
 		{
 			/* We got an event, rather than a timeout.
 			 **/
+			if (pDriver_->isShuttingDown_)
+			{
+				return;
+			}
+
 			ReqTraceData();
 			if(fastUpdate)
 			{
@@ -762,7 +771,6 @@ void TraceData::TraceDataRequester()
 									if (doOnce)
 									{
 										cout << ", P offset " << phaseOffset_[chIndex] << ", Irot = " << Irot << ", Qrot = " << Qrot<< ", Ascl = " << pABuf_[chIndex][i] << ", Pscl = " << pPBuf_[chIndex][i] << endl;
-										doOnce = false;
 									}
 								}
 								catch (std::exception& e)
@@ -823,6 +831,7 @@ void TraceData::TraceDataRequester()
 					}
 					// TODO: fill with 0 after publishing, change size of unused channels to 0
 				}
+				doOnce = false;
 			}
 		}
 	}

@@ -22,8 +22,8 @@ record (calc, "GUN:GUNB:100:FWD:PWR" )
 
 record (bo, "GUN:GUNB:100:FWD:USE_AS_REF")
 {
-	field(ZNAM "GUN:GUNB:100:FWD1")
-	field(ONAM "GUN:GUNB:100:FWD2")
+	field(ZNAM, "GUN:GUNB:100:FWD1")
+	field(ONAM, "GUN:GUNB:100:FWD2")
 }
 
 record (calc, "GUN:GUNB:100:FWD:PMEAN" )
@@ -178,7 +178,7 @@ record (calc, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
 	field( INPC, "GUN:GUNB:100:DFACT CP MS")
 	field( INPE, ".99") # SMOOTHING FACTOR
 	field( INPF, "GUN:GUNB:100:PMEAN_EXP_OFFSET CP")
-	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F)")
+	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
 	field( SDIS, "GUN:GUNB:100:PULSE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	info( autosaveFields, "VAL")

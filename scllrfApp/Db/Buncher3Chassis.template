@@ -215,7 +215,7 @@ record (calc, "ACCL:GUNB:455:FWD1:PMEAN_OFFSET")
 	field( INPC, "ACCL:GUNB:455:DFACT CP MS")
 	field( INPE, ".99") # SMOOTHING FACTOR
 	field( INPF, "ACCL:GUNB:455:PMEAN_EXP_OFFSET CP")
-	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F)")
+	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
 	field( SDIS, "ACCL:GUNB:455:PULSE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	info( autosaveFields, "VAL")

@@ -535,13 +535,6 @@ record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
 	field(DOL, "$(P)WF_TIME_PER_POINT")
 	field(OMSL, "closed_loop")
 }
-
-
-record(mbbiDirect, "$(P)INLK_STATUS_MSBITS_R")
-{
-	field(HIHI, "1")
-	field(HHSV, "MAJOR")
-}
 #record(calc, "$(P)IFDES2MODULO")
 #{
 #field(INPA, "$(P)IFDES")
