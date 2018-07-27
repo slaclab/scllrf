@@ -42,10 +42,10 @@ record (calc, "ACCL:GUNB:455:FWD:PWR" )
 
 record (mbbo, "ACCL:GUNB:455:FWD:USE_AS_REF")
 {
-	field(ZRST "ACCL:GUNB:455:FWD1")
-	field(ONST "ACCL:GUNB:455:FWD2")
-	field(TWST "ACCL:GUNB:455:FWD3")
-	field(THST "ACCL:GUNB:455:FWD4")
+	field(ZRST, "ACCL:GUNB:455:FWD1")
+	field(ONST, "ACCL:GUNB:455:FWD2")
+	field(TWST, "ACCL:GUNB:455:FWD3")
+	field(THST, "ACCL:GUNB:455:FWD4")
 }
 
 record (calc, "ACCL:GUNB:455:FWD:PMEAN" )
