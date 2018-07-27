@@ -803,6 +803,7 @@ void TraceData::TraceDataRequester()
 									pPBuf_[chIndex] + sizeof( pPBuf_[chIndex] )/sizeof( *pPBuf_[chIndex]), 0 );
 							pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], 1, *aParamIndex_, chIndex);
 							pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], 1, *pParamIndex_, chIndex);
+							pDriver_->doCallbacksFloat32Array(pIQBuf_[Qindex], nPoints, *qParamIndex_, chIndex);
 						}
 
 					}

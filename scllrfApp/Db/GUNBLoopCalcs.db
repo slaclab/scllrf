@@ -340,8 +340,9 @@ record ( acalcout, "$(P)AACT_DECAY" )
 	field( INAA, "$(P)CAV1:DECAY_AWF CP MS" )
 	field( INBB, "$(P)CAV2:DECAY_AWF NPP MS" )
 	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
+	firle( INPB, "GUN:GUNB:100:ACTIVE_PROBE")
 ## The equation is odd because the record wasn't working with AA[0]
-	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*MAX(AMAX(AA[0,1]),AMAX(BB[0,1]))" ) # Use this if we want 2 probe max.
+	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*(B=1?AMAX(AA[0,1]):AMAX(BB[0,1]))" ) # Use this if we want 2 probe max.
 #	field( CALC, "VAL*A+(1-A)*AMAX(AA[0,1])" )
 #	field( OUT, "$(P)ADES PP")
 #	field( OOPT, "On Change")
@@ -351,7 +352,7 @@ record ( acalcout, "$(P)AACT_DECAY" )
 #	field( DISV, "1")
 	field( NELM, "1")
 	field( NUSE, "1")
-field(EGU, "sqrt(W)")
+	field(EGU, "sqrt(W)")
 }
 
 
@@ -360,7 +361,8 @@ record ( acalcout, "$(P)PACT_DECAY" )
 	field( INAA, "$(P)CAV1:DECAY_PWF CP MS" )
 	field( INBB, "$(P)CAV2:DECAY_PWF NPP MS" )
 	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
-	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*AMAX(AA[0,1])" )
+	firle( INPB, "GUN:GUNB:100:ACTIVE_PROBE")
+	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*(B=1?AMAX(AA[0,1]):AMAX(BB[0,1]))" )
 #	field( OUT, "$(P)PDES PP")
 #	field( OOPT, "On Change")
 #	field( PINI, "YES" )

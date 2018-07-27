@@ -186,11 +186,10 @@ record( bi, "$(P)PULSE_MODE")
 record( calc, "$(P)SMOOTHED_BW")
 {
 	field( INPA, "$(P)CAV1:DECAY_BW CP MS")
-	####XXXX Using just one input for now
-####	field( INPB, "$(P)CAV2:DECAY_BW")
-	field( INPB, "$(P)CAV1:DECAY_BW CP MS")
+	field( INPB, "$(P)CAV2:DECAY_BW CP MS")
 	field( INPC, "0.9") # Smoothing factor
-	field( CALC, "C*(ISNAN(VAL)?0:VAL)+(1-C)*(A+B)/2")
+	firle( INPD, "GUN:GUNB:100:ACTIVE_PROBE")
+	field( CALC, "C*VAL+(1-C)*(D=1?A:B)")
 	field( SDIS, "$(P)PULSE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	info( autosaveFields, "VAL")
@@ -339,8 +338,9 @@ record( calc, "$(P)AOPEN_SCALE_CALC" ) {
 	field( INPA, "$(P)AOPEN_RAW")
 	field( INPB, "$(P)CAV1:AMEAN CP MS") # Use this waveform mean to scale AOPEN
 	field( INPC, "$(P)CAV2:AMEAN CP MS") # Use this waveform mean to scale AOPEN
-	field( INPD, "0.95") # Equivalent of SMOO field in ai records
-	field( CALC, "(1-D)*A/MAX(B,C) + (ISNAN(VAL)?0:VAL)*D")
+	firle( INPD, "GUN:GUNB:100:ACTIVE_PROBE")
+	field( INPE, "0.95") # Equivalent of SMOO field in ai records
+	field( CALC, "(1-E)*A/(D=1?B:C) + (ISNAN(VAL)?0:VAL)*E")
 }
 record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when

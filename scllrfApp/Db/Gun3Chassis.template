@@ -19,14 +19,29 @@ record (calc, "GUN:GUNB:100:FWD:PWR" )
 	field( SCAN, ".2 second" )
 	field(EGU, "W")
 }
+
+record (bo, "GUN:GUNB:100:FWD:USE_AS_REF")
+{
+	field(ZNAM "GUN:GUNB:100:FWD1")
+	field(ONAM "GUN:GUNB:100:FWD2")
+}
+
 record (calc, "GUN:GUNB:100:FWD:PMEAN" )
 {
 	field( DESC, "Total forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:ITMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:ITMEAN NPP MS" )
-	field( INPC, "GUN:GUNB:100:FWD1:QTMEAN NPP MS" )
-	field( INPD, "GUN:GUNB:100:FWD2:QTMEAN NPP MS" )
-	field( CALC, "ATAN2((C+D),(A+B))")
+#	# Maybe we'll use this vector sum approach later.
+#	# For now, there are too many complications and no
+#	# compelling reason it's better than picking one signal.
+#	# GWB 7-24-18
+#	field( INPA, "GUN:GUNB:100:FWD1:ITMEAN NPP MS" )
+#	field( INPB, "GUN:GUNB:100:FWD2:ITMEAN NPP MS" )
+#	field( INPC, "GUN:GUNB:100:FWD1:QTMEAN NPP MS" )
+#	field( INPD, "GUN:GUNB:100:FWD2:QTMEAN NPP MS" )
+#	field( CALC, "ATAN2((C+D),(A+B))")
+	field( INPA, "GUN:GUNB:100:FWD1:PMEAN NPP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:PMEAN NPP MS" )
+	field( INPC, "GUN:GUNB:100:FWD:FWD:USE_AS_REF")
+	field( CALC, "C=0?A:B")
 	field( SCAN, ".2 second" )
 	field(EGU, "deg")
 }
@@ -71,6 +86,13 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN_MIN" )
 	field(EGU, "sqrt(Watts)")
 }
 
+record(calc, "GUN:GUNB:100:ACTIVE_PROBE")
+{
+# Translate channel number used by feedback to CAV1/2 signal
+	field( INPA, "GUN:GUNB:100:PRC:FDBKSEL_W" )
+	field( CALC, "A=4?2:1")
+}
+
 record (calc, "GUN:GUNB:100:AACT" )
 {
 	field( DESC, "Average cavity amplitude" )
@@ -85,60 +107,89 @@ record (calc, "GUN:GUNB:100:AACT" )
 record (calc, "GUN:GUNB:100:PACT" )
 {
 	field( DESC, "Average cavity phase" )
-	field( INPA, "GUN:GUNB:100:CAV1:ITMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:ITMEAN NPP MS" )
-	field( INPC, "GUN:GUNB:100:CAV1:QTMEAN NPP MS" )
-	field( INPD, "GUN:GUNB:100:CAV2:QTMEAN NPP MS" )
-	field( INPE, "GUN:GUNB:100:CAV1:PMEAN NPP MS" )
-	field( CALC, "ATAN2(C+D,A+B)")
-	field( CALC, "E")
+#	# Maybe we'll use this vector sum approach later.
+#	# For now, there are too many complications and no
+#	# compelling reason it's better than picking one signal.
+#	# GWB 7-24-18
+#	field( INPA, "GUN:GUNB:100:CAV1:ITMEAN NPP MS" )
+#	field( INPB, "GUN:GUNB:100:CAV2:ITMEAN NPP MS" )
+#	field( INPC, "GUN:GUNB:100:CAV1:QTMEAN NPP MS" )
+#	field( INPD, "GUN:GUNB:100:CAV2:QTMEAN NPP MS" )
+#	field( CALC, "ATAN2(C+D,A+B)")
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN NPP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:PMEAN NPP MS" )
+	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE" )
+	field( CALC, "C=1?A:B")
 	field( SCAN, ".2 second" )
 	field( FLNK, "GUN:GUNB:100:CW_DETUNE" )
 	field(EGU, "deg")
 }
 
+record (calc, "GUN:GUNB:100:DECAY_STRENGTH" )
+{
+	field( DESC, "Average cavity phase" )
+	field( INPA, "GUN:GUNB:100:CAV1:DECAY_STRENGTH CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:DECAY_STRENGTH CP MS" )
+	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( CALC, "C=1?A:B")
+}
+
+record (calc, "GUN:GUNB:100:DECAY_FIT_STDDEV" )
+{
+	field( DESC, "Average cavity phase" )
+	field( INPA, "GUN:GUNB:100:CAV1:DECAY_FIT_STDDEV CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:DECAY_FIT_STDDEV CP MS" )
+	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( CALC, "C=1?A:B")
+}
+
+record (calc, "GUN:GUNB:100:DECAY_CONSTANT_B" )
+{
+	alias( "GUN:GUNB:100:PM_DETUNE")
+	field( DESC, "Average cavity phase" )
+	field( INPA, "GUN:GUNB:100:CAV1:DECAY_CONSTANT_B CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS" )
+	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( CALC, "C=1?A:B")
+}
+
+record (calc, "GUN:GUNB:100:DECAY_BW" )
+{
+	field( DESC, "Average cavity phase" )
+	field( INPA, "GUN:GUNB:100:CAV1:DECAY_BW CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:DECAY_BW CP MS" )
+	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( CALC, "C=1?A:B")
+}
+
 record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 {
 	field( DESC, "Detuning in CW mode" )
-	field( INPA, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS")
+	field( INPA, "GUN:GUNB:100:DFACT CP MS")
 	field( INPB, "GUN:GUNB:100:SMOOTHED_BW")
 	field( CALC, "R2D*ATAN(A/B)")
-	field( FLNK, "GUN:GUNB:100:DFACT" )
 }
 
 record (calc, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
 {
 	field( DESC, "Fwd - cav phase when detune is small")
-	field( INPA, "GUN:GUNB:100:CAV2:PMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD1:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS")
-	field( INPD, "GUN:GUNB:100:PULSE_MODE CP")
+	field( INPA, "GUN:GUNB:100:PACT CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD:PMEAN CP MS" )
+	field( INPC, "GUN:GUNB:100:DFACT CP MS")
 	field( INPE, ".99") # SMOOTHING FACTOR
 	field( INPF, "GUN:GUNB:100:PMEAN_EXP_OFFSET CP")
-	field( CALC, "(ABS(C)<999)&&D?E*VAL+(1-E)*(A-B-F):VAL")
-        info( autosaveFields, "VAL")
+	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F)")
+	field( SDIS, "GUN:GUNB:100:PULSE_MODE")
+	field( DISV, "0") # stop updating this when not pulsing
+	info( autosaveFields, "VAL")
 }
-
-record (calc, "GUN:GUNB:100:FWD2:PMEAN_OFFSET")
-{
-	field( DESC, "Fwd - cav phase when detune is small")
-	field( INPA, "GUN:GUNB:100:CAV2:PMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS")
-	field( INPD, "GUN:GUNB:100:PULSE_MODE CP")
-	field( INPE, ".99") # SMOOTHING FACTOR
-	field( INPF, "GUN:GUNB:100:PMEAN_EXP_OFFSET CP")
-	field( CALC, "(ABS(C)<999)&&D?E*VAL+(1-E)*(A-B):VAL")
-        info( autosaveFields, "VAL")
-}
-
 
 record (calc, "GUN:GUNB:100:CW_DETUNE" )
 {
 	field( DESC, "Detuning in CW mode" )
-	field( INPA, "GUN:GUNB:100:CAV2:PMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD1:PMEAN NPP MS" )
-	field( INPC, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
+	field( INPA, "GUN:GUNB:100:PACT NPP MS" )
+	field( INPB, "GUN:GUNB:100:FWD:PMEAN NPP MS" )
+	field( INPC, "GUN:GUNB:100:FWD:PMEAN_OFFSET")
 	field( INPD, "GUN:GUNB:100:SMOOTHED_BW")
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
