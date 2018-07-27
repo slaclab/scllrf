@@ -52,6 +52,7 @@ public:
 			int *rawParamIndex, int *iRawParamIndex, int *qRawParamIndex, int *aRawParamIndex, int *pRawParamIndex,
 			int *iParamIndex, int *qParamIndex, int *aParamIndex,int *pParamIndex,
 			int *decayBWParamIndex, int *decayConstantBParamIndex, int *decayStrengthParamIndex, int *decayFitStddevParamIndex);
+	~TraceData();
 	FpgaReg traceDataAck[5];
 	FpgaReg statusRequest;
 	void ReqTraceData();
