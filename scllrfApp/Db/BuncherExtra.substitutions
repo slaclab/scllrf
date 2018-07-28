@@ -139,7 +139,7 @@ pattern { PREF,				 NORM }
 
 file GUNBLoopCalcs.db
 {
-	{ P = "ACCL:GUNB:455:", 1300RATIO=1, ALIAS_N=2 }
+	{ P = "ACCL:GUNB:455:", 1300RATIO=1, ALIAS_N=2 , FTGAIN="-0.02"}
 }
 
 
