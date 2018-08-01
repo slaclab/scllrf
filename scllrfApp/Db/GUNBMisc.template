@@ -164,7 +164,7 @@ record( calcout, "$(P)DUTY_CYCLE_Sync_In")
 	field( PREC, "5")
 }
 
-record( calcout, "$(P)PULSE_MODE_CALC")
+record( calcout, "$(P)DETUNE_MODE_CALC")
 {
 	field( INPA, "$(P)REP_PERIOD CP MS")
 	field( INPB, "$(P)PULSE_LENGTH CP MS")
@@ -173,6 +173,20 @@ record( calcout, "$(P)PULSE_MODE_CALC")
 	# results are as bad as CW mode calculations.
 	field( INPC, "0.04")
 	field( CALC, "A-B > C")
+	field( OUT, "$(P)DETUNE_MODE PP MS")
+	info( autosaveFields, "INPC")
+}
+
+record( bi, "$(P)DETUNE_MODE")
+{
+	field( ONAM, "Pulse")
+	field(ZNAM, "CW")
+}
+
+record( calcout, "$(P)PULSE_MODE_CALC")
+{
+	field( INPA, "$(P)DUTY_CYCLE CP MS")
+	field( CALC, "A >= 100")
 	field( OUT, "$(P)PULSE_MODE PP MS")
 	info( autosaveFields, "INPC")
 }
@@ -190,7 +204,7 @@ record( calc, "$(P)SMOOTHED_BW")
 	field( INPC, "0.9") # Smoothing factor
 	field( INPD, "$(P)ACTIVE_PROBE")
 	field( CALC, "C*VAL+(1-C)*(D=1?A:B)")
-	field( SDIS, "$(P)PULSE_MODE")
+	field( SDIS, "$(P)DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	info( autosaveFields, "VAL")
 }

@@ -326,7 +326,7 @@ record (calc, "$(P)DFACT" )
 	field( INPC, "$(P)CAV2:DECAY_STRENGTH NPP MS")
 	field( INPD, "$(P)CAV1:DECAY_CONSTANT_B NPP MS")
 	field( INPE, "$(P)CAV2:DECAY_CONSTANT_B NPP MS")
-	field( INPF, "$(P)PULSE_MODE NPP MS")
+	field( INPF, "$(P)DETUNE_MODE NPP MS")
 	# If pulsed, use the signal with greater decay strength (cleaner)
 	# Otherwise, use the CW calculation.
 	field( CALC, "F?(B>C?D:E):A")

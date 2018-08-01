@@ -4,26 +4,29 @@
 record (calc, "GUN:GUNB:100:FWD:AMEAN" )
 {
 	field( DESC, "Total forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:AMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:AMEAN NPP MS" )
+	field( INPA, "GUN:GUNB:100:FWD1:AMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
 	field( CALC, "A+B")
-	field( SCAN, ".2 second" )
 }
 
 record (calc, "GUN:GUNB:100:FWD:PWR" )
 {
 	field( DESC, "Total forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:PWR NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:PWR NPP MS" )
+	field( INPA, "GUN:GUNB:100:FWD1:PWR CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:PWR CP MS" )
 	field( CALC, "A+B")
-	field( SCAN, ".2 second" )
 	field(EGU, "W")
 }
 
-record (bo, "GUN:GUNB:100:FWD:USE_AS_REF")
+
+record (mbbo, "GUN:GUNB:100:FWD:USE_AS_REF")
 {
-	field(ZNAM, "GUN:GUNB:100:FWD1")
-	field(ONAM, "GUN:GUNB:100:FWD2")
+	field(ZRST, "GUN:GUNB:100:FWD1")
+	field(ONST, "GUN:GUNB:100:FWD2")
+	field(TWST, "GUN:GUNB:100:PRC:RFS1A")
+	field(THST, "GUN:GUNB:100:PRC:RFS1B")
+	field(FRST, "GUN:GUNB:100:PRC:RFS2A")
+	field(FVST, "GUN:GUNB:100:PRC:RFS2B")
 }
 
 record (calc, "GUN:GUNB:100:FWD:PMEAN" )
@@ -38,29 +41,30 @@ record (calc, "GUN:GUNB:100:FWD:PMEAN" )
 #	field( INPC, "GUN:GUNB:100:FWD1:QTMEAN NPP MS" )
 #	field( INPD, "GUN:GUNB:100:FWD2:QTMEAN NPP MS" )
 #	field( CALC, "ATAN2((C+D),(A+B))")
-	field( INPA, "GUN:GUNB:100:FWD1:PMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:PMEAN NPP MS" )
-	field( INPC, "GUN:GUNB:100:FWD:FWD:USE_AS_REF")
-	field( CALC, "C=0?A:B")
-	field( SCAN, ".2 second" )
+	field( INPA, "GUN:GUNB:100:FWD1:PMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:PMEAN CP MS" )
+	field( INPC, "ACCL:GUNB:455:PRC:RFS1A:PMEAN CP MS" )
+	field( INPD, "ACCL:GUNB:455:PRC:RFS1B:PMEAN CP MS" )
+	field( INPE, "ACCL:GUNB:455:PRC:RFS2A:PMEAN CP MS" )
+	field( INPF, "ACCL:GUNB:455:PRC:RFS2B:PMEAN CP MS" )
+	field( INPG, "GUN:GUNB:100:FWD:FWD:USE_AS_REF")
+	field( CALC, "H=0?A:H=1?B:H=2?C:H=3?D:H=4?E:F")
 	field(EGU, "deg")
 }
 
 record (calc, "GUN:GUNB:100:REV:AMEAN" )
 {
 	field( DESC, "Total reverse amplitude" )
-	field( INPA, "GUN:GUNB:100:REV1:AMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:REV2:AMEAN NPP MS" )
+	field( INPA, "GUN:GUNB:100:REV1:AMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:REV2:AMEAN CP MS" )
 	field( CALC, "A+B")
-	field( SCAN, ".2 second" )
 }
 record (calc, "GUN:GUNB:100:REV:PWR" )
 {
 	field( DESC, "Total reverse amplitude" )
-	field( INPA, "GUN:GUNB:100:REV1:PWR NPP MS" )
-	field( INPB, "GUN:GUNB:100:REV2:PWR NPP MS" )
+	field( INPA, "GUN:GUNB:100:REV1:PWR CP MS" )
+	field( INPB, "GUN:GUNB:100:REV2:PWR CP MS" )
 	field( CALC, "A+B")
-	field( SCAN, ".2 second" )
 	field(EGU, "W")
 }
 
@@ -68,10 +72,9 @@ record (calc, "GUN:GUNB:100:REV:PWR" )
 record (calc, "GUN:GUNB:100:FWD:AMEAN_MAX" )
 {
 	field( DESC, "Highest forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:AMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:AMEAN NPP MS" )
+	field( INPA, "GUN:GUNB:100:FWD1:AMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
 	field( CALC, "MAX(A,B)")
-	field( SCAN, ".2 second" )
 	field(EGU, "sqrt(Watts)")
 }
 
@@ -79,10 +82,9 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN_MAX" )
 record (calc, "GUN:GUNB:100:FWD:AMEAN_MIN" )
 {
 	field( DESC, "Lowest forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:AMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:AMEAN NPP MS" )
+	field( INPA, "GUN:GUNB:100:FWD1:AMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
 	field( CALC, "MIN(A,B)")
-	field( SCAN, ".2 second" )
 	field(EGU, "sqrt(Watts)")
 }
 
@@ -116,11 +118,10 @@ record (calc, "GUN:GUNB:100:PACT" )
 #	field( INPC, "GUN:GUNB:100:CAV1:QTMEAN NPP MS" )
 #	field( INPD, "GUN:GUNB:100:CAV2:QTMEAN NPP MS" )
 #	field( CALC, "ATAN2(C+D,A+B)")
-	field( INPA, "GUN:GUNB:100:CAV1:PMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:PMEAN NPP MS" )
+	field( INPA, "GUN:GUNB:100:CAV1:PMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:PMEAN CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE" )
 	field( CALC, "C=1?A:B")
-	field( SCAN, ".2 second" )
 	field( FLNK, "GUN:GUNB:100:CW_DETUNE" )
 	field(EGU, "deg")
 }
