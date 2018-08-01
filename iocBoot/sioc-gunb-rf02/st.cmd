@@ -125,7 +125,6 @@ dbpf $(P)KEEP_W 0xFFFF
 dbpf $(P)DECAYKEEP_W 0xFFFF
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
-dbpf $(P)EXT_TRIG_SEL_W 1
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
 
@@ -136,7 +135,6 @@ dbpf $(P)KEEP_W 0xFFFF
 dbpf $(P)DECAYKEEP_W 0xFFFF
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
-dbpf $(P)EXT_TRIG_SEL_W 1
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
 
