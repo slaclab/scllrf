@@ -751,7 +751,7 @@ void TraceData::TraceDataRequester()
 									pRawPBuf_[chIndex][i] = (epicsFloat32) (atan2(pRawIQBuf_[Qindex][i], pRawIQBuf_[Iindex][i])) * 180.0/M_PI;
 									if (doOnce)
 									{
-										cout << "A = " << pRawABuf_[chIndex][i] << ", P = " << pRawPBuf_[chIndex][i] << ", I = " << pRawIQBuf_[Iindex][i] << ", Q = " << pRawIQBuf_[Qindex][i];
+										//cout << "A = " << pRawABuf_[chIndex][i] << ", P = " << pRawPBuf_[chIndex][i] << ", I = " << pRawIQBuf_[Iindex][i] << ", Q = " << pRawIQBuf_[Qindex][i];
 									}
 									Irot = pIQBuf_[Iindex][i] * cos((float)(phaseOffset_[chIndex]*M_PI)/180.0)
 											- pIQBuf_[Qindex][i] * sin((float)(phaseOffset_[chIndex]*M_PI)/180.0);
@@ -770,7 +770,7 @@ void TraceData::TraceDataRequester()
 									pPBuf_[chIndex][i] -= 360.0;
 									if (doOnce)
 									{
-										cout << ", P offset " << phaseOffset_[chIndex] << ", Irot = " << Irot << ", Qrot = " << Qrot<< ", Ascl = " << pABuf_[chIndex][i] << ", Pscl = " << pPBuf_[chIndex][i] << endl;
+										//cout << ", P offset " << phaseOffset_[chIndex] << ", Irot = " << Irot << ", Qrot = " << Qrot<< ", Ascl = " << pABuf_[chIndex][i] << ", Pscl = " << pPBuf_[chIndex][i] << endl;
 									}
 								}
 								catch (std::exception& e)
@@ -888,17 +888,15 @@ asynStatus TraceData::ProcessTraceDataReadback(const FpgaReg *pFromFpga)
 	{
 		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
 				"%s %s: got last waveform datapoint. Publishing.\n", pDriver_->portName, __PRETTY_FUNCTION__);
-		if (doOnce)
-		{
-			cout << "First raw trace data buffer: ";
-			for( int i = 0; i< regOffset; i++)
-			{
-				cout << setw(8) <<regBuffer_->getDataAt(i);
-			}
-			cout << endl;
-		}
-
-
+//		if (doOnce)
+//		{
+//			cout << "First raw trace data buffer: ";
+//			for( int i = 0; i< regOffset; i++)
+//			{
+//				cout << setw(8) <<regBuffer_->getDataAt(i);
+//			}
+//			cout << endl;
+//		}
 		regBuffer_->publish(pDriver_, rawParamIndex_);
 	}
 
