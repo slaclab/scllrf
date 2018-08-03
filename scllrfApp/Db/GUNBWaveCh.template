@@ -65,15 +65,16 @@ record(ao, "$(P)PULSE_START_TIME")
 {
 	field(DESC, "Rise time to ignore in calcs")
 	field(EGU, "s")
+	field(PINI, YES)
 	info(autosaveFields, "VAL")
 }
 
 record(calcout, "$(P)PULSE_START_POINT")
 {
-field(DESC, "Points of rise time to drop from calcs")
-field(INPA, "$(CHASSIS)WF_TIME_STEP CP")
-field(INPB, "$(P)PULSE_START_TIME CP")
-field(CALC, "B/A")
+	field(DESC, "Points of rise time to drop from calcs")
+	field(INPA, "$(CHASSIS)WF_TIME_STEP CP")
+	field(INPB, "$(P)PULSE_START_TIME CP")
+	field(CALC, "B/A")
 	field(EGU, "points")
 }
 
@@ -281,6 +282,7 @@ record(acalcout, "$(P)AWF_SMOO") {
 	field(NELM, "8192")
 	info( autosaveFields, "A")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "VAL")
 }
 
 record(acalcout, "$(P)AMEAN") {
@@ -424,6 +426,7 @@ record(acalcout, "$(P)PWF_SMOO") {
 	field(NELM, "8192")
 	info( autosaveFields, "A")
 	field(EGU, "degrees")
+	info( autosaveFields, "VAL")
 }
 
 record(acalcout, "$(P)PMEAN") {

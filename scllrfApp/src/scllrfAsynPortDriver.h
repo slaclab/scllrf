@@ -129,6 +129,89 @@ typedef struct
 regInterface;
 
 
+// A base class to be used for registers containing arrays.
+// This is the interface, defined so that the templated
+// DataBuffer<T> classes can be used in a generic way
+// by non-templated classes like DataBufferReader
+class DataBuffer
+{
+public:
+	const unsigned int RegCount;
+	const unsigned int ReqSegmentCount; // # of UDP requests, divide and round up;
+	const unsigned int ReqMsgSize; // All register addresses plus nonce space
+	const unsigned int iStartAddr;
+	std::vector<FpgaReg> reqData; // Canned message to request data buffer
+	// When the data is used, e.g. scaled, the various bit width integers
+	// in the template types will be used as floating point data. This
+	// also allows us to access the data without knowing the type of data
+	// in the template.
+	// Note that this is read only "const" access, not "reference" access,
+	// because the expected implementation is just casting an int, not
+	// assigning values to data.
+	DataBuffer(unsigned int RegCount, unsigned int iStartAddr);
+	virtual ~DataBuffer();
+
+	/** For requesting a waveform, fill canned message request with sequential addresses
+	 * \param[in/out] pMsgBuff An array of the right size to contain a request
+	 * message for the waveform. The canned message includes the nonce per packet,
+	 * so for an n element array, size should be N + N/maxRegPerMsg + 1.
+	 * \param[in] buffSize The array length, N + N/maxRegPerMsg + 1 for an N register array
+	 * \param[in] iStartAddr Address of the start of the array.
+	 */
+	void fillWaveRequestMsg();
+	virtual epicsFloat32 getDataAt(unsigned int index) const = 0;
+	virtual void setDataAt(unsigned int index, epicsInt32 value) = 0;
+	virtual void publish(asynPortDriver *driver, int *paramIndex);
+};
+
+class DataBuffer8 : public DataBuffer
+{
+public:
+	std::vector<epicsInt8> data;
+	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
+	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (epicsInt8) value; }
+	virtual void publish(asynPortDriver *driver, int *paramIndex);
+
+	DataBuffer8(unsigned int RegCount, unsigned int iStartAddr):
+		DataBuffer(RegCount, iStartAddr)
+	{
+		data.reserve(RegCount);
+	}
+	virtual ~DataBuffer8(){};
+};
+
+class DataBuffer16 : public DataBuffer
+{
+public:
+	std::vector<epicsInt16> data;
+	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
+	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (epicsInt16) value; }
+	virtual void publish(asynPortDriver *driver, int *paramIndex);
+
+	DataBuffer16(unsigned int RegCount, unsigned int iStartAddr):
+		DataBuffer(RegCount, iStartAddr)
+	{
+		data.reserve(RegCount);
+	}
+	virtual ~DataBuffer16(){};
+};
+
+class DataBuffer32 : public DataBuffer
+{
+public:
+	std::vector<epicsInt32> data;
+	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
+	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (epicsInt32) value; }
+	virtual void publish(asynPortDriver *driver, int *paramIndex);
+
+	DataBuffer32(unsigned int RegCount, unsigned int iStartAddr):
+		DataBuffer(RegCount, iStartAddr)
+	{
+		data.reserve(RegCount);
+	}
+	virtual ~DataBuffer32(){};
+};
+
 class scllrfAsynPortDriver: public asynPortDriver
 {
 public:
@@ -182,6 +265,7 @@ protected:
 
 
 	// Registers relating to the firmware build
+	static const char *ConfigRomOctetString;  /* asynOctet,    r */
 	static const char *JsonSha1DesString;  /* asynOctet,    r */
 	static const char *JsonSha1ActString;  /* asynOctet,    r */
 	static const char *GitSha1ARString;
@@ -250,11 +334,17 @@ protected:
 		stop, run
 	};
 
+	static const unsigned int ConfigRomOctetCount = 4096;
+	static const unsigned int ConfigRomOctetAdr;
+	DataBuffer8 ConfigRomOctetBuf; // The registers are 16 bit, so generated code is 16 bit, but the data is really bytes
+	unsigned int cfgRecordType; // Offset from ConfigRomOctetAdr where the record being read ends
+	unsigned int cfgRecordEnd; // Offset from ConfigRomOctetAdr where the record being read ends
 	/* SHA1 hash of register map */
 	static const char *regMapSha1String; // Compiled in to a subclass, from the SHA1 sum of the register map a used to generate the subclass
 	std::ostringstream strJsonSha1; // Read back from a live system
 	std::ostringstream strGitSHA1; // SHA1 from the git commit used to generate firmware on the live system
 	std::ostringstream strFwDesc; // Firmware description string
+	unsigned int fwDescSize;
 
 	/** Values used for pasynUser->reason, and indexes into the parameter library.
 	 * For this prototype, it's read only values that identify the FPGA. */
@@ -267,6 +357,7 @@ protected:
 	int p_CommErrorCount;
 
 	// Registers relating to the firmware build
+	int p_ConfigRomOctet;
 	int p_JsonSha1Des;
 	int p_JsonSha1Act;
 	int p_GitSha1AR;
@@ -358,88 +449,6 @@ protected:
 };
 
 
-// A base class to be used for registers containing arrays.
-// This is the interface, defined so that the templated
-// DataBuffer<T> classes can be used in a generic way
-// by non-templated classes like DataBufferReader
-class DataBuffer
-{
-public:
-	const unsigned int RegCount;
-	const unsigned int ReqSegmentCount; // # of UDP requests, divide and round up;
-	const unsigned int ReqMsgSize; // All register addresses plus nonce space
-	const unsigned int iStartAddr;
-	std::vector<FpgaReg> reqData; // Canned message to request data buffer
-	// When the data is used, e.g. scaled, the various bit width integers
-	// in the template types will be used as floating point data. This
-	// also allows us to access the data without knowing the type of data
-	// in the template.
-	// Note that this is read only "const" access, not "reference" access,
-	// because the expected implementation is just casting an int, not
-	// assigning values to data.
-	DataBuffer(unsigned int RegCount, unsigned int iStartAddr);
-	virtual ~DataBuffer();
-
-	/** For requesting a waveform, fill canned message request with sequential addresses
-	 * \param[in/out] pMsgBuff An array of the right size to contain a request
-	 * message for the waveform. The canned message includes the nonce per packet,
-	 * so for an n element array, size should be N + N/maxRegPerMsg + 1.
-	 * \param[in] buffSize The array length, N + N/maxRegPerMsg + 1 for an N register array
-	 * \param[in] iStartAddr Address of the start of the array.
-	 */
-	void fillWaveRequestMsg();
-	virtual epicsFloat32 getDataAt(unsigned int index) const = 0;
-	virtual void setDataAt(unsigned int index, epicsInt32 value) = 0;
-	virtual void publish(asynPortDriver *driver, int *paramIndex);
-};
-
-class DataBuffer8 : public DataBuffer
-{
-public:
-	std::vector<epicsInt8> data;
-	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
-	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (epicsInt8) value; }
-	virtual void publish(asynPortDriver *driver, int *paramIndex);
-
-	DataBuffer8(unsigned int RegCount, unsigned int iStartAddr):
-		DataBuffer(RegCount, iStartAddr)
-	{
-		data.reserve(RegCount);
-	}
-	virtual ~DataBuffer8(){};
-};
-
-class DataBuffer16 : public DataBuffer
-{
-public:
-	std::vector<epicsInt16> data;
-	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
-	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (epicsInt16) value; }
-	virtual void publish(asynPortDriver *driver, int *paramIndex);
-
-	DataBuffer16(unsigned int RegCount, unsigned int iStartAddr):
-		DataBuffer(RegCount, iStartAddr)
-	{
-		data.reserve(RegCount);
-	}
-	virtual ~DataBuffer16(){};
-};
-
-class DataBuffer32 : public DataBuffer
-{
-public:
-	std::vector<epicsInt32> data;
-	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
-	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (epicsInt32) value; }
-	virtual void publish(asynPortDriver *driver, int *paramIndex);
-
-	DataBuffer32(unsigned int RegCount, unsigned int iStartAddr):
-		DataBuffer(RegCount, iStartAddr)
-	{
-		data.reserve(RegCount);
-	}
-	virtual ~DataBuffer32(){};
-};
 
 //template <class T>
 //class TypedDataBuffer : public DataBuffer

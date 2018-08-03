@@ -48,6 +48,7 @@ record (mbbo, "ACCL:GUNB:455:FWD:USE_AS_REF")
 	field(FVST, "ACCL:GUNB:455:PRC:RFS1B")
 	field(SXST, "ACCL:GUNB:455:PRC:RFS2A")
 	field(SVST, "ACCL:GUNB:455:PRC:RFS2B")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "ACCL:GUNB:455:FWD:PMEAN" )
@@ -204,6 +205,7 @@ record (calc, "ACCL:GUNB:455:PMEAN_EXP_OFFSET")
 	field( INPA, "ACCL:GUNB:455:PM_DETUNE CP MS")
 	field( INPB, "ACCL:GUNB:455:SMOOTHED_BW")
 	field( CALC, "R2D*ATAN(A/B)")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "ACCL:GUNB:455:FWD:PMEAN_OFFSET")
@@ -215,7 +217,7 @@ record (calc, "ACCL:GUNB:455:FWD:PMEAN_OFFSET")
 	field( INPE, ".99") # SMOOTHING FACTOR
 	field( INPF, "ACCL:GUNB:455:PMEAN_EXP_OFFSET CP")
 	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
-	field( SDIS, "ACCL:GUNB:455:PULSE_MODE")
+	field( SDIS, "ACCL:GUNB:455:DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	info( autosaveFields, "VAL")
 }

@@ -113,7 +113,7 @@ field(INPA, "$(P)PRC:DDSA_PHSTEP_H_W MS")
 field(INPB, "$(P)DFACT CP")
 # Check # with Gang
 # 2^20/(1300e6/7)
-field(INPC, "$(FTGAIN=0.0011121)")
+field(INPC, "$(FTGAIN=-0.0011121)")
 field(CALC, "A+B*C")
 }
 
@@ -353,6 +353,7 @@ record ( acalcout, "$(P)AACT_DECAY" )
 	field( NELM, "1")
 	field( NUSE, "1")
 	field(EGU, "sqrt(W)")
+	info( autosaveFields, "VAL")
 }
 
 
@@ -372,7 +373,8 @@ record ( acalcout, "$(P)PACT_DECAY" )
 #	field( DISV, "1")
 	field( NELM, "1")
 	field( NUSE, "1")
-field(EGU, "deg")
+	field(EGU, "deg")
+	info( autosaveFields, "VAL")
 }
 
 record (bo, "$(P)RFCTRL" )

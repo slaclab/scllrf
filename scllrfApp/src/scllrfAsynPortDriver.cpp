@@ -38,6 +38,7 @@ const char *scllrfAsynPortDriver::WriteOneRegString = "WRITE_ONE_REG"; /* asynIn
 const char *scllrfAsynPortDriver::MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
 const char *scllrfAsynPortDriver::PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
 const char *scllrfAsynPortDriver::CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
+const char *scllrfAsynPortDriver::ConfigRomOctetString = "CONFIG_ROM_OCTET";
 const char *scllrfAsynPortDriver::JsonSha1DesString = "JSON_SHA1_DES";
 const char *scllrfAsynPortDriver::JsonSha1ActString = "JSON_SHA1_ACT";
 // Git SHA1 sum as individual characters
@@ -63,6 +64,7 @@ const char *scllrfAsynPortDriver::GitSha1SRString = "GIT_SHA1_S_R";
 const char *scllrfAsynPortDriver::GitSha1TRString = "GIT_SHA1_T_R";
 const char *scllrfAsynPortDriver::GitSHA1String = "GIT_SHA1";  /* asynOctet,    r */
 const char *scllrfAsynPortDriver::FwDescString = "FW_DESC";  /* asynOctet,    r */
+const unsigned int scllrfAsynPortDriver::ConfigRomOctetAdr = 0x00000800;
 
 DataBuffer::DataBuffer(unsigned int RegCount, unsigned int iStartAddr):
 	RegCount(RegCount), ReqSegmentCount( (RegCount + maxRegPerMsg -1)/maxRegPerMsg),
@@ -138,7 +140,7 @@ scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *
 		epicsThreadPriorityMedium,
 		0), /* Default stack size*/
 		_singleMsgQ (maxMsgSize, maxMsgSize), isShuttingDown_(0), netSendCount_(0), lastResponseCount_ (0), netWaitingRequests_(0),
-		newWaveAvailable_(0), newWaveRead_ (0), p_RunStop (stop)
+		newWaveAvailable_(0), newWaveRead_ (0), ConfigRomOctetBuf ( ConfigRomOctetCount, ConfigRomOctetAdr ), cfgRecordType (0), cfgRecordEnd (0), fwDescSize(0)
 {
 	asynStatus status = asynSuccess;
 
@@ -159,6 +161,7 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(CommErrorCountString, asynParamInt32, &p_CommErrorCount);
 	createParam(PollPeriodString, asynParamFloat64, &p_PollPeriod);
 
+	createParam(ConfigRomOctetString, asynParamOctet, &p_ConfigRomOctet);
 	createParam(JsonSha1DesString, asynParamOctet, &p_JsonSha1Des);
 	createParam(JsonSha1ActString, asynParamOctet, &p_JsonSha1Act);
 	createParam(GitSha1ARString, asynParamInt32, &p_GitSha1AR);
@@ -1424,9 +1427,37 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 	break;
 
 	default:
-		if ((pFromFpga->addr - flagReadMask) < JsonSha1RAdr + 0x7FF && (pFromFpga->addr - flagReadMask) >= JsonSha1RAdr)
+		if ((pFromFpga->addr >= (ConfigRomOctetBuf.iStartAddr|flagReadMask)) &&
+				(pFromFpga->addr < ((ConfigRomOctetBuf.iStartAddr|flagReadMask) + ConfigRomOctetBuf.RegCount)))
 		{
-			// Firmware rom, ignore
+			unsigned int index = (pFromFpga->addr - (ConfigRomOctetBuf.iStartAddr|flagReadMask));
+			ConfigRomOctetBuf.data[index*2] = (pFromFpga->data & 0xFF);
+			ConfigRomOctetBuf.data[index*2+1] = (pFromFpga->data >>8 & 0xFF);
+			if (index >= cfgRecordEnd)
+			{
+				if(cfgRecordType == 1) // if this is the firmware description string we just finished reading
+				{
+					doCallbacksInt8Array( (char*) &ConfigRomOctetBuf.data[index - fwDescSize], fwDescSize, p_FwDesc, 0);
+					fwDescSize = 0;
+				}
+				cfgRecordType = (pFromFpga->data >>14 & 0x3);
+				cfgRecordEnd += (pFromFpga->data & 0x3FFF);
+
+				if(cfgRecordType == 1) // if this is the firmware description string we are about to read
+				{
+					fwDescSize = (pFromFpga->data & 0x3FFF);
+				}
+			}
+			asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
+				"%s %s: readback for address=%s, channel %u, value=0x%x\n", portName, __PRETTY_FUNCTION__,
+				"ConfigRomOctet",index,
+				(unsigned int) (pFromFpga->data & 0xFFFF));
+			if(index == ConfigRomOctetBuf.RegCount - 1)
+			{
+				doCallbacksInt8Array( ConfigRomOctetBuf.data.data(), ConfigRomOctetBuf.RegCount, p_ConfigRomOctet, 0);
+				cfgRecordEnd = 0;
+				cfgRecordType = 0;
+			}
 		}
 		else
 		{

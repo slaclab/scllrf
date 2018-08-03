@@ -186,7 +186,7 @@ record( bi, "$(P)DETUNE_MODE")
 record( calcout, "$(P)PULSE_MODE_CALC")
 {
 	field( INPA, "$(P)DUTY_CYCLE CP MS")
-	field( CALC, "A >= 100")
+	field( CALC, "A < 100")
 	field( OUT, "$(P)PULSE_MODE PP MS")
 	info( autosaveFields, "INPC")
 }
@@ -355,6 +355,7 @@ record( calc, "$(P)AOPEN_SCALE_CALC" ) {
 	field( INPD, "$(P)ACTIVE_PROBE")
 	field( INPE, "0.95") # Equivalent of SMOO field in ai records
 	field( CALC, "(1-E)*A/(D=1?B:C) + (ISNAN(VAL)?0:VAL)*E")
+	info( autosaveFields, "VAL")
 }
 record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when
@@ -375,6 +376,7 @@ record( calcout, "$(P)AOPEN_MAX_CALC" ) {
 	field( CALC, "A/B")
 	field( OUT, "$(P)SET_AOPEN_LIMITS PP" )
 	field( PINI, "YES")
+	info( autosaveFields, "VAL")
 }
 record( dfanout, "$(P)SET_AOPEN_LIMITS") {
 
@@ -389,6 +391,7 @@ record( calc, "$(P)POPEN_SCALE_CALC" ) {
 	field( INPB, "$(P)PACT CP MS") # Use this waveform mean to scale POPEN
 	field( INPC, "0.95") # Equivalent of SMOO field in ai records
 	field( CALC, "(1-C)*(A-B) + C*(ISNAN(VAL)?0:VAL)")
+	info( autosaveFields, "VAL")
 }
 record(ao, "$(P)USE_POPEN_SCALE_CALC")
 { # To allow manual scale to be entered, only process this when
