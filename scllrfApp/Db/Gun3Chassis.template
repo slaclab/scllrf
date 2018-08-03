@@ -27,6 +27,7 @@ record (mbbo, "GUN:GUNB:100:FWD:USE_AS_REF")
 	field(THST, "GUN:GUNB:100:PRC:RFS1B")
 	field(FRST, "GUN:GUNB:100:PRC:RFS2A")
 	field(FVST, "GUN:GUNB:100:PRC:RFS2B")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "GUN:GUNB:100:FWD:PMEAN" )
@@ -43,12 +44,12 @@ record (calc, "GUN:GUNB:100:FWD:PMEAN" )
 #	field( CALC, "ATAN2((C+D),(A+B))")
 	field( INPA, "GUN:GUNB:100:FWD1:PMEAN CP MS" )
 	field( INPB, "GUN:GUNB:100:FWD2:PMEAN CP MS" )
-	field( INPC, "ACCL:GUNB:455:PRC:RFS1A:PMEAN CP MS" )
-	field( INPD, "ACCL:GUNB:455:PRC:RFS1B:PMEAN CP MS" )
-	field( INPE, "ACCL:GUNB:455:PRC:RFS2A:PMEAN CP MS" )
-	field( INPF, "ACCL:GUNB:455:PRC:RFS2B:PMEAN CP MS" )
-	field( INPG, "GUN:GUNB:100:FWD:FWD:USE_AS_REF")
-	field( CALC, "H=0?A:H=1?B:H=2?C:H=3?D:H=4?E:F")
+	field( INPC, "GUN:GUNB:100:PRC:RFS1A:PMEAN CP MS" )
+	field( INPD, "GUN:GUNB:100:PRC:RFS1B:PMEAN CP MS" )
+	field( INPE, "GUN:GUNB:100:PRC:RFS2A:PMEAN CP MS" )
+	field( INPF, "GUN:GUNB:100:PRC:RFS2B:PMEAN CP MS" )
+	field( INPG, "GUN:GUNB:100:FWD:USE_AS_REF")
+	field( CALC, "G=0?A:G=1?B:G=2?C:G=3?D:G=4?E:F")
 	field(EGU, "deg")
 }
 
@@ -91,18 +92,17 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN_MIN" )
 record(calc, "GUN:GUNB:100:ACTIVE_PROBE")
 {
 # Translate channel number used by feedback to CAV1/2 signal
-	field( INPA, "GUN:GUNB:100:PRC:FDBKSEL_W" )
+	field( INPA, "GUN:GUNB:100:PRC:FDBKSEL_W CP MS" )
 	field( CALC, "A=4?2:1")
 }
 
 record (calc, "GUN:GUNB:100:AACT" )
 {
 	field( DESC, "Average cavity amplitude" )
-	field( INPA, "GUN:GUNB:100:CAV1:AMEAN NPP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:AMEAN NPP MS" )
+	field( INPA, "GUN:GUNB:100:CAV1:AMEAN CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:AMEAN CP MS" )
 	field( CALC, "MAX(A,B)")
 #	field( CALC, "(A+B)/2") # Something like this once we have both probes
-	field( SCAN, ".2 second" )
 	field(EGU, "MV")
 }
 
@@ -161,14 +161,16 @@ record (calc, "GUN:GUNB:100:DECAY_BW" )
 	field( INPB, "GUN:GUNB:100:CAV2:DECAY_BW CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 {
 	field( DESC, "Detuning in CW mode" )
-	field( INPA, "GUN:GUNB:100:DFACT CP MS")
+	field( INPA, "GUN:GUNB:100:PM_DETUNE CP MS")
 	field( INPB, "GUN:GUNB:100:SMOOTHED_BW")
 	field( CALC, "R2D*ATAN(A/B)")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
@@ -176,11 +178,11 @@ record (calc, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
 	field( DESC, "Fwd - cav phase when detune is small")
 	field( INPA, "GUN:GUNB:100:PACT CP MS" )
 	field( INPB, "GUN:GUNB:100:FWD:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:DFACT CP MS")
+	field( INPC, "GUN:GUNB:100:PM_DETUNE CP MS")
 	field( INPE, ".99") # SMOOTHING FACTOR
 	field( INPF, "GUN:GUNB:100:PMEAN_EXP_OFFSET CP")
 	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
-	field( SDIS, "GUN:GUNB:100:PULSE_MODE")
+	field( SDIS, "GUN:GUNB:100:DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	info( autosaveFields, "VAL")
 }
