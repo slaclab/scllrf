@@ -1118,10 +1118,10 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga)
 		{
 			// This one is also processed by grandparent class scllrfAsynPortDriver
 			GUNBDriver::processRegReadback(pFromFpga);
-			if(pFromFpga->addr<= (GitSha1JRAdr|flagReadMask)+1)
-			{ ////XXXX This is all that is implemented at the moment, remove "if" later
+//			if(pFromFpga->addr<= (GitSha1JRAdr|flagReadMask)+1)
+//			{ ////XXXX This is all that is implemented at the moment, remove "if" later
 				scllrfAsynPortDriver::processRegReadback(pFromFpga);
-			}
+//			}
 		}
 		else if ((pFromFpga->addr >= (RegmirrorRAdr|flagReadMask)) &&
 				(pFromFpga->addr < ((RegmirrorRAdr|flagReadMask) + RegmirrorBuf.RegCount)))
