@@ -6,6 +6,7 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN" )
 	field( DESC, "Total forward amplitude" )
 	field( INPA, "GUN:GUNB:100:FWD1:AMEAN CP MS" )
 	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
+	field(EGU, "sqrt(W)")
 	field( CALC, "A+B")
 }
 
@@ -59,6 +60,7 @@ record (calc, "GUN:GUNB:100:REV:AMEAN" )
 	field( INPA, "GUN:GUNB:100:REV1:AMEAN CP MS" )
 	field( INPB, "GUN:GUNB:100:REV2:AMEAN CP MS" )
 	field( CALC, "A+B")
+	field(EGU, "sqrt(W)")
 }
 record (calc, "GUN:GUNB:100:REV:PWR" )
 {
@@ -152,6 +154,7 @@ record (calc, "GUN:GUNB:100:DECAY_CONSTANT_B" )
 	field( INPB, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	field(EGU, "Hz")
 }
 
 record (calc, "GUN:GUNB:100:DECAY_BW" )
@@ -161,6 +164,7 @@ record (calc, "GUN:GUNB:100:DECAY_BW" )
 	field( INPB, "GUN:GUNB:100:CAV2:DECAY_BW CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	field(EGU, "Hz")
 	info( autosaveFields, "VAL")
 }
 
@@ -170,6 +174,7 @@ record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 	field( INPA, "GUN:GUNB:100:PM_DETUNE CP MS")
 	field( INPB, "GUN:GUNB:100:SMOOTHED_BW")
 	field( CALC, "R2D*ATAN(A/B)")
+	field(EGU, "degrees")
 	info( autosaveFields, "VAL")
 }
 
@@ -184,6 +189,7 @@ record (calc, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
 	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
 	field( SDIS, "GUN:GUNB:100:DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
+	field(EGU, "degrees")
 	info( autosaveFields, "VAL")
 }
 
@@ -196,6 +202,7 @@ record (calc, "GUN:GUNB:100:CW_DETUNE" )
 	field( INPD, "GUN:GUNB:100:SMOOTHED_BW")
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
+	field(EGU, "Hz")
 }
 
 record( ao, "GUN:GUNB:100:RF_GO")

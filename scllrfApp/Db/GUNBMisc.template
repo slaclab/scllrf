@@ -59,6 +59,7 @@ record(calcout, "$(P)REP_P_TO_F")
 	field( SDIS, "$(P)REP_F_TO_P.PACT")
 	field( DISV, "1")
 	field( PREC, "5")
+	field( EGU, "Hz")
 }
 
 record(calcout, "$(P)REP_F_TO_P")
@@ -69,6 +70,7 @@ record(calcout, "$(P)REP_F_TO_P")
 	field( SDIS, "$(P)REP_P_TO_F.PACT")
 	field( DISV, "1")
 	field( PREC, "5")
+	field( EGU, "ms")
 }
 
 record(ao, "$(P)REP_FREQUENCY")
@@ -105,6 +107,7 @@ record(calcout, "$(P)PULSE_LENGTH_U_TO_R")
 
 record( ao, "$(P)$(CHASSIS)PULSE_LENGTH_W"){
 	field( FLNK, "$(P)PULSE_LENGTH_Sync")
+	field(EGU, "s")
 }
 
 record( calcout, "$(P)PULSE_LENGTH_Sync"){
@@ -206,6 +209,7 @@ record( calc, "$(P)SMOOTHED_BW")
 	field( CALC, "C*VAL+(1-C)*(D=1?A:B)")
 	field( SDIS, "$(P)DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
+	field(EGU, "Hz")
 	info( autosaveFields, "VAL")
 }
 
@@ -217,12 +221,14 @@ record( ao, "$(P)ADES"){
 	field( PREC, "5")
 	field( HOPR, "0x7FFF")
 	field( LOPR, "0")
+	field(EGU, "MV")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW")
 }
 
 record( ao, "$(P)AMAX")
 {
 	field(DESC, "Limit on requested output")
+	field(EGU, "MV")
 	info( autosaveFields, "VAL")
 
 }
@@ -233,6 +239,7 @@ record(dfanout, "$(P)AMAX_SYNC") {
 	field(OUTB, "$(P)AOPEN.DRVH")
 	field(DOL, "$(P)AMAX")
 	field(OMSL, "closed_loop")
+	field(EGU, "MV")
 }
 
 record( ao, "$(P)PDES"){
@@ -241,6 +248,7 @@ record( ao, "$(P)PDES"){
 	field( PREC, "5")
 	field( HOPR, "180")
 	field( LOPR, "-180")
+	field(EGU, "degrees")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW LOLO")
 }
 
@@ -259,6 +267,7 @@ record( calcout, "$(P)SET_PLOOP_AP_TO_I")
 	field( CALC, "A*COS((B-D)*D2R)/C")
 	field( OUT, "$(P)$(CHASSIS)SET_PLOOP_RE_W PP")
 	field( OOPT, "On Change")
+	field(EGU, "MV")
 }
 
 record( calcout, "$(P)SET_PLOOP_AP_TO_Q")
@@ -270,6 +279,7 @@ record( calcout, "$(P)SET_PLOOP_AP_TO_Q")
 	field( CALC, "A*SIN((B-D)*D2R)/C")
 	field( OUT, "$(P)$(CHASSIS)SET_PLOOP_IM_W PP")
 	field( OOPT, "On Change")
+	field(EGU, "MV")
 }
 
 record( ao, "$(P)PH_DELAY")
@@ -318,6 +328,7 @@ record( ao, "$(P)AOPEN"){
 	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
 	field( PREC, "5")
 	field( LOPR, "0")
+	field(EGU, "MV")
 	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
@@ -331,6 +342,7 @@ record( calc, "$(P)AOPEN_RAW" )
 
 record( ao, "$(P)POPEN"){
 	field( DESC, "RF Phase Setpoint")
+	field(EGU, "degrees")
 	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
 	field( PREC, "5")
 	field( HOPR, "360")
@@ -344,6 +356,7 @@ record( calc, "$(P)POPEN_RAW" )
 	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W CP")
 	field( INPB, "$(P)$(CHASSIS)SOURCE_IM_W CP")
 	field(CALC, "ATAN2(B,A)*R2D")
+	field(EGU, "degrees")
 }
 
 # Set DAC scale so AOPEN matches a measured amplitude.
