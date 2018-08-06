@@ -562,8 +562,31 @@ record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
 	field(OUTA, "$(P)PRC:WAVE_SAMP_PER_W PP")
 	field(OUTB, "$(P)RFS1:WAVE_SAMP_PER_W PP")
 	field(OUTC, "$(P)RFS2:WAVE_SAMP_PER_W PP")
-	field(DOL, "$(P)WF_TIME_PER_POINT")
+	field(DOL, "$(P)WF_TIME_PER_POINT.RVAL")
 	field(OMSL, "closed_loop")
+}
+
+record( dfanout, "$(P)LIMIT_TRIP_RESET") {
+
+	field( OUTA, "$(P)PRC:RESET_INLK_1_W PP" )
+	field( OUTB, "$(P)RFS1:RESET_INLK_1_W PP" )
+	field( OUTC, "$(P)RFS2:RESET_INLK_1_W PP" )
+}
+
+
+record( bo, "$(P)RF_GO")
+{
+	field(FLNK, "$(P)RF_GO_3CH PP")
+	field(HIGH, 1)
+}
+
+record( dfanout, "$(P)RF_GO_3CH")
+{
+	field(OMSL, "closed_loop")
+	field(DOL, "$(P)RF_GO")
+	field(OUTA, "$(P)PRC:RF_GO_W PP")
+	field(OUTB, "$(P)RFS1:RF_GO_W PP")
+	field(OUTC, "$(P)RFS2:RF_GO_W PP")
 }
 #record(calc, "$(P)IFDES2MODULO")
 #{

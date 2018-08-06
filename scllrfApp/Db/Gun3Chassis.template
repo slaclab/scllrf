@@ -178,7 +178,7 @@ record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 	info( autosaveFields, "VAL")
 }
 
-record (calc, "GUN:GUNB:100:FWD1:PMEAN_OFFSET")
+record (calc, "GUN:GUNB:100:FWD:PMEAN_OFFSET")
 {
 	field( DESC, "Fwd - cav phase when detune is small")
 	field( INPA, "GUN:GUNB:100:PACT CP MS" )
@@ -203,20 +203,6 @@ record (calc, "GUN:GUNB:100:CW_DETUNE" )
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 	field(EGU, "Hz")
-}
-
-record( ao, "GUN:GUNB:100:RF_GO")
-{
-	field(FLNK, "GUN:GUNB:100:RF_GO_3CH PP")
-}
-
-record( dfanout, "GUN:GUNB:100:RF_GO_3CH")
-{
-	field(OMSL, "closed_loop")
-	field(DOL, "GUN:GUNB:100:RF_GO")
-	field(OUTA, "GUN:GUNB:100:PRC:RF_GO_W PP")
-	field(OUTB, "GUN:GUNB:100:RFS1:RF_GO_W PP")
-	field(OUTC, "GUN:GUNB:100:RFS2:RF_GO_W PP")
 }
 
 # SSA drive balancing. raw 19898 = 100% amplitude.

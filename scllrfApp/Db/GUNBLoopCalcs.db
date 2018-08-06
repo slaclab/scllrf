@@ -611,11 +611,86 @@ field(INPK, "$(P)PRC:DDSA_PHSTEP_H_W CP MS")
 #{
 #field(INPA, "$(P)PRC:DECAY_SAMP_PER_W")
 #}
-record(ai, "$(P)RF_MASTER") {
+record(bi, "$(P)PRC:RF_MASTER")
+{
+	field(INP, "$(P)PRC:PERMITSTATUS_LSBITS_R.BD CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+record(bi, "$(P)RFS1:RF_MASTER")
+{
+	field(INP, "$(P)RFS1:PERMITSTATUS_LSBITS_R.BD CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+record(bi, "$(P)RFS2:RF_MASTER")
+{
+	field(INP, "$(P)RFS2:PERMITSTATUS_LSBITS_R.BD CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+record(calc, "$(P)RF_MASTER_CALC")
+{
+field(INPA, "$(P)PRC:RF_MASTER CP MS")
+field(INPB, "$(P)RFS1:RF_MASTER CP MS")
+field(INPC, "$(P)RFS2:RF_MASTER CP MS")
+field(CALC, "A&&B&&C")
+field(LOLO, 0)
+field(LLSV, "MAJOR")
+}
+
+
+record(bi, "$(P)RF_MASTER") {
 #Garth adding the desrciption
 field(DESC, "Master control to enable/disable RF")
-#field(FLNK, "$(P)BOUNDARY_RESET_CALC")
-	info( autosaveFields, "VAL")
+field(INP, "$(P)RF_MASTER_CALC CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+
+record(bi, "$(P)PRC:RF_PERMIT")
+{
+	field(INP, "$(P)PRC:PERMITSTATUS_LSBITS_R.B0 CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+record(bi, "$(P)RFS1:RF_PERMIT")
+{
+	field(INP, "$(P)RFS1:PERMITSTATUS_LSBITS_R.B0 CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+record(bi, "$(P)RFS2:RF_PERMIT")
+{
+	field(INP, "$(P)RFS2:PERMITSTATUS_LSBITS_R.B0 CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
+}
+record(calc, "$(P)RF_PERMIT_CALC")
+{
+field(INPA, "$(P)PRC:RF_PERMIT CP MS")
+field(INPB, "$(P)RFS1:RF_PERMIT CP MS")
+field(INPC, "$(P)RFS2:RF_PERMIT CP MS")
+field(CALC, "A&&B&&C")
+field(LOLO, 0)
+field(LLSV, "MAJOR")
+}
+
+
+record(bi, "$(P)RF_PERMIT") {
+#Garth adding the desrciption
+field(DESC, "PERMIT control to enable/disable RF")
+field(INP, "$(P)RF_PERMIT_CALC CP MS")
+	field(ZNAM, "Fault")
+	field(ZSV, "MAJOR")
+	field(ONAM, "Ok")
 }
 
 record(ao, "$(P)MASK_BOUNDARY_RESET") {

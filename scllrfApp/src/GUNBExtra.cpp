@@ -454,6 +454,7 @@ asynStatus GUNBExtra::writeInt32(asynUser *pasynUser, epicsInt32 value)
 				//		regSendBuf[3].data = ;
 
 				status = (asynStatus) setIntegerParam(0, p_WaveSampPerW, value);
+				status = (asynStatus) setIntegerParam(0, p_WaveShiftW, wave_shift);
 
 				htonFpgaRegArray(regSendBuf, sizeof( regSendBuf )/sizeof( *regSendBuf));
 				_singleMsgQ.send(regSendBuf, 2 * sizeof( FpgaReg ));
