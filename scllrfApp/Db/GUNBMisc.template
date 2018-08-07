@@ -442,7 +442,7 @@ record( calcout, "$(P)SOURCE_AP_TO_Q")
 	field( INPB, "$(P)POPEN")
 	field( INPC, "$(P)AOPEN_SCALE" )
 	field( INPD, "$(P)POPEN_SCALE" )
-	field( CALC, "A*C*SIN((B-D)*D2R)")
+	field( CALC, "-A*C*SIN((B-D)*D2R)")
 	field( OUT, "$(P)$(CHASSIS)SOURCE_IM_W PP")
 }
 
@@ -568,10 +568,10 @@ record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
 
 record( bo, "$(P)LIMIT_TRIP_RESET")
 {
-        field(FLNK, "$(P)LIMIT_TRIP_RESET_3CH PP")
-        field(HIGH, 1)
-        field(ZNAM, "0")
-        field(ONAM, "1")
+		field(FLNK, "$(P)LIMIT_TRIP_RESET_3CH PP")
+		field(HIGH, 1)
+		field(ZNAM, "0")
+		field(ONAM, "1")
 }
 
 record( dfanout, "$(P)LIMIT_TRIP_RESET_3CH") {
@@ -596,7 +596,7 @@ record( dfanout, "$(P)RF_GO_3CH")
 	field(DOL, "$(P)RF_GO")
 	field(OUTA, "$(P)RFS1:RF_GO_W PP")
 	field(OUTB, "$(P)RFS2:RF_GO_W PP")
-        field(OUTC, "$(P)PRC:RF_GO_W PP")
+		field(OUTC, "$(P)PRC:RF_GO_W PP")
 }
 #record(calc, "$(P)IFDES2MODULO")
 #{
