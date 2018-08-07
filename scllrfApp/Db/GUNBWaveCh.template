@@ -355,6 +355,27 @@ record(acalcout, "$(P)AMEAN_ENG") {
 	field(EGU, "dBm")
 }
 
+record(acalcout, "$(P)ASTD_ENG") {
+	field(DESC, "Normalized standard deviation")
+	field(INAA, "$(P)AWF_ENG CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA)")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
+record(acalcout, "$(P)ARSTD_ENG") {
+	field(DESC, "Normalized standard deviation")
+	field(INPA, "$(P)ASTD_ENG CPP")
+	field(INPB, "$(P)AMEAN_ENG CPP MS")
+	field(CALC, "A/B")
+	field(NELM, "8192")
+	field(PREC, "5")
+	field(EGU, "$(EGU)")
+}
+
 record(calc, "$(P)PWR") {
 	field(INPA, "$(P)AMEAN CPP MS")
 	field(CALC, "A^2")
@@ -430,6 +451,7 @@ record(acalcout, "$(P)PWF_SMOO") {
 }
 
 record(acalcout, "$(P)PMEAN") {
+	alias( "$(P)PMEAN_ENG")
 	field(INAA, "$(P)PWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -440,6 +462,7 @@ record(acalcout, "$(P)PMEAN") {
 }
 
 record(acalcout, "$(P)PSTD") {
+	alias( "$(P)PSTD_ENG")
 	field(DESC, "Normalized standard deviation")
 	field(INAA, "$(P)PWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
@@ -451,6 +474,7 @@ record(acalcout, "$(P)PSTD") {
 }
 
 record(acalcout, "$(P)PRSTD") {
+	alias( "$(P)PRSTD_ENG")
 	field(DESC, "Normalized standard deviation")
 	field(INPA, "$(P)PSTD CPP MS")
 	field(INPB, "$(P)PMEAN CPP MS")
