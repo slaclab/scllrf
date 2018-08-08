@@ -529,6 +529,11 @@ record(calc, "$(P)ADC_MAX-MIN")
 # This is raw ADC counts, an integer
 	field(PREC, 0)
 	field(EGU, "counts")
+field(HIHI, "65400")
+field(HIGH, "65000")
+field(HHSV, "MAJOR")
+field(HSV, "MINOR")
+field(FLNK, "$(P)AWF NPP MS")
 }
 
 #! Further lines contain data used by VisualDCT

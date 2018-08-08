@@ -619,21 +619,21 @@ field(INPK, "$(P)PRC:DDSA_PHSTEP_H_W CP MS")
 #}
 record(bi, "$(P)PRC:RF_MASTER")
 {
-	field(INP, "$(P)PRC:PERMITSTATUS_LSBITS_R.BD CP MS")
+	field(INP, "$(P)PRC:PERMITSTATUS_LSBITS_R.BC CP MS")
 	field(ZNAM, "Fault")
 	field(ZSV, "MAJOR")
 	field(ONAM, "Ok")
 }
 record(bi, "$(P)RFS1:RF_MASTER")
 {
-	field(INP, "$(P)RFS1:PERMITSTATUS_LSBITS_R.BD CP MS")
+	field(INP, "$(P)RFS1:PERMITSTATUS_LSBITS_R.BC CP MS")
 	field(ZNAM, "Fault")
 	field(ZSV, "MAJOR")
 	field(ONAM, "Ok")
 }
 record(bi, "$(P)RFS2:RF_MASTER")
 {
-	field(INP, "$(P)RFS2:PERMITSTATUS_LSBITS_R.BD CP MS")
+	field(INP, "$(P)RFS2:PERMITSTATUS_LSBITS_R.BC CP MS")
 	field(ZNAM, "Fault")
 	field(ZSV, "MAJOR")
 	field(ONAM, "Ok")
