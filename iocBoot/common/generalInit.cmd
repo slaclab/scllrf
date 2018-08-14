@@ -40,5 +40,5 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 # ====================================================
 
 # Increase queue sizes
-callbackSetQueueSize(16000)
-scanOnceSetQueueSize(8000)
+callbackSetQueueSize(160000)
+scanOnceSetQueueSize(80000)
