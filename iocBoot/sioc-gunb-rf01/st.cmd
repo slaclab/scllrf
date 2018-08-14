@@ -61,7 +61,7 @@ asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
 dbLoadRecords("db/GUNBExtra.db")
-dbLoadRecords("GunStatHistory.db")
+dbLoadRecords("db/GunStatHistory.db")
 
 ##############################################################################
 # BEGIN: Load the record databases
