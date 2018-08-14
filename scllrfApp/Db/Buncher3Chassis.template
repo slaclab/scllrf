@@ -101,18 +101,6 @@ record (calc, "ACCL:GUNB:455:REV:PWR" )
 	field(EGU, "W")
 }
 
-# Useful for SSA balancing
-record (calc, "ACCL:GUNB:455:FWD:AMEAN_MIN" )
-{
-	field( DESC, "Total forward amplitude" )
-	field( INPA, "ACCL:GUNB:455:FWD1:AMEAN CP MS" )
-	field( INPB, "ACCL:GUNB:455:FWD2:AMEAN CP MS" )
-	field( INPC, "ACCL:GUNB:455:FWD3:AMEAN CP MS" )
-	field( INPD, "ACCL:GUNB:455:FWD4:AMEAN CP MS" )
-	field( CALC, "MIN(A,B,C,D)")
-	field(EGU, "sqrt(W)")
-}
-
 record(calc, "ACCL:GUNB:455:ACTIVE_PROBE")
 {
 # Translate channel number used by feedback to CAV1/2 signal
