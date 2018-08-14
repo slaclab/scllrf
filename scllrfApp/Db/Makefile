@@ -17,6 +17,8 @@ DB += BMB7monitor.db
 #DB += GunRfCalib.db
 #DB += BuncherRfCalib.db
 DB += BuncherExtra.db
+DB += GunStatHistory.db
+DB += BuncherStatHistory.db
 
 # To generate a script that renames buncher channels to gun channels, uncomment this.
 #DB += BuncherWFtoGunWF.db

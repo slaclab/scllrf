@@ -117,7 +117,7 @@ record(ao, "$(P)GOLD_DECAY") {
 	field(DTYP, "asynFloat64")
 	field(OUT, "@asyn($(PORT),$(CH),1)DECAY_GOLD")
 	field(VAL, "0")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 

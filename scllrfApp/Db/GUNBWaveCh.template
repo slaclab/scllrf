@@ -54,9 +54,25 @@ record(dfanout, "$(P)STAT_NUSE") {
 	field(OMSL, "closed_loop")
 }
 
-record(dfanout, "$(P)STAT_NUSE2") {
-	field(OUTA, "$(P)AMEAN_RAW.NUSE")
-	field(OUTB, "$(P)AMEAN_ENG.NUSE")
+record(dfanout, "$(P)STAT_NUSE_RAW") {
+	field(OUTA, "$(P)ITMEAN_RAW.NUSE")
+	field(OUTB, "$(P)QTMEAN_RAW.NUSE")
+	field(OUTC, "$(P)AMEAN_RAW.NUSE")
+	field(OUTD, "$(P)ASTD_RAW.NUSE")
+	field(OUTE, "$(P)ARSTD_RAW.NUSE")
+	field(OUTF, "$(P)PMEAN_RAW.NUSE")
+	field(OUTG, "$(P)PSTD_RAW.NUSE")
+	field(OUTH, "$(P)PRSTD_RAW.NUSE")
+	field(DOL, "$(CHASSIS)PULSE_POINTS CP")
+	field(OMSL, "closed_loop")
+}
+
+record(dfanout, "$(P)STAT_NUSE_ENG") {
+	field(OUTA, "$(P)ITMEAN_ENG.NUSE")
+	field(OUTB, "$(P)QTMEAN_ENG.NUSE")
+	field(OUTC, "$(P)AMEAN_ENG.NUSE")
+	field(OUTD, "$(P)ASTD_ENG.NUSE")
+	field(OUTE, "$(P)ARSTD_ENG.NUSE")
 	field(DOL, "$(CHASSIS)PULSE_POINTS CP")
 	field(OMSL, "closed_loop")
 }
@@ -379,7 +395,7 @@ record(acalcout, "$(P)ARSTD_ENG") {
 record(calc, "$(P)PWR") {
 	field(INPA, "$(P)AMEAN CPP MS")
 	field(CALC, "A^2")
-	field(PREC, "5")
+	field(PREC, "2")
 	field(EGU, "W")
 }
 
@@ -389,7 +405,7 @@ record(waveform, "$(P)PWF") {
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_P")
 	field(PREC, "2")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
 }
@@ -407,7 +423,7 @@ record(acalcout, "$(P)P_CALC") {
 # field(INPE, "$(P)CAL_LOSS_TOTAL")
 field(CALC, "AA")
 field(PREC, "2")
-field(EGU, "degrees")
+field(EGU, "deg")
 field(NELM, "8192")
 field(OUT, "$(P)PWF_ENG PP")
 }
@@ -416,7 +432,7 @@ record(waveform, "$(P)PWF_ENG")
 field(NELM, "8192")
 field(FTVL, "FLOAT")
 field(DESC, "Ch $(CH) engineering Waveform")
-field(EGU, "degrees")
+field(EGU, "deg")
 }
 
 record(waveform, "$(P)PWF_RAW") {
@@ -425,7 +441,7 @@ record(waveform, "$(P)PWF_RAW") {
 	field(DTYP, "asynFloat32ArrayIn")
 	field(INP, "@asyn($(PORT),$(CH),1)TRACE_DATA_RAW_P")
 	field(PREC, "1")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(NELM, "8192")
 	field(FTVL, "FLOAT")
 }
@@ -435,7 +451,7 @@ record(ao, "$(P)GOLD") {
 	field(DTYP, "asynFloat64")
 	field(OUT, "@asyn($(PORT),$(CH),1)TRACE_DATA_GOLD")
 	field(VAL, "0")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -446,7 +462,7 @@ record(acalcout, "$(P)PWF_SMOO") {
 	field(CALC, "(AA/A)+(AVAL*(1-1/A))")
 	field(NELM, "8192")
 	info( autosaveFields, "A")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
@@ -457,8 +473,8 @@ record(acalcout, "$(P)PMEAN") {
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "degrees")
+	field(PREC, "2")
+	field(EGU, "deg")
 }
 
 record(acalcout, "$(P)PSTD") {
@@ -469,8 +485,8 @@ record(acalcout, "$(P)PSTD") {
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
 	field(CALC, "STD(AA[B,-1])")
 	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "degrees")
+	field(PREC, "2")
+	field(EGU, "deg")
 }
 
 record(acalcout, "$(P)PRSTD") {
@@ -480,8 +496,8 @@ record(acalcout, "$(P)PRSTD") {
 	field(INPB, "$(P)PMEAN CPP MS")
 	field(CALC, "A/B")
 	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "degrees")
+	field(PREC, "2")
+	field(EGU, "deg")
 }
 
 record(acalcout, "$(P)PMEAN_RAW") {
@@ -490,8 +506,8 @@ record(acalcout, "$(P)PMEAN_RAW") {
 	field(INPC, "$(CHASSIS)PULSE_POINTS_RAW CP")
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "degrees")
+	field(PREC, "2")
+	field(EGU, "deg")
 }
 
 record(acalcout, "$(P)PSTD_RAW") {
@@ -501,8 +517,8 @@ record(acalcout, "$(P)PSTD_RAW") {
 	field(INPC, "$(CHASSIS)PULSE_POINTS_RAW CP")
 	field(CALC, "STD(AA[B,-1])")
 	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "degrees")
+	field(PREC, "2")
+	field(EGU, "deg")
 }
 
 record(acalcout, "$(P)PRSTD_RAW") {
@@ -511,8 +527,8 @@ record(acalcout, "$(P)PRSTD_RAW") {
 	field(INPB, "$(P)PMEAN_RAW CPP MS")
 	field(CALC, "A/B")
 	field(NELM, "8192")
-	field(PREC, "5")
-	field(EGU, "degrees")
+	field(PREC, "2")
+	field(EGU, "deg")
 }
 
 # For checking ADC saturation

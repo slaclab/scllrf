@@ -52,7 +52,6 @@ record(bo, "$(P)FREQ_LOOP_CLOSE") {
 alias("llrf$(ALIAS_N):freq_loop_close")
 field(ZNAM, "Off")
 field(ONAM, "On")
-	info( autosaveFields, "VAL")
 }
 
 record(ao, "$(P)FREQ_LOOP_GAIN") {
@@ -102,9 +101,13 @@ field(EGU, "Hz")
 record(calcout, "$(P)DETUNE_GOOD") {
 field(INPA, "$(P)DECAY_STRENGTH")
 field(INPB, "$(P)DECAY_FIT_STDDEV")
-field(INPC, "1000")
+field(INPE, "$(P)PACT_LAST_N_STD")
+field(INPC, "50")
 field(INPD, "3000")
-field(CALC, "(A>C)&&(B<D)")
+field(INPE, "$(P)PACT_LAST_N_STD")
+field(INPF, "$(P)DETUNE_MODE")
+field(INPG, "1")
+field(CALC, "(A>C)&&(B<D)&&F?1:(E<G)")
 field(SCAN, ".2 second")
 }
 
@@ -420,6 +423,12 @@ record( ao, "$(P)AP_KI_Sync")
 	field( DOL,  "$(P)AP_KI")
 	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)PRC:GAINP_ALPHA_W PP")
+}
+
+# Defined in GUNBRegisters, adding autosave here.
+record(ao, "$(P)FDBKSEL_W")
+{
+	info( autosaveFields, "VAL")
 }
 
 record(bo, "$(P)BT_CLOSELOOP") {

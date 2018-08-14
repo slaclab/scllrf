@@ -207,7 +207,7 @@ record (calc, "ACCL:GUNB:455:PMEAN_EXP_OFFSET")
 	field( INPA, "ACCL:GUNB:455:PM_DETUNE CP MS")
 	field( INPB, "ACCL:GUNB:455:SMOOTHED_BW")
 	field( CALC, "R2D*ATAN(A/B)")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
@@ -222,7 +222,7 @@ record (calc, "ACCL:GUNB:455:FWD:PMEAN_OFFSET")
 	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
 	field( SDIS, "ACCL:GUNB:455:DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
@@ -274,7 +274,7 @@ record(ao, "$(P)DRV1_ADJ_A")
 
 record(ao, "$(P)DRV1_ADJ_P")
 {
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(HOPR, "180")
 	field(LOPR, "-180")
 		field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
@@ -314,7 +314,7 @@ record(ao, "$(P)DRV2_ADJ_A")
 
 record(ao, "$(P)DRV2_ADJ_P")
 {
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(HOPR, "180")
 	field(LOPR, "-180")
 		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
@@ -354,7 +354,7 @@ record(ao, "$(P)DRV3_ADJ_A")
 
 record(ao, "$(P)DRV3_ADJ_P")
 {
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(HOPR, "180")
 	field(LOPR, "-180")
 		field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
@@ -393,7 +393,7 @@ record(ao, "$(P)DRV4_ADJ_A")
 
 record(ao, "$(P)DRV4_ADJ_P")
 {
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(HOPR, "180")
 	field(LOPR, "-180")
 	field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")

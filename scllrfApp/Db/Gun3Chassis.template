@@ -173,8 +173,8 @@ record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 	field( DESC, "Detuning in CW mode" )
 	field( INPA, "GUN:GUNB:100:PM_DETUNE CP MS")
 	field( INPB, "GUN:GUNB:100:SMOOTHED_BW")
-	field( CALC, "R2D*ATAN(A/B)")
-	field(EGU, "degrees")
+	field( CALC, "C:=R2D*ATAN(A/B);ISNAN(C)?VAL:C")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
@@ -189,7 +189,7 @@ record (calc, "GUN:GUNB:100:FWD:PMEAN_OFFSET")
 	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
 	field( SDIS, "GUN:GUNB:100:DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
@@ -203,6 +203,7 @@ record (calc, "GUN:GUNB:100:CW_DETUNE" )
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 	field(EGU, "Hz")
+	info( autosaveFields, "INPC INPD C D")
 }
 
 # SSA drive balancing. raw 19898 = 100% amplitude.
@@ -219,7 +220,7 @@ record(ao, "$(P)DRV1_ADJ_A")
 
 record(ao, "$(P)DRV1_ADJ_P")
 {
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(HOPR, "180")
 	field(LOPR, "-180")
 		field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
@@ -259,7 +260,7 @@ record(ao, "$(P)DRV2_ADJ_A")
 
 record(ao, "$(P)DRV2_ADJ_P")
 {
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field(HOPR, "180")
 	field(LOPR, "-180")
 		field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")

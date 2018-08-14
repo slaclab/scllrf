@@ -248,7 +248,7 @@ record( ao, "$(P)PDES"){
 	field( PREC, "5")
 	field( HOPR, "180")
 	field( LOPR, "-180")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW LOLO")
 }
 
@@ -285,7 +285,7 @@ record( calcout, "$(P)SET_PLOOP_AP_TO_Q")
 record( ao, "$(P)PH_DELAY")
 {
 	field( DESC, "Initial phase on loop close")
-	field( EGU, "degrees")
+	field( EGU, "deg")
 	field( HOPR, "360.0" )
 	field( LOPR, "0" )
 	field( FLNK, "$(P)PH_DELAY_Sync_Out")
@@ -342,7 +342,7 @@ record( calc, "$(P)AOPEN_RAW" )
 
 record( ao, "$(P)POPEN"){
 	field( DESC, "RF Phase Setpoint")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 	field( OUT,  "$(P)SOURCE_AP_TO_IQ PP")
 	field( PREC, "5")
 	field( HOPR, "360")
@@ -356,7 +356,7 @@ record( calc, "$(P)POPEN_RAW" )
 	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W CP")
 	field( INPB, "$(P)$(CHASSIS)SOURCE_IM_W CP")
 	field(CALC, "ATAN2(B,A)*R2D")
-	field(EGU, "degrees")
+	field(EGU, "deg")
 }
 
 # Set DAC scale so AOPEN matches a measured amplitude.
