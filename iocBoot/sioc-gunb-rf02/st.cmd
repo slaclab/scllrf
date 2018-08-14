@@ -62,6 +62,7 @@ asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
 dbLoadRecords("db/BuncherExtra.db")
+dbLoadRecords("BuncherStatHistory.db")
 
 ##############################################################################
 # BEGIN: Load the record databases
