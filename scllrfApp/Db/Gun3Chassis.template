@@ -71,16 +71,6 @@ record (calc, "GUN:GUNB:100:REV:PWR" )
 	field(EGU, "W")
 }
 
-# Useful for setting max fwd pwr limit
-record (calc, "GUN:GUNB:100:FWD:AMEAN_MAX" )
-{
-	field( DESC, "Highest forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:AMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
-	field( CALC, "MAX(A,B)")
-	field(EGU, "sqrt(Watts)")
-}
-
 # Useful for SSA balancing
 record (calc, "GUN:GUNB:100:FWD:AMEAN_MIN" )
 {
