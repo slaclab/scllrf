@@ -10,6 +10,10 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-9: Adding History module support for diagnostics and improved automation.
+
+scllrf-R1-0-8: CW detune refinements.
+
 scllrf-R1-0-7: Make CW detune work for buncher.
 
 scllrf-R1-0-6: Fixing CW detune calculations.
