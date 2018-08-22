@@ -40,5 +40,7 @@ scllrf_registerRecordDeviceDriver(pdbbase)
 # ====================================================
 
 # Increase queue sizes
-callbackSetQueueSize(1600000)
-scanOnceSetQueueSize(800000)
+callbackSetQueueSize(262144)
+scanOnceSetQueueSize(262144)
+# production LinuxRT CPU has 6 cores, so allow 6 threads
+callbackParallelThreads(6)
