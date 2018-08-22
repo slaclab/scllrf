@@ -267,3 +267,9 @@ record( calcout, "$(P)RFSUPLO2_AP_TO_Q")
 	field( CALC, "A*SIN(B*D2R)*19898/100")
 	field( OUT, "$(P)RFS2:RFSUPLOY1_W PP")
 }
+
+####XXXX This is effectively an alias for Apex compatability. Remove after commissioning.
+record( bo, "Screen1:Command" )
+{
+	field( OUT, "YAGS:GUNB:753:TGT_CTRL PP" )
+}

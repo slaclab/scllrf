@@ -4,8 +4,3 @@ alias( "$(P)CAV1:QTWF", "llrf$(N):w8")
 alias( "$(P)AOPEN", "llrf$(N):source_amp_ao")
 alias( "$(P)POPEN", "llrf$(N):source_ph_ao")
 alias( "$(P)PRC:WF_X_AXIS", "llrf$(N):xaxis")
-
-record( bo, "Screen1:Command" )
-{
-	field( OUT, "YAGS:GUNB:753:TGT_CTRL PP" )
-}
