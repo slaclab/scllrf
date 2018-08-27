@@ -75,7 +75,7 @@ record( calcout,  "$(P)UPPER_LIMIT_RAW_CALC")
 {
 	field( INPA, "$(P)SCALE")
 	field( INPB, "$(P)UPPER_LIMIT")
-	field( CALC, "A*B")
+	field( CALC, "B/A")
 	field( OUT, "$(P)UPPER_LIMIT_RAW PP")
 }
 
@@ -119,7 +119,7 @@ record( calcout,  "$(P)LOWER_LIMIT_RAW_CALC")
 {
 	field( INPA, "$(P)SCALE")
 	field( INPB, "$(P)LOWER_LIMIT")
-	field( CALC, "A*B")
+	field( CALC, "B/A")
 	field( OUT, "$(P)LOWER_LIMIT_RAW PP")
 }
 

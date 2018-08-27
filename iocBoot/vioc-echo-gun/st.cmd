@@ -19,7 +19,7 @@ epicsEnvSet("P", "GUN$(N):$(AREA):")
 epicsEnvSet( FPGA_IP, "127.0.0.1")  # if running on cdlx11
 #epicsEnvSet( FPGA_IP, "192.168.165.67")  # real PRC, can be used with loopback ports 50000 or 50002
 # UDP port number. 50006 for most, 7 for echo test interface, 3000 for cmoc
-epicsEnvSet( PORT, "50006")
+epicsEnvSet( PORT, "7")
 # If this chassis has a subclass, by convention called extra, set its name
 # here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","myIP") resolves correctly
 epicsEnvSet( EXTRA, "extra")

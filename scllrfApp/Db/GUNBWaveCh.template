@@ -270,6 +270,24 @@ record(waveform, "$(P)AWF_ENG")
 		field(DESC, "Ch $(CH) engineering Waveform")
 		field(EGU, "dBm")
 }
+
+record(acalcout, "$(P)PWRWF_CALC") {
+        field(DESC, "Ch $(CH) power Waveform")
+        field(INAA, "$(P)AWF CP MS")
+        field(CALC, "AA*AA")
+        field(PREC, "1")
+        field(EGU, "$(EGU)")
+        field(NELM, "8192")
+        field(OUT, "$(P)PWRWF PP")
+}
+record(waveform, "$(P)PWRWF")
+{
+                field(NELM, "8192")
+                field(FTVL, "FLOAT")
+                field(DESC, "Ch $(CH) power Waveform")
+                field(EGU, "W")
+}
+
 record(waveform, "$(P)AWF_RAW") {
 	field(DESC, "Ch $(CH) raw ADC amplitude Waveform")
 	field(SCAN, "I/O Intr")

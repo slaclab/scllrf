@@ -10,7 +10,8 @@
 
 record(calc, "$(P)SSA$(N)_GAIN") {
 field(INPA, "$(P)DRV$(N):AMEAN NPP MS")
-field(INPB, "$(P)FWD$(N):AMEAN NPP MS")
+field(INPB, "$(FWD)$(N):AMEAN NPP MS")
+# Use INPC to trigger processing
 field(INPC, "$(P)AOPEN CP")
 # Update when ADES changes
 field(CALC, "B/A")

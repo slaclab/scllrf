@@ -206,7 +206,7 @@ record( calc, "$(P)SMOOTHED_BW")
 	field( INPB, "$(P)CAV2:DECAY_BW CP MS")
 	field( INPC, "0.9") # Smoothing factor
 	field( INPD, "$(P)ACTIVE_PROBE")
-	field( CALC, "C*VAL+(1-C)*(D=1?A:B)")
+	field( CALC, "C*VAL+(1-C)*(ISNAN(A,B)?VAL:D=1?A:B)")
 	field( SDIS, "$(P)DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	field(EGU, "Hz")

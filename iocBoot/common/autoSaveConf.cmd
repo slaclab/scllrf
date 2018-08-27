@@ -1,7 +1,7 @@
 # =====================================================================
 # Load database for autosave status
 # =====================================================================
-dbLoadRecords("db/save_restoreStatus.db", "P=${IOC_PV}")
+dbLoadRecords("db/save_restoreStatus.db", "P=${IOC_PV}:")
 
 # END: Loading the record databases
 ########################################################################
@@ -39,7 +39,7 @@ set_savefile_path("${IOC_DATA}/${IOC}/autosave")
 # ============================================================
 save_restoreSet_UseStatusPVs(1)
 # Set IOC_PV as a prefix for autosave and iocAdmin PVs
-save_restoreSet_status_prefix("${IOC_PV}")
+save_restoreSet_status_prefix("${IOC_PV}:")
 
 ## Restore datasets
 set_pass0_restoreFile("info_settings.sav")
