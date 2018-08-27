@@ -10,6 +10,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-10: Add power waveforms. Fix trip limit scaling.
+
 scllrf-R1-0-9: Adding History module support for diagnostics and improved automation.
 
 scllrf-R1-0-8: CW detune refinements.
