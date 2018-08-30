@@ -590,13 +590,18 @@ record( bo, "$(P)RF_GO")
 	field(ONAM, "1")
 }
 
-record( dfanout, "$(P)RF_GO_3CH")
+record( seq, "$(P)RF_GO_3CH")
 {
-	field(OMSL, "closed_loop")
-	field(DOL, "$(P)RF_GO")
-	field(OUTA, "$(P)RFS1:RF_GO_W PP")
-	field(OUTB, "$(P)RFS2:RF_GO_W PP")
-		field(OUTC, "$(P)PRC:RF_GO_W PP")
+	field(DO1, "0")
+	field(LNK1, "$(P)AOPEN")
+	field(DO2, "0")
+	field(LNK2, "$(P)ADES")
+	field(DOL3, "$(P)RF_GO")
+	field(LNK3, "$(P)RFS1:RF_GO_W PP")
+	field(DOL4, "$(P)RF_GO")
+	field(LNK4, "$(P)RFS2:RF_GO_W PP")
+	field(DOL5, "$(P)RF_GO")
+	field(LNK5, "$(P)PRC:RF_GO_W PP")
 }
 #record(calc, "$(P)IFDES2MODULO")
 #{

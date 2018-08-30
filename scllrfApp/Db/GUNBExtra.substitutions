@@ -165,8 +165,8 @@ file Gun3Chassis.template
 
 file gainScanRecorder.template
 {
-	{ P = "GUN:GUNB:100:", N=1, FWD = "GUN:GUNB:S100:FWD$(N)" }
-	{ P = "GUN:GUNB:100:", N=2, FWD = "GUN:GUNB:S100:FWD$(N)" }
+	{ P = "GUN:GUNB:100:", N=1, FWD = "GUN:GUNB:S100:FWD" }
+	{ P = "GUN:GUNB:100:", N=2, FWD = "GUN:GUNB:S100:FWD" }
 }
 
 #	P - Prefix for this monitor. The PV with enumerated status and severity is $(P):ALIVESUM

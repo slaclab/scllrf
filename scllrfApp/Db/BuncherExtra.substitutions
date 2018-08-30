@@ -176,10 +176,10 @@ file Buncher3Chassis.template
 
 file gainScanRecorder.template
 {
-	{ P = "ACCL:GUNB:455:", N=1, FWD = "ACCL:GUNB:455:FWD$(N)" }
-	{ P = "ACCL:GUNB:455:", N=2, FWD = "ACCL:GUNB:455:FWD$(N)" }
-	{ P = "ACCL:GUNB:455:", N=3, FWD = "ACCL:GUNB:455:FWD$(N)" }
-	{ P = "ACCL:GUNB:455:", N=4, FWD = "ACCL:GUNB:455:FWD$(N)" }
+	{ P = "ACCL:GUNB:455:", N=1, FWD = "ACCL:GUNB:455:FWD" }
+	{ P = "ACCL:GUNB:455:", N=2, FWD = "ACCL:GUNB:455:FWD" }
+	{ P = "ACCL:GUNB:455:", N=3, FWD = "ACCL:GUNB:455:FWD" }
+	{ P = "ACCL:GUNB:455:", N=4, FWD = "ACCL:GUNB:455:FWD" }
 }
 
 #	P - Prefix for this monitor. The PV with enumerated status and severity is $(P):ALIVESUM

@@ -38,6 +38,15 @@ record (calc, "ACCL:GUNB:455:FWD:PWR" )
 	field(EGU, "W")
 }
 
+record (calc, "ACCL:GUNB:455:FWD:PWR_AVG" )
+{
+	field( DESC, "Total forward amplitude" )
+	field( INPA, "ACCL:GUNB:455:FWD:PWR CP MS" )
+	field( INPB, "ACCL:GUNB:455:DUTY_CYCLE CP MS" )
+	field( CALC, "A*B/100")
+	field(EGU, "W")
+}
+
 record (mbbo, "ACCL:GUNB:455:FWD:USE_AS_REF")
 {
 	field(ZRST, "ACCL:GUNB:455:FWD1")
