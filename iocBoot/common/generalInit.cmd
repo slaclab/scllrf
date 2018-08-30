@@ -39,6 +39,14 @@ dbLoadDatabase("dbd/scllrf.dbd",0,0)
 scllrf_registerRecordDeviceDriver(pdbbase)
 # ====================================================
 
+# =====================================================================
+# Channel Access Security:
+# This is required if you use caPutLog.
+# Set access security file
+# Load common LCLS Access Configuration File
+< ${ACF_INIT}
+epicsThreadSleep(0.3)
+
 # Increase queue sizes
 callbackSetQueueSize(262144)
 scanOnceSetQueueSize(262144)

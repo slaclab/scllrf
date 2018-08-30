@@ -74,27 +74,18 @@ dbLoadRecords("db/GunStatHistory.db")
 # END: Loading the record databases
 ########################################################################
 
-# =====================================================================
-# Channel Access Security:
-# This is required if you use caPutLog.
-# Set access security file
-# Load common LCLS Access Configuration File
-#< ${ACF_INIT}
-#epicsThreadSleep(1.0)
-
-
 # =============================================================
 # Start EPICS IOC Process (i.e. all threads will start running)
 # =============================================================
 pwd
 iocInit()
-#
-#
+
+
 # =====================================================
 # Turn on caPutLogging:
 # Log values only on change to the iocLogServer:
-#caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
-#caPutLogShow(2)
+caPutLogInit("${EPICS_CA_PUT_LOG_ADDR}")
+caPutLogShow(2)
 # =====================================================
 
 ## Start any sequence programs
