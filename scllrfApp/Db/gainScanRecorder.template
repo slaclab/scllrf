@@ -19,10 +19,20 @@ field(PREC, "5")
 field(FLNK, "$(P)TRACK_SSA$(N)_GAIN")
 }
 
+record(calc, "$(P)SSA$(N)_DB_GAIN") {
+field(INPA, "$(P)DRV$(N):AMEAN_ENG NPP MS")
+field(INPB, "$(FWD)$(N):AMEAN_ENG NPP MS")
+field(CALC, "B-A")
+field(PREC, "5")
+field(FLNK, "$(P)TRACK_SSA$(N)_GAIN")
+}
+
 record(fanout, "$(P)TRACK_SSA$(N)_GAIN") {
 field(LNK0, "$(P)DRV$(N):AMEAN_LOG PP")
 field(LNK1, "$(P)FWD$(N):AMEAN_LOG PP")
 field(LNK2, "$(P)SSA$(N)_GAIN_LOG PP")
+field(LNK2, "$(P)SSA$(N)_DB_GAIN" PP)
+field(LNK2, "$(P)SSA$(N)_DB_GAIN_LOG" PP)
 }
 
 record(compress, "$(P)DRV$(N):AMEAN_LOG") {
@@ -44,6 +54,14 @@ field(PREC, "5")
 record(compress, "$(P)SSA$(N)_GAIN_LOG") {
 field(DESC, "Record of the last 1024 AMEAN values")
 field(INP, "$(P)SSA$(N)_GAIN")
+field(ALG, "Circular Buffer")
+field(NSAM, "1024")
+field(PREC, "5")
+}
+
+record(compress, "$(P)SSA$(N)_DB_GAIN_LOG") {
+field(DESC, "Record of the last 1024 dBm values")
+field(INP, "$(P)SSA$(N)_DB_GAIN")
 field(ALG, "Circular Buffer")
 field(NSAM, "1024")
 field(PREC, "5")
