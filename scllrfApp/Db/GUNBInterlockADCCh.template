@@ -51,7 +51,7 @@ record( ao, "$(P)UPPER_PWR_LIMIT")
 # For other signals, e.g. cavity probes, this is meaningless.
 	field( DESC, "UPPER trip limit squared")
 	field( FLNK, "$(P)UPPER_LIMIT_CALC")
-	field( EGU, "$(EGU)")
+	field( EGU, "W")
 }
 
 record( calcout,  "$(P)UPPER_LIMIT_CALC")
@@ -96,7 +96,7 @@ record( ao, "$(P)LOWER_PWR_LIMIT")
 # For other signals, e.g. cavity probes, this is meaningless.
 	field( DESC, "Lower trip limit squared")
 	field( FLNK, "$(P)LOWER_LIMIT_CALC")
-	field( EGU, "$(EGU)")
+	field( EGU, "W")
 }
 
 record( calcout,  "$(P)LOWER_LIMIT_CALC")
