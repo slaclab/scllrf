@@ -2,6 +2,8 @@ file ai_hist_pattern.db
 {
 pattern
 {   PV,                                            EGU          }
+{   "GUN:GUNB:100:FWD:PWR", "W" }
+{   "GUN:GUNB:100:FWD:PWR_AVG", "W" }
 {   "GUN:GUNB:100:AACT", "MV" }
 {   "GUN:GUNB:100:CAV1:ADC_MAX-MIN", "counts" }
 {   "GUN:GUNB:100:CAV1:AMEAN", "MV" }
@@ -27,6 +29,7 @@ pattern
 {   "GUN:GUNB:100:DECAY_FIT_STDDEV", "" }
 {   "GUN:GUNB:100:DECAY_STRENGTH", "" }
 {   "GUN:GUNB:100:DFACT", "Hz" }
+{   "GUN:GUNB:100:FREQ_CAV", "Hz" }
 {   "GUN:GUNB:100:DRV1:ADC_MAX-MIN", "counts" }
 {   "GUN:GUNB:100:DRV1:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:DRV1:AMEAN_RAW", "counts" }
