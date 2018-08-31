@@ -391,6 +391,38 @@ record (bo, "$(P)RFCTRL" )
 	field( DESC, "Hook for RF control sequence" )
 	field( ONAM, "On" )
 	field( ZNAM, "OFF" )
+	field( OUT, "$(P)CALC_RFCTRL PP" )
+	field( FLNK,
+}
+
+record(calcout, "$(P)CALC_RFCTRL") {
+field(INPA, "$(P)RFCTRL")
+field(OUT, "$(P)SWITCH_RFCTRL PP")
+field(CALC, "A+1")
+	info( autosaveFields, "VAL")
+}
+
+record(seq, "$(P)SWITCH_RFCTRL") {
+field(SELM, "Specified")
+#field(SELM,"All")
+field(SELL, "$(P)CALC_RFCTRL")
+field(LNK1, "$(P)RFCTRL_OFF PP")
+field(LNK2, "$(P)RFCTRL_ON PP")
+}
+
+record(seq, "$(P)RFCTRL_OFF") {
+field(SELM, "All")
+# Set gains to 0 so there's no jump
+field(DO1, "0")
+field(LNK1, "$(P)AOPEN PP")
+field(DO2, "0")
+field(LNK2, "$(P)ADES PP")
+}
+
+record(seq, "$(P)RFCTRL_ON") {
+field(SELM, "All")
+# Set gains to 0 so there's no jump
+#TBD
 }
 
 record (mbbi, "$(P)RFMODE" )
