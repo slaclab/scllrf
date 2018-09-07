@@ -257,7 +257,7 @@ record(acalcout, "$(P)A_CALC") {
 	field(INPD, "50")
 # Other losses
 	field(INPE, "$(P)CAL_LOSS_TOTAL")
-	field(CALC, "10*LOG((AA*A/B)**2*1e-3/D) + E")
+	field(CALC, "10*LOG(((AA+0.5)*A/B)**2*1e-3/D) + E")
 	field(PREC, "1")
 	field(EGU, "$(EGU)")
 	field(NELM, "8192")
@@ -520,8 +520,8 @@ record(acalcout, "$(P)PRSTD") {
 
 record(acalcout, "$(P)PMEAN_RAW") {
 	field(INAA, "$(P)PWF_RAW CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT_RAW CP")
-	field(INPC, "$(CHASSIS)PULSE_POINTS_RAW CP")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "2")
@@ -531,8 +531,8 @@ record(acalcout, "$(P)PMEAN_RAW") {
 record(acalcout, "$(P)PSTD_RAW") {
 	field(DESC, "Normalized standard deviation")
 	field(INAA, "$(P)PWF_RAW CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT_RAW CP")
-	field(INPC, "$(CHASSIS)PULSE_POINTS_RAW CP")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
 	field(CALC, "STD(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "2")
