@@ -10,6 +10,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-11: RF on/off behavior improved, consistent with SRF
+
 scllrf-R1-0-10: Add power waveforms and average. Fix trip limit scaling. Phase balance seq.
 
 scllrf-R1-0-9: Adding History module support for diagnostics and improved automation.
