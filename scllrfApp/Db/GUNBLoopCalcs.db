@@ -87,6 +87,7 @@ field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP MS")
 # The 13xx is good for the gun, not buncher. Use freq divider macro.
 field(CALC, "A*1320e6/(7*2^20)")
 field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
 record(calc, "$(P)FREQ_CAV") {
@@ -96,6 +97,7 @@ field(INPB, "$(1300RATIO)")
 # The 13xx is good for the gun, not buncher. Use freq divider macro.
 field(CALC, "1300e6/B+A*1320e6/(7*2^20)")
 field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
 record(calcout, "$(P)DETUNE_GOOD") {
@@ -109,6 +111,7 @@ field(INPF, "$(P)DETUNE_MODE")
 field(INPG, "1")
 field(CALC, "(A>C)&&(B<D)&&F?1:(E<G)")
 field(SCAN, ".2 second")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV INPC C INPD D")
 }
 
 record(calcout, "$(P)CALC_NEW_PHSTEP_H") {
@@ -340,6 +343,7 @@ record (calc, "$(P)DFACT" )
 	# Otherwise, use the CW calculation.
 	field( CALC, "F?(B>C?D:E):A")
 	field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
 # This record keeps ADES, the closed loop setpoint,
@@ -392,37 +396,91 @@ record (bo, "$(P)RFCTRL" )
 	field( ONAM, "On" )
 	field( ZNAM, "OFF" )
 	field( OUT, "$(P)CALC_RFCTRL PP" )
-	field( FLNK,
 }
 
 record(calcout, "$(P)CALC_RFCTRL") {
-field(INPA, "$(P)RFCTRL")
-field(OUT, "$(P)SWITCH_RFCTRL PP")
-field(CALC, "A+1")
+	field(INPA, "$(P)RFCTRL")
+	field(OUT, "$(P)SWITCH_RFCTRL PP")
+	field(CALC, "A+1")
 	info( autosaveFields, "VAL")
 }
 
 record(seq, "$(P)SWITCH_RFCTRL") {
-field(SELM, "Specified")
+	field(SELM, "Specified")
 #field(SELM,"All")
-field(SELL, "$(P)CALC_RFCTRL")
-field(LNK1, "$(P)RFCTRL_OFF PP")
-field(LNK2, "$(P)RFCTRL_ON PP")
+	field(SELL, "$(P)CALC_RFCTRL")
+	field(LNK1, "$(P)RFCTRL_OFF PP")
+	field(LNK2, "$(P)RFCTRL_ON PP")
 }
 
+# Disable PVs sending setpoint to registers
+# $(P)SOURCE_AP_TO_I/Q
+# $(P)SET_PLOOP_AP_TO_I/Q
+# Set registers to 0
 record(seq, "$(P)RFCTRL_OFF") {
-field(SELM, "All")
-# Set gains to 0 so there's no jump
-field(DO1, "0")
-field(LNK1, "$(P)AOPEN PP")
-field(DO2, "0")
-field(LNK2, "$(P)ADES PP")
+	field(LNK1, "$(P)RFOLOFFGO PP")
+	field(LNK2, "$(P)RFCLOFFGO PP")
 }
 
+# Turn off RF in open loop
+record(seq, "$(P)RFOLOFFGO") {
+	field(DO1, "1")
+	field(LNK1, "$(P)SOURCE_AP_TO_I.DISA")
+	field(DO2, "1")
+	field(LNK2, "$(P)SOURCE_AP_TO_Q.DISA")
+	field(DO3, "0")
+	field(LNK3, "$(P)PRC:SOURCE_RE_W PP")
+	field(DO4, "0")
+	field(LNK4, "$(P)PRC:SOURCE_IM_W PP")
+}
+
+# Turn off RF in closed loop
+record(seq, "$(P)RFCLOFFGO") {
+	field(DO1, "1")
+	field(LNK1, "$(P)SET_PLOOP_AP_TO_I.DISA")
+	field(DO2, "1")
+	field(LNK2, "$(P)SET_PLOOP_AP_TO_Q.DISA")
+	field(DO3, "0")
+	field(LNK3, "$(P)PRC:SET_PLOOP_RE_W PP")
+	field(DO4, "0")
+	field(LNK4, "$(P)PRC:SET_PLOOP_IM_W PP")
+}
+
+# Re-enable PVs sending setpoint to registers
+# $(P)SOURCE_AP_TO_I/Q
+# $(P)SET_PLOOP_AP_TO_I/Q
+# Process ADES and AOPEN to restore setpoints
 record(seq, "$(P)RFCTRL_ON") {
-field(SELM, "All")
-# Set gains to 0 so there's no jump
-#TBD
+	field(LNK1, "$(P)RFOLONGO PP")
+	field(LNK2, "$(P)RFCLONGO PP")
+}
+
+# Turn off RF in open loop
+record(seq, "$(P)RFOLONGO") {
+	field(DO1, "0")
+	field(LNK1, "$(P)SOURCE_AP_TO_I.DISA")
+	field(DO2, "0")
+	field(LNK2, "$(P)SOURCE_AP_TO_Q.DISA")
+	field(DO3, "1")
+	field(LNK3, "$(P)AOPEN.PROC")
+	field(DOL4, ""$(P)SOURCE_AP_TO_I")
+	field(LNK4, "$(P)PRC:SOURCE_RE_W PP")
+	field(DOL5, ""$(P)SOURCE_AP_TO_Q")
+	field(LNK5, "$(P)PRC:SOURCE_IM_W PP")
+}
+
+# Turn off RF in closed loop
+record(seq, "$(P)RFCLONGO") {
+	field(DO1, "0")
+	field(LNK1, "$(P)SET_PLOOP_AP_TO_I.DISA")
+	field(DO2, "0")
+	field(LNK2, "$(P)SET_PLOOP_AP_TO_Q.DISA")
+	field(DO3, "1")
+	field(LNK3, "$(P)ADES.PROC")
+	field(DOL4, "$(P)SET_PLOOP_AP_TO_I")
+	field(LNK4, "$(P)PRC:SET_PLOOP_RE_W PP")
+	field(DOL5, "$(P)SET_PLOOP_AP_TO_Q")
+	field(LNK5, "$(P)PRC:SET_PLOOP_IM_W PP")
 }
 
 record (mbbi, "$(P)RFMODE" )

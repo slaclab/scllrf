@@ -18,6 +18,7 @@ record(ao, "$(P)REP_PERIOD")
 	field( EGU, "ms")
 	field( FLNK, "$(P)REP_PERIOD_U_TO_R")
 	field( PREC, "5")
+# field(ASG, "")
 }
 # Using a calcout instead of ao because ao misbehaved with SDIS loop breaking
 record(calcout, "$(P)REP_PERIOD_U_TO_R")
@@ -81,6 +82,7 @@ record(ao, "$(P)REP_FREQUENCY")
 	field( EGU, "Hz")
 	field(FLNK, "$(P)REP_F_TO_P")
 	field( PREC, "5")
+# field(ASG, "")
 }
 
 # User interface PV in ms
@@ -91,6 +93,8 @@ record(ao, "$(P)PULSE_LENGTH")
 	field( EGU, "ms")
 	field( FLNK, "$(P)PULSE_LENGTH_U_TO_R")
 	field( PREC, "5")
+# field(ASG, "")
+	info( autosaveFields, "VAL")
 }
 
 
@@ -133,6 +137,8 @@ record( ao, "$(P)DUTY_CYCLE")
 	field( EGU, "%")
 	field( FLNK, "$(P)DUTY_CYCLE_Sync_Out PP")
 	field( PREC, "5")
+# field(ASG, "")
+	info( autosaveFields, "VAL")
 }
 
 record( calcout, "$(P)DUTY_CYCLE_Sync_Out")
@@ -378,7 +384,7 @@ record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 	field( OUT,  "$(P)AOPEN_SCALE PP MS")
 }
 record( ao, "$(P)AOPEN_SCALE" ) {
-	field( FLNK, "$(P)AOPEN_MAX_CALC" )
+	field( FLNK, "$(P)AOPEN_MAX_CALC PP" )
 	field( VAL, "1")
 	info( autosaveFields, "VAL")
 }
@@ -446,6 +452,7 @@ record( calcout, "$(P)SOURCE_AP_TO_Q")
 	field( OUT, "$(P)$(CHASSIS)SOURCE_IM_W PP")
 }
 
+# Set open loop setpoint based on DAC output during closed loop
 record( ao, "$(P)SOURCE_RE_Sync"){
 # This should be processed right before opening I/Q loop
 	field( SDIS, "$(P)$(CHASSIS)CLOSE_LOOP_W")
@@ -483,7 +490,13 @@ record( calcout, "$(P)SOURCE_IQ_TO_P")
 	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R NPP MS")
 	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
 	field( INPD, "$(P)POPEN_SCALE" )
-	field(CALC, "ATAN2(A,B)*R2D+D")
+	field( INPE, "$(P)PDES" )
+# The vout*fall registers currently have a phase offset
+# resulting in rotating phase when loop closes then opens.
+# If this is resolved, go back to use this calc:
+#	field(CALC, "ATAN2(A,B)*R2D+D")
+# Until then, just keep the closed loop phase
+	field( CALC, "E" )
 	field( OUT, "$(P)POPEN PP")
 	field( OOPT, "On Change")
 }
