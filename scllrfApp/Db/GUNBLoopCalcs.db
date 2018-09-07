@@ -465,7 +465,7 @@ record(seq, "$(P)RFOLONGO") {
 	field(LNK3, "$(P)AOPEN.PROC")
 	field(DOL4, ""$(P)SOURCE_AP_TO_I")
 	field(LNK4, "$(P)PRC:SOURCE_RE_W PP")
-	field(DOL5, ""$(P)SOURCE_AP_TO_Q")
+	field(DOL5, "$(P)SOURCE_AP_TO_Q")
 	field(LNK5, "$(P)PRC:SOURCE_IM_W PP")
 }
 
