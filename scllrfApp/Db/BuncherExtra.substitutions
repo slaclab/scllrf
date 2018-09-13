@@ -7,8 +7,8 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 	{	"ACCL:GUNB:455:CAV2:",	"3",	"4",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:CAV3:",	"4",	"5",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:CAV4:",	"5",	"6",	"PRCReg",	"MV",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRLFWD:",	"6",	"7",	"PRCReg",	"dBm",	"32767",	"ACCL:GUNB:455:PRC:" }
-	{	"ACCL:GUNB:455:PRLREV:",	"7",	"8",	"PRCReg",	"dBm",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRLFWD:",	"6",	"7",	"PRCReg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:PRC:" }
+	{	"ACCL:GUNB:455:PRLREV:",	"7",	"8",	"PRCReg",	"sqrt(W)",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:DAC1:",	"8",	"9",	"PRCReg",	"Counts",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:DAC2:",	"9",	"10",	"PRCReg",	"Counts",	"32767",	"ACCL:GUNB:455:PRC:" }
 	{	"ACCL:GUNB:455:PRC:RFS1A:",	"10",	"11",	"PRCReg",	"",	"32767",	"ACCL:GUNB:455:PRC:" }

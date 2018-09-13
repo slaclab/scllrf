@@ -158,7 +158,7 @@ record (calc, "ACCL:GUNB:455:DECAY_STRENGTH" )
 
 record (calc, "ACCL:GUNB:455:DECAY_FIT_STDDEV" )
 {
-	field( DESC, "pulse decay compared to theoretical ideal" )
+	field( DESC, "pulse decay fit to theoretical ideal" )
 	field( INPA, "ACCL:GUNB:455:CAV1:DECAY_FIT_STDDEV CP MS" )
 	field( INPB, "ACCL:GUNB:455:CAV2:DECAY_FIT_STDDEV CP MS" )
 	field( INPC, "ACCL:GUNB:455:ACTIVE_PROBE CP" )
@@ -455,7 +455,7 @@ record( seq, "$(P)BALANCE_PHASES_PT2")
 	field(LNK9, "$(P)DRV4_ADJ_A PP")
 	field(DOA, "1")
 	field(LNKA, "$(P)BALANCE_PHASES_PT3.PROC")
-)
+}
 # Too many steps to fit in one sequence, so there's a sequel
 record( seq, "$(P)BALANCE_PHASES_PT3")
 {
@@ -470,4 +470,4 @@ record( seq, "$(P)BALANCE_PHASES_PT3")
 	field(LNK4, "$(P)DRV2_ADJ_A PP")
 	field(DO5, "100")
 	field(LNK5, "$(P)DRV3_ADJ_A PP")
-
+}

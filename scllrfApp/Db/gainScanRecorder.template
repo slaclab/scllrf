@@ -14,7 +14,7 @@ field(INPB, "$(FWD)$(N):AMEAN NPP MS")
 # Use INPC to trigger processing
 field(INPC, "$(P)AOPEN CP")
 # Update when ADES changes
-field(CALC, "B/A")
+field(CALC, "A>1e-6?B/A:0")
 field(PREC, "5")
 field(FLNK, "$(P)TRACK_SSA$(N)_GAIN")
 }
@@ -31,8 +31,8 @@ record(fanout, "$(P)TRACK_SSA$(N)_GAIN") {
 field(LNK0, "$(P)DRV$(N):AMEAN_LOG PP")
 field(LNK1, "$(P)FWD$(N):AMEAN_LOG PP")
 field(LNK2, "$(P)SSA$(N)_GAIN_LOG PP")
-field(LNK2, "$(P)SSA$(N)_DB_GAIN" PP)
-field(LNK2, "$(P)SSA$(N)_DB_GAIN_LOG" PP)
+field(LNK2, "$(P)SSA$(N)_DB_GAIN PP")
+field(LNK2, "$(P)SSA$(N)_DB_GAIN_LOG PP")
 }
 
 record(compress, "$(P)DRV$(N):AMEAN_LOG") {
