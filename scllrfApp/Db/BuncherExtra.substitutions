@@ -195,3 +195,31 @@ pattern{ P,							PV2CHECK,						FAIL_IF	}
 		{"ACCL:GUNB:455:RFS1:CRCERRORCNT_",	"ACCL:GUNB:455:RFS1:CRCERRORCNT_R",	"(A&0xFFFF)!=(B&0xFFFF)"	}
 		{"ACCL:GUNB:455:RFS2:CRCERRORCNT_",	"ACCL:GUNB:455:RFS2:CRCERRORCNT_R",	"(A&0xFFFF)!=(B&0xFFFF)"	}
 }
+
+file amc7823monitor.template
+{
+pattern{ PREFIX }
+	{ "ACCL:GUNB:455:PRC:" }
+	{ "ACCL:GUNB:455:RFS1:" }
+	{ "ACCL:GUNB:455:RFS2:" }
+}
+
+#/*
+# When the proportion of RF coming back from the cavity exceeds a threshold,
+# and other conditions are met, dither a setting to establish where the minimum
+# RF comes back, and establish that as the new 0 detune position.
+# Change the CW detune calculation nominal offset from cavity phase to forward phase
+# at detune = 0 with the offset at that point.
+# Then resume normal feedback.
+#
+# Macros:
+# 		PREFIX - pv name prefix used for settings PVs, e.g. GUN:GUNB:100:
+# 		REV - reverse signal to use for amplitude comparison, e.g. GUN:GUNB:100:REV:
+# 		FWD - forward signal to use for amplitude comparison and phase calibration, e.g. GUN:GUNB:100:FWD:
+# 		CAV - Prefix to PACT for cavity to use for phase calibration, e.g. GUN:GUNB:100:
+# 		CTL - PV that changes the frequency, e.g. GUN:GUNB:100:PRC:DDSA_PHSTEP_H_W
+#/
+file centerCwDetune.template
+{
+	{ PREFIX = "ACCL:GUNB:455:", REV = "ACCL:GUNB:455:REV:", FWD = "ACCL:GUNB:455:FWD:", CAV = "ACCL:GUNB:455:", CTL = "ACCL:GUNB:455:PRC:DDSA_PHSTEP_H_W" }
+}
