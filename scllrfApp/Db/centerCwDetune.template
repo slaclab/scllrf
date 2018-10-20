@@ -1,0 +1,66 @@
+#/*
+# When the proportion of RF coming back from the cavity exceeds a threshold,
+# and other conditions are met, dither a setting to establish where the minimum
+# RF comes back, and establish that as the new 0 detune position.
+# Change the CW detune calculation nominal offset from cavity phase to forward phase
+# at detune = 0 with the offset at that point.
+# Then resume normal feedback.
+#
+# Macros:
+# 		PREFIX - pv name prefix used for settings PVs, e.g. GUN:GUNB:100:
+# 		REV - reverse signal to use for amplitude comparison, e.g. GUN:GUNB:100:REV:
+# 		FWD - forward signal to use for amplitude comparison and phase calibration, e.g. GUN:GUNB:100:FWD:
+# 		CAV - Prefix to PACT for cavity to use for phase calibration, e.g. GUN:GUNB:100:
+# 		CTL - PV that changes the frequency, e.g. GUN:GUNB:100:PRC:DDSA_PHSTEP_H_W
+#/
+
+# Enable detune control
+record( bo, "{PREFIX}DET_CTR_ENA")
+{
+	field( DESC, "Enable detune control")
+}
+
+# Status indicator: minimum seeking is active
+record( bi, "{PREFIX}DET_IS_SEEKING")
+{
+	field( ONAM, "Seeking")
+	field( ZNAM, "Idle")
+}
+
+# size of non-disruptive small move from current frequency
+record( ai, "{PREFIX}DET_INC_SIZE")
+{
+	field( HIHI, "")
+	field( LOLO, "")
+}
+
+# limit on fraction of RF reflected that triggers re-centering
+record( ao, "{PREFIX}DET_REV_LIMIT")
+{
+	field( HIHI, "1.0")
+	field( LOLO, "0.0")
+	field( VAL, "0.20
+}
+
+# stop seeking 0 detune when reverse amplitude / forward amplitude is less than this limit
+record( ai, "{PREFIX}DET_STOP_LIMIT")
+{
+	field( HIHI, "1.0")
+	field( LOLO, "0.0")
+	field( VAL, "0.05
+}
+
+# A flag to start moving to 0 detune even if REV/FWD < threshold
+record( bo, "{PREFIX}DET_TUNE_GO")
+{
+	field( ONAM, "Go")
+	field( ZNAM, "Normal")
+}
+
+# a flag to stop moving to 0 detune even if REV/FWD > another threshold
+record( bo, "{PREFIX}DET_TUNE_ABORT")
+{
+	field( ONAM, "Abort")
+	field( ZNAM, "Normal")
+}
+

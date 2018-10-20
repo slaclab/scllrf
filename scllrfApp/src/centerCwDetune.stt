@@ -1,0 +1,325 @@
+/*
+ * When the proportion of RF coming back from the cavity exceeds a threshold,
+ * and other conditions are met, dither a setting to establish where the minimum
+ * RF comes back, and establish that as the new 0 detune position.
+ * Change the CW detune calculation nominal offset from cavity phase to forward phase
+ * at detune = 0 with the offset at that point.
+ * Then resume normal feedback.
+ *
+ * Macros:
+ * 		PREFIX - pv name prefix used for settings PVs, e.g. GUN:GUNB:100:
+ * 		REV - reverse signal to use for amplitude comparison, e.g. GUN:GUNB:100:REV:
+ * 		FWD - forward signal to use for amplitude comparison and phase calibration, e.g. GUN:GUNB:100:FWD:
+ * 		CAV - Prefix to PACT for cavity to use for phase calibration, e.g. GUN:GUNB:100:
+ * 		CTL - PV that changes the frequency, e.g. GUN:GUNB:100:PRC:DDSA_PHSTEP_H_W
+ */
+
+program centerCwDetune
+option +r;    /* re-entrant */
+option +c;    /* wait until all connection are established */
+option +w; // Initially, extra warnings
+
+%{
+	#include <math.h>
+	#include <stdio.h>
+	#include <errlog.h> /* errlogPrintf */
+	/*typedef enum { linear=0, exponential=1 } exp_lin;*/
+	#include <unistd.h> /* sleep */
+}%
+
+string     name;
+string     facility;
+
+/* enable/disable this correction */
+unsigned int     enable;
+assign     enable      to "{PREFIX}DET_CTR_ENA";
+monitor    enable;
+
+/* Status indicator: minimum seeking is active */
+unsigned int     isSeeking;
+assign     isSeeking   to "{PREFIX}DET_IS_SEEKING";
+
+/* size of non-disruptive small move from current frequency */
+double     incSize;
+assign     incSize     to "{PREFIX}DET_INC_SIZE";
+monitor    incSize;
+
+/* limit on fraction of RF reflected that triggers re-centering */
+double     revLimit;
+assign     revLimit    to "{PREFIX}DET_REV_LIMIT";
+
+/* stop seeking 0 detune when reverse amplitude / forward amplitude is less than this limit */
+double     stopLimit;
+assign     stopLimit   to "{PREFIX}DET_STOP_LIMIT";
+
+// A flag to start moving to 0 detune even if REV/FWD < threshold
+unsigned int       tune_go;
+assign     tune_go     to "{PREFIX}DET_TUNE_GO";
+monitor    tune_go;
+
+// a flag to stop moving to 0 detune even if REV/FWD > another threshold
+unsigned int       tune_abort;
+assign     tune_abort  to "{PREFIX}DET_TUNE_ABORT";
+monitor    tune_abort;
+
+/* reverse amplitude for comparison */
+double     revAmp;
+assign     revAmp      to "{REV}AMEAN";
+monitor    revAmp;
+
+/* reverse phase for comparison */
+double     revPh;
+assign     revPh       to "{REV}PMEAN";
+monitor    revPh;
+
+/* forward amplitude for comparison */
+double     fwdAmp;
+assign     fwdAmp      to "{FWD}AMEAN";
+monitor    fwdAmp;
+
+/* forward phase for calibration output */
+double     fwdPh;
+assign     fwdPh       to "{FWD}PMEAN";
+
+/* cavity phase for calibration output */
+double     cavPh;
+assign     cavPh       to "{CAV}PACT";
+
+/* PV that changes the frequency, cavity or output, same control PV used by the above loop */
+double     freqCtl;
+assign     freqCtl     to "{CTL}";
+
+// Field used in CW detune to set FWD - CAV nominal phase difference
+unsigned int       calib;
+assign     calib       to "{PREFIX}CW_DETUNE.INPC";
+monitor    calib;
+
+/* Initial value of the PV to det */
+double     startPos; /* postition system is centered on before shift up/down */
+double     startAmp; /* Reflected/forward amplitude at startPos */
+double     startPh;  /* cavity phase at startPos */
+double     pos;
+double     ampAtPosPlusInc;
+double     ampAtPosMinusInc;
+double     phAtPosPlusInc;
+double     phAtPosMinusInc;
+double     dAdPos;
+double     dPdPos;
+double     maxAmp;
+double     posAtMaxAmp;
+double     minAmp;
+double     posAtMinAmp;
+double     min_dPdPos;
+double     posAtMin_dPdPos;
+double     max_dPdPos;
+double     posAtMax_dPdPos;
+
+entry {
+
+	isSeeking = FALSE;
+	pvPut(isSeeking);
+
+	tune_go = FALSE;
+	pvPut(tune_go);
+
+	tune_abort = FALSE;
+	pvPut(tune_abort);
+}
+
+
+ss det
+{
+	state init {
+		when()
+		{
+		printf("Starting the CW tuning sequencer\n");
+		/* Place holder for now, delete this if it's not used */
+		} state wait
+	} /* state init */
+
+	state wait {
+		option +t;    /* reset timer everytime */
+		option +e;    /* inhibit entry execution for self-state-transition */
+
+		entry{
+
+			isSeeking = FALSE;
+			pvPut(isSeeking);
+
+			tune_go = FALSE;
+			pvPut(tune_go);
+
+			tune_abort = FALSE;
+			pvPut(tune_abort);
+		}
+
+		/* Do nothing until the go button is pushed */
+		when(enable != FALSE) {
+		} state ready_det
+
+	} /* state wait */
+
+	state ready_det {
+		entry {
+			pvGet(revLimit);
+			pvGet(freqCtl);
+		}
+
+		/* Do nothing until the go button is pushed */
+		when(enable == FALSE) {
+		} state wait
+
+		when(tune_go || (revAmp/fwdAmp > revLimit))
+		{
+		} state det
+	} /* state ready_det */
+
+
+	state det {
+		option +t;    /* reset timer everytime */
+		option +e;    /* inhibit entry execution for self-state-transition */
+		option +x;    /* inhibit exit  execution for self-state-transition */
+
+		entry {
+
+			tune_go = FALSE;
+			pvPut(tune_go);
+
+			tune_abort = FALSE;
+			pvPut(tune_abort);
+
+			isSeeking = TRUE;
+			pvPut(isSeeking);
+			pvGet(freqCtl);
+			pos = freqCtl;
+			startPos = freqCtl;
+			ampAtPosPlusInc = 0;
+			ampAtPosMinusInc = 0;
+			dAdPos = 0;
+			dPdPos = 0;
+			startAmp = revAmp/fwdAmp; /* Reflected/forward amplitude at startPos */
+			startPh = revPh;
+			maxAmp = minAmp = startAmp;
+			/* use revAmp for synchronization, so pause monitoring */
+			pvStopMonitor(revAmp);
+		}
+
+		when((tune_abort == TRUE)|(enable == FALSE)) { /* force reset */
+			errlogPrintf("%s %s tuning Aborted\n", facility, name);
+		} state wait
+
+		when((revAmp/fwdAmp < stopLimit))
+		{
+			pvGet(fwdPh);
+			pvGet(cavPh);
+			/*XXXX TODO: Figure out where to write the difference of these */
+		} state wait
+
+		when(delay(0.1))
+		{
+			freqCtl = pos + incSize;
+			pvPut(freqCtl);
+			pvGet(revAmp);
+			sleep(0.15);
+			pvGet(revAmp);
+			ampAtPosPlusInc = revAmp/fwdAmp;
+			phAtPosPlusInc = revPh;
+
+			freqCtl = pos - incSize;
+			pvPut(freqCtl);
+			pvGet(revAmp);
+			sleep(0.15);
+			pvGet(revAmp);
+			ampAtPosMinusInc = revAmp/fwdAmp;
+			phAtPosMinusInc = revPh;
+
+			if((startAmp>ampAtPosPlusInc) | (startAmp>ampAtPosMinusInc))
+			{
+				if (ampAtPosPlusInc > ampAtPosMinusInc)
+				{
+					/* update new position */
+					pos = pos - incSize;
+
+					/* gather some stats */
+					if(maxAmp < ampAtPosMinusInc)
+					{
+						maxAmp = ampAtPosMinusInc;
+						posAtMaxAmp = pos;
+						printf("New max rev/fwd amp of %f at %f\n", maxAmp, pos);
+					}
+
+					if( minAmp > ampAtPosMinusInc)
+					{
+						minAmp = ampAtPosMinusInc;
+						posAtMinAmp = pos;
+						printf("New min rev/fwd amp of %f at %f\n", minAmp, pos);
+					}
+					dAdPos = ampAtPosMinusInc - startAmp;
+					dPdPos = phAtPosMinusInc - startPh;
+					if( min_dPdPos > dPdPos )
+					{
+						min_dPdPos = dPdPos;
+						posAtMin_dPdPos = pos;
+						printf("New min rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
+					}
+					if( max_dPdPos < dPdPos)
+					{
+						max_dPdPos = dPdPos;
+						posAtMax_dPdPos = pos;
+						printf("New max rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
+					}
+
+					/* update starting amplitude and cavity phase */
+					startAmp = ampAtPosMinusInc;
+					startPh = phAtPosMinusInc;
+
+				}
+				else
+				{
+					pos = pos + incSize;
+
+					/* gather some stats */
+					if(maxAmp < ampAtPosPlusInc)
+					{
+						maxAmp = ampAtPosPlusInc;
+						posAtMaxAmp = pos;
+						printf("New max rev/fwd amp of %f at %f\n", maxAmp, pos);
+					}
+
+					if( minAmp > ampAtPosPlusInc)
+					{
+						minAmp = ampAtPosPlusInc;
+						posAtMinAmp = pos;
+						printf("New min rev/fwd amp of %f at %f\n", minAmp, pos);
+					}
+					dAdPos =  startAmp - ampAtPosPlusInc;
+					dPdPos =  startPh - phAtPosPlusInc;
+					if( min_dPdPos > dPdPos )
+					{
+						min_dPdPos = dPdPos;
+						posAtMin_dPdPos = pos;
+						printf("New min rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
+					}
+					if( max_dPdPos < dPdPos)
+					{
+						max_dPdPos = dPdPos;
+						posAtMax_dPdPos = pos;
+						printf("New max rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
+					}
+
+					/* update starting amplitude and cavity phase */
+					startAmp = ampAtPosPlusInc;
+					startPh = phAtPosPlusInc;
+				}
+			}
+		} state det
+
+		exit
+		{
+			printf("Found reflected amplitude minimum of %f at %f. Pausing minimum finder.\n", startAmp, pos);
+			sleep(0.15);
+			/* resume monitor to check if re-tuning is needed */
+			pvMonitor(revAmp);
+		}
+	} /* state det */
+} /* ss det */

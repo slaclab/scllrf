@@ -101,6 +101,7 @@ record(acalcout, "$(P)ITMEAN") {
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ITSTD") {
@@ -112,6 +113,7 @@ record(acalcout, "$(P)ITSTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ITRSTD") {
@@ -122,6 +124,7 @@ record(acalcout, "$(P)ITRSTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ITMEAN_RAW") {
@@ -131,6 +134,7 @@ record(acalcout, "$(P)ITMEAN_RAW") {
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ITSTD_RAW") {
@@ -142,6 +146,7 @@ record(acalcout, "$(P)ITSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ITRSTD_RAW") {
@@ -152,6 +157,7 @@ record(acalcout, "$(P)ITRSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(waveform, "$(P)QTWF") {
@@ -182,6 +188,7 @@ record(acalcout, "$(P)QTMEAN") {
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)QTSTD") {
@@ -193,6 +200,7 @@ record(acalcout, "$(P)QTSTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)QTRSTD") {
@@ -203,6 +211,7 @@ record(acalcout, "$(P)QTRSTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)QTMEAN_RAW") {
@@ -212,6 +221,7 @@ record(acalcout, "$(P)QTMEAN_RAW") {
 	field(CALC, "AVG(AA[B,-1])")
 	field(NELM, "8192")
 	field(PREC, "5")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)QTSTD_RAW") {
@@ -223,6 +233,7 @@ record(acalcout, "$(P)QTSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)QTRSTD_RAW") {
@@ -233,6 +244,7 @@ record(acalcout, "$(P)QTRSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(waveform, "$(P)AWF") {
@@ -272,20 +284,20 @@ record(waveform, "$(P)AWF_ENG")
 }
 
 record(acalcout, "$(P)PWRWF_CALC") {
-        field(DESC, "Ch $(CH) power Waveform")
-        field(INAA, "$(P)AWF CP MS")
-        field(CALC, "AA*AA")
-        field(PREC, "1")
-        field(EGU, "$(EGU)")
-        field(NELM, "8192")
-        field(OUT, "$(P)PWRWF PP")
+		field(DESC, "Ch $(CH) power Waveform")
+		field(INAA, "$(P)AWF CP MS")
+		field(CALC, "AA*AA")
+		field(PREC, "1")
+		field(EGU, "$(EGU)")
+		field(NELM, "8192")
+		field(OUT, "$(P)PWRWF PP")
 }
 record(waveform, "$(P)PWRWF")
 {
-                field(NELM, "8192")
-                field(FTVL, "FLOAT")
-                field(DESC, "Ch $(CH) power Waveform")
-                field(EGU, "W")
+				field(NELM, "8192")
+				field(FTVL, "FLOAT")
+				field(DESC, "Ch $(CH) power Waveform")
+				field(EGU, "W")
 }
 
 record(waveform, "$(P)AWF_RAW") {
@@ -327,6 +339,7 @@ record(acalcout, "$(P)AMEAN") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ASTD") {
@@ -338,6 +351,7 @@ record(acalcout, "$(P)ASTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ARSTD") {
@@ -348,6 +362,7 @@ record(acalcout, "$(P)ARSTD") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)AMEAN_RAW") {
@@ -356,6 +371,7 @@ record(acalcout, "$(P)AMEAN_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "counts")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ASTD_RAW") {
@@ -367,6 +383,7 @@ record(acalcout, "$(P)ASTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ARSTD_RAW") {
@@ -377,6 +394,7 @@ record(acalcout, "$(P)ARSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)AMEAN_ENG") {
@@ -387,6 +405,7 @@ record(acalcout, "$(P)AMEAN_ENG") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "dBm")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ASTD_ENG") {
@@ -398,6 +417,7 @@ record(acalcout, "$(P)ASTD_ENG") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)ARSTD_ENG") {
@@ -408,6 +428,7 @@ record(acalcout, "$(P)ARSTD_ENG") {
 	field(NELM, "8192")
 	field(PREC, "5")
 	field(EGU, "$(EGU)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(calc, "$(P)PWR") {
@@ -415,6 +436,7 @@ record(calc, "$(P)PWR") {
 	field(CALC, "A^2")
 	field(PREC, "2")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(waveform, "$(P)PWF") {
@@ -493,6 +515,7 @@ record(acalcout, "$(P)PMEAN") {
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)PSTD") {
@@ -505,6 +528,7 @@ record(acalcout, "$(P)PSTD") {
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)PRSTD") {
@@ -516,6 +540,7 @@ record(acalcout, "$(P)PRSTD") {
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)PMEAN_RAW") {
@@ -526,6 +551,7 @@ record(acalcout, "$(P)PMEAN_RAW") {
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)PSTD_RAW") {
@@ -537,6 +563,7 @@ record(acalcout, "$(P)PSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 record(acalcout, "$(P)PRSTD_RAW") {
@@ -547,6 +574,7 @@ record(acalcout, "$(P)PRSTD_RAW") {
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 # For checking ADC saturation
@@ -568,6 +596,7 @@ field(HIGH, "65000")
 field(HHSV, "MAJOR")
 field(HSV, "MINOR")
 field(FLNK, "$(P)AWF NPP MS")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST PREC")
 }
 
 #! Further lines contain data used by VisualDCT
