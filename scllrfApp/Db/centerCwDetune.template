@@ -39,7 +39,7 @@ record( ao, "{PREFIX}DET_REV_LIMIT")
 {
 	field( HIHI, "1.0")
 	field( LOLO, "0.0")
-	field( VAL, "0.20)
+	field( VAL, "0.20")
 }
 
 # stop seeking 0 detune when reverse amplitude / forward amplitude is less than this limit
@@ -47,7 +47,7 @@ record( ai, "{PREFIX}DET_STOP_LIMIT")
 {
 	field( HIHI, "1.0")
 	field( LOLO, "0.0")
-	field( VAL, "0.05)
+	field( VAL, "0.05")
 }
 
 # A flag to start moving to 0 detune even if REV/FWD < threshold
