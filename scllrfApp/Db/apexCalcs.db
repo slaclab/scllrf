@@ -62,7 +62,7 @@ field(VAL, "0.2")
 
 record(calcout, "$(P)$(R):freq_shift" )
 {
-	field(DESC, "
+	field(DESC, "")
 	field(INPA,"$(P)$(R):ddsa_phstep_h_ao")
 	field(INPB,"$(P)$(R):phase_diff")
 	field(INPC,"$(P)$(R):rf_master")
@@ -735,7 +735,7 @@ record(calc, "$(P)$(R):system_health_1")
 #}
 record(ai, "$(P)$(R):rf_master" )
 #Garth adding the desrciption
-	field(DESC, "Master control to enable/disable RF"
+	field(DESC, "Master control to enable/disable RF")
 	field(FLNK,"$(P)$(R):boundary_reset_calc")
 }
 
