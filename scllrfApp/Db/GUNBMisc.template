@@ -633,7 +633,7 @@ record( seq, "$(P)RF_GO_3CH")
 #record(calc, "$(P)IFDES2MODULO")
 #{
 #field(INPA, "$(P)IFDES")
-#field(CALC, "
+#field(CALC, "")
 
 #! Further lines contain data used by VisualDCT
 #! View(1074,190,1.6)
