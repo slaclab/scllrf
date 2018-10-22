@@ -92,6 +92,7 @@ caPutLogShow(2)
 #seq sncExample,"user=gwbrownHost"
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):")
 seq PVramp, "PREFIX=$(P)"
+seq centerCwDetune, "PREFIX=GUN:GUNB:100:,REV=GUN:GUNB:100:REV:,FWD=GUN:GUNB:100:FWD:,CAV=GUN:GUNB:100:,CTL=GUN:GUNB:100:PRC:DDSA_PHSTEP_H_W"
 
 < iocBoot/common/autoSaveStart.cmd
 
@@ -118,6 +119,7 @@ dbpf $(P)DECAYKEEP_W 0xFFFF
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
+seq amd7823mon, "PREFIX=$(P)"
 
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","RFS2")
@@ -128,6 +130,7 @@ dbpf $(P)DECAYKEEP_W 0xFFFF
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
+seq amd7823mon, "PREFIX=$(P)"
 
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","PRC")
@@ -139,5 +142,6 @@ dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
 epicsThreadSleep(1)
+seq amd7823mon, "PREFIX=$(P)"
 
 dbpf GUN:GUNB:100:WF_TIME_PER_POINT 4
