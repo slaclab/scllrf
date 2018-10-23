@@ -1,4 +1,10 @@
-program amc7823mon
+/* Poll 9 voltage monitors on the amc78xx ADC board. */
+
+program amc78xxmon
+
+option +r;    /* re-entrant */
+option +c;    /* wait until all connection are established */
+option +w; // Initially, extra warnings
 
 %{
 	#include <math.h>
@@ -8,10 +14,6 @@ program amc7823mon
 enum { spareAddr, v2p2Addr, v3p7Addr, v12p0Addr,
 microphoneAddr, loAddr, iMonAddr, vMonAddr, adcTempAddr };
 }%
-
-option +r;    /* re-entrant */
-option +c;    /* wait until all connection are established */
-option +w; // Initially, extra warnings
 
 int saddr;
 
@@ -72,12 +74,13 @@ assign vMon to "{PREFIX}V_MON";
 int adcTemp;
 assign adcTemp to "{PREFIX}ADC_TEMP";
 
-ss amc7xxxmon
+ss amc78xxmon
 {
 	state init
 	{
 		when()
 		{
+			printf("AMC7823 voltage monitor starting.\n");
 		} state idle
 	}
 
@@ -141,7 +144,7 @@ ss amc7xxxmon
 
 			/* map address to PV */
 %{
-			switch(seqg_var->seqg_vars_amc7xxxmon.seqg_vars_addrDecode.chan)
+			switch(seqg_var->seqg_vars_amc78xxmon.seqg_vars_addrDecode.chan)
 			{
 			case spareAddr:
 }%				pvPut(spareV, val);%{
