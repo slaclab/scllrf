@@ -109,6 +109,7 @@ ss amc78xxmon
 			pvPut(spiStart, 0);
 			pvPut(spiStart, 1);
 			pvPut(spiStart, 0);
+			sleep(0.3);
 		} state readOneV
 
 		when(saddr >= 9)
