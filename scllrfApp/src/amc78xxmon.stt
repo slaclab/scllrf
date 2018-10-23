@@ -191,6 +191,6 @@ ss amc78xxmon
 			pvPut(getSpiRdbk, 1);
 			pvGet(spiRdbk);
 			printf("AMC7823 voltage monitor retry read, got %d\n", spiRdbk);
-		} state addrDecode
+		} state poll
 	}
 }
