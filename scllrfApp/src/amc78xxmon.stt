@@ -3,8 +3,8 @@
 program amc78xxmon
 
 option +r;    /* re-entrant */
-option +c;    /* wait until all connection are established */
-option +w; // Initially, extra warnings
+option +W; // Initially, extra warnings
+
 
 %{
 	#include <math.h>
@@ -32,6 +32,7 @@ assign getSpiReady to "{PREFIX}GET_U15_SPI_READY_R.PROC";
 
 int spiRdbk;
 assign spiRdbk to "{PREFIX}U15_SPI_RDBK_R";
+syncq spiRdbk 9;
 int getSpiRdbk;
 assign getSpiRdbk to "{PREFIX}GET_U15_SPI_RDBK_R.PROC";
 
@@ -104,11 +105,11 @@ ss amc78xxmon
 			int addr=(rw<<15)+(pg<<12)+(saddr<<6)+eaddr;
 
 			printf("AMC7823 voltage monitor getting SPI addr %d\n", addr);
-			pvPut(spiAddr, addr);
-			pvPut(spiData, 1);
-			pvPut(spiStart, 0);
-			pvPut(spiStart, 1);
-			pvPut(spiStart, 0);
+			pvPut(spiAddr, addr, SYNC);
+			pvPut(spiData, 1, SYNC);
+			pvPut(spiStart, 0, SYNC);
+			pvPut(spiStart, 1, SYNC);
+			pvPut(spiStart, 0, SYNC);
 			sleep(0.3);
 		} state readOneV
 
@@ -123,14 +124,14 @@ ss amc78xxmon
 /*XXXX Is this state a bad idea? SpiReady doesn't work?		when(spiReady == 1)*/
 		when()
 		{
-			pvPut(getSpiRdbk, 1);
+			pvPut(getSpiRdbk, 1, SYNC);
 			pvGet(spiRdbk);
 			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
 		} state addrDecode
 
 		when(delay( 0.11 ))
 		{
-			pvPut( getSpiReady, 1);
+			pvPut( getSpiReady, 1, SYNC);
 		} state readOneV
 	}
 	state addrDecode
@@ -189,7 +190,7 @@ ss amc78xxmon
 
 		when(delay( 0.11))
 		{
-			pvPut(getSpiRdbk, 1);
+			pvPut(getSpiRdbk, 1, SYNC);
 			pvGet(spiRdbk);
 			printf("AMC7823 voltage monitor retry read, got %d\n", spiRdbk);
 			saddr++;
