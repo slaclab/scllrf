@@ -89,6 +89,7 @@ ss amc78xxmon
 		/* Update ADC board voltages every 10 seconds */
 		when(delay( 10 ))
 		{
+			printf("AMC7823 voltage monitor starting update cycle.\n");
 		} state poll
 	}
 
@@ -102,6 +103,7 @@ ss amc78xxmon
 			int eaddr=0;
 			int addr=(rw<<15)+(pg<<12)+(saddr<<6)+eaddr;
 
+			printf("AMC7823 voltage monitor getting SPI addr %d\n", addr);
 			pvPut(spiAddr, addr);
 			pvPut(spiData, 1);
 			pvPut(spiStart, 0);
@@ -117,10 +119,12 @@ ss amc78xxmon
 	state readOneV
 	{
 		/* Wait for SPI data ready flag */
-		when(spiReady == 1)
+/*XXXX Is this state a bad idea? SpiReady doesn't work?		when(spiReady == 1)*/
+		when()
 		{
 			pvPut(getSpiRdbk, 1);
 			pvGet(spiRdbk);
+			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
 		} state addrDecode
 
 		when(delay( 0.11 ))
@@ -141,6 +145,7 @@ ss amc78xxmon
 		when (chan == saddr)
 		{
 			int val=(spiRdbk&0xfff)*2.5/pow(2,12);
+			printf("AMC7823 voltage monitor chan %d raw V = %d\n", chan, val);
 
 			/* map address to PV */
 %{
@@ -185,6 +190,7 @@ ss amc78xxmon
 		{
 			pvPut(getSpiRdbk, 1);
 			pvGet(spiRdbk);
+			printf("AMC7823 voltage monitor retry read, got %d\n", spiRdbk);
 		} state addrDecode
 	}
 }

@@ -119,7 +119,7 @@ dbpf $(P)DECAYKEEP_W 0xFFFF
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
-seq amd78xxmon, "PREFIX=$(P)"
+seq amc78xxmon, "PREFIX=$(P)"
 
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","RFS2")
@@ -130,7 +130,7 @@ dbpf $(P)DECAYKEEP_W 0xFFFF
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
-seq amd78xxmon, "PREFIX=$(P)"
+seq amc78xxmon, "PREFIX=$(P)"
 
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","PRC")
@@ -142,6 +142,6 @@ dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1
 dbpf $(P)RUN_STOP 1
 epicsThreadSleep(1)
-seq amd78xxmon, "PREFIX=$(P)"
+seq amc78xxmon, "PREFIX=$(P)"
 
 dbpf GUN:GUNB:100:WF_TIME_PER_POINT 4

@@ -39,6 +39,9 @@ DB_INSTALLS += $(IOCADMIN)/db/iocScanMonSum.db
 DB_INSTALLS += $(IOCADMIN)/db/iocScanMon.db
 IOCRELEASE_DB += iocRelease.db
 endif
+ifneq ($(SEQ),)
+DB_INSTALLS += $(SEQ)/db/devSeqCar.db
+endif
 
 # Install Database to support reading the status of the autosave package:
 ifneq ($(AUTOSAVE),)
