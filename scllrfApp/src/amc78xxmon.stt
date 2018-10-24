@@ -104,9 +104,12 @@ ss amc78xxmon
 			int addr=(rw<<15)+(pg<<12)+(saddr<<6)+eaddr;
 
 			printf("AMC7823 voltage monitor getting SPI addr %d\n", addr);
-			pvPut(spiAddr, addr, SYNC);
-			pvPut(spiData, 1, SYNC);
-			pvPut(spiStart, 0, SYNC);
+			spiAddr = addr;
+			pvPut(spiAddr, SYNC);)
+			spiData = 1;
+			pvPut(spiData, SYNC);)
+			spiStart = 0;
+			pvPut(spiStart, SYNC);)
 		} state spiStartRisingEdge
 
 		when(saddr >= 9)
@@ -118,14 +121,16 @@ ss amc78xxmon
 	{
 		when()
 		{
-			pvPut(spiStart, 1, SYNC);
+			spiStart = 1;
+			pvPut(spiStart, SYNC);)
 		}state spiStartFallingEdge
 	}
 	state spiStartFallingEdge
 	{
 		when()
 		{
-			pvPut(spiStart, 0, SYNC);
+			spiStart = 0;
+			pvPut(spiStart, SYNC);)
 		}state readOneV
 	}
 	state readOneV
@@ -134,7 +139,8 @@ ss amc78xxmon
 /*XXXX Is this state a bad idea? SpiReady doesn't work?		when(spiReady == 1)*/
 		when()
 		{
-			pvPut(getSpiRdbk, 1, SYNC);
+			getSpiRdbk = 1;
+			pvPut(getSpiRdbk, SYNC);)
 		} state addrDecode
 	}
 	state addrDecode
@@ -159,31 +165,40 @@ ss amc78xxmon
 			switch(seqg_var->seqg_vars_amc78xxmon.seqg_vars_addrDecode.chan)
 			{
 			case spareAddr:
-}%				pvPut(spareV, val);%{
+}%				spareV = val;
+				pvPut(spareV, );%{
 				break;
 			case v2p2Addr:
-}%				pvPut(v2p2V, 2*val); %{
+}%				v2p2V = 2*val;
+				pvPut(v2p2V, ); %{
 				break;
 			case v3p7Addr:
-}%				pvPut(v3p7V, 2*val); %{
+}%				v3p7V = 2*val;
+				pvPut(v3p7V, ); %{
 				break;
 			case v12p0Addr:
-}%				pvPut(v12p0V, val/0.1776); %{
+}%				v12p0V = val/0.1776;
+				pvPut(v12p0V, ); %{
 				break;
 			case microphoneAddr:
-}%				pvPut(microphoneV, val); %{
+}%				microphoneV = val;
+				pvPut(microphoneV, ); %{
 				break;
 			case loAddr:
-}%				pvPut(loV, val); %{
+}%				loV = val;
+				pvPut(loV, ); %{
 				break;
 			case iMonAddr:
-}%				pvPut(iMon, val); %{
+}%				iMon = val;
+				pvPut(iMon, ); %{
 				break;
 			case vMonAddr:
-}%				pvPut(vMon, 2*val); %{
+}%				vMon = 2*val;
+				pvPut(vMon, ); %{
 				break;
 			case adcTempAddr:
-}%				pvPut(adcTemp, val); %{
+}%				adcTemp = val;
+				pvPut(adcTemp, ); %{
 				break;
 			default:
 				/* insert error message here */
@@ -195,7 +210,8 @@ ss amc78xxmon
 
 		when(delay( 2.0 ))
 		{
-			pvPut(getSpiRdbk, 1, SYNC);
+			getSpiRdbk = 1;
+			pvPut(getSpiRdbk, SYNC);)
 			pvGet(spiRdbk);
 			printf("AMC7823 voltage monitor retry read, got %d\n", spiRdbk);
 			saddr++;
