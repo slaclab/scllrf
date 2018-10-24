@@ -105,21 +105,28 @@ ss amc78xxmon
 
 			printf("AMC7823 voltage monitor getting SPI addr %d\n", addr);
 			pvPut(spiAddr, addr, SYNC);
-			sleep(0.3);
 			pvPut(spiData, 1, SYNC);
-			sleep(0.3);
 			pvPut(spiStart, 0, SYNC);
-			sleep(0.3);
-			pvPut(spiStart, 1, SYNC);
-			sleep(0.3);
-			pvPut(spiStart, 0, SYNC);
-			sleep(0.3);
-		} state readOneV
+		} state spiStartRisingEdge
 
 		when(saddr >= 9)
 		{
 			saddr = 0;
 		} state idle
+	}
+	state spiStartRisingEdge
+	{
+		when()
+		{
+			pvPut(spiStart, 1, SYNC);
+		}spiStartFallingEdge
+	}
+	state spiStartFallingEdge
+	{
+		when()
+		{
+			pvPut(spiStart, 0, SYNC);
+		}readOneV
 	}
 	state readOneV
 	{
@@ -128,10 +135,6 @@ ss amc78xxmon
 		when()
 		{
 			pvPut(getSpiRdbk, 1, SYNC);
-			sleep(0.3);
-			pvGet(spiRdbk);
-			sleep(0.3);
-			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
 		} state addrDecode
 	}
 	state addrDecode
@@ -142,6 +145,8 @@ ss amc78xxmon
 		/* Double check data is for the right address, then write to corresponding PV */
 		entry
 		{
+			pvGet(spiRdbk);
+			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
 			chan = spiRdbk >> 12;
 		}
 		when (chan == saddr)

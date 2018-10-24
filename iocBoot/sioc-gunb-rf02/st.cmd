@@ -2,7 +2,8 @@
 #!../../bin/rhel6-x86_64/scllrf
 ## You may have to change scllrf to something else
 ## everywhere it appears in this file
-
+# enable core dumps
+system("ulimit -c unlimited")
 < envPaths
 # PV name prefix parts in naming convention for Buncher
 epicsEnvSet("DEVICE_TYPE", "ACCL")
