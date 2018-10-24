@@ -152,7 +152,7 @@ ss amc78xxmon
 		when (chan == saddr)
 		{
 			float val=(spiRdbk&0xfff)*2.5/pow(2,12);
-			printf("AMC7823 voltage monitor chan %d raw V = %d\n", chan, val);
+			printf("AMC7823 voltage monitor chan %d raw V = %f\n", chan, val);
 
 			/* map address to PV */
 %{
