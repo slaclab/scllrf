@@ -105,11 +105,11 @@ ss amc78xxmon
 
 			printf("AMC7823 voltage monitor getting SPI addr %d\n", addr);
 			spiAddr = addr;
-			pvPut(spiAddr, SYNC);)
+			pvPut(spiAddr, SYNC);
 			spiData = 1;
-			pvPut(spiData, SYNC);)
+			pvPut(spiData, SYNC);
 			spiStart = 0;
-			pvPut(spiStart, SYNC);)
+			pvPut(spiStart, SYNC);
 		} state spiStartRisingEdge
 
 		when(saddr >= 9)
@@ -122,7 +122,7 @@ ss amc78xxmon
 		when()
 		{
 			spiStart = 1;
-			pvPut(spiStart, SYNC);)
+			pvPut(spiStart, SYNC);
 		}state spiStartFallingEdge
 	}
 	state spiStartFallingEdge
@@ -130,7 +130,7 @@ ss amc78xxmon
 		when()
 		{
 			spiStart = 0;
-			pvPut(spiStart, SYNC);)
+			pvPut(spiStart, SYNC);
 		}state readOneV
 	}
 	state readOneV
@@ -140,7 +140,7 @@ ss amc78xxmon
 		when()
 		{
 			getSpiRdbk = 1;
-			pvPut(getSpiRdbk, SYNC);)
+			pvPut(getSpiRdbk, SYNC);
 		} state addrDecode
 	}
 	state addrDecode
@@ -211,7 +211,7 @@ ss amc78xxmon
 		when(delay( 2.0 ))
 		{
 			getSpiRdbk = 1;
-			pvPut(getSpiRdbk, SYNC);)
+			pvPut(getSpiRdbk, SYNC);
 			pvGet(spiRdbk);
 			printf("AMC7823 voltage monitor retry read, got %d\n", spiRdbk);
 			saddr++;
