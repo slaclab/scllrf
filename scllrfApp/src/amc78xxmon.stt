@@ -119,14 +119,14 @@ ss amc78xxmon
 		when()
 		{
 			pvPut(spiStart, 1, SYNC);
-		}spiStartFallingEdge
+		}state spiStartFallingEdge
 	}
 	state spiStartFallingEdge
 	{
 		when()
 		{
 			pvPut(spiStart, 0, SYNC);
-		}readOneV
+		}state readOneV
 	}
 	state readOneV
 	{
