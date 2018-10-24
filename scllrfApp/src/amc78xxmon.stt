@@ -143,26 +143,27 @@ ss amc78xxmon
 			pvPut(getSpiRdbk, SYNC);
 		} state addrDecode
 	}
+
 	state addrDecode
 	{
 		option -e;    /* execute entry execution for self-state-transition */
 		int chan;
+		float val;
 
 		/* Double check data is for the right address, then write to corresponding PV */
-		entry
+/*		entry
 		{
-			pvGet(spiRdbk);
-			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
-			chan = spiRdbk >> 12;
-		}
-//		when (chan == saddr)
-		when(delay(1.1)
+//			pvGet(spiRdbk);
+//			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
+//			chan = spiRdbk >> 12;
+		} */
+
+		when(delay(1))
 		{
                         pvGet(spiRdbk);
                         printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
                         chan = spiRdbk >> 12;
-
-			float val=(spiRdbk&0xfff)*2.5/pow(2,12);
+			val=(spiRdbk&0xfff)*2.5/pow(2,12);
 			printf("AMC7823 voltage monitor chan %d raw V = %f\n", chan, val);
 
 			/* map address to PV */
@@ -171,39 +172,39 @@ ss amc78xxmon
 			{
 			case spareAddr:
 }%				spareV = val;
-				pvPut(spareV, );%{
+				pvPut(spareV );%{
 				break;
 			case v2p2Addr:
 }%				v2p2V = 2*val;
-				pvPut(v2p2V, ); %{
+				pvPut(v2p2V ); %{
 				break;
 			case v3p7Addr:
 }%				v3p7V = 2*val;
-				pvPut(v3p7V, ); %{
+				pvPut(v3p7V ); %{
 				break;
 			case v12p0Addr:
 }%				v12p0V = val/0.1776;
-				pvPut(v12p0V, ); %{
+				pvPut(v12p0V ); %{
 				break;
 			case microphoneAddr:
 }%				microphoneV = val;
-				pvPut(microphoneV, ); %{
+				pvPut(microphoneV ); %{
 				break;
 			case loAddr:
 }%				loV = val;
-				pvPut(loV, ); %{
+				pvPut(loV ); %{
 				break;
 			case iMonAddr:
 }%				iMon = val;
-				pvPut(iMon, ); %{
+				pvPut(iMon ); %{
 				break;
 			case vMonAddr:
 }%				vMon = 2*val;
-				pvPut(vMon, ); %{
+				pvPut(vMon ); %{
 				break;
 			case adcTempAddr:
 }%				adcTemp = val;
-				pvPut(adcTemp, ); %{
+				pvPut(adcTemp ); %{
 				break;
 			default:
 				/* insert error message here */
@@ -213,13 +214,5 @@ ss amc78xxmon
 			saddr++;
 		} state poll
 
-		when(delay( 2.0 ))
-		{
-			getSpiRdbk = 1;
-			pvPut(getSpiRdbk, SYNC);
-			pvGet(spiRdbk);
-			printf("AMC7823 voltage monitor retry read, got %d\n", spiRdbk);
-			saddr++;
-		} state poll
 	}
 }
