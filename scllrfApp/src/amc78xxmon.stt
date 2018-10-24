@@ -32,7 +32,6 @@ assign getSpiReady to "{PREFIX}GET_U15_SPI_READY_R.PROC";
 
 int spiRdbk;
 assign spiRdbk to "{PREFIX}U15_SPI_RDBK_R";
-syncq spiRdbk 9;
 int getSpiRdbk;
 assign getSpiRdbk to "{PREFIX}GET_U15_SPI_RDBK_R.PROC";
 
@@ -40,39 +39,39 @@ assign getSpiRdbk to "{PREFIX}GET_U15_SPI_RDBK_R.PROC";
 /* voltage monitor signals for board health. */
 /* for raw voltage, scale by 2.5/2^12 */
 
-int spareV;
+float spareV;
 assign spareV to "{PREFIX}ADC_SPARE_V";
 
 /* 2.2V supply. Scale by additional x2 */
-int v2p2V;
+float v2p2V;
 assign v2p2V to "{PREFIX}V2P2V";
 
 /* 3.7V supply. Scale by additional x2 */
-int v3p7V;
+float v3p7V;
 assign v3p7V to "{PREFIX}V3P7V";
 
 /* 12V supply. Scale by additional /0.1776 */
-int v12p0V;
+float v12p0V;
 assign v12p0V to "{PREFIX}V12P0V";
 
 /* not using the microphone */
-int microphoneV;
+float microphoneV;
 assign microphoneV to "{PREFIX}MICROPHONEV";
 
 /* LO voltage monitor */
-int loV;
+float loV;
 assign loV to "{PREFIX}LO_V";
 
 /* board current monitor, in A (1ohm) */
-int iMon;
+float iMon;
 assign iMon to "{PREFIX}I_MON";
 
 /* board voltge monitor. scale by additional x2 */
-int vMon;
+float vMon;
 assign vMon to "{PREFIX}V_MON";
 
 /* board temperature monitor, not used */
-int adcTemp;
+float adcTemp;
 assign adcTemp to "{PREFIX}ADC_TEMP";
 
 ss amc78xxmon
@@ -147,7 +146,7 @@ ss amc78xxmon
 		}
 		when (chan == saddr)
 		{
-			int val=(spiRdbk&0xfff)*2.5/pow(2,12);
+			float val=(spiRdbk&0xfff)*2.5/pow(2,12);
 			printf("AMC7823 voltage monitor chan %d raw V = %d\n", chan, val);
 
 			/* map address to PV */
