@@ -15,7 +15,12 @@ enum { spareAddr, v2p2Addr, v3p7Addr, v12p0Addr,
 microphoneAddr, loAddr, iMonAddr, vMonAddr, adcTempAddr };
 }%
 
-int saddr;
+int chan;
+int const firstchan = 0;
+int const lastchan = 8;
+int const maxRetries = 5;
+int retryCounter;
+
 
 int spiAddr;
 assign spiAddr to "{PREFIX}U15_SPI_ADDR_W";
@@ -38,41 +43,32 @@ assign getSpiRdbk to "{PREFIX}GET_U15_SPI_RDBK_R.PROC";
 
 /* voltage monitor signals for board health. */
 /* for raw voltage, scale by 2.5/2^12 */
-
-float spareV;
-assign spareV to "{PREFIX}ADC_SPARE_V";
+double amc_monitor_channels[9];
+assign amc_monitor_channels[0] to "{PREFIX}ADC_SPARE_V";
 
 /* 2.2V supply. Scale by additional x2 */
-float v2p2V;
-assign v2p2V to "{PREFIX}V2P2V";
+assign amc_monitor_channels[1] to "{PREFIX}V2P2V";
 
 /* 3.7V supply. Scale by additional x2 */
-float v3p7V;
-assign v3p7V to "{PREFIX}V3P7V";
+assign amc_monitor_channels[2] to "{PREFIX}V3P7V";
 
 /* 12V supply. Scale by additional /0.1776 */
-float v12p0V;
-assign v12p0V to "{PREFIX}V12P0V";
+assign amc_monitor_channels[3] to "{PREFIX}V12P0V";
 
 /* not using the microphone */
-float microphoneV;
-assign microphoneV to "{PREFIX}MICROPHONEV";
+assign amc_monitor_channels[4] to "{PREFIX}MICROPHONEV";
 
 /* LO voltage monitor */
-float loV;
-assign loV to "{PREFIX}LO_V";
+assign amc_monitor_channels[5] to "{PREFIX}LO_V";
 
 /* board current monitor, in A (1ohm) */
-float iMon;
-assign iMon to "{PREFIX}I_MON";
+assign amc_monitor_channels[6] to "{PREFIX}I_MON";
 
 /* board voltge monitor. scale by additional x2 */
-float vMon;
-assign vMon to "{PREFIX}V_MON";
+assign amc_monitor_channels[7] to "{PREFIX}V_MON";
 
 /* board temperature monitor, not used */
-float adcTemp;
-assign adcTemp to "{PREFIX}ADC_TEMP";
+assign amc_monitor_channels[8] to "{PREFIX}ADC_TEMP";
 
 ss amc78xxmon
 {
@@ -80,7 +76,7 @@ ss amc78xxmon
 	{
 		when()
 		{
-			printf("AMC7823 voltage monitor starting.\n");
+			printf("AMC7823 voltage monitor for {PREFIX} starting.\n");
 		} state idle
 	}
 
@@ -89,130 +85,117 @@ ss amc78xxmon
 		/* Update ADC board voltages every 10 seconds */
 		when(delay( 10 ))
 		{
-			printf("AMC7823 voltage monitor starting update cycle.\n");
 		} state poll
 	}
 
 	state poll
 	{
 		/* Read U15 SPI register address 0 through 8 */
-		when(saddr < 9)
+		when(chan <= lastchan)
 		{
 			int rw=1;
 			int pg=0;
 			int eaddr=0;
-			int addr=(rw<<15)+(pg<<12)+(saddr<<6)+eaddr;
+			int addr=(rw<<15)+(pg<<12)+(chan<<6)+eaddr;
 
-			printf("AMC7823 voltage monitor getting SPI addr %d\n", addr);
 			spiAddr = addr;
 			pvPut(spiAddr, SYNC);
+
 			spiData = 1;
 			pvPut(spiData, SYNC);
+
 			spiStart = 0;
 			pvPut(spiStart, SYNC);
-		} state spiStartRisingEdge
 
-		when(saddr >= 9)
-		{
-			saddr = 0;
-		} state idle
-	}
-	state spiStartRisingEdge
-	{
-		when(delay(0.61))
-		{
 			spiStart = 1;
 			pvPut(spiStart, SYNC);
-		}state spiStartFallingEdge
-	}
-	state spiStartFallingEdge
-	{
-		when(delay(0.61))
-		{
+
 			spiStart = 0;
 			pvPut(spiStart, SYNC);
-		}state readOneV
+		} state readOneV
+
+		when(chan > lastchan)
+		{
+			chan = firstchan;
+		} state idle
 	}
+
 	state readOneV
 	{
-		/* Wait for SPI data ready flag */
-/*XXXX Is this state a bad idea? SpiReady doesn't work?		when(spiReady == 1)*/
 		when(delay(0.61))
 		{
 			getSpiRdbk = 1;
 			pvPut(getSpiRdbk, SYNC);
+			retryCounter = 0;
 		} state addrDecode
 	}
 
 	state addrDecode
 	{
 		option -e;    /* execute entry execution for self-state-transition */
-		int chan;
+		int chanRdbk;
 		float val;
 
 		/* Double check data is for the right address, then write to corresponding PV */
-/*		entry
+		entry
 		{
-//			pvGet(spiRdbk);
-//			printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
-//			chan = spiRdbk >> 12;
-		} */
+			pvGet(spiRdbk);
+			chanRdbk = spiRdbk >> 12;
+		}
 
-		when(delay(1))
+		when(chanRdbk == chan)
 		{
-                        pvGet(spiRdbk);
-                        printf("AMC7823 voltage monitor read back %d\n", spiRdbk);
-                        chan = spiRdbk >> 12;
 			val=(spiRdbk&0xfff)*2.5/pow(2,12);
-			printf("AMC7823 voltage monitor chan %d raw V = %f\n", chan, val);
-
 			/* map address to PV */
 %{
-			switch(seqg_var->seqg_vars_amc78xxmon.seqg_vars_addrDecode.chan)
+			switch(seqg_var->seqg_vars_amc78xxmon.seqg_vars_addrDecode.chanRdbk)
 			{
 			case spareAddr:
-}%				spareV = val;
-				pvPut(spareV );%{
+}%				amc_monitor_channels[chan] =  val;%{
 				break;
 			case v2p2Addr:
-}%				v2p2V = 2*val;
-				pvPut(v2p2V ); %{
+}%				amc_monitor_channels[chan] =  2*val; %{
 				break;
 			case v3p7Addr:
-}%				v3p7V = 2*val;
-				pvPut(v3p7V ); %{
+}%				amc_monitor_channels[chan] =  2*val; %{
 				break;
 			case v12p0Addr:
-}%				v12p0V = val/0.1776;
-				pvPut(v12p0V ); %{
+}%				amc_monitor_channels[chan] =  val/0.1776; %{
 				break;
 			case microphoneAddr:
-}%				microphoneV = val;
-				pvPut(microphoneV ); %{
+}%				amc_monitor_channels[chan] =  val; %{
 				break;
 			case loAddr:
-}%				loV = val;
-				pvPut(loV ); %{
+}%				amc_monitor_channels[chan] =  val; %{
 				break;
 			case iMonAddr:
-}%				iMon = val;
-				pvPut(iMon ); %{
+}%				amc_monitor_channels[chan] =  val; %{
 				break;
 			case vMonAddr:
-}%				vMon = 2*val;
-				pvPut(vMon ); %{
+}%				amc_monitor_channels[chan] =  2*val; %{
 				break;
 			case adcTempAddr:
-}%				adcTemp = val;
-				pvPut(adcTemp ); %{
+}%				amc_monitor_channels[chan] =  val; %{
 				break;
 			default:
 				/* insert error message here */
 				break;
 			};
 }%
-			saddr++;
+			pvPut(amc_monitor_channels[chan]);
+			chan++;
 		} state poll
 
+		when(delay(0.1))
+		{
+			getSpiRdbk = 1;
+			pvPut(getSpiRdbk, SYNC);
+			retryCounter++;
+		} state addrDecode
+
+		when(retryCounter>maxRetries)
+		{
+
+		} state poll
 	}
 }

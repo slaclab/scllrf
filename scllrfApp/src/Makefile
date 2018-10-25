@@ -120,14 +120,11 @@ newmat_DIR = $(TOP)/newmat10/
 # NOTE: To build SNL programs, SNCSEQ must be defined
 # in the <top>/configure/RELEASE file
 
-#ifneq ($(SNCSEQ),)
-#    # This builds sncExample as a component of scllrf
-#    scllrf_SNCFLAGS += +r
-#    scllrf_DBD += sncExample.dbd
-#    scllrf_SRCS += sncExample.stt
-scllrf_LIBS += seq pv
-#
-#    # The following builds sncProgram as a standalone application
+ifneq ($(SNCSEQ),)
+    scllrf_DBD += devSeqCar.dbd
+    scllrf_LIBS += seq seqCar pv
+
+    # The following builds sncProgram as a standalone application
 #  ifneq ($(T_A),linuxRT-x86)
 #    PROD_HOST += sncProgram
 #    sncProgram_SNCFLAGS += +m
@@ -135,7 +132,7 @@ scllrf_LIBS += seq pv
 #    sncProgram_LIBS += seq pv
 #    sncProgram_LIBS += $(EPICS_BASE_HOST_LIBS)
 #  endif
-#endif
+endif
 
 scllrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 
