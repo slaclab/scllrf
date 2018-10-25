@@ -11,6 +11,7 @@ record( ai, "$(PREFIX)ADC_SPARE_V")
 	field(DESC, "Spare")
 	field( HIHI, "3.3")
 	field( LOLO, "0")
+	field(PREC, 2 )
 }
 
 # 2.2V supply.
@@ -19,6 +20,7 @@ record( ai, "$(PREFIX)V2P2V")
 	field(DESC, "2.2V Source")
 	field( HIHI, "2.4")
 	field( LOLO, "2.0")
+	field(PREC, 2 )
 }
 
 # 3.7V supply.
@@ -27,6 +29,7 @@ record( ai, "$(PREFIX)V3P7V")
 	field(DESC, "3.7V Source")
 	field( HIHI, "4.08")
 	field( LOLO, "3.33")
+	field(PREC, 2 )
 }
 
 # 12V supply.
@@ -35,6 +38,7 @@ record( ai, "$(PREFIX)V12P0V")
 	field(DESC, "12.0V Source")
 	field( HIHI, "12.6")
 	field( LOLO, "4.8")
+	field(PREC, 2 )
 }
 
 # not using the microphone
@@ -43,6 +47,7 @@ record( ai, "$(PREFIX)MICROPHONEV")
 	field(DESC, "Microphone")
 	field( HIHI, "2.7")
 	field( LOLO, "0.5")
+	field(PREC, 2 )
 }
 
 # LO voltage monitor
@@ -51,6 +56,7 @@ record( ai, "$(PREFIX)LO_V")
 	field(DESC, "LO level")
 	field( HIHI, "1.4")
 	field( LOLO, "0.7")
+	field(PREC, 2 )
 }
 
 # board current monitor, in A (1ohm)
@@ -59,6 +65,7 @@ record( ai, "$(PREFIX)I_MON")
 	field(DESC, "Current Monitor")
 	field( HIHI, "0.9")
 	field( LOLO, "0.3")
+	field(PREC, 2 )
 }
 
 # board voltge monitor.
@@ -67,6 +74,7 @@ record( ai, "$(PREFIX)V_MON")
 	field(DESC, "Voltage Monitor")
 	field( HIHI, "3.6")
 	field( LOLO, "3.0")
+	field(PREC, 2 )
 }
 
 # board temperature monitor, not used
@@ -75,5 +83,6 @@ record( ai, "$(PREFIX)ADC_TEMP")
 	field(DESC, "Temp sensor V")
 	field( HIHI, "0.2")
 	field( LOLO, "0.1")
+	field(PREC, 2 )
 }
 
