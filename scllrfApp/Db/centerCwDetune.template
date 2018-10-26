@@ -18,6 +18,8 @@
 record( bo, "$(PREFIX)DET_CTR_ENA")
 {
 	field( DESC, "Enable detune control")
+	field( ONAM, "Disabled")
+	field( ZNAM, "Enabled")
 }
 
 # Status indicator: minimum seeking is active
@@ -40,6 +42,7 @@ record( ao, "$(PREFIX)DET_REV_LIMIT")
 	field( HIHI, "1.0")
 	field( LOLO, "0.0")
 	field( VAL, "0.20")
+	field( PREC, 3 )
 }
 
 # stop seeking 0 detune when reverse amplitude / forward amplitude is less than this limit
@@ -48,6 +51,7 @@ record( ai, "$(PREFIX)DET_STOP_LIMIT")
 	field( HIHI, "1.0")
 	field( LOLO, "0.0")
 	field( VAL, "0.05")
+	field( PREC, 3 )
 }
 
 # A flag to start moving to 0 detune even if REV/FWD < threshold

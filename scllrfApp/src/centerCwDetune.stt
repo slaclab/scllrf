@@ -51,6 +51,7 @@ assign     revLimit    to "{PREFIX}DET_REV_LIMIT";
 /* stop seeking 0 detune when reverse amplitude / forward amplitude is less than this limit */
 double     stopLimit;
 assign     stopLimit   to "{PREFIX}DET_STOP_LIMIT";
+monitor    stopLimit;
 
 // A flag to start moving to 0 detune even if REV/FWD < threshold
 unsigned int       tune_go;
