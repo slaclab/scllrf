@@ -18,8 +18,8 @@
 record( bo, "$(PREFIX)DET_CTR_ENA")
 {
 	field( DESC, "Enable detune control")
-	field( ONAM, "Disabled")
-	field( ZNAM, "Enabled")
+	field( ZNAM, "Disabled")
+	field( ONAM, "Enabled")
 }
 
 # Status indicator: minimum seeking is active
@@ -34,6 +34,7 @@ record( ai, "$(PREFIX)DET_INC_SIZE")
 {
 	field( HIHI, "")
 	field( LOLO, "")
+	info( autosaveFields, "VAL")
 }
 
 # limit on fraction of RF reflected that triggers re-centering
@@ -43,6 +44,7 @@ record( ao, "$(PREFIX)DET_REV_LIMIT")
 	field( LOLO, "0.0")
 	field( VAL, "0.20")
 	field( PREC, 3 )
+	info( autosaveFields, "VAL")
 }
 
 # stop seeking 0 detune when reverse amplitude / forward amplitude is less than this limit
@@ -52,6 +54,7 @@ record( ai, "$(PREFIX)DET_STOP_LIMIT")
 	field( LOLO, "0.0")
 	field( VAL, "0.05")
 	field( PREC, 3 )
+	info( autosaveFields, "VAL")
 }
 
 # A flag to start moving to 0 detune even if REV/FWD < threshold
