@@ -219,7 +219,7 @@ ss det
 		when(delay(0.1))
 		{
 			freqCtl = pos + incSize;
-			pvPut(freqCtl);
+			pvPut(freqCtl, SYNC);
 			pvGet(revAmp);
 			sleep(0.15);
 			pvGet(revAmp);
@@ -227,7 +227,7 @@ ss det
 			phAtPosPlusInc = revPh;
 
 			freqCtl = pos - incSize;
-			pvPut(freqCtl);
+			pvPut(freqCtl, SYNC);
 			pvGet(revAmp);
 			sleep(0.15);
 			pvGet(revAmp);
