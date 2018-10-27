@@ -18,6 +18,7 @@ program centerCwDetune
 option +r;    /* re-entrant */
 option +c;    /* wait until all connection are established */
 option +w; // Initially, extra warnings
+option +s; // Safe mode
 
 %{
 	#include <math.h>
@@ -214,6 +215,7 @@ ss det
 
 		when((revAmp/fwdAmp < stopLimit))
 		{
+			printf("Found reflected amplitude minimum of %f at %f. Pausing minimum finder.\n", startAmp, pos);
 			pvGet(fwdPh);
 			pvGet(cavPh);
 			/*XXXX TODO: Figure out where to write the difference of these */
@@ -330,7 +332,6 @@ ss det
 
 		exit
 		{
-			printf("Found reflected amplitude minimum of %f at %f. Pausing minimum finder.\n", startAmp, pos);
 		}
 	} /* state det */
 } /* ss det */
