@@ -201,7 +201,7 @@ ss det
 			ampAtPosPlusInc = 0;
 			ampAtPosMinusInc = 0;
 			dAdPos = 0;
-			dPdPos = 0;
+			min_dPdPos = max_dPdPos = dPdPos = 0;
 			startAmp = revAmp/fwdAmp; /* Reflected/forward amplitude at startPos */
 			startPh = revPh;
 			maxAmp = minAmp = startAmp;
@@ -284,7 +284,7 @@ printf("Amplitude at %d is %f, at %d is %f, and at %d is %f\n", pos + 1, ampAtPo
 						posAtMax_dPdPos = pos;
 						printf("New max rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
 					}
-
+printf("Going positive. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
 					/* update starting amplitude and cavity phase */
 					startAmp = ampAtPosMinusInc;
 					startPh = phAtPosMinusInc;
@@ -322,7 +322,7 @@ printf("Amplitude at %d is %f, at %d is %f, and at %d is %f\n", pos + 1, ampAtPo
 						posAtMax_dPdPos = pos;
 						printf("New max rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
 					}
-
+					printf("Going negative. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
 					/* update starting amplitude and cavity phase */
 					startAmp = ampAtPosPlusInc;
 					startPh = phAtPosPlusInc;
