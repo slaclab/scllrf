@@ -248,7 +248,7 @@ ss det
 			pvGet(revAmp);
 			ampAtPosMinusInc = revAmp/fwdAmp;
 			phAtPosMinusInc = revPh;
-
+printf("Amplitude at %d is %f, at %d is %f, and at %d is %f\n", pos + 1, ampAtPosPlusInc, pos, startAmp, pos-1, ampAtPosMinusInc);
 			if((startAmp>ampAtPosPlusInc) | (startAmp>ampAtPosMinusInc))
 			{
 				if (ampAtPosPlusInc > ampAtPosMinusInc)
@@ -328,6 +328,8 @@ ss det
 					startPh = phAtPosPlusInc;
 				}
 			}
+			freqCtl = pos;
+			pvPut(freqCtl, SYNC);
 		} state det
 
 		exit
