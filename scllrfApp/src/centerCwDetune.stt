@@ -152,6 +152,9 @@ ss det
 
 			tune_abort = FALSE;
 			pvPut(tune_abort);
+
+			/* resume monitor to check if re-tuning is needed */
+			pvMonitor(revAmp);
 		}
 
 		/* Do nothing until the go button is pushed */
@@ -221,7 +224,12 @@ ss det
 			freqCtl = pos + incSize;
 			pvPut(freqCtl, SYNC);
 			pvGet(revAmp);
-			sleep(0.15);
+		} state tryLow
+	}
+	state tryLow
+	{
+		when(delay(0.2))
+		{
 			pvGet(revAmp);
 			ampAtPosPlusInc = revAmp/fwdAmp;
 			phAtPosPlusInc = revPh;
@@ -229,7 +237,12 @@ ss det
 			freqCtl = pos - incSize;
 			pvPut(freqCtl, SYNC);
 			pvGet(revAmp);
-			sleep(0.15);
+		} state move
+	}
+	state move
+	{
+		when(delay(0.2))
+		{
 			pvGet(revAmp);
 			ampAtPosMinusInc = revAmp/fwdAmp;
 			phAtPosMinusInc = revPh;
@@ -318,9 +331,6 @@ ss det
 		exit
 		{
 			printf("Found reflected amplitude minimum of %f at %f. Pausing minimum finder.\n", startAmp, pos);
-			sleep(0.15);
-			/* resume monitor to check if re-tuning is needed */
-			pvMonitor(revAmp);
 		}
 	} /* state det */
 } /* ss det */
