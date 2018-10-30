@@ -90,6 +90,26 @@ field(EGU, "Hz")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
+record(ao, "$(P)DELTA_FREQDES")
+{
+	field( DRVH, "94285534")
+	field( DRVL, "-94285534")
+	field(EGU, "Hz")
+	field( HIGH, "179")
+	field( HSV, "MINOR")
+	field( LOW, "-179")
+	field( LSV, "MINOR")
+}
+
+record(calc, "$(P)DELTA_FREQDES_OUT")
+{
+field(INPA, "$(P)DELTA_FREQDES_OUT CP MS")
+field(OUT, "$(P)PRC:DDSA_PHSTEP_H_W PP")
+# The 13xx is good for the gun, not buncher. Use freq divider macro.
+field(CALC, "A*7*2^20/1320e6")
+field(EGU, "Hz")
+}
+
 record(calc, "$(P)FREQ_CAV") {
 alias("llrf$(ALIAS_N):freq_cav")
 field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP MS")
