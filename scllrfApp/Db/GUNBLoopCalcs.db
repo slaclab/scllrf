@@ -103,7 +103,7 @@ record(ao, "$(P)DELTA_FREQDES")
 
 record(calcout, "$(P)DELTA_FREQDES_OUT")
 {
-field(INPA, "$(P)DELTA_FREQDES_OUT CP MS")
+field(INPA, "$(P)DELTA_FREQDES CP MS")
 field(OUT, "$(P)PRC:DDSA_PHSTEP_H_W PP")
 # The 13xx is good for the gun, not buncher. Use freq divider macro.
 field(CALC, "A*7*2^20/1320e6")
