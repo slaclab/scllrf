@@ -101,7 +101,7 @@ record(ao, "$(P)DELTA_FREQDES")
 	field( LSV, "MINOR")
 }
 
-record(calc, "$(P)DELTA_FREQDES_OUT")
+record(calcout, "$(P)DELTA_FREQDES_OUT")
 {
 field(INPA, "$(P)DELTA_FREQDES_OUT CP MS")
 field(OUT, "$(P)PRC:DDSA_PHSTEP_H_W PP")
