@@ -174,7 +174,7 @@ ss det
 			tune_abort = FALSE;
 			pvPut(tune_abort);
 
-			isSeeking = TRUE;
+			isSeeking = FALSE;
 			pvPut(isSeeking);
 			pvGet(freqCtl);
 			pos = freqCtl;
@@ -204,7 +204,10 @@ ss det
 		option +x;    /* inhibit exit  execution for self-state-transition */
 
 		entry {
-
+			isSeeking = TRUE;
+			pvPut(isSeeking);
+			pvGet(freqCtl);
+			pos = freqCtl;
 			/* use revAmp for synchronization, so pause monitoring */
 			pvStopMonitor(revAmp);
 		}
@@ -284,7 +287,7 @@ ss det
 						posAtMax_dPdPos = pos;
 						printf("New max rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
 					}
-printf("Going positive. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
+					printf("Going negative. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
 					/* update starting amplitude and cavity phase */
 					startAmp = ampAtPosMinusInc;
 					startPh = phAtPosMinusInc;
@@ -322,7 +325,7 @@ printf("Going positive. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
 						posAtMax_dPdPos = pos;
 						printf("New max rev/fwd dP/dPos of %f at %f\n", dPdPos, pos);
 					}
-					printf("Going negative. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
+					printf("Going positive. dAdPos = %f, dPdPos = %f\n", dAdPos, dPdPos);
 					/* update starting amplitude and cavity phase */
 					startAmp = ampAtPosPlusInc;
 					startPh = phAtPosPlusInc;

@@ -26,8 +26,8 @@ epicsEnvSet(PATH,"${EPICS_BASE}/bin/$(ARCH)")
 # 16K bytes.
 # ========================================================
 # Uncomment and set appropriate size for your application:
-# 1 MB Some wavefom buffers already exceed 1/2 MB
-epicsEnvSet("EPICS_CA_MAX_ARRAY_BYTES", "1048576")
+# 16 MB Some wavefom buffers already exceed 1/2 MB
+epicsEnvSet("EPICS_CA_MAX_ARRAY_BYTES", "16777216")
 
 # END: Additional environment variables
 # ====================================================================
