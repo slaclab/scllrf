@@ -34,6 +34,7 @@ record( ai, "$(PREFIX)DET_INC_SIZE")
 {
 	field( HIHI, "")
 	field( LOLO, "")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -44,6 +45,7 @@ record( ao, "$(PREFIX)DET_REV_LIMIT")
 	field( LOLO, "0.0")
 	field( VAL, "0.20")
 	field( PREC, 3 )
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -54,6 +56,7 @@ record( ai, "$(PREFIX)DET_STOP_LIMIT")
 	field( LOLO, "0.0")
 	field( VAL, "0.05")
 	field( PREC, 3 )
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 

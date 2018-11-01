@@ -57,6 +57,7 @@ field(ONAM, "On")
 record(ao, "$(P)FREQ_LOOP_GAIN") {
 #       field(FLNK, "$(P)FREQ_SHIFT")
 field(VAL, "$(FTGAIN=-0.0011121)")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -422,6 +423,7 @@ record(calcout, "$(P)CALC_RFCTRL") {
 	field(INPA, "$(P)RFCTRL")
 	field(OUT, "$(P)SWITCH_RFCTRL PP")
 	field(CALC, "A+1")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -512,6 +514,7 @@ record (mbbi, "$(P)RFMODE" )
 record( ao, "$(P)AP_KP")
 {
 	field( FLNK, "$(P)AP_KP_Sync")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 
 }
@@ -525,6 +528,7 @@ record( ao, "$(P)AP_KP_Sync")
 record( ao, "$(P)AP_KI")
 {
 	field( FLNK, "$(P)AP_KI_Sync")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 
 }
@@ -538,6 +542,7 @@ record( ao, "$(P)AP_KI_Sync")
 # Defined in GUNBRegisters, adding autosave here.
 record(ao, "$(P)FDBKSEL_W")
 {
+	field( PINI, "YES" )
 	info( autosaveFields, "VAL")
 }
 
@@ -551,6 +556,7 @@ record(calc, "$(P)CALC_CLOSELOOP") {
 field(INPA, "$(P)BT_CLOSELOOP")
 field(FLNK, "$(P)SWITCH_CLOSELOOP")
 field(CALC, "A?2:1")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -819,6 +825,7 @@ field(INP, "$(P)RF_PERMIT_CALC CP MS")
 }
 
 record(ao, "$(P)MASK_BOUNDARY_RESET") {
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -835,6 +842,7 @@ record(calcout, "$(P)BOUNDARY_RESET_CALC") {
 	field(OUT, "$(P)SET_BOUNDARY_RESETS PP")
 	field(SDIS, "$(P)MASK_BOUNDARY_RESET")
 	field( DISV, "1")
+	field(PINI, "YES")
 }
 record( dfanout, "$(P)SET_BOUNDARY_RESETS") {
 

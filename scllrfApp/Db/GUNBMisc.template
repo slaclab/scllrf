@@ -18,6 +18,8 @@ record(ao, "$(P)REP_PERIOD")
 	field( EGU, "ms")
 	field( FLNK, "$(P)REP_PERIOD_U_TO_R")
 	field( PREC, "5")
+	field(PINI, "YES")
+	info( autosaveFields, "VAL")
 # field(ASG, "")
 }
 # Using a calcout instead of ao because ao misbehaved with SDIS loop breaking
@@ -94,6 +96,7 @@ record(ao, "$(P)PULSE_LENGTH")
 	field( FLNK, "$(P)PULSE_LENGTH_U_TO_R")
 	field( PREC, "5")
 # field(ASG, "")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -183,6 +186,7 @@ record( calcout, "$(P)DETUNE_MODE_CALC")
 	field( INPC, "0.04")
 	field( CALC, "A-B > C")
 	field( OUT, "$(P)DETUNE_MODE PP MS")
+	field(PINI, "YES")
 	info( autosaveFields, "INPC")
 }
 
@@ -197,6 +201,7 @@ record( calcout, "$(P)PULSE_MODE_CALC")
 	field( INPA, "$(P)DUTY_CYCLE CP MS")
 	field( CALC, "A < 100")
 	field( OUT, "$(P)PULSE_MODE PP MS")
+	field(PINI, "YES")
 	info( autosaveFields, "INPC")
 }
 
@@ -228,6 +233,7 @@ record( ao, "$(P)ADES"){
 	field( HOPR, "0x7FFF")
 	field( LOPR, "0")
 	field(EGU, "MV")
+	field(PINI, "YES")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW")
 }
 
@@ -235,6 +241,7 @@ record( ao, "$(P)AMAX")
 {
 	field(DESC, "Limit on requested output")
 	field(EGU, "MV")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 
 }
@@ -255,6 +262,7 @@ record( ao, "$(P)PDES"){
 	field( HOPR, "180")
 	field( LOPR, "-180")
 	field(EGU, "deg")
+	field(PINI, "YES")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW LOLO")
 }
 
@@ -295,6 +303,7 @@ record( ao, "$(P)PH_DELAY")
 	field( HOPR, "360.0" )
 	field( LOPR, "0" )
 	field( FLNK, "$(P)PH_DELAY_Sync_Out")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -335,6 +344,7 @@ record( ao, "$(P)AOPEN"){
 	field( PREC, "5")
 	field( LOPR, "0")
 	field(EGU, "MV")
+	field(PINI, "YES")
 	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
@@ -353,6 +363,7 @@ record( ao, "$(P)POPEN"){
 	field( PREC, "5")
 	field( HOPR, "360")
 	field( LOPR, "-360")
+	field(PINI, "YES")
 	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
@@ -386,6 +397,7 @@ record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 record( ao, "$(P)AOPEN_SCALE" ) {
 	field( FLNK, "$(P)AOPEN_MAX_CALC PP" )
 	field( VAL, "1")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -421,6 +433,7 @@ record(ao, "$(P)USE_POPEN_SCALE_CALC")
 }
 record( ao, "$(P)POPEN_SCALE" ) {
 	field( VAL, "0")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -503,14 +516,17 @@ record( calcout, "$(P)SOURCE_IQ_TO_P")
 
 record( ao, "$(P)$(CHASSIS)THRESH_INIT_W")
 {
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 record( ao, "$(P)$(CHASSIS)THRESH_NOISE_W")
 {
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 record( ao, "$(P)$(CHASSIS)DECAY_COEF_W")
 {
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 record( acalcout, "$(P)REV:AWF_LIMIT")

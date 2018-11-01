@@ -40,6 +40,7 @@ record( mbbo, "$(P)INTERLOCK_MODE")
 	field( THVL, 0x80008000)
 	field( THST, "ABOVE")
 	field( DTYP, "Raw Soft Channel")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -52,6 +53,7 @@ record( ao, "$(P)UPPER_PWR_LIMIT")
 	field( DESC, "UPPER trip limit squared")
 	field( FLNK, "$(P)UPPER_LIMIT_CALC")
 	field( EGU, "W")
+	info( autosaveFields, "VAL")
 }
 
 record( calcout,  "$(P)UPPER_LIMIT_CALC")
@@ -68,6 +70,7 @@ record( ao, "$(P)UPPER_LIMIT")
 	field( DESC, "Upper trip limit in physics units")
 	field( FLNK, "$(P)UPPER_LIMIT_RAW_CALC")
 	field( EGU, "$(EGU)")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
@@ -97,6 +100,7 @@ record( ao, "$(P)LOWER_PWR_LIMIT")
 	field( DESC, "Lower trip limit squared")
 	field( FLNK, "$(P)LOWER_LIMIT_CALC")
 	field( EGU, "W")
+	info( autosaveFields, "VAL")
 }
 
 record( calcout,  "$(P)LOWER_LIMIT_CALC")
@@ -112,6 +116,7 @@ record( ao, "$(P)LOWER_LIMIT")
 	field( DESC, "Lower trip limit in physics units")
 	field( FLNK, "$(P)LOWER_LIMIT_RAW_CALC")
 	field( EGU, "$(EGU)")
+	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
 
