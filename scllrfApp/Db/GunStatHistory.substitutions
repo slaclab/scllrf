@@ -19,7 +19,7 @@ pattern
 {   "GUN:GUNB:100:DECAY_BW", "" }
 {   "GUN:GUNB:100:DECAY_CONSTANT_B", "" }
 {   "GUN:GUNB:100:DFACT", "Hz" }
-{   "GUN:GUNB:100:FREQ_CAV", "Hz" }
+{   "GUN:GUNB:100:FREQ_OUT", "Hz" }
 {   "GUN:GUNB:100:DRV1:ADC_MAX-MIN", "counts" }
 {   "GUN:GUNB:100:DRV1:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:DRV1:PMEAN", "deg" }

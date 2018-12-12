@@ -29,6 +29,8 @@ info(autosaveFields, "VAL")
 }
 
 record(calc, "$(PREF)CAL_REF_CALC") {
+# NOTE: The equation is equivalent to:
+# 20*LOG(2**15/B) + 10
 field(CALC, "10*LOG((C*A/B)**2*1e-3/D)")
 # 100*sqrt(50ohms)
 field(INPA, "707.1067811")

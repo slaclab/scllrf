@@ -609,9 +609,8 @@ float* TraceData::CavityDecayConstantCompute(
 		X(length+i+1,2)=-0.5*(xi1+xi2);
 		Y(i+1,1) = -xi1 + xi2;
 		Y(length+i+1,1) = -xr1 + xr2;
-		// Even 64 entries at 32K each can't overflow, with this prescaling
-#define PS 8
-		energy_hat = energy_hat + (xr1/PS)*(xr1/PS)+(xi1/PS)*(xi1/PS);
+
+		energy_hat = energy_hat + xr1*xr1+xi1*xi1;
 	}
 	Matrix A = PseudoInverse(X) * Y;
 	double ar = -A(1,1);

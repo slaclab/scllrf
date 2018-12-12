@@ -401,19 +401,20 @@ record( ao, "$(P)AOPEN_SCALE" ) {
 	info( autosaveFields, "VAL")
 }
 
-record( calcout, "$(P)AOPEN_MAX_CALC" ) {
-	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W.HOPR") # Use register max
-	field( INPB, "$(P)AOPEN_SCALE")
-	field( CALC, "A/B")
-	field( OUT, "$(P)SET_AOPEN_LIMITS PP" )
-	field( PINI, "YES")
-	info( autosaveFields, "VAL")
-}
-record( dfanout, "$(P)SET_AOPEN_LIMITS") {
-
-	field( OUTA, "$(P)AOPEN.DRVH" )
-	field( OUTB, "$(P)AOPEN.HOPR" )
-}
+# At least for RF bake, we're keeping AOUT in DAC units and Tim sets the limit
+#record( calcout, "$(P)AOPEN_MAX_CALC" ) {
+#	field( INPA, "$(P)$(CHASSIS)SOURCE_RE_W.HOPR") # Use register max
+#	field( INPB, "$(P)AOPEN_SCALE")
+#	field( CALC, "A/B")
+#	field( OUT, "$(P)SET_AOPEN_LIMITS PP" )
+#	field( PINI, "YES")
+#	info( autosaveFields, "VAL")
+#}
+#record( dfanout, "$(P)SET_AOPEN_LIMITS") {
+#
+#	field( OUTA, "$(P)AOPEN.DRVH" )
+#	field( OUTB, "$(P)AOPEN.HOPR" )
+#}
 
 # Offset DAC phase so POPEN matches measured cavity phase.
 # Keep this passive, so it is only applied when a button is pushed.

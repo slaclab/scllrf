@@ -137,8 +137,8 @@ seq amc78xxmon, "PREFIX=$(P)"
 epicsThreadSleep(0.2)
 epicsEnvSet("CHASSIS_NAME","PRC")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")
-dbpf $(P)KEEP_W 0xFFFF
-dbpf $(P)DECAYKEEP_W 0x00FF
+dbpf $(P)KEEP_W 0xFF0F0F0
+dbpf $(P)DECAYKEEP_W 0x0FF0
 # The lower 16 bits of interlock status are diagnostic, the upper indicate a real trip
 dbpf $(P)INLK_STATUS_R.HIHI 0x10000
 dbpf $(P)POLL_PERIOD 0.1

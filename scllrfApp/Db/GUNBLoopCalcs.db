@@ -111,13 +111,35 @@ field(CALC, "A*7*2^20/1320e6")
 field(EGU, "Hz")
 }
 
-record(calc, "$(P)FREQ_CAV") {
+record(calc, "$(P)FREQ_OUT") {
 alias("llrf$(ALIAS_N):freq_cav")
 field(INPA, "$(P)PRC:DDSA_PHSTEP_H_R CP MS")
 field(INPB, "$(1300RATIO)")
 # The 13xx is good for the gun, not buncher. Use freq divider macro.
 field(CALC, "1300e6/B+A*1320e6/(7*2^20)")
 field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
+}
+
+record(calc, "$(P)FREQ_CAV") {
+field(INPA, "$(P)FREQ_OUT CP MS")
+field(INPB, "$(P)DFACT")
+field(CALC, "A+B")
+field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
+}
+
+record(calc, "$(P)CAV1:Q_LOADED") {
+field(INPA, "$(P)FREQ_OUT CP MS")
+field(INPB, "$(P)CAV1:DECAY_BW")
+field(CALC, "A/B")
+	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
+}
+
+record(calc, "$(P)CAV2:Q_LOADED") {
+field(INPA, "$(P)FREQ_OUT CP MS")
+field(INPB, "$(P)CAV2:DECAY_BW")
+field(CALC, "A/B")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
@@ -415,7 +437,7 @@ record (bo, "$(P)RFCTRL" )
 {
 	field( DESC, "Hook for RF control sequence" )
 	field( ONAM, "On" )
-	field( ZNAM, "OFF" )
+	field( ZNAM, "Off" )
 	field( OUT, "$(P)CALC_RFCTRL PP" )
 }
 
@@ -477,7 +499,7 @@ record(seq, "$(P)RFCTRL_ON") {
 	field(LNK2, "$(P)RFCLONGO PP")
 }
 
-# Turn off RF in open loop
+# Turn on RF in open loop
 record(seq, "$(P)RFOLONGO") {
 	field(DO1, "0")
 	field(LNK1, "$(P)SOURCE_AP_TO_I.DISA")
@@ -491,7 +513,7 @@ record(seq, "$(P)RFOLONGO") {
 	field(LNK5, "$(P)PRC:SOURCE_IM_W PP")
 }
 
-# Turn off RF in closed loop
+# Turn on RF in closed loop
 record(seq, "$(P)RFCLONGO") {
 	field(DO1, "0")
 	field(LNK1, "$(P)SET_PLOOP_AP_TO_I.DISA")
@@ -878,11 +900,11 @@ record( dfanout, "$(P)SET_BOUNDARY_RESETS") {
 #! Link("$(P)FREQ_SHIFT.INPE","$(P)FREQ_LOOP_GAIN.VAL")
 #! Field("$(P)FREQ_SHIFT.OUT",16777215,0,"$(P)FREQ_SHIFT.OUT")
 #! Link("$(P)FREQ_SHIFT.OUT","$(P)PRC:DDSA_PHSTEP_H_W.VAL")
-#! Record("$(P)FREQ_CAV",2719,1233,0,0,"$(P)FREQ_CAV")
-#! Field("$(P)FREQ_CAV.INPA",16777215,0,"$(P)FREQ_CAV.INPA")
-#! Link("$(P)FREQ_CAV.INPA","$(P)PRC:DDSA_PHSTEP_H_W.VAL")
-#! Field("$(P)FREQ_CAV.INPB",16777215,1,"$(P)FREQ_CAV.INPB")
-#! Field("$(P)FREQ_CAV.INPC",16777215,1,"$(P)FREQ_CAV.INPC")
+#! Record("$(P)FREQ_OUT",2719,1233,0,0,"$(P)FREQ_OUT")
+#! Field("$(P)FREQ_OUT.INPA",16777215,0,"$(P)FREQ_OUT.INPA")
+#! Link("$(P)FREQ_OUT.INPA","$(P)PRC:DDSA_PHSTEP_H_W.VAL")
+#! Field("$(P)FREQ_OUT.INPB",16777215,1,"$(P)FREQ_OUT.INPB")
+#! Field("$(P)FREQ_OUT.INPC",16777215,1,"$(P)FREQ_OUT.INPC")
 #! Record("$(P)DETUNE_GOOD",2701,384,0,0,"$(P)DETUNE_GOOD")
 #! Field("$(P)DETUNE_GOOD.INPA",16777215,1,"$(P)DETUNE_GOOD.INPA")
 #! Field("$(P)DETUNE_GOOD.INPB",16777215,1,"$(P)DETUNE_GOOD.INPB")
