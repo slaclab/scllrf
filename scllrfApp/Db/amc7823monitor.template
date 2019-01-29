@@ -12,6 +12,7 @@ record( ai, "$(PREFIX)ADC_SPARE_V")
 	field( HIHI, "3.3")
 	field( LOLO, "0")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # 2.2V supply.
@@ -21,6 +22,7 @@ record( ai, "$(PREFIX)V2P2V")
 	field( HIHI, "2.4")
 	field( LOLO, "2.0")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # 3.7V supply.
@@ -30,6 +32,7 @@ record( ai, "$(PREFIX)V3P7V")
 	field( HIHI, "4.08")
 	field( LOLO, "3.33")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # 12V supply.
@@ -39,6 +42,7 @@ record( ai, "$(PREFIX)V12P0V")
 	field( HIHI, "12.6")
 	field( LOLO, "4.8")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # not using the microphone
@@ -48,6 +52,7 @@ record( ai, "$(PREFIX)MICROPHONEV")
 	field( HIHI, "2.7")
 	field( LOLO, "0.5")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # LO voltage monitor
@@ -57,6 +62,7 @@ record( ai, "$(PREFIX)LO_V")
 	field( HIHI, "1.4")
 	field( LOLO, "0.7")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # board current monitor, in A (1ohm)
@@ -66,6 +72,7 @@ record( ai, "$(PREFIX)I_MON")
 	field( HIHI, "0.9")
 	field( LOLO, "0.3")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # board voltge monitor.
@@ -75,6 +82,7 @@ record( ai, "$(PREFIX)V_MON")
 	field( HIHI, "3.6")
 	field( LOLO, "3.0")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
 # board temperature monitor, not used
@@ -84,5 +92,6 @@ record( ai, "$(PREFIX)ADC_TEMP")
 	field( HIHI, "0.2")
 	field( LOLO, "0.1")
 	field(PREC, 2 )
+	info( autosaveFields, "DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
