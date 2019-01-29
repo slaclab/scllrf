@@ -182,7 +182,7 @@ record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
 	info( autosaveFields, "VAL")
 }
 
-record (calc, "GUN:GUNB:100:FWD:PMEAN_DET0")
+record (calc, "GUN:GUNB:100:PMEAN_DET0")
 {
 	field( DESC, "Fwd - cav phase when detune is small")
 	field( INPA, "GUN:GUNB:100:PACT CP MS" )
@@ -202,7 +202,7 @@ record (calc, "GUN:GUNB:100:CW_DETUNE" )
 	field( DESC, "Detuning in CW mode" )
 	field( INPA, "GUN:GUNB:100:PACT NPP MS" )
 	field( INPB, "GUN:GUNB:100:FWD:PMEAN NPP MS" )
-	field( INPC, "GUN:GUNB:100:FWD:PMEAN_DET0")
+	field( INPC, "GUN:GUNB:100:PMEAN_DET0")
 	field( INPD, "GUN:GUNB:100:SMOOTHED_BW")
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "GUN:GUNB:100:DFACT" )

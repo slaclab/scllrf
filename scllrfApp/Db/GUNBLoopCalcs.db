@@ -131,14 +131,14 @@ field(EGU, "Hz")
 
 record(calc, "$(P)CAV1:Q_LOADED") {
 field(INPA, "$(P)FREQ_OUT CP MS")
-field(INPB, "$(P)CAV1:DECAY_BW")
+field(INPB, "$(P)CAV1:DECAY_BW CP MS")
 field(CALC, "A/B")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
 record(calc, "$(P)CAV2:Q_LOADED") {
 field(INPA, "$(P)FREQ_OUT CP MS")
-field(INPB, "$(P)CAV2:DECAY_BW")
+field(INPB, "$(P)CAV2:DECAY_BW CP MS")
 field(CALC, "A/B")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
