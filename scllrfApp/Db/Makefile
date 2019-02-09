@@ -48,6 +48,10 @@ ifneq ($(AUTOSAVE),)
 DB_INSTALLS += $(AUTOSAVE)/db/save_restoreStatus.db
 endif
 
+ifneq ($(STD),)
+DB_INSTALLS += $(STD)/stdApp/Db/pid_control.db
+endif
+
 # =======================================================================
 # Install to deployment dir (eg. PROD)
 DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfCommon.template
