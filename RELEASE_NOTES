@@ -10,6 +10,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-14: Added buncher tuning PID loop, various small improvements based on ops
+
 scllrf-R1-0-13: Adding a PV for loaded Q based on decay waveforms
 
 scllrf-R1-0-12: Two new sequencers: Use "Extremum Seeking" to find minimum
