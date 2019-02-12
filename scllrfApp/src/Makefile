@@ -42,6 +42,7 @@ scllrf_DBD += drvAsynIPPort.dbd
 scllrf_DBD += asyn.dbd
 scllrf_DBD += scllrfAsynPortDriver.dbd
 scllrf_DBD += calcSupport.dbd
+scllrf_DBD += stdSupport.dbd
 scllrf_DBD += history.dbd
 scllrf_DBD += ether_ip.dbd
 scllrf_DBD += PVAServerRegister.dbd
@@ -108,6 +109,7 @@ scllrf_LIBS += history
 scllrf_LIBS += ether_ip
 scllrf_LIBS += newmat
 scllrf_LIBS += qsrv
+scllrf_LIBS += std
 # EPICS_BASE_PVA_CORE_LIBS comes from pvAccessCPP and is defined at <>/cfg/CONFIG_PVACCESS_MODULE
 scllrf_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
 scllrf_LIBS += $(EPICS_BASE_IOC_LIBS)

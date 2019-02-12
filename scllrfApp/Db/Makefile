@@ -7,6 +7,8 @@ include $(TOP)/configure/CONFIG
 #  Optimization of db files using dbst (DEFAULT: NO)
 #DB_OPT = YES
 
+DB_INSTALLS += $(STD)/stdApp/Db/pid_control.db
+
 #----------------------------------------------------
 # Create and install (or just install)
 # databases, templates, substitutions like this
@@ -46,10 +48,6 @@ endif
 # Install Database to support reading the status of the autosave package:
 ifneq ($(AUTOSAVE),)
 DB_INSTALLS += $(AUTOSAVE)/db/save_restoreStatus.db
-endif
-
-ifneq ($(STD),)
-DB_INSTALLS += $(STD)/stdApp/Db/pid_control.db
 endif
 
 # =======================================================================
