@@ -143,7 +143,7 @@ record (calc, "GUN:GUNB:100:DECAY_STRENGTH" )
 
 record (calc, "GUN:GUNB:100:DECAY_FIT_STDDEV" )
 {
-	field( DESC, "pulse decay compared to theoretical ideal" )
+	field( DESC, "pulse decay compared to ideal" )
 	field( INPA, "GUN:GUNB:100:CAV1:DECAY_FIT_STDDEV CP MS" )
 	field( INPB, "GUN:GUNB:100:CAV2:DECAY_FIT_STDDEV CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )

@@ -191,7 +191,7 @@ record (calc, "ACCL:GUNB:455:DECAY_STRENGTH" )
 
 record (calc, "ACCL:GUNB:455:DECAY_FIT_STDDEV" )
 {
-	field( DESC, "pulse decay fit to theoretical ideal" )
+	field( DESC, "pulse decay fit to ideal" )
 	field( INPA, "ACCL:GUNB:455:CAV1:DECAY_FIT_STDDEV CP MS" )
 	field( INPB, "ACCL:GUNB:455:CAV2:DECAY_FIT_STDDEV CP MS" )
 	field( INPC, "ACCL:GUNB:455:ACTIVE_PROBE CP" )
