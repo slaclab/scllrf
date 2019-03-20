@@ -1,0 +1,11 @@
+# Abs: LLRF chassis "alive" status Archive PV list
+#
+# File: aliveChecker.tpl-arch
+#
+# Format:  PVNAME     INTERVAL     [ monitor | scan ]
+# The interval is in seconds.
+#
+# Name				     Interval	Mode
+#---------------------------------------------------------
+$(P)ALIVESUM 10 monitor
+$(P)ALIVEERR 10 monitor

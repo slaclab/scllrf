@@ -1,0 +1,18 @@
+# Abs: LLRF ADC board health status Archive PV list
+#
+# File: amd7823monitor.tpl-arch
+#
+# Format:  PVNAME     INTERVAL     [ monitor | scan ]
+# The interval is in seconds.
+#
+# Name				     Interval	Mode
+#---------------------------------------------------------
+$(PREFIX)ADC_SPARE_V 600 scan
+$(PREFIX)V2P2V 600 scan
+$(PREFIX)V3P7V 600 scan
+$(PREFIX)V12P0V 600 scan
+$(PREFIX)MICROPHONEV 600 scan
+$(PREFIX)LO_V 600 scan
+$(PREFIX)I_MON 600 scan
+$(PREFIX)V_MON 600 scan
+$(PREFIX)ADC_TEMP 600 scan

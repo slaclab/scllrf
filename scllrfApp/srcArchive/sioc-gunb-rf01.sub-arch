@@ -1,0 +1,202 @@
+file GUNBWaveCh.tpl-arch {
+pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
+	{ "GUN:GUNB:100:PRL:",			"0",	"1",	"PRCReg",	"dBm",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:SPARE1:",	"1",	"2",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:SPARE2:",	"2",	"3",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:CAV1:",			"3",	"4",	"PRCReg",	"MV",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:CAV2:",			"4",	"5",	"PRCReg",	"MV",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:SPARE3:",	"5",	"6",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:SPARE4:",	"6",	"7",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:LASR:",			"7",	"8",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:DAC1:",		"8",	"9",	"PRCReg",	"DAC counts",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:DAC2:",		"9",	"10",	"PRCReg",	"DAC counts",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS1A:",	"10",	"11",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS1B:",	"11",	"12",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS2A:",	"12",	"13",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS2B:",	"13",	"14",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:SPARE5:",	"14",	"15",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:SPARE6:",	"15",	"16",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
+
+	{ "GUN:GUNB:100:DRV1:",			"0",	"1",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:DRV1A:",		"1",	"2",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:S100:FWD1:",		"2",	"3",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:S100:REV1:",		"3",	"4",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:FWD1:",			"4",	"5",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:REV1:",			"5",	"6",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:C100:FWD1:",		"6",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:C100:REV1:",		"7",	"8",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:DAC1:",	"8",	"9",	"RFS1Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:DAC2:",	"9",	"10",	"RFS1Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:SPARE1:",	"10",	"11",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:SPARE2:",	"11",	"12",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:SPARE3:",	"12",	"13",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:SPARE4:",	"13",	"14",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:SPARE5:",	"14",	"15",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS1:SPARE6:",	"15",	"16",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
+
+	{ "GUN:GUNB:100:DRV2:",			"0",	"1",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:DRV2A:",		"1",	"2",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:S100:FWD2:",		"2",	"3",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:S100:REV2:",		"3",	"4",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:FWD2:",			"4",	"5",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:REV2:",			"5",	"6",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:C100:FWD2:",		"6",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:C100:REV2:",		"7",	"8",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:DAC1:",	"8",	"9",	"RFS2Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:DAC2:",	"9",	"10",	"RFS2Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:SPARE1:",	"10",	"11",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:SPARE2:",	"11",	"12",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:SPARE3:",	"12",	"13",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:SPARE4:",	"13",	"14",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:SPARE5:",	"14",	"15",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:RFS2:SPARE6:",	"15",	"16",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
+}
+file GUNBWavePerChassis.tpl-arch
+{
+pattern{ P,				CHASSIS,	KEEP,		PORT }
+	{ "GUN:GUNB:100:",	"PRC:",	"0xC3C3",	PRCReg }
+	{ "GUN:GUNB:100:",	"RFS1:",	"0xFFFF",	RFS1Reg }
+	{ "GUN:GUNB:100:",	"RFS2:",	"0xFFFF",	RFS2Reg }
+}
+
+file rfSigCalibCav.tpl-arch {
+pattern { PREF, RoverQ }
+	{ "GUN:GUNB:100:CAV1:", 200 }
+	{ "GUN:GUNB:100:CAV2:", 200 }
+}
+file rfSigCalib.tpl-arch {
+pattern { PREF,				 NORM,						CAVSCL }
+	{ "GUN:GUNB:100:CAV1:",	"32767",	"$(PREF)CAL_SCALE_CAV" }
+	{ "GUN:GUNB:100:CAV2:",	"32767",	"$(PREF)CAL_SCALE_CAV" }
+}
+file rfSigCalib.tpl-arch {
+pattern { PREF,				 NORM }
+	{ "GUN:GUNB:100:PRL:",	"32767"}
+	{ "GUN:GUNB:100:PRC:SPARE1:",	"32767" }
+	{ "GUN:GUNB:100:PRC:SPARE2:",	"32767" }
+	{ "GUN:GUNB:100:PRC:SPARE3:",	"32767" }
+	{ "GUN:GUNB:100:PRC:SPARE4:",	"32767" }
+	{ "GUN:GUNB:100:LASR:",	"32767"}
+	{ "GUN:GUNB:100:PRC:DAC1:",	"32767" }
+	{ "GUN:GUNB:100:PRC:DAC2:",	"32767" }
+	{ "GUN:GUNB:100:PRC:RFS1A:",	"32767" }
+	{ "GUN:GUNB:100:PRC:RFS1B:",	"32767" }
+	{ "GUN:GUNB:100:PRC:RFS2A:",	"32767" }
+	{ "GUN:GUNB:100:PRC:RFS2B:",	"32767" }
+	{ "GUN:GUNB:100:PRC:SPARE5:",	"32767" }
+	{ "GUN:GUNB:100:PRC:SPARE6:",	"32767" }
+
+	{ "GUN:GUNB:100:DRV1:",	"32767" }
+	{ "GUN:GUNB:100:DRV1A:",	"32767" }
+	{ "GUN:GUNB:S100:FWD1:","32767" }
+	{ "GUN:GUNB:S100:REV1:","32767" }
+	{ "GUN:GUNB:100:FWD1:",	"32767" }
+	{ "GUN:GUNB:100:REV1:",	"32767" }
+	{ "GUN:GUNB:C100:FWD1:","32767" }
+	{ "GUN:GUNB:C100:REV1:","32767" }
+	{ "GUN:GUNB:100:RFS1:DAC1:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:DAC2:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:SPARE1:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:SPARE2:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:SPARE3:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:SPARE4:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:SPARE5:",	"32767" }
+	{ "GUN:GUNB:100:RFS1:SPARE6:",	"32767" }
+
+	{ "GUN:GUNB:100:DRV2:",	"32767" }
+	{ "GUN:GUNB:100:DRV2A:",	"32767" }
+	{ "GUN:GUNB:S100:FWD2:","32767" }
+	{ "GUN:GUNB:S100:REV2:","32767" }
+	{ "GUN:GUNB:100:FWD2:",	"32767" }
+	{ "GUN:GUNB:100:REV2:",	"32767" }
+	{ "GUN:GUNB:C100:FWD2:","32767" }
+	{ "GUN:GUNB:C100:REV2:","32767" }
+	{ "GUN:GUNB:100:RFS2:DAC1:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:DAC2:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:SPARE1:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:SPARE2:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:SPARE3:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:SPARE4:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:SPARE5:",	"32767" }
+	{ "GUN:GUNB:100:RFS2:SPARE6:",	"32767" }
+}
+
+file GUNBLoopCalcs.tpl-arch
+{
+	{ P = "GUN:GUNB:100:", 1300RATIO=7, ALIAS_N=1 }
+}
+
+
+file GUNBMisc.tpl-arch
+{
+pattern{ P,				CHASSIS,	PORT,	 SCALEP }
+	{ "GUN:GUNB:100:",	"PRC:",		PRCReg,	"GUN:GUNB:100:CAV1:" }
+#	{ "GUN:GUNB:100:RFS1:",	RFS1Reg,"GUN:GUNB:100:FWD1:SCALE" }
+#	{ "GUN:GUNB:100:RFS2:",	RFS2Reg,"GUN:GUNB:100:FWD2:SCALE" }
+}
+
+file Gun3Chassis.tpl-arch
+{
+	{ P = "GUN:GUNB:100:", N=1 }
+}
+
+file gainScanRecorder.tpl-arch
+{
+	{ P = "GUN:GUNB:100:", N=1, FWD = "GUN:GUNB:S100:FWD" }
+	{ P = "GUN:GUNB:100:", N=2, FWD = "GUN:GUNB:S100:FWD" }
+}
+
+#	P - Prefix for this monitor. The PV with enumerated status and severity is $(P):ALIVESUM
+#	PV2CHECK - The PV implementing heartbeat or error counting type functionality
+#	FAIL_IF - Failure condition test equation with A as new value, B as previous value, e.g. "A=B" for a counter failure
+file aliveChecker.tpl-arch
+{
+pattern{ P,							PV2CHECK,						FAIL_IF	}
+		{"GUN:GUNB:100:PRC:COUNTER_",	"GUN:GUNB:100:PRC:COUNTER_R",	"A=B"	}
+		{"GUN:GUNB:100:RFS1:COUNTER_",	"GUN:GUNB:100:RFS1:COUNTER_R",	"A=B"	}
+		{"GUN:GUNB:100:RFS2:COUNTER_",	"GUN:GUNB:100:RFS2:COUNTER_R",	"A=B"	}
+		{"GUN:GUNB:100:PRC:CRCERRORCNT_",	"GUN:GUNB:100:PRC:CRCERRORCNT_R",	"A!=B"	}
+		{"GUN:GUNB:100:RFS1:CRCERRORCNT_",	"GUN:GUNB:100:RFS1:CRCERRORCNT_R",	"(A&0xFFFF)!=(B&0xFFFF)"	}
+		{"GUN:GUNB:100:RFS2:CRCERRORCNT_",	"GUN:GUNB:100:RFS2:CRCERRORCNT_R",	"(A&0xFFFF)!=(B&0xFFFF)"	}
+}
+
+file amc7823monitor.tpl-arch
+{
+pattern{ PREFIX }
+	{ "GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:RFS2:" }
+}
+
+file BMB7monitor.archive
+{
+	{ P="GUN:GUNB:100", R=":PRC:" }
+	{ P="GUN:GUNB:100", R=":RFS1:" }
+	{ P="GUN:GUNB:100", R=":RFS2:" }
+}
+
+#/*
+# When the proportion of RF coming back from the cavity exceeds a threshold,
+# and other conditions are met, dither a setting to establish where the minimum
+# RF comes back, and establish that as the new 0 detune position.
+# Change the CW detune calculation nominal offset from cavity phase to forward phase
+# at detune = 0 with the offset at that point.
+# Then resume normal feedback.
+#
+# Macros:
+# 		PREFIX - pv name prefix used for settings PVs, e.g. GUN:GUNB:100:
+# 		REV - reverse signal to use for amplitude comparison, e.g. GUN:GUNB:100:REV:
+# 		FWD - forward signal to use for amplitude comparison and phase calibration, e.g. GUN:GUNB:100:FWD:
+# 		CAV - Prefix to PACT for cavity to use for phase calibration, e.g. GUN:GUNB:100:
+# 		CTL - PV that changes the frequency, e.g. GUN:GUNB:100:PRC:DDSA_PHSTEP_H_W
+#/
+file centerCwDetune.tpl-arch
+{
+	{ PREFIX = "GUN:GUNB:100:", REV = "GUN:GUNB:100:REV:", FWD = "GUN:GUNB:100:FWD:", CAV = "GUN:GUNB:100:", CTL = "GUN:GUNB:100:PRC:DDSA_PHSTEP_H_W" }
+}
+
+file archive_iocAdmin.archive
+{
+pattern { IOC            }
+		{ SIOC:GUNB:RF01 }
+}

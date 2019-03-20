@@ -1,0 +1,4 @@
+$(PREF)QPROBE 10 monitor
+$(PREF)SHUNT_IMPED 10 monitor
+$(PREF)CAL_SCALE_CAV 10 monitor
+$(PREF)SCALETOREF 10 monitor
