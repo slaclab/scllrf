@@ -8,6 +8,7 @@ record (calc, "GUN:GUNB:100:FWD:AMEAN" )
 	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
 	field(EGU, "sqrt(W)")
 	field( CALC, "A+B")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:FWD:PWR" )
@@ -17,6 +18,7 @@ record (calc, "GUN:GUNB:100:FWD:PWR" )
 	field( INPB, "GUN:GUNB:100:FWD2:PWR CP MS" )
 	field( CALC, "A+B")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:FWD:PWR_AVG" )
@@ -26,6 +28,7 @@ record (calc, "GUN:GUNB:100:FWD:PWR_AVG" )
 	field( INPB, "GUN:GUNB:100:DUTY_CYCLE CP MS" )
 	field( CALC, "A*B/100")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 
@@ -62,6 +65,7 @@ record (calc, "GUN:GUNB:100:FWD:PMEAN" )
 	field( INPG, "GUN:GUNB:100:FWD:USE_AS_REF CP")
 	field( CALC, "G=0?A:G=1?B:G=2?C:G=3?D:G=4?E:F")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:REV:AMEAN" )
@@ -71,6 +75,7 @@ record (calc, "GUN:GUNB:100:REV:AMEAN" )
 	field( INPB, "GUN:GUNB:100:REV2:AMEAN CP MS" )
 	field( CALC, "A+B")
 	field(EGU, "sqrt(W)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 record (calc, "GUN:GUNB:100:REV:PWR" )
 {
@@ -79,6 +84,7 @@ record (calc, "GUN:GUNB:100:REV:PWR" )
 	field( INPB, "GUN:GUNB:100:REV2:PWR CP MS" )
 	field( CALC, "A+B")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:REV:PMEAN" )
@@ -93,6 +99,7 @@ record (calc, "GUN:GUNB:100:REV:PMEAN" )
 	field( INPG, "GUN:GUNB:100:FWD:USE_AS_REF CP")
 	field( CALC, "G=0?A:G=1?B:G=2?D:G=3?C:G=4?F:E")
 	field(EGU, "sqrt(W)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "GUN:GUNB:100:ACTIVE_PROBE")
@@ -100,6 +107,7 @@ record(calc, "GUN:GUNB:100:ACTIVE_PROBE")
 # Translate channel number used by feedback to CAV1/2 signal
 	field( INPA, "GUN:GUNB:100:PRC:FDBKSEL_W CP MS" )
 	field( CALC, "A=4?2:1")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "GUN:GUNB:100:AACT" )
@@ -110,6 +118,7 @@ record (calc, "GUN:GUNB:100:AACT" )
 	field( CALC, "MAX(A,B)")
 #	field( CALC, "(A+B)/2") # Something like this once we have both probes
 	field(EGU, "MV")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:PACT" )
@@ -130,6 +139,7 @@ record (calc, "GUN:GUNB:100:PACT" )
 	field( CALC, "C=1?A:B")
 	field( FLNK, "GUN:GUNB:100:CW_DETUNE" )
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:DECAY_STRENGTH" )
@@ -139,6 +149,7 @@ record (calc, "GUN:GUNB:100:DECAY_STRENGTH" )
 	field( INPB, "GUN:GUNB:100:CAV2:DECAY_STRENGTH CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:DECAY_FIT_STDDEV" )
@@ -148,6 +159,7 @@ record (calc, "GUN:GUNB:100:DECAY_FIT_STDDEV" )
 	field( INPB, "GUN:GUNB:100:CAV2:DECAY_FIT_STDDEV CP MS" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:DECAY_CONSTANT_B" )
@@ -159,6 +171,7 @@ record (calc, "GUN:GUNB:100:DECAY_CONSTANT_B" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:DECAY_BW" )
@@ -169,7 +182,7 @@ record (calc, "GUN:GUNB:100:DECAY_BW" )
 	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "Hz")
-	info( autosaveFields, "VAL")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
@@ -207,7 +220,7 @@ record (calc, "GUN:GUNB:100:CW_DETUNE" )
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "GUN:GUNB:100:DFACT" )
 	field(EGU, "Hz")
-	info( autosaveFields, "INPC INPD C D")
+	info( autosaveFields, "INPC INPD C D ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 # SSA drive balancing. raw 19898 = 100% amplitude.

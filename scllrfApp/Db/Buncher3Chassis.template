@@ -23,6 +23,7 @@ record (calc, "ACCL:GUNB:455:FWD:AMEAN" )
 	field( INPD, "ACCL:GUNB:455:FWD4:AMEAN CP MS" )
 	field( CALC, "A+B+C+D")
 	field(EGU, "sqrt(W)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 record (calc, "ACCL:GUNB:455:FWD:PWR" )
 {
@@ -36,6 +37,7 @@ record (calc, "ACCL:GUNB:455:FWD:PWR" )
 	# change this to vector sum of Is and Qs?
 	field( CALC, "A+B+C+D")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:FWD:PWR_AVG" )
@@ -45,6 +47,7 @@ record (calc, "ACCL:GUNB:455:FWD:PWR_AVG" )
 	field( INPB, "ACCL:GUNB:455:DUTY_CYCLE CP MS" )
 	field( CALC, "A*B/100")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (mbbo, "ACCL:GUNB:455:FWD:USE_AS_REF")
@@ -88,6 +91,7 @@ record (calc, "ACCL:GUNB:455:FWD:PMEAN" )
 	field( INPI, "ACCL:GUNB:455:PRC:RFS2B:PMEAN CP" )
 	field( CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?F:E=5?G:E=6?H:I")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:REV:AMEAN" )
@@ -99,6 +103,7 @@ record (calc, "ACCL:GUNB:455:REV:AMEAN" )
 	field( INPD, "ACCL:GUNB:455:REV4:AMEAN CP MS" )
 	field( CALC, "A+B+C+D")
 	field(EGU, "sqrt(W)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 record (calc, "ACCL:GUNB:455:REV:PWR" )
 {
@@ -109,6 +114,7 @@ record (calc, "ACCL:GUNB:455:REV:PWR" )
 	field( INPD, "ACCL:GUNB:455:REV4:PWR CP MS" )
 	field( CALC, "A+B+C+D")
 	field(EGU, "W")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:REV:PMEAN" )
@@ -125,6 +131,7 @@ record (calc, "ACCL:GUNB:455:REV:PMEAN" )
 	field( INPI, "ACCL:GUNB:455:PRC:RFS2B:PMEAN CP" )
 	field( CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?G:E=5?F:E=6?I:H")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (acalcout, "ACCL:GUNB:455:REV:CAV_V" )
@@ -141,6 +148,7 @@ record (acalcout, "ACCL:GUNB:455:REV:CAV_V" )
 	field( INPI, "ACCL:GUNB:455:PRC:RFS2B:PMEAN CP" )
 	field( CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?G:E=5?F:E=6?I:H")
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "ACCL:GUNB:455:ACTIVE_PROBE")
@@ -148,6 +156,7 @@ record(calc, "ACCL:GUNB:455:ACTIVE_PROBE")
 # Translate channel number used by feedback to CAV1/2 signal
 	field( INPA, "ACCL:GUNB:455:PRC:FDBKSEL_W CP MS" )
 	field( CALC, "A=2?1:A=3?2:A=4?3:4")
+	info( autosaveFields, "VAL")
 }
 
 record (calc, "ACCL:GUNB:455:AACT" )
@@ -158,6 +167,7 @@ record (calc, "ACCL:GUNB:455:AACT" )
 	field( CALC, "MAX(A,B)")
 #	field( CALC, "(A+B)/2") # Something like this once we have both probes
 	field(EGU, "MV")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:PACT" )
@@ -178,6 +188,7 @@ record (calc, "ACCL:GUNB:455:PACT" )
 	field( CALC, "C=1?A:B")
 	field( FLNK, "ACCL:GUNB:455:CW_DETUNE" )
 	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:DECAY_STRENGTH" )
@@ -187,6 +198,7 @@ record (calc, "ACCL:GUNB:455:DECAY_STRENGTH" )
 	field( INPB, "ACCL:GUNB:455:CAV2:DECAY_STRENGTH CP MS" )
 	field( INPC, "ACCL:GUNB:455:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:DECAY_FIT_STDDEV" )
@@ -196,6 +208,7 @@ record (calc, "ACCL:GUNB:455:DECAY_FIT_STDDEV" )
 	field( INPB, "ACCL:GUNB:455:CAV2:DECAY_FIT_STDDEV CP MS" )
 	field( INPC, "ACCL:GUNB:455:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:DECAY_CONSTANT_B" )
@@ -207,6 +220,7 @@ record (calc, "ACCL:GUNB:455:DECAY_CONSTANT_B" )
 	field( INPC, "ACCL:GUNB:455:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:DECAY_BW" )
@@ -217,6 +231,7 @@ record (calc, "ACCL:GUNB:455:DECAY_BW" )
 	field( INPC, "ACCL:GUNB:455:ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record (calc, "ACCL:GUNB:455:PMEAN_EXP_OFFSET")
@@ -246,6 +261,7 @@ record (calc, "ACCL:GUNB:455:PMEAN_DET0")
 
 record (calc, "ACCL:GUNB:455:CW_DETUNE" )
 {
+# Processes with FLNK from PACT
 	field( DESC, "Detuning in CW mode" )
 	field( INPA, "ACCL:GUNB:455:PACT NPP MS" )
 	field( INPB, "ACCL:GUNB:455:FWD:PMEAN NPP MS" )
@@ -254,6 +270,7 @@ record (calc, "ACCL:GUNB:455:CW_DETUNE" )
 	field( CALC, "D*TAN(D2R*(A - B - C))")
 	field( FLNK, "ACCL:GUNB:455:DFACT" )
 	field(EGU, "Hz")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 # We expect no slope, this is just experimental.

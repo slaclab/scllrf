@@ -146,13 +146,12 @@ field(CALC, "A/B")
 record(calcout, "$(P)DETUNE_GOOD") {
 field(INPA, "$(P)DECAY_STRENGTH")
 field(INPB, "$(P)DECAY_FIT_STDDEV")
-field(INPE, "$(P)PACT_LAST_N_STD")
 field(INPC, "50")
 field(INPD, "3000")
 field(INPE, "$(P)PACT_LAST_N_STD")
 field(INPF, "$(P)DETUNE_MODE")
 field(INPG, "1")
-field(CALC, "(A>C)&&(B<D)&&F?1:(E<G)")
+field(CALC, "(A>C)&&(B<D)&&F?1:(ABS(E)<G)")
 field(SCAN, ".2 second")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV INPC C INPD D")
 }
@@ -847,8 +846,6 @@ field(INP, "$(P)RF_PERMIT_CALC CP MS")
 }
 
 record(ao, "$(P)MASK_BOUNDARY_RESET") {
-	field(PINI, "YES")
-	info( autosaveFields, "VAL")
 }
 
 # If MASK_BOUNDARY_RESET is true, don't change PULSE_BOUNDARY
