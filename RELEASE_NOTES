@@ -4,11 +4,13 @@
 #  Name: RELEASE_NOTES
 #
 #  Rem:  This files describes release notes for
-#        the XXX IOC Application.
+#        the gun and buncher LLRF IOC Application.
 #
-#  Auth: xx-Dec-2012, XXX         (xxx)
+#  Auth: 28-Jul-2016, GARTH BROWN         (gwbrown)
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
+
+scllrf-R1-0-16: Temperature tuning PID loop improved with PWM type control.
 
 scllrf-R1-0-15: Added archive files.
 

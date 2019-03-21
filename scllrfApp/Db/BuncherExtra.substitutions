@@ -169,6 +169,13 @@ file GUNB3ChassisAlias.template
 	{ P = "ACCL:GUNB:455:", N=2 }
 }
 
+# PID loop for buncher tuning using water temperature
+file $(STD)/stdApp/Db/pid_control.db
+{
+	{ P="ACCL:GUNB:455:CAV:", PID = "PID", INP="ACCL:GUNB:455:PID_incalc.B", OUT = "ACCL:GUNB:455:PID_incalc.C", SCAN = ".1 second", KP = 2.00e-6, KI = 5.00e-3, KD = 90, LOPR = 17, HOPR = 40, DRVL = 17, DRVH = 40, PREC = 2 }
+}
+
+# Things that apply to the whole 3 chassis system
 file Buncher3Chassis.template
 {
 	{ P = "ACCL:GUNB:455:", N=2 }
@@ -222,11 +229,4 @@ pattern{ PREFIX }
 file centerCwDetune.template
 {
 	{ PREFIX = "ACCL:GUNB:455:", REV = "ACCL:GUNB:455:REV:", FWD = "ACCL:GUNB:455:FWD:", CAV = "ACCL:GUNB:455:", CTL = "ACCL:GUNB:455:PRC:DDSA_PHSTEP_H_W" }
-}
-
-
-# PID loop for buncher tuning using water temperature
-file $(STD)/stdApp/Db/pid_control.db
-{
-	{ P="ACCL:GUNB:455:CAV:", PID = "PID", INP="ACCL:GUNB:455:DFACT", OUT = "ACCL:GUNB:455:TEMPSP", SCAN = ".1 second", KP = 1, KI = 1, KD = 0, LOPR = 1, HOPR = 40, DRVL = 1, DRVH = 40, PREC = 2 }
 }
