@@ -6,7 +6,7 @@
 # Deal with all the things that are different between Gun and Buncher,
 # and bringing the 3 chassis and 4 SSAs together as a system
 record(calc, "$(P)FWD:AMEAN") {
-  field(DESC, "Total forward amplitude")
+field(DESC, "Total forward amplitude")
 ## Maybe we'll use this vector sum approach later.
 ## For now, there are too many complications and no
 ## compelling reason it's better than picking one signal.
@@ -20,53 +20,53 @@ record(calc, "$(P)FWD:AMEAN") {
 #field( INPG, "$(P)FWD3:QTMEAN CP MS" )
 #field( INPH, "$(P)FWD4:QTMEAN CP MS" )
 #field( CALC, "SQRT((A+B+C+D)^2+(E+F+G+H)^2)")
-  field(INPA, "$(P)FWD1:AMEAN CP MS")
-  field(INPB, "$(P)FWD2:AMEAN CP MS")
-  field(INPC, "$(P)FWD3:AMEAN CP MS")
-  field(INPD, "$(P)FWD4:AMEAN CP MS")
-  field(CALC, "A+B+C+D")
-  field(EGU, "sqrt(W)")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(INPA, "$(P)FWD1:AMEAN CP MS")
+field(INPB, "$(P)FWD2:AMEAN CP MS")
+field(INPC, "$(P)FWD3:AMEAN CP MS")
+field(INPD, "$(P)FWD4:AMEAN CP MS")
+field(CALC, "A+B+C+D")
+field(EGU, "sqrt(W)")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)FWD:PWR") {
-  field(DESC, "Total forward amplitude")
-  field(INPA, "$(P)FWD1:PWR CP MS")
-  field(INPB, "$(P)FWD2:PWR CP MS")
-  field(INPC, "$(P)FWD3:PWR CP MS")
-  field(INPD, "$(P)FWD4:PWR CP MS")
+field(DESC, "Total forward amplitude")
+field(INPA, "$(P)FWD1:PWR CP MS")
+field(INPB, "$(P)FWD2:PWR CP MS")
+field(INPC, "$(P)FWD3:PWR CP MS")
+field(INPD, "$(P)FWD4:PWR CP MS")
 # This is the sum of the output power of all the SSAs.
 # If we're more interested in what's going into the cavity,
 # change this to vector sum of Is and Qs?
-  field(CALC, "A+B+C+D")
-  field(EGU, "W")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(CALC, "A+B+C+D")
+field(EGU, "W")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)FWD:PWR_AVG") {
-  field(DESC, "Total forward amplitude")
-  field(INPA, "$(P)FWD:PWR CP MS")
-  field(INPB, "$(P)DUTY_CYCLE CP MS")
-  field(CALC, "A*B/100")
-  field(EGU, "W")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Total forward amplitude")
+field(INPA, "$(P)FWD:PWR CP MS")
+field(INPB, "$(P)DUTY_CYCLE CP MS")
+field(CALC, "A*B/100")
+field(EGU, "W")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(mbbo, "$(P)FWD:USE_AS_REF") {
-  field(ZRST, "$(P)FWD1")
-  field(ONST, "$(P)FWD2")
-  field(TWST, "$(P)FWD3")
-  field(THST, "$(P)FWD4")
-  field(FRST, "$(P)PRC:RFS1A")
-  field(FVST, "$(P)PRC:RFS1B")
-  field(SXST, "$(P)PRC:RFS2A")
-  field(SVST, "$(P)PRC:RFS2B")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(ZRST, "$(P)FWD1")
+field(ONST, "$(P)FWD2")
+field(TWST, "$(P)FWD3")
+field(THST, "$(P)FWD4")
+field(FRST, "$(P)PRC:RFS1A")
+field(FVST, "$(P)PRC:RFS1B")
+field(SXST, "$(P)PRC:RFS2A")
+field(SVST, "$(P)PRC:RFS2B")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)FWD:PMEAN") {
-  field(DESC, "Forward phase for detune calcs")
+field(DESC, "Forward phase for detune calcs")
 ## Maybe we'll use this vector sum approach later.
 ## For now, there are too many complications and no
 ## compelling reason it's better than picking one signal.
@@ -80,77 +80,77 @@ record(calc, "$(P)FWD:PMEAN") {
 #field( INPG, "$(P)FWD3:QTMEAN CP MS" )
 #field( INPH, "$(P)FWD4:QTMEAN CP MS" )
 #field( CALC, "ATAN2((E+F+G+H),(A+B+C+D))")
-  field(INPA, "$(P)FWD1:PMEAN CP MS")
-  field(INPB, "$(P)FWD2:PMEAN CP MS")
-  field(INPC, "$(P)FWD3:PMEAN CP MS")
-  field(INPD, "$(P)FWD4:PMEAN CP MS")
-  field(INPE, "$(P)FWD:USE_AS_REF")
-  field(INPF, "$(P)PRC:RFS1A:PMEAN CP")
-  field(INPG, "$(P)PRC:RFS1B:PMEAN CP")
-  field(INPH, "$(P)PRC:RFS2A:PMEAN CP")
-  field(INPI, "$(P)PRC:RFS2B:PMEAN CP")
-  field(CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?F:E=5?G:E=6?H:I")
-  field(EGU, "deg")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(INPA, "$(P)FWD1:PMEAN CP MS")
+field(INPB, "$(P)FWD2:PMEAN CP MS")
+field(INPC, "$(P)FWD3:PMEAN CP MS")
+field(INPD, "$(P)FWD4:PMEAN CP MS")
+field(INPE, "$(P)FWD:USE_AS_REF")
+field(INPF, "$(P)PRC:RFS1A:PMEAN CP")
+field(INPG, "$(P)PRC:RFS1B:PMEAN CP")
+field(INPH, "$(P)PRC:RFS2A:PMEAN CP")
+field(INPI, "$(P)PRC:RFS2B:PMEAN CP")
+field(CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?F:E=5?G:E=6?H:I")
+field(EGU, "deg")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)REV:AMEAN") {
-  field(DESC, "Total reverse amplitude")
-  field(INPA, "$(P)REV1:AMEAN CP MS")
-  field(INPB, "$(P)REV2:AMEAN CP MS")
-  field(INPC, "$(P)REV3:AMEAN CP MS")
-  field(INPD, "$(P)REV4:AMEAN CP MS")
-  field(CALC, "A+B+C+D")
-  field(EGU, "sqrt(W)")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Total reverse amplitude")
+field(INPA, "$(P)REV1:AMEAN CP MS")
+field(INPB, "$(P)REV2:AMEAN CP MS")
+field(INPC, "$(P)REV3:AMEAN CP MS")
+field(INPD, "$(P)REV4:AMEAN CP MS")
+field(CALC, "A+B+C+D")
+field(EGU, "sqrt(W)")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)REV:PWR") {
-  field(DESC, "Total forward amplitude")
-  field(INPA, "$(P)REV1:PWR CP MS")
-  field(INPB, "$(P)REV2:PWR CP MS")
-  field(INPC, "$(P)REV3:PWR CP MS")
-  field(INPD, "$(P)REV4:PWR CP MS")
-  field(CALC, "A+B+C+D")
-  field(EGU, "W")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Total forward amplitude")
+field(INPA, "$(P)REV1:PWR CP MS")
+field(INPB, "$(P)REV2:PWR CP MS")
+field(INPC, "$(P)REV3:PWR CP MS")
+field(INPD, "$(P)REV4:PWR CP MS")
+field(CALC, "A+B+C+D")
+field(EGU, "W")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)REV:PMEAN") {
-  field(DESC, "Reverse phase for detune calcs")
-  field(INPA, "$(P)REV1:PMEAN CP MS")
-  field(INPB, "$(P)REV2:PMEAN CP MS")
-  field(INPC, "$(P)REV3:PMEAN CP MS")
-  field(INPD, "$(P)REV4:PMEAN CP MS")
-  field(INPE, "$(P)FWD:USE_AS_REF CP MS")
-  field(INPF, "$(P)PRC:RFS1A:PMEAN CP")
-  field(INPG, "$(P)PRC:RFS1B:PMEAN CP")
-  field(INPH, "$(P)PRC:RFS2A:PMEAN CP")
-  field(INPI, "$(P)PRC:RFS2B:PMEAN CP")
-  field(CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?G:E=5?F:E=6?I:H")
-  field(EGU, "deg")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Reverse phase for detune calcs")
+field(INPA, "$(P)REV1:PMEAN CP MS")
+field(INPB, "$(P)REV2:PMEAN CP MS")
+field(INPC, "$(P)REV3:PMEAN CP MS")
+field(INPD, "$(P)REV4:PMEAN CP MS")
+field(INPE, "$(P)FWD:USE_AS_REF CP MS")
+field(INPF, "$(P)PRC:RFS1A:PMEAN CP")
+field(INPG, "$(P)PRC:RFS1B:PMEAN CP")
+field(INPH, "$(P)PRC:RFS2A:PMEAN CP")
+field(INPI, "$(P)PRC:RFS2B:PMEAN CP")
+field(CALC, "E=0?A:E=1?B:E=2?C:E=3?D:E=4?G:E=5?F:E=6?I:H")
+field(EGU, "deg")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)ACTIVE_PROBE") {
 # Translate channel number used by feedback to CAV1/2 signal
-  field(INPA, "$(P)PRC:FDBKSEL_W CP MS")
-  field(CALC, "A=2?1:A=3?2:A=4?3:4")
-  info(autosaveFields, "VAL")
+field(INPA, "$(P)PRC:FDBKSEL_W CP MS")
+field(CALC, "A=2?1:A=3?2:A=4?3:4")
+info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)AACT") {
-  field(DESC, "Average cavity amplitude")
-  field(INPA, "$(P)CAV1:AMEAN CP MS")
-  field(INPB, "$(P)CAV2:AMEAN CP MS")
-  field(CALC, "MAX(A,B)")
+field(DESC, "Average cavity amplitude")
+field(INPA, "$(P)CAV1:AMEAN CP MS")
+field(INPB, "$(P)CAV2:AMEAN CP MS")
+field(CALC, "MAX(A,B)")
 #field( CALC, "(A+B)/2") # Something like this once we have both probes
-  field(EGU, "MV")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(EGU, "MV")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)PACT") {
-  field(DESC, "Average cavity phase")
+field(DESC, "Average cavity phase")
 ## Maybe we'll use this vector sum approach later.
 ## For now, there are too many complications and no
 ## compelling reason it's better than picking one signal.
@@ -160,89 +160,90 @@ record(calc, "$(P)PACT") {
 #field( INPC, "$(P)CAV1:QTMEAN CP MS" )
 #field( INPD, "$(P)CAV2:QTMEAN CP MS" )
 #field( CALC, "ATAN2(C+D,A+B)")
-  field(INPA, "$(P)CAV1:PMEAN CP MS")
-  field(INPB, "$(P)CAV2:PMEAN CP MS")
-  field(INPC, "$(P)ACTIVE_PROBE")
-  field(CALC, "C=1?A:B")
-  field(FLNK, "$(P)CW_DETUNE")
-  field(EGU, "deg")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(INPA, "$(P)CAV1:PMEAN CP MS")
+field(INPB, "$(P)CAV2:PMEAN CP MS")
+field(INPC, "$(P)ACTIVE_PROBE")
+field(CALC, "C=1?A:B")
+field(FLNK, "$(P)CW_DETUNE")
+field(EGU, "deg")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)DECAY_STRENGTH") {
-  field(DESC, "Ask Gang")
-  field(INPA, "$(P)CAV1:DECAY_STRENGTH CP MS")
-  field(INPB, "$(P)CAV2:DECAY_STRENGTH CP MS")
-  field(INPC, "$(P)ACTIVE_PROBE CP")
-  field(CALC, "C=1?A:B")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Ask Gang")
+field(INPA, "$(P)CAV1:DECAY_STRENGTH CP MS")
+field(INPB, "$(P)CAV2:DECAY_STRENGTH CP MS")
+field(INPC, "$(P)ACTIVE_PROBE CP")
+field(CALC, "C=1?A:B")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)DECAY_FIT_STDDEV") {
-  field(DESC, "pulse decay fit to ideal")
-  field(INPA, "$(P)CAV1:DECAY_FIT_STDDEV CP MS")
-  field(INPB, "$(P)CAV2:DECAY_FIT_STDDEV CP MS")
-  field(INPC, "$(P)ACTIVE_PROBE CP")
-  field(CALC, "C=1?A:B")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "pulse decay fit to ideal")
+field(INPA, "$(P)CAV1:DECAY_FIT_STDDEV CP MS")
+field(INPB, "$(P)CAV2:DECAY_FIT_STDDEV CP MS")
+field(INPC, "$(P)ACTIVE_PROBE CP")
+field(CALC, "C=1?A:B")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)DECAY_CONSTANT_B") {
-  field(DESC, "Pulse Mode Detune")
-  field(INPA, "$(P)CAV1:DECAY_CONSTANT_B CP MS")
-  field(INPB, "$(P)CAV2:DECAY_CONSTANT_B CP MS")
-  field(INPC, "$(P)ACTIVE_PROBE CP")
-  field(CALC, "C=1?A:B")
-  field(EGU, "Hz")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+alias( "$(P)PM_DETUNE")
+field(DESC, "Pulse Mode Detune")
+field(INPA, "$(P)CAV1:DECAY_CONSTANT_B CP MS")
+field(INPB, "$(P)CAV2:DECAY_CONSTANT_B CP MS")
+field(INPC, "$(P)ACTIVE_PROBE CP")
+field(CALC, "C=1?A:B")
+field(EGU, "Hz")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)DECAY_BW") {
-  field(DESC, "Cavity bandwidth")
-  field(INPA, "$(P)CAV1:DECAY_BW CP MS")
-  field(INPB, "$(P)CAV2:DECAY_BW CP MS")
-  field(INPC, "$(P)ACTIVE_PROBE CP")
-  field(CALC, "C=1?A:B")
-  field(EGU, "Hz")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Cavity bandwidth")
+field(INPA, "$(P)CAV1:DECAY_BW CP MS")
+field(INPB, "$(P)CAV2:DECAY_BW CP MS")
+field(INPC, "$(P)ACTIVE_PROBE CP")
+field(CALC, "C=1?A:B")
+field(EGU, "Hz")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)PMEAN_EXP_OFFSET") {
-  field(DESC, "Detuning in CW mode")
-  field(INPA, "$(P)PM_DETUNE CP MS")
-  field(INPB, "$(P)SMOOTHED_BW")
-  field(CALC, "C:=R2D*ATAN(A/B);ISNAN(C)?VAL:C")
-  field(EGU, "deg")
-  info(autosaveFields, "VAL")
+field(DESC, "Detuning in CW mode")
+field(INPA, "$(P)PM_DETUNE CP MS")
+field(INPB, "$(P)SMOOTHED_BW")
+field(CALC, "C:=R2D*ATAN(A/B);ISNAN(C)?VAL:C")
+field(EGU, "deg")
+info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)PMEAN_DET0") {
-  field(DESC, "Fwd - cav phase when detune is small")
-  field(INPA, "$(P)PACT CP MS")
-  field(INPB, "$(P)FWD:PMEAN CP MS")
-  field(INPC, "$(P)PM_DETUNE CP MS")
-  field(INPE, ".99")
+field(DESC, "Fwd - cav phase when detune is small")
+field(INPA, "$(P)PACT CP MS")
+field(INPB, "$(P)FWD:PMEAN CP MS")
+field(INPC, "$(P)PM_DETUNE CP MS")
+field(INPE, ".99")
 # SMOOTHING FACTOR
-  field(INPF, "$(P)PMEAN_EXP_OFFSET CP")
-  field(CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
-  field(SDIS, "$(P)DETUNE_MODE")
-  field(DISV, "0")
+field(INPF, "$(P)PMEAN_EXP_OFFSET CP")
+field(CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
+field(SDIS, "$(P)DETUNE_MODE")
+field(DISV, "0")
 # stop updating this when not pulsing
-  field(EGU, "deg")
-  info(autosaveFields, "VAL")
+field(EGU, "deg")
+info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)CW_DETUNE") {
 # Processes with FLNK from PACT
-  field(DESC, "Detuning in CW mode")
-  field(INPA, "$(P)PACT NPP MS")
-  field(INPB, "$(P)FWD:PMEAN NPP MS")
-  field(INPC, "$(P)PMEAN_DET0")
-  field(INPD, "$(P)SMOOTHED_BW")
-  field(CALC, "D*TAN(D2R*(A - B - C))")
-  field(FLNK, "$(P)DFACT")
-  field(EGU, "Hz")
-  info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+field(DESC, "Detuning in CW mode")
+field(INPA, "$(P)PACT NPP MS")
+field(INPB, "$(P)FWD:PMEAN NPP MS")
+field(INPC, "$(P)PMEAN_DET0")
+field(INPD, "$(P)SMOOTHED_BW")
+field(CALC, "D*TAN(D2R*(A - B - C))")
+field(FLNK, "$(P)DFACT")
+field(EGU, "Hz")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 # We expect no slope, this is just experimental.
@@ -250,261 +251,261 @@ record(calc, "$(P)CW_DETUNE") {
 # find the derivative of phse dt,
 # then get the median to kick out those ugly phase wraps
 record(acalcout, "$(P)FWD:DPDT") {
-  field(INAA, "$(P)FWD1:PWF CP MS")
-  field(INPA, "$(P)WF_TIME_STEP NPP MS")
-  field(CALC, "(AA-(AA<<1))/A")
-  field(FLNK, "$(P)DPDT_DETUNE")
-  field(NELM, "512")
-  field(NUSE, "512")
-  field(EGU, "deg/s")
+field(INAA, "$(P)FWD1:PWF CP MS")
+field(INPA, "$(P)WF_TIME_STEP NPP MS")
+field(CALC, "(AA-(AA<<1))/A")
+field(FLNK, "$(P)DPDT_DETUNE")
+field(NELM, "512")
+field(NUSE, "512")
+field(EGU, "deg/s")
 }
 
 record(compress, "$(P)DPDT_DETUNE") {
-  field(ALG, "N to 1 Median")
-  field(N, "512")
-  field(INP, "$(P)FWD:DPDT.AVAL")
+field(ALG, "N to 1 Median")
+field(N, "512")
+field(INP, "$(P)FWD:DPDT.AVAL")
 }
 
 # SSA drive balancing. raw 19898 = 100% amplitude.
 # Adjust phase and amplitude so RF is in phase and output is equal.
 record(ao, "$(P)DRV1_ADJ_A") {
-  field(EGU, "%")
-  field(HOPR, "100")
-  field(LOPR, "0")
-  field(VAL, "100")
-  field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "%")
+field(HOPR, "100")
+field(LOPR, "0")
+field(VAL, "100")
+field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(P)DRV1_ADJ_P") {
-  field(EGU, "deg")
-  field(HOPR, "180")
-  field(LOPR, "-180")
-  field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "deg")
+field(HOPR, "180")
+field(LOPR, "-180")
+field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(fanout, "$(P)RFSUPLO1_AP_TO_IQ") {
-  field(LNK1, "$(P)RFSUPLO1_AP_TO_I PP")
-  field(LNK2, "$(P)RFSUPLO1_AP_TO_Q PP")
+field(LNK1, "$(P)RFSUPLO1_AP_TO_I PP")
+field(LNK2, "$(P)RFSUPLO1_AP_TO_Q PP")
 }
 
 record(calcout, "$(P)RFSUPLO1_AP_TO_I") {
-  field(INPA, "$(P)DRV1_ADJ_A")
-  field(INPB, "$(P)DRV1_ADJ_P")
-  field(CALC, "A*COS(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS1:RFSUPLOX1_W PP")
+field(INPA, "$(P)DRV1_ADJ_A")
+field(INPB, "$(P)DRV1_ADJ_P")
+field(CALC, "A*COS(B*D2R)*19898/100")
+field(OUT, "$(P)RFS1:RFSUPLOX1_W PP")
 }
 
 record(calcout, "$(P)RFSUPLO1_AP_TO_Q") {
-  field(INPA, "$(P)DRV1_ADJ_A")
-  field(INPB, "$(P)DRV1_ADJ_P")
-  field(CALC, "A*SIN(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS1:RFSUPLOY1_W PP")
+field(INPA, "$(P)DRV1_ADJ_A")
+field(INPB, "$(P)DRV1_ADJ_P")
+field(CALC, "A*SIN(B*D2R)*19898/100")
+field(OUT, "$(P)RFS1:RFSUPLOY1_W PP")
 }
 
 record(ao, "$(P)DRV2_ADJ_A") {
-  field(EGU, "%")
-  field(HOPR, "100")
-  field(LOPR, "0")
-  field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "%")
+field(HOPR, "100")
+field(LOPR, "0")
+field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(P)DRV2_ADJ_P") {
-  field(EGU, "deg")
-  field(HOPR, "180")
-  field(LOPR, "-180")
-  field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "deg")
+field(HOPR, "180")
+field(LOPR, "-180")
+field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(fanout, "$(P)RFSUPLO2_AP_TO_IQ") {
-  field(LNK1, "$(P)RFSUPLO2_AP_TO_I PP")
-  field(LNK2, "$(P)RFSUPLO2_AP_TO_Q PP")
+field(LNK1, "$(P)RFSUPLO2_AP_TO_I PP")
+field(LNK2, "$(P)RFSUPLO2_AP_TO_Q PP")
 }
 
 record(calcout, "$(P)RFSUPLO2_AP_TO_I") {
-  field(INPA, "$(P)DRV2_ADJ_A")
-  field(INPB, "$(P)DRV2_ADJ_P")
-  field(CALC, "A*COS(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS1:RFSUPLOX2_W PP")
+field(INPA, "$(P)DRV2_ADJ_A")
+field(INPB, "$(P)DRV2_ADJ_P")
+field(CALC, "A*COS(B*D2R)*19898/100")
+field(OUT, "$(P)RFS1:RFSUPLOX2_W PP")
 }
 
 record(calcout, "$(P)RFSUPLO2_AP_TO_Q") {
-  field(INPA, "$(P)DRV2_ADJ_A")
-  field(INPB, "$(P)DRV2_ADJ_P")
-  field(CALC, "A*SIN(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS1:RFSUPLOY2_W PP")
+field(INPA, "$(P)DRV2_ADJ_A")
+field(INPB, "$(P)DRV2_ADJ_P")
+field(CALC, "A*SIN(B*D2R)*19898/100")
+field(OUT, "$(P)RFS1:RFSUPLOY2_W PP")
 }
 
 record(ao, "$(P)DRV3_ADJ_A") {
-  field(EGU, "%")
-  field(HOPR, "100")
-  field(LOPR, "0")
-  field(VAL, "100")
-  field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "%")
+field(HOPR, "100")
+field(LOPR, "0")
+field(VAL, "100")
+field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(P)DRV3_ADJ_P") {
-  field(EGU, "deg")
-  field(HOPR, "180")
-  field(LOPR, "-180")
-  field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "deg")
+field(HOPR, "180")
+field(LOPR, "-180")
+field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(fanout, "$(P)RFSUPLO3_AP_TO_IQ") {
-  field(LNK1, "$(P)RFSUPLO3_AP_TO_I PP")
-  field(LNK2, "$(P)RFSUPLO3_AP_TO_Q PP")
+field(LNK1, "$(P)RFSUPLO3_AP_TO_I PP")
+field(LNK2, "$(P)RFSUPLO3_AP_TO_Q PP")
 }
 
 record(calcout, "$(P)RFSUPLO3_AP_TO_I") {
-  field(INPA, "$(P)DRV3_ADJ_A")
-  field(INPB, "$(P)DRV3_ADJ_P")
-  field(CALC, "A*COS(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS2:RFSUPLOX1_W PP")
+field(INPA, "$(P)DRV3_ADJ_A")
+field(INPB, "$(P)DRV3_ADJ_P")
+field(CALC, "A*COS(B*D2R)*19898/100")
+field(OUT, "$(P)RFS2:RFSUPLOX1_W PP")
 }
 
 record(calcout, "$(P)RFSUPLO3_AP_TO_Q") {
-  field(INPA, "$(P)DRV3_ADJ_A")
-  field(INPB, "$(P)DRV3_ADJ_P")
-  field(CALC, "A*SIN(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS2:RFSUPLOY1_W PP")
+field(INPA, "$(P)DRV3_ADJ_A")
+field(INPB, "$(P)DRV3_ADJ_P")
+field(CALC, "A*SIN(B*D2R)*19898/100")
+field(OUT, "$(P)RFS2:RFSUPLOY1_W PP")
 }
 
 record(ao, "$(P)DRV4_ADJ_A") {
-  field(EGU, "%")
-  field(HOPR, "100")
-  field(LOPR, "0")
-  field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "%")
+field(HOPR, "100")
+field(LOPR, "0")
+field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(ao, "$(P)DRV4_ADJ_P") {
-  field(EGU, "deg")
-  field(HOPR, "180")
-  field(LOPR, "-180")
-  field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")
-  field(PINI, "YES")
-  info(autosaveFields, "VAL")
+field(EGU, "deg")
+field(HOPR, "180")
+field(LOPR, "-180")
+field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")
+field(PINI, "YES")
+info(autosaveFields, "VAL")
 }
 
 record(fanout, "$(P)RFSUPLO4_AP_TO_IQ") {
-  field(LNK1, "$(P)RFSUPLO4_AP_TO_I PP")
-  field(LNK2, "$(P)RFSUPLO4_AP_TO_Q PP")
+field(LNK1, "$(P)RFSUPLO4_AP_TO_I PP")
+field(LNK2, "$(P)RFSUPLO4_AP_TO_Q PP")
 }
 
 record(calcout, "$(P)RFSUPLO4_AP_TO_I") {
-  field(INPA, "$(P)DRV4_ADJ_A")
-  field(INPB, "$(P)DRV4_ADJ_P")
-  field(CALC, "A*COS(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS2:RFSUPLOX2_W PP")
+field(INPA, "$(P)DRV4_ADJ_A")
+field(INPB, "$(P)DRV4_ADJ_P")
+field(CALC, "A*COS(B*D2R)*19898/100")
+field(OUT, "$(P)RFS2:RFSUPLOX2_W PP")
 }
 
 record(calcout, "$(P)RFSUPLO4_AP_TO_Q") {
-  field(INPA, "$(P)DRV4_ADJ_A")
-  field(INPB, "$(P)DRV4_ADJ_P")
-  field(CALC, "A*SIN(B*D2R)*19898/100")
-  field(OUT, "$(P)RFS2:RFSUPLOY2_W PP")
+field(INPA, "$(P)DRV4_ADJ_A")
+field(INPB, "$(P)DRV4_ADJ_P")
+field(CALC, "A*SIN(B*D2R)*19898/100")
+field(OUT, "$(P)RFS2:RFSUPLOY2_W PP")
 }
 
 record(seq, "$(P)BALANCE_PHASES") {
-  field(DO1, "0")
-  field(LNK1, "$(P)BT_CLOSELOOP PP")
-  field(DO2, "0")
-  field(LNK2, "$(P)FREQ_LOOP_CLOSE PP")
-  field(DO3, "100")
-  field(LNK3, "$(P)DRV1_ADJ_A PP")
-  field(DO4, "0")
-  field(LNK4, "$(P)DRV2_ADJ_A PP")
-  field(DO5, "0")
-  field(LNK5, "$(P)DRV3_ADJ_A PP")
-  field(DO6, "0")
-  field(LNK6, "$(P)DRV4_ADJ_A PP")
-  field(DO7, "0")
-  field(LNK7, "$(P)DRV1_ADJ_P PP")
-  field(DLY8, "1")
-  field(DOL8, "$(P)PACT")
-  field(LNK8, "$(P)DRV1_ADJ_P PP")
-  field(DO9, "0")
-  field(LNK9, "$(P)DRV1_ADJ_A PP")
-  field(DOA, "1")
-  field(LNKA, "$(P)BALANCE_PHASES_PT2.PROC")
+field(DO1, "0")
+field(LNK1, "$(P)BT_CLOSELOOP PP")
+field(DO2, "0")
+field(LNK2, "$(P)FREQ_LOOP_CLOSE PP")
+field(DO3, "100")
+field(LNK3, "$(P)DRV1_ADJ_A PP")
+field(DO4, "0")
+field(LNK4, "$(P)DRV2_ADJ_A PP")
+field(DO5, "0")
+field(LNK5, "$(P)DRV3_ADJ_A PP")
+field(DO6, "0")
+field(LNK6, "$(P)DRV4_ADJ_A PP")
+field(DO7, "0")
+field(LNK7, "$(P)DRV1_ADJ_P PP")
+field(DLY8, "1")
+field(DOL8, "$(P)PACT")
+field(LNK8, "$(P)DRV1_ADJ_P PP")
+field(DO9, "0")
+field(LNK9, "$(P)DRV1_ADJ_A PP")
+field(DOA, "1")
+field(LNKA, "$(P)BALANCE_PHASES_PT2.PROC")
 }
 
 # Too many steps to fit in one sequence, so there's a sequel
 record(seq, "$(P)BALANCE_PHASES_PT2") {
-  field(DO1, "100")
-  field(LNK1, "$(P)DRV2_ADJ_A PP")
-  field(DO2, "0")
-  field(LNK2, "$(P)DRV2_ADJ_P PP")
-  field(DLY3, "1")
-  field(DOL3, "$(P)PACT")
-  field(LNK3, "$(P)DRV2_ADJ_P PP")
-  field(DO4, "0")
-  field(LNK4, "$(P)DRV2_ADJ_A PP")
-  field(DO5, "100")
-  field(LNK5, "$(P)DRV3_ADJ_A PP")
-  field(DO6, "0")
-  field(LNK6, "$(P)DRV3_ADJ_P PP")
-  field(DLY7, "1")
-  field(DOL7, "$(P)PACT")
-  field(LNK7, "$(P)DRV3_ADJ_P PP")
-  field(DO8, "0")
-  field(LNK8, "$(P)DRV3_ADJ_A PP")
-  field(DO9, "100")
-  field(LNK9, "$(P)DRV4_ADJ_A PP")
-  field(DOA, "1")
-  field(LNKA, "$(P)BALANCE_PHASES_PT3.PROC")
+field(DO1, "100")
+field(LNK1, "$(P)DRV2_ADJ_A PP")
+field(DO2, "0")
+field(LNK2, "$(P)DRV2_ADJ_P PP")
+field(DLY3, "1")
+field(DOL3, "$(P)PACT")
+field(LNK3, "$(P)DRV2_ADJ_P PP")
+field(DO4, "0")
+field(LNK4, "$(P)DRV2_ADJ_A PP")
+field(DO5, "100")
+field(LNK5, "$(P)DRV3_ADJ_A PP")
+field(DO6, "0")
+field(LNK6, "$(P)DRV3_ADJ_P PP")
+field(DLY7, "1")
+field(DOL7, "$(P)PACT")
+field(LNK7, "$(P)DRV3_ADJ_P PP")
+field(DO8, "0")
+field(LNK8, "$(P)DRV3_ADJ_A PP")
+field(DO9, "100")
+field(LNK9, "$(P)DRV4_ADJ_A PP")
+field(DOA, "1")
+field(LNKA, "$(P)BALANCE_PHASES_PT3.PROC")
 }
 
 # Too many steps to fit in one sequence, so there's a sequel
 record(seq, "$(P)BALANCE_PHASES_PT3") {
-  field(DO1, "0")
-  field(LNK1, "$(P)DRV4_ADJ_P PP")
-  field(DLY2, "1")
-  field(DOL2, "$(P)PACT")
-  field(LNK2, "$(P)DRV4_ADJ_P PP")
-  field(DO3, "100")
-  field(LNK3, "$(P)DRV1_ADJ_A PP")
-  field(DO4, "100")
-  field(LNK4, "$(P)DRV2_ADJ_A PP")
-  field(DO5, "100")
-  field(LNK5, "$(P)DRV3_ADJ_A PP")
+field(DO1, "0")
+field(LNK1, "$(P)DRV4_ADJ_P PP")
+field(DLY2, "1")
+field(DOL2, "$(P)PACT")
+field(LNK2, "$(P)DRV4_ADJ_P PP")
+field(DO3, "100")
+field(LNK3, "$(P)DRV1_ADJ_A PP")
+field(DO4, "100")
+field(LNK4, "$(P)DRV2_ADJ_A PP")
+field(DO5, "100")
+field(LNK5, "$(P)DRV3_ADJ_A PP")
 }
 
 # Unless we can get fractions of a degree to work for water temperature setpoint,
 # this implements a PWM approach that toggles integer setpoints to achieve sub-degree
 # control
 record(transform, "$(P)CAV:PID_incalc") {
-  field(DESC, "Convert tuning temp control to PWM output")
-  field(CLCA, "A")
-  field(CLCB, "0.01*A_0.99*B")
-  field(CLCF, "C>D?D:C<E?E:D")
-  field(CLCG, "(G+1)%99")
-  field(CLCH, "CEIL(F-G/100)")
-  field(INPA, "$(P)DFACT PP")
-  field(INPD, "$(P)CAV:PID_limits.P")
-  field(INPE, "$(P)CAV:PID_limits.O")
-  field(OUTH, "$(P)TEMPSP PP")
-  field(PREC, "2")
-  field(CMTA, "Detune")
-  field(CMTB, "Smoothed Detune")
-  field(CMTC, "PID Output")
-  field(CMTD, "Upper limit")
-  field(CMTE, "Lower limit")
-  field(CMTF, "Clipped PID Output")
-  field(CMTG, "0-99 counter")
-  field(CMTH, "PWM Output")
+field(DESC, "Convert tuning temp control to PWM output")
+field(CLCA, "A")
+field(CLCB, "0.01*A_0.99*B")
+field(CLCF, "C>D?D:C<E?E:D")
+field(CLCG, "(G+1)%99")
+field(CLCH, "CEIL(F-G/100)")
+field(INPA, "$(P)DFACT PP")
+field(INPD, "$(P)CAV:PID_limits.P")
+field(INPE, "$(P)CAV:PID_limits.O")
+field(OUTH, "$(P)TEMPSP PP")
+field(PREC, "2")
+field(CMTA, "Detune")
+field(CMTB, "Smoothed Detune")
+field(CMTC, "PID Output")
+field(CMTD, "Upper limit")
+field(CMTE, "Lower limit")
+field(CMTF, "Clipped PID Output")
+field(CMTG, "0-99 counter")
+field(CMTH, "PWM Output")
 }
 
 #! Further lines contain data used by VisualDCT
