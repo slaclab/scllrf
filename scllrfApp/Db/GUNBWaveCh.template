@@ -68,8 +68,8 @@ record(dfanout, "$(P)STAT_NUSE_RAW") {
 }
 
 record(dfanout, "$(P)STAT_NUSE_ENG") {
-	field(OUTA, "$(P)ITMEAN_ENG.NUSE")
-	field(OUTB, "$(P)QTMEAN_ENG.NUSE")
+#	field(OUTA, "$(P)ITMEAN_ENG.NUSE")
+#	field(OUTB, "$(P)QTMEAN_ENG.NUSE")
 	field(OUTC, "$(P)AMEAN_ENG.NUSE")
 	field(OUTD, "$(P)ASTD_ENG.NUSE")
 	field(OUTE, "$(P)ARSTD_ENG.NUSE")
