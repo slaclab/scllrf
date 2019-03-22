@@ -172,7 +172,7 @@ file GUNB3ChassisAlias.template
 # PID loop for buncher tuning using water temperature
 file $(STD)/stdApp/Db/pid_control.db
 {
-	{ P="ACCL:GUNB:455:CAV:", PID = "PID", INP="ACCL:GUNB:455:PID_incalc.B", OUT = "ACCL:GUNB:455:PID_incalc.C", SCAN = ".1 second", KP = 2.00e-6, KI = 5.00e-3, KD = 90, LOPR = 17, HOPR = 40, DRVL = 17, DRVH = 40, PREC = 2 }
+	{ P="ACCL:GUNB:455:CAV:", PID = "PID", INP="ACCL:GUNB:455:CAV:PID_incalc.B", OUT = "ACCL:GUNB:455:CAV:PID_incalc.C", SCAN = ".1 second", KP = 2.00e-6, KI = 5.00e-3, KD = 90, LOPR = 17, HOPR = 40, DRVL = 17, DRVH = 40, PREC = 2 }
 }
 
 # Things that apply to the whole 3 chassis system
