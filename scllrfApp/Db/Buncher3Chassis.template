@@ -169,6 +169,26 @@ field(EGU, "deg")
 info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
+record(calc, "$(P)PRSTD") {
+field(DESC, "Average cavity phase")
+## Maybe we'll use this vector sum approach later.
+## For now, there are too many complications and no
+## compelling reason it's better than picking one signal.
+## GWB 7-24-18
+#field( INPA, "$(P)CAV1:ITRSTD CP MS" )
+#field( INPB, "$(P)CAV2:ITRSTD CP MS" )
+#field( INPC, "$(P)CAV1:QTRSTD CP MS" )
+#field( INPD, "$(P)CAV2:QTRSTD CP MS" )
+#field( CALC, "ATAN2(C+D,A+B)")
+field(INPA, "$(P)CAV1:PRSTD CP MS")
+field(INPB, "$(P)CAV2:PRSTD CP MS")
+field(INPC, "$(P)ACTIVE_PROBE")
+field(CALC, "C=1?A:B")
+field(FLNK, "$(P)CW_DETUNE")
+field(EGU, "deg")
+info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
 record(calc, "$(P)DECAY_STRENGTH") {
 field(DESC, "Ask Gang")
 field(INPA, "$(P)CAV1:DECAY_STRENGTH CP MS")
@@ -490,7 +510,7 @@ record(transform, "$(P)CAV:PID_incalc") {
 field(DESC, "Convert tuning temp control to PWM output")
 field(CLCA, "A")
 field(CLCB, "0.01*A_0.99*B")
-field(CLCF, "C>D?D:C<E?E:D")
+field(CLCF, "C>D?D:C<E?E:C")
 field(CLCG, "(G+1)%99")
 field(CLCH, "CEIL(F-G/100)")
 field(INPA, "$(P)DFACT PP")

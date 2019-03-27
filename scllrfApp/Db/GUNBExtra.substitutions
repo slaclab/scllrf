@@ -10,10 +10,10 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 	{ "GUN:GUNB:100:LASR:",			"7",	"8",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
 	{ "GUN:GUNB:100:PRC:DAC1:",		"8",	"9",	"PRCReg",	"DAC counts",	"32767",	"GUN:GUNB:100:PRC:" }
 	{ "GUN:GUNB:100:PRC:DAC2:",		"9",	"10",	"PRCReg",	"DAC counts",	"32767",	"GUN:GUNB:100:PRC:" }
-	{ "GUN:GUNB:100:PRC:RFS1A:",	"10",	"11",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
-	{ "GUN:GUNB:100:PRC:RFS1B:",	"11",	"12",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
-	{ "GUN:GUNB:100:PRC:RFS2A:",	"12",	"13",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
-	{ "GUN:GUNB:100:PRC:RFS2B:",	"13",	"14",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS2A:",	"10",	"11",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS2B:",	"11",	"12",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS1A:",	"12",	"13",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
+	{ "GUN:GUNB:100:PRC:RFS1B:",	"13",	"14",	"PRCReg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:PRC:" }
 	{ "GUN:GUNB:100:PRC:SPARE5:",	"14",	"15",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
 	{ "GUN:GUNB:100:PRC:SPARE6:",	"15",	"16",	"PRCReg",	"N/A",	"32767",	"GUN:GUNB:100:PRC:" }
 
@@ -87,10 +87,10 @@ pattern { PREF,				 NORM }
 	{ "GUN:GUNB:100:LASR:",	"32767"}
 	{ "GUN:GUNB:100:PRC:DAC1:",	"32767" }
 	{ "GUN:GUNB:100:PRC:DAC2:",	"32767" }
-	{ "GUN:GUNB:100:PRC:RFS1A:",	"32767" }
-	{ "GUN:GUNB:100:PRC:RFS1B:",	"32767" }
 	{ "GUN:GUNB:100:PRC:RFS2A:",	"32767" }
 	{ "GUN:GUNB:100:PRC:RFS2B:",	"32767" }
+	{ "GUN:GUNB:100:PRC:RFS1A:",	"32767" }
+	{ "GUN:GUNB:100:PRC:RFS1B:",	"32767" }
 	{ "GUN:GUNB:100:PRC:SPARE5:",	"32767" }
 	{ "GUN:GUNB:100:PRC:SPARE6:",	"32767" }
 

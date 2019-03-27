@@ -142,6 +142,26 @@ record (calc, "GUN:GUNB:100:PACT" )
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
+record (calc, "GUN:GUNB:100:PRSTD" )
+{
+	field( DESC, "Average cavity phase" )
+#	# Maybe we'll use this vector sum approach later.
+#	# For now, there are too many complications and no
+#	# compelling reason it's better than picking one signal.
+#	# GWB 7-24-18
+#	field( INPA, "GUN:GUNB:100:CAV1:ITRSTD NPP MS" )
+#	field( INPB, "GUN:GUNB:100:CAV2:ITRSTD NPP MS" )
+#	field( INPC, "GUN:GUNB:100:CAV1:QTRSTD NPP MS" )
+#	field( INPD, "GUN:GUNB:100:CAV2:QTRSTD NPP MS" )
+#	field( CALC, "ATAN2(C+D,A+B)")
+	field( INPA, "GUN:GUNB:100:CAV1:PRSTD CP MS" )
+	field( INPB, "GUN:GUNB:100:CAV2:PRSTD CP MS" )
+	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE" )
+	field( CALC, "C=1?A:B")
+	field(EGU, "deg")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
+}
+
 record (calc, "GUN:GUNB:100:DECAY_STRENGTH" )
 {
 	field( DESC, "Ask Gang" )
