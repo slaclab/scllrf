@@ -10,6 +10,9 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-17: Fixing "detune good" calculation. Use standard devitation of phase waveform,
+				not last 300 phase means
+
 scllrf-R1-0-16: Temperature tuning PID loop improved with PWM type control.
 
 scllrf-R1-0-15: Added archive files.
