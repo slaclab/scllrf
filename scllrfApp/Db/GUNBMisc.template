@@ -498,7 +498,7 @@ record( calcout, "$(P)SOURCE_IQ_TO_A")
 {
 	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R NPP MS")
 	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
-	field( INPC, "$(P)AOPEN_SCALE NPP MS")" )
+	field( INPC, "$(P)AOPEN_SCALE NPP MS")
 	field( INPD, "$(P)AOPEN NPP MS")
 	field(CALC, "E=SQRT(A^2+B^2)/C;E<D?E:D")
 	field( OUT, "$(P)AOPEN PP")
