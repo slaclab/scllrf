@@ -92,7 +92,7 @@ const char* GUNBExtra::DecayPollEnableString = "DECAY_POLL_ENABLE";
 const char* GUNBExtra::DecayFastUpdateString = "DECAY_FAST_UPDATE";
 
 #define TEST_MODE
-#define LEN 32
+#define LEN 18
 
 // Constants used in llrf_close_loop.py
 //	cic_base_period = 33  # default parameter in llrf_dsp.v

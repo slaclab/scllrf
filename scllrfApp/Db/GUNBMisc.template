@@ -478,6 +478,8 @@ record( ao, "$(P)SOURCE_RE_Sync"){
 
 record( ao, "$(P)SOURCE_IM_Sync"){
 # This should be processed right before opening I/Q loop
+	field( SDIS, "$(P)$(CHASSIS)CLOSE_LOOP_W")
+	field( DISV, "0")
 	field( DOL,  "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
 	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)SOURCE_IQ_TO_AP PP MS")
@@ -489,12 +491,16 @@ record( fanout,  "$(P)SOURCE_IQ_TO_AP")
 	field(LNK2, "$(P)SOURCE_IQ_TO_P PP MS")
 }
 
+# Use the closed loop raw DAC output level to set
+# AOPEN, unless this would cause a jump up.
+# Some times VXOUT... values are a poor guide.
 record( calcout, "$(P)SOURCE_IQ_TO_A")
 {
 	field( INPA, "$(P)$(CHASSIS)VOUTXFALL_R NPP MS")
 	field( INPB, "$(P)$(CHASSIS)VOUTYFALL_R NPP MS")
-	field( INPC, "$(P)AOPEN_SCALE" )
-	field(CALC, "SQRT(A^2+B^2)/C")
+	field( INPC, "$(P)AOPEN_SCALE NPP MS")" )
+	field( INPD, "$(P)AOPEN NPP MS")
+	field(CALC, "E=SQRT(A^2+B^2)/C;E<D?E:D")
 	field( OUT, "$(P)AOPEN PP")
 	field( OOPT, "On Change")
 }
