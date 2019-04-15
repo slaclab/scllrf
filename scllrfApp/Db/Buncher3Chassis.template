@@ -62,7 +62,8 @@ field(FVST, "$(P)PRC:RFS1B")
 field(SXST, "$(P)PRC:RFS2A")
 field(SVST, "$(P)PRC:RFS2B")
 field(PINI, "YES")
-info(autosaveFields, "VAL")
+field(VAL, 4)
+#info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)FWD:PMEAN") {
@@ -143,7 +144,9 @@ record(calc, "$(P)AACT") {
 field(DESC, "Average cavity amplitude")
 field(INPA, "$(P)CAV1:AMEAN CP MS")
 field(INPB, "$(P)CAV2:AMEAN CP MS")
-field(CALC, "MAX(A,B)")
+field(INPC, "$(P)ACTIVE_PROBE")
+field(CALC, "C=1?A:C=2?B")
+#field(CALC, "MAX(A,B)")
 #field( CALC, "(A+B)/2") # Something like this once we have both probes
 field(EGU, "MV")
 info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
@@ -507,7 +510,7 @@ field(LNK5, "$(P)DRV3_ADJ_A PP")
 # this implements a PWM approach that toggles integer setpoints to achieve sub-degree
 # control
 record(transform, "$(P)CAV:PID_incalc") {
-field(DESC, "Convert tuning temp control to PWM output")
+field(DESC, "PWM tuning temp control")
 field(CLCA, "A")
 field(CLCB, "0.01*A_0.99*B")
 field(CLCF, "C>D?D:C<E?E:C")
