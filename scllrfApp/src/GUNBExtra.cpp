@@ -535,7 +535,15 @@ static void TraceDataRequesterC(void *drvPvt)
 {
 	//printf("%s: starting\n", __PRETTY_FUNCTION__);
 	TraceData *pTraceData = (TraceData*)drvPvt;
-	pTraceData->TraceDataRequester();
+	try
+	{
+		pTraceData->TraceDataRequester();
+	}
+	catch(Exception)
+	{
+		cout << "Unhandeld exception in TraceDataRequester, thread exiting" << endl;
+		cout<<Exception::what() <<endl;
+	}
 	//printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
@@ -736,10 +744,18 @@ void TraceData::TraceDataRequester()
 					{
 						unsigned int Iindex = rel_chan_ix-1;
 						unsigned int Qindex = rel_chan_ix;
-						asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
-								"%s %s publishing  waveform %d, from relative channel %d\n",
-								pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[Qindex]/2, Qindex);
-						pDriver_->doCallbacksInt32Array(pRawIQBuf_[Qindex], nPoints, *qRawParamIndex_, relToAbsIdx[Qindex]/2);
+						try
+						{
+							asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
+									"%s %s publishing  waveform %d, from relative channel %d\n",
+									pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[Qindex]/2, Qindex);
+							pDriver_->doCallbacksInt32Array(pRawIQBuf_[Qindex], nPoints, *qRawParamIndex_, relToAbsIdx[Qindex]/2);
+						}
+						catch(Exception)
+						{
+							cout << "Exception publishing raw waveform data" << endl;
+							cout<<Exception::what() <<endl;
+						}
 
 						if((rel_chan_ix > 0) && (relToAbsIdx[Qindex]/2 == relToAbsIdx[Iindex]/2)) // if the corresponding I is also active
 						{
@@ -780,6 +796,8 @@ void TraceData::TraceDataRequester()
 									std::cerr << "exception caught: " << e.what() << endl;
 								}
 							}
+							try
+							{
 							asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
 									"%s %s publishing amplitude and phase waveforms %d, from relative channels %d/%d\n",
 									pDriver_->portName, __PRETTY_FUNCTION__ , chIndex, Qindex, Iindex);
@@ -790,11 +808,25 @@ void TraceData::TraceDataRequester()
 							pDriver_->doCallbacksFloat32Array(pRawPBuf_[chIndex], nPoints, *pRawParamIndex_, chIndex);
 							pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], nPoints, *aParamIndex_, chIndex);
 							pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], nPoints, *pParamIndex_, chIndex);
+							}
+							catch(Exception)
+							{
+								cout << "Exception while publishing waveforms" << endl;
+								cout<<Exception::what() <<endl;
+							}
 
 							// TODO: add "if" to select the right channel for this analysis. Cavity? Also, "if" pulsed mode.
 							if(doDecayComp)
 							{
-								CavityDecayConstantCompute(pRawIQBuf_[Iindex], pRawIQBuf_[Qindex], 3, chIndex);
+								try
+								{
+									CavityDecayConstantCompute(pRawIQBuf_[Iindex], pRawIQBuf_[Qindex], 3, chIndex);
+								}
+								catch(Exception)
+								{
+									cout << "Exception in decay constant computation not otherwise handled" << endl;
+									cout<<Exception::what() <<endl;
+								}
 							}
 
 							std::fill( pABuf_[chIndex],
@@ -805,13 +837,21 @@ void TraceData::TraceDataRequester()
 						}
 						else // This is a Q waveform, but the corresponding I isn't active, so clear A and P
 						{
-							std::fill( pABuf_[chIndex],
-									pABuf_[chIndex] + sizeof( pABuf_[chIndex] )/sizeof( *pABuf_[chIndex]), 0 );
-							std::fill( pPBuf_[chIndex],
-									pPBuf_[chIndex] + sizeof( pPBuf_[chIndex] )/sizeof( *pPBuf_[chIndex]), 0 );
-							pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], 1, *aParamIndex_, chIndex);
-							pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], 1, *pParamIndex_, chIndex);
-							pDriver_->doCallbacksFloat32Array(pIQBuf_[Qindex], nPoints, *qParamIndex_, chIndex);
+							try
+							{
+								std::fill( pABuf_[chIndex],
+										pABuf_[chIndex] + sizeof( pABuf_[chIndex] )/sizeof( *pABuf_[chIndex]), 0 );
+								std::fill( pPBuf_[chIndex],
+										pPBuf_[chIndex] + sizeof( pPBuf_[chIndex] )/sizeof( *pPBuf_[chIndex]), 0 );
+								pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], 1, *aParamIndex_, chIndex);
+								pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], 1, *pParamIndex_, chIndex);
+								pDriver_->doCallbacksFloat32Array(pIQBuf_[Qindex], nPoints, *qParamIndex_, chIndex);
+							}
+							catch(Exception)
+							{
+								cout << "Exception publising Q waveform and clearing others" << endl;
+								cout<<Exception::what() <<endl;
+							}
 						}
 
 					}

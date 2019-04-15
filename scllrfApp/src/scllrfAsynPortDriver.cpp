@@ -270,7 +270,15 @@ static void singleMessageQueuerC(void *drvPvt)
 {
 	printf("%s: starting\n", __PRETTY_FUNCTION__);
 	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
-	pscllrfDriver->singleMessageQueuer();
+	try
+	{
+		pscllrfDriver->singleMessageQueuer();
+	}
+	catch(Exception)
+	{
+		cout << "Unhandled exception in singleMessageQueuer, thread exiting" << endl;
+		cout<<Exception::what() <<endl;
+	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
@@ -807,7 +815,15 @@ typedef struct
 static void regPollerC(void *drvPvt)
 {
 	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
-	pscllrfDriver->regPoller();
+	try
+	{
+		pscllrfDriver->regPoller();
+	}
+	catch(Exception)
+	{
+		cout << "Unhandled exception in regPoller, thread exiting" << endl;
+		cout<<Exception::what() <<endl;
+	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
@@ -997,7 +1013,15 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 static void responseHandlerC(void *drvPvt)
 {
 	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
-	pscllrfDriver->responseHandler();
+	try
+	{
+		pscllrfDriver->responseHandler();
+	}
+	catch(Exception)
+	{
+		cout << "Unhandled exception in responseHandler, thread exiting" << endl;
+		cout<<Exception::what() <<endl;
+	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
@@ -1065,7 +1089,7 @@ void scllrfAsynPortDriver::responseHandler()
 
 				// First read just the nonce for a sanity check.
 				pasynOctetSyncIO->read(pOctetAsynUser_, pReadBuffer,
-						nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
+						nonceSize*sizeof(FpgaReg), 0.05, &readCount, &eomReason);
 
 				// Prevent an endless loop here while senders are throttled
 				if(readCount == 0)
@@ -1080,14 +1104,22 @@ void scllrfAsynPortDriver::responseHandler()
 				{
 					noDataCounter = 0;
 					if(ntohl(pRegReadback[0].data) <= (int) maxMsgSize)
-					{ // read in the number of bytes the nonce says to expect, starting with the second register location
-						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: read %u byte nonce, says sequence # %u with %d bytes.\n",
-								portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
-						pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
-								ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.01, &readCount, &eomReason);
-						readCount += nonceSize*sizeof(FpgaReg);
-						asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: got %u bytes total for response #%u\n",
-								portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
+					{
+						try
+						{ // read in the number of bytes the nonce says to expect, starting with the second register location
+							asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: read %u byte nonce, says sequence # %u with %d bytes.\n",
+									portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr), ntohl(pRegReadback[0].data));
+							pasynOctetSyncIO->read(pOctetAsynUser_, &pReadBuffer[nonceSize*sizeof(FpgaReg)],
+									ntohl(pRegReadback[0].data)-nonceSize*sizeof(FpgaReg), 0.05, &readCount, &eomReason);
+							readCount += nonceSize*sizeof(FpgaReg);
+							asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: got %u bytes total for response #%u\n",
+									portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
+						}
+						catch(Exception)
+						{
+							cout << "Unhandled exception in responseHandler trying to read data" << endl;
+							cout<<Exception::what() <<endl;
+						}
 					}
 					else
 					{
