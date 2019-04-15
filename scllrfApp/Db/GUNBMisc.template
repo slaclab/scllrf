@@ -257,13 +257,23 @@ record(dfanout, "$(P)AMAX_SYNC") {
 
 record( ao, "$(P)PDES"){
 	field( DESC, "RF Phase Setpoint")
-	field( OUT,  "$(P)SET_PLOOP_AP_TO_IQ PP")
 	field( PREC, "5")
 	field( HOPR, "180")
 	field( LOPR, "-180")
-	field(EGU, "deg")
-	field(PINI, "YES")
+	field( EGU, "deg")
+	field( PINI, "YES")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW LOLO")
+}
+
+# In closed A/P loop, phase shouldn't jump abruptly, <5 degrees per move
+record( calcout, "$(P)PDES_ROTATE"){
+	field( INPA, "$(P)PDES")
+	field( CALC, "B:=(A-VAL)%360;ABS(B)<5?A:B>=180?VAL-5:VAL+5")
+	field( EGU, "deg")
+	field( PINI, "YES")
+	field( SCAN, ".1 second")
+	field( OUT,  "$(P)SET_PLOOP_AP_TO_IQ PP")
+	field( OOPT, "On Change")
 }
 
 record( fanout,  "$(P)SET_PLOOP_AP_TO_IQ")
@@ -275,7 +285,7 @@ record( fanout,  "$(P)SET_PLOOP_AP_TO_IQ")
 record( calcout, "$(P)SET_PLOOP_AP_TO_I")
 {
 	field( INPA, "$(P)ADES")
-	field( INPB, "$(P)PDES")
+	field( INPB, "$(P)PDES_ROTATE")
 	field( INPC, "$(SCALEP)SCALE")
 	field( INPD, "$(SCALEP)GOLD")
 	field( CALC, "A*COS((B-D)*D2R)/C")
@@ -287,7 +297,7 @@ record( calcout, "$(P)SET_PLOOP_AP_TO_I")
 record( calcout, "$(P)SET_PLOOP_AP_TO_Q")
 {
 	field( INPA, "$(P)ADES")
-	field( INPB, "$(P)PDES")
+	field( INPB, "$(P)PDES_ROTATE")
 	field( INPC, "$(SCALEP)SCALE")
 	field( INPD, "$(SCALEP)GOLD")
 	field( CALC, "A*SIN((B-D)*D2R)/C")

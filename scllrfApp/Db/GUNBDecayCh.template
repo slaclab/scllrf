@@ -90,17 +90,6 @@ record(waveform, "$(P)DECAY_PWF") {
 	field(FTVL, "FLOAT")
 }
 
-record(waveform, "$(P)DECAY_PWF") {
-	field(DESC, "Ch $(CH) phase Waveform")
-	field(SCAN, "I/O Intr")
-	field(DTYP, "asynFloat32ArrayIn")
-	field(INP, "@asyn($(PORT),$(CH),1)DECAY_P")
-	field(PREC, "5")
-	field(EGU, "deg")
-	field(NELM, "256")
-	field(FTVL, "FLOAT")
-}
-
 record(waveform, "$(P)DECAY_PWF_RAW") {
 	field(DESC, "Ch $(CH) phase Waveform")
 	field(SCAN, "I/O Intr")

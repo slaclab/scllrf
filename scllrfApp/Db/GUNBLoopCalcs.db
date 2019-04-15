@@ -420,7 +420,7 @@ record ( acalcout, "$(P)PACT_DECAY" )
 	field( INBB, "$(P)CAV2:DECAY_PWF NPP MS" )
 	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
 	field( INPB, "$(P)ACTIVE_PROBE")
-	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*(B=1?AMAX(AA[0,1]):AMAX(BB[0,1]))" )
+	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*(B=1?AVG(AA[0,1]):AVG(BB[0,1]))" )
 #	field( OUT, "$(P)PDES PP")
 #	field( OOPT, "On Change")
 #	field( PINI, "YES" )
