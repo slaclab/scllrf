@@ -541,8 +541,13 @@ static void TraceDataRequesterC(void *drvPvt)
 	}
 	catch(Exception)
 	{
-		cout << "Unhandeld exception in TraceDataRequester, thread exiting" << endl;
+		cout << "Unhandeld newmat exception in TraceDataRequester, thread exiting" << endl;
 		cout<<Exception::what() <<endl;
+	}
+	catch(std::exception e)
+	{
+		cout << "Unhandeld exception in TraceDataRequester, thread exiting" << endl;
+		cout<< e.what() <<endl;
 	}
 	//printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -578,7 +583,12 @@ Matrix TraceData::PseudoInverse(const Matrix & m)
 	}
 	catch(Exception)
 	{
-		cout<<Exception::what() <<endl;
+		cout<<"newmat related exception: " << Exception::what() <<endl;
+	}
+	catch(std::exception e)
+	{
+		cout << "newmat related exception in PseudoInverse" << endl;
+		cout<< e.what() <<endl;
 	}
 
 
@@ -751,10 +761,9 @@ void TraceData::TraceDataRequester()
 									pDriver_->portName, __PRETTY_FUNCTION__ , relToAbsIdx[Qindex]/2, Qindex);
 							pDriver_->doCallbacksInt32Array(pRawIQBuf_[Qindex], nPoints, *qRawParamIndex_, relToAbsIdx[Qindex]/2);
 						}
-						catch(Exception)
+						catch(std::exception e)
 						{
-							cout << "Exception publishing raw waveform data" << endl;
-							cout<<Exception::what() <<endl;
+							cout << "Unhandeld exception in TraceDataRequester: " << e.what() <<endl;
 						}
 
 						if((rel_chan_ix > 0) && (relToAbsIdx[Qindex]/2 == relToAbsIdx[Iindex]/2)) // if the corresponding I is also active
@@ -809,10 +818,10 @@ void TraceData::TraceDataRequester()
 							pDriver_->doCallbacksFloat32Array(pABuf_[chIndex], nPoints, *aParamIndex_, chIndex);
 							pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], nPoints, *pParamIndex_, chIndex);
 							}
-							catch(Exception)
+							catch(std::exception e)
 							{
-								cout << "Exception while publishing waveforms" << endl;
-								cout<<Exception::what() <<endl;
+								cout << "Unhandeld exception in TraceDataRequester publishing waveforms" << endl;
+								cout<< e.what() <<endl;
 							}
 
 							// TODO: add "if" to select the right channel for this analysis. Cavity? Also, "if" pulsed mode.
@@ -824,8 +833,13 @@ void TraceData::TraceDataRequester()
 								}
 								catch(Exception)
 								{
-									cout << "Exception in decay constant computation not otherwise handled" << endl;
+									cout << "Newmat exception in decay constant computation not otherwise handled" << endl;
 									cout<<Exception::what() <<endl;
+								}
+								catch(std::exception e)
+								{
+									cout << "Unhandeld exception in TraceDataRequester, not newmat" << endl;
+									cout<< e.what() <<endl;
 								}
 							}
 
@@ -847,10 +861,10 @@ void TraceData::TraceDataRequester()
 								pDriver_->doCallbacksFloat32Array(pPBuf_[chIndex], 1, *pParamIndex_, chIndex);
 								pDriver_->doCallbacksFloat32Array(pIQBuf_[Qindex], nPoints, *qParamIndex_, chIndex);
 							}
-							catch(Exception)
+							catch(std::exception e)
 							{
-								cout << "Exception publising Q waveform and clearing others" << endl;
-								cout<<Exception::what() <<endl;
+								cout << "Unhandeld exception in TraceDataRequester publishing Q-only channel " << chIndex<< endl;
+								cout<< e.what() <<endl;
 							}
 						}
 

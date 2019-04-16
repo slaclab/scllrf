@@ -30,6 +30,11 @@
 #include <netinet/in.h>
 #include <math.h>
 #include <execinfo.h>
+#include <iostream>
+#include <stdio.h>
+#include <stdexcept>
+
+using namespace std;
 
 // EPICS database driver strings
 const char *scllrfAsynPortDriver::RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
@@ -274,10 +279,10 @@ static void singleMessageQueuerC(void *drvPvt)
 	{
 		pscllrfDriver->singleMessageQueuer();
 	}
-	catch(Exception)
+	catch(std::exception e)
 	{
 		cout << "Unhandled exception in singleMessageQueuer, thread exiting" << endl;
-		cout<<Exception::what() <<endl;
+		cout<< e.what() <<endl;
 	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -819,10 +824,10 @@ static void regPollerC(void *drvPvt)
 	{
 		pscllrfDriver->regPoller();
 	}
-	catch(Exception)
+	catch(std::exception e)
 	{
 		cout << "Unhandled exception in regPoller, thread exiting" << endl;
-		cout<<Exception::what() <<endl;
+		cout<< e.what() <<endl;
 	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -1017,10 +1022,10 @@ static void responseHandlerC(void *drvPvt)
 	{
 		pscllrfDriver->responseHandler();
 	}
-	catch(Exception)
+	catch(std::exception e)
 	{
 		cout << "Unhandled exception in responseHandler, thread exiting" << endl;
-		cout<<Exception::what() <<endl;
+		cout<< e.what() <<endl;
 	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
@@ -1115,10 +1120,10 @@ void scllrfAsynPortDriver::responseHandler()
 							asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s %s: got %u bytes total for response #%u\n",
 									portName, __PRETTY_FUNCTION__, (unsigned) readCount, ntohl(pRegReadback[0].addr));
 						}
-						catch(Exception)
+						catch(std::exception e)
 						{
 							cout << "Unhandled exception in responseHandler trying to read data" << endl;
-							cout<<Exception::what() <<endl;
+							cout<< e.what() <<endl;
 						}
 					}
 					else
