@@ -62,7 +62,8 @@ field(FVST, "$(P)PRC:RFS1B")
 field(SXST, "$(P)PRC:RFS2A")
 field(SVST, "$(P)PRC:RFS2B")
 field(PINI, "YES")
-info(autosaveFields, "VAL")
+field(VAL, 4)
+#info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)FWD:PMEAN") {
@@ -143,7 +144,11 @@ record(calc, "$(P)AACT") {
 field(DESC, "Average cavity amplitude")
 field(INPA, "$(P)CAV1:AMEAN CP MS")
 field(INPB, "$(P)CAV2:AMEAN CP MS")
-field(CALC, "MAX(A,B)")
+field(INPC, "$(P)CAV3:AMEAN CP MS")
+field(INPD, "$(P)CAV4:AMEAN CP MS")
+field(INPE, "$(P)ACTIVE_PROBE")
+field(CALC, "E=1?A:E=2?B:E=3?C:D")
+#field(CALC, "MAX(A,B)")
 #field( CALC, "(A+B)/2") # Something like this once we have both probes
 field(EGU, "MV")
 info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
@@ -169,7 +174,7 @@ field(EGU, "deg")
 info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(calc, "$(P)PRSTD") {
+record(calc, "$(P)PSTD") {
 field(DESC, "Average cavity phase")
 ## Maybe we'll use this vector sum approach later.
 ## For now, there are too many complications and no
@@ -180,8 +185,8 @@ field(DESC, "Average cavity phase")
 #field( INPC, "$(P)CAV1:QTRSTD CP MS" )
 #field( INPD, "$(P)CAV2:QTRSTD CP MS" )
 #field( CALC, "ATAN2(C+D,A+B)")
-field(INPA, "$(P)CAV1:PRSTD CP MS")
-field(INPB, "$(P)CAV2:PRSTD CP MS")
+field(INPA, "$(P)CAV1:PSTD CP MS")
+field(INPB, "$(P)CAV2:PSTD CP MS")
 field(INPC, "$(P)ACTIVE_PROBE")
 field(CALC, "C=1?A:B")
 field(FLNK, "$(P)CW_DETUNE")
@@ -237,20 +242,23 @@ field(EGU, "deg")
 info(autosaveFields, "VAL")
 }
 
-record(calc, "$(P)PMEAN_DET0") {
-field(DESC, "Fwd - cav phase when detune is small")
-field(INPA, "$(P)PACT CP MS")
-field(INPB, "$(P)FWD:PMEAN CP MS")
-field(INPC, "$(P)PM_DETUNE CP MS")
-field(INPE, ".99")
+record (calc, "$(P)PMEAN_DET0")
+{
+	field(DESC, "Fwd - cav phase when detune is small")
+	field(INPA, "$(P)PACT CP MS")
+	field(INPB, "$(P)FWD:PMEAN CP MS")
+	field(INPC, "$(P)PM_DETUNE CP MS")
 # SMOOTHING FACTOR
-field(INPF, "$(P)PMEAN_EXP_OFFSET CP")
-field(CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
-field(SDIS, "$(P)DETUNE_MODE")
-field(DISV, "0")
+	field(INPE, ".99")
+	field(INPF, "$(P)PMEAN_EXP_OFFSET CP")
+	field( INPG, "$(P)FREQ_OFFSET CP")
+	field( INPH, "6.9E-4")
+	field(CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F-H*G):VAL")
+	field(SDIS, "$(P)DETUNE_MODE")
+	field(DISV, "0")
 # stop updating this when not pulsing
-field(EGU, "deg")
-info(autosaveFields, "VAL")
+	field(EGU, "deg")
+	info(autosaveFields, "VAL")
 }
 
 record(calc, "$(P)CW_DETUNE") {
@@ -260,7 +268,9 @@ field(INPA, "$(P)PACT NPP MS")
 field(INPB, "$(P)FWD:PMEAN NPP MS")
 field(INPC, "$(P)PMEAN_DET0")
 field(INPD, "$(P)SMOOTHED_BW")
-field(CALC, "D*TAN(D2R*(A - B - C))")
+	field( INPE, "$(P)FREQ_OFFSET")
+	field( INPF, "6.8E-4")
+field(CALC, "D*TAN(D2R*(A - B - C + F*E))")
 field(FLNK, "$(P)DFACT")
 field(EGU, "Hz")
 info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
@@ -507,9 +517,9 @@ field(LNK5, "$(P)DRV3_ADJ_A PP")
 # this implements a PWM approach that toggles integer setpoints to achieve sub-degree
 # control
 record(transform, "$(P)CAV:PID_incalc") {
-field(DESC, "Convert tuning temp control to PWM output")
+field(DESC, "PWM tuning temp control")
 field(CLCA, "A")
-field(CLCB, "0.01*A_0.99*B")
+field(CLCB, "0.01*A+0.99*B")
 field(CLCF, "C>D?D:C<E?E:C")
 field(CLCG, "(G+1)%99")
 field(CLCH, "CEIL(F-G/100)")

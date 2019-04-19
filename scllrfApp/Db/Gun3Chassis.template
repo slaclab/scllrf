@@ -1,244 +1,250 @@
 # Deal with all the things that are different between Gun and Buncher,
 # and bringing the 3 chassis and 2 SSAs together as a system
 
-record (calc, "GUN:GUNB:100:FWD:AMEAN" )
+record (calc, "$(P)FWD:AMEAN" )
 {
 	field( DESC, "Total forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:AMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:AMEAN CP MS" )
+	field( INPA, "$(P)FWD1:AMEAN CP MS" )
+	field( INPB, "$(P)FWD2:AMEAN CP MS" )
 	field(EGU, "sqrt(W)")
 	field( CALC, "A+B")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:FWD:PWR" )
+record (calc, "$(P)FWD:PWR" )
 {
 	field( DESC, "Total forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD1:PWR CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:PWR CP MS" )
+	field( INPA, "$(P)FWD1:PWR CP MS" )
+	field( INPB, "$(P)FWD2:PWR CP MS" )
 	field( CALC, "A+B")
 	field(EGU, "W")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:FWD:PWR_AVG" )
+record (calc, "$(P)FWD:PWR_AVG" )
 {
 	field( DESC, "Total forward amplitude" )
-	field( INPA, "GUN:GUNB:100:FWD:PWR CP MS" )
-	field( INPB, "GUN:GUNB:100:DUTY_CYCLE CP MS" )
+	field( INPA, "$(P)FWD:PWR CP MS" )
+	field( INPB, "$(P)DUTY_CYCLE CP MS" )
 	field( CALC, "A*B/100")
 	field(EGU, "W")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 
-record (mbbo, "GUN:GUNB:100:FWD:USE_AS_REF")
+record (mbbo, "$(P)FWD:USE_AS_REF")
 {
-	field(ZRST, "GUN:GUNB:100:FWD1")
-	field(ONST, "GUN:GUNB:100:FWD2")
-	field(TWST, "GUN:GUNB:100:PRC:RFS1A")
-	field(THST, "GUN:GUNB:100:PRC:RFS1B")
-	field(FRST, "GUN:GUNB:100:PRC:RFS2A")
-	field(FVST, "GUN:GUNB:100:PRC:RFS2B")
+	field(ZRST, "$(P)FWD1")
+	field(ONST, "$(P)FWD2")
+	field(TWST, "$(P)PRC:RFS1A")
+	field(THST, "$(P)PRC:RFS1B")
+	field(FRST, "$(P)PRC:RFS2A")
+	field(FVST, "$(P)PRC:RFS2B")
 	field(PINI, "YES")
-	info( autosaveFields, "VAL")
+	field(VAL, 3)
+#	info( autosaveFields, "VAL")
 }
 
-record (calc, "GUN:GUNB:100:FWD:PMEAN" )
+record (calc, "$(P)FWD:PMEAN" )
 {
 	field( DESC, "Total forward amplitude" )
 #	# Maybe we'll use this vector sum approach later.
 #	# For now, there are too many complications and no
 #	# compelling reason it's better than picking one signal.
 #	# GWB 7-24-18
-#	field( INPA, "GUN:GUNB:100:FWD1:ITMEAN NPP MS" )
-#	field( INPB, "GUN:GUNB:100:FWD2:ITMEAN NPP MS" )
-#	field( INPC, "GUN:GUNB:100:FWD1:QTMEAN NPP MS" )
-#	field( INPD, "GUN:GUNB:100:FWD2:QTMEAN NPP MS" )
+#	field( INPA, "$(P)FWD1:ITMEAN NPP MS" )
+#	field( INPB, "$(P)FWD2:ITMEAN NPP MS" )
+#	field( INPC, "$(P)FWD1:QTMEAN NPP MS" )
+#	field( INPD, "$(P)FWD2:QTMEAN NPP MS" )
 #	field( CALC, "ATAN2((C+D),(A+B))")
-	field( INPA, "GUN:GUNB:100:FWD1:PMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD2:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:PRC:RFS1A:PMEAN CP" )
-	field( INPD, "GUN:GUNB:100:PRC:RFS1B:PMEAN CP" )
-	field( INPE, "GUN:GUNB:100:PRC:RFS2A:PMEAN CP" )
-	field( INPF, "GUN:GUNB:100:PRC:RFS2B:PMEAN CP" )
-	field( INPG, "GUN:GUNB:100:FWD:USE_AS_REF CP")
+	field( INPA, "$(P)FWD1:PMEAN CP MS" )
+	field( INPB, "$(P)FWD2:PMEAN CP MS" )
+	field( INPC, "$(P)PRC:RFS1A:PMEAN CP" )
+	field( INPD, "$(P)PRC:RFS1B:PMEAN CP" )
+	field( INPE, "$(P)PRC:RFS2A:PMEAN CP" )
+	field( INPF, "$(P)PRC:RFS2B:PMEAN CP" )
+	field( INPG, "$(P)FWD:USE_AS_REF CP")
 	field( CALC, "G=0?A:G=1?B:G=2?C:G=3?D:G=4?E:F")
 	field(EGU, "deg")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:REV:AMEAN" )
+record (calc, "$(P)REV:AMEAN" )
 {
 	field( DESC, "Total reverse amplitude" )
-	field( INPA, "GUN:GUNB:100:REV1:AMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:REV2:AMEAN CP MS" )
+	field( INPA, "$(P)REV1:AMEAN CP MS" )
+	field( INPB, "$(P)REV2:AMEAN CP MS" )
 	field( CALC, "A+B")
 	field(EGU, "sqrt(W)")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
-record (calc, "GUN:GUNB:100:REV:PWR" )
+record (calc, "$(P)REV:PWR" )
 {
 	field( DESC, "Total reverse amplitude" )
-	field( INPA, "GUN:GUNB:100:REV1:PWR CP MS" )
-	field( INPB, "GUN:GUNB:100:REV2:PWR CP MS" )
+	field( INPA, "$(P)REV1:PWR CP MS" )
+	field( INPB, "$(P)REV2:PWR CP MS" )
 	field( CALC, "A+B")
 	field(EGU, "W")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:REV:PMEAN" )
+record (calc, "$(P)REV:PMEAN" )
 {
 	field( DESC, "Total reverse amplitude" )
-	field( INPA, "GUN:GUNB:100:REV1:PMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:REV2:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:PRC:RFS1A:PMEAN CP" )
-	field( INPD, "GUN:GUNB:100:PRC:RFS1B:PMEAN CP" )
-	field( INPE, "GUN:GUNB:100:PRC:RFS2A:PMEAN CP" )
-	field( INPF, "GUN:GUNB:100:PRC:RFS2B:PMEAN CP" )
-	field( INPG, "GUN:GUNB:100:FWD:USE_AS_REF CP")
+	field( INPA, "$(P)REV1:PMEAN CP MS" )
+	field( INPB, "$(P)REV2:PMEAN CP MS" )
+	field( INPC, "$(P)PRC:RFS1A:PMEAN CP" )
+	field( INPD, "$(P)PRC:RFS1B:PMEAN CP" )
+	field( INPE, "$(P)PRC:RFS2A:PMEAN CP" )
+	field( INPF, "$(P)PRC:RFS2B:PMEAN CP" )
+	field( INPG, "$(P)FWD:USE_AS_REF CP")
 	field( CALC, "G=0?A:G=1?B:G=2?D:G=3?C:G=4?F:E")
 	field(EGU, "sqrt(W)")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record(calc, "GUN:GUNB:100:ACTIVE_PROBE")
+record(calc, "$(P)ACTIVE_PROBE")
 {
 # Translate channel number used by feedback to CAV1/2 signal
-	field( INPA, "GUN:GUNB:100:PRC:FDBKSEL_W CP MS" )
+	field( INPA, "$(P)PRC:FDBKSEL_W CP MS" )
 	field( CALC, "A=4?2:1")
 	info( autosaveFields, "VAL")
 }
 
-record (calc, "GUN:GUNB:100:AACT" )
+record (calc, "$(P)AACT" )
 {
 	field( DESC, "Average cavity amplitude" )
-	field( INPA, "GUN:GUNB:100:CAV1:AMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:AMEAN CP MS" )
+	field( INPA, "$(P)CAV1:AMEAN CP MS" )
+	field( INPB, "$(P)CAV2:AMEAN CP MS" )
 	field( CALC, "MAX(A,B)")
 #	field( CALC, "(A+B)/2") # Something like this once we have both probes
 	field(EGU, "MV")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:PACT" )
+record (calc, "$(P)PACT" )
 {
 	field( DESC, "Average cavity phase" )
 #	# Maybe we'll use this vector sum approach later.
 #	# For now, there are too many complications and no
 #	# compelling reason it's better than picking one signal.
 #	# GWB 7-24-18
-#	field( INPA, "GUN:GUNB:100:CAV1:ITMEAN NPP MS" )
-#	field( INPB, "GUN:GUNB:100:CAV2:ITMEAN NPP MS" )
-#	field( INPC, "GUN:GUNB:100:CAV1:QTMEAN NPP MS" )
-#	field( INPD, "GUN:GUNB:100:CAV2:QTMEAN NPP MS" )
+#	field( INPA, "$(P)CAV1:ITMEAN NPP MS" )
+#	field( INPB, "$(P)CAV2:ITMEAN NPP MS" )
+#	field( INPC, "$(P)CAV1:QTMEAN NPP MS" )
+#	field( INPD, "$(P)CAV2:QTMEAN NPP MS" )
 #	field( CALC, "ATAN2(C+D,A+B)")
-	field( INPA, "GUN:GUNB:100:CAV1:PMEAN CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE" )
+	field( INPA, "$(P)CAV1:PMEAN CP MS" )
+	field( INPB, "$(P)CAV2:PMEAN CP MS" )
+	field( INPC, "$(P)ACTIVE_PROBE" )
 	field( CALC, "C=1?A:B")
-	field( FLNK, "GUN:GUNB:100:CW_DETUNE" )
+	field( FLNK, "$(P)CW_DETUNE" )
 	field(EGU, "deg")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:PRSTD" )
+record (calc, "$(P)PSTD" )
 {
 	field( DESC, "Average cavity phase" )
 #	# Maybe we'll use this vector sum approach later.
 #	# For now, there are too many complications and no
 #	# compelling reason it's better than picking one signal.
 #	# GWB 7-24-18
-#	field( INPA, "GUN:GUNB:100:CAV1:ITRSTD NPP MS" )
-#	field( INPB, "GUN:GUNB:100:CAV2:ITRSTD NPP MS" )
-#	field( INPC, "GUN:GUNB:100:CAV1:QTRSTD NPP MS" )
-#	field( INPD, "GUN:GUNB:100:CAV2:QTRSTD NPP MS" )
+#	field( INPA, "$(P)CAV1:ITRSTD NPP MS" )
+#	field( INPB, "$(P)CAV2:ITRSTD NPP MS" )
+#	field( INPC, "$(P)CAV1:QTRSTD NPP MS" )
+#	field( INPD, "$(P)CAV2:QTRSTD NPP MS" )
 #	field( CALC, "ATAN2(C+D,A+B)")
-	field( INPA, "GUN:GUNB:100:CAV1:PRSTD CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:PRSTD CP MS" )
-	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE" )
+	field( INPA, "$(P)CAV1:PSTD CP MS" )
+	field( INPB, "$(P)CAV2:PSTD CP MS" )
+	field( INPC, "$(P)ACTIVE_PROBE" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "deg")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:DECAY_STRENGTH" )
+record (calc, "$(P)DECAY_STRENGTH" )
 {
 	field( DESC, "Ask Gang" )
-	field( INPA, "GUN:GUNB:100:CAV1:DECAY_STRENGTH CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:DECAY_STRENGTH CP MS" )
-	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( INPA, "$(P)CAV1:DECAY_STRENGTH CP MS" )
+	field( INPB, "$(P)CAV2:DECAY_STRENGTH CP MS" )
+	field( INPC, "$(P)ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:DECAY_FIT_STDDEV" )
+record (calc, "$(P)DECAY_FIT_STDDEV" )
 {
 	field( DESC, "pulse decay compared to ideal" )
-	field( INPA, "GUN:GUNB:100:CAV1:DECAY_FIT_STDDEV CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:DECAY_FIT_STDDEV CP MS" )
-	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( INPA, "$(P)CAV1:DECAY_FIT_STDDEV CP MS" )
+	field( INPB, "$(P)CAV2:DECAY_FIT_STDDEV CP MS" )
+	field( INPC, "$(P)ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:DECAY_CONSTANT_B" )
+record (calc, "$(P)DECAY_CONSTANT_B" )
 {
-	alias( "GUN:GUNB:100:PM_DETUNE")
+	alias( "$(P)PM_DETUNE")
 	field( DESC, "Pulse Mode Detune" )
-	field( INPA, "GUN:GUNB:100:CAV1:DECAY_CONSTANT_B CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:DECAY_CONSTANT_B CP MS" )
-	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( INPA, "$(P)CAV1:DECAY_CONSTANT_B CP MS" )
+	field( INPB, "$(P)CAV2:DECAY_CONSTANT_B CP MS" )
+	field( INPC, "$(P)ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "Hz")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:DECAY_BW" )
+record (calc, "$(P)DECAY_BW" )
 {
 	field( DESC, "Cavity bandwidth" )
-	field( INPA, "GUN:GUNB:100:CAV1:DECAY_BW CP MS" )
-	field( INPB, "GUN:GUNB:100:CAV2:DECAY_BW CP MS" )
-	field( INPC, "GUN:GUNB:100:ACTIVE_PROBE CP" )
+	field( INPA, "$(P)CAV1:DECAY_BW CP MS" )
+	field( INPB, "$(P)CAV2:DECAY_BW CP MS" )
+	field( INPC, "$(P)ACTIVE_PROBE CP" )
 	field( CALC, "C=1?A:B")
 	field(EGU, "Hz")
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "GUN:GUNB:100:PMEAN_EXP_OFFSET")
+record (calc, "$(P)PMEAN_EXP_OFFSET")
 {
 	field( DESC, "Detuning in CW mode" )
-	field( INPA, "GUN:GUNB:100:PM_DETUNE CP MS")
-	field( INPB, "GUN:GUNB:100:SMOOTHED_BW")
+	field( INPA, "$(P)PM_DETUNE CP MS")
+	field( INPB, "$(P)SMOOTHED_BW")
 	field( CALC, "C:=R2D*ATAN(A/B);ISNAN(C)?VAL:C")
 	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
-record (calc, "GUN:GUNB:100:PMEAN_DET0")
+record (calc, "$(P)PMEAN_DET0")
 {
 	field( DESC, "Fwd - cav phase when detune is small")
-	field( INPA, "GUN:GUNB:100:PACT CP MS" )
-	field( INPB, "GUN:GUNB:100:FWD:PMEAN CP MS" )
-	field( INPC, "GUN:GUNB:100:PM_DETUNE CP MS")
+	field( INPA, "$(P)PACT CP MS" )
+	field( INPB, "$(P)FWD:PMEAN CP MS" )
+	field( INPC, "$(P)PM_DETUNE CP MS")
 	field( INPE, ".99") # SMOOTHING FACTOR
-	field( INPF, "GUN:GUNB:100:PMEAN_EXP_OFFSET CP")
-	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F):VAL")
-	field( SDIS, "GUN:GUNB:100:DETUNE_MODE")
+	field( INPF, "$(P)PMEAN_EXP_OFFSET CP")
+	field( INPG, "$(P)FREQ_OFFSET CP")
+	field( INPH, "-1.1E-4")
+	field( CALC, "ABS(C)<300?E*VAL+(1-E)*(A-B-F-H*G):VAL")
+	field( SDIS, "$(P)DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
 
-record (calc, "GUN:GUNB:100:CW_DETUNE" )
+record (calc, "$(P)CW_DETUNE" )
 {
+# Processes with FLNK from PACT
 	field( DESC, "Detuning in CW mode" )
-	field( INPA, "GUN:GUNB:100:PACT NPP MS" )
-	field( INPB, "GUN:GUNB:100:FWD:PMEAN NPP MS" )
-	field( INPC, "GUN:GUNB:100:PMEAN_DET0")
-	field( INPD, "GUN:GUNB:100:SMOOTHED_BW")
-	field( CALC, "D*TAN(D2R*(A - B - C))")
-	field( FLNK, "GUN:GUNB:100:DFACT" )
+	field( INPA, "$(P)PACT NPP MS" )
+	field( INPB, "$(P)FWD:PMEAN NPP MS" )
+	field( INPC, "$(P)PMEAN_DET0")
+	field( INPD, "$(P)SMOOTHED_BW")
+	field( INPE, "$(P)FREQ_OFFSET")
+	field( INPF, "-1.1E-4")
+	field( CALC, "D*TAN(D2R*(A - B - C + F*E))")
+	field( FLNK, "$(P)DFACT" )
 	field(EGU, "Hz")
 	info( autosaveFields, "INPC INPD C D ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }

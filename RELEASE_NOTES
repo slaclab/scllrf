@@ -10,6 +10,12 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-18-RC2: Hard coded which forward phase to use in CW detune. Experimental
+				frequency correction. Phase mean calculation uses mean I and Q to avoid
+				wrapping problems.
+scllrf-R1-0-18-RC1: Reducing number of points for decay detune calc; buncher decays faster,
+				was using noise for part of calculation. Test release.
+
 scllrf-R1-0-17: Fixing "detune good" calculation. Use standard devitation of phase waveform,
 				not last 300 phase means
 
