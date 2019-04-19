@@ -26,7 +26,7 @@ CHECK_RELEASE = YES
 # will be built.  Remember EPICS will build for the HOST ARCH by default.
 CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86_64
 #CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86 linuxRT_glibc-x86_64 linux-x86
-
+BUILD_FOR_HOST_ARCH =NO
 # To install files into a location other than $(TOP) define
 #   INSTALL_LOCATION here.
 #INSTALL_LOCATION=</absolute/path/to/install/top>
@@ -35,11 +35,24 @@ CROSS_COMPILER_TARGET_ARCHS = linuxRT-x86_64
 #   to the install location. This may be needed to boot from
 #   a Microsoft FTP server say, or on some NFS configurations.
 #IOCS_APPL_TOP = </IOC's/absolute/path/to/install/top>
+#
+# =======================================================
+# Let's install our IOC boot products:
+# envPaths and st.cmd
+# =======================================================
+IOCS_APPL_TOP  = $(INSTALL_LOCATION)
+
+INSTALL_LOCATION_STARTUP += $(INSTALL_LOCATION)/startup
+DIRECTORY_TARGETS += $(INSTALL_LOCATION_STARTUP)
 
 # For application debugging purposes, override the HOST_OPT and/
 #   or CROSS_OPT settings from base/configure/CONFIG_SITE
 #HOST_OPT = NO
 #CROSS_OPT = NO
+
+LINUX_KERNEL_MODULES=$(PACKAGE_SITE_TOP)/linuxKernel_Modules
+LINUXRT_BUILDROOT_VERSION=buildroot-2016.11.1
+LINUX_VERSION=rhel6
 
 # These allow developers to override the CONFIG_SITE variable
 # settings without having to modify the configure/CONFIG_SITE

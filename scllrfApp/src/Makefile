@@ -44,7 +44,6 @@ scllrf_DBD += scllrfAsynPortDriver.dbd
 scllrf_DBD += calcSupport.dbd
 scllrf_DBD += stdSupport.dbd
 scllrf_DBD += history.dbd
-scllrf_DBD += ether_ip.dbd
 scllrf_DBD += PVAServerRegister.dbd
 scllrf_DBD += qsrv.dbd
 
@@ -61,24 +60,13 @@ scllrf_SRCS_vxWorks += -nil-
 # Add locally compiled object code
 # For example, subroutines
 # ========================================================================
- scllrf_SRCS += scllrfAsynPortDriver.cpp
-# scllrf_SRCS += scllrfINT.cpp
-# scllrf_SRCS += scllrfPRC.cpp
-# scllrf_SRCS += scllrfPRCextra.cpp
-# scllrf_SRCS += scllrfRES.cpp
-# scllrf_SRCS += scllrfRESextra.cpp
- scllrf_SRCS += GUNB.cpp
- scllrf_SRCS += GUNBExtra.cpp
- scllrf_SRCS += PVramp.stt
- scllrf_SRCS += centerCwDetune.stt
- scllrf_SRCS += amc78xxmon.stt
-# scllrf_SRCS += INTmbboCopy.st
-# scllrf_SRCS += INTres2tmp.c
-# scllrf_SRCS += INTarcTest.st
-# scllrf_SRCS += INTheLevel.st
-# scllrf_SRCS += INTssaRfKill.st
-# scllrf_SRCS += INTdegkToVolt.st# scllrf_SRCS += RES_HiHwLink.st
- scllrf_SRCS += BMB7Sup.c
+scllrf_SRCS += scllrfAsynPortDriver.cpp
+scllrf_SRCS += GUNB.cpp
+scllrf_SRCS += GUNBExtra.cpp
+scllrf_SRCS += PVramp.stt
+scllrf_SRCS += centerCwDetune.stt
+scllrf_SRCS += amc78xxmon.stt
+scllrf_SRCS += BMB7Sup.c
 USR_CXXFLAGS += -std=c++0x
 USR_CXXFLAGS += -g -I$(TOP)/newmat10
 # =====================================================
@@ -101,12 +89,12 @@ endif
 
 # Needed to link cexpsh() support
 scllrf_LIBS += $(CEXP_LIBS)
+scllrf_SYS_LIBS += $(CEXP_SYS_LIBS)
 
 scllrf_LIBS += asyn
 scllrf_LIBS += calc
 scllrf_LIBS += sscan
 scllrf_LIBS += history
-scllrf_LIBS += ether_ip
 scllrf_LIBS += newmat
 scllrf_LIBS += qsrv
 scllrf_LIBS += std
