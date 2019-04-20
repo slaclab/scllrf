@@ -95,6 +95,7 @@ record(calcout, "$(P)PULSE_START_POINT")
 }
 
 record(acalcout, "$(P)ITMEAN") {
+	field(DESC, "I waveform mean")
 	field(INAA, "$(P)ITWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -105,7 +106,7 @@ record(acalcout, "$(P)ITMEAN") {
 }
 
 record(acalcout, "$(P)ITSTD") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "I standard deviation")
 	field(INAA, "$(P)ITWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -128,6 +129,7 @@ record(acalcout, "$(P)ITRSTD") {
 }
 
 record(acalcout, "$(P)ITMEAN_RAW") {
+	field(DESC, "Uncalibrated I mean")
 	field(INAA, "$(P)ITWF_RAW CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -138,7 +140,7 @@ record(acalcout, "$(P)ITMEAN_RAW") {
 }
 
 record(acalcout, "$(P)ITSTD_RAW") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "I standard deviation")
 	field(INAA, "$(P)ITWF_RAW CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -182,6 +184,7 @@ record(waveform, "$(P)QTWF_RAW") {
 }
 
 record(acalcout, "$(P)QTMEAN") {
+	field(DESC, "Q waveform mean")
 	field(INAA, "$(P)QTWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -192,7 +195,7 @@ record(acalcout, "$(P)QTMEAN") {
 }
 
 record(acalcout, "$(P)QTSTD") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "Q standard deviation")
 	field(INAA, "$(P)QTWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -215,6 +218,7 @@ record(acalcout, "$(P)QTRSTD") {
 }
 
 record(acalcout, "$(P)QTMEAN_RAW") {
+	field(DESC, "Uncalibrated Q mean")
 	field(INAA, "$(P)QTWF_RAW CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -225,7 +229,7 @@ record(acalcout, "$(P)QTMEAN_RAW") {
 }
 
 record(acalcout, "$(P)QTSTD_RAW") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "Raw Q standard deviation")
 	field(INAA, "$(P)QTWF_RAW CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -311,6 +315,8 @@ record(waveform, "$(P)AWF_RAW") {
 		field(FTVL, "FLOAT")
 }
 
+# Scaling is done at the device level.
+# This is the per-channel scale factor it uses.
 record(ao, "$(P)SCALE") {
 	field(DESC, "Scale factor for waveform $(CH)")
 	field(DTYP, "asynFloat64")
@@ -332,6 +338,7 @@ record(acalcout, "$(P)AWF_SMOO") {
 }
 
 record(acalcout, "$(P)AMEAN") {
+	field(DESC, "Mean amplitude")
 	field(INAA, "$(P)AWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -343,7 +350,7 @@ record(acalcout, "$(P)AMEAN") {
 }
 
 record(acalcout, "$(P)ASTD") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "Amplitude standard deviation")
 	field(INAA, "$(P)AWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -366,6 +373,7 @@ record(acalcout, "$(P)ARSTD") {
 }
 
 record(acalcout, "$(P)AMEAN_RAW") {
+	field(DESC, "mean ADC count")
 	field(INAA, "$(P)AWF_RAW CPP MS")
 	field(CALC, "AVG(AA)")
 	field(NELM, "8192")
@@ -375,7 +383,7 @@ record(acalcout, "$(P)AMEAN_RAW") {
 }
 
 record(acalcout, "$(P)ASTD_RAW") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "ADC count standard deviation")
 	field(INAA, "$(P)AWF_RAW CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -409,7 +417,7 @@ record(acalcout, "$(P)AMEAN_ENG") {
 }
 
 record(acalcout, "$(P)ASTD_ENG") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "Amplitude standard deviation")
 	field(INAA, "$(P)AWF_ENG CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
@@ -486,6 +494,7 @@ record(waveform, "$(P)PWF_RAW") {
 	field(FTVL, "FLOAT")
 }
 
+# Phase offset applied by in the device layer.
 record(ao, "$(P)GOLD") {
 	field(DESC, "Phase offset for waveform $(CH)")
 	field(DTYP, "asynFloat64")
@@ -510,6 +519,7 @@ record(acalcout, "$(P)PWF_SMOO") {
 # throws off an average of the phase waveform
 record(acalcout, "$(P)PMEAN") {
 	alias( "$(P)PMEAN_ENG")
+	field(DESC, "Phase mean")
 	field(INPA, "$(P)ITMEAN NPP MS")
 # I is published first, so have Q updates trigger processing.
 	field(INPB, "$(P)QTMEAN CPP MS")
@@ -522,11 +532,11 @@ record(acalcout, "$(P)PMEAN") {
 
 record(acalcout, "$(P)PSTD") {
 	alias( "$(P)PSTD_ENG")
-	field(DESC, "Normalized standard deviation")
-	field(INAA, "$(P)PWF CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT CP")
-	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "STD(AA[B,-1])")
+	field(DESC, "Phase standard deviation")
+	field(INPA, "$(P)ITSTD NPP MS")
+# I is published first, so have Q updates trigger processing.
+	field(INPB, "$(P)QTSTD CPP MS")
+	field(CALC, "ATAN2(A,B)*R2D")
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
@@ -546,6 +556,7 @@ record(acalcout, "$(P)PRSTD") {
 }
 
 record(acalcout, "$(P)PMEAN_RAW") {
+	field(DESC, "Uncalibrated phase mean")
 	field(INPA, "$(P)ITMEAN_RAW NPP MS")
 # I is published first, so have Q updates trigger processing.
 	field(INPB, "$(P)QTMEAN_RAW CPP MS")
@@ -557,11 +568,11 @@ record(acalcout, "$(P)PMEAN_RAW") {
 }
 
 record(acalcout, "$(P)PSTD_RAW") {
-	field(DESC, "Normalized standard deviation")
-	field(INAA, "$(P)PWF_RAW CPP MS")
-	field(INPB, "$(P)PULSE_START_POINT CP")
-	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "STD(AA[B,-1])")
+	field(DESC, "Raw phase standard deviation")
+	field(INPA, "$(P)ITSTD_RAW NPP MS")
+# I is published first, so have Q updates trigger processing.
+	field(INPB, "$(P)QTSTD_RAW CPP MS")
+	field(CALC, "ATAN2(A,B)*R2D")
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
@@ -569,7 +580,7 @@ record(acalcout, "$(P)PSTD_RAW") {
 }
 
 record(acalcout, "$(P)PRSTD_RAW") {
-	field(DESC, "Normalized standard deviation")
+	field(DESC, "Phase normalized standard deviation")
 	field(INPA, "$(P)PSTD_RAW CPP MS")
 	field(INPB, "$(P)PMEAN_RAW CPP MS")
 	field(CALC, "A/B")
