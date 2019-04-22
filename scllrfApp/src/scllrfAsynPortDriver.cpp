@@ -334,10 +334,10 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s %s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", portName, __PRETTY_FUNCTION__, sendBufByteCount);
-			for(unsigned int i=0;i<sendBufByteCount; i++)
+			for(unsigned int i=0;i<=sendBufByteCount/sizeof(FpgaReg); i++)
 			{
 				cout << std::hex << pMsgBuff[i].addr << ": " << pMsgBuff[i].data << endl;
-		}
+			}
 		}
 
 		if (isShuttingDown_)
@@ -368,10 +368,10 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
 					"%s %s: FOUND %d QUEUED BYTES, WHICH IS NOT A MULTIPLE OF FpgaReg SIZE!\n", portName, __PRETTY_FUNCTION__, sendBufByteCount);
-			for(unsigned int i=0;i<sendBufByteCount; i++)
+			for(unsigned int i=0;i<=sendBufByteCount/sizeof(FpgaReg); i++)
 			{
 				cout << std::hex << pMsgBuff[i].addr << ": " << pMsgBuff[i].data << endl;
-		}
+			}
 		}
 
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
