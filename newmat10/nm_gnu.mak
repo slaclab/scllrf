@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O2 -Wall
+CXXFLAGS = -g -O3 -Wall -std=c++0x -D_GNU_SOURCE -D_DEFAULT_SOURCE -D_X86_64_ -DUNIX -Dlinux -DHAVE_CEXP -m64
 
 DIFF = ./sdiff
 PRE = ./
