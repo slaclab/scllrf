@@ -1484,7 +1484,8 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 			{
 				if(cfgRecordType == 1) // if this is the firmware description string we just finished reading
 				{
-					doCallbacksInt8Array( (char*) &ConfigRomOctetBuf.data[index - fwDescSize], fwDescSize, p_FwDesc, 0);
+					//doCallbacksInt8Array( (char*) &ConfigRomOctetBuf.data[index - fwDescSize], fwDescSize, p_FwDesc, 0);
+					setStringParam(p_FwDesc, (char*) &ConfigRomOctetBuf.data[index - fwDescSize]);
 					fwDescSize = 0;
 				}
 				cfgRecordType = (pFromFpga->data >>14 & 0x3);
@@ -1501,7 +1502,8 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 				(unsigned int) (pFromFpga->data & 0xFFFF));
 			if(index == ConfigRomOctetBuf.RegCount - 1)
 			{
-				doCallbacksInt8Array( ConfigRomOctetBuf.data.data(), ConfigRomOctetBuf.RegCount, p_ConfigRomOctet, 0);
+				//doCallbacksInt8Array( ConfigRomOctetBuf.data.data(), ConfigRomOctetBuf.RegCount, p_ConfigRomOctet, 0);
+				setStringParam(p_ConfigRomOctet, ConfigRomOctetBuf.data.data());
 				cfgRecordEnd = 0;
 				cfgRecordType = 0;
 			}

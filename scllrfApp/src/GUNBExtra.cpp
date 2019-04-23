@@ -539,10 +539,10 @@ static void TraceDataRequesterC(void *drvPvt)
 	{
 		pTraceData->TraceDataRequester();
 	}
-	catch(Exception)
+	catch(BaseException)
 	{
 		cout << "Unhandeld newmat exception in TraceDataRequester, thread exiting" << endl;
-		cout<<Exception::what() <<endl;
+		cout<<BaseException::what() <<endl;
 	}
 	catch(std::exception e)
 	{
@@ -581,13 +581,13 @@ Matrix TraceData::PseudoInverse(const Matrix & m)
 	{
 		SVD(m,D,U,V);
 	}
-	catch(Exception)
+	catch(BaseException E)
 	{
-		cout<<"newmat related exception: " << Exception::what() <<endl;
+		cout<<"newmat related exception in " << __PRETTY_FUNCTION__ << ": " << E.what() <<endl;
 	}
 	catch(std::exception e)
 	{
-		cout << "newmat related exception in PseudoInverse" << endl;
+		cout << "non-newmat exception type in PseudoInverse call to SVD" << endl;
 		cout<< e.what() <<endl;
 	}
 
@@ -802,7 +802,7 @@ void TraceData::TraceDataRequester()
 								{
 									printf("pIQBufI_[%u][%u] = %f, ", rel_chan_ix, i, pIQBuf_[Iindex][i]);
 									printf("pIQBufQ_[%u][%u] = %f, ", Qindex, i, pIQBuf_[Qindex][i]);
-									std::cerr << "exception caught: " << e.what() << endl;
+									std::cerr << "exception in " << __PRETTY_FUNCTION__ << " caught: " << e.what() << endl;
 								}
 							}
 							try
@@ -831,10 +831,10 @@ void TraceData::TraceDataRequester()
 								{
 									CavityDecayConstantCompute(pRawIQBuf_[Iindex], pRawIQBuf_[Qindex], 3, chIndex);
 								}
-								catch(Exception)
+								catch(BaseException)
 								{
 									cout << "Newmat exception in decay constant computation not otherwise handled" << endl;
-									cout<<Exception::what() <<endl;
+									cout<<BaseException::what() <<endl;
 								}
 								catch(std::exception e)
 								{
