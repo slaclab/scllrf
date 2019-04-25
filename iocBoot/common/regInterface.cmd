@@ -2,7 +2,6 @@
 #The following line works for RHEL
 ####XXXX It's a pain to do this every time while testing
 system("${GO_PY=} cd ${PY_INIT_DIR}; ${PY_PATH=}python gun.py -a ${FPGA_IP} -b ${BIT_FILE}  -r -c ${CHASSIS_REG}")
-cd ${TOP}
 
 # =====================================================================
 # Set some facility specific MACROs for database instantiation below
