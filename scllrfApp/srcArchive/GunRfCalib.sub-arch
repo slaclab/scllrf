@@ -42,18 +42,18 @@ pattern { PREF			, CAVSCL			 }
 	{ "GUN:GUNB:100:DRV1:"	, "1"				 }
 	{ "GUN:GUNB:100:DRV2:"	, "1"				 }
 	{ "GUN:GUNB:100:LASR:"	, "1"				 }
-	{ "GUN:GUNB:S100:FWD1:"	, "1"				 }
-	{ "GUN:GUNB:S100:FWD2:"	, "1"				 }
-	{ "GUN:GUNB:S100:REV1:"	, "1"				 }
-	{ "GUN:GUNB:S100:REV2:"	, "1"				 }
+	{ "GUN:GUNB:100:SFWD1:"	, "1"				 }
+	{ "GUN:GUNB:100:SFWD2:"	, "1"				 }
+	{ "GUN:GUNB:100:SREV1:"	, "1"				 }
+	{ "GUN:GUNB:100:SREV2:"	, "1"				 }
 	{ "GUN:GUNB:100:FWD1:"	, "1"				 }
 	{ "GUN:GUNB:100:FWD2:"	, "1"				 }
 	{ "GUN:GUNB:100:REV1:"	, "1"				 }
 	{ "GUN:GUNB:100:REV2:"	, "1"				 }
-	{ "GUN:GUNB:C100:FWD1:"	, "1"				 }
-	{ "GUN:GUNB:C100:FWD2:"	, "1"				 }
-	{ "GUN:GUNB:C100:REV1:"	, "1"				 }
-	{ "GUN:GUNB:C100:REV2:"	, "1"				 }
+	{ "GUN:GUNB:100:CFWD1:"	, "1"				 }
+	{ "GUN:GUNB:100:CFWD2:"	, "1"				 }
+	{ "GUN:GUNB:100:CREV1:"	, "1"				 }
+	{ "GUN:GUNB:100:CREV2:"	, "1"				 }
 }
 
 file rfSigCalibCav.tpl-arch {

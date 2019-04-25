@@ -100,6 +100,13 @@ record(ao, "$(P)PULSE_LENGTH")
 	info( autosaveFields, "VAL")
 }
 
+# Same thing, but in seconds instead of ms, used for screens.
+record(calc, "$(P)PULSE_LENGTH_S")
+{
+	field( INPA, "$(P)PULSE_LENGTH PP")
+	field( CALC, "A*1000")
+	field(EGU, "seconds")
+}
 
 record(calcout, "$(P)PULSE_LENGTH_U_TO_R")
 {
@@ -405,7 +412,7 @@ record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 	field( OUT,  "$(P)AOPEN_SCALE PP MS")
 }
 record( ao, "$(P)AOPEN_SCALE" ) {
-	field( FLNK, "$(P)AOPEN_MAX_CALC PP" )
+#	field( FLNK, "$(P)AOPEN_MAX_CALC PP" )
 	field( VAL, "1")
 	field(PINI, "YES")
 	info( autosaveFields, "VAL")

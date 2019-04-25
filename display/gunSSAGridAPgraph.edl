@@ -506,7 +506,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "WF=GUN:GUNB:S100:FWD1:,WF2=GUN:GUNB:S100:FWD2:,T=GUN:GUNB:S100:RFS1:WF_X_AXIS"
+  0 "WF=GUN:GUNB:100:SFWD1:,WF2=GUN:GUNB:100:SFWD2:,T=GUN:GUNB:100:SRFS1:WF_X_AXIS"
 }
 endObjectProperties
 
@@ -524,7 +524,7 @@ h 130
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:FWD"
+graphTitle "GUN:GUNB:100:SFWD"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -550,16 +550,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:S100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:S100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:SRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:SRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD1:AWF"
-  1 "GUN:GUNB:S100:FWD2:AWF"
+  0 "GUN:GUNB:100:SFWD1:AWF"
+  1 "GUN:GUNB:100:SFWD2:AWF"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD1:AWF.NORD"
-  1 "GUN:GUNB:S100:FWD2:AWF.NORD"
+  0 "GUN:GUNB:100:SFWD1:AWF.NORD"
+  1 "GUN:GUNB:100:SFWD2:AWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -618,16 +618,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:S100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:S100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:SRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:SRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD1:PWF"
-  1 "GUN:GUNB:S100:FWD2:PWF"
+  0 "GUN:GUNB:100:SFWD1:PWF"
+  1 "GUN:GUNB:100:SFWD2:PWF"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD1:PWF.NORD"
-  1 "GUN:GUNB:S100:FWD2:PWF.NORD"
+  0 "GUN:GUNB:100:SFWD1:PWF.NORD"
+  1 "GUN:GUNB:100:SFWD2:PWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -677,7 +677,7 @@ x 30
 y 410
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD1:AMEAN"
+controlPv "GUN:GUNB:100:SFWD1:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -720,7 +720,7 @@ x 30
 y 450
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD1:ARSTD"
+controlPv "GUN:GUNB:100:SFWD1:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -763,7 +763,7 @@ x 30
 y 490
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD1:PMEAN"
+controlPv "GUN:GUNB:100:SFWD1:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -786,7 +786,7 @@ x 30
 y 530
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD1:PRSTD"
+controlPv "GUN:GUNB:100:SFWD1:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -829,7 +829,7 @@ x 130
 y 410
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD2:AMEAN"
+controlPv "GUN:GUNB:100:SFWD2:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -852,7 +852,7 @@ x 130
 y 450
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD2:ARSTD"
+controlPv "GUN:GUNB:100:SFWD2:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -875,7 +875,7 @@ x 130
 y 490
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD2:PMEAN"
+controlPv "GUN:GUNB:100:SFWD2:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -898,7 +898,7 @@ x 130
 y 530
 w 90
 h 10
-controlPv "GUN:GUNB:S100:FWD2:PRSTD"
+controlPv "GUN:GUNB:100:SFWD2:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -933,7 +933,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "WF=GUN:GUNB:S100:REV1:,WF2=GUN:GUNB:S100:REV2:,T=GUN:GUNB:S100:RFS1:WF_X_AXIS"
+  0 "WF=GUN:GUNB:100:SREV1:,WF2=GUN:GUNB:100:SREV2:,T=GUN:GUNB:100:SRFS1:WF_X_AXIS"
 }
 endObjectProperties
 
@@ -951,7 +951,7 @@ h 130
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:REV"
+graphTitle "GUN:GUNB:100:SREV"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -977,16 +977,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:S100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:S100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:SRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:SRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV1:AWF"
-  1 "GUN:GUNB:S100:REV2:AWF"
+  0 "GUN:GUNB:100:SREV1:AWF"
+  1 "GUN:GUNB:100:SREV2:AWF"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV1:AWF.NORD"
-  1 "GUN:GUNB:S100:REV2:AWF.NORD"
+  0 "GUN:GUNB:100:SREV1:AWF.NORD"
+  1 "GUN:GUNB:100:SREV2:AWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -1045,16 +1045,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:S100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:S100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:SRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:SRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV1:PWF"
-  1 "GUN:GUNB:S100:REV2:PWF"
+  0 "GUN:GUNB:100:SREV1:PWF"
+  1 "GUN:GUNB:100:SREV2:PWF"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV1:PWF.NORD"
-  1 "GUN:GUNB:S100:REV2:PWF.NORD"
+  0 "GUN:GUNB:100:SREV1:PWF.NORD"
+  1 "GUN:GUNB:100:SREV2:PWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -1422,7 +1422,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "WF=GUN:GUNB:C100:FWD1:,WF2=GUN:GUNB:C100:FWD2:,T=GUN:GUNB:C100:RFS1:WF_X_AXIS"
+  0 "WF=GUN:GUNB:100:CFWD1:,WF2=GUN:GUNB:100:CFWD2:,T=GUN:GUNB:100:CRFS1:WF_X_AXIS"
 }
 endObjectProperties
 
@@ -1440,7 +1440,7 @@ h 130
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:FWD"
+graphTitle "GUN:GUNB:100:CFWD"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -1466,16 +1466,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:C100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:C100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:CRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:CRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD1:AWF"
-  1 "GUN:GUNB:C100:FWD2:AWF"
+  0 "GUN:GUNB:100:CFWD1:AWF"
+  1 "GUN:GUNB:100:CFWD2:AWF"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD1:AWF.NORD"
-  1 "GUN:GUNB:C100:FWD2:AWF.NORD"
+  0 "GUN:GUNB:100:CFWD1:AWF.NORD"
+  1 "GUN:GUNB:100:CFWD2:AWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -1534,16 +1534,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:C100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:C100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:CRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:CRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD1:PWF"
-  1 "GUN:GUNB:C100:FWD2:PWF"
+  0 "GUN:GUNB:100:CFWD1:PWF"
+  1 "GUN:GUNB:100:CFWD2:PWF"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD1:PWF.NORD"
-  1 "GUN:GUNB:C100:FWD2:PWF.NORD"
+  0 "GUN:GUNB:100:CFWD1:PWF.NORD"
+  1 "GUN:GUNB:100:CFWD2:PWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -1585,7 +1585,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "WF=GUN:GUNB:C100:REV1:,WF2=GUN:GUNB:C100:REV2:,T=GUN:GUNB:C100:RFS1:WF_X_AXIS"
+  0 "WF=GUN:GUNB:100:CREV1:,WF2=GUN:GUNB:100:CREV2:,T=GUN:GUNB:100:CRFS1:WF_X_AXIS"
 }
 endObjectProperties
 
@@ -1603,7 +1603,7 @@ h 130
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:REV"
+graphTitle "GUN:GUNB:100:CREV"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -1629,16 +1629,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:C100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:C100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:CRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:CRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV1:AWF"
-  1 "GUN:GUNB:C100:REV2:AWF"
+  0 "GUN:GUNB:100:CREV1:AWF"
+  1 "GUN:GUNB:100:CREV2:AWF"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV1:AWF.NORD"
-  1 "GUN:GUNB:C100:REV2:AWF.NORD"
+  0 "GUN:GUNB:100:CREV1:AWF.NORD"
+  1 "GUN:GUNB:100:CREV2:AWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -1697,16 +1697,16 @@ y2Max 1
 # Trace Properties
 numTraces 2
 xPv {
-  0 "GUN:GUNB:C100:RFS1:WF_X_AXIS"
-  1 "GUN:GUNB:C100:RFS2:WF_X_AXIS"
+  0 "GUN:GUNB:100:CRFS1:WF_X_AXIS"
+  1 "GUN:GUNB:100:CRFS2:WF_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV1:PWF"
-  1 "GUN:GUNB:C100:REV2:PWF"
+  0 "GUN:GUNB:100:CREV1:PWF"
+  1 "GUN:GUNB:100:CREV2:PWF"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV1:PWF.NORD"
-  1 "GUN:GUNB:C100:REV2:PWF.NORD"
+  0 "GUN:GUNB:100:CREV1:PWF.NORD"
+  1 "GUN:GUNB:100:CREV2:PWF.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -1756,7 +1756,7 @@ x 240
 y 410
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV1:AMEAN"
+controlPv "GUN:GUNB:100:SREV1:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -1799,7 +1799,7 @@ x 240
 y 450
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV1:ARSTD"
+controlPv "GUN:GUNB:100:SREV1:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -1842,7 +1842,7 @@ x 240
 y 490
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV1:PMEAN"
+controlPv "GUN:GUNB:100:SREV1:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -1865,7 +1865,7 @@ x 240
 y 530
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV1:PRSTD"
+controlPv "GUN:GUNB:100:SREV1:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -1908,7 +1908,7 @@ x 340
 y 410
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV2:AMEAN"
+controlPv "GUN:GUNB:100:SREV2:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -1931,7 +1931,7 @@ x 340
 y 450
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV2:ARSTD"
+controlPv "GUN:GUNB:100:SREV2:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -1954,7 +1954,7 @@ x 340
 y 490
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV2:PMEAN"
+controlPv "GUN:GUNB:100:SREV2:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -1977,7 +1977,7 @@ x 340
 y 530
 w 90
 h 14
-controlPv "GUN:GUNB:S100:REV2:PRSTD"
+controlPv "GUN:GUNB:100:SREV2:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -2548,7 +2548,7 @@ x 970
 y 410
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD1:AMEAN"
+controlPv "GUN:GUNB:100:CFWD1:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2591,7 +2591,7 @@ x 970
 y 450
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD1:ARSTD"
+controlPv "GUN:GUNB:100:CFWD1:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2634,7 +2634,7 @@ x 970
 y 490
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD1:PMEAN"
+controlPv "GUN:GUNB:100:CFWD1:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2657,7 +2657,7 @@ x 970
 y 530
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD1:PRSTD"
+controlPv "GUN:GUNB:100:CFWD1:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2700,7 +2700,7 @@ x 1070
 y 410
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD2:AMEAN"
+controlPv "GUN:GUNB:100:CFWD2:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -2723,7 +2723,7 @@ x 1070
 y 450
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD2:ARSTD"
+controlPv "GUN:GUNB:100:CFWD2:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -2746,7 +2746,7 @@ x 1070
 y 490
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD2:PMEAN"
+controlPv "GUN:GUNB:100:CFWD2:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -2769,7 +2769,7 @@ x 1070
 y 530
 w 90
 h 14
-controlPv "GUN:GUNB:C100:FWD2:PRSTD"
+controlPv "GUN:GUNB:100:CFWD2:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -2812,7 +2812,7 @@ x 1180
 y 410
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV1:AMEAN"
+controlPv "GUN:GUNB:100:CREV1:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2855,7 +2855,7 @@ x 1180
 y 450
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV1:ARSTD"
+controlPv "GUN:GUNB:100:CREV1:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2898,7 +2898,7 @@ x 1180
 y 490
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV1:PMEAN"
+controlPv "GUN:GUNB:100:CREV1:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2921,7 +2921,7 @@ x 1180
 y 530
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV1:PRSTD"
+controlPv "GUN:GUNB:100:CREV1:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 16
@@ -2964,7 +2964,7 @@ x 1280
 y 410
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV2:AMEAN"
+controlPv "GUN:GUNB:100:CREV2:AMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -2987,7 +2987,7 @@ x 1280
 y 450
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV2:ARSTD"
+controlPv "GUN:GUNB:100:CREV2:ARSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -3010,7 +3010,7 @@ x 1280
 y 490
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV2:PMEAN"
+controlPv "GUN:GUNB:100:CREV2:PMEAN"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31
@@ -3033,7 +3033,7 @@ x 1280
 y 530
 w 90
 h 14
-controlPv "GUN:GUNB:C100:REV2:PRSTD"
+controlPv "GUN:GUNB:100:CREV2:PRSTD"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 bgColor index 31

@@ -169,6 +169,8 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(ConfigRomOctetString, asynParamOctet, &p_ConfigRomOctet);
 	createParam(JsonSha1DesString, asynParamOctet, &p_JsonSha1Des);
 	createParam(JsonSha1ActString, asynParamOctet, &p_JsonSha1Act);
+	createParam(FwDescString, asynParamOctet, &p_FwDesc);
+	createParam(GitSHA1String, asynParamOctet, &p_GitSHA1);
 	createParam(GitSha1ARString, asynParamInt32, &p_GitSha1AR);
 	createParam(GitSha1BRString, asynParamInt32, &p_GitSha1BR);
 	createParam(GitSha1CRString, asynParamInt32, &p_GitSha1CR);
@@ -189,8 +191,6 @@ printf("%s created RunStop parameter\n", __PRETTY_FUNCTION__);
 	createParam(GitSha1RRString, asynParamInt32, &p_GitSha1RR);
 	createParam(GitSha1SRString, asynParamInt32, &p_GitSha1SR);
 	createParam(GitSha1TRString, asynParamInt32, &p_GitSha1TR);
-	createParam(GitSHA1String, asynParamOctet, &p_GitSHA1);
-	createParam(FwDescString, asynParamOctet, &p_FwDesc);
 
 	// Set these early, consider adding interlock for race condition with polling loop.
 	setIntegerParam(p_RunStop, stop);
@@ -593,8 +593,11 @@ asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *v
 {
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
+	int function = pasynUser->reason;
+	const char *paramName;
+	getParamName(function, &paramName);
 	std::copy(value, value+nElements, value32);
-	cout << "I'm probably doing this wrong, is it ever called? " << __PRETTY_FUNCTION__ << endl;
+	cout << "I'm probably doing this wrong, is it ever called? " << __PRETTY_FUNCTION__ << " " << paramName << endl;
 	status = readInt32Array(pasynUser, value32, nElements, nIn);
 	delete value32;
 	return status;
@@ -605,8 +608,11 @@ asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 
 {
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
+	int function = pasynUser->reason;
+	const char *paramName;
+	getParamName(function, &paramName);
 	std::copy(value, value+nElements, value32);
-	cout << "I'm probably doing this wrong, is it ever called? " << __PRETTY_FUNCTION__ << endl;
+	cout << "I'm probably doing this wrong, is it ever called? " << __PRETTY_FUNCTION__ << " " << paramName << endl;
 	status = readInt32Array(pasynUser, value32, nElements, nIn);
 	delete value32;
 	return status;
@@ -1351,6 +1357,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
 	asynStatus status = asynSuccess;
+	char pSha[42];
 
 	/* Map address to parameter, set the parameter in the parameter library. */
 	switch (pFromFpga->addr)
@@ -1366,7 +1373,8 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 		{
 			strJsonSha1 << setfill('0') << std::setw(4) << std::hex << (unsigned int) (pFromFpga[i].data & JsonSha1Mask);
 		}
-		status = (asynStatus) setStringParam(p_JsonSha1Act, strJsonSha1.str().c_str());
+		strcpy(pSha, strJsonSha1.str().c_str());
+		status = (asynStatus) setStringParam(p_JsonSha1Act, pSha);
 		asynPrint(pOctetAsynUser_, ASYN_TRACEIO_DRIVER,
 				"%s: readback for JsonSha1 sum: %s\n", __PRETTY_FUNCTION__,
 				strJsonSha1.str().c_str());

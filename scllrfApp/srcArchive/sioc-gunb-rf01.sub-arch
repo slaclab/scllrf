@@ -19,12 +19,12 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 
 	{ "GUN:GUNB:100:DRV1:",			"0",	"1",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
 	{ "GUN:GUNB:100:DRV1A:",		"1",	"2",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
-	{ "GUN:GUNB:S100:FWD1:",		"2",	"3",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
-	{ "GUN:GUNB:S100:REV1:",		"3",	"4",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:SFWD1:",		"2",	"3",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:SREV1:",		"3",	"4",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
 	{ "GUN:GUNB:100:FWD1:",			"4",	"5",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
 	{ "GUN:GUNB:100:REV1:",			"5",	"6",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
-	{ "GUN:GUNB:C100:FWD1:",		"6",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
-	{ "GUN:GUNB:C100:REV1:",		"7",	"8",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:CFWD1:",		"6",	"7",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
+	{ "GUN:GUNB:100:CREV1:",		"7",	"8",	"RFS1Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS1:" }
 	{ "GUN:GUNB:100:RFS1:DAC1:",	"8",	"9",	"RFS1Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS1:" }
 	{ "GUN:GUNB:100:RFS1:DAC2:",	"9",	"10",	"RFS1Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS1:" }
 	{ "GUN:GUNB:100:RFS1:SPARE1:",	"10",	"11",	"RFS1Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS1:" }
@@ -36,12 +36,12 @@ pattern { P,						 CH,	 CH+1,	 PORT,		 EGU,	NORM,	CHASSIS	}
 
 	{ "GUN:GUNB:100:DRV2:",			"0",	"1",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
 	{ "GUN:GUNB:100:DRV2A:",		"1",	"2",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
-	{ "GUN:GUNB:S100:FWD2:",		"2",	"3",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
-	{ "GUN:GUNB:S100:REV2:",		"3",	"4",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:SFWD2:",		"2",	"3",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:SREV2:",		"3",	"4",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
 	{ "GUN:GUNB:100:FWD2:",			"4",	"5",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
 	{ "GUN:GUNB:100:REV2:",			"5",	"6",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
-	{ "GUN:GUNB:C100:FWD2:",		"6",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
-	{ "GUN:GUNB:C100:REV2:",		"7",	"8",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:CFWD2:",		"6",	"7",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
+	{ "GUN:GUNB:100:CREV2:",		"7",	"8",	"RFS2Reg",	"sqrt(W)",	"32767",	"GUN:GUNB:100:RFS2:" }
 	{ "GUN:GUNB:100:RFS2:DAC1:",	"8",	"9",	"RFS2Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS2:" }
 	{ "GUN:GUNB:100:RFS2:DAC2:",	"9",	"10",	"RFS2Reg",	"DAC counts",	"32767",	"GUN:GUNB:100:RFS2:" }
 	{ "GUN:GUNB:100:RFS2:SPARE1:",	"10",	"11",	"RFS2Reg",	"N/A",	"32767",	"GUN:GUNB:100:RFS2:" }
@@ -88,12 +88,12 @@ pattern { PREF,				 NORM }
 
 	{ "GUN:GUNB:100:DRV1:",	"32767" }
 	{ "GUN:GUNB:100:DRV1A:",	"32767" }
-	{ "GUN:GUNB:S100:FWD1:","32767" }
-	{ "GUN:GUNB:S100:REV1:","32767" }
+	{ "GUN:GUNB:100:SFWD1:","32767" }
+	{ "GUN:GUNB:100:SREV1:","32767" }
 	{ "GUN:GUNB:100:FWD1:",	"32767" }
 	{ "GUN:GUNB:100:REV1:",	"32767" }
-	{ "GUN:GUNB:C100:FWD1:","32767" }
-	{ "GUN:GUNB:C100:REV1:","32767" }
+	{ "GUN:GUNB:100:CFWD1:","32767" }
+	{ "GUN:GUNB:100:CREV1:","32767" }
 	{ "GUN:GUNB:100:RFS1:DAC1:",	"32767" }
 	{ "GUN:GUNB:100:RFS1:DAC2:",	"32767" }
 	{ "GUN:GUNB:100:RFS1:SPARE1:",	"32767" }
@@ -105,12 +105,12 @@ pattern { PREF,				 NORM }
 
 	{ "GUN:GUNB:100:DRV2:",	"32767" }
 	{ "GUN:GUNB:100:DRV2A:",	"32767" }
-	{ "GUN:GUNB:S100:FWD2:","32767" }
-	{ "GUN:GUNB:S100:REV2:","32767" }
+	{ "GUN:GUNB:100:SFWD2:","32767" }
+	{ "GUN:GUNB:100:SREV2:","32767" }
 	{ "GUN:GUNB:100:FWD2:",	"32767" }
 	{ "GUN:GUNB:100:REV2:",	"32767" }
-	{ "GUN:GUNB:C100:FWD2:","32767" }
-	{ "GUN:GUNB:C100:REV2:","32767" }
+	{ "GUN:GUNB:100:CFWD2:","32767" }
+	{ "GUN:GUNB:100:CREV2:","32767" }
 	{ "GUN:GUNB:100:RFS2:DAC1:",	"32767" }
 	{ "GUN:GUNB:100:RFS2:DAC2:",	"32767" }
 	{ "GUN:GUNB:100:RFS2:SPARE1:",	"32767" }
@@ -142,8 +142,8 @@ file Gun3Chassis.tpl-arch
 
 file gainScanRecorder.tpl-arch
 {
-	{ P = "GUN:GUNB:100:", N=1, FWD = "GUN:GUNB:S100:FWD" }
-	{ P = "GUN:GUNB:100:", N=2, FWD = "GUN:GUNB:S100:FWD" }
+	{ P = "GUN:GUNB:100:", N=1, FWD = "GUN:GUNB:100:SFWD" }
+	{ P = "GUN:GUNB:100:", N=2, FWD = "GUN:GUNB:100:SFWD" }
 }
 
 #	P - Prefix for this monitor. The PV with enumerated status and severity is $(P):ALIVESUM

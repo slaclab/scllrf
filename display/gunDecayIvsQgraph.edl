@@ -865,7 +865,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:S100:FWD1:ITWF_DECAY,Y=GUN:GUNB:S100:FWD1:QTWF_DECAY,P=GUN:GUNB:S100:FWD1"
+  0 "X=GUN:GUNB:100:SFWD1:ITWF_DECAY,Y=GUN:GUNB:100:SFWD1:QTWF_DECAY,P=GUN:GUNB:100:SFWD1"
 }
 endObjectProperties
 
@@ -883,7 +883,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:FWD1"
+graphTitle "GUN:GUNB:100:SFWD1"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -909,13 +909,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:FWD1:ITWF_DECAY"
+  0 "GUN:GUNB:100:SFWD1:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD1:QTWF_DECAY"
+  0 "GUN:GUNB:100:SFWD1:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD1:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SFWD1:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -947,7 +947,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:S100:REV1:ITWF_DECAY,Y=GUN:GUNB:S100:REV1:QTWF_DECAY,P=GUN:GUNB:S100:REV1"
+  0 "X=GUN:GUNB:100:SREV1:ITWF_DECAY,Y=GUN:GUNB:100:SREV1:QTWF_DECAY,P=GUN:GUNB:100:SREV1"
 }
 endObjectProperties
 
@@ -965,7 +965,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:REV1"
+graphTitle "GUN:GUNB:100:SREV1"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -991,13 +991,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:REV1:ITWF_DECAY"
+  0 "GUN:GUNB:100:SREV1:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV1:QTWF_DECAY"
+  0 "GUN:GUNB:100:SREV1:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV1:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SREV1:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -1193,7 +1193,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:C100:FWD1:ITWF_DECAY,Y=GUN:GUNB:C100:FWD1:QTWF_DECAY,P=GUN:GUNB:C100:FWD1"
+  0 "X=GUN:GUNB:100:CFWD1:ITWF_DECAY,Y=GUN:GUNB:100:CFWD1:QTWF_DECAY,P=GUN:GUNB:100:CFWD1"
 }
 endObjectProperties
 
@@ -1211,7 +1211,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:FWD1"
+graphTitle "GUN:GUNB:100:CFWD1"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -1237,13 +1237,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:FWD1:ITWF_DECAY"
+  0 "GUN:GUNB:100:CFWD1:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD1:QTWF_DECAY"
+  0 "GUN:GUNB:100:CFWD1:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD1:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CFWD1:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -1275,7 +1275,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:C100:REV1:ITWF_DECAY,Y=GUN:GUNB:C100:REV1:QTWF_DECAY,P=GUN:GUNB:C100:REV1"
+  0 "X=GUN:GUNB:100:CREV1:ITWF_DECAY,Y=GUN:GUNB:100:CREV1:QTWF_DECAY,P=GUN:GUNB:100:CREV1"
 }
 endObjectProperties
 
@@ -1293,7 +1293,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:REV1"
+graphTitle "GUN:GUNB:100:CREV1"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -1319,13 +1319,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:REV1:ITWF_DECAY"
+  0 "GUN:GUNB:100:CREV1:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV1:QTWF_DECAY"
+  0 "GUN:GUNB:100:CREV1:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV1:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CREV1:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -1521,7 +1521,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:S100:FWD2:ITWF_DECAY,Y=GUN:GUNB:S100:FWD2:QTWF_DECAY,P=GUN:GUNB:S100:FWD2"
+  0 "X=GUN:GUNB:100:SFWD2:ITWF_DECAY,Y=GUN:GUNB:100:SFWD2:QTWF_DECAY,P=GUN:GUNB:100:SFWD2"
 }
 endObjectProperties
 
@@ -1539,7 +1539,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:FWD2"
+graphTitle "GUN:GUNB:100:SFWD2"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -1565,13 +1565,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:FWD2:ITWF_DECAY"
+  0 "GUN:GUNB:100:SFWD2:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD2:QTWF_DECAY"
+  0 "GUN:GUNB:100:SFWD2:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD2:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SFWD2:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -1603,7 +1603,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:S100:REV2:ITWF_DECAY,Y=GUN:GUNB:S100:REV2:QTWF_DECAY,P=GUN:GUNB:S100:REV2"
+  0 "X=GUN:GUNB:100:SREV2:ITWF_DECAY,Y=GUN:GUNB:100:SREV2:QTWF_DECAY,P=GUN:GUNB:100:SREV2"
 }
 endObjectProperties
 
@@ -1621,7 +1621,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:REV2"
+graphTitle "GUN:GUNB:100:SREV2"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -1647,13 +1647,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:REV2:ITWF_DECAY"
+  0 "GUN:GUNB:100:SREV2:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV2:QTWF_DECAY"
+  0 "GUN:GUNB:100:SREV2:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV2:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SREV2:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -1849,7 +1849,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:C100:FWD2:ITWF_DECAY,Y=GUN:GUNB:C100:FWD2:QTWF_DECAY,P=GUN:GUNB:C100:FWD2"
+  0 "X=GUN:GUNB:100:CFWD2:ITWF_DECAY,Y=GUN:GUNB:100:CFWD2:QTWF_DECAY,P=GUN:GUNB:100:CFWD2"
 }
 endObjectProperties
 
@@ -1867,7 +1867,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:FWD2"
+graphTitle "GUN:GUNB:100:CFWD2"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -1893,13 +1893,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:FWD2:ITWF_DECAY"
+  0 "GUN:GUNB:100:CFWD2:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD2:QTWF_DECAY"
+  0 "GUN:GUNB:100:CFWD2:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD2:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CFWD2:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1
@@ -1931,7 +1931,7 @@ displayFileName {
   0 "gunbSingleIvsQgraph.edl"
 }
 symbols {
-  0 "X=GUN:GUNB:C100:REV2:ITWF_DECAY,Y=GUN:GUNB:C100:REV2:QTWF_DECAY,P=GUN:GUNB:C100:REV2"
+  0 "X=GUN:GUNB:100:CREV2:ITWF_DECAY,Y=GUN:GUNB:100:CREV2:QTWF_DECAY,P=GUN:GUNB:100:CREV2"
 }
 endObjectProperties
 
@@ -1949,7 +1949,7 @@ h 200
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:REV2"
+graphTitle "GUN:GUNB:100:CREV2"
 xLabel "I"
 yLabel "Q"
 fgColor index 14
@@ -1975,13 +1975,13 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:REV2:ITWF_DECAY"
+  0 "GUN:GUNB:100:CREV2:ITWF_DECAY"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV2:QTWF_DECAY"
+  0 "GUN:GUNB:100:CREV2:QTWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV2:QTWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CREV2:QTWF_DECAY.NORD"
 }
 ySigned {
   0 1

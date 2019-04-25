@@ -103,6 +103,25 @@ record (calc, "$(P)REV:PMEAN" )
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
+# Set bit 0 to 1 to mask soft trip on REV1.
+# Set bit 1 to 1 to mask soft trip on REV2
+record( mbboDirect, "$(P)SOFT_TRIP_MASK")
+{
+}
+
+record( calcout, "$(P)SOFT_TRIP")
+{
+	field( INPA, "$(P)REV1:SOFT_TRIP CP MS" )
+	field( INPB, "$(P)SOFT_TRIP_MASK.B0" )
+	field( INPC, "$(P)REV2:SOFT_TRIP CP MS" )
+	field( INPD, "$(P)SOFT_TRIP_MASK.B1" )
+	# value to send to RF on/off control when there is an unmasked trip
+	field( CALC, "(!A || B)&&(!C || D)" )
+	field( OUT, "$(P)RFCTRL")
+	# If there is a trip, keep turning off while it persists. Don't turn on automatically.
+	field( OOPT, "When Zero")
+}
+
 record(calc, "$(P)ACTIVE_PROBE")
 {
 # Translate channel number used by feedback to CAV1/2 signal

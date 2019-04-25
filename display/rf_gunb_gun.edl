@@ -136,7 +136,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:C100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:CREV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -165,7 +165,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:C100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:CREV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -194,7 +194,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:C100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:CFWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -223,7 +223,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:C100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:CFWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -368,7 +368,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:S100:REV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:SREV2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -397,7 +397,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:S100:REV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:SREV1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -426,7 +426,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:S100:FWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:SFWD2:,T=GUN:GUNB:100:RFS2:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -455,7 +455,7 @@ setPosition {
 0 "button"
 }
 symbols {
-0 "WF=GUN:GUNB:S100:FWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
+0 "WF=GUN:GUNB:100:SFWD1:,T=GUN:GUNB:100:RFS1:WF_X_AXIS,WF2=GUN:GUNB:100:NULL:,WF3=GUN:GUNB:100:NULL:,WF4=GUN:GUNB:100:NULL:"
 }
 endObjectProperties
 
@@ -1039,7 +1039,7 @@ x 270
 y 410
 w 160
 h 20
-controlPv "GUN:GUNB:S100:FWD1:AMEAN"
+controlPv "GUN:GUNB:100:SFWD1:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1082,7 +1082,7 @@ x 440
 y 410
 w 160
 h 20
-controlPv "GUN:GUNB:S100:FWD2:AMEAN"
+controlPv "GUN:GUNB:100:SFWD2:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1130,7 +1130,7 @@ x 270
 y 440
 w 160
 h 20
-controlPv "GUN:GUNB:S100:REV1:AMEAN"
+controlPv "GUN:GUNB:100:SREV1:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1174,7 +1174,7 @@ x 440
 y 440
 w 160
 h 20
-controlPv "GUN:GUNB:S100:REV2:AMEAN"
+controlPv "GUN:GUNB:100:SREV2:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1234,7 +1234,7 @@ x 270
 y 510
 w 160
 h 20
-controlPv "GUN:GUNB:C100:FWD1:AMEAN"
+controlPv "GUN:GUNB:100:CFWD1:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1277,7 +1277,7 @@ x 440
 y 510
 w 160
 h 20
-controlPv "GUN:GUNB:C100:FWD2:AMEAN"
+controlPv "GUN:GUNB:100:CFWD2:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1301,7 +1301,7 @@ x 270
 y 540
 w 160
 h 20
-controlPv "GUN:GUNB:C100:REV1:AMEAN"
+controlPv "GUN:GUNB:100:CREV1:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -1345,7 +1345,7 @@ x 440
 y 540
 w 160
 h 20
-controlPv "GUN:GUNB:C100:REV2:AMEAN"
+controlPv "GUN:GUNB:100:CREV2:AMEAN"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"

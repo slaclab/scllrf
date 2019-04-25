@@ -62,7 +62,7 @@ x 275
 y 270
 w 90
 h 25
-controlPv "GUN:GUNB:S100:REV$(N):AMEAN"
+controlPv "GUN:GUNB:100:SREV$(N):AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -225,7 +225,7 @@ x 370
 y 270
 w 65
 h 25
-controlPv "GUN:GUNB:S100:REV$(N):PMEAN"
+controlPv "GUN:GUNB:100:SREV$(N):PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -633,7 +633,7 @@ x 275
 y 310
 w 90
 h 25
-controlPv "GUN:GUNB:S100:FWD$(N):AMEAN"
+controlPv "GUN:GUNB:100:SFWD$(N):AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -659,7 +659,7 @@ x 370
 y 310
 w 65
 h 25
-controlPv "GUN:GUNB:S100:FWD$(N):PMEAN"
+controlPv "GUN:GUNB:100:SFWD$(N):PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -789,7 +789,7 @@ x 275
 y 150
 w 90
 h 25
-controlPv "GUN:GUNB:C100:FWD$(N):AMEAN"
+controlPv "GUN:GUNB:100:CFWD$(N):AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -815,7 +815,7 @@ x 370
 y 150
 w 65
 h 25
-controlPv "GUN:GUNB:C100:FWD$(N):PMEAN"
+controlPv "GUN:GUNB:100:CFWD$(N):PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -973,7 +973,7 @@ x 275
 y 110
 w 90
 h 25
-controlPv "GUN:GUNB:C100:REV$(N):AMEAN"
+controlPv "GUN:GUNB:100:CREV$(N):AMEAN"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -999,7 +999,7 @@ x 370
 y 110
 w 65
 h 25
-controlPv "GUN:GUNB:C100:REV$(N):PMEAN"
+controlPv "GUN:GUNB:100:CREV$(N):PMEAN"
 format "float"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1044,7 +1044,7 @@ x 180
 y 270
 w 90
 h 25
-controlPv "GUN:GUNB:S100:REV$(N):ARSTD"
+controlPv "GUN:GUNB:100:SREV$(N):ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1096,7 +1096,7 @@ x 180
 y 310
 w 90
 h 25
-controlPv "GUN:GUNB:S100:FWD$(N):ARSTD"
+controlPv "GUN:GUNB:100:SFWD$(N):ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1174,7 +1174,7 @@ x 180
 y 150
 w 90
 h 25
-controlPv "GUN:GUNB:C100:FWD$(N):ARSTD"
+controlPv "GUN:GUNB:100:CFWD$(N):ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15
@@ -1200,7 +1200,7 @@ x 180
 y 110
 w 90
 h 25
-controlPv "GUN:GUNB:C100:REV$(N):ARSTD"
+controlPv "GUN:GUNB:100:CREV$(N):ARSTD"
 format "exponential"
 font "helvetica-medium-r-14.0"
 fgColor index 15

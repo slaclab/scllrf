@@ -183,7 +183,7 @@ x 130
 y 200
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV1:AMEAN"
+controlPv "GUN:GUNB:100:SREV1:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -228,7 +228,7 @@ x 130
 y 240
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD1:AMEAN"
+controlPv "GUN:GUNB:100:SFWD1:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -430,7 +430,7 @@ x 220
 y 200
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV2:AMEAN"
+controlPv "GUN:GUNB:100:SREV2:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -454,7 +454,7 @@ x 220
 y 240
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD2:AMEAN"
+controlPv "GUN:GUNB:100:SFWD2:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -555,7 +555,7 @@ x 450
 y 240
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD1:PMEAN"
+controlPv "GUN:GUNB:100:SFWD1:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -579,7 +579,7 @@ x 540
 y 240
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD2:PMEAN"
+controlPv "GUN:GUNB:100:SFWD2:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -691,7 +691,7 @@ x 450
 y 200
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV1:PMEAN"
+controlPv "GUN:GUNB:100:SREV1:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -715,7 +715,7 @@ x 540
 y 200
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV2:PMEAN"
+controlPv "GUN:GUNB:100:SREV2:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -964,7 +964,7 @@ x 130
 y 280
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV1:AMEAN"
+controlPv "GUN:GUNB:100:CREV1:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1009,7 +1009,7 @@ x 130
 y 320
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD1:AMEAN"
+controlPv "GUN:GUNB:100:CFWD1:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1054,7 +1054,7 @@ x 220
 y 280
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV2:AMEAN"
+controlPv "GUN:GUNB:100:CREV2:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1078,7 +1078,7 @@ x 220
 y 320
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD2:AMEAN"
+controlPv "GUN:GUNB:100:CFWD2:AMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1102,7 +1102,7 @@ x 450
 y 320
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD1:PMEAN"
+controlPv "GUN:GUNB:100:CFWD1:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1126,7 +1126,7 @@ x 540
 y 320
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD2:PMEAN"
+controlPv "GUN:GUNB:100:CFWD2:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1150,7 +1150,7 @@ x 450
 y 280
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV1:PMEAN"
+controlPv "GUN:GUNB:100:CREV1:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
@@ -1174,7 +1174,7 @@ x 540
 y 280
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV2:PMEAN"
+controlPv "GUN:GUNB:100:CREV2:PMEAN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 16

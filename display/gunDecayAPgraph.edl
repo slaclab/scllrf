@@ -3231,7 +3231,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:S100:FWD1:AWF_DECAY,PWF=GUN:GUNB:S100:FWD1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:SFWD1:AWF_DECAY,PWF=GUN:GUNB:100:SFWD1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -3249,7 +3249,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:FWD1"
+graphTitle "GUN:GUNB:100:SFWD1"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -3278,10 +3278,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD1:AWF_DECAY"
+  0 "GUN:GUNB:100:SFWD1:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD1:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SFWD1:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -3339,10 +3339,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD1:PWF_DECAY"
+  0 "GUN:GUNB:100:SFWD1:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD1:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SFWD1:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -3368,7 +3368,7 @@ x 420
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD1:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:SFWD1:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3391,7 +3391,7 @@ x 520
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD1:DECAY_BW"
+controlPv "GUN:GUNB:100:SFWD1:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3414,7 +3414,7 @@ x 520
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD1:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:SFWD1:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3437,7 +3437,7 @@ x 420
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD1:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:SFWD1:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3489,7 +3489,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:S100:REV1:AWF_DECAY,PWF=GUN:GUNB:S100:REV1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:SREV1:AWF_DECAY,PWF=GUN:GUNB:100:SREV1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -3507,7 +3507,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:REV1"
+graphTitle "GUN:GUNB:100:SREV1"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -3536,10 +3536,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV1:AWF_DECAY"
+  0 "GUN:GUNB:100:SREV1:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV1:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SREV1:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -3597,10 +3597,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV1:PWF_DECAY"
+  0 "GUN:GUNB:100:SREV1:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV1:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SREV1:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -3626,7 +3626,7 @@ x 620
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV1:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:SREV1:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3649,7 +3649,7 @@ x 720
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV1:DECAY_BW"
+controlPv "GUN:GUNB:100:SREV1:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3672,7 +3672,7 @@ x 720
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV1:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:SREV1:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -3695,7 +3695,7 @@ x 620
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV1:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:SREV1:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4263,7 +4263,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:C100:FWD1:AWF_DECAY,PWF=GUN:GUNB:C100:FWD1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:CFWD1:AWF_DECAY,PWF=GUN:GUNB:100:CFWD1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -4281,7 +4281,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:FWD1"
+graphTitle "GUN:GUNB:100:CFWD1"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -4310,10 +4310,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD1:AWF_DECAY"
+  0 "GUN:GUNB:100:CFWD1:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD1:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CFWD1:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -4371,10 +4371,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD1:PWF_DECAY"
+  0 "GUN:GUNB:100:CFWD1:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD1:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CFWD1:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -4400,7 +4400,7 @@ x 1220
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD1:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:CFWD1:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4423,7 +4423,7 @@ x 1320
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD1:DECAY_BW"
+controlPv "GUN:GUNB:100:CFWD1:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4446,7 +4446,7 @@ x 1320
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD1:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:CFWD1:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4469,7 +4469,7 @@ x 1220
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD1:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:CFWD1:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4521,7 +4521,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:C100:REV1:AWF_DECAY,PWF=GUN:GUNB:C100:REV1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:CREV1:AWF_DECAY,PWF=GUN:GUNB:100:CREV1:PWF_DECAY,T=ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -4539,7 +4539,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:REV1"
+graphTitle "GUN:GUNB:100:CREV1"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -4568,10 +4568,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV1:AWF_DECAY"
+  0 "GUN:GUNB:100:CREV1:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV1:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CREV1:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -4629,10 +4629,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS1:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV1:PWF_DECAY"
+  0 "GUN:GUNB:100:CREV1:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV1:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CREV1:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -4658,7 +4658,7 @@ x 1420
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV1:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:CREV1:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4681,7 +4681,7 @@ x 1520
 y 520
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV1:DECAY_BW"
+controlPv "GUN:GUNB:100:CREV1:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4704,7 +4704,7 @@ x 1520
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV1:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:CREV1:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -4727,7 +4727,7 @@ x 1420
 y 540
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV1:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:CREV1:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -5811,7 +5811,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:S100:FWD2:AWF_DECAY,PWF=GUN:GUNB:S100:FWD2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:SFWD2:AWF_DECAY,PWF=GUN:GUNB:100:SFWD2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -5829,7 +5829,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:FWD2"
+graphTitle "GUN:GUNB:100:SFWD2"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -5858,10 +5858,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD2:AWF_DECAY"
+  0 "GUN:GUNB:100:SFWD2:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD2:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SFWD2:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -5919,10 +5919,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD2:PWF_DECAY"
+  0 "GUN:GUNB:100:SFWD2:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:FWD2:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SFWD2:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -5948,7 +5948,7 @@ x 420
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD2:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:SFWD2:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -5971,7 +5971,7 @@ x 520
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD2:DECAY_BW"
+controlPv "GUN:GUNB:100:SFWD2:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -5994,7 +5994,7 @@ x 520
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD2:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:SFWD2:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -6017,7 +6017,7 @@ x 420
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:S100:FWD2:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:SFWD2:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -6069,7 +6069,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:S100:REV2:AWF_DECAY,PWF=GUN:GUNB:S100:REV2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:SREV2:AWF_DECAY,PWF=GUN:GUNB:100:SREV2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -6087,7 +6087,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:S100:REV2"
+graphTitle "GUN:GUNB:100:SREV2"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -6116,10 +6116,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV2:AWF_DECAY"
+  0 "GUN:GUNB:100:SREV2:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV2:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SREV2:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -6177,10 +6177,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV2:PWF_DECAY"
+  0 "GUN:GUNB:100:SREV2:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:S100:REV2:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:SREV2:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -6206,7 +6206,7 @@ x 620
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV2:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:SREV2:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -6229,7 +6229,7 @@ x 720
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV2:DECAY_BW"
+controlPv "GUN:GUNB:100:SREV2:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -6252,7 +6252,7 @@ x 720
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV2:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:SREV2:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -6275,7 +6275,7 @@ x 620
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:S100:REV2:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:SREV2:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -6843,7 +6843,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:C100:FWD2:AWF_DECAY,PWF=GUN:GUNB:C100:FWD2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:CFWD2:AWF_DECAY,PWF=GUN:GUNB:100:CFWD2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -6861,7 +6861,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:FWD2"
+graphTitle "GUN:GUNB:100:CFWD2"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -6890,10 +6890,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD2:AWF_DECAY"
+  0 "GUN:GUNB:100:CFWD2:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD2:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CFWD2:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -6951,10 +6951,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD2:PWF_DECAY"
+  0 "GUN:GUNB:100:CFWD2:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:FWD2:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CFWD2:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -6980,7 +6980,7 @@ x 1220
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD2:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:CFWD2:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7003,7 +7003,7 @@ x 1320
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD2:DECAY_BW"
+controlPv "GUN:GUNB:100:CFWD2:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7026,7 +7026,7 @@ x 1320
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD2:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:CFWD2:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7049,7 +7049,7 @@ x 1220
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:C100:FWD2:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:CFWD2:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7101,7 +7101,7 @@ displayFileName {
   0 "gunbSingleAPgraph.edl"
 }
 symbols {
-  0 "AWF=GUN:GUNB:C100:REV2:AWF_DECAY,PWF=GUN:GUNB:C100:REV2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
+  0 "AWF=GUN:GUNB:100:CREV2:AWF_DECAY,PWF=GUN:GUNB:100:CREV2:PWF_DECAY,T=ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 endObjectProperties
 
@@ -7119,7 +7119,7 @@ h 100
 # Appearance
 border
 autoScaleBothDirections
-graphTitle "GUN:GUNB:C100:REV2"
+graphTitle "GUN:GUNB:100:CREV2"
 xLabel "Time (s)"
 yLabel "A"
 fgColor index 14
@@ -7148,10 +7148,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV2:AWF_DECAY"
+  0 "GUN:GUNB:100:CREV2:AWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV2:AWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CREV2:AWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -7209,10 +7209,10 @@ xPv {
   0 "ACCL:GUNB:455:RFS2:DECAY_X_AXIS"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV2:PWF_DECAY"
+  0 "GUN:GUNB:100:CREV2:PWF_DECAY"
 }
 nPv {
-  0 "GUN:GUNB:C100:REV2:PWF_DECAY.NORD"
+  0 "GUN:GUNB:100:CREV2:PWF_DECAY.NORD"
 }
 plotUpdateMode {
   0 "xOrY"
@@ -7238,7 +7238,7 @@ x 1420
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV2:DECAY_CONSTANT_B"
+controlPv "GUN:GUNB:100:CREV2:DECAY_CONSTANT_B"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7261,7 +7261,7 @@ x 1520
 y 780
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV2:DECAY_BW"
+controlPv "GUN:GUNB:100:CREV2:DECAY_BW"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7284,7 +7284,7 @@ x 1520
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV2:DECAY_FIT_STDDEV"
+controlPv "GUN:GUNB:100:CREV2:DECAY_FIT_STDDEV"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0
@@ -7307,7 +7307,7 @@ x 1420
 y 800
 w 80
 h 20
-controlPv "GUN:GUNB:C100:REV2:DECAY_STRENGTH"
+controlPv "GUN:GUNB:100:CREV2:DECAY_STRENGTH"
 font "helvetica-medium-r-10.0"
 fgColor index 14
 bgColor index 0

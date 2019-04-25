@@ -395,7 +395,7 @@ x 408
 y 344
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_CABLE"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_CABLE"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -422,7 +422,7 @@ x 408
 y 376
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_COUPLER"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_COUPLER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -449,7 +449,7 @@ x 408
 y 408
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_ATTEN"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_ATTEN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -476,7 +476,7 @@ x 408
 y 488
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_TOTAL"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_TOTAL"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -524,7 +524,7 @@ x 408
 y 440
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_OTHER"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_OTHER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -551,7 +551,7 @@ x 412
 y 180
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):GOLD"
+controlPv "GUN:GUNB:100:SFWD$(SSA):GOLD"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -578,7 +578,7 @@ x 520
 y 180
 w 36
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_REF_PWR.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_REF_PWR.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -603,7 +603,7 @@ x 516
 y 344
 w 36
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_CABLE.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_CABLE.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -628,7 +628,7 @@ x 516
 y 376
 w 36
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_COUPLER.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_COUPLER.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -653,7 +653,7 @@ x 516
 y 408
 w 36
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_ATTEN.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_ATTEN.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -678,7 +678,7 @@ x 516
 y 440
 w 36
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_OTHER.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_OTHER.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -703,7 +703,7 @@ x 516
 y 488
 w 36
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_LOSS_TOTAL.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_LOSS_TOTAL.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -728,7 +728,7 @@ x 408
 y 580
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_SCALE"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_SCALE"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -778,7 +778,7 @@ x 572
 y 344
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_LOSS_CABLE"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_LOSS_CABLE"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -805,7 +805,7 @@ x 572
 y 376
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_LOSS_COUPLER"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_LOSS_COUPLER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -832,7 +832,7 @@ x 572
 y 408
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_LOSS_ATTEN"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_LOSS_ATTEN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -859,7 +859,7 @@ x 572
 y 488
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_LOSS_TOTAL"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_LOSS_TOTAL"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -884,7 +884,7 @@ x 572
 y 440
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_LOSS_OTHER"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_LOSS_OTHER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -911,7 +911,7 @@ x 576
 y 180
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_REF_PWR"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_REF_PWR"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -1088,7 +1088,7 @@ x 572
 y 580
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_SCALE"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_SCALE"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -2154,7 +2154,7 @@ x 1144
 y 344
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_CABLE"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_CABLE"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2181,7 +2181,7 @@ x 1144
 y 376
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_COUPLER"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_COUPLER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2208,7 +2208,7 @@ x 1144
 y 408
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_ATTEN"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_ATTEN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2235,7 +2235,7 @@ x 1144
 y 488
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_TOTAL"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_TOTAL"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2283,7 +2283,7 @@ x 1144
 y 440
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_OTHER"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_OTHER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2310,7 +2310,7 @@ x 1148
 y 180
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_REF_PWR"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_REF_PWR"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2337,7 +2337,7 @@ x 1256
 y 180
 w 36
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_REF_PWR.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_REF_PWR.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2362,7 +2362,7 @@ x 1252
 y 344
 w 36
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_CABLE.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_CABLE.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2387,7 +2387,7 @@ x 1252
 y 376
 w 36
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_COUPLER.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_COUPLER.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2412,7 +2412,7 @@ x 1252
 y 408
 w 36
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_ATTEN.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_ATTEN.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2437,7 +2437,7 @@ x 1252
 y 440
 w 36
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_OTHER.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_OTHER.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2462,7 +2462,7 @@ x 1252
 y 488
 w 36
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_LOSS_TOTAL.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_LOSS_TOTAL.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2487,7 +2487,7 @@ x 1144
 y 580
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_SCALE"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_SCALE"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -2513,7 +2513,7 @@ x 1312
 y 344
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_CABLE"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_CABLE"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2540,7 +2540,7 @@ x 1312
 y 376
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_COUPLER"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_COUPLER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2567,7 +2567,7 @@ x 1312
 y 408
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_ATTEN"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_ATTEN"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2594,7 +2594,7 @@ x 1312
 y 488
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_TOTAL"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_TOTAL"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2619,7 +2619,7 @@ x 1312
 y 440
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_OTHER"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_OTHER"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2646,7 +2646,7 @@ x 1316
 y 180
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_REF_PWR"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_REF_PWR"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -2673,7 +2673,7 @@ x 1424
 y 180
 w 36
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_REF_PWR.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_REF_PWR.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2698,7 +2698,7 @@ x 1420
 y 344
 w 36
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_CABLE.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_CABLE.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2723,7 +2723,7 @@ x 1420
 y 376
 w 36
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_COUPLER.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_COUPLER.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2748,7 +2748,7 @@ x 1420
 y 408
 w 36
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_ATTEN.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_ATTEN.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2773,7 +2773,7 @@ x 1420
 y 440
 w 36
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_OTHER.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_OTHER.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2798,7 +2798,7 @@ x 1420
 y 488
 w 36
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_LOSS_TOTAL.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_LOSS_TOTAL.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -2823,7 +2823,7 @@ x 1312
 y 580
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_SCALE"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_SCALE"
 format "gfloat"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
@@ -3223,7 +3223,7 @@ x 412
 y 228
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):CAL_SCALE_CALC.D"
+controlPv "GUN:GUNB:100:SFWD$(SSA):CAL_SCALE_CALC.D"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3250,7 +3250,7 @@ x 576
 y 228
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):CAL_SCALE_CALC.D"
+controlPv "GUN:GUNB:100:SREV$(SSA):CAL_SCALE_CALC.D"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3358,7 +3358,7 @@ x 1148
 y 228
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):CAL_SCALE_CALC.D"
+controlPv "GUN:GUNB:100:CFWD$(SSA):CAL_SCALE_CALC.D"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3385,7 +3385,7 @@ x 1316
 y 228
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):CAL_SCALE_CALC.D"
+controlPv "GUN:GUNB:100:CREV$(SSA):CAL_SCALE_CALC.D"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3465,7 +3465,7 @@ x 408
 y 760
 w 104
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):GOLD"
+controlPv "GUN:GUNB:100:SFWD$(SSA):GOLD"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3492,7 +3492,7 @@ x 516
 y 760
 w 54
 h 24
-controlPv "GUN:GUNB:S100:FWD$(SSA):GOLD.EGU"
+controlPv "GUN:GUNB:100:SFWD$(SSA):GOLD.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -3541,7 +3541,7 @@ x 572
 y 760
 w 104
 h 24
-controlPv "GUN:GUNB:S100:REV$(SSA):GOLD"
+controlPv "GUN:GUNB:100:SREV$(SSA):GOLD"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3769,7 +3769,7 @@ x 1144
 y 760
 w 104
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):GOLD"
+controlPv "GUN:GUNB:100:CFWD$(SSA):GOLD"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3796,7 +3796,7 @@ x 1252
 y 760
 w 54
 h 24
-controlPv "GUN:GUNB:C100:FWD$(SSA):GOLD.EGU"
+controlPv "GUN:GUNB:100:CFWD$(SSA):GOLD.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm
@@ -3821,7 +3821,7 @@ x 1312
 y 760
 w 104
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):GOLD"
+controlPv "GUN:GUNB:100:CREV$(SSA):GOLD"
 font "helvetica-medium-r-12.0"
 fontAlign "center"
 fgColor index 14
@@ -3848,7 +3848,7 @@ x 1420
 y 760
 w 54
 h 24
-controlPv "GUN:GUNB:C100:REV$(SSA):GOLD.EGU"
+controlPv "GUN:GUNB:100:CREV$(SSA):GOLD.EGU"
 font "helvetica-medium-r-12.0"
 fgColor index 14
 fgAlarm

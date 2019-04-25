@@ -118,10 +118,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:FWD1:ITWF"
+  0 "GUN:GUNB:100:SFWD1:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD1:QTWF"
+  0 "GUN:GUNB:100:SFWD1:QTWF"
 }
 xSigned {
   0 1
@@ -171,10 +171,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:FWD2:ITWF"
+  0 "GUN:GUNB:100:SFWD2:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:S100:FWD2:QTWF"
+  0 "GUN:GUNB:100:SFWD2:QTWF"
 }
 xSigned {
   0 1
@@ -224,10 +224,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:REV1:ITWF"
+  0 "GUN:GUNB:100:SREV1:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV1:QTWF"
+  0 "GUN:GUNB:100:SREV1:QTWF"
 }
 xSigned {
   0 1
@@ -277,10 +277,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:S100:REV2:ITWF"
+  0 "GUN:GUNB:100:SREV2:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:S100:REV2:QTWF"
+  0 "GUN:GUNB:100:SREV2:QTWF"
 }
 xSigned {
   0 1
@@ -505,10 +505,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:FWD1:ITWF"
+  0 "GUN:GUNB:100:CFWD1:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD1:QTWF"
+  0 "GUN:GUNB:100:CFWD1:QTWF"
 }
 xSigned {
   0 1
@@ -558,10 +558,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:FWD2:ITWF"
+  0 "GUN:GUNB:100:CFWD2:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:C100:FWD2:QTWF"
+  0 "GUN:GUNB:100:CFWD2:QTWF"
 }
 xSigned {
   0 1
@@ -611,10 +611,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:REV1:ITWF"
+  0 "GUN:GUNB:100:CREV1:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV1:QTWF"
+  0 "GUN:GUNB:100:CREV1:QTWF"
 }
 xSigned {
   0 1
@@ -664,10 +664,10 @@ y2Max 1
 # Trace Properties
 numTraces 1
 xPv {
-  0 "GUN:GUNB:C100:REV2:ITWF"
+  0 "GUN:GUNB:100:CREV2:ITWF"
 }
 yPv {
-  0 "GUN:GUNB:C100:REV2:QTWF"
+  0 "GUN:GUNB:100:CREV2:QTWF"
 }
 xSigned {
   0 1
