@@ -10,6 +10,9 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-19: Added soft trip on high reflection level mid-pulse. Naming convention change.
+				CATERs 1400006, 1400094, 141451, 141450,141473
+
 scllrf-R1-0-18: Also migrating to EPICS 7
 scllrf-R1-0-18-RC2: Hard coded which forward phase to use in CW detune. Experimental
 				frequency correction. Phase mean calculation uses mean I and Q to avoid
