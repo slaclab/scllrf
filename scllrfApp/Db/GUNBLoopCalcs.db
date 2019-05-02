@@ -757,7 +757,7 @@ field(INPF, "$(P)PRC:ADC2_MIN_R CP MS")
 field(INPG, "$(P)PRC:ADC3_MIN_R CP MS")
 field(INPH, "$(P)PRC:ADC4_MIN_R CP MS")
 field(INPI, "$(P)PRC:DECAY_SAMP_PER_W CP MS")
-field(INPJ, "$(P)PRC:CH_KEEP_W CP MS")
+field(INPJ, "$(P)PRC:KEEP_W CP MS")
 field(INPK, "$(P)PRC:DDSA_PHSTEP_H_W CP MS")
 }
 
