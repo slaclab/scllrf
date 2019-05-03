@@ -104,7 +104,7 @@ const unsigned TraceData::SHIFT_BASE = 4;
 const float TraceData::CLK_FREQ = 1320e6/14; // LCLS-II value from app.py
 
 const unsigned TraceData::SLOW_OFFSET = 17; // register address offset from start of slow buffer to the data we care about
-
+epicsMutexId TraceData::newmatMutexID_ = epicsMutexCreate();
 TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex,
 		int *iRawParamIndex, int *qRawParamIndex, int *aRawParamIndex, int *pRawParamIndex,
 		int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
@@ -126,7 +126,7 @@ TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex
 	const std::string strThreadName = strStmThreadName.str();
 
 	/* Create the epicsMutex for protecting newmat library from its thread-unsafe self */
-	newmatMutexID_ = epicsMutexCreate();
+
 	if (!newmatMutexID_) {
 		printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
 		return;
