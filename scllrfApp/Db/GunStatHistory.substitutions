@@ -32,16 +32,12 @@ pattern
 {   "GUN:GUNB:100:DRV2A:ADC_MAX-MIN", "counts" }
 {   "GUN:GUNB:100:DRV2A:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:DRV2A:PMEAN", "deg" }
-{   "GUN:GUNB:100:DRV3:AMEAN", "sqrt(W)" }
-{   "GUN:GUNB:100:DRV4:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:FWD1:ADC_MAX-MIN", "counts" }
 {   "GUN:GUNB:100:FWD1:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:FWD1:PMEAN", "deg" }
 {   "GUN:GUNB:100:FWD2:ADC_MAX-MIN", "counts" }
 {   "GUN:GUNB:100:FWD2:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:FWD2:PMEAN", "deg" }
-{   "GUN:GUNB:100:FWD3:AMEAN", "sqrt(W)" }
-{   "GUN:GUNB:100:FWD4:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:FWD:AMEAN", "sqrt(W)" }
 {   "GUN:GUNB:100:FWD:PMEAN", "deg" }
 {   "GUN:GUNB:100:LASR:ADC_MAX-MIN", "counts" }
