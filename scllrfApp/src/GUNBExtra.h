@@ -63,6 +63,7 @@ public:
 	void updateRelToAbsIdx();
 	uint32_t GetEndAddr(){return regEndAddr_;}
 	asynStatus ProcessTraceDataReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
+	epicsMutexId newmatMutexID_; // The newmat library is not thread safe. Only allow one thread at a time to use it.
 //	asynStatus ProcessSlowDataReadback(const FpgaReg *pFromFpga); // parse register data, write to various parameters
 //	unsigned int nextTag(){tag_ = ((tag_+1-4) % (unsigned int) pow(2,7))+4; return tag_;};
 	epicsFloat32 scaleFactor_[maxWavesCount]; // Separate scale factors for I and Q

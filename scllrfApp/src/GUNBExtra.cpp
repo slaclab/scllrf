@@ -125,6 +125,13 @@ TraceData::TraceData(GUNBExtra *pDriver, DataBuffer *pBuffer, int *rawParamIndex
 	strStmThreadName << pDriver->portName << hex << regStartAddr_;
 	const std::string strThreadName = strStmThreadName.str();
 
+	/* Create the epicsMutex for protecting newmat library from its thread-unsafe self */
+	newmatMutexID_ = epicsMutexCreate();
+	if (!newmatMutexID_) {
+		printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
+		return;
+	}
+
 	for (i = 0; i < maxWavesCount; i++)
 	{
 		std::fill(pIQBuf_[i], pIQBuf_[i] + pBuffer->RegCount, 0);
@@ -282,8 +289,6 @@ void GUNBExtra::testCannedResponse()
 	// regex that translates to the right format.
 
 #ifdef TEST_CANNED_RESPONSE
-	bool dummy; // For the waveform flag
-
 	pasynTrace->setTraceMask((pasynUserSelf), 0xb);
 	pasynTrace->setTraceMask(pOctetAsynUser_, 0xb);
 
@@ -539,10 +544,10 @@ static void TraceDataRequesterC(void *drvPvt)
 	{
 		pTraceData->TraceDataRequester();
 	}
-	catch(BaseException)
+	catch(BaseException e)
 	{
 		cout << "Unhandeld newmat exception in TraceDataRequester, thread exiting" << endl;
-		cout<<BaseException::what() <<endl;
+		cout<<e.what() <<endl;
 	}
 	catch(std::exception e)
 	{
@@ -577,20 +582,7 @@ Matrix TraceData::PseudoInverse(const Matrix & m)
 	// calculate SVD decomposition
 	Matrix U,V;
 	DiagonalMatrix D;
-	try
-	{
-		SVD(m,D,U,V);
-	}
-	catch(BaseException E)
-	{
-		cout<<"newmat related exception in " << __PRETTY_FUNCTION__ << ": " << E.what() <<endl;
-	}
-	catch(std::exception e)
-	{
-		cout << "non-newmat exception type in PseudoInverse call to SVD" << endl;
-		cout<< e.what() <<endl;
-	}
-
+	SVD(m,D,U,V);
 
 	Matrix Dinv(cols,cols);
 	Dinv = 0;
@@ -612,9 +604,11 @@ float* TraceData::CavityDecayConstantCompute(
 {
 	unsigned int length=LEN - start;
 	double invdt = TraceData::CLK_FREQ / TraceData::CIC_PERIOD;
+	double energy_hat = 0.0;
+
+	epicsMutexLock(newmatMutexID_);
 	Matrix X(2*length-1,2);
 	Matrix Y(2*length-1,1);
-	double energy_hat = 0.0;
 	for (unsigned int i=0; i<length-1;i++) {
 		int j = start+i;
 		double xr1 = D_REAL(j);
@@ -630,39 +624,55 @@ float* TraceData::CavityDecayConstantCompute(
 
 		energy_hat = energy_hat + xr1*xr1+xi1*xi1;
 	}
-	Matrix A = PseudoInverse(X) * Y;
-	double ar = -A(1,1);
-	double ai = A(2,1);
-	// ai.dt = w.dt = 2*pi*f.dt
-	// 1/dt = 1.3675e+06
-	//  double invdt = 1.7857e+06;
-	ai = (ai * invdt) / (2 * M_PI);
-	ar = (ar * invdt) / (2 * M_PI);
-	double arr = A(1,1);
-	double aii = A(2,1);
-	double residue = 0.0;
-	for (unsigned int i=0; i<2*length-1;i++) {
-		double x1 = X(i+1,1);
-		double x2 = X(i+1,2);
-		double y = Y(i+1,1);
-		double r = (y-(x1*arr)-(x2*aii));
-		residue = residue + r*r;
-	}
-	double stdev = sqrt(residue/(2*length));
+	try
+	{
+		Matrix A = PseudoInverse(X) * Y;
+		double ar = -A(1,1);
+		double ai = A(2,1);
+		// ai.dt = w.dt = 2*pi*f.dt
+		// 1/dt = 1.3675e+06
+		//  double invdt = 1.7857e+06;
+		ai = (ai * invdt) / (2 * M_PI);
+		ar = (ar * invdt) / (2 * M_PI);
+		double arr = A(1,1);
+		double aii = A(2,1);
+		double residue = 0.0;
+		for (unsigned int i=0; i<2*length-1;i++) {
+			double x1 = X(i+1,1);
+			double x2 = X(i+1,2);
+			double y = Y(i+1,1);
+			double r = (y-(x1*arr)-(x2*aii));
+			residue = residue + r*r;
+		}
+		epicsMutexUnlock(newmatMutexID_);
+
+		double stdev = sqrt(residue/(2*length));
 #ifndef TEST_MODE
-	arout->set_value(ar*1000);
-	aiout->set_value(ai*1000);
-	strength->set_value(energy_hat);
-	stddev->set_value(stdev*1000);
+		arout->set_value(ar*1000);
+		aiout->set_value(ai*1000);
+		strength->set_value(energy_hat);
+		stddev->set_value(stdev*1000);
 #else
-	// PVs: decay_constant_b, decay_strength, decay_fit_stddev
-	pDriver_->setDoubleParam(ch, *decayBWParamIndex_, ar);
-	pDriver_->setDoubleParam(ch, *decayConstantBParamIndex_, ai);
-	pDriver_->setDoubleParam(ch, *decayStrengthParamIndex_, energy_hat);
-	pDriver_->setDoubleParam(ch, *decayFitStddevParamIndex_, stdev);
-	asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
-			"Ch. %u: Bandwidth %8.1f Hz  Detune %8.1f Hz  Signal strength %7f  Stdev %5.3f\n", ch, ar, ai, energy_hat, stdev);
+		// PVs: decay_constant_b, decay_strength, decay_fit_stddev
+		pDriver_->setDoubleParam(ch, *decayBWParamIndex_, ar);
+		pDriver_->setDoubleParam(ch, *decayConstantBParamIndex_, ai);
+		pDriver_->setDoubleParam(ch, *decayStrengthParamIndex_, energy_hat);
+		pDriver_->setDoubleParam(ch, *decayFitStddevParamIndex_, stdev);
+		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
+				"Ch. %u: Bandwidth %8.1f Hz  Detune %8.1f Hz  Signal strength %7f  Stdev %5.3f\n", ch, ar, ai, energy_hat, stdev);
 #endif
+	}
+	catch(BaseException E)
+	{
+		cout<<"newmat related exception in " << __PRETTY_FUNCTION__ << ": " << E.what() <<endl;
+		epicsMutexUnlock(newmatMutexID_);
+	}
+	catch(std::exception e)
+	{
+		cout << "non-newmat exception type in PseudoInverse call to SVD" << endl;
+		cout<< e.what() <<endl;
+		epicsMutexUnlock(newmatMutexID_);
+	}
 	return NULL;
 }
 
@@ -831,10 +841,10 @@ void TraceData::TraceDataRequester()
 								{
 									CavityDecayConstantCompute(pRawIQBuf_[Iindex], pRawIQBuf_[Qindex], 3, chIndex);
 								}
-								catch(BaseException)
+								catch(BaseException e)
 								{
 									cout << "Newmat exception in decay constant computation not otherwise handled" << endl;
-									cout<<BaseException::what() <<endl;
+									cout<<e.what() <<endl;
 								}
 								catch(std::exception e)
 								{

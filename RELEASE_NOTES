@@ -10,6 +10,9 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-20: newmat10 is not thread safe. Adding mutexes to make sure only one thread at a time uses it.
+		Also adjusting exception handling to make sure bad data is not used or sent to PVs.
+
 scllrf-R1-0-19: Added soft trip on high reflection level mid-pulse. Naming convention change.
 				CATERs 1400006, 1400094, 141451, 141450,141473
 
