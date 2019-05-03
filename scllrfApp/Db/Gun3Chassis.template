@@ -80,7 +80,7 @@ record (calc, "$(P)REV:AMEAN" )
 }
 record (calc, "$(P)REV:PWR" )
 {
-	field( DESC, "Total reverse amplitude" )
+	field( DESC, "Total reverse power" )
 	field( INPA, "$(P)REV1:PWR CP MS" )
 	field( INPB, "$(P)REV2:PWR CP MS" )
 	field( CALC, "A+B")
@@ -88,25 +88,13 @@ record (calc, "$(P)REV:PWR" )
 	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
-record (calc, "$(P)REV:PMEAN" )
-{
-	field( DESC, "Total reverse amplitude" )
-	field( INPA, "$(P)REV1:PMEAN CP MS" )
-	field( INPB, "$(P)REV2:PMEAN CP MS" )
-	field( INPC, "$(P)PRC:RFS1A:PMEAN CP" )
-	field( INPD, "$(P)PRC:RFS1B:PMEAN CP" )
-	field( INPE, "$(P)PRC:RFS2A:PMEAN CP" )
-	field( INPF, "$(P)PRC:RFS2B:PMEAN CP" )
-	field( INPG, "$(P)FWD:USE_AS_REF CP")
-	field( CALC, "G=0?A:G=1?B:G=2?D:G=3?C:G=4?F:E")
-	field(EGU, "sqrt(W)")
-	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
-}
-
 # Set bit 0 to 1 to mask soft trip on REV1.
 # Set bit 1 to 1 to mask soft trip on REV2
 record( mbboDirect, "$(P)SOFT_TRIP_MASK")
 {
+# Bypassed by default
+	field( VAL, "3")
+	info( autosaveFields, "VAL")
 }
 
 record( calcout, "$(P)SOFT_TRIP")
@@ -117,9 +105,30 @@ record( calcout, "$(P)SOFT_TRIP")
 	field( INPD, "$(P)SOFT_TRIP_MASK.B1" )
 	# value to send to RF on/off control when there is an unmasked trip
 	field( CALC, "(!A || B)&&(!C || D)" )
-	field( OUT, "$(P)RFCTRL")
+	field( OUT, "$(P)SET_ZERO_AMPLITUDE PP")
 	# If there is a trip, keep turning off while it persists. Don't turn on automatically.
 	field( OOPT, "When Zero")
+}
+
+record( dfanout, "$(P)SET_ZERO_AMPLITUDE")
+{
+	field( OUTA, "$(P)AOPEN PP" )
+	field( OUTB, "$(P)ADES PP")
+}
+
+record (calc, "$(P)REV:PMEAN" )
+{
+	field( DESC, "Active reverse phase" )
+	field( INPA, "$(P)REV1:PMEAN CP MS" )
+	field( INPB, "$(P)REV2:PMEAN CP MS" )
+	field( INPC, "$(P)PRC:RFS1A:PMEAN CP" )
+	field( INPD, "$(P)PRC:RFS1B:PMEAN CP" )
+	field( INPE, "$(P)PRC:RFS2A:PMEAN CP" )
+	field( INPF, "$(P)PRC:RFS2B:PMEAN CP" )
+	field( INPG, "$(P)FWD:USE_AS_REF CP")
+	field( CALC, "G=0?A:G=1?B:G=2?D:G=3?C:G=4?F:E")
+	field(EGU, "sqrt(W)")
+	info( autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
 
 record(calc, "$(P)ACTIVE_PROBE")
