@@ -563,7 +563,7 @@ record( ao, "$(P)AP_KI_Sync")
 }
 
 # Defined in GUNBRegisters, adding autosave here.
-record(ao, "$(P)FDBKSEL_W")
+record(ao, "$(P)PRC:FDBKSEL_W")
 {
 	field( PINI, "YES" )
 	info( autosaveFields, "VAL")
