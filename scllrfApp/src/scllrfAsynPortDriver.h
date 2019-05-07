@@ -248,6 +248,7 @@ public:
 	virtual void responseHandler(); // Readback loop, processes data from FPGAs when it arrives
 	virtual asynStatus wakeupReader(); // Alert responseHandler to expect new data
 	virtual void init();
+	virtual void shutdown();
 	void singleMessageQueuer(); // Accumulates individual requests until they can be sent together.
 
 protected:

@@ -267,18 +267,8 @@ GUNBExtra::GUNBExtra(const char *drvPortName, const char *netPortName)
 
 GUNBExtra::~GUNBExtra()
 {
-	isShuttingDown_ = true;
-	epicsEventSignal(reqWaveEventId_);
-	wakeupPoller();
-	wakeupReader();
-	epicsThreadSleep(0.3); // Allow threads to run and exit
-	wakeupPoller(); // call this twice in case the poller was never set to run
-	wakeupReader();
-	epicsThreadSleep(0.3); // Allow threads to run and exit
-	wakeupReader();
-//	pasynOctetSyncIO->disconnect(pOctetAsynUser_);
-//	pasynCommonSyncIO->disconnectDevice(pCommonAsynUser_);
-//	pasynCommonSyncIO->disconnect(pCommonAsynUser_);
+	decayData_.reqTraceDataEvent.signal();
+	traceData_.reqTraceDataEvent.signal();
 }
 
 // To test how the code handles responses from the FPGA, compose a simulated response here.
@@ -554,7 +544,7 @@ static void TraceDataRequesterC(void *drvPvt)
 		cout << "Unhandeld exception in TraceDataRequester, thread exiting" << endl;
 		cout<< e.what() <<endl;
 	}
-	//printf("%s: exiting\n", __PRETTY_FUNCTION__);
+	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
 /** Starts the poller thread.
@@ -701,6 +691,11 @@ void TraceData::TraceDataRequester()
 
 		if (!reqTraceDataEvent.wait(pollTimeout))
 		{
+			if (pDriver_->isShuttingDown_)
+			{
+				return;
+			}
+
 			if(fastUpdate)
 			{
 				pDriver_->_singleMsgQ.send(&statusRequest, sizeof( FpgaReg ));
@@ -712,11 +707,6 @@ void TraceData::TraceDataRequester()
 				return;
 			}
 			continue;
-		}
-
-		if (pDriver_->isShuttingDown_)
-		{
-			return;
 		}
 
 		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
@@ -753,6 +743,10 @@ void TraceData::TraceDataRequester()
 			// Wait for date to be read back, then process I/Q to A/P and publish
 			if ( rawWaveRead_.wait(pollTimeout)) // wait returns false if timeout, e.g. dropped reply
 			{
+				if (pDriver_->isShuttingDown_)
+				{
+					return;
+				}
 				unsigned int rel_chan_ix = 0;
 				unsigned int nPoints = nChan>0? regBuffer_->RegCount/nChan: 0;
 				unsigned int i;
@@ -1182,10 +1176,7 @@ asynStatus GUNBExtra::processRegReadback(const FpgaReg *pFromFpga)
 		{
 			// This one is also processed by grandparent class scllrfAsynPortDriver
 			GUNBDriver::processRegReadback(pFromFpga);
-//			if(pFromFpga->addr<= (GitSha1JRAdr|flagReadMask)+1)
-//			{ ////XXXX This is all that is implemented at the moment, remove "if" later
-				scllrfAsynPortDriver::processRegReadback(pFromFpga);
-//			}
+			scllrfAsynPortDriver::processRegReadback(pFromFpga);
 		}
 		else if ((pFromFpga->addr >= (RegmirrorRAdr|flagReadMask)) &&
 				(pFromFpga->addr < ((RegmirrorRAdr|flagReadMask) + RegmirrorBuf.RegCount)))

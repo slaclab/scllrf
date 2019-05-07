@@ -26,6 +26,7 @@
 #include "scllrfAsynPortDriver.h"
 #include <asynOctetSyncIO.h>
 #include <asynCommonSyncIO.h>
+#include <epicsExit.h>
 #include <limits>
 #include <netinet/in.h>
 #include <math.h>
@@ -124,6 +125,12 @@ void DataBuffer::fillWaveRequestMsg() /**< For requesting a waveform, fill canne
 		reqData[msgOffset].data = blankData;
 	}
 	htonFpgaRegArray(reqData.data(), buffSize);
+}
+
+void scllrfAsynPortDriverAtExit(void * driver)
+{
+	scllrfAsynPortDriver *exitingDriver = (scllrfAsynPortDriver*) driver;
+	exitingDriver->shutdown();
 }
 
 /** Constructor for the scllrfAsynPortDriver class.
@@ -233,26 +240,27 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
 	singleMsgQueueEventId_ = epicsEventMustCreate(epicsEventEmpty);
 	startSingleMessageQueuer(netPortName);
 	printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
+
+	epicsAtExit(scllrfAsynPortDriverAtExit, this);
 }
 
 void scllrfAsynPortDriver::init()
 {
 	return;
 }
-scllrfAsynPortDriver::~scllrfAsynPortDriver()
+
+void scllrfAsynPortDriver::shutdown()
 {
 	isShuttingDown_ = true;
+	wakeupPoller();
+	wakeupReader();
+}
+
+scllrfAsynPortDriver::~scllrfAsynPortDriver()
+{
 	FpgaReg finalMsg = {0,blankData};
 	htonFpgaRegArray(&finalMsg, sizeof(FpgaReg));
 	_singleMsgQ.send(&finalMsg, sizeof(FpgaReg));
-	epicsThreadSleep(0.1); // Allow threads to run and exit
-	wakeupPoller();
-	wakeupReader();
-	epicsThreadSleep(0.1); // Allow threads to run and exit
-	wakeupPoller(); // call this twice in case the poller was never set to run
-	wakeupReader();
-	epicsThreadSleep(0.1); // Allow threads to run and exit
-	wakeupReader();
 	pasynOctetSyncIO->disconnect(pOctetAsynUser_);
 	pasynCommonSyncIO->disconnectDevice(pCommonAsynUser_);
 	pasynCommonSyncIO->disconnect(pCommonAsynUser_);
@@ -317,7 +325,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 	unsigned int sendBufRegCount;
 	printf("\n%s \n", __PRETTY_FUNCTION__);
 
-// Main polling loop
+	// Main polling loop
 	while (1)
 	{
 
@@ -329,7 +337,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 
 		// Block and wait for incoming single register writes
 		sendBufByteCount+=_singleMsgQ.receive(&pMsgBuff[1],sizeof(pMsgBuff));
-//		status = epicsEventWait(reqWaveEventId_);
+
 		if(sendBufByteCount%sizeof(FpgaReg) != 0)
 		{
 			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
@@ -342,7 +350,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 
 		if (isShuttingDown_)
 		{
-			printf("%s exiting.\n", __PRETTY_FUNCTION__);
+			printf("%s got shutdown flag.\n", __PRETTY_FUNCTION__);
 			break;
 		}
 		if(sendBufByteCount < sizeof(FpgaReg))// receive returned -1
@@ -382,16 +390,32 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 			sendBufRegCount = minRegPerMsg;
 		}
 
-		sendRegRequest(pMsgBuff, sendBufRegCount);
-		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-				"%s %s: done sending %u queued requests\n", portName, __PRETTY_FUNCTION__, sendBufRegCount);
+		if (sendRegRequest(pMsgBuff, sendBufRegCount) != asynSuccess)
+		{
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s %s: stopping. %s\n", portName, __PRETTY_FUNCTION__,
+					pOctetAsynUser_->errorMessage);
+			if (isShuttingDown_)
+			{
+				printf("%s got shutdown flag.\n", __PRETTY_FUNCTION__);
+				break;
+			}
+		}
+		else
+		{
+			asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
+					"%s %s: done sending %u queued requests\n", portName, __PRETTY_FUNCTION__, sendBufRegCount);
+		}
 	}
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
 asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
-asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRETTY_FUNCTION__, value, mask);
+	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRETTY_FUNCTION__, value, mask);
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
@@ -470,6 +494,11 @@ asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRE
  * \param[in] value Pointer to the value to read. */
 asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
+
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
@@ -548,6 +577,11 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
  * \param[in] value Pointer to the value to read. */
 asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *value)
 {
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
+
 	int function = pasynUser->reason;
 //	int addr = 0;
 	asynStatus status = asynSuccess;
@@ -591,6 +625,11 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *value,
 								size_t nElements, size_t *nIn)
 {
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
+
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
 	int function = pasynUser->reason;
@@ -606,6 +645,11 @@ asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *v
 asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 *value,
 								size_t nElements, size_t *nIn)
 {
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
+
 	asynStatus status;
 	epicsInt32 *value32 = new epicsInt32[nElements];
 	int function = pasynUser->reason;
@@ -627,6 +671,11 @@ asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 
 asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 *value,
 								size_t nElements, size_t *nIn)
 {
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
+
 	int function = pasynUser->reason;
 	asynStatus status = asynSuccess;
 //	int nCopy;
@@ -698,7 +747,7 @@ asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 
 	}
 
 	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
-	sendRegRequest(regSendBuf, uOutBuffIndex);
+	status = sendRegRequest(regSendBuf, uOutBuffIndex);
 	*nIn = nElements;
 	if (status)
 		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
@@ -742,6 +791,11 @@ asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16
 asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 								size_t nElements)
 {
+	if (isShuttingDown_)
+	{
+		return asynSuccess;
+	}
+
 	int function = pasynUser->reason;
 	asynStatus status = asynSuccess;
 //	int nCopy;
@@ -813,7 +867,7 @@ asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32
 	}
 
 	htonFpgaRegArray(regSendBuf, uOutBuffIndex);
-	sendRegRequest(regSendBuf, uOutBuffIndex);
+	status = sendRegRequest(regSendBuf, uOutBuffIndex);
 
 	if (status)
 		epicsSnprintf(pasynUser->errorMessage, pasynUser->errorMessageSize,
@@ -886,6 +940,10 @@ void scllrfAsynPortDriver::regPoller()
 			status = (bool) epicsEventWaitOK;
 		}
 
+		if (isShuttingDown_) {
+			break;
+		}
+
 		if (status == epicsEventWaitOK)
 		{
 			/* We got an event, rather than a timeout.  This is because other software
@@ -900,9 +958,6 @@ void scllrfAsynPortDriver::regPoller()
 				continue;
 			}
 		}
-		if (isShuttingDown_) {
-			break;
-		}
 
 		pTempRegMsg = pPolledRegMsg_;
 		regBuffCount = PolledRegMsgSize_;
@@ -911,13 +966,7 @@ void scllrfAsynPortDriver::regPoller()
 		// If so, it is expected to have an extra "nonce" element every
 		// maxMsgSize/sizeof(FpgaReg)
 		sendBigBuffer(pTempRegMsg, regBuffCount);
-//		while (regBuffCount > maxMsgSize/sizeof(FpgaReg))
-//		{
-//			sendRegRequest(pTempRegMsg, maxMsgSize/sizeof(FpgaReg));
-//			regBuffCount -= maxMsgSize/sizeof(FpgaReg);
-//			pTempRegMsg = &pTempRegMsg[maxMsgSize/sizeof(FpgaReg)];
-//		}
-//		sendRegRequest(pTempRegMsg, regBuffCount);
+
 		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
 				"%s: woke up and sent a poll\n", __PRETTY_FUNCTION__);
 	}
@@ -946,6 +995,8 @@ asynStatus scllrfAsynPortDriver::sendBigBuffer(FpgaReg *regBuffer, unsigned int 
 		status = sendRegRequest(regBuffer, maxMsgSize/sizeof(FpgaReg));
 		if(status != asynSuccess)
 		{
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s %s: write failed with status %u\n", portName, __PRETTY_FUNCTION__,
+					status);
 			return status;
 		}
 		regBuffRemainingCount -= maxMsgSize/sizeof(FpgaReg);
@@ -953,6 +1004,11 @@ asynStatus scllrfAsynPortDriver::sendBigBuffer(FpgaReg *regBuffer, unsigned int 
 	}
 
 	status = sendRegRequest(regBuffer, regBuffRemainingCount);
+	if(status != asynSuccess)
+	{
+		asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s %s: write failed with status %u\n", portName, __PRETTY_FUNCTION__,
+				status);
+	}
 	return status;
 }
 
@@ -1301,20 +1357,6 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 		// The nonce in pRegReadback[0] contains the message size. Move pointer to the next message.
 		pRegReadback = & pRegReadback[pRegReadback[0].data/sizeof(FpgaReg)];
 	} // while(bytesLeft > 0)
-
-//	////XXXX Testing to be sure this section is obsolete
-//	// If the waveIsReady flag is set,
-//	if (waveIsReady &&
-//			// and there isn't a pending waveform read
-//			(newWaveAvailable_ == newWaveRead_))
-//	{
-//		// Set the message counter with a "new waveform" notification
-//		// to the message counter value for the message we just received
-//		newWaveAvailable_ = pRegReadback[0].addr;
-//		epicsEventSignal(reqWaveEventId_);
-//		asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,"%s: new waveform data available, signaling the waveform requester\n",
-//				__PRETTY_FUNCTION__);
-//	}
 
 	return asynSuccess;
 }
