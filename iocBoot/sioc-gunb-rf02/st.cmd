@@ -40,9 +40,6 @@ epicsEnvSet( SC, "")
 < ../common/generalInit.cmd
 # regInterface.cmd leaves us in $(TOP) directory
 
-# enable core dumps
-system("/bin/su -pc 'ulimit -c unlimited'")
-
 < iocBoot/common/regInterface.cmd
 asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
