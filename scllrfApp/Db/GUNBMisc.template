@@ -51,7 +51,6 @@ record( calcout, "$(P)REP_PERIOD_Sync"){
 	field( CALC, "A*132*14/1320000")
 	field(FLNK, "$(P)REP_P_TO_F")
 	field( PREC, "5")
-####xxxx iS THIS CAUSING A WRITE OF 0 ON STARTUP?	field( PINI, "YES")
 }
 
 record(calcout, "$(P)REP_P_TO_F")
@@ -134,7 +133,6 @@ record( calcout, "$(P)PULSE_LENGTH_Sync"){
 	field( CALC, "A*132*14/1320000")
 	field(FLNK, "$(P)REP_P_TO_F")
 	field( PREC, "5")
-####xxxx iS THIS CAUSING A WRITE OF 0 ON STARTUP?	field( PINI, "YES")
 }
 
 # When ramping duty cycle, increase the frequency, not the pulse length
