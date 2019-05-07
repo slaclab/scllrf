@@ -66,7 +66,6 @@ dbLoadRecords("db/GunStatHistory.db")
 ##############################################################################
 # BEGIN: Load the record databases
 ##############################################################################
-####XXXX A bit of a hack to get the right iocAdmin PVs
 
 < iocBoot/common/iocAdmin.cmd
 < iocBoot/common/autoSaveConf.cmd
