@@ -1067,11 +1067,14 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 
 	if (status != asynSuccess)
 	{
-		asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s %s: failed to write. %s\n", portName, __PRETTY_FUNCTION__,
-				pOctetAsynUser_->errorMessage);
-		getIntegerParam(p_CommErrorCount, &errorCount);
-		setIntegerParam(p_CommErrorCount, errorCount + 1);
-		callParamCallbacks();
+		if (!isShuttingDown_)
+		{
+			asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,"%s %s: failed to write. %s\n", portName, __PRETTY_FUNCTION__,
+					pOctetAsynUser_->errorMessage);
+			getIntegerParam(p_CommErrorCount, &errorCount);
+			setIntegerParam(p_CommErrorCount, errorCount + 1);
+			callParamCallbacks();
+		}
 	}
 	else
 	{
@@ -1083,7 +1086,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 
 	asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "<-- %s( regBuffer=%p, regBuffCount=%u )\n",
 			__PRETTY_FUNCTION__, regBuffer, regBuffCount);
-	return asynSuccess;
+	return status;
 }
 
 
