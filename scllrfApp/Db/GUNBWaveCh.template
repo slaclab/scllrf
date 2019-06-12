@@ -313,6 +313,7 @@ record(waveform, "$(P)PWRWF")
 record(ao, "$(P)SOFT_TRIP_LEVEL") {
 	field(DESC, "Trip off if power goes above this level")
 	field(EGU, "W")
+	info( autosaveFields, "VAL")
 }
 
 record(acalcout, "$(P)SOFT_TRIP_LWF") {
