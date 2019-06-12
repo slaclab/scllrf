@@ -103,7 +103,7 @@ record(ao, "$(P)PULSE_LENGTH")
 record(calc, "$(P)PULSE_LENGTH_S")
 {
 	field( INPA, "$(P)PULSE_LENGTH PP")
-	field( CALC, "A*1000")
+	field( CALC, "A/1000")
 	field(EGU, "seconds")
 }
 
