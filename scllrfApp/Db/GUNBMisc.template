@@ -102,7 +102,7 @@ record(ao, "$(P)PULSE_LENGTH")
 # Same thing, but in seconds instead of ms, used for screens.
 record(calc, "$(P)PULSE_LENGTH_S")
 {
-	field( INPA, "$(P)PULSE_LENGTH PP")
+	field( INPA, "$(P)PULSE_LENGTH CP")
 	field( CALC, "A/1000")
 	field(EGU, "seconds")
 }
@@ -192,7 +192,7 @@ record( calcout, "$(P)DETUNE_MODE_CALC")
 	field( CALC, "A-B > C")
 	field( OUT, "$(P)DETUNE_MODE PP MS")
 	field(PINI, "YES")
-	info( autosaveFields, "INPC")
+	info( autosaveFields, "C INPC")
 }
 
 record( bi, "$(P)DETUNE_MODE")

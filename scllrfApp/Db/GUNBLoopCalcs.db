@@ -9,32 +9,6 @@
 #
 # ALIAS_N - for aliasing to Apex names, 1 for gun, 2 for buncher
 
-#record(calcout, "$(P)LASER_FREQ_Hz")
-#{
-#alias( "llrf$(N):laser_freq_Hz" )
-#field(INPA, "$(P)LASER_FREQ")
-#field(INPB, "-13.6239")
-#field(CALC, "A*B")
-#}
-#record(ao, "$(P)PRC:WAVE_SAMP_PER_W")
-#{
-#field(FLNK, "$(P)WAVE_SHIFT_CALC")
-#}
-#
-# We do this partly in firmware, partly in GUNBExtra.cpp
-#record(calcout, "$(P)WAVE_SHIFT_CALC")
-#{
-#alias( "llrf$(N):wave_shift_calc" )
-#field(INPA, "$(P)PRC:WAVE_SAMP_PER_W")
-#field(INPB, "0.602059991327962")
-##log10(4)
-## change by hg for 100MHz -> 102MHz Osc CIC_PERIOD change from 14 to 22
-##field(INPC,"5349.87755102041") #2^20/(14^2)
-#field(INPC, "2166.479338842975")
-##2^20/(22^2)
-#field(CALC, "MIN(8-FLOOR(LOG(C/A^2)/B),7)")
-#field(OUT, "$(P)PRC:WAVE_SHIFT_W PP")
-#}
 record(ao, "$(P)PH2_4_STATIC") {
 }
 
@@ -46,6 +20,22 @@ field(INPD, "360000")
 # 360/2^32
 field(CALC, "((((A-B+540)*1000)%D)/1000-180)")
 field(SCAN, ".2 second")
+}
+
+record(ai, "$(P)PH2_4_MEAN") {
+field(FLNK, "$(P)PH2_4_MEAN_DEGREE")
+}
+
+record(calcout, "$(P)PH2_4_MEAN_DEGREE") {
+field(INPA, "$(P)PH2_4_MEAN")
+field(INPB, "8.38190317153931e-08")
+#360/2^32
+#field(CALC, "A*B")
+# The above is from Apex. I think for SLAC it should be:
+field(INPC, "$(P)CAV2:PMEAN")
+field(INPD, "$(P)PRC:RFS2B:PMEAN")
+field(CALC, "A-B")
+field(EGU, "deg")
 }
 
 record(bo, "$(P)FREQ_LOOP_CLOSE") {
@@ -167,22 +157,7 @@ field(INPC, "$(P)FREQ_LOOP_GAIN")
 field(CALC, "A+B*C")
 	field( SDIS, "$(P)DETUNE_GOOD")
 	field( DISV, "0")
-}
-
-record(ai, "$(P)PH2_4_MEAN") {
-field(FLNK, "$(P)PH2_4_MEAN_DEGREE")
-}
-
-record(calcout, "$(P)PH2_4_MEAN_DEGREE") {
-field(INPA, "$(P)PH2_4_MEAN")
-field(INPB, "8.38190317153931e-08")
-#360/2^32
-#field(CALC, "A*B")
-# The above is from Apex. I think for SLAC it should be:
-field(INPC, "$(P)CAV2:PMEAN")
-field(INPD, "$(P)PRC:RFS2B:PMEAN")
-field(CALC, "A-B")
-field(EGU, "deg")
+	field( FLNK, "$(P)DO_FREQ_CORRECTION")
 }
 
 record(calcout, "$(P)READY_TO_TUNE") {
@@ -204,18 +179,18 @@ field(OUT, "$(P)FREQ_LOOP_CLOSE")
 record(seq, "$(P)DO_FREQ_CORRECTION") {
 	field(SELL, "$(P)READY_TO_TUNE")
 	field(SELM, "All")
-	field(DOL1, "$(P)CALC_NEW_PHSTEP_H PP")
+	field(DOL1, "$(P)CALC_NEW_PHSTEP_H")
 	field(LNK1, "$(P)PRC:DDSA_PHSTEP_H_W PP")
-	field(DOL2, "$(P)CALC_NEW_PHSTEP_H PP")
+	field(DOL2, "$(P)CALC_NEW_PHSTEP_H")
 	field(LNK2, "$(P)RFS1:DDSA_PHSTEP_H_W PP")
-	field(DOL3, "$(P)CALC_NEW_PHSTEP_H PP")
+	field(DOL3, "$(P)CALC_NEW_PHSTEP_H")
 	field(LNK3, "$(P)RFS2:DDSA_PHSTEP_H_W PP")
-	field(DOL4, "$(P)PH2_4_MEAN_DEGREE PP")
-	field(LNK4, "$(P)PH2_4_STATIC PP")
-	field(DLY4, "1")
+#	field(DOL4, "$(P)PH2_4_MEAN_DEGREE PP")
+#	field(LNK4, "$(P)PH2_4_STATIC PP")
+#	field(DLY4, "0.1")
 	field( SDIS, "$(P)FREQ_LOOP_CLOSE")
 	field( DISV, "0")
-	field(SCAN, ".2 second")
+	field(SCAN, "Passive")
 }
 
 #record(ao,"$(P)PRC:PULSE_LENGTH_W")
