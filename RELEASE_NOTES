@@ -10,6 +10,11 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-22: A bunch of cleanup and refactoring for clarity.
+				- Deleted experimental or obsolete files
+				- Changed "extra" to dev, since it's the device layer, and added drv to driver layer things
+				- This is not used for superconducting things, so scllrf -> gunbLlrf
+
 scllrf-R1-0-21: Speed up frequency following loop. Make it triggered by new detune calculation.
 
 scllrf-R1-0-20: newmat10 is not thread safe. Adding mutexes to make sure only one thread at a time uses it.
