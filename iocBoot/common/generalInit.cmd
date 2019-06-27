@@ -35,8 +35,8 @@ epicsEnvSet("EPICS_CA_MAX_ARRAY_BYTES", "134217728")
 cd ${TOP}
 # ====================================================
 ## Register all support components
-dbLoadDatabase("dbd/gunLlrf.dbd",0,0)
-gunLlrf_registerRecordDeviceDriver(pdbbase)
+dbLoadDatabase("dbd/gunbLlrf.dbd",0,0)
+gunbLlrf_registerRecordDeviceDriver(pdbbase)
 # ====================================================
 
 # =====================================================================

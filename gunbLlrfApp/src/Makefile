@@ -10,63 +10,63 @@ include $(TOP)/configure/CONFIG
 # ================================================
 # This will attempt to build an IOC application
 # for every target including the host computer.
-PROD_IOC = gunLlrf
-#LIBRARY_IOC= gunLlrf
+PROD_IOC = gunbLlrf
+#LIBRARY_IOC= gunbLlrf
 # Use the following for RTEMS Only IOCs
-#PROD_IOC_RTEMS = gunLlrf
+#PROD_IOC_RTEMS = gunbLlrf
 
-# gunLlrf.dbd will be created and installed
-DBD += gunLlrf.dbd
+# gunbLlrf.dbd will be created and installed
+DBD += gunbLlrf.dbd
 
-# gunLlrf.dbd will be made up from these files:
-gunLlrf_DBD += base.dbd
+# gunbLlrf.dbd will be made up from these files:
+gunbLlrf_DBD += base.dbd
 
 ifneq ($(IOCADMIN),)
-gunLlrf_DBD += devIocStats.dbd
+gunbLlrf_DBD += devIocStats.dbd
 endif
 ifneq ($(AUTOSAVE),)
-gunLlrf_DBD += asSupport.dbd
+gunbLlrf_DBD += asSupport.dbd
 endif
 ifneq ($(CAPUTLOG),)
-gunLlrf_DBD += caPutLog.dbd
+gunbLlrf_DBD += caPutLog.dbd
 endif
-gunLlrf_DBD += $(CEXP_DBDS)
+gunbLlrf_DBD += $(CEXP_DBDS)
 
 # ================================================================================
 # The system command will be mainly used by linux hosted IOCs
 # Very useful for changing kernel thread priorities for kernel drivers
 # ================================================================================
-gunLlrf_DBD += system.dbd
+gunbLlrf_DBD += system.dbd
 
-gunLlrf_DBD += drvAsynIPPort.dbd
-gunLlrf_DBD += asyn.dbd
-gunLlrf_DBD += leepDrv.dbd
-gunLlrf_DBD += calcSupport.dbd
-gunLlrf_DBD += stdSupport.dbd
-gunLlrf_DBD += history.dbd
-gunLlrf_DBD += PVAServerRegister.dbd
-gunLlrf_DBD += qsrv.dbd
+gunbLlrf_DBD += drvAsynIPPort.dbd
+gunbLlrf_DBD += asyn.dbd
+gunbLlrf_DBD += leepDrv.dbd
+gunbLlrf_DBD += calcSupport.dbd
+gunbLlrf_DBD += stdSupport.dbd
+gunbLlrf_DBD += history.dbd
+gunbLlrf_DBD += PVAServerRegister.dbd
+gunbLlrf_DBD += qsrv.dbd
 
 # ======================================================================
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
-gunLlrf_SRCS += gunLlrf_registerRecordDeviceDriver.cpp
+gunbLlrf_SRCS += gunbLlrf_registerRecordDeviceDriver.cpp
 
-gunLlrf_SRCS_DEFAULT += gunLlrfMain.cpp
+gunbLlrf_SRCS_DEFAULT += gunbLlrfMain.cpp
 
-gunLlrf_SRCS_vxWorks += -nil-
+gunbLlrf_SRCS_vxWorks += -nil-
 
 # ========================================================================
 # ========================================================================
 # Add locally compiled object code
 # For example, subroutines
 # ========================================================================
-gunLlrf_SRCS += leepDrv.cpp
-gunLlrf_SRCS += GUNBLlrfDrv.cpp
-gunLlrf_SRCS += GUNBLlrfDev.cpp
-gunLlrf_SRCS += PVramp.stt
-gunLlrf_SRCS += centerCwDetune.stt
-gunLlrf_SRCS += amc78xxmon.stt
-gunLlrf_SRCS += BMB7Sup.c
+gunbLlrf_SRCS += leepDrv.cpp
+gunbLlrf_SRCS += GUNBLlrfDrv.cpp
+gunbLlrf_SRCS += GUNBLlrfDev.cpp
+gunbLlrf_SRCS += PVramp.stt
+gunbLlrf_SRCS += centerCwDetune.stt
+gunbLlrf_SRCS += amc78xxmon.stt
+gunbLlrf_SRCS += BMB7Sup.c
 USR_CXXFLAGS += -std=c++0x
 USR_CXXFLAGS += -g -I$(TOP)/newmat10
 # =====================================================
@@ -74,33 +74,33 @@ USR_CXXFLAGS += -g -I$(TOP)/newmat10
 # =====================================================
 # Needed to link in iocAdmin support
 ifneq ($(IOCADMIN),)
-gunLlrf_LIBS += devIocStats
+gunbLlrf_LIBS += devIocStats
 endif
 
 # Needed to link in autosave support
 ifneq ($(AUTOSAVE),)
-gunLlrf_LIBS += autosave
+gunbLlrf_LIBS += autosave
 endif
 
 # Needed to link caPutLog support
 ifneq ($(CAPUTLOG),)
-gunLlrf_LIBS += caPutLog
+gunbLlrf_LIBS += caPutLog
 endif
 
 # Needed to link cexpsh() support
-gunLlrf_LIBS += $(CEXP_LIBS)
-gunLlrf_SYS_LIBS += $(CEXP_SYS_LIBS)
+gunbLlrf_LIBS += $(CEXP_LIBS)
+gunbLlrf_SYS_LIBS += $(CEXP_SYS_LIBS)
 
-gunLlrf_LIBS += asyn
-gunLlrf_LIBS += calc
-gunLlrf_LIBS += sscan
-gunLlrf_LIBS += history
-gunLlrf_LIBS += newmat
-gunLlrf_LIBS += qsrv
-gunLlrf_LIBS += std
+gunbLlrf_LIBS += asyn
+gunbLlrf_LIBS += calc
+gunbLlrf_LIBS += sscan
+gunbLlrf_LIBS += history
+gunbLlrf_LIBS += newmat
+gunbLlrf_LIBS += qsrv
+gunbLlrf_LIBS += std
 # EPICS_BASE_PVA_CORE_LIBS comes from pvAccessCPP and is defined at <>/cfg/CONFIG_PVACCESS_MODULE
-gunLlrf_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
-gunLlrf_LIBS += $(EPICS_BASE_IOC_LIBS)
+gunbLlrf_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
+gunbLlrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 newmat_DIR = $(TOP)/newmat10/
 
 # =====================================================
@@ -111,8 +111,8 @@ newmat_DIR = $(TOP)/newmat10/
 # in the <top>/configure/RELEASE file
 
 ifneq ($(SNCSEQ),)
-    gunLlrf_DBD += devSeqCar.dbd
-    gunLlrf_LIBS += seq seqCar pv
+    gunbLlrf_DBD += devSeqCar.dbd
+    gunbLlrf_LIBS += seq seqCar pv
 
     # The following builds sncProgram as a standalone application
 #  ifneq ($(T_A),linuxRT-x86)
@@ -124,7 +124,7 @@ ifneq ($(SNCSEQ),)
 #  endif
 endif
 
-gunLlrf_LIBS += $(EPICS_BASE_IOC_LIBS)
+gunbLlrf_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 

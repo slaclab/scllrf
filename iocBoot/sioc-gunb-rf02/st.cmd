@@ -1,6 +1,6 @@
-#!../../bin/linuxRT-x86_64/gunLlrf
-#!../../bin/rhel6-x86_64/gunLlrf
-## You may have to change gunLlrf to something else
+#!../../bin/linuxRT-x86_64/gunbLlrf
+#!../../bin/rhel6-x86_64/gunbLlrf
+## You may have to change gunbLlrf to something else
 ## everywhere it appears in this file
 < envPaths
 # PV name prefix parts in naming convention for Buncher
@@ -32,7 +32,7 @@ epicsEnvSet( BIT_FILE, "../gun.bit")
 # The "chassis" register sets the type of chassis: 0:gun prc,1:gun rfs,2:buncher prc,3:buncher rfs
 epicsEnvSet(CHASSIS_REG, "3")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that gunLlrf$(CHASSIS_TYPE)$(DEV)Configure( "myReg","$(P)myIP") resolves correctly
+# here so that gunbLlrf$(CHASSIS_TYPE)$(DEV)Configure( "myReg","$(P)myIP") resolves correctly
 epicsEnvSet( DEV, "Dev")
 # This will work for the gun, which is not sc.
 epicsEnvSet( SC, "")
