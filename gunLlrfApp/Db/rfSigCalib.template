@@ -185,7 +185,7 @@ info(autosaveFields, "VAL")
 # Final calculated scale factor
 # which gets applied to waveform data
 # "SCALE" PV resides in wfCav.template
-# or gun/buncher scllrfApp
+# or gun/buncher gunLlrfApp
 record(calc, "$(PREF)SCALE_CALC") {
 field(CALC, "A*B")
 field(INPA, "$(PREF)CAL_SCALE")

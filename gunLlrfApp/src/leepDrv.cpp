@@ -282,10 +282,10 @@ asynStatus leepDrv::functionToRegister(const int function,
 static void singleMessageQueuerC(void *drvPvt)
 {
 	printf("%s: starting\n", __PRETTY_FUNCTION__);
-	leepDrv *pscllrfDriver = (leepDrv*)drvPvt;
+	leepDrv *pleepDriver = (leepDrv*)drvPvt;
 	try
 	{
-		pscllrfDriver->singleMessageQueuer();
+		pleepDriver->singleMessageQueuer();
 	}
 	catch(std::exception e)
 	{
@@ -889,10 +889,10 @@ typedef struct
 
 static void regPollerC(void *drvPvt)
 {
-	leepDrv *pscllrfDriver = (leepDrv*)drvPvt;
+	leepDrv *pleepDriver = (leepDrv*)drvPvt;
 	try
 	{
-		pscllrfDriver->regPoller();
+		pleepDriver->regPoller();
 	}
 	catch(std::exception e)
 	{
@@ -1092,10 +1092,10 @@ asynStatus leepDrv::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount
 
 static void responseHandlerC(void *drvPvt)
 {
-	leepDrv *pscllrfDriver = (leepDrv*)drvPvt;
+	leepDrv *pleepDriver = (leepDrv*)drvPvt;
 	try
 	{
-		pscllrfDriver->responseHandler();
+		pleepDriver->responseHandler();
 	}
 	catch(std::exception e)
 	{

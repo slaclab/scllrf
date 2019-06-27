@@ -48,8 +48,8 @@ endif
 
 # =======================================================================
 # Install to deployment dir (eg. PROD)
-DB_INSTALLS += $(TOP)/scllrfApp/Db/leepDrv.template
-DB_INSTALLS += $(TOP)/scllrfApp/Db/GUNBLlrfRegisters.template
+DB_INSTALLS += $(TOP)/gunLlrfApp/Db/leepDrv.template
+DB_INSTALLS += $(TOP)/gunLlrfApp/Db/GUNBLlrfRegisters.template
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
 
 #----------------------------------------------------
