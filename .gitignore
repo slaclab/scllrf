@@ -6,6 +6,7 @@ iocBoot/*/envPaths
 *~
 /.settings/
 /data/
+display/
 *.pyc
 O.*
 /info_positions.req

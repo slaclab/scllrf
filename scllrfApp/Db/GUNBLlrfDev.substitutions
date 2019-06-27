@@ -147,17 +147,6 @@ file PVramp.template
 {
 	{ P = "GUN:GUNB:100:", PV0 = ADES, PV1 = PDES, PV3 = , PV4 = , PV5 = , PV2 = , PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
 }
-
-
-file GUNBRegisterAlias.template
-{
-	{ P = "GUN:GUNB:100:PRC:", N=1 }
-}
-
-file GUNB3ChassisAlias.template
-{
-	{ P = "GUN:GUNB:100:", N=1}
-}
 file Gun3Chassis.template
 {
 	{ P = "GUN:GUNB:100:", N=1 }

@@ -41,12 +41,12 @@ def makeAsynDriver(regmap_dict):
 	print(Template( file='./Makefile.tmpl', searchList = [regmap_dict] ), file=f)
 	f.close()
 
-	f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'.cpp', 'w')
-	print(Template( file='./templateScllrfDriver.cpp.tmpl', searchList = [regmap_dict] ), file=f)
+	f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'Drv.cpp', 'w')
+	print(Template( file='./templateRegisterDriver.cpp.tmpl', searchList = [regmap_dict] ), file=f)
 	f.close()
 
-	f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'.h', 'w')
-	print(Template( file='./templateScllrfDriver.h.tmpl', searchList = [regmap_dict] ), file=f)
+	f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'Drv.h', 'w')
+	print(Template( file='./templateRegisterDriver.h.tmpl', searchList = [regmap_dict] ), file=f)
 	f.close()
 
 	f=open(regmap_dict['name']+'/src/'+regmap_dict['name']+'DriverSupportInclude.dbd', 'w')

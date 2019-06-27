@@ -2,7 +2,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : scllrfAsynPortDriver.h
+ * File       : leepDrv.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -212,11 +212,11 @@ public:
 	virtual ~DataBuffer32(){};
 };
 
-class scllrfAsynPortDriver: public asynPortDriver
+class leepDrv: public asynPortDriver
 {
 public:
-	scllrfAsynPortDriver(const char *drvPortName, const char *netPortName, int maxAddr=0, int paramTableSize=7);
-	virtual ~scllrfAsynPortDriver();
+	leepDrv(const char *drvPortName, const char *netPortName, int maxAddr=0, int paramTableSize=7);
+	virtual ~leepDrv();
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
 	virtual asynStatus readInt32(asynUser *pasynUser, epicsInt32 *value);
 	virtual asynStatus readInt8Array(asynUser *pasynUser, epicsInt8 *value,
@@ -458,7 +458,7 @@ protected:
 //	std::vector<T> data;
 //	virtual epicsFloat32 getDataAt(unsigned int index) const { return (epicsFloat32) data[index]; }
 //	virtual void setDataAt(unsigned int index, epicsInt32 value) { data[index] = (T) value; }
-//	//virtual void publish(scllrfAsynPortDriver *driver, int *paramIndex);
+//	//virtual void publish(leepDrv *driver, int *paramIndex);
 //
 //	TypedDataBuffer(unsigned int RegCount, unsigned int iStartAddr):
 //		DataBuffer(RegCount, iStartAddr)
@@ -469,14 +469,14 @@ protected:
 //};
 
 //template <>
-//void TypedDataBuffer<epicsInt16>::publish(scllrfAsynPortDriver *driver, int *paramIndex)
+//void TypedDataBuffer<epicsInt16>::publish(leepDrv *driver, int *paramIndex)
 //{
 //	//driver->doCallbacksInt16Array(data.data(), RegCount, *paramIndex, 0);
 //	RegCount = 5;////XXXX
 //}
 
 //template<>
-//void TypedDataBuffer<epicsInt32>::publish(scllrfAsynPortDriver *driver, int *paramIndex)
+//void TypedDataBuffer<epicsInt32>::publish(leepDrv *driver, int *paramIndex)
 //		{ driver->doCallbacksInt32Array(data.data(), RegCount, *paramIndex, 0); }
 
 //class DataBufferReader

@@ -2,7 +2,7 @@
  *-----------------------------------------------------------------------------
  * Title      : superconducting low level RF EPICS interface
  * ----------------------------------------------------------------------------
- * File       : scllrfAsynPortDriver.cpp
+ * File       : leepDrv.cpp
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -23,7 +23,7 @@
  * ----------------------------------------------------------------------------
 **/
 
-#include "scllrfAsynPortDriver.h"
+#include "leepDrv.h"
 #include <asynOctetSyncIO.h>
 #include <asynCommonSyncIO.h>
 #include <epicsExit.h>
@@ -38,39 +38,39 @@
 using namespace std;
 
 // EPICS database driver strings
-const char *scllrfAsynPortDriver::RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
-const char *scllrfAsynPortDriver::ReadOneRegString = "READ_ONE_REG"; /* asynInt32 array[2] w */
-const char *scllrfAsynPortDriver::WriteOneRegString = "WRITE_ONE_REG"; /* asynInt32 array[2] w */
-const char *scllrfAsynPortDriver::MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
-const char *scllrfAsynPortDriver::PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
-const char *scllrfAsynPortDriver::CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
-const char *scllrfAsynPortDriver::ConfigRomOctetString = "CONFIG_ROM_OCTET";
-const char *scllrfAsynPortDriver::JsonSha1DesString = "JSON_SHA1_DES";
-const char *scllrfAsynPortDriver::JsonSha1ActString = "JSON_SHA1_ACT";
+const char *leepDrv::RunStopString = "RUN_STOP"; /* asynInt32,    r/w */
+const char *leepDrv::ReadOneRegString = "READ_ONE_REG"; /* asynInt32 array[2] w */
+const char *leepDrv::WriteOneRegString = "WRITE_ONE_REG"; /* asynInt32 array[2] w */
+const char *leepDrv::MaxParallelRequestsString = "MAX_PARALLEL_REQUESTS"; /* asynInt32,    r/w */
+const char *leepDrv::PollPeriodString = "POLL_PERIOD"; /* asynInt32,    r/w */
+const char *leepDrv::CommErrorCountString = "COMM_ERROR_COUNT";  /* asynInt32,    r */
+const char *leepDrv::ConfigRomOctetString = "CONFIG_ROM_OCTET";
+const char *leepDrv::JsonSha1DesString = "JSON_SHA1_DES";
+const char *leepDrv::JsonSha1ActString = "JSON_SHA1_ACT";
 // Git SHA1 sum as individual characters
-const char *scllrfAsynPortDriver::GitSha1ARString = "GIT_SHA1_A_R";
-const char *scllrfAsynPortDriver::GitSha1BRString = "GIT_SHA1_B_R";
-const char *scllrfAsynPortDriver::GitSha1CRString = "GIT_SHA1_C_R";
-const char *scllrfAsynPortDriver::GitSha1DRString = "GIT_SHA1_D_R";
-const char *scllrfAsynPortDriver::GitSha1ERString = "GIT_SHA1_E_R";
-const char *scllrfAsynPortDriver::GitSha1FRString = "GIT_SHA1_F_R";
-const char *scllrfAsynPortDriver::GitSha1GRString = "GIT_SHA1_G_R";
-const char *scllrfAsynPortDriver::GitSha1HRString = "GIT_SHA1_H_R";
-const char *scllrfAsynPortDriver::GitSha1IRString = "GIT_SHA1_I_R";
-const char *scllrfAsynPortDriver::GitSha1JRString = "GIT_SHA1_J_R";
-const char *scllrfAsynPortDriver::GitSha1KRString = "GIT_SHA1_K_R";
-const char *scllrfAsynPortDriver::GitSha1LRString = "GIT_SHA1_L_R";
-const char *scllrfAsynPortDriver::GitSha1MRString = "GIT_SHA1_M_R";
-const char *scllrfAsynPortDriver::GitSha1NRString = "GIT_SHA1_N_R";
-const char *scllrfAsynPortDriver::GitSha1ORString = "GIT_SHA1_O_R";
-const char *scllrfAsynPortDriver::GitSha1PRString = "GIT_SHA1_P_R";
-const char *scllrfAsynPortDriver::GitSha1QRString = "GIT_SHA1_Q_R";
-const char *scllrfAsynPortDriver::GitSha1RRString = "GIT_SHA1_R_R";
-const char *scllrfAsynPortDriver::GitSha1SRString = "GIT_SHA1_S_R";
-const char *scllrfAsynPortDriver::GitSha1TRString = "GIT_SHA1_T_R";
-const char *scllrfAsynPortDriver::GitSHA1String = "GIT_SHA1";  /* asynOctet,    r */
-const char *scllrfAsynPortDriver::FwDescString = "FW_DESC";  /* asynOctet,    r */
-const unsigned int scllrfAsynPortDriver::ConfigRomOctetAdr = 0x00000800;
+const char *leepDrv::GitSha1ARString = "GIT_SHA1_A_R";
+const char *leepDrv::GitSha1BRString = "GIT_SHA1_B_R";
+const char *leepDrv::GitSha1CRString = "GIT_SHA1_C_R";
+const char *leepDrv::GitSha1DRString = "GIT_SHA1_D_R";
+const char *leepDrv::GitSha1ERString = "GIT_SHA1_E_R";
+const char *leepDrv::GitSha1FRString = "GIT_SHA1_F_R";
+const char *leepDrv::GitSha1GRString = "GIT_SHA1_G_R";
+const char *leepDrv::GitSha1HRString = "GIT_SHA1_H_R";
+const char *leepDrv::GitSha1IRString = "GIT_SHA1_I_R";
+const char *leepDrv::GitSha1JRString = "GIT_SHA1_J_R";
+const char *leepDrv::GitSha1KRString = "GIT_SHA1_K_R";
+const char *leepDrv::GitSha1LRString = "GIT_SHA1_L_R";
+const char *leepDrv::GitSha1MRString = "GIT_SHA1_M_R";
+const char *leepDrv::GitSha1NRString = "GIT_SHA1_N_R";
+const char *leepDrv::GitSha1ORString = "GIT_SHA1_O_R";
+const char *leepDrv::GitSha1PRString = "GIT_SHA1_P_R";
+const char *leepDrv::GitSha1QRString = "GIT_SHA1_Q_R";
+const char *leepDrv::GitSha1RRString = "GIT_SHA1_R_R";
+const char *leepDrv::GitSha1SRString = "GIT_SHA1_S_R";
+const char *leepDrv::GitSha1TRString = "GIT_SHA1_T_R";
+const char *leepDrv::GitSHA1String = "GIT_SHA1";  /* asynOctet,    r */
+const char *leepDrv::FwDescString = "FW_DESC";  /* asynOctet,    r */
+const unsigned int leepDrv::ConfigRomOctetAdr = 0x00000800;
 
 DataBuffer::DataBuffer(unsigned int RegCount, unsigned int iStartAddr):
 	RegCount(RegCount), ReqSegmentCount( (RegCount + maxRegPerMsg -1)/maxRegPerMsg),
@@ -127,13 +127,13 @@ void DataBuffer::fillWaveRequestMsg() /**< For requesting a waveform, fill canne
 	htonFpgaRegArray(reqData.data(), buffSize);
 }
 
-void scllrfAsynPortDriverAtExit(void * driver)
+void leepDrvAtExit(void * driver)
 {
-	scllrfAsynPortDriver *exitingDriver = (scllrfAsynPortDriver*) driver;
+	leepDrv *exitingDriver = (leepDrv*) driver;
 	exitingDriver->shutdown();
 }
 
-/** Constructor for the scllrfAsynPortDriver class.
+/** Constructor for the leepDrv class.
  * Calls constructor for the asynPortDriver base class.
  * \param[in] drvPortName The name of the asyn port driver to be created.
  * \param[in] netPortName The name of the asyn port driver to use for the network connection
@@ -141,7 +141,7 @@ void scllrfAsynPortDriverAtExit(void * driver)
  * \paarm[in] paramTableSize The number of asyn params to be created for each device
  *
  * */
-scllrfAsynPortDriver::scllrfAsynPortDriver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableSize)
+leepDrv::leepDrv(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableSize)
 : asynPortDriver(drvPortName,
 		maxAddr, /* maxAddr */
 		paramTableSize,
@@ -241,22 +241,22 @@ printf("%s set RunStop parameter to stop\n", __PRETTY_FUNCTION__);
 	startSingleMessageQueuer(netPortName);
 	printf("%s %s initialized and threads started.\n",__PRETTY_FUNCTION__, drvPortName);
 
-	epicsAtExit(scllrfAsynPortDriverAtExit, this);
+	epicsAtExit(leepDrvAtExit, this);
 }
 
-void scllrfAsynPortDriver::init()
+void leepDrv::init()
 {
 	return;
 }
 
-void scllrfAsynPortDriver::shutdown()
+void leepDrv::shutdown()
 {
 	isShuttingDown_ = true;
 	wakeupPoller();
 	wakeupReader();
 }
 
-scllrfAsynPortDriver::~scllrfAsynPortDriver()
+leepDrv::~leepDrv()
 {
 	FpgaReg finalMsg = {0,blankData};
 	htonFpgaRegArray(&finalMsg, sizeof(FpgaReg));
@@ -272,7 +272,7 @@ scllrfAsynPortDriver::~scllrfAsynPortDriver()
   * \param[in] function From pAsynUser->reason, corresponding to a registered parameter.
   * \param[in] pToFpga Pointer to the {Address, Data} structure where the register address will be written
   * \param[in] nElements Number of elements to read. */
-asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
+asynStatus leepDrv::functionToRegister(const int function,
 		FpgaReg *pToFpga)
 {
 	// base class has no registers defined
@@ -282,7 +282,7 @@ asynStatus scllrfAsynPortDriver::functionToRegister(const int function,
 static void singleMessageQueuerC(void *drvPvt)
 {
 	printf("%s: starting\n", __PRETTY_FUNCTION__);
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	leepDrv *pscllrfDriver = (leepDrv*)drvPvt;
 	try
 	{
 		pscllrfDriver->singleMessageQueuer();
@@ -300,7 +300,7 @@ static void singleMessageQueuerC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startSingleMessageQueuer(const char *netPortName)
+asynStatus leepDrv::startSingleMessageQueuer(const char *netPortName)
 {
 	std::string  strThreadName(netPortName);
 	strThreadName += "singleMessageQueuer";
@@ -318,7 +318,7 @@ asynStatus scllrfAsynPortDriver::startSingleMessageQueuer(const char *netPortNam
 // where:
 // message is an FpgaReg or array of them
 // messageSize is sizeof(message), the size in bytes not array elements.
-void scllrfAsynPortDriver::singleMessageQueuer()
+void leepDrv::singleMessageQueuer()
 {
 	FpgaReg pMsgBuff[maxRegPerMsg + nonceSize]; // buffer big enough for one packet
 	unsigned int sendBufByteCount;
@@ -409,7 +409,7 @@ void scllrfAsynPortDriver::singleMessageQueuer()
 	printf("%s: exiting\n", __PRETTY_FUNCTION__);
 }
 
-asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
+asynStatus leepDrv::writeUInt32Digital(asynUser *pasynUser, epicsUInt32 value, epicsUInt32 mask)
 {
 	asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, "--> %s: value: %d, mask: %x\n", __PRETTY_FUNCTION__, value, mask);
 	if (isShuttingDown_)
@@ -492,7 +492,7 @@ asynStatus scllrfAsynPortDriver::writeUInt32Digital(asynUser *pasynUser, epicsUI
 /** Called when asyn clients call pasynInt32->write().
  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
  * \param[in] value Pointer to the value to read. */
-asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 value)
+asynStatus leepDrv::writeInt32(asynUser *pasynUser, epicsInt32 value)
 {
 	if (isShuttingDown_)
 	{
@@ -575,7 +575,7 @@ asynStatus scllrfAsynPortDriver::writeInt32(asynUser *pasynUser, epicsInt32 valu
 /** Called when asyn clients call pasynInt32->read().
  * \param[in] pasynUser pasynUser structure that encodes the reason and address.
  * \param[in] value Pointer to the value to read. */
-asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *value)
+asynStatus leepDrv::readInt32(asynUser *pasynUser, epicsInt32 *value)
 {
 	if (isShuttingDown_)
 	{
@@ -622,7 +622,7 @@ asynStatus scllrfAsynPortDriver::readInt32(asynUser *pasynUser, epicsInt32 *valu
 	return status;
 }
 
-asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *value,
+asynStatus leepDrv::readInt8Array(asynUser *pasynUser, epicsInt8 *value,
 								size_t nElements, size_t *nIn)
 {
 	if (isShuttingDown_)
@@ -642,7 +642,7 @@ asynStatus scllrfAsynPortDriver::readInt8Array(asynUser *pasynUser, epicsInt8 *v
 	return status;
 }
 
-asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 *value,
+asynStatus leepDrv::readInt16Array(asynUser *pasynUser, epicsInt16 *value,
 								size_t nElements, size_t *nIn)
 {
 	if (isShuttingDown_)
@@ -668,7 +668,7 @@ asynStatus scllrfAsynPortDriver::readInt16Array(asynUser *pasynUser, epicsInt16 
   * \param[in] pasynUser pasynUser structure that encodes the reason and address.
   * \param[in] value Pointer to the array to write.
   * \param[in] nElements Number of elements to write. */
-asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 *value,
+asynStatus leepDrv::readInt32Array(asynUser *pasynUser, epicsInt32 *value,
 								size_t nElements, size_t *nIn)
 {
 	if (isShuttingDown_)
@@ -760,7 +760,7 @@ asynStatus scllrfAsynPortDriver::readInt32Array(asynUser *pasynUser, epicsInt32 
 	return status; //(writeArray < epicsInt32 > (pasynUser, value, nElements));
 }
 
-asynStatus scllrfAsynPortDriver::writeInt8Array(asynUser *pasynUser, epicsInt8 *value,
+asynStatus leepDrv::writeInt8Array(asynUser *pasynUser, epicsInt8 *value,
 								size_t nElements)
 {
 	asynStatus status;
@@ -771,7 +771,7 @@ asynStatus scllrfAsynPortDriver::writeInt8Array(asynUser *pasynUser, epicsInt8 *
 	return status;
 }
 
-asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
+asynStatus leepDrv::writeInt16Array(asynUser *pasynUser, epicsInt16 *value,
 								size_t nElements)
 {
 	asynStatus status;
@@ -788,7 +788,7 @@ asynStatus scllrfAsynPortDriver::writeInt16Array(asynUser *pasynUser, epicsInt16
   * \param[in] pasynUser pasynUser structure that encodes the reason and address.
   * \param[in] value Pointer to the array to write.
   * \param[in] nElements Number of elements to write. */
-asynStatus scllrfAsynPortDriver::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
+asynStatus leepDrv::writeInt32Array(asynUser *pasynUser, epicsInt32 *value,
 								size_t nElements)
 {
 	if (isShuttingDown_)
@@ -884,12 +884,12 @@ typedef struct
 {
 	FpgaReg* sendBuff;
 	size_t sendBuffSize;
-	scllrfAsynPortDriver* pDriver;
+	leepDrv* pDriver;
 } regPollerThreadArgs;
 
 static void regPollerC(void *drvPvt)
 {
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	leepDrv *pscllrfDriver = (leepDrv*)drvPvt;
 	try
 	{
 		pscllrfDriver->regPoller();
@@ -907,7 +907,7 @@ static void regPollerC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startPoller(const char *netPortName, double pollPeriod)
+asynStatus leepDrv::startPoller(const char *netPortName, double pollPeriod)
 {
 	std::string  strThreadName(netPortName);
 	strThreadName += "asynPoller";
@@ -919,7 +919,7 @@ asynStatus scllrfAsynPortDriver::startPoller(const char *netPortName, double pol
 	return asynSuccess;
 }
 
-void scllrfAsynPortDriver::regPoller()
+void leepDrv::regPoller()
 {
 	bool status = (bool) epicsEventWaitOK;
 	int runStop;
@@ -973,7 +973,7 @@ void scllrfAsynPortDriver::regPoller()
 }
 
 /** Wakes up the poller thread to make it start polling. */
-asynStatus scllrfAsynPortDriver::wakeupPoller()
+asynStatus leepDrv::wakeupPoller()
 {
 	pollEvent_.signal();
 	return asynSuccess;
@@ -985,7 +985,7 @@ asynStatus scllrfAsynPortDriver::wakeupPoller()
 // maxMsgSize/sizeof(FpgaReg) and be send in one maxMsgSize segments.
 // FpgaReg arrays sent to this function should have a blank inserted
 // ahead of every maxRegPerMsg register messages.
-asynStatus scllrfAsynPortDriver::sendBigBuffer(FpgaReg *regBuffer, unsigned int regBuffCount)
+asynStatus leepDrv::sendBigBuffer(FpgaReg *regBuffer, unsigned int regBuffCount)
 {
 	asynStatus status = asynSuccess;
 	unsigned int regBuffRemainingCount = regBuffCount;
@@ -1021,7 +1021,7 @@ asynStatus scllrfAsynPortDriver::sendBigBuffer(FpgaReg *regBuffer, unsigned int 
   * processing required, since most messages are canned and repeated at regular intervals.
   * \param[in] regBuffCount is the number of FpgaReg type elements, including the nonce
   **  */
-asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount)
+asynStatus leepDrv::sendRegRequest(FpgaReg *regBuffer, unsigned int regBuffCount)
 {
 	if(regBuffer == NULL || regBuffCount < 5)
 	{
@@ -1092,7 +1092,7 @@ asynStatus scllrfAsynPortDriver::sendRegRequest(FpgaReg *regBuffer, unsigned int
 
 static void responseHandlerC(void *drvPvt)
 {
-	scllrfAsynPortDriver *pscllrfDriver = (scllrfAsynPortDriver*)drvPvt;
+	leepDrv *pscllrfDriver = (leepDrv*)drvPvt;
 	try
 	{
 		pscllrfDriver->responseHandler();
@@ -1110,7 +1110,7 @@ static void responseHandlerC(void *drvPvt)
  ** Derived classes can typically use the base class implementation of the poller thread,
  ** but are free to re-implement it if necessary.
  ** \param[in] pollPeriod The time between polls. */
-asynStatus scllrfAsynPortDriver::startResponseHandler(const char *netPortName)
+asynStatus leepDrv::startResponseHandler(const char *netPortName)
 {
 	std::string  strThreadName(netPortName);
 	strThreadName += "responseHandler";
@@ -1122,14 +1122,14 @@ asynStatus scllrfAsynPortDriver::startResponseHandler(const char *netPortName)
 }
 
 /** Wakes up the reader thread to check for data. */
-asynStatus scllrfAsynPortDriver::wakeupReader()
+asynStatus leepDrv::wakeupReader()
 {
 	epicsEventSignal(readEventId_);
 	return asynSuccess;
 }
 
 // Most of the main loop is network error handling, signaling, network details.
-void scllrfAsynPortDriver::responseHandler()
+void leepDrv::responseHandler()
 {
 	epicsEventWaitStatus waitStatus;
 	epicsMutexLockStatus mutexStatus;
@@ -1247,7 +1247,7 @@ void scllrfAsynPortDriver::responseHandler()
 // Iterate over each register in the buffer returned from the FPGA
 // Array passed to this function contains the nonce, with the buffer
 // size at pRegReadback[0].data
-asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, unsigned int readCount)
+asynStatus leepDrv::processReadbackBuffer(FpgaReg *pRegReadback, unsigned int readCount)
 {
 	unsigned i;
 	asynStatus status = asynSuccess;
@@ -1364,7 +1364,7 @@ asynStatus scllrfAsynPortDriver::processReadbackBuffer(FpgaReg *pRegReadback, un
 	return asynSuccess;
 }
 
-asynStatus scllrfAsynPortDriver::catGitSHA1()
+asynStatus leepDrv::catGitSHA1()
 {
 	int twoByte;
 	int i;
@@ -1397,7 +1397,7 @@ asynStatus scllrfAsynPortDriver::catGitSHA1()
  * calling function.
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 */
-asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
+asynStatus leepDrv::processRegReadback(const FpgaReg *pFromFpga)
 {
 	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
@@ -1595,7 +1595,7 @@ asynStatus scllrfAsynPortDriver::processRegReadback(const FpgaReg *pFromFpga)
 * \param[in] pFromFpga Data returned from the FPGA for a single register
 * \param[in] waveIsReady A flag that gets set to true if the appropriate bit was set by the FPGA
 */
-asynStatus scllrfAsynPortDriver::processRegWriteResponse(const FpgaReg *pFromFpga)
+asynStatus leepDrv::processRegWriteResponse(const FpgaReg *pFromFpga)
 {
 	epicsInt32 errorCount;
 	epicsInt32 iReg[2];
@@ -1669,12 +1669,12 @@ extern "C" {
 
 /* Configuration routine.  Called directly, or from the iocsh function below */
 
-/** EPICS iocsh callable function to call constructor for the scllrfAsynPortDriver class.
+/** EPICS iocsh callable function to call constructor for the leepDrv class.
  * \param[in] portName The name of the asyn port driver to be created.
  * \param[in] netPortName The name of the asynIPport this will use to communicate */
-int scllrfAsynPortDriverConfigure(const char *drvPortName, const char *netPortName)
+int leepDrvConfigure(const char *drvPortName, const char *netPortName)
 {
-	new scllrfAsynPortDriver(drvPortName, netPortName, 0, 7);
+	new leepDrv(drvPortName, netPortName, 0, 7);
 	return asynSuccess;
 }
 
@@ -1685,18 +1685,18 @@ static const iocshArg initArg0 = { "drvPortName",iocshArgString};
 static const iocshArg initArg1 = { "IP port name",iocshArgString};
 static const iocshArg * const initArgs[] = {&initArg0,
 		&initArg1};
-static const iocshFuncDef initFuncDef = {"scllrfAsynPortDriverConfigure",2,initArgs};
+static const iocshFuncDef initFuncDef = {"leepDrvConfigure",2,initArgs};
 static void initCallFunc(const iocshArgBuf *args)
 {
-	scllrfAsynPortDriverConfigure(args[0].sval, args[1].sval);
+	leepDrvConfigure(args[0].sval, args[1].sval);
 }
 
-void scllrfAsynPortDriverRegister(void)
+void leepDrvRegister(void)
 {
 	iocshRegister(&initFuncDef,initCallFunc);
 }
 
-epicsExportRegistrar(scllrfAsynPortDriverRegister);
+epicsExportRegistrar(leepDrvRegister);
 
 }
 

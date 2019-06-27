@@ -3,9 +3,9 @@
 
 /**
  *-----------------------------------------------------------------------------
- * Title      : superconducting low level RF EPICS interface
+ * Title      : low level RF register EPICS interface
  * ----------------------------------------------------------------------------
- * File       : ${name}Driver.h
+ * File       : ${name}Drv.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
  * Created    : June 17, 2016
  * Last update: September 6, 2016
@@ -24,14 +24,14 @@
  * contained in the LICENSE.txt file.
  * ----------------------------------------------------------------------------
 **/
-\#include "scllrfAsynPortDriver.h"
+\#include "leepDrv.h"
 
 /* This class implements the chassis type specific driver. */
-class ${name}Driver : public scllrfAsynPortDriver {
+class ${name}Drv : public leepDrv {
 public:
-//    ${name}Driver(const char *drvPortName, const char *netPortName);
-	${name}Driver(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
-	virtual ~${name}Driver();
+//    ${name}Drv(const char *drvPortName, const char *netPortName);
+	${name}Drv(const char *drvPortName, const char *netPortName, int maxAddr, int paramTableAdds);
+	virtual ~${name}Drv();
 
 #if $varExists('commands')
 	virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);

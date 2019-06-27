@@ -40,7 +40,7 @@ scllrf_DBD += system.dbd
 
 scllrf_DBD += drvAsynIPPort.dbd
 scllrf_DBD += asyn.dbd
-scllrf_DBD += scllrfAsynPortDriver.dbd
+scllrf_DBD += leepDrv.dbd
 scllrf_DBD += calcSupport.dbd
 scllrf_DBD += stdSupport.dbd
 scllrf_DBD += history.dbd
@@ -60,9 +60,9 @@ scllrf_SRCS_vxWorks += -nil-
 # Add locally compiled object code
 # For example, subroutines
 # ========================================================================
-scllrf_SRCS += scllrfAsynPortDriver.cpp
-scllrf_SRCS += GUNB.cpp
-scllrf_SRCS += GUNBExtra.cpp
+scllrf_SRCS += leepDrv.cpp
+scllrf_SRCS += GUNBLlrfDrv.cpp
+scllrf_SRCS += GUNBLlrfDev.cpp
 scllrf_SRCS += PVramp.stt
 scllrf_SRCS += centerCwDetune.stt
 scllrf_SRCS += amc78xxmon.stt

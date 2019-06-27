@@ -158,17 +158,6 @@ file PVramp.template
 	{ P = "ACCL:GUNB:455:", PV0 = , PV1 = , PV3 =, PV4 =, PV5 =, PV2 = , PV6 = , PV7 = , PV8 = , PV9 = , PV10 = , PV11 = , PV12 = , PV13 = , PV14 = , PV15 = }
 }
 
-
-file GUNBRegisterAlias.template
-{
-	{ P = "ACCL:GUNB:455:PRC:", N=2 }
-}
-
-file GUNB3ChassisAlias.template
-{
-	{ P = "ACCL:GUNB:455:", N=2 }
-}
-
 # PID loop for buncher tuning using water temperature
 file $(STD)/stdApp/Db/pid_control.db
 {

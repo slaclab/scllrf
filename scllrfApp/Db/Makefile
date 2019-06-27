@@ -12,13 +12,9 @@ DB_INSTALLS += $(STD)/stdApp/Db/pid_control.db
 #----------------------------------------------------
 # Create and install (or just install)
 # databases, templates, substitutions like this
-#DB += PRCextra.db
-DB += GUNBExtra.db
+DB += GUNBLlrfDev.db
 DB += BMB7monitor.db
-#DB += cryo-plc.db
-#DB += GunRfCalib.db
-#DB += BuncherRfCalib.db
-DB += BuncherExtra.db
+DB += BuncherLlrfDev.db
 DB += GunStatHistory.db
 DB += BuncherStatHistory.db
 
@@ -52,20 +48,9 @@ endif
 
 # =======================================================================
 # Install to deployment dir (eg. PROD)
-DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfCommon.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfINTRegisters.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfPRCRegisters.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/scllrfRESRegisters.template
-DB_INSTALLS += $(TOP)/scllrfApp/Db/GUNBRegisters.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/RESextra.db
+DB_INSTALLS += $(TOP)/scllrfApp/Db/leepDrv.template
+DB_INSTALLS += $(TOP)/scllrfApp/Db/GUNBLlrfRegisters.template
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/ZZZextra.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/STMPextra.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/ARCTextra.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/CPLTextra.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/HELLextra.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/DEGKextra.template
-#DB_INSTALLS += $(TOP)/scllrfApp/Db/STEPextra.template
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

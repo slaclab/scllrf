@@ -28,7 +28,7 @@ dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_IP,PORT=$(CHASSIS_NAME)IP,ADDR=0
 
 
 #epicsThreadSleep(1.0)
-$(SC=scllrf)$(CHASSIS_TYPE)$(EXTRA=extra)Configure( "$(CHASSIS_NAME)Reg","$(CHASSIS_NAME)IP")
+$(SC=scllrf)$(CHASSIS_TYPE)$(DEV=Dev)Configure( "$(CHASSIS_NAME)Reg","$(CHASSIS_NAME)IP")
 dbLoadRecords("db/asynRecord.db","P=$(P),R=ASYN_REG,PORT=$(CHASSIS_NAME)Reg,ADDR=0,IMAX=0,OMAX=0")
 
 # ======================================================================
@@ -45,7 +45,7 @@ epicsThreadSleep(0.2)
 #Load Additional databases:
 # =====================================================================
 ## Load record instances
-dbLoadRecords("db/scllrfCommon.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)Reg,SC=$(SC=scllrf)")
+dbLoadRecords("db/leepDrv.template", "CHASSIS_TYPE=$(CHASSIS_TYPE),P=$(P),PORT=$(CHASSIS_NAME)Reg,SC=$(SC=scllrf)")
 
 bmb7Configure("$(CHASSIS_NAME)BMB7", "$(FPGA_IP)", "0")
 dbLoadRecords("db/BMB7monitor.db", "PORT=$(CHASSIS_NAME)BMB7,P=$(DEVICE_TYPE):$(AREA):$(POSITION):,R=$(CHASSIS_NAME):")

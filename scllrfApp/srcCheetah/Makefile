@@ -6,9 +6,8 @@ DIRS := $(patsubst %.py, %, $(PY_FILES))
 all: $(PY_FILES)
 #	for i in $^ ; do \
 #		python deviceGeneration.py -d $$i ; \
-#	done  ; \
-#	python deviceGeneration.py -c scllrfPRC -i live_prc_regmap.json
-	python deviceGeneration.py -c GUNB -i regmapold.json
+#	done  ;
+	python deviceGeneration.py -c GUNBLlrf -i regmapold.json
 
 % : %.py
 	python deviceGeneration.py -d $^

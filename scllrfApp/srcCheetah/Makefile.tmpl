@@ -11,10 +11,10 @@ include \$(TOP)/configure/CONFIG
 
 LIBRARY_IOC += ${name}
 
-DBD += ${name}DriverSupport.dbd
+DBD += ${name}DrvSupport.dbd
 
 \# The following are compiled and added to the Support library
-${name}_SRCS += ${name}Driver.cpp
+${name}_SRCS += ${name}Drv.cpp
 
 ${name}_LIBS += DeviceLibrary
 ${name}_LIBS += cpswAsynPortDriverSupport

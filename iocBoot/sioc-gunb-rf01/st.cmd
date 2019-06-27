@@ -32,8 +32,8 @@ epicsEnvSet( BIT_FILE, "../gun.bit")
 # The "chassis" register sets the type of chassis: 0:gun prc,1:gun rfs,2:buncher prc,3:buncher rfs
 epicsEnvSet(CHASSIS_REG, "1")
 # If this chassis has a subclass, by convention called extra, set its name
-# here so that scllrf$(CHASSIS_TYPE)$(EXTRA)Configure( "myReg","$(P)myIP") resolves correctly
-epicsEnvSet( EXTRA, "Extra")
+# here so that scllrf$(CHASSIS_TYPE)$(DEV)Configure( "myReg","$(P)myIP") resolves correctly
+epicsEnvSet( DEV, "Dev")
 # This will work for the gun, which is not sc.
 epicsEnvSet( SC, "")
 
@@ -60,7 +60,7 @@ epicsEnvSet( FPGA_IP, "192.168.0.103")
 asynSetTraceMask("$(CHASSIS_NAME)IP",-1,1)
 asynSetTraceMask("$(CHASSIS_NAME)Reg",-1,1)
 
-dbLoadRecords("db/GUNBExtra.db")
+dbLoadRecords("db/GUNBLlrfDev.db")
 dbLoadRecords("db/GunStatHistory.db")
 
 ##############################################################################
