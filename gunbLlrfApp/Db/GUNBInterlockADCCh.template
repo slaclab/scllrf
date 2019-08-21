@@ -9,6 +9,7 @@ record(ao, "$(CHASSIS)V_THRESH_W$(CH)")
 	field(DESC, "Raw register value for trip thresholds")
 	field(LOPR, "-0xFFFFFFFF")
 	field(DRVL, "-0xFFFFFFFF")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL DESC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 
@@ -41,6 +42,7 @@ record( mbbo, "$(P)INTERLOCK_MODE")
 	field( THST, "ABOVE")
 	field( DTYP, "Raw Soft Channel")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -53,6 +55,7 @@ record( ao, "$(P)UPPER_PWR_LIMIT")
 	field( DESC, "UPPER trip limit squared")
 	field( FLNK, "$(P)UPPER_LIMIT_CALC")
 	field( EGU, "W")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -71,6 +74,7 @@ record( ao, "$(P)UPPER_LIMIT")
 	field( FLNK, "$(P)UPPER_LIMIT_RAW_CALC")
 	field( EGU, "$(EGU)")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -89,6 +93,7 @@ record( longout, "$(P)UPPER_LIMIT_RAW")
 	field( HOPR, 0x7FFF)
 	field( DRVL, 0)
 	field( LOPR, 0)
+	field( ASG, "CAPUTLOG")
 }
 
 
@@ -100,6 +105,7 @@ record( ao, "$(P)LOWER_PWR_LIMIT")
 	field( DESC, "Lower trip limit squared")
 	field( FLNK, "$(P)LOWER_LIMIT_CALC")
 	field( EGU, "W")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -117,6 +123,7 @@ record( ao, "$(P)LOWER_LIMIT")
 	field( FLNK, "$(P)LOWER_LIMIT_RAW_CALC")
 	field( EGU, "$(EGU)")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -135,4 +142,5 @@ record( longout, "$(P)LOWER_LIMIT_RAW")
 	field( HOPR, 0x7FFF)
 	field( DRVL, 0)
 	field( LOPR, 0)
+	field( ASG, "CAPUTLOG")
 }

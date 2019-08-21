@@ -62,6 +62,7 @@ field(FVST, "$(P)PRC:RFS1B")
 field(SXST, "$(P)PRC:RFS2A")
 field(SVST, "$(P)PRC:RFS2B")
 field(PINI, "YES")
+field( ASG, "CAPUTLOG")
 field(VAL, 4)
 #info(autosaveFields, "VAL")
 }
@@ -258,6 +259,7 @@ record (calc, "$(P)PMEAN_DET0")
 	field(DISV, "0")
 # stop updating this when not pulsing
 	field(EGU, "deg")
+	field( ASG, "CAPUTLOG")
 	info(autosaveFields, "VAL")
 }
 
@@ -305,6 +307,7 @@ field(LOPR, "0")
 field(VAL, "100")
 field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -314,6 +317,7 @@ field(HOPR, "180")
 field(LOPR, "-180")
 field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -342,6 +346,7 @@ field(HOPR, "100")
 field(LOPR, "0")
 field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -351,6 +356,7 @@ field(HOPR, "180")
 field(LOPR, "-180")
 field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -380,6 +386,7 @@ field(LOPR, "0")
 field(VAL, "100")
 field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -389,6 +396,7 @@ field(HOPR, "180")
 field(LOPR, "-180")
 field(FLNK, "$(P)RFSUPLO3_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -417,6 +425,7 @@ field(HOPR, "100")
 field(LOPR, "0")
 field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -426,6 +435,7 @@ field(HOPR, "180")
 field(LOPR, "-180")
 field(FLNK, "$(P)RFSUPLO4_AP_TO_IQ")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -470,6 +480,7 @@ field(DO9, "0")
 field(LNK9, "$(P)DRV1_ADJ_A PP")
 field(DOA, "1")
 field(LNKA, "$(P)BALANCE_PHASES_PT2.PROC")
+	field( ASG, "CAPUTLOG")
 }
 
 # Too many steps to fit in one sequence, so there's a sequel
@@ -536,6 +547,7 @@ field(CMTE, "Lower limit")
 field(CMTF, "Clipped PID Output")
 field(CMTG, "0-99 counter")
 field(CMTH, "PWM Output")
+	field( ASG, "CAPUTLOG")
 }
 
 #! Further lines contain data used by VisualDCT

@@ -42,12 +42,14 @@ record(bo, "$(P)FREQ_LOOP_CLOSE") {
 alias("llrf$(ALIAS_N):freq_loop_close")
 field(ZNAM, "Off")
 field(ONAM, "On")
+	field( ASG, "CAPUTLOG")
 }
 
 record(ao, "$(P)FREQ_LOOP_GAIN") {
 #       field(FLNK, "$(P)FREQ_SHIFT")
 field(VAL, "$(FTGAIN=-0.0011121)")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -86,10 +88,11 @@ record(ao, "$(P)DELTA_FREQDES")
 	field( DRVH, "94285534")
 	field( DRVL, "-94285534")
 	field(EGU, "Hz")
-	field( HIGH, "179")
+	field( HIGH, "370")
 	field( HSV, "MINOR")
-	field( LOW, "-179")
+	field( LOW, "-400000")
 	field( LSV, "MINOR")
+	field( ASG, "CAPUTLOG")
 }
 
 record(calcout, "$(P)DELTA_FREQDES_OUT")
@@ -174,6 +177,7 @@ field(ONAM, "On")
 # Momentary button sort of action, and reset before DO_... executes.
 field(HIGH, "0.7")
 field(OUT, "$(P)FREQ_LOOP_CLOSE")
+	field( ASG, "CAPUTLOG")
 }
 
 record(seq, "$(P)DO_FREQ_CORRECTION") {
@@ -347,6 +351,7 @@ field(HHSV, "MAJOR")
 field(HSV, "MINOR")
 field(LSV, "MINOR")
 field(LLSV, "MAJOR")
+field( ASG, "CAPUTLOG")
 }
 
 
@@ -415,6 +420,7 @@ record (bo, "$(P)RFCTRL" )
 	field( ONAM, "On" )
 	field( ZNAM, "Off" )
 	field( OUT, "$(P)CALC_RFCTRL PP" )
+	field( ASG, "CAPUTLOG")
 }
 
 record(calcout, "$(P)CALC_RFCTRL") {
@@ -506,6 +512,7 @@ record(seq, "$(P)RFCLONGO") {
 record (mbbi, "$(P)RFMODE" )
 {
 	field( DESC, "Hook for RF control sequence" )
+	field( ASG, "CAPUTLOG")
 }
 
 # Amplitude/phase loop proportional gain
@@ -513,6 +520,7 @@ record( ao, "$(P)AP_KP")
 {
 	field( FLNK, "$(P)AP_KP_Sync")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 
 }
@@ -527,6 +535,7 @@ record( ao, "$(P)AP_KI")
 {
 	field( FLNK, "$(P)AP_KI_Sync")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 
 }
@@ -541,6 +550,7 @@ record( ao, "$(P)AP_KI_Sync")
 record(ao, "$(P)PRC:FDBKSEL_W")
 {
 	field( PINI, "YES" )
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -548,6 +558,7 @@ record(bo, "$(P)BT_CLOSELOOP") {
 field(FLNK, "$(P)CALC_CLOSELOOP")
 field(ZNAM, "Off")
 field(ONAM, "On")
+	field( ASG, "CAPUTLOG")
 }
 
 record(calc, "$(P)CALC_CLOSELOOP") {
@@ -720,6 +731,7 @@ field(HHSV, "MAJOR")
 field(HSV, "MINOR")
 field(LSV, "MINOR")
 field(LLSV, "MAJOR")
+field( ASG, "CAPUTLOG")
 }
 
 record(calc, "$(P)SYSTEM_HEALTH_1") {
@@ -746,6 +758,7 @@ record(bi, "$(P)PRC:RF_MASTER")
 	field(ZNAM, "Fault")
 	field(ZSV, "MAJOR")
 	field(ONAM, "Ok")
+	field( ASG, "CAPUTLOG")
 }
 record(bi, "$(P)RFS1:RF_MASTER")
 {
@@ -779,6 +792,7 @@ field(INP, "$(P)RF_MASTER_CALC CP MS")
 	field(ZNAM, "Fault")
 	field(ZSV, "MAJOR")
 	field(ONAM, "Ok")
+	field( ASG, "CAPUTLOG")
 }
 
 record(bi, "$(P)PRC:RF_PERMIT")
@@ -839,6 +853,7 @@ record(calcout, "$(P)BOUNDARY_RESET_CALC") {
 	field(SDIS, "$(P)MASK_BOUNDARY_RESET")
 	field( DISV, "1")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 }
 record( dfanout, "$(P)SET_BOUNDARY_RESETS") {
 

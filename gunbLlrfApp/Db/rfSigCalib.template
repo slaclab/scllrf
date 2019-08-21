@@ -25,6 +25,7 @@ record(longin, "$(PREF)CAL_ADC_10DBM") {
 field(VAL, "0")
 field(FLNK, "$(PREF)CAL_REF_CALC")
 field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -75,6 +76,7 @@ field(SCAN, "Passive")
 field(OMSL, "supervisory")
 field(PREC, "6")
 field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -85,6 +87,7 @@ field(PREC, "6")
 field(OMSL, "supervisory")
 field(PINI, "YES")
 field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -95,6 +98,7 @@ field(PREC, "6")
 field(OMSL, "supervisory")
 field(PINI, "YES")
 field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -105,6 +109,7 @@ field(PREC, "6")
 field(OMSL, "supervisory")
 field(PINI, "YES")
 field(FLNK, "$(PREF)CAL_LOSS_TOTAL")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -165,6 +170,7 @@ field(PREC, "7")
 field(VAL,  "1")
 field(PINI, "YES")
 field(FLNK, "$(PREF)SCALE_CALC")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -179,6 +185,7 @@ field(OMSL, "supervisory")
 field(VAL,  "1")
 field(PINI, "YES")
 field(FLNK, "$(PREF)SCALE_CALC")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 

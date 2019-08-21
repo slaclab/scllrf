@@ -42,6 +42,7 @@ record (mbbo, "$(P)FWD:USE_AS_REF")
 	field(FVST, "$(P)PRC:RFS2B")
 	field(PINI, "YES")
 	field(VAL, 3)
+	field( ASG, "CAPUTLOG")
 #	info( autosaveFields, "VAL")
 }
 
@@ -94,6 +95,7 @@ record( mbboDirect, "$(P)SOFT_TRIP_MASK")
 {
 # Bypassed by default
 	field( VAL, "3")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -258,6 +260,7 @@ record (calc, "$(P)PMEAN_DET0")
 	field( SDIS, "$(P)DETUNE_MODE")
 	field( DISV, "0") # stop updating this when not pulsing
 	field(EGU, "deg")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -287,6 +290,7 @@ record(ao, "$(P)DRV1_ADJ_A")
 	field(VAL, "100")
 	field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -297,6 +301,7 @@ record(ao, "$(P)DRV1_ADJ_P")
 	field(LOPR, "-180")
 	field(FLNK, "$(P)RFSUPLO1_AP_TO_IQ")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 record( fanout,  "$(P)RFSUPLO1_AP_TO_IQ")
@@ -329,6 +334,7 @@ record(ao, "$(P)DRV2_ADJ_A")
 	field(LOPR, "0")
 	field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -339,6 +345,7 @@ record(ao, "$(P)DRV2_ADJ_P")
 	field(LOPR, "-180")
 	field(FLNK, "$(P)RFSUPLO2_AP_TO_IQ")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 record( fanout,  "$(P)RFSUPLO2_AP_TO_IQ")
@@ -387,10 +394,5 @@ record( seq, "$(P)BALANCE_PHASES")
 	field(LNK9, "$(P)DRV2_ADJ_P PP")
 	field(DOA, "100")
 	field(LNKA, "$(P)DRV1_ADJ_A PP")
-}
-
-####XXXX This is effectively an alias for Apex compatability. Remove after commissioning.
-record( bo, "Screen1:Command" )
-{
-	field( OUT, "YAGS:GUNB:753:TGT_CTRL PP" )
+	field( ASG, "CAPUTLOG")
 }

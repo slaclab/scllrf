@@ -8,6 +8,7 @@ record(ao, "$(P)POLL_PERIOD")
 	field(OUT,  "@asyn($(PORT),0) POLL_PERIOD")
 	field(SCAN, "Passive")
 	field(PREC, "2")
+	field( ASG, "CAPUTLOG")
 	info(asyn:READBACK, "1")
 	info(autosaveFields, "VAL DESC EGUL EGUF HOPR LOPR PREC HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
@@ -20,6 +21,7 @@ record(bo, "$(P)RUN_STOP")
 	field(SCAN, "Passive")
 	field(ZNAM, "Stop")
 	field(ONAM, "Run")
+	field( ASG, "CAPUTLOG")
 	info(autosaveFields, "VAL DESC HIGH")
 }
 
@@ -30,6 +32,7 @@ record(longout, "$(P)MAX_PARALLEL_REQUESTS")
 	field(OUT,  "@asyn($(PORT),0) MAX_PARALLEL_REQUESTS")
 	field(SCAN, "Passive")
 	info(asyn:READBACK, "1")
+	field( ASG, "CAPUTLOG")
 	info(autosaveFields, "VAL DESC HOPR LOPR HIHI HHSV HIGH HSV LOW LSV LOLO LLSV HYST ADEL MDEL")
 }
 

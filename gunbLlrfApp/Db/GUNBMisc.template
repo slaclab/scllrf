@@ -19,8 +19,8 @@ record(ao, "$(P)REP_PERIOD")
 	field( FLNK, "$(P)REP_PERIOD_U_TO_R")
 	field( PREC, "5")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
-# field(ASG, "")
 }
 # Using a calcout instead of ao because ao misbehaved with SDIS loop breaking
 record(calcout, "$(P)REP_PERIOD_U_TO_R")
@@ -38,6 +38,7 @@ record(calcout, "$(P)REP_PERIOD_U_TO_R")
 record( ao, "$(P)$(CHASSIS)REP_PERIOD_W"){
 	field( FLNK, "$(P)REP_PERIOD_Sync")
 	field( EGU, "IF counts")
+	field( ASG, "CAPUTLOG")
 }
 
 record( calcout, "$(P)REP_PERIOD_Sync"){
@@ -83,7 +84,7 @@ record(ao, "$(P)REP_FREQUENCY")
 	field( EGU, "Hz")
 	field(FLNK, "$(P)REP_F_TO_P")
 	field( PREC, "5")
-# field(ASG, "")
+	field( ASG, "CAPUTLOG")
 }
 
 # User interface PV in ms
@@ -94,7 +95,7 @@ record(ao, "$(P)PULSE_LENGTH")
 	field( EGU, "ms")
 	field( FLNK, "$(P)PULSE_LENGTH_U_TO_R")
 	field( PREC, "5")
-# field(ASG, "")
+	field( ASG, "CAPUTLOG")
 	field(PINI, "YES")
 	info( autosaveFields, "VAL")
 }
@@ -145,7 +146,7 @@ record( ao, "$(P)DUTY_CYCLE")
 	field( EGU, "%")
 	field( FLNK, "$(P)DUTY_CYCLE_Sync_Out PP")
 	field( PREC, "5")
-# field(ASG, "")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -239,6 +240,7 @@ record( ao, "$(P)ADES"){
 	field( LOPR, "0")
 	field(EGU, "MV")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW")
 }
 
@@ -267,6 +269,7 @@ record( ao, "$(P)PDES"){
 	field( LOPR, "-180")
 	field( EGU, "deg")
 	field( PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "DRVH DRVL HIGH HIHI LOW LOLO")
 }
 
@@ -319,6 +322,7 @@ record( ao, "$(P)PH_DELAY")
 	field( LOPR, "0" )
 	field( FLNK, "$(P)PH_DELAY_Sync_Out")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -360,6 +364,7 @@ record( ao, "$(P)AOPEN"){
 	field( LOPR, "0")
 	field(EGU, "MV")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
@@ -379,6 +384,7 @@ record( ao, "$(P)POPEN"){
 	field( HOPR, "360")
 	field( LOPR, "-360")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "DRVH DRVL HIHI HIGH LOW LOLO HOPR LOPR")
 }
 
@@ -408,11 +414,13 @@ record(ao, "$(P)USE_AOPEN_SCALE_CALC")
 	field( DOL,  "$(P)AOPEN_SCALE_CALC NPP MS")
 	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)AOPEN_SCALE PP MS")
+	field( ASG, "CAPUTLOG")
 }
 record( ao, "$(P)AOPEN_SCALE" ) {
 #	field( FLNK, "$(P)AOPEN_MAX_CALC PP" )
 	field( VAL, "1")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -446,10 +454,12 @@ record(ao, "$(P)USE_POPEN_SCALE_CALC")
 	field( DOL,  "$(P)POPEN_SCALE_CALC NPP MS")
 	field( OMSL, "closed_loop")
 	field( OUT,  "$(P)POPEN_SCALE PP MS")
+	field( ASG, "CAPUTLOG")
 }
 record( ao, "$(P)POPEN_SCALE" ) {
 	field( VAL, "0")
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 
@@ -539,16 +549,19 @@ record( calcout, "$(P)SOURCE_IQ_TO_P")
 record( ao, "$(P)$(CHASSIS)THRESH_INIT_W")
 {
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 record( ao, "$(P)$(CHASSIS)THRESH_NOISE_W")
 {
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 record( ao, "$(P)$(CHASSIS)DECAY_COEF_W")
 {
 	field(PINI, "YES")
+	field( ASG, "CAPUTLOG")
 	info( autosaveFields, "VAL")
 }
 record( acalcout, "$(P)REV:AWF_LIMIT")
@@ -620,6 +633,7 @@ field(TTST, "11.5 ms")
 field(FTST, "22.9 ms")
 field(FFST, "45.9 ms")
 field(DTYP, "Raw Soft Channel")
+	field( ASG, "CAPUTLOG")
 }
 
 record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
@@ -633,10 +647,11 @@ record(dfanout, "$(P)WAVE_SAMP_PER_FAN")
 
 record( bo, "$(P)LIMIT_TRIP_RESET")
 {
-		field(FLNK, "$(P)LIMIT_TRIP_RESET_3CH PP")
-		field(HIGH, 1)
-		field(ZNAM, "0")
-		field(ONAM, "1")
+	field(FLNK, "$(P)LIMIT_TRIP_RESET_3CH PP")
+	field(HIGH, 1)
+	field(ZNAM, "0")
+	field(ONAM, "1")
+	field( ASG, "CAPUTLOG")
 }
 
 record( dfanout, "$(P)LIMIT_TRIP_RESET_3CH") {
@@ -653,6 +668,7 @@ record( bo, "$(P)RF_GO")
 	field(HIGH, 1)
 	field(ZNAM, "0")
 	field(ONAM, "1")
+	field( ASG, "CAPUTLOG")
 }
 
 record( seq, "$(P)RF_GO_3CH")

@@ -23,6 +23,7 @@ field(OMSL, "supervisory")
 field(VAL,  "4.1e7")
 field(PINI, "YES")
 field(FLNK, "$(PREF)CAL_SCALE_CAV")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -34,6 +35,7 @@ field(OMSL, "supervisory")
 field(VAL,  "$(RoverQ)")
 field(PINI, "YES")
 field(FLNK, "$(PREF)CAL_SCALE_CAV")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 

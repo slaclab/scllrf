@@ -7,6 +7,7 @@
 # Complete ramp in this much time
 record(ao, "$(P)RAMP_TIME") {
 field(EGU, "s")
+	field( ASG, "CAPUTLOG")
 }
 record(ao, "$(P)RAMP_TIME_LEFT") {
 field(EGU, "s")
@@ -14,18 +15,22 @@ field(EGU, "s")
 
 # Ramp the specified PV to this value
 record(ao, "$(P)RAMP_TO") {
+	field( ASG, "CAPUTLOG")
 }
 record(ao, "$(P)RAMP_LAST_VAL") {
+	field( ASG, "CAPUTLOG")
 }
 
 # Linear or exponential ramping?
 record(bo, "$(P)RAMP_EXP_LIN") {
 field(ZNAM, "Linear")
 field(ONAM, "Exponential")
+	field( ASG, "CAPUTLOG")
 }
 
 # PV name to be ramped
 record(stringout, "$(P)RAMPING_PV_NAME") {
+	field( ASG, "CAPUTLOG")
 }
 
 record(mbbo, "$(P)RAMPING_PV_LIST") {
@@ -56,11 +61,13 @@ field(ONAM, "Ramping")
 record(bo, "$(P)RAMP_GO") {
 field(ZNAM, "Start")
 field(ONAM, "Ramping")
+	field( ASG, "CAPUTLOG")
 }
 
 record(bo, "$(P)RAMP_ABORT") {
 field(ZNAM, "Abort")
 field(ONAM, "Aborting")
+	field( ASG, "CAPUTLOG")
 }
 
 #! Further lines contain data used by VisualDCT

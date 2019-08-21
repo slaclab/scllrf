@@ -46,6 +46,7 @@ field(OUT, "@asynMask($(PORT),0, 0x00000FFF, 0.1) TRACE_DATA_CHAN_ENABLE")
 field(NOBT, "16")
 field(SCAN, "Passive")
 field(FLNK, "$(P)$(CHASSIS)WF_CHAN_DISABLE")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "DESC")
 info(asyn:READBACK, "1")
 }
@@ -106,6 +107,7 @@ field(ONAM, "Enabled")
 field(PINI, "YES")
 field(DTYP, "asynUInt32Digital")
 field(OUT, "@asynMask($(PORT),0, 1, 0.1)TRACE_DATA_POLL_ENABLE")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -115,6 +117,7 @@ field(ONAM, "Enabled")
 field(PINI, "YES")
 field(DTYP, "asynUInt32Digital")
 field(OUT, "@asynMask($(PORT),0, 1, 0.1)TRACE_DATA_FAST_UPDATE")
+	field( ASG, "CAPUTLOG")
 info(autosaveFields, "VAL")
 }
 
@@ -155,6 +158,7 @@ field(CALC, "1")
 # The waveform displays use this record to know when to update parameters
 record(bo, "$(P)$(CHASSIS)WF_UPDATE_PLOT") {
 field(HIGH, "0.1")
+	field( ASG, "CAPUTLOG")
 }
 
 ## This keeps writing 0 instead of the assigned VAL during startup. huh.
