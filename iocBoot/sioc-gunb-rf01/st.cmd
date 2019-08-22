@@ -10,7 +10,7 @@ epicsEnvSet("POSITION", "100")
 iocLogInit()
 iocLogPrefix("fac=${DEVICE_TYPE} proc=${IOC} ")
 # Hardware type [PRC, RFS, RES, INT]
-epicsEnvSet("CHASSIS_TYPE","GUNBLlrf")
+epicsEnvSet("CHASSIS_TYPE","GUNBLlrfLlrf")
 # Number within location and type: 1, 2, 3...
 epicsEnvSet("CHASSIS_NAME","RFS1")
 epicsEnvSet("P", "$(DEVICE_TYPE):$(AREA):$(POSITION):$(CHASSIS_NAME):")

@@ -10,6 +10,9 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-23: Added ASG of CAPUTLOG for all settings on screens.
+				Added fault waveform saving for soft limit trips, more sophisticated turn-off.
+
 scllrf-R1-0-22: A bunch of cleanup and refactoring for clarity.
 				- Deleted experimental or obsolete files
 				- Changed "extra" to dev, since it's the device layer, and added drv to driver layer things
