@@ -144,10 +144,6 @@ record( seq, "$(P)SOFT_TRIP_SEQ")
 	field( LNK7, "$(P)SOFT_TRIP_RESET PP")
 	field( DO8, 0 )
 	field( LNK8, "$(P)SET_ZERO_AMPLITUDE PP")
-	field( DO
-	field( LNK
-	field( DO
-	field( LNK
 }
 
 record( waveform, "$(P)REV1:FAULT_SNAPSHOT")
