@@ -117,6 +117,159 @@ field(CALC, "A+B+C+D")
 field(EGU, "W")
 info(autosaveFields, "ADEL MDEL HIHI HHSV HIGH HSV LOW LSV LOLO LLSV")
 }
+# Set bit 0 to 1 to mask soft trip on REV1.
+# Set bit 1 to 1 to mask soft trip on REV2
+record( mbboDirect, "$(P)SOFT_TRIP_MASK")
+{
+# Bypassed by default
+	field( VAL, "3")
+	field( ASG, "CAPUTLOG")
+	info( autosaveFields, "VAL")
+}
+
+# When a trip happens, trigger the sequence SOFT_TRIP_SEQ which:
+# - Captures all the FWD and REV power waveforms,
+# - Sets the trip/arm flag to trip. This flag also disables more trips until reset
+# - Turns off cavity frequency following loop
+# - Sets tuner TUNR:GUNB:200:FB_MODEto Force mode (1)
+# - Sets RF output to 0
+
+#Add disa/sdis above to be a BO SOFT_TRIP_RESET which is 0 when tripped
+# The BO triggers a sequence to copy REV1/2 and FWD1/2 to fault waveforms,
+# and set amplitude to 0
+
+record( calcout, "$(P)SOFT_TRIP")
+{
+	field( INPA, "$(P)REV1:SOFT_TRIP CP MS" )
+	field( INPB, "$(P)SOFT_TRIP_MASK.B0" )
+	field( INPC, "$(P)REV2:SOFT_TRIP CP MS" )
+	field( INPD, "$(P)SOFT_TRIP_MASK.B1" )
+	field( INPE, "$(P)REV3:SOFT_TRIP CP MS" )
+	field( INPF, "$(P)SOFT_TRIP_MASK.B2" )
+	field( INPG, "$(P)REV4:SOFT_TRIP CP MS" )
+	field( INPH, "$(P)SOFT_TRIP_MASK.B3" )
+	# value to send to RF on/off control when there is an unmasked trip
+	field( CALC, "(!A||B)&&(!C||D)&&(!E||F)&&(!G||H)" )
+	field( OUT, "$(P)SOFT_TRIP_SEQ PP")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+	# If there is a trip, keep turning off while it persists. Don't turn on automatically.
+	field( OOPT, "When Zero")
+}
+
+record( seq, "$(P)SOFT_TRIP_SEQ")
+{
+	field( DO1, 1 )
+	field( LNK1, "$(P)REV1:FAULT_SNAPSHOT.PROC")
+	field( DO2, 1 )
+	field( LNK2, "$(P)REV2:FAULT_SNAPSHOT.PROC")
+	field( DO3, 1 )
+	field( LNK3, "$(P)REV3:FAULT_SNAPSHOT.PROC")
+	field( DO4, 1 )
+	field( LNK4, "$(P)REV4:FAULT_SNAPSHOT.PROC")
+	field( DO5, 1 )
+	field( LNK5, "$(P)FWD1:FAULT_SNAPSHOT.PROC")
+	field( DO6, 1 )
+	field( LNK6, "$(P)FWD2:FAULT_SNAPSHOT.PROC")
+	field( DO7, 1 )
+	field( LNK7, "$(P)FWD3:FAULT_SNAPSHOT.PROC")
+	field( DO8, 1 )
+	field( LNK8, "$(P)FWD4:FAULT_SNAPSHOT.PROC")
+# Once we establish buncher tuner loop control, maybe change this
+#	field( DO9, 1)
+#	field( LNK9, "TUNR:GUNB:200:FB_MODE PP")
+	field( DOA, 0 )
+	field( LNKA, "$(P)SET_ZERO_AMPLITUDE PP")
+}
+
+record( waveform, "$(P)REV1:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)REV1:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)REV2:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)REV2:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)REV3:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)REV3:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)REV4:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)REV4:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)FWD1:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)FWD1:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)FWD2:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)FWD2:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)FWD3:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)FWD3:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( waveform, "$(P)FWD4:FAULT_SNAPSHOT")
+{
+	field( INP, "$(P)FWD4:PWRWF" )
+	field( FTVL, "FLOAT" )
+	field( NELM, "8192")
+	field( SDIS, "$(P)SOFT_TRIP_RESET")
+	field( DISV, 0)
+}
+
+record( bo, "$(P)SOFT_TRIP_RESET")
+{
+	field( ZNAM, "Trip" )
+	field( ZSV, "MAJOR" )
+	field( ONAM, "Arm" )
+	field( ASG, "CAPUTLOG" )
+}
+
+record( dfanout, "$(P)SET_ZERO_AMPLITUDE")
+{
+	field( OUTA, "$(P)SOFT_TRIP_RESET PP")
+	field( OUTB, "$(P)FREQ_LOOP_CLOSE PP")
+	field( OUTC, "$(P)AOPEN PP" )
+	field( OUTD, "$(P)ADES PP" )
+}
+
 
 record(calc, "$(P)REV:PMEAN") {
 field(DESC, "Reverse phase for detune calcs")
