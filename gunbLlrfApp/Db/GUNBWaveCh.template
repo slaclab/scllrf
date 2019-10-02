@@ -338,7 +338,7 @@ record(acalcout, "$(P)SOFT_TRIP") {
 	field(INAA, "$(P)PWRWF CPP MS")
 	field(INPB, "$(P)PULSE_START_POINT CP")
 	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
-	field(CALC, "D:=AMAX(AA[B,C-B]);D>A?(FF:=AA;1):0")
+	field(CALC, "D:=AVG(AA[B,C-B]);D>A?(FF:=AA;1):0")
 	field(NELM, "8192")
 	field(PREC, "0")
 	field(EGU, "")

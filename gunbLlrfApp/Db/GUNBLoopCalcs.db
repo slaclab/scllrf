@@ -387,8 +387,8 @@ record ( acalcout, "$(P)AACT_DECAY" )
 ## This should be inactive when loop is CLOSED
 #	field( SDIS, "$(P)PRC:CLOSE_LOOP_W")
 #	field( DISV, "1")
-	field( NELM, "1")
-	field( NUSE, "1")
+	field( NELM, "2")
+	field( NUSE, "2")
 	field(EGU, "sqrt(W)")
 	info( autosaveFields, "VAL")
 }
@@ -408,8 +408,8 @@ record ( acalcout, "$(P)PACT_DECAY" )
 ## The equation is odd because the record wasn't working with AA[0]
 #	field( SDIS, "$(P)PRC:CLOSE_LOOP_W")
 #	field( DISV, "1")
-	field( NELM, "1")
-	field( NUSE, "1")
+	field( NELM, "2")
+	field( NUSE, "2")
 	field(EGU, "deg")
 	info( autosaveFields, "VAL")
 }
