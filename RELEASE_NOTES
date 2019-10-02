@@ -10,6 +10,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 
+scllrf-R1-0-24: Soft trip on reflected power now uses average instead of peak power.
+
 scllrf-R1-0-23: Added ASG of CAPUTLOG for all settings on screens.
 				Added fault waveform saving for soft limit trips, more sophisticated turn-off.
 
