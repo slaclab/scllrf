@@ -575,10 +575,10 @@ record(acalcout, "$(P)PMEAN") {
 record(acalcout, "$(P)PSTD") {
 	alias( "$(P)PSTD_ENG")
 	field(DESC, "Phase standard deviation")
-	field(INPA, "$(P)ITSTD NPP MS")
-# I is published first, so have Q updates trigger processing.
-	field(INPB, "$(P)QTSTD CPP MS")
-	field(CALC, "ATAN2(A,B)*R2D")
+	field(INAA, "$(P)PWF CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA[B,-(B+1)])")
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
@@ -611,10 +611,10 @@ record(acalcout, "$(P)PMEAN_RAW") {
 
 record(acalcout, "$(P)PSTD_RAW") {
 	field(DESC, "Raw phase standard deviation")
-	field(INPA, "$(P)ITSTD_RAW NPP MS")
-# I is published first, so have Q updates trigger processing.
-	field(INPB, "$(P)QTSTD_RAW CPP MS")
-	field(CALC, "ATAN2(A,B)*R2D")
+	field(INAA, "$(P)PWF_RAW CPP MS")
+	field(INPB, "$(P)PULSE_START_POINT CP")
+	field(INPC, "$(CHASSIS)PULSE_POINTS CP")
+	field(CALC, "STD(AA[B,-(B+1)])")
 	field(NELM, "8192")
 	field(PREC, "2")
 	field(EGU, "deg")
