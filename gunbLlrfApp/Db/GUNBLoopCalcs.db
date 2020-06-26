@@ -125,14 +125,14 @@ field(EGU, "Hz")
 record(calc, "$(P)CAV1:Q_LOADED") {
 field(INPA, "$(P)FREQ_OUT CP MS")
 field(INPB, "$(P)CAV1:DECAY_BW CP MS")
-field(CALC, "A/B")
+field(CALC, "A/(2*B)")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
 record(calc, "$(P)CAV2:Q_LOADED") {
 field(INPA, "$(P)FREQ_OUT CP MS")
 field(INPB, "$(P)CAV2:DECAY_BW CP MS")
-field(CALC, "A/B")
+field(CALC, "A/(2*B)")
 	info( autosaveFields, "ADEL MDEL LOLO LOW HIGH HIHI LLSV LSV HSV HHSV")
 }
 
@@ -377,7 +377,7 @@ record ( acalcout, "$(P)AACT_DECAY" )
 	field( INAA, "$(P)CAV1:DECAY_AWF CP MS" )
 	field( INBB, "$(P)CAV2:DECAY_AWF NPP MS" )
 	field( INPA, "0.9" ) # Equivalent of SMOO field in ai records
-	field( INPB, "GUN:GUNB:100:ACTIVE_PROBE")
+	field( INPB, "$(P)ACTIVE_PROBE")
 ## The equation is odd because the record wasn't working with AA[0]
 	field( CALC, "(ISNAN(VAL)?0:VAL)*A+(1-A)*(B=1?AMAX(AA[0,1]):AMAX(BB[0,1]))" ) # Use this if we want 2 probe max.
 #	field( CALC, "VAL*A+(1-A)*AMAX(AA[0,1])" )
