@@ -677,22 +677,16 @@ field(DO5, "100")
 field(LNK5, "$(P)DRV3_ADJ_A PP")
 }
 
-# Unless we can get fractions of a degree to work for water temperature setpoint,
-# this implements a PWM approach that toggles integer setpoints to achieve sub-degree
-# control
+# The PID loop feeds back on different signals at different times.
+# This is a place to change inputs and do a little pre-processing.
 record(transform, "$(P)CAV:PID_incalc") {
 field(DESC, "PWM tuning temp control")
 field(CLCA, "A")
-field(CLCB, "0.01*A+0.99*B")
-field(CLCF, "C>D?D:C<E?E:C")
-field(CLCG, "(G+1)%99")
-field(CLCH, "CEIL(F-G/100)")
-field(INPA, "$(P)DFACT PP")
-field(INPD, "$(P)CAV:PID_limits.P")
-field(INPE, "$(P)CAV:PID_limits.O")
-field(OUTH, "$(P)TEMPSP PP")
+field(CLCB, "0.9*B-0.1*A")
+field(INPA, "$(P)FREQ_OFFSET PP")
+field(OUTH, "$(P)TempSetpt PP")
 field(PREC, "2")
-field(CMTA, "Detune")
+field(CMTA, "Frequency Offset")
 field(CMTB, "Smoothed Detune")
 field(CMTC, "PID Output")
 field(CMTD, "Upper limit")
@@ -702,6 +696,43 @@ field(CMTG, "0-99 counter")
 field(CMTH, "PWM Output")
 	field( ASG, "CAPUTLOG")
 }
+
+# Feedback on frequency, drive cavity resonant frequency to nominal,
+# while RF output frequency follows cavity resonant cavity
+record(seq, "$(P)TUNE_TO_NOM")
+{
+	field(LNK, "$(P)FREQ_LOOP_CLOSE PP")
+	field(DO, "1")
+ 	field(LNK, "$(P)CAV:PID_incalc.INPA PP")
+	field(DO, "$(P)FREQ_OFFSET PP")
+ 	field(LNK, "$(P)CAV:PID_incalc.B PP")
+	field(DO, "0")
+ 	field(LNK, "$(P)CAV:PID_incalc.CLCB PP")
+	field(DO, "0.9*B-0.1*A")
+	"$(P)TempSetpt
+}
+
+# Feedback on detune, keep cavity resonance near nominal
+record(seq, "$(P)KEEP_AT_NOM")
+{
+	field(LNK, "$(P)FREQ_LOOP_CLOSE PP")
+	field(DO, "0")
+ 	field(LNK, "$(P)CAV:PID_incalc.INPA PP")
+	field(DO, "$(P)DFACT PP")
+ 	field(LNK, "$(P)CAV:PID_incalc.CLCB PP")
+	field(DO, "0.9*B+0.1*A")
+	field(LNK, "$(P)DELTA_FREQDES PP")
+	field(DO, "0")
+	"$(P)TempSetpt
+}
+
+# When the PID loop closes, if difference from nominal is < 200 and detune < 5000
+# - run KEEP_AT_NOM
+# otherwise
+# - run TUNE_TO_NOM
+record(seq, "$(P)CHANGE_FEEDBACK")
+{
+	field(
 
 #! Further lines contain data used by VisualDCT
 #! View(2339,577,1.1)
