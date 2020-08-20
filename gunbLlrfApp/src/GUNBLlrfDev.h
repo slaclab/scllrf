@@ -37,11 +37,6 @@
 #include <math.h>
 #include <bitset>
 
-#include "newmat.h"
-#include "newmatap.h"
-#include "newmatio.h"
-using namespace NEWMAT;
-
 class GUNBLlrfDev;
 
 class TraceData
@@ -70,7 +65,6 @@ public:
 	void updateRelToAbsIdx();
 	uint32_t GetEndAddr(){return regEndAddr_;}
 	asynStatus ProcessTraceDataReadback(const FpgaReg *pFromFpga); // parse register data, write to array PV
-	static epicsMutexId newmatMutexID_; // The newmat library is not thread safe. Only allow one thread at a time to use it.
 //	asynStatus ProcessSlowDataReadback(const FpgaReg *pFromFpga); // parse register data, write to various parameters
 //	unsigned int nextTag(){tag_ = ((tag_+1-4) % (unsigned int) pow(2,7))+4; return tag_;};
 	epicsFloat32 scaleFactor_[maxWavesCount]; // Separate scale factors for I and Q
@@ -109,7 +103,6 @@ private:
 	epicsEvent rawWaveRead_; /**< Event to signal the waveform requester */
 
 	float* CavityDecayConstantCompute(int *decay_real, int *decay_imag, unsigned int start, unsigned int ch);
-	Matrix PseudoInverse(const Matrix & m);
 
 	epicsFloat32 pIQBuf_[maxWavesCount][GUNBLlrfDrv::TraceDataRegCount]; // Data mapped into channels, I/Q separated
 	epicsInt32 pRawIQBuf_[maxWavesCount][GUNBLlrfDrv::TraceDataRegCount]; // Data mapped into channels, I/Q separated

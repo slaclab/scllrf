@@ -54,7 +54,6 @@ gunbLlrf_SRCS += gunbLlrf_registerRecordDeviceDriver.cpp
 gunbLlrf_SRCS_DEFAULT += gunbLlrfMain.cpp
 
 gunbLlrf_SRCS_vxWorks += -nil-
-
 # ========================================================================
 # ========================================================================
 # Add locally compiled object code
@@ -68,10 +67,41 @@ gunbLlrf_SRCS += centerCwDetune.stt
 gunbLlrf_SRCS += amc78xxmon.stt
 gunbLlrf_SRCS += BMB7Sup.c
 USR_CXXFLAGS += -std=c++0x
-USR_CXXFLAGS += -g -I$(TOP)/newmat10
+USR_INCLUDES = $(addprefix -I,$(BOOST_INCLUDE) $(BOOSTBINDINGS_INCLUDE)/boost-numeric-bindings $(CPPUNIT_INCLUDE) $(LAPACK_INCLUDE))
+
+USR_CPPFLAGS += -I$(GFORT_INCLUDE)
+USR_CPPFLAGS += -I$(QUADMATH_INCLUDE)
+USR_CPPFLAGS += -I$(DL_INCLUDE)
 # =====================================================
 # Link in the code from other libraries
 # =====================================================
+
+# ========================================================
+# Link in external package libraries (-llapack -lblas...)
+# Also, link system library (i.e. gfortran)
+# System library must be reference like so;
+# <IOCAPP>_SYS_LIB
+# ========================================================
+cppunit_DIR       =  $(CPPUNIT_LIB)
+gunbLlrf_LIBS    += cppunit
+
+lapack_DIR        =  $(LAPACK_LIB)
+gunbLlrf_LIBS    += lapack
+
+blas_DIR          =  $(LAPACK_LIB)
+gunbLlrf_LIBS    += blas
+
+ifeq ($(T_A),linuxRT-x86_64)
+gfortran_DIR=$(GFORT_LIB)
+quadmath_DIR = $(QUADMATH_LIB)
+#dl_DIR = $(DL_LIB)
+
+gunbLlrf_LIBS    += gfortran
+gunbLlrf_LIBS    += quadmath
+else
+gunbLlrf_SYS_LIBS    += gfortran
+endif
+
 # Needed to link in iocAdmin support
 ifneq ($(IOCADMIN),)
 gunbLlrf_LIBS += devIocStats
@@ -95,13 +125,11 @@ gunbLlrf_LIBS += asyn
 gunbLlrf_LIBS += calc
 gunbLlrf_LIBS += sscan
 gunbLlrf_LIBS += history
-gunbLlrf_LIBS += newmat
 gunbLlrf_LIBS += qsrv
 gunbLlrf_LIBS += std
 # EPICS_BASE_PVA_CORE_LIBS comes from pvAccessCPP and is defined at <>/cfg/CONFIG_PVACCESS_MODULE
 gunbLlrf_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
 gunbLlrf_LIBS += $(EPICS_BASE_IOC_LIBS)
-newmat_DIR = $(TOP)/newmat10/
 
 # =====================================================
 # END EVR libraries

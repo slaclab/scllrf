@@ -54,6 +54,66 @@ LINUX_KERNEL_MODULES=$(PACKAGE_SITE_TOP)/linuxKernel_Modules
 LINUXRT_BUILDROOT_VERSION=buildroot-2016.11.1
 LINUX_VERSION=rhel6
 
+
+# ===========================================================================
+# Support for CPPUNIT
+# ===========================================================================
+CPPUNIT_PACKAGE_NAME=cppunit
+CPPUNIT_VERSION=1.12.1
+CPPUNIT_TOP=$(PACKAGE_SITE_TOP)/$(CPPUNIT_PACKAGE_NAME)/$(CPPUNIT_VERSION)
+CPPUNIT_LIB = $(CPPUNIT_TOP)/$(PKG_ARCH)/lib
+CPPUNIT_INCLUDE = $(CPPUNIT_TOP)/$(PKG_ARCH)/include
+# ===========================================================================
+
+# ===========================================================================
+# Support for BOOST
+# ===========================================================================
+BOOST_PACKAGE_NAME=boost
+BOOST_VERSION=1.63.0
+BOOST_TOP=$(PACKAGE_SITE_TOP)/$(BOOST_PACKAGE_NAME)/$(BOOST_VERSION)
+BOOST_LIB = $(BOOST_TOP)/$(PKG_ARCH)/lib
+BOOST_INCLUDE = $(BOOST_TOP)/$(PKG_ARCH)/include
+# ===========================================================================
+
+# ============================================================================================
+# Support for BOOST Numeric Bindings (Headers)
+# ============================================================================================
+BOOSTBINDINGS_PACKAGE_NAME=boost-numeric-bindings
+BOOSTBINDINGS_VERSION=1.63.0
+BOOSTBINDINGS_TOP=$(PACKAGE_SITE_TOP)/$(BOOSTBINDINGS_PACKAGE_NAME)/$(BOOSTBINDINGS_VERSION)
+BOOSTBINDINGS_INCLUDE = $(BOOSTBINDINGS_TOP)/include
+# ============================================================================================
+
+
+# ===========================================================================
+# Support for LAPACK
+# ===========================================================================
+LAPACK_PACKAGE_NAME=lapack
+LAPACK_VERSION=3.2.1
+LAPACK_TOP=$(PACKAGE_SITE_TOP)/$(LAPACK_PACKAGE_NAME)/$(LAPACK_VERSION)
+LAPACK_LIB = $(LAPACK_TOP)/$(PKG_ARCH)/lib
+LAPACK_INCLUDE = $(LAPACK_TOP)/$(PKG_ARCH)/include
+# ====================================
+# ===========================================================================
+# GNU Fortran support in Buildroot (linuxRT)
+# ===========================================================================
+# Define the location of the gfortran
+# # So only need to define location of libs and headers
+BUILDROOT_HOME=/afs/slac/package/linuxRT/buildroot-2016.11.1
+STAGE_X86=$(BUILDROOT_HOME)/buildroot-2016.11.1-x86_64/output/staging
+#
+GFORT_LIB     = $(STAGE_X86)/usr/lib64
+GFORT_INCLUDE = $(STAGE_X86)/usr/include
+#
+DL_LIB       = $(STAGE_X86)/usr/lib64
+DL_INCLUDE   = $(STAGE_X86)/usr/include
+#
+QUADMATH_LIB       = $(STAGE_X86)/usr/lib64
+QUADMATH_INCLUDE   = $(STAGE_X86)/usr/include
+# ============================================================================
+
+#=======================================
+
 # These allow developers to override the CONFIG_SITE variable
 # settings without having to modify the configure/CONFIG_SITE
 # file itself.

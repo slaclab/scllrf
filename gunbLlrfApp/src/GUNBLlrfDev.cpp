@@ -1,7 +1,6 @@
-
 /**
  *-----------------------------------------------------------------------------
-* Title      : GUNB low level RF device layer EPICS interface
+ * Title      : GUNB low level RF device layer EPICS interface
  * ----------------------------------------------------------------------------
  * File       : GUNBLlrfDev.h
  * Author     : Garth Brown, gwbrown@slac.stanford.edu
@@ -43,13 +42,30 @@
 #include <ctgmath>
 #include <stdio.h>
 #include <stdexcept>
-#include "../../newmat10/newmat.h"
-#include "../../newmat10/newmatap.h"
-#include "../../newmat10/newmatio.h"
-#include "../../newmat10/precisio.h"
+#include <boost/lambda/lambda.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/vector_proxy.hpp>
+#include <boost/numeric/ublas/matrix_proxy.hpp>
+#include <boost/numeric/bindings/lapack/workspace.hpp>
+#include <boost/numeric/bindings/traits/traits.hpp>
+#include <boost/numeric/bindings/lapack/lapack.hpp>
 
 using namespace std;
-using namespace NEWMAT;
+
+using namespace boost::lambda;
+using namespace boost::numeric::ublas;
+using namespace boost::numeric::bindings::traits;
+using namespace boost::numeric::bindings::lapack;
+
+/** Definition of a Vector type with fixed size */
+typedef boost::numeric::ublas::vector<double,
+        boost::numeric::ublas::bounded_array<double,1024> > bnuVector;
+
+/** Definition of a Matrix type with fixed size */
+typedef boost::numeric::ublas::matrix<double,
+        boost::numeric::ublas::column_major,
+        boost::numeric::ublas::bounded_array<double,1024> > bnuMatrix;
 
 const unsigned GUNBLlrfDev::maxChannel = 32; // for small waveforms, divided into one "channel"/PV per element, this is the size limit
 
@@ -112,7 +128,7 @@ const unsigned TraceData::SHIFT_BASE = 4;
 const float TraceData::CLK_FREQ = 1320e6/14; // LCLS-II value from app.py
 
 const unsigned TraceData::SLOW_OFFSET = 17; // register address offset from start of slow buffer to the data we care about
-epicsMutexId TraceData::newmatMutexID_ = epicsMutexCreate();
+
 TraceData::TraceData(GUNBLlrfDev *pDriver, DataBuffer *pBuffer, int *rawParamIndex,
 		int *iRawParamIndex, int *qRawParamIndex, int *aRawParamIndex, int *pRawParamIndex,
 		int *iParamIndex, int *qParamIndex, int *aParamIndex, int *pParamIndex,
@@ -132,13 +148,6 @@ TraceData::TraceData(GUNBLlrfDev *pDriver, DataBuffer *pBuffer, int *rawParamInd
 	std::stringstream strStmThreadName;
 	strStmThreadName << pDriver->portName << hex << regStartAddr_;
 	const std::string strThreadName = strStmThreadName.str();
-
-	/* Create the epicsMutex for protecting newmat library from its thread-unsafe self */
-
-	if (!newmatMutexID_) {
-		printf("%s ERROR: epicsMutexCreate failure\n", __PRETTY_FUNCTION__);
-		return;
-	}
 
 	for (i = 0; i < maxWavesCount; i++)
 	{
@@ -542,11 +551,6 @@ static void TraceDataRequesterC(void *drvPvt)
 	{
 		pTraceData->TraceDataRequester();
 	}
-	catch(BaseException e)
-	{
-		cout << "Unhandeld newmat exception in TraceDataRequester, thread exiting" << endl;
-		cout<<e.what() <<endl;
-	}
 	catch(std::exception e)
 	{
 		cout << "Unhandeld exception in TraceDataRequester, thread exiting" << endl;
@@ -572,26 +576,160 @@ asynStatus TraceData::StartTraceDataRequester(const char *netPortName)
 	return asynSuccess;
 }
 
-Matrix TraceData::PseudoInverse(const Matrix & m)
-{
-	Matrix result;
-	// int rows = m.Nrows();
-	unsigned int cols = m.Ncols();
-	// calculate SVD decomposition
-	Matrix U,V;
-	DiagonalMatrix D;
-	SVD(m,D,U,V);
+bnuMatrix calculateNonSquarePseudoInverse(const bnuMatrix & m) {
+  unsigned M = m.size1();
+  unsigned N = m.size2();
 
-	Matrix Dinv(cols,cols);
-	Dinv = 0;
-	for (unsigned int i=0; i<cols; i++)
-		if ( fabs(D(i+1,i+1)) < FloatingPointPrecision::Epsilon() )
-			Dinv(i+1,i+1) = 0;
-		else
-			Dinv(i+1,i+1) = 1/D(i+1,i+1);
-	result = V * Dinv * U.t();
-	result.Release();
-	return result;
+
+  /** Workspace used by the LAPACK gels() routine */
+  boost::numeric::bindings::traits::detail::array<double> _workspace(1024);
+  bnuMatrix _pinvGMatrix;
+  boost::numeric::ublas::vector<double> _s;
+  bnuMatrix _u;
+  bnuMatrix _v;
+  bnuMatrix _a;
+  bnuMatrix _sMatrix;
+  bnuMatrix _sPrime;
+  _s.resize(M);
+  _u.resize(M,M);
+  _v.resize(N,N, false);
+  _a.resize(M,N);
+
+  _u.clear();
+  _v.clear();
+  _a.clear();
+  _s.clear();
+
+  for (unsigned i = 0; i < M; ++i) {
+    for (unsigned j = 0; j < N; ++j) {
+      _a(i,j) = m(i,j);
+    }
+  }
+
+  for (unsigned i = 0; i < _s.size(); ++i) {
+    _s[i] = 1;
+  }
+
+  //** DEBUG
+  std::cout << "  _a(GMATRIX): " << std::endl;
+  for (int i = 0; i < (int) _a.size1(); ++i) {
+    std::cout << "  ";
+    for (int j = 0; j < (int) _a.size2(); ++j) {
+      std::cout << _a(i, j) << " ";
+    }
+    std::cout << std::endl;
+  }
+
+  std::cout << "  _s: " << std::endl;
+  for (int i = 0; i < (int) _s.size(); ++i) {
+    std::cout << _s(i) << " ";
+  }
+  std::cout << std::endl;
+   //DEBUG **/
+
+  int status = 0;
+  try {
+    status = gesvd(_a, _s, _u, _v);
+  } catch (...) {
+    printf("Failed to find SVD of G Matrix");
+throw;
+  }
+  if (status != 0) {
+    printf("Failed to find SVD of G Matrix");
+throw;
+  }
+
+
+  _sMatrix.resize(M,M);
+  _sMatrix.clear();
+  unsigned z = 0;
+  for (unsigned i = 0; i < _sMatrix.size1(); ++i) {
+    for (unsigned j = 0; j < _sMatrix.size2(); ++j) {
+      _sMatrix(i,j) = 0;
+      if (i == j) {
+	if (z < _s.size()) {
+	  _sMatrix(i,j) = _s(z);
+	}
+	++z;
+      }
+    }
+  }
+
+  // Find the pseudo inverse of S
+  _sPrime.resize(N,M);
+  _sPrime.clear();
+  for (unsigned i = 0; i < (M<N?M:N); ++i) {
+    for (unsigned j = 0; j < (M<N?M:N); ++j) {
+      if (i == j) {
+	_sPrime(i,j) = 1;
+      }
+    }
+  }
+
+  //  boost::numeric::bindings::traits::detail::array<double> _workspace(200);
+  status = gelss(_sMatrix, _sPrime, workspace(_workspace));
+  if (status != 0) {
+    printf("Failed to find pseudo inverse of G Matrix");
+throw;
+  }
+
+  /** DEBUG
+  std::cout << "  _s(eigenvalues): " << std::endl;
+  for (int i = 0; i < (int) _s.size(); ++i) {
+    std::cout << _s(i) << " ";
+  }
+  std::cout << std::endl;
+  std::cout << "  _u: " << std::endl;
+  for (int i = 0; i < (int) _u.size1(); ++i) {
+    std::cout << "  ";
+    for (int j = 0; j < (int) _u.size2(); ++j) {
+      std::cout << _u(i, j) << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "  _v: " << std::endl;
+  for (int i = 0; i < (int) _v.size1(); ++i) {
+    std::cout << "  ";
+    for (int j = 0; j < (int) _v.size2(); ++j) {
+      std::cout << _v(i, j) << " ";
+    }
+    std::cout << std::endl;
+  }
+ //DEBUG **/
+
+  // Now compute the pseudo inverse of X!
+  // Which is X+ = V * _sprime * Utransposed
+  _u = trans(_u);
+  _v = trans(_v);
+
+  _a = prod(_v, _sPrime);
+  _pinvGMatrix = prod(_a, _u);
+
+  //** DEBUG
+  std::cout << "  _a(pseudo-inverse): " << std::endl;
+  for (int i = 0; i < (int) _a.size1(); ++i) {
+    std::cout << "  ";
+    for (int j = 0; j < (int) _a.size2(); ++j) {
+      std::cout << _a(i, j) << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "  pinv(GMatrix): " << std::endl;
+  for (int i = 0; i < (int) _pinvGMatrix.size1(); ++i) {
+    std::cout << "  ";
+    for (int j = 0; j < (int) _pinvGMatrix.size2(); ++j) {
+      std::cout << _pinvGMatrix(i, j) << " ";
+    }
+    std::cout << std::endl;
+  }
+  ////DEBUG **/
+
+  if (std::isnan(_a(0,0))) {
+    std::cout << "NAN NAN NAN --- nan pseudo inverse found!" << std::endl;
+    printf("Calculated NAN pseudo inverse of G Matrix");
+throw;
+  }
+  return _pinvGMatrix;
 }
 
 float* TraceData::CavityDecayConstantCompute(
@@ -603,74 +741,68 @@ float* TraceData::CavityDecayConstantCompute(
 	unsigned int length=LEN - start;
 	double invdt = TraceData::CLK_FREQ / TraceData::CIC_PERIOD;
 	double energy_hat = 0.0;
+	double ar, ai, arr, aii;
+	ar = ai = arr = aii = 0;
 
-	epicsMutexLock(newmatMutexID_);
-	Matrix X(2*length-1,2);
-	Matrix Y(2*length-1,1);
+	bnuMatrix X(2,2*(length-1));
+	bnuMatrix Y(1,2*(length-1));
+
 	for (unsigned int i=0; i<length-1;i++) {
 		int j = start+i;
 		double xr1 = D_REAL(j);
 		double xi1 = D_IMAG(j);
 		double xr2 = D_REAL(j+1);
 		double xi2 = D_IMAG(j+1);
-		X(i+1,1) = 0.5*(xi1 + xi2);
-		X(length+i+1,1)=0.5*(xr1 + xr2);
-		X(i+1,2) = 0.5*(xr1 + xr2);
-		X(length+i+1,2)=-0.5*(xi1+xi2);
-		Y(i+1,1) = -xi1 + xi2;
-		Y(length+i+1,1) = -xr1 + xr2;
+		X(0,i) = 0.5*(xi1 + xi2);
+		X(0,length+i-1) = 0.5*(xr1 + xr2);
+		X(1,i) = 0.5*(xr1 + xr2);
+		X(1,length+i-1) = -0.5*(xi1+xi2);
+		Y(0,i) = -xi1 + xi2;
+		Y(0,length+i-1) = -xr1 + xr2;
 
 		energy_hat = energy_hat + xr1*xr1+xi1*xi1;
 	}
+
 	try
 	{
-		Matrix A = PseudoInverse(X) * Y;
-		double ar = -A(1,1);
-		double ai = A(2,1);
+		bnuMatrix A = prod(Y, calculateNonSquarePseudoInverse(X));
+
+		ar = -A(0,0);
+		ai = A(0,1);
 		// ai.dt = w.dt = 2*pi*f.dt
 		// 1/dt = 1.3675e+06
 		//  double invdt = 1.7857e+06;
 		ai = (ai * invdt) / (2 * M_PI);
 		ar = (ar * invdt) / (2 * M_PI);
-		double arr = A(1,1);
-		double aii = A(2,1);
-		double residue = 0.0;
-		for (unsigned int i=0; i<2*length-1;i++) {
-			double x1 = X(i+1,1);
-			double x2 = X(i+1,2);
-			double y = Y(i+1,1);
-			double r = (y-(x1*arr)-(x2*aii));
-			residue = residue + r*r;
-		}
-		epicsMutexUnlock(newmatMutexID_);
+		arr = A(0,0);
+		aii = A(0,1);
 
-		double stdev = sqrt(residue/(2*length));
-#ifndef TEST_MODE
-		arout->set_value(ar*1000);
-		aiout->set_value(ai*1000);
-		strength->set_value(energy_hat);
-		stddev->set_value(stdev*1000);
-#else
-		// PVs: decay_constant_b, decay_strength, decay_fit_stddev
-		pDriver_->setDoubleParam(ch, *decayBWParamIndex_, ar);
-		pDriver_->setDoubleParam(ch, *decayConstantBParamIndex_, ai);
-		pDriver_->setDoubleParam(ch, *decayStrengthParamIndex_, energy_hat);
-		pDriver_->setDoubleParam(ch, *decayFitStddevParamIndex_, stdev);
-		asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
-				"Ch. %u: Bandwidth %8.1f Hz  Detune %8.1f Hz  Signal strength %7f  Stdev %5.3f\n", ch, ar, ai, energy_hat, stdev);
-#endif
-	}
-	catch(BaseException E)
-	{
-		cout<<"newmat related exception in " << __PRETTY_FUNCTION__ << ": " << E.what() <<endl;
-		epicsMutexUnlock(newmatMutexID_);
 	}
 	catch(std::exception e)
 	{
-		cout << "non-newmat exception type in PseudoInverse call to SVD" << endl;
+		cout << "exception type in PseudoInverse call to SVD" << endl;
 		cout<< e.what() <<endl;
-		epicsMutexUnlock(newmatMutexID_);
 	}
+
+	double residue = 0.0;
+	for (unsigned int i=0; i<2*(length-1);i++) {
+		double x1 = X(0,i);
+		double x2 = X(1,i);
+		double y = Y(0,i);
+		double r = (y-(x1*arr)-(x2*aii));
+		residue = residue + r*r;
+	}
+
+	double stdev = sqrt(residue/(2*length));
+
+	// PVs: decay_constant_b, decay_strength, decay_fit_stddev
+	pDriver_->setDoubleParam(ch, *decayBWParamIndex_, ar);
+	pDriver_->setDoubleParam(ch, *decayConstantBParamIndex_, ai);
+	pDriver_->setDoubleParam(ch, *decayStrengthParamIndex_, energy_hat);
+	pDriver_->setDoubleParam(ch, *decayFitStddevParamIndex_, stdev);
+	asynPrint(pDriver_->pOctetAsynUser_, ASYN_TRACEIO_DEVICE,
+			"Ch. %u: Bandwidth %8.1f Hz  Detune %8.1f Hz  Signal strength %7f  Stdev %5.3f\n", ch, ar, ai, energy_hat, stdev);
+
 	return NULL;
 }
 
@@ -843,14 +975,9 @@ void TraceData::TraceDataRequester()
 								{
 									CavityDecayConstantCompute(pRawIQBuf_[Iindex], pRawIQBuf_[Qindex], 3, chIndex);
 								}
-								catch(BaseException e)
-								{
-									cout << "Newmat exception in decay constant computation not otherwise handled" << endl;
-									cout<<e.what() <<endl;
-								}
 								catch(std::exception e)
 								{
-									cout << "Unhandeld exception in TraceDataRequester, not newmat" << endl;
+									cout << "Unhandeld exception in TraceDataRequester" << endl;
 									cout<< e.what() <<endl;
 								}
 							}

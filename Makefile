@@ -4,7 +4,6 @@ include $(TOP)/configure/CONFIG
 
 # Directories to build, any order
 DIRS += configure
-DIRS += newmat10
 DIRS += $(wildcard *Sup)
 DIRS += $(wildcard *App)
 DIRS += $(wildcard *Top)
